@@ -1,0 +1,34 @@
+[
+	{
+		"name": "simple_farmer_processes",
+		"comment": "Table that holds information processes currently running on instances",
+		"columns": [
+			{
+				"name": "sfp_instance",
+				"type": "string",
+				"comment": "The unique identifier for the farming instance",
+				"options": { "length": 16 }
+			},
+			{
+				"name": "sfp_pid",
+				"type": "string",
+				"comment": "Process ID",
+				"options": { "length": 255 }
+			},
+			{
+				"name": "sfp_type",
+				"type": "string",
+				"comment": "Process class",
+				"options": { "length": 255 }
+			},
+			{
+				"name": "sfp_started",
+				"type": "mwtimestamp",
+				"comment": "Timestamp of process started",
+				"options": {}
+			}
+		],
+		"pk": [ "sfp_instance", "sfp_pid" ],
+		"indexes": []
+	}
+]

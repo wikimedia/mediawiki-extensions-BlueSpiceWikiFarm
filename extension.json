@@ -1,0 +1,729 @@
+{
+	"name": "BlueSpiceWikiFarm",
+	"version": "6.0.0-alpha",
+	"author": [
+		"[https://www.hallowelt.com Hallo Welt! GmbH]"
+	],
+	"url": "https://en.wiki.bluespice.com/wiki/Reference:BlueSpiceWikiFarm",
+	"descriptionmsg": "wikifarm-desc",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.43.0",
+		"extensions": {
+			"OOJSPlus": "*"
+		}
+	},
+	"attributes": {
+		"BlueSpiceWikiFarm": {
+			"DynamicConfigurationFactories": {},
+			"PostInstanceCreationCommandFactories": {
+				"runjobs": "BlueSpice\\WikiFarm\\CommandDescription\\RunJobs::factory"
+			},
+			"PostInstanceDeletionCommandFactories": {},
+			"PreInstanceDeletionCommandFactories": {}
+		},
+		"BlueSpiceFoundation": {
+			"PermissionRegistry": {
+				"wikifarm-createwiki": {
+					"type": "global",
+					"roles": [
+						"admin"
+					]
+				},
+				"wikifarm-managewiki": {
+					"type": "global",
+					"roles": [
+						"admin"
+					]
+				},
+				"wikifarm-deletewiki": {
+					"type": "global",
+					"roles": [
+						"admin"
+					]
+				}
+			},
+			"ConfigDefinitionRegistry": {
+				"WikiFarmAccessLevel": "\\BlueSpice\\WikiFarm\\ConfigDefinition\\WikiFarmAccessLevel::getInstance"
+			}
+		},
+		"BlueSpiceExtendedSearch": {
+			"PluginRegistry": {
+				"global-search": {
+					"class": "BlueSpice\\WikiFarm\\ExtendedSearch\\GlobalSearch",
+					"services": [ "BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.AccessControlStore" ]
+				}
+			}
+		},
+		"BlueSpiceVisualEditorConnector": {
+			"PluginModules": [
+				"ext.bluespice.wikiFarm.combinedTitleInput",
+				"ext.bluespice.wikiFarm.ve.overrideTemplateDialog"
+			]
+		},
+		"EnhancedUpload": {
+			"UploadFormPluginModules": [
+				"ext.bluespice.wikiFarm.sharedUpload"
+			]
+		}
+	},
+	"DefaultUserOptions": {
+		"bs-farm-instances-favorite": ""
+	},
+	"MessagesDirs": {
+		"BlueSpiceWikiFarm": [
+			"i18n"
+		]
+	},
+	"SpecialPages": {
+		"FarmManagement": {
+			"class": "BlueSpice\\WikiFarm\\Special\\FarmManagement",
+			"services": [ "LanguageNameUtils", "BlueSpiceWikiFarm._InstanceCountLimiter", "BlueSpiceWikiFarm.InstanceManager" ]
+		}
+	},
+	"APIModules": {
+		"wikifarm-wiki-instance-store": {
+			"class": "\\BlueSpice\\WikiFarm\\Api\\WikiInstancesStore"
+		},
+		"wikifarm-group-store": {
+			"class": "\\BlueSpice\\WikiFarm\\Api\\GroupStore"
+		},
+		"wikifarm-keyword-store": {
+			"class": "\\BlueSpice\\WikiFarm\\Api\\KeywordStore"
+		}
+	},
+	"ExtensionMessagesFiles": {
+		"SpecialPageAlias": "languages/SpecialPage.alias.php"
+	},
+	"AutoloadNamespaces": {
+		"BlueSpice\\WikiFarm\\": "src/"
+	},
+	"TestAutoloadNamespaces": {
+		"BlueSpice\\WikiFarm\\Tests\\": "tests/phpunit/"
+	},
+	"ResourceModules": {
+		"ext.bluespice.wikiFarm.bootstrap": {
+			"packageFiles": [
+				"bootstrap.js",
+				{
+					"name": "farmConfig.json",
+					"callback": "BlueSpice\\WikiFarm\\Setup::getClientConfig"
+				}
+			]
+		},
+		"ext.bluespice.wikiFarm.tag.wikifarmlist": {
+			"scripts": [
+				"ui/InstancesGrid.js",
+				"ui/panel/ManagementPanel.js",
+				"farmInstanceListTag.js"
+			],
+			"messages": [
+				"wikifarm-instance-title",
+				"wikifarm-instance-ctime",
+				"wikifarm-instance-desc",
+				"wikifarm-instance-group",
+				"wikifarm-instance-keywords",
+				"wikifarm-group-undefined"
+			],
+			"dependencies": [
+				"oojs-ui",
+				"ext.oOJSPlus.data",
+				"oojs-ui.styles.icons-editing-core",
+				"ext.bluespice.wikiFarm.bootstrap"
+			]
+		},
+		"ext.bluespice.wikiFarm.management": {
+			"scripts": [
+				"ui/dialog/TaskDialog.js",
+				"ui/dialog/RemoveInstanceDialog.js",
+				"ui/dialog/ConfirmDialog.js",
+				"ui/InstancesGrid.js",
+				"ui/panel/ManagementPanel.js",
+				"farmManagementSpecial.js"
+			],
+			"messages": [
+				"wikifarm-create-instance",
+				"wikifarm-clone-instance",
+				"wikifarm-suspend-instance",
+				"wikifarm-resume-instance",
+				"wikifarm-instance-title",
+				"wikifarm-instance-notsearchable",
+				"wikifarm-instance-ctime",
+				"wikifarm-instance-desc",
+				"wikifarm-instance-keywords",
+				"wikifarm-remove-instructions",
+				"wikifarm-instance-ctime",
+				"wikifarm-group-undefined",
+				"wikifarm-suspend-prompt",
+				"wikifarm-resume-prompt",
+				"wikifarm-button-action-label-save",
+				"wikifarm-button-action-label-clone",
+				"wikifarm-button-action-label-cancel",
+				"wikifarm-button-action-label-delete",
+				"wikifarm-error-generic",
+				"wikifarm-instance-limit-banner",
+				"wikifarm-error-instance-limit-reached",
+				"wikifarm-edit-instance",
+				"wikifarm-instance-path",
+				"wikifarm-remove-instance",
+				"wikifarm-incomplete-instance"
+			],
+			"dependencies": [
+				"oojs-ui",
+				"ext.oOJSPlus.data",
+				"ext.oOJSPlus.widgets",
+				"oojs-ui.styles.icons-moderation",
+				"oojs-ui.styles.icons-media",
+				"oojs-ui.styles.icons-editing-core",
+				"ext.bluespice.wikiFarm.bootstrap"
+			]
+		},
+		"ext.bluespice.wikiFarm.special.bootstrap": {
+			"scripts": [
+				"farmManagementSpecial.js"
+			]
+		},
+		"ext.bluespice.wikiFarm.create": {
+			"scripts": [
+				"ui/InstancePicker.js",
+				"ui/PathInput.js",
+				"ui/panel/TemplatePicker.js",
+				"ui/panel/CreatePanel.js"
+			],
+			"messages": [
+				"wikifarm-create-instance",
+				"wikifarm-template-title",
+				"wikifarm-template-blank",
+				"wikifarm-template-blank-help",
+				"wikifarm-template-clone",
+				"wikifarm-template-clone-help",
+				"wikifarm-instance-path-error",
+				"wikifarm-instance-path-invalid",
+				"wikifarm-ui-access-wiki-type-label"
+			],
+			"dependencies": [
+				"ext.bluespice",
+				"ext.bluespice.wikiFarm.edit",
+				"oojs-ui.styles.icons-editing-advanced",
+				"ext.bluespice.wikiFarm.widget.AccessLevelInput"
+			]
+		},
+		"ext.bluespice.wikiFarm.edit": {
+			"scripts": [
+				"ui/dialog/TaskDialog.js",
+				"ui/dialog/ConfirmDialog.js",
+				"ui/dialog/RemoveInstanceDialog.js",
+				"ui/panel/EditPanel.js"
+			],
+			"styles": [
+				"styles/edit.less"
+			],
+			"messages": [
+				"wikifarm-instance-title",
+				"wikifarm-lang-code",
+				"wikifarm-instance-path",
+				"wikifarm-instance-sourcepath",
+				"wikifarm-button-action-label-create",
+				"wikifarm-button-action-label-cancel",
+				"wikifarm-instance-notsearchable",
+				"wikifarm-instance-desc",
+				"wikifarm-instance-group",
+				"wikifarm-instance-keywords",
+				"wikifarm-group-undefined",
+				"wikifarm-instance-name-exists",
+				"wikifarm-instance-create-edit-error",
+				"wikifarm-remove-instance",
+				"wikifarm-button-action-label-save",
+				"wikifarm-clone-instance",
+				"wikifarm-suspend-instance",
+				"wikifarm-resume-instance",
+				"wikifarm-instance-actions",
+				"wikifarm-instance-suspended-notice",
+				"wikifarm-button-action-label-delete",
+				"wikifarm-suspend-prompt",
+				"wikifarm-remove-instructions",
+				"wikifarm-resume-prompt",
+				"wikifarm-error-generic"
+			],
+			"dependencies": [
+				"oojs-ui",
+				"ext.bluespice",
+				"ext.oOJSPlus.data",
+				"ext.oOJSPlus.widgets",
+				"oojs-ui.styles.icons-media",
+				"ext.bluespice.wikiFarm.bootstrap"
+			]
+		},
+		"ext.bluespice.wikiFarm.widgets": {
+			"scripts": [
+				"ui/widget/CombinedTitleInputWidget.js"
+			],
+			"dependencies": [
+				"ext.oOJSPlus.widgets",
+				"ext.bluespice.wikiFarm.bootstrap"
+			],
+			"messages": [
+				"wikifarm-widget-combined-title-input-local"
+			]
+		},
+		"ext.bluespice.wikiFarm.search": {
+			"scripts": [
+				"ui/widget/SearchInstanceSelector.js",
+				"searchGlobalInstanceContext.js"
+			],
+			"styles": [
+				"searchGlobalInstanceContext.less"
+			],
+			"dependencies": [
+				"ext.bluespice",
+				"oojs-ui",
+				"ext.blueSpiceExtendedSearch.SearchCenter",
+				"ext.bluespice.wikiFarm.bootstrap"
+			],
+			"messages": [
+				"wikifarm-ui-search-instance-filter",
+				"wikifarm-ui-search-instance-filter-local",
+				"wikifarm-ui-search-instance-filter-all",
+				"wikifarm-ui-search-instance-filter-hint",
+				"wikifarm-ui-search-instance-filter-search"
+			]
+		},
+		"ext.bluespice.wikiFarm.combinedTitleInput": {
+			"scripts": [
+				"ui/widget/CombinedTitleInputWidget.js",
+				"ve/ui/CombinedTitleAnnotationWidget.js",
+				"ve/insertLinkCombinedTitleInput.js"
+			],
+			"dependencies": [
+				"ext.bluespice.wikiFarm.bootstrap"
+			],
+			"messages": [
+				"wikifarm-widget-combined-title-input-local"
+			]
+		},
+		"ext.bluespice.wikiFarm.teams.grid": {
+			"scripts": [
+				"ui/dialog/CreateTeamDialog.js",
+				"ui/panel/TeamsPanel.js",
+				"wikiTeams.special.js"
+			],
+			"styles": [
+				"styles/wikiTeams.less"
+			],
+			"messages": [
+				"wikifarm-ui-teams-header-name",
+				"wikifarm-ui-teams-header-description",
+				"wikifarm-ui-teams-header-membercount",
+				"wikifarm-ui-teams-action-edit",
+				"wikifarm-ui-teams-action-create-team",
+				"wikifarm-button-action-label-cancel",
+				"wikifarm-button-action-label-add",
+				"wikifarm-ui-teams-header-membercount-none",
+				"wikifarm-ui-teams-action-details",
+				"wikifarm-ui-teams-sort-name",
+				"wikifarm-ui-teams-sort-membercount"
+			],
+			"dependencies": [
+				"ext.oOJSPlus.managerPanel",
+				"user.options",
+				"ext.bluespice",
+				"ext.oOJSPlus.data",
+				"ext.bluespice.wikiFarm.bootstrap"
+			]
+		},
+		"ext.bluespice.wikiFarm.teams.details": {
+			"scripts": [
+				"ui/dialog/AddTeamMemberDialog.js",
+				"ui/panel/TeamDetails.js",
+				"wikiTeams.special.js"
+			],
+			"styles": [
+				"styles/wikiTeams.less"
+			],
+			"messages": [
+				"wikifarm-ui-teams-section-members",
+				"wikifarm-ui-teams-field-user",
+				"wikifarm-ui-teams-action-add-member",
+				"wikifarm-ui-teams-action-remove-member",
+				"wikifarm-button-action-label-add",
+				"wikifarm-button-action-label-cancel",
+				"wikifarm-ui-teams-action-create-team",
+				"wikifarm-ui-teams-header-user",
+				"wikifarm-ui-teams-header-expiration",
+				"wikifarm-ui-teams-confirm-delete-member",
+				"wikifarm-ui-teams-error-delete-member",
+				"wikifarm-ui-teams-confirm-delete-team",
+				"wikifarm-ui-teams-error-delete-team",
+				"wikifarm-ui-teams-action-delete-team",
+				"wikifarm-ui-teams-header-expiration-value",
+				"wikifarm-ui-teams-sort-user-name",
+				"wikifarm-ui-teams-sort-user-expiration"
+			],
+			"dependencies": [
+				"ext.oOJSPlus.managerPanel",
+				"user.options",
+				"ext.bluespice",
+				"ext.oOJSPlus.data",
+				"ext.bluespice.wikiFarm.bootstrap"
+			]
+		},
+		"ext.bluespice.wikiFarm.access": {
+			"scripts": [
+				"ui/panel/WikiAccess.js",
+				"ui/widget/WikiAccessEntity.js",
+				"ui/widget/WikiAccessEntityPicker.js",
+				"ui/widget/TeamEntity.js",
+				"ui/dialog/EditAccessAssignmentDialog.js",
+				"ui/dialog/AddAccessAssignmentDialog.js",
+				"wikiAccess.special.js"
+			],
+			"styles": [
+				"styles/wikiAccess.less"
+			],
+			"messages": [
+				"wikifarm-ui-access-field-type",
+				"wikifarm-ui-access-field-key",
+				"wikifarm-ui-access-field-role",
+				"wikifarm-ui-access-action-create-new-rule",
+				"wikifarm-ui-role-label-reader",
+				"wikifarm-ui-role-label-editor",
+				"wikifarm-ui-role-label-reviewer",
+				"wikifarm-ui-role-label-maintainer",
+				"wikifarm-ui-access-label-global",
+				"wikifarm-button-action-label-add",
+				"wikifarm-button-action-label-cancel",
+				"wikifarm-ui-access-confirm-delete-assignment",
+				"wikifarm-ui-access-error-delete-assignment",
+				"wikifarm-ui-access-action-add-assignment",
+				"wikifarm-ui-access-action-delete",
+				"wikifarm-ui-access-action-edit",
+				"wikifarm-ui-access-field-global",
+				"wikifarm-ui-access-action-edit-assignment",
+				"wikifarm-ui-access-assignee-type-team",
+				"wikifarm-ui-access-assignee-type-user",
+				"wikifarm-ui-access-wiki-type-label",
+				"wikifarm-ui-access-assignments-header",
+				"wikifarm-ui-access-success-set-level",
+				"wikifarm-ui-access-error-set-level"
+			],
+			"dependencies": [
+				"ext.oOJSPlus.managerPanel",
+				"user.options",
+				"ext.bluespice",
+				"ext.oOJSPlus.data",
+				"ext.oOJSPlus.widgets",
+				"oojs-ui.styles.icons-user",
+				"ext.bluespice.wikiFarm.widget.AccessLevelInput",
+				"ext.bluespice.wikiFarm.bootstrap"
+			]
+		},
+		"ext.bluespice.wikiFarm.widget.AccessLevelInput": {
+			"scripts": [
+				"ui/widget/AccessLevelInput.js"
+			],
+			"messages": [
+				"wikifarm-ui-access-wiki-type-public",
+				"wikifarm-ui-access-wiki-type-private",
+				"wikifarm-ui-access-wiki-type-protected",
+				"wikifarm-ui-access-wiki-type-public-help",
+				"wikifarm-ui-access-wiki-type-private-help",
+				"wikifarm-ui-access-wiki-type-protected-help"
+			],
+			"styles": [
+				"styles/accessLevelInput.less"
+			],
+			"dependencies": [
+				"oojs-ui",
+				"ext.bluespice.wikiFarm.bootstrap"
+			]
+		},
+		"ext.bluespice.wikiFarm.sharedUpload": {
+			"scripts": [
+				"ui/EnhancedUploadParamsProcessor.js",
+				"ext.bluespice.wikiFarm.foreignUpload.js"
+			],
+			"messages": [
+				"wikifarm-upload-file-foreign-repo-label"
+			],
+			"dependencies": [
+				"ext.bluespice.wikiFarm.bootstrap",
+				"ext.enhancedUpload.paramsProcessor",
+				"mediawiki.widgets",
+				"oojs-ui"
+			]
+		},
+		"ext.bluespice.wikiFarm.promotionToShared": {
+			"scripts": [
+				"ui/dialog/PromoteToSharedDialog.js"
+			],
+			"messages": [
+				"wikifarm-promote-to-shared-dialog-description",
+				"wikifarm-promote-to-shared-dialog-push",
+				"wikifarm-promote-to-shared-dialog-delete-local",
+				"wikifarm-promote-to-shared",
+				"wikifarm-button-action-label-promote-to-shared",
+				"wikifarm-promote-to-shared-dialog-title",
+				"wikifarm-error-unknown",
+				"wikifarm-promote-to-shared-dialog-delete-local-reason"
+			],
+			"dependencies": [
+				"oojs-ui"
+			]
+		},
+		"ext.bluespice.wikiFarm.ve.overrideTemplateDialog": {
+			"scripts": [
+				"ui/widget/SharedTemplateInputWidget.js",
+				"ve/ui/SharedTemplatePlaceholderPage.js",
+				"ve/ui/dialog/SharedTemplateDialog.js",
+				"ve/sharedTemplateDialogLoader.js"
+			],
+			"dependencies": [
+				"ext.bluespice.wikiFarm.bootstrap"
+			]
+		},
+		"ext.bluespice.wikiFarm.megamenu": {
+			"styles": [
+				"styles/wikiFarm.megamenu.css"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "BlueSpiceWikiFarm/resources"
+	},
+	"Hooks": {
+		"LoadExtensionSchemaUpdates": "runDatabaseUpdates",
+		"ParserFirstCallInit": "handleTag",
+		"InterwikiLoadPrefix": "handleInterwiki",
+		"BSApiInterwikiStoreMakeData": "handleInterwiki",
+		"BeforePageDisplay": [ "addBootstrap", "addSearchInstanceContext", "handleSharedResources" ],
+		"SpecialPage_initList": "addSpecialPages",
+		"MessageCacheFetchOverrides": "setupGroupMessages",
+		"BeforeParserFetchTemplateRevisionRecord": "handleSharedResources",
+		"SkinTemplateNavigation::Universal": "handleSharedResources",
+		"BlueSpiceDiscoveryTemplateDataProviderAfterInit": "handleSharedResources",
+		"APIAfterExecute": "handleSharedResources",
+		"MWStakeCommonUIRegisterSkinSlotComponents": "common-user-interface",
+		"GetPreferences": "userpreference"
+	},
+	"HookHandlers": {
+		"runDatabaseUpdates": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\RunDatabaseUpdates"
+		},
+		"handleTag": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\HandleTag"
+		},
+		"handleInterwiki": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\HandleInterwiki",
+			"services": [ "BlueSpiceWikiFarm._Config" ]
+		},
+		"addSearchInstanceContext": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\AddSearchInstanceContext",
+			"services": [ "BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.AccessControlStore" ]
+		},
+		"addSpecialPages": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\AddSpecialPages",
+			"services": [ "BlueSpiceWikiFarm._Config" ]
+		},
+		"setupGroupMessages": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\SetupGroupMessages",
+			"services": [ "BlueSpiceWikiFarm._Config" ]
+		},
+		"addBootstrap": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\AddBootstrap"
+		},
+		"handleSharedResources": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\HandleSharedResources",
+			"services": [
+				"BlueSpiceWikiFarm._Config", "MainConfig", "TitleFactory",
+				"BlueSpiceWikiFarm.GlobalDatabaseQuery", "BlueSpiceWikiFarm.InstanceStore",
+				"BlueSpiceWikiFarm.AccessControlStore", "BlueSpiceWikiFarm.ForeignRequestExecution",
+				"NamespaceInfo"
+			]
+		},
+		"common-user-interface": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\CommonUserInterface",
+			"services": [ "BlueSpiceWikiFarm.InstanceStore", "BlueSpiceWikiFarm._Config", "UserOptionsLookup" ]
+		},
+		"userpreference": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\AddUserPreference"
+		}
+	},
+	"RestRoutes": [
+		{
+			"method": "POST",
+			"path": "/bluespice/farm/v1/instance/{instanceName}",
+			"class": "\\BlueSpice\\WikiFarm\\Rest\\CreateInstanceHandler",
+			"services": [ "BlueSpiceWikiFarm.InstanceManager", "PermissionManager", "LanguageFactory", "MainConfig" ]
+		},
+		{
+			"method": "POST",
+			"path": "/bluespice/farm/v1/instance/edit/{instanceName}",
+			"class": "\\BlueSpice\\WikiFarm\\Rest\\EditInstanceHandler",
+			"services": [ "BlueSpiceWikiFarm.InstanceManager", "PermissionManager", "LanguageFactory", "MainConfig" ]
+		},
+		{
+			"method": "POST",
+			"path": "/bluespice/farm/v1/instance/clone/{sourceInstancePath}/{instanceName}",
+			"class": "\\BlueSpice\\WikiFarm\\Rest\\CloneInstanceHandler",
+			"services": [ "BlueSpiceWikiFarm.InstanceManager", "PermissionManager", "LanguageFactory", "MainConfig" ]
+		},
+		{
+			"method": "POST",
+			"path": "/bluespice/farm/v1/instance/suspend/{instanceName}",
+			"class": "\\BlueSpice\\WikiFarm\\Rest\\SuspendHandler",
+			"services": [ "BlueSpiceWikiFarm.InstanceManager", "PermissionManager" ]
+		},
+		{
+			"method": "POST",
+			"path": "/bluespice/farm/v1/instance/resume/{instanceName}",
+			"class": "\\BlueSpice\\WikiFarm\\Rest\\ResumeHandler",
+			"services": [ "BlueSpiceWikiFarm.InstanceManager", "PermissionManager", "BlueSpiceWikiFarm._InstanceCountLimiter" ]
+		},
+		{
+			"method": "DELETE",
+			"path": "/bluespice/farm/v1/instance/{instanceName}",
+			"class": "\\BlueSpice\\WikiFarm\\Rest\\DeleteInstanceHandler",
+			"services": [ "BlueSpiceWikiFarm.InstanceManager", "PermissionManager" ]
+		},
+		{
+			"method": "GET",
+			"path": "/bluespice/farm/v1/process/{processId}",
+			"class": "\\BlueSpice\\WikiFarm\\Rest\\ProcessHandler",
+			"services": [ "ProcessManager" ]
+		},
+		{
+			"path": "/bluespice/farm/v1/limits",
+			"class": "\\BlueSpice\\WikiFarm\\Rest\\LimitsHandler",
+			"services": [ "PermissionManager", "BlueSpiceWikiFarm._InstanceCountLimiter" ]
+		},
+		{
+			"method": "GET",
+			"path": "/bluespice/farm/v1/generate_path",
+			"class": "\\BlueSpice\\WikiFarm\\Rest\\GeneratePathHandler",
+			"services": [ "BlueSpiceWikiFarm._InstancePathGenerator", "BlueSpiceWikiFarm.InstanceStore" ]
+		},
+		{
+			"method": "GET",
+			"path": "/bluespice/farm/v1/check_path_validity",
+			"class": "\\BlueSpice\\WikiFarm\\Rest\\CheckPathHandler",
+			"services": [ "BlueSpiceWikiFarm._InstancePathGenerator" ]
+		},
+		{
+			"path": "/bluespice/farm/v1/combined-title-query-store",
+			"class": "BlueSpice\\WikiFarm\\TitleSearch\\Rest\\FarmTitleQueryStore",
+			"services": [
+				"HookContainer",
+				"DBLoadBalancer",
+				"TitleFactory",
+				"ContentLanguage",
+				"NamespaceInfo",
+				"PageProps",
+				"BlueSpiceWikiFarm.GlobalDatabaseQuery"
+			]
+		},
+		{
+			"path": "/bluespice/farm/v1/template-query-store",
+			"class": "BlueSpice\\WikiFarm\\TitleSearch\\Rest\\FarmTemplateQueryStore",
+			"services": [
+				"HookContainer",
+				"DBLoadBalancer",
+				"TitleFactory",
+				"ContentLanguage",
+				"NamespaceInfo",
+				"PageProps",
+				"BlueSpiceWikiFarm.GlobalDatabaseQuery",
+				"BlueSpiceWikiFarm.InstanceStore",
+				"BlueSpiceWikiFarm._Config"
+			]
+		},
+		{
+			"path": "/bluespice/farm/v1/teams/{teamName}/members",
+			"class": "BlueSpice\\WikiFarm\\Rest\\GetTeamMembersHandler",
+			"services": [ "HookContainer", "BlueSpiceWikiFarm.TeamManager", "PermissionManager" ]
+		},
+		{
+			"path": "/bluespice/farm/v1/teams",
+			"class": "BlueSpice\\WikiFarm\\Rest\\GetTeamsHandler",
+			"services": [ "HookContainer", "BlueSpiceWikiFarm.TeamManager", "PermissionManager" ]
+		},
+		{
+			"method": "PUT",
+			"path": "/bluespice/farm/v1/teams/{teamName}",
+			"class": "BlueSpice\\WikiFarm\\Rest\\CreateTeamHandler",
+			"services": [ "PermissionManager", "BlueSpiceWikiFarm.TeamManager" ]
+		},
+		{
+			"method": "DELETE",
+			"path": "/bluespice/farm/v1/teams/{teamName}",
+			"class": "BlueSpice\\WikiFarm\\Rest\\DeleteTeamHandler",
+			"services": [ "PermissionManager", "BlueSpiceWikiFarm.TeamManager" ]
+		},
+		{
+			"method": "POST",
+			"path": "/bluespice/farm/v1/teams/{teamName}/assign",
+			"class": "BlueSpice\\WikiFarm\\Rest\\AssignUserToTeamHandler",
+			"services": [ "PermissionManager", "BlueSpiceWikiFarm.TeamManager", "UserFactory" ]
+		},
+		{
+			"method": "POST",
+			"path": "/bluespice/farm/v1/teams/{teamName}/unassign",
+			"class": "BlueSpice\\WikiFarm\\Rest\\RemoveUserFromTeamHandler",
+			"services": [ "PermissionManager", "BlueSpiceWikiFarm.TeamManager", "UserFactory" ]
+		},
+		{
+			"method": "POST",
+			"path": "/bluespice/farm/v1/access/assign",
+			"class": "BlueSpice\\WikiFarm\\Rest\\AssignRoleToEntityHandler",
+			"services": [
+				"PermissionManager", "BlueSpiceWikiFarm.TeamManager", "UserFactory",
+				"UserGroupManager", "BlueSpiceWikiFarm.InstanceGroupCreator", "BlueSpiceWikiFarm.InstanceStore"
+			]
+		},
+		{
+			"path": "/bluespice/farm/v1/access/assignments",
+			"class": "BlueSpice\\WikiFarm\\Rest\\AccessAssignmentsStore",
+			"services": [
+				"HookContainer", "PermissionManager", "BlueSpiceWikiFarm.InstanceGroupCreator",
+				"DBLoadBalancer", "BlueSpiceWikiFarm.TeamManager", "BlueSpiceWikiFarm.InstanceStore"
+			]
+		}
+	],
+	"ServiceWiringFiles": [
+		"ServiceWiring.php"
+	],
+	"AvailableRights": [
+		"wikifarm-createwiki",
+		"wikifarm-managewiki",
+		"wikifarm-deletewiki"
+	],
+	"GroupPermissions": {
+		"sysop": {
+			"wikifarm-createwiki": true,
+			"wikifarm-managewiki": true,
+			"wikifarm-deletewiki": true
+		}
+	},
+	"GrantPermissions": {
+		"farm-management": {
+			"wikifarm-createwiki": true,
+			"wikifarm-managewiki": true,
+			"wikifarm-deletewiki": true
+		}
+	},
+	"config": {
+		"WikiFarmAccessLevel": {
+			"value": null
+		},
+		"WikiFarmInstanceTemplates": {
+			"value": {}
+		}
+	},
+	"LogTypes": [ "ext-wikifarm", "ext-wikifarm-teams" ],
+	"LogActionsHandlers": {
+		"ext-wikifarm/*": "LogFormatter",
+		"ext-wikifarm-teams/*": "LogFormatter"
+	},
+	"callback": "BlueSpice\\WikiFarm\\Setup::onRegistration",
+	"manifest_version": 2
+}

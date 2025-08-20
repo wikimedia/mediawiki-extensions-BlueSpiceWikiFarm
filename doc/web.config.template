@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.webServer>
+        <security>
+            <requestFiltering allowDoubleEscaping="true">
+                <requestLimits maxQueryString="4096" />
+            </requestFiltering>
+        </security>
+        <rewrite>
+            <rules>
+                <!-- "wiki" is path reserved for "w" wiki, when using $wgArticlePath="/wiki/$1" -->
+                <rule name="Imported Rule 1" stopProcessing="true">
+                    <match url="^wiki/(.*?).php/(.+)$" ignoreCase="false" />
+                    <action type="Rewrite" url="/w/{R:1}.php?sfr=w&amp;title={R:2}" appendQueryString="true" />
+                </rule>
+                <rule name="Imported Rule 2" stopProcessing="true">
+                    <match url="^wiki/(.*?).php$" ignoreCase="false" />
+                    <action type="Rewrite" url="/w/{R:1}.php?sfr=w" appendQueryString="true" />
+                </rule>
+                <rule name="Imported Rule 3" stopProcessing="true">
+                    <match url="^wiki/(.+)$" ignoreCase="false" />
+                    <action type="Rewrite" url="/w/index.php?title={R:1}&amp;sfr=w" appendQueryString="true" />
+                </rule>
+                <rule name="Imported Rule 4" stopProcessing="true">
+                    <match url="^wiki/([^/]+)/?$" ignoreCase="false" />
+                    <action type="Rewrite" url="/w/index.php?title={R:1}&amp;sfr=w" appendQueryString="true" />
+                </rule>
+                    <!--Let all requests directly to "w" pass, for when retrieving static resources, so that path is not matched as a page name-->
+                <rule name="Imported Rule 5" stopProcessing="true">
+                    <match url="^w/(.*?)$" ignoreCase="false" />
+                    <action type="Rewrite" url="/w/{R:1}?sfr=w" appendQueryString="true" />
+                </rule>
+                <rule name="Imported Rule 6" stopProcessing="true">
+                    <match url="^([^/]*)/(.*?).php/(.+)$" ignoreCase="false" />
+                    <action type="Rewrite" url="/w/{R:2}.php?sfr={R:1}&amp;title={R:3}" appendQueryString="true" />
+                </rule>
+                <rule name="Imported Rule 7" stopProcessing="true">
+                    <match url="^([^/]*)/(.*?).php$" ignoreCase="false" />
+                    <action type="Rewrite" url="/w/{R:2}.php?sfr={R:1}" appendQueryString="true" />
+                </rule>
+                <rule name="Imported Rule 8" stopProcessing="true">
+                    <match url="^([^/]*)/wiki/(.+)$" ignoreCase="false" />
+                    <action type="Rewrite" url="/w/index.php?title={R:2}&amp;sfr={R:1}" appendQueryString="true" />
+                </rule>
+				<rule name="Imported Rule 9" stopProcessing="true">
+                    <match url="^([^/]*)/(.+)$" ignoreCase="false" />
+                    <action type="Rewrite" url="/w/{R:2}" appendQueryString="true" />
+                </rule>
+                <rule name="Imported Rule 10" stopProcessing="true">
+                    <match url="^([^/]+)/?$" ignoreCase="false" />
+                    <action type="Rewrite" url="/w/index.php?sfr={R:1}" appendQueryString="true" />
+                </rule>
+                <rule name="Imported Rule 11" stopProcessing="true">
+                    <match url="^$" ignoreCase="false" />
+                    <action type="Rewrite" url="/w/index.php" />
+                </rule>
+            </rules>
+        </rewrite>
+    </system.webServer>
+</configuration>
