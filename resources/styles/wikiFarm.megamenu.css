@@ -1,0 +1,16 @@
+.farm-wiki-card-item {
+	display: inline-flex;
+	margin: 5px;
+	padding: 15px;
+	background-color: #f1f3f9;
+	width: 200px;
+}
+
+.farm-wiki-card-favorite-btn {
+	color: #3e5389;
+	margin-right: 10px;
+}
+
+.farm-wiki-card-favorite-btn:hover {
+	cursor: pointer;
+}
