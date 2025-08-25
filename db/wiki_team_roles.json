@@ -1,0 +1,26 @@
+[
+	{
+		"name": "wiki_team_roles",
+		"comment": "Role assignments for wiki teams",
+		"columns": [
+			{
+				"name": "wtr_team",
+				"type": "integer",
+				"options": { "notnull": true, "unsigned": true }
+			},
+			{
+				"name": "wtr_instance",
+				"type": "string",
+				"options": { "notnull": false, "length": 16 }
+			},
+			{
+				"name": "wtr_role",
+				"type": "binary",
+				"options": { "notnull": true, "length": 255 }
+			}
+		],
+		"indexes": [
+			{ "name": "wtr_team_instance_role", "columns": [ "wtr_team", "wtr_instance", "wtr_role" ], "unique": true }
+		]
+	}
+]

@@ -1,0 +1,37 @@
+[
+	{
+		"name": "wiki_teams",
+		"comment": "Store information about teams",
+		"columns": [
+			{
+				"name": "wt_id",
+				"type": "integer",
+				"options": { "notnull": true, "autoincrement": true, "unsigned": true }
+			},
+			{
+				"name": "wt_name",
+				"type": "binary",
+				"options": { "notnull": true, "length": 200 }
+			},
+			{
+				"name": "wt_description",
+				"type": "binary",
+				"options": { "notnull": false, "length": 200 }
+			},
+			{
+				"name": "wt_creator",
+				"type": "integer",
+				"options": { "notnull": true, "unsigned": true }
+			},
+			{
+				"name": "wt_created",
+				"type": "mwtimestamp",
+				"options": { "notnull": true }
+			}
+		],
+		"indexes": [
+			{ "name": "wt_name_unique", "columns": [ "wt_name" ], "unique": true }
+		],
+		"pk": [ "wt_id" ]
+	}
+]

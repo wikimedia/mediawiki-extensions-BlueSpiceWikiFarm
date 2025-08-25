@@ -1,0 +1,25 @@
+RewriteEngine On
+
+# RewriteRule ^(_sp)($|/) - [L]  # Support #13386 - Allows to access /_sp folder next to wiki
+
+RewriteRule ^wiki/(.*?).php/(.+)$ /w/$1.php?sfr=w&amp;title=$2 [QSA,L]
+
+RewriteRule ^wiki/(.*?).php$ /w/{R:1}.php?sfr=w [QSA,L]
+
+RewriteRule ^wiki/(.+)$ /w/index.php?title=$1&amp;sfr=w [QSA,L]
+
+RewriteRule ^wiki/([^/]+)/?$ /w/index.php?title=$1&amp;sfr=w [QSA,L]
+
+RewriteRule ^w/(.*?)$ /w/$1?sfr=w [QSA,L]
+
+RewriteRule ^([^/]*)/(.*?).php/(.+)$ /w/$2.php?sfr=$1&amp;title=$3 [QSA,L]
+
+RewriteRule ^([^/]*)/(.*?).php /w/$2.php?sfr=$1 [QSA,L]
+
+RewriteRule ^/([^/]*)/wiki/(.+)$ /w/index.php?title=$2&sfr=$1 [QSA,L]
+
+RewriteRule ^/([^/]*)/(.+)$ /w/$2 [QSA,L]
+
+RewriteRule ^([^/]+)/?$ /w/index.php?sfr=$1 [QSA,L]
+
+RewriteRule ^/*$ /w/index.php [L]

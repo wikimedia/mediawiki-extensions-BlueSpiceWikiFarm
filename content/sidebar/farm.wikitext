@@ -1,0 +1,5 @@
+* navigation
+** bs-sandbox-page|bs-sandbox
+** bs-helpdesk-page|bs-helpdesk
+** bs-support-page|bs-support
+** bs-bluespiceabout-about-bluespice-page|bs-bluespiceabout-about-bluespice
