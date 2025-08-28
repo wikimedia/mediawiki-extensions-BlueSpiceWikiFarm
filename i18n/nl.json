@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"wikifarm-desc": "Wikifarm aanmaken en beheren",
+	"farmmanagement": "Farmbeheer",
+	"useraccess": "Beheer van gebruikerstoegang",
+	"wikiteams": "Wiki-teams",
+	"grant-farm-management": "Farmwiki’s aanmaken, beheren en verwijderen",
+	"right-wikifarm-createwiki": "Een nieuwe wiki aanmaken",
+	"action-wikifarm-createwiki": "een nieuwe wiki aan te maken",
+	"right-wikifarm-managewiki": "Wiki-instellingen beheren",
+	"action-wikifarm-managewiki": "de wiki-farm te beheren",
+	"right-wikifarm-deletewiki": "Een wiki verwijderen",
+	"action-wikifarm-deletewiki": "een wiki te verwijderen",
+	"log-name-ext-wikifarm": "Wikifarm-beheer",
+	"log-name-ext-wikifarm-teams": "Wiki-teams"
+}
