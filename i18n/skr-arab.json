@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saraiki"
+		]
+	},
+	"wikifarm-button-action-label-cancel": "منسوخ",
+	"wikifarm-instance-desc": "تفصیل",
+	"wikifarm-instance-keywords": "خاص لفظ",
+	"wikifarm-instance-not-found": "وکی کائنی لبھا",
+	"wikifarm-ui-role-label-reader": "قاری",
+	"wikifarm-ui-access-assignee-type-team": "ٹیم",
+	"wikifarm-button-action-label-promote-to-shared": "ٹورو"
+}

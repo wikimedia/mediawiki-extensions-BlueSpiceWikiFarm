@@ -1,6 +1,8 @@
 {
 	"@metadata": {
-		"authors": []
+		"authors": [
+			"McDutchie"
+		]
 	},
 	"wikifarm-desc": "Description of Extension:BlueSpiceWikiFarm as listed on [[Special:Version]]",
 	"farmmanagement": "Special page name",
@@ -163,8 +165,8 @@
 	"wikifarm-ui-access-wiki-type-private": "Wiki access level type label",
 	"wikifarm-ui-access-wiki-type-protected": "Wiki access level type label",
 	"wikifarm-ui-access-wiki-type-public-help": "Wiki access level type help text",
-	"wikifarm-ui-access-wiki-type-private-help": "Wiki access level type help text",
-	"wikifarm-ui-access-wiki-type-protected-help": "Wiki access level type help text",
+	"wikifarm-ui-access-wiki-type-private-help": "Wiki access level type help text. “Reader” should be translated as in {{msg-mw|Wikifarm-ui-role-label-reader}}. “Editor” should be translated as in {{msg-mw|Wikifarm-ui-role-label-editor}}.",
+	"wikifarm-ui-access-wiki-type-protected-help": "Wiki access level type help text. “Editor” should be translated as in {{msg-mw|Wikifarm-ui-role-label-editor}}.",
 	"wikifarm-ui-access-assignments-header": "Fieldset label",
 	"wikifarm-ui-access-success-set-level": "Success message when setting wiki type",
 	"wikifarm-ui-access-error-set-level": "Error message when setting wiki type",
