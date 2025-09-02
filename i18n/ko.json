@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ykhwong"
+		]
+	},
+	"action-wikifarm-deletewiki": "위키 삭제",
+	"wikifarm-button-action-label-cancel": "취소",
+	"wikifarm-creation-progress-main-label": "새 위키를 만드는 중",
+	"wikifarm-edit-instance": "위키 편집",
+	"wikifarm-instance-desc": "설명",
+	"wikifarm-instance-keywords": "키워드",
+	"wikifarm-instance-not-found": "위키를 찾을 수 없습니다",
+	"wikifarm-resume-instance": "위키 재개",
+	"wikifarm-main-instance-name": "주 위키",
+	"wikifarm-ui-search-instance-filter-local": "이 위키",
+	"wikifarm-ui-teams-action-edit": "팀 편집",
+	"wikifarm-ui-teams-field-user": "사용자",
+	"wikifarm-button-action-label-add": "추가",
+	"wikifarm-ui-teams-action-delete-team": "팀 삭제",
+	"wikifarm-ui-access-assignee-type-team": "팀",
+	"wikifarm-ui-teams-sort-name": "팀 이름",
+	"wikifarm-button-action-label-promote-to-shared": "이동",
+	"wikifarm-instances-menu-overview-text": "모든 위키"
+}
