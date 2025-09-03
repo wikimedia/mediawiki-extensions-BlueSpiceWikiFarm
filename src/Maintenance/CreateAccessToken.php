@@ -11,6 +11,7 @@ use MediaWiki\Extension\OAuth\Entity\AccessTokenEntity;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Maintenance\MaintenanceFatalError;
 use MediaWiki\Registration\ExtensionRegistry;
+use MediaWiki\User\User;
 use MWRestrictions;
 use Psr\Log\LoggerInterface;
 
@@ -28,17 +29,14 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 	 * @throws MaintenanceFatalError|Exception
 	 */
 	private function generateAccessToken(): ?string {
-		$user = $this->getServiceContainer()->getUserFactory()->newFromName( 'ContentTransferBot' );
-		if ( !$user->isRegistered() ) {
-			$status = $user->addToDatabase();
-			if ( !$status->isOK() ) {
-				throw new Exception( 'Failed to create user' );
-			}
+		$user = User::newSystemUser( 'ContentTransferBot', [ 'steal' => true ] );
+		if ( !$user ) {
+			throw new Exception( 'Failed to create user' );
 		}
 		$this->getServiceContainer()->getUserGroupManager()->addUserToMultipleGroups( $user, [ 'bot', 'sysop' ] );
-
-		$user->setEmail( 'contenttranfer@default.com' );
+		$user->setEmail( 'contenttransfer@default.com' );
 		$user->confirmEmail();
+
 		$data = [
 			'action' => 'propose',
 			'name'         => 'ContentTransfer',
@@ -53,7 +51,7 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 			'ownerOnly' => true,
 			'oauth2IsConfidential' => true,
 			'oauth2GrantTypes' => [ 'client_credentials' ],
-			'email' => 'contenttranfer@default.com',
+			'email' => $user->getEmail(),
 			// All wikis
 			'wiki' => '*',
 			// Generate a key
