@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Beta16"
+			"Beta16",
+			"McDutchie"
 		]
 	},
-	"action-wikifarm-deletewiki": "Cancella un wiki",
+	"action-wikifarm-deletewiki": "cancellare un wiki",
 	"wikifarm-instance-desc": "Descrizione",
 	"wikifarm-instance-not-found": "Wiki non trovato",
 	"wikifarm-main-instance-name": "Wiki principale",

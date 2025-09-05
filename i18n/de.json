@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"*surak*"
+			"*surak*",
+			"McDutchie"
 		]
 	},
 	"wikifarm-desc": "Farmverwaltung",
@@ -10,11 +11,11 @@
 	"wikiteams": "Wiki-Teams",
 	"grant-farm-management": "Farmwikis erstellen, verwalten und löschen",
 	"right-wikifarm-createwiki": "Ein Wiki erstellen",
-	"action-wikifarm-createwiki": "Ein Wiki erstellen",
+	"action-wikifarm-createwiki": "ein Wiki zu erstellen",
 	"right-wikifarm-managewiki": "Wiki-Einstellungen verwalten",
 	"action-wikifarm-managewiki": "Farmverwaltung verwenden",
 	"right-wikifarm-deletewiki": "Ein Wiki löschen",
-	"action-wikifarm-deletewiki": "Ein Wiki löschen",
+	"action-wikifarm-deletewiki": "ein Wiki zu löschen",
 	"log-name-ext-wikifarm": "Wiki-Farm-Verwaltung",
 	"log-name-ext-wikifarm-teams": "Wiki-Teams",
 	"logentry-ext-wikifarm-teams-create": "$1 {{GENDER:$2|erstellte}} ein neues Team \"$4\"",

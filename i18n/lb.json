@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"McDutchie",
 			"Volvox"
 		]
 	},
 	"right-wikifarm-createwiki": "Eng nei Wiki uleeën",
 	"action-wikifarm-createwiki": "eng nei Wiki unzeleeën",
 	"right-wikifarm-deletewiki": "Eng Wiki läschen",
-	"action-wikifarm-deletewiki": "Eng Wiki läschen",
+	"action-wikifarm-deletewiki": "eng Wiki ze läschen",
 	"wikifarm-mainpage-content-contact-title": "Braucht Dir Hëllef?",
 	"wikifarm-mainpage-content-helpdesk-title": "Dokumentatioun",
 	"wikifarm-widget-combined-title-input-local": "Dës Wiki",
