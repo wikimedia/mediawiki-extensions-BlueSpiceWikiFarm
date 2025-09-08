@@ -5,6 +5,7 @@ namespace BlueSpice\WikiFarm;
 use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
 use Throwable;
@@ -122,23 +123,42 @@ class GlobalDatabaseQueryExecution {
 	}
 
 	/**
-	 * @param InstanceEntity|null $sharedInstance
-	 * @param Title $title
+	 * @param InstanceEntity $instanceEntity
+	 * @param array $params
 	 * @return array|null
 	 */
-	public function getForeignPage( ?InstanceEntity $sharedInstance, Title $title ): ?array {
-		$instancePath = $sharedInstance->getPath();
+	public function getActionApiResults( InstanceEntity $instanceEntity, array $params = [] ): ?array {
+		$apiEndpoint = $instanceEntity->getUrl( $this->farmConfig ) . '/api.php';
+		$url = wfAppendQuery( $apiEndpoint, $params );
+		$response = MediaWikiServices::getInstance()->getHttpRequestFactory()->request( 'GET', $url );
+		if ( !$response ) {
+			return null;
+		}
+		return json_decode( $response, 1 );
+	}
+
+	/**
+	 * @param InstanceEntity $instanceEntity
+	 * @param Title $title
+	 * @param int|null $revisionId
+	 * @return array|null
+	 */
+	public function getForeignPage( InstanceEntity $instanceEntity, Title $title, ?int $revisionId = null ): ?array {
+		$instancePath = $instanceEntity->getPath();
 		$this->assertInstanceDatabases( $this->databaseFactory->createManagementConnection(), [ $instancePath ] );
 		$db = $this->instanceDatabases[$instancePath] ?? null;
 		if ( !$db ) {
 			return null;
 		}
+		$revisionCondition = $revisionId ?
+			[ 'slot_revision_id = ' . $revisionId ] :
+			[ 'slot_revision_id = page_latest' ];
 		$row = $db->newSelectQueryBuilder()
 			->select( [ 'old_text', 'page_latest', 'page_id', 'page_namespace', 'page_title' ] )
 			->from( 'text' )
 			->join( 'content', 'c', [ 'old_id = \'tt:\' + content_id' ] )
 			->join( 'slots', 'sl', [ 'slot_content_id = content_id' ] )
-			->join( 'page', 'p', [ 'slot_revision_id = page_latest' ] )
+			->join( 'page', 'p', $revisionCondition )
 			->where( [
 				'page_title' => $title->getText(),
 				'page_namespace' => $title->getNamespace(),
@@ -152,7 +172,7 @@ class GlobalDatabaseQueryExecution {
 		return [
 			'content' => $row->old_text,
 			'id' => $row->page_id,
-			'revision' => $row->page_latest,
+			'revision' => $revisionId ?? $row->page_latest,
 			'namespace' => $row->page_namespace,
 			'title' => $row->page_title,
 		];

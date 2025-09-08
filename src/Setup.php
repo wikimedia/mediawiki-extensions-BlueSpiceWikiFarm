@@ -191,6 +191,7 @@ class Setup {
 		$connection = ( new ManagementDatabaseFactory( $farmConfig ) )->createSharedUserDatabaseConnection();
 		$GLOBALS['wgSharedDB'] = $connection->getDBname();
 		$GLOBALS['wgSharedPrefix'] = $connection->tablePrefix();
+
 		$GLOBALS['wgSharedTables'][] = 'actor';
 		$GLOBALS['wgSharedTables'][] = 'user';
 		$GLOBALS['wgSharedTables'][] = 'user_autocreate_serial';

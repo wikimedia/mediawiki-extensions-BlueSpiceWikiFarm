@@ -534,6 +534,9 @@
 		"APIAfterExecute": "handleSharedResources",
 		"MWStakeCommonUIRegisterSkinSlotComponents": "common-user-interface",
 		"GetPreferences": "userpreference",
+		"ContentStabilizationGetCurrentInclusions": "handleSharedStabilization",
+		"ContentStabilizationFetchForeignRevisionForTransclusion": "handleSharedStabilization",
+		"ContentStabilizationGetStableForeignInclusion": "handleSharedStabilization",
 		"MWStakeMCPGetWikiMap": "populateWikiMap",
 		"BeforeInitialize": "redirectUserPage",
 		"SpecialPageBeforeExecute": "addGlobalUnifiedTaskOverviewModule",
@@ -571,6 +574,15 @@
 		},
 		"handleSharedResources": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\HandleSharedResources",
+			"services": [
+				"BlueSpiceWikiFarm._Config", "MainConfig", "TitleFactory",
+				"BlueSpiceWikiFarm.GlobalDatabaseQuery", "BlueSpiceWikiFarm.InstanceStore",
+				"BlueSpiceWikiFarm.AccessControlStore", "BlueSpiceWikiFarm.ForeignRequestExecution",
+				"NamespaceInfo"
+			]
+		},
+		"handleSharedStabilization": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\HandleSharedStabilization",
 			"services": [
 				"BlueSpiceWikiFarm._Config", "MainConfig", "TitleFactory",
 				"BlueSpiceWikiFarm.GlobalDatabaseQuery", "BlueSpiceWikiFarm.InstanceStore",
