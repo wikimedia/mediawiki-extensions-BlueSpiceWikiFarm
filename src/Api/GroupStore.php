@@ -35,7 +35,7 @@ class GroupStore extends BSApiExtJSStoreBase {
 	protected function makeData( $query = '' ) {
 		foreach ( $this->instanceStore->getInstanceIds() as $id ) {
 			$instance = $this->instanceStore->getInstanceById( $id );
-			$this->appendResults( $query, $instance->getMetadata() );
+			$this->appendResults( $query ?? '', $instance->getMetadata() );
 		}
 
 		return array_values( $this->results );

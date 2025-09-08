@@ -77,7 +77,7 @@ class MaintenancePageConstructor {
 				->select( [ 'sfp_pid pid', 'sfp_pid type' ] )
 				->from( 'simple_farmer_processes' )
 				->join( 'processes', 'p', [ 'p.p_pid = simple_farmer_processes.sfp_pid' ] )
-				->where( [ 'sfp_instance' => $this->instanceEntity->getId(), 'p.p_state' => 'ready' ] )
+				->where( [ 'sfp_instance' => $this->instanceEntity->getId(), 'p.p_state' => [ 'ready', 'started' ] ] )
 				->caller( __METHOD__ )
 				->fetchRow();
 			if ( $running ) {

@@ -202,7 +202,7 @@ class Setup {
 		if ( !is_array( $GLOBALS['wgContentTransferTargets'] ) ) {
 			$GLOBALS['wgContentTransferTargets'] = [];
 		}
-		if ( !is_array( $GLOBALS['bsgTranslateTransferNamespaces'] ) ) {
+		if ( !is_array( $GLOBALS['bsgTranslateTransferNamespaces'] ?? [] ) ) {
 			$GLOBALS['bsgTranslateTransferNamespaces'] = [];
 		}
 		foreach ( $GLOBALS['wgWikiFarmGlobalStore']->getAllInstances() as $instance ) {

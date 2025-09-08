@@ -187,11 +187,11 @@ class InstanceManager {
 	 */
 	private function startProcess( ManagedProcess $process, string $id ): string {
 		$pid = $this->processManager->startProcess( $process );
-		$this->instanceStore->storeRunningProcess( $id, $pid, get_class( $process ) );
 		if ( !$pid ) {
 			$this->logger->error( 'Failed to start process of type ' . get_class( $process ) );
 			$this->throwException( RuntimeException::class, 'wikifarm-error-failed-to-start-process' );
 		}
+		$this->instanceStore->storeRunningProcess( $id, $pid, get_class( $process ) );
 		$this->logger->info( 'Started process of type ' . get_class( $process ) . ' with pid ' . $pid );
 		return $pid;
 	}
