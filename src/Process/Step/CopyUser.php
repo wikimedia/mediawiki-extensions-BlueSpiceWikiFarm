@@ -37,7 +37,6 @@ class CopyUser extends InstanceAwareStep {
 	 * @throws Exception
 	 */
 	public function execute( $data = [] ): array {
-		sleep( 5 );
 		$instanceDb = $this->getInstanceManager()->getDatabaseConnectionForInstance( $this->getInstance() );
 		if ( !$instanceDb ) {
 			$this->getInstanceManager()->getLogger()->error( 'Could not get database connection for instance {path}', [

@@ -11,7 +11,6 @@ use MediaWiki\Extension\OAuth\Entity\AccessTokenEntity;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Maintenance\MaintenanceFatalError;
 use MediaWiki\Registration\ExtensionRegistry;
-use MediaWiki\User\User;
 use MWRestrictions;
 use Psr\Log\LoggerInterface;
 
@@ -24,18 +23,49 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 	 */
 	private LoggerInterface $logger;
 
+	public function __construct() {
+		parent::__construct();
+		$this->addOption( 'for-user', 'Generate the token for the specified user (username)', false, true );
+	}
+
 	/**
 	 * @return string|null
 	 * @throws MaintenanceFatalError|Exception
 	 */
 	private function generateAccessToken(): ?string {
-		$user = User::newSystemUser( 'ContentTransferBot', [ 'steal' => true ] );
-		if ( !$user ) {
-			throw new Exception( 'Failed to create user' );
+		$explicitUser = $this->getOption( 'for-user' );
+		if ( $explicitUser ) {
+			$user = $this->getServiceContainer()->getUserFactory()->newFromName( $explicitUser );
+			if ( !$user || !$user->isRegistered() ) {
+				throw new Exception( "User '$explicitUser' does not exist or is not registered." );
+			}
+			if ( !$user->getEmail() ) {
+				throw new Exception( "User '$explicitUser' does not have an email address set." );
+			}
+		} else {
+			// We must use actual user, non-system, as system users don't have tokens, which causes CSRF (and other)
+			// token to not be persistent, preventing any kind of stateful operations
+			$user = $this->getServiceContainer()->getUserFactory()->newFromName( 'ContentTransferBot' );
+			// Compatibility check - If user exists and it's a system user, we must not use it, we need a new one
+			// Run `getToken` twice, if each time new token is generated, we have a system user
+			// isSystemUser alone cannot be used as user might have email set
+			$hasInvalidToken = $user->getToken( false ) !== $user->getToken( false );
+			if ( $user->isRegistered() && ( $user->isSystemUser() || $hasInvalidToken ) ) {
+				$user = $this->getServiceContainer()->getUserFactory()->newFromName( 'ContentTransfer bot' );
+			}
+			if ( !$user->isRegistered() ) {
+				$status = $user->addToDatabase();
+				if ( !$status->isOK() ) {
+					throw new Exception( 'Failed to create user' );
+				}
+			}
+			$this->getServiceContainer()->getUserGroupManager()->addUserToMultipleGroups( $user, [ 'bot', 'sysop' ] );
+			if ( !$user->getEmail() || !$user->isEmailConfirmed() ) {
+				$user->setEmail( 'contenttranfer@default.com' );
+				$user->confirmEmail();
+			}
+			$user->saveSettings();
 		}
-		$this->getServiceContainer()->getUserGroupManager()->addUserToMultipleGroups( $user, [ 'bot', 'sysop' ] );
-		$user->setEmail( 'contenttransfer@default.com' );
-		$user->confirmEmail();
 
 		$data = [
 			'action' => 'propose',
@@ -124,13 +154,6 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 			return false;
 		}
 
-		$instanceConfig = $instance->getConfig();
-		$accessToken = $instanceConfig['access_token'] ?? null;
-		if ( $accessToken ) {
-			$this->logger->info( 'CreateAccessToken: Access token already exists' );
-			$this->output( "Access token already exists\n" );
-			return false;
-		}
 		try {
 			$accessToken = $this->generateAccessToken();
 			if ( !$accessToken ) {
