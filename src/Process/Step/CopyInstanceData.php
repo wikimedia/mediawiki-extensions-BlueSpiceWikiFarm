@@ -23,7 +23,10 @@ class CopyInstanceData extends InstanceAwareStep {
 	private $rootDatabase;
 
 	/** @var string[] */
-	protected $skipTableData = [ 'objectcache', 'module_deps', 'l10n_cache', 'bs_whoisonline', 'updatelog' ];
+	protected $skipTableData = [
+		'objectcache', 'module_deps', 'l10n_cache', 'bs_whoisonline', 'updatelog',
+		'oauth2_access_tokens', 'oauth_accepted_consumer', 'oauth_registered_consumer'
+	];
 
 	/** @var string[] */
 	protected $filesToSkip = [ 'extensions/BlueSpiceFoundation/data/.smw.json' ];
