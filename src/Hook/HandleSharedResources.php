@@ -35,6 +35,9 @@ class HandleSharedResources implements
 	APIAfterExecuteHook
 {
 
+	/** @var InstanceEntity|null */
+	protected ?InstanceEntity $sharedInstance = null;
+
 	/**
 	 * @param Config $farmConfig
 	 * @param Config $mainConfig
@@ -46,15 +49,16 @@ class HandleSharedResources implements
 	 * @param NamespaceInfo $namespaceInfo
 	 */
 	public function __construct(
-		private readonly Config $farmConfig,
+		protected readonly Config $farmConfig,
 		private readonly Config $mainConfig,
-		private readonly TitleFactory $titleFactory,
-		private readonly GlobalDatabaseQueryExecution $globalDatabaseQueryExecution,
+		protected readonly TitleFactory $titleFactory,
+		protected readonly GlobalDatabaseQueryExecution $globalDatabaseQueryExecution,
 		private readonly InstanceStore $instanceStore,
 		private readonly IAccessStore $accessStore,
 		private readonly ForeignRequestExecution $foreignRequestExecution,
-		private readonly NamespaceInfo $namespaceInfo
+		protected readonly NamespaceInfo $namespaceInfo
 	) {
+		$this->sharedInstance = $this->getSharedInstance();
 	}
 
 	/**
@@ -63,6 +67,10 @@ class HandleSharedResources implements
 	public function onBeforeParserFetchTemplateRevisionRecord(
 		?LinkTarget $contextTitle, LinkTarget $title, bool &$skip, ?RevisionRecord &$revRecord
 	) {
+		if ( !$this->sharedInstance ) {
+			// No shared instance configured, bail out
+			return;
+		}
 		if (
 			!$this->farmConfig->get( 'useSharedResources' ) ||
 			FARMER_CALLED_INSTANCE === $this->farmConfig->get( 'sharedResourcesWikiPath' )
@@ -77,7 +85,8 @@ class HandleSharedResources implements
 			// Template exists locally, bail out
 			return;
 		}
-		$sharedRevision = $this->getSharedRevision( $targetTitle );
+		// Try to get a template revision from a shared resources wiki
+		$sharedRevision = $this->getSharedRevision( $targetTitle, $this->sharedInstance );
 		if ( $sharedRevision ) {
 			$revRecord = $sharedRevision;
 		}
@@ -94,18 +103,18 @@ class HandleSharedResources implements
 	 * @inheritDoc
 	 */
 	public function onSkinTemplateNavigation__Universal( $sktemplate, &$links ): void {
-		if ( !$this->isRelevantPage( $sktemplate->getTitle(), true ) ) {
+		if ( !$this->isPromotable( $sktemplate->getTitle(), true ) ) {
 			return;
 		}
-		$shared = $this->getSharedInstance();
-		if ( !$shared ) {
+		if ( !$this->sharedInstance ) {
+			// No shared instance configured, bail out
 			return;
 		}
-		if ( $this->existsOnShared( $sktemplate->getTitle(), $shared ) ) {
+		if ( $this->existsOnShared( $sktemplate->getTitle(), $this->sharedInstance ) ) {
 			return;
 		}
 
-		if ( !$this->isEligibleForPromotion( $sktemplate->getUser(), $shared ) ) {
+		if ( !$this->isEligibleForPromotion( $sktemplate->getUser(), $this->sharedInstance ) ) {
 			return;
 		}
 		$links['actions']['promote-shared'] = [
@@ -121,7 +130,7 @@ class HandleSharedResources implements
 	 * @inheritDoc
 	 */
 	public function onBeforePageDisplay( $out, $skin ): void {
-		if ( !$this->isRelevantPage( $out->getTitle() ) ) {
+		if ( !$this->isPromotable( $out->getTitle() ) ) {
 			return;
 		}
 		$shared = $this->getSharedInstance();
@@ -150,15 +159,17 @@ class HandleSharedResources implements
 	}
 
 	/**
+	 * Get template data for a template that exists on shared resources wiki
+	 * and inject it as if template existed locally
 	 * @param ApiTemplateData $module
 	 * @return void
 	 */
 	private function handleTemplateData( ApiTemplateData $module ) {
-		$sharedInstance = $this->getSharedInstance();
-		if ( !$sharedInstance ) {
+		if ( !$this->sharedInstance ) {
+			// No shared instance configured, bail out
 			return;
 		}
-		$foreignPages = $this->getForeignTemplateData( $module->getRequest(), $sharedInstance );
+		$foreignPages = $this->getForeignTemplateData( $module->getRequest(), $this->sharedInstance );
 
 		$pages = $module->getResult()->getResultData( 'pages' );
 		foreach ( $pages as $id => $page ) {
@@ -174,12 +185,12 @@ class HandleSharedResources implements
 	}
 
 	/**
+	 * Make sure page titles in response are prefixed with canonical NS prefix, to avoid
+	 * issues if shared resources wiki is in a different language.
 	 * @param ApiQuery $module
 	 * @return void
 	 */
 	private function handleImageInfo( ApiQuery $module ) {
-		// Replace file namespace in arbitrary language with canonical - on shared resource wiki,
-		// to work well with other instances that may be in any language
 		if ( FARMER_CALLED_INSTANCE !== $this->farmConfig->get( 'sharedResourcesWikiPath' ) ) {
 			return;
 		}
@@ -191,22 +202,25 @@ class HandleSharedResources implements
 				// Not image info response
 				continue;
 			}
-			// Convert title to canonical namespace
-			$title = $this->titleFactory->newFromText( $page['title'], NS_FILE );
-			if ( $title->getNsText() === $fileCanonical ) {
+			if ( str_starts_with( $page['title'], $fileCanonical . ':' ) ) {
+				// Already in canonical namespace
 				continue;
 			}
+			// Convert title to canonical namespace
+			$title = $this->titleFactory->newFromText( $page['title'], NS_FILE );
 			$result->removeValue( [ 'query', 'pages', $index ], 'title' );
 			$result->addValue( [ 'query', 'pages', $index ], 'title', $fileCanonical . ':' . $title->getDBkey() );
 		}
 	}
 
 	/**
+	 * Check if page can be moved to the shared resources wiki.
+	 *
 	 * @param Title|null $title
 	 * @param bool $mustExist
 	 * @return bool
 	 */
-	private function isRelevantPage( ?Title $title, bool $mustExist = false ): bool {
+	private function isPromotable( ?Title $title, bool $mustExist = false ): bool {
 		if ( !$this->farmConfig->get( 'useSharedResources' ) || !$this->farmConfig->get( 'useGlobalAccessControl' ) ) {
 			return false;
 		}
@@ -268,22 +282,22 @@ class HandleSharedResources implements
 	}
 
 	/**
+	 * Get a revision object containing content from the shared resources wiki.
+	 *
 	 * @param Title $title
+	 * @param InstanceEntity $sharedInstance
+	 * @param int|null $revisionId
 	 * @return MutableRevisionRecord|null
 	 */
-	private function getSharedRevision( Title $title ) {
-		$sharedInstance = $this->instanceStore->getInstanceByPath(
-			$this->farmConfig->get( 'sharedResourcesWikiPath' )
-		);
-		if ( !$sharedInstance ) {
-			return null;
-		}
-
-		$foreign = $this->globalDatabaseQueryExecution->getForeignPage( $sharedInstance, $title );
+	protected function getSharedRevision(
+		Title $title, InstanceEntity $sharedInstance, ?int $revisionId = null
+	): ?MutableRevisionRecord {
+		$foreign = $this->globalDatabaseQueryExecution->getForeignPage( $sharedInstance, $title, $revisionId );
 		if ( $foreign === null ) {
 			return null;
 		}
 		$rev = new MutableRevisionRecord( $title );
+		$rev->setId( $foreign['revision'] );
 		$rev->setContent( SlotRecord::MAIN, new WikitextContent( $foreign['content'] ) );
 
 		return $rev;
@@ -319,5 +333,4 @@ class HandleSharedResources implements
 
 		return $formatted;
 	}
-
 }
