@@ -6,9 +6,6 @@ ext.bluespiceWikiFarm.ui.TeamsPanel = function ( cfg ) {
 		name: {
 			type: 'text',
 			headerText: mw.msg( 'wikifarm-ui-teams-header-name' ),
-			filter: {
-				type: 'string'
-			},
 			sortable: true,
 			valueParser: function ( value, row ) {
 				const url = mw.Title.makeTitle( -1, 'WikiTeams/' + value ).getUrl( {
@@ -49,23 +46,10 @@ ext.bluespiceWikiFarm.ui.TeamsPanel = function ( cfg ) {
 		store: this.store,
 		columns: columns,
 		multiSelect: false,
-		noHeader: true
+		noHeader: true,
+		filtering: { showQueryField: true }
 	};
-
-	this.externalFilter = new OOJSPlus.ui.data.grid.ExternalFilter( {
-		store: this.store,
-		sort: {
-			value: 'name',
-			sortOptions: [
-				{ data: 'name', label: mw.msg( 'wikifarm-ui-teams-sort-name' ) },
-				{ data: 'memberCount', label: mw.msg( 'wikifarm-ui-teams-sort-membercount' ) }
-			],
-			direction: 'asc'
-		}
-	} );
 	ext.bluespiceWikiFarm.ui.TeamsPanel.parent.call( this, cfg );
-
-	this.externalFilter.$element.insertBefore( this.grid.$element );
 };
 
 OO.inheritClass( ext.bluespiceWikiFarm.ui.TeamsPanel, OOJSPlus.ui.panel.ManagerGrid );

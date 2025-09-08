@@ -422,7 +422,9 @@
 				"wikifarm-ui-access-wiki-type-label",
 				"wikifarm-ui-access-assignments-header",
 				"wikifarm-ui-access-success-set-level",
-				"wikifarm-ui-access-error-set-level"
+				"wikifarm-ui-access-error-set-level",
+				"wikifarm-ui-access-field-type-user",
+				"wikifarm-ui-access-field-type-team"
 			],
 			"dependencies": [
 				"ext.oOJSPlus.managerPanel",
