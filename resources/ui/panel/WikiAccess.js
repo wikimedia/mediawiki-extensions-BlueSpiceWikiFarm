@@ -10,15 +10,22 @@ ext.bluespiceWikiFarm.ui.WikiAccessPanel = function ( cfg ) {
 			type: 'text',
 			headerText: mw.msg( 'wikifarm-ui-access-field-type' ),
 			filter: {
-				type: 'string'
+				type: 'list',
+				list: [
+					{ data: 'user', label: mw.msg( 'wikifarm-ui-access-field-type-user' ) },
+					{ data: 'team', label: mw.msg( 'wikifarm-ui-access-field-type-team' ) }
+				]
 			},
-			sortable: true,
+			valueParser: function ( value ) {
+				// 'wikifarm-ui-access-field-type-user',
+				// 'wikifarm-ui-access-field-type-team',
+				return mw.msg( 'wikifarm-ui-access-field-type-' + value );
+			},
 			hidden: true
 		},
 		entity_key: { // eslint-disable-line camelcase
 			type: 'text',
 			headerText: mw.msg( 'wikifarm-ui-access-field-key' ),
-			filter: { type: 'text' },
 			valueParser: function ( value, row ) {
 				return new ext.bluespiceWikiFarm.ui.widget.WikiAccessEntity( row );
 			}
@@ -27,6 +34,15 @@ ext.bluespiceWikiFarm.ui.WikiAccessPanel = function ( cfg ) {
 			width: 150,
 			type: 'text',
 			headerText: mw.msg( 'wikifarm-ui-access-field-role' ),
+			filter: {
+				type: 'list',
+				list: [
+					{ data: 'reader', label: mw.msg( 'wikifarm-ui-role-label-reader' ) },
+					{ data: 'editor', label: mw.msg( 'wikifarm-ui-role-label-editor' ) },
+					{ data: 'reviewer', label: mw.msg( 'wikifarm-ui-role-label-reviewer' ) },
+					{ data: 'maintainer', label: mw.msg( 'wikifarm-ui-role-label-maintainer' ) }
+				]
+			},
 			valueParser: function ( value ) {
 				// * wikifarm-ui-role-label-reader
 				// * wikifarm-ui-role-label-editor
@@ -66,7 +82,8 @@ ext.bluespiceWikiFarm.ui.WikiAccessPanel = function ( cfg ) {
 	cfg.grid = {
 		store: this.store,
 		columns: columns,
-		multiSelect: false
+		multiSelect: false,
+		filtering: { showQueryField: true }
 	};
 	ext.bluespiceWikiFarm.ui.WikiAccessPanel.parent.call( this, cfg );
 

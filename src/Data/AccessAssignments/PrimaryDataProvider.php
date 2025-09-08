@@ -36,6 +36,7 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 		$teamAssignments = $this->getTeamAssignments( $this->teamManager->getTeamRoles( $this->instanceEntity ) );
 
 		$assignments = array_merge( $assignments, $localUserAssignments, $teamAssignments );
+		$assignments = $this->filterByQuery( $assignments, $params );
 
 		$records = [];
 		foreach ( $assignments as $assignment ) {
@@ -47,6 +48,28 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 			] );
 		}
 		return $records;
+	}
+
+	/**
+	 * @param array $assignments
+	 * @param ReaderParams $params
+	 * @return array
+	 */
+	public function filterByQuery( array $assignments, ReaderParams $params ): array {
+		if ( !$params->getQuery() ) {
+			return $assignments;
+		}
+		$query = $params->getQuery();
+		$query = mb_strtolower( $query );
+		$filtered = [];
+		foreach ( $assignments as $assignment ) {
+			$key = mb_strtolower( $assignment['search_index'] ?? $assignment['key'] );
+			if ( str_contains( $key, $query ) ) {
+				$filtered[] = $assignment;
+			}
+		}
+
+		return $filtered;
 	}
 
 	/**
@@ -62,7 +85,7 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 	 */
 	private function getLocalUserAssignments(): array {
 		$groups = $this->instanceGroupCreator->getGroupsAndRolesForInstancePath( $this->instanceEntity->getPath() );
-		return $this->getAssignmentsForUserGroups( $groups, false );
+		return $this->getAssignmentsForUserGroups( $groups );
 	}
 
 	/**
@@ -75,7 +98,7 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 		$res = $db->newSelectQueryBuilder()
 			->from( 'user_groups', 'ug' )
 			->join( 'user', 'u', [ 'ug.ug_user = u.user_id' ] )
-			->select( [ 'user_name', 'ug_group' ] )
+			->select( [ 'user_name', 'user_real_name', 'ug_group' ] )
 			->where( [ 'ug_group' => array_keys( $groups ) ] )
 			->caller( __METHOD__ )
 			->fetchResultSet();
@@ -88,6 +111,7 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 			}
 			$assignments[] = [
 				'type' => 'user',
+				'search_index' => $row->user_real_name . '|' . $row->user_name,
 				'key' => $row->user_name,
 				'role' => $role,
 				'is_global' => $isGlobal,

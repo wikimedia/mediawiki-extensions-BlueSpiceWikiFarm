@@ -194,6 +194,8 @@
 	"wikifarm-instances-menu-favorite-text": "Favourites",
 	"wikifarm-instances-menu-button-title": "List with all wiki instances",
 	"wikifarm-instances-menu-aria-label": "Wiki instances",
+	"wikifarm-ui-access-field-type-user": "User",
+	"wikifarm-ui-access-field-type-team": "Team",
 	"wikifarm-instance-color": "Wiki color",
 	"wikifarm-instance-color-remove": "Do not assign color",
 	"wikifarm-management-breadcrumb-label-create": "Create",
