@@ -478,7 +478,8 @@
 				"ve/sharedTemplateDialogLoader.js"
 			],
 			"dependencies": [
-				"ext.bluespice.wikiFarm.bootstrap"
+				"ext.bluespice.wikiFarm.bootstrap",
+				"oojs-ui"
 			]
 		},
 		"ext.bluespice.wikiFarm.megamenu": {
