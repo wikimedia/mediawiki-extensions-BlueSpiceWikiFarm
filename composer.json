@@ -14,7 +14,7 @@
 	},
 	"require": {
 		"composer/installers": "~1.0|~2",
-		"symfony/process": "~5",
+		"symfony/process": "~6",
 		"symfony/filesystem": "~3",
 		"cocur/background-process": "v0.7",
 		"ifsnop/mysqldump-php": "v2.4",
