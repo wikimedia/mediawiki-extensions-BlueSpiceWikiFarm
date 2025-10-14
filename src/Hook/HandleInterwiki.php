@@ -22,7 +22,7 @@ class HandleInterwiki implements InterwikiLoadPrefixHook {
 	 * @return bool
 	 */
 	public function onInterwikiLoadPrefix( $prefix, &$iwData ) {
-		$links = $this->farmConfig->get( 'interwikiLinks' );
+		$links = $this->farmConfig->get( 'interwikiLinks' ) ?: [];
 		$prefix = mb_strtolower( $prefix );
 		if ( isset( $links[$prefix] ) ) {
 			$iwData = $links[$prefix];
@@ -40,7 +40,7 @@ class HandleInterwiki implements InterwikiLoadPrefixHook {
 		foreach ( $data as $item ) {
 			$item->editable = true;
 		}
-		$links = $this->farmConfig->get( 'interwikiLinks' );
+		$links = $this->farmConfig->get( 'interwikiLinks' ) ?: [];
 		foreach ( $links as $prefix => $link ) {
 			$link = (object)$link;
 			$link->editable = false;
