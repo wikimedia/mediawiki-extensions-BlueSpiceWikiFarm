@@ -4,6 +4,7 @@ use BlueSpice\WikiFarm\AccessControl\GroupAccessStore;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
 use BlueSpice\WikiFarm\AccessControl\NullAccessStore;
 use BlueSpice\WikiFarm\AccessControl\TeamManager;
+use BlueSpice\WikiFarm\DirectInstanceStore;
 use BlueSpice\WikiFarm\ForeignRequestExecution;
 use BlueSpice\WikiFarm\GlobalDatabaseQueryExecution;
 use BlueSpice\WikiFarm\InstanceCountLimiter;
@@ -48,9 +49,11 @@ return [
 	},
 	'BlueSpiceWikiFarm.GlobalDatabaseQuery' => static function ( MediaWikiServices $services ) {
 		$config = $services->getService( 'BlueSpiceWikiFarm._Config' );
+		$instanceStore = $GLOBALS['wgWikiFarmGlobalStore'] ??
+			new DirectInstanceStore( $services->getService( 'BlueSpiceWikiFarm.ManagementDatabaseFactory' ) );
 		return new GlobalDatabaseQueryExecution(
 			$services->getService( 'BlueSpiceWikiFarm.ManagementDatabaseFactory' ),
-			$GLOBALS['wgWikiFarmGlobalStore'],
+			$instanceStore,
 			$services->getDBLoadBalancer(),
 			$services->getService( 'BlueSpiceWikiFarm._Config' ),
 			LoggerFactory::getInstance( 'BlueSpiceWikiFarm' ),
@@ -81,7 +84,9 @@ return [
 		);
 	},
 	'BlueSpiceWikiFarm.InstanceGroupCreator' => static function ( MediaWikiServices $services ) {
-		return new InstanceGroupCreator( $GLOBALS['wgWikiFarmGlobalStore'] );
+		$instanceStore = $GLOBALS['wgWikiFarmGlobalStore'] ??
+			new DirectInstanceStore( $services->getService( 'BlueSpiceWikiFarm.ManagementDatabaseFactory' ) );
+		return new InstanceGroupCreator( $instanceStore );
 	},
 	'BlueSpiceWikiFarm.ForeignRequestExecution' => static function ( MediaWikiServices $services ) {
 		return new ForeignRequestExecution(

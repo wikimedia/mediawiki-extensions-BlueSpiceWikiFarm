@@ -32,15 +32,19 @@ class EditInstanceHandler extends CreateInstanceHandler {
 	public function getBodyParamSettings(): array {
 		return [
 			'displayName' => [
+				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'description' => [
+				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'language' => [
+				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
 			'metadata' => [
+				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_TYPE => 'array',
 			]
