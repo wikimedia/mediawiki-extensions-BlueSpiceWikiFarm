@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"SleaY"
+		]
+	},
+	"wikifarm-mainpage-content-contact-title": "Avez-vous besoin d'aide?",
+	"wikifarm-button-action-label-cancel": "Annuler",
+	"wikifarm-button-action-label-clone": "Dupliquer",
+	"wikifarm-button-action-label-create": "Créer",
+	"wikifarm-button-action-label-delete": "Retirer",
+	"wikifarm-button-action-label-save": "Enregistrer",
+	"wikifarm-instance-desc": "Description",
+	"wikifarm-lang-code": "Langue",
+	"wikifarm-ui-teams-field-user": "Utilisateur",
+	"wikifarm-ui-teams-action-add-member": "Ajouter un membre",
+	"wikifarm-ui-role-label-editor": "Contributeur",
+	"wikifarm-ui-role-label-reviewer": "Relecteur",
+	"wikifarm-ui-access-wiki-type-protected": "Protégé"
+}
