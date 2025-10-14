@@ -14,6 +14,7 @@ use Wikimedia\Rdbms\DatabaseDomain;
 class Setup {
 	public static function onRegistration() {
 		if ( defined( 'MW_QUIBBLE_CI' ) ) {
+			define( 'FARMER_CALLED_INSTANCE', '' );
 			$GLOBALS['wgWikiFarmConfigInternal'] = new SetupCIConfig();
 			return;
 		}

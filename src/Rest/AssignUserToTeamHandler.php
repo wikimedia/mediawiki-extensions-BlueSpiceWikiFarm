@@ -55,6 +55,7 @@ class AssignUserToTeamHandler extends RightManagementHandler {
 	public function getBodyParamSettings(): array {
 		return [
 			'user' => [
+				self::PARAM_SOURCE => 'body',
 				'type' => 'string',
 				'required' => true
 			]
