@@ -10,6 +10,7 @@
 	"requires": {
 		"MediaWiki": ">= 1.43.0",
 		"extensions": {
+			"BlueSpiceFoundation": ">= 5.0.0",
 			"OOJSPlus": "*"
 		}
 	},
@@ -460,7 +461,6 @@
 				"wikifarm-promote-to-shared-dialog-description",
 				"wikifarm-promote-to-shared-dialog-push",
 				"wikifarm-promote-to-shared-dialog-delete-local",
-				"wikifarm-promote-to-shared",
 				"wikifarm-button-action-label-promote-to-shared",
 				"wikifarm-promote-to-shared-dialog-title",
 				"wikifarm-error-unknown",

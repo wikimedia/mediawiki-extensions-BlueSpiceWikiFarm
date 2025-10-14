@@ -126,18 +126,22 @@ class AssignRoleToEntityHandler extends RightManagementHandler {
 	public function getBodyParamSettings(): array {
 		return [
 			'entityType' => [
+				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true
 			],
 			'entityKey' => [
+				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true
 			],
 			'roleName' => [
+				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true
 			],
 			'globalAssignment' => [
+				self::PARAM_SOURCE => 'body',
 				ParamValidator::PARAM_TYPE => 'boolean',
 				ParamValidator::PARAM_DEFAULT => false
 			],

@@ -46,6 +46,7 @@ class CreateTeamHandler extends RightManagementHandler {
 	public function getBodyParamSettings(): array {
 		return [
 			'description' => [
+				self::PARAM_SOURCE => 'body',
 				'type' => 'string',
 				'required' => true
 			]
