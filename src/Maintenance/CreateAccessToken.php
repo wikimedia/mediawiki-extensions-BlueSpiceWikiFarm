@@ -70,7 +70,7 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 		$data = [
 			'action' => 'propose',
 			'name'         => 'ContentTransfer',
-			'version'      => '1.0',
+			'version'      => '1.1',
 			'description'  => 'ContentTransfer client',
 			'oauthVersion' => 2,
 			'callbackUrl' => 'https://dummy.com',
@@ -177,7 +177,7 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 	 * @return string
 	 */
 	protected function getUpdateKey() {
-		return 'wikifarm-create-access-token';
+		return 'wikifarm-create-access-token-2';
 	}
 }
 
