@@ -1,0 +1,25 @@
+{
+	"@metadata": {
+		"authors": [
+			"Milicevic01"
+		]
+	},
+	"logentry-ext-wikifarm-teams-create": "$1 је {{GENDER:$2|направио|направила}} нови тим „$4”",
+	"logentry-ext-wikifarm-teams-delete": "$1 {{GENDER:$2|обрисао|обрисала}} је тим „$4”",
+	"logentry-ext-wikifarm-teams-assign-role": "$1 је {{GENDER:$2|доделио|доделила}} улогу „$5” тиму „$4”",
+	"logentry-ext-wikifarm-teams-un-assign-user": "$1 је {{GENDER:$2|уклонио|уклонила}} корисника „$5” из тима „$4”",
+	"wikifarm-button-action-label-cancel": "Откажи",
+	"wikifarm-instance-desc": "Опис",
+	"wikifarm-instance-keywords": "Кључне речи",
+	"wikifarm-instance-not-found": "Вики није пронађен",
+	"wikifarm-ui-teams-action-remove-member": "Уклони члана",
+	"wikifarm-button-action-label-add": "Додај",
+	"wikifarm-ui-access-field-role": "Улога",
+	"wikifarm-ui-role-label-maintainer": "Одржава",
+	"wikifarm-ui-access-assignee-type-team": "Тим",
+	"wikifarm-ui-teams-sort-name": "Име тима",
+	"wikifarm-ui-teams-sort-membercount": "Број чланова",
+	"wikifarm-ui-teams-header-expiration-value": "Истиче: $1",
+	"wikifarm-ui-teams-sort-user-expiration": "Истиче",
+	"wikifarm-button-action-label-promote-to-shared": "Премести"
+}

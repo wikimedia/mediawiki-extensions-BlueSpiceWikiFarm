@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"JLTRY",
+			"SleaY"
+		]
+	},
+	"useraccess": "Gestion des accès utilisateurs",
+	"wikiteams": "Équipes Wiki",
+	"right-wikifarm-createwiki": "Créer un nouveau wiki",
+	"action-wikifarm-createwiki": "Créer un nouveau wiki",
+	"right-wikifarm-managewiki": "Gérer les paramètres du wiki",
+	"right-wikifarm-deletewiki": "Supprimer un wiki",
+	"action-wikifarm-deletewiki": "Supprimer un wiki",
+	"log-name-ext-wikifarm-teams": "Équipes Wiki",
+	"logentry-ext-wikifarm-teams-create": "$1 {{GENDER:$2| a créé}} une nouvelle équipe « $4 »",
+	"logentry-ext-wikifarm-teams-delete": "$1 {{GENDER:$2| a supprimé}} l'équipe « $4 »",
+	"wikifarm-mainpage-content-contact-title": "Avez-vous besoin d'aide?",
+	"wikifarm-button-action-label-cancel": "Annuler",
+	"wikifarm-button-action-label-clone": "Dupliquer",
+	"wikifarm-button-action-label-create": "Créer",
+	"wikifarm-button-action-label-delete": "Retirer",
+	"wikifarm-button-action-label-save": "Enregistrer",
+	"wikifarm-instance-desc": "Description",
+	"wikifarm-lang-code": "Langue",
+	"wikifarm-ui-teams-field-user": "Utilisateur",
+	"wikifarm-ui-teams-action-add-member": "Ajouter un membre",
+	"wikifarm-ui-role-label-editor": "Contributeur",
+	"wikifarm-ui-role-label-reviewer": "Relecteur",
+	"wikifarm-ui-access-wiki-type-protected": "Protégé"
+}
