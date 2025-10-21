@@ -1,9 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"SleaY"
+			"SleaY",
+			"JLTRY"
 		]
 	},
+	"useraccess": "Gestion des accès utilisateurs",
+	"wikiteams": "Équipes Wiki",
+	"right-wikifarm-createwiki": "Créer un nouveau wiki",
+	"action-wikifarm-createwiki": "Créer un nouveau wiki",
+	"right-wikifarm-managewiki": "Gérer les paramètres du wiki",
+	"right-wikifarm-deletewiki": "Supprimer un wiki",
+	"action-wikifarm-deletewiki": "Supprimer un wiki",
+	"log-name-ext-wikifarm-teams": "Équipes Wiki",
+	"logentry-ext-wikifarm-teams-create": "$1 {{GENDER:$2| a créé}} une nouvelle équipe « $4 »",
+	"logentry-ext-wikifarm-teams-delete": "$1 {{GENDER:$2| a supprimé}} l'équipe « $4 »",
 	"wikifarm-mainpage-content-contact-title": "Avez-vous besoin d'aide?",
 	"wikifarm-button-action-label-cancel": "Annuler",
 	"wikifarm-button-action-label-clone": "Dupliquer",
