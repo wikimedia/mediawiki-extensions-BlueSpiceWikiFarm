@@ -2,15 +2,14 @@
 
 namespace BlueSpice\WikiFarm\Special;
 
+use MediaWiki\Config\Config;
 use MediaWiki\Html\Html;
 use OOJSPlus\Special\OOJSGridSpecialPage;
 use OOUI\MessageWidget;
 
 class UserAccess extends OOJSGridSpecialPage {
 
-	/**
-	 */
-	public function __construct( private readonly \Config $farmConfig ) {
+	public function __construct( private readonly Config $farmConfig ) {
 		parent::__construct( 'UserAccess', 'userrights' );
 	}
 

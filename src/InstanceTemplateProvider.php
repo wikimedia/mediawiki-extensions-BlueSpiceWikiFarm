@@ -2,14 +2,15 @@
 
 namespace BlueSpice\WikiFarm;
 
+use MediaWiki\Config\Config;
 use MediaWiki\Message\Message;
 
 class InstanceTemplateProvider {
 	/**
-	 * @param \Config $mainConfig
+	 * @param Config $mainConfig
 	 */
 	public function __construct(
-		private readonly \Config $mainConfig
+		private readonly Config $mainConfig
 	) {
 	}
 
