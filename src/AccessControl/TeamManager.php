@@ -5,6 +5,7 @@ namespace BlueSpice\WikiFarm\AccessControl;
 use BlueSpice\WikiFarm\InstanceEntity;
 use ManualLogEntry;
 use MediaWiki\Permissions\Authority;
+use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\User\UserFactory;
 use MediaWiki\User\UserGroupManager;
 use MediaWiki\User\UserIdentity;
@@ -236,7 +237,7 @@ class TeamManager extends TeamQuery {
 	 */
 	private function logToSpecialLog( string $action, Authority $actor, array $params ) {
 		$logEntry = new ManualLogEntry( 'ext-wikifarm-teams', $action );
-		$logEntry->setTarget( \SpecialPage::getTitleFor( 'WikiTeams' ) );
+		$logEntry->setTarget( SpecialPage::getTitleFor( 'WikiTeams' ) );
 		$logEntry->setPerformer( $actor->getUser() );
 		$logEntry->setParameters( $params );
 		$id = $logEntry->insert();
