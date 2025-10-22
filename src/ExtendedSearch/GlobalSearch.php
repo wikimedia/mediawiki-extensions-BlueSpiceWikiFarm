@@ -11,7 +11,7 @@ use BS\ExtendedSearch\Plugin\IIndexProvider;
 use BS\ExtendedSearch\Plugin\ISearchContextProvider;
 use BS\ExtendedSearch\Plugin\ISearchPlugin;
 use BS\ExtendedSearch\SearchResult;
-use Config;
+use MediaWiki\Config\Config;
 use MediaWiki\Language\Language;
 use MediaWiki\Message\Message;
 use MediaWiki\Page\PageIdentity;
