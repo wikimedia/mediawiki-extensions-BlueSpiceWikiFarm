@@ -6,7 +6,7 @@ use BlueSpice\WikiFarm\InstanceCountLimiter;
 use BlueSpice\WikiFarm\InstanceManager;
 use BlueSpice\WikiFarm\InstanceTemplateProvider;
 use BlueSpice\WikiFarm\SystemInstanceEntity;
-use Html;
+use MediaWiki\Html\Html;
 use MediaWiki\Language\LanguageCode;
 use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\MainConfigNames;
