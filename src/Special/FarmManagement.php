@@ -11,7 +11,7 @@ use MediaWiki\Language\LanguageCode;
 use MediaWiki\Languages\LanguageNameUtils;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Permissions\PermissionStatus;
-use SpecialPage;
+use MediaWiki\SpecialPage\SpecialPage;
 
 class FarmManagement extends SpecialPage {
 
