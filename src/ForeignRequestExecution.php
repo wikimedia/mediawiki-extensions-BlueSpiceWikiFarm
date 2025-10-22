@@ -2,6 +2,7 @@
 
 namespace BlueSpice\WikiFarm;
 
+use MediaWiki\Config\Config;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Status\Status;
 
@@ -9,7 +10,7 @@ class ForeignRequestExecution {
 
 	public function __construct(
 		private readonly HttpRequestFactory $httpRequestFactory,
-		private readonly \Config $farmConfig
+		private readonly Config $farmConfig
 	) {
 	}
 

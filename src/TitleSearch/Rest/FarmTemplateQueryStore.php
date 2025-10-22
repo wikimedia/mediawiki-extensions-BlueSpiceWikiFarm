@@ -5,7 +5,7 @@ namespace BlueSpice\WikiFarm\TitleSearch\Rest;
 use BlueSpice\WikiFarm\GlobalDatabaseQueryExecution;
 use BlueSpice\WikiFarm\InstanceStore;
 use BlueSpice\WikiFarm\TitleSearch\Store\Store;
-use Config;
+use MediaWiki\Config\Config;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Language\Language;
 use MediaWiki\Page\PageProps;
