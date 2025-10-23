@@ -135,6 +135,11 @@ class DefaultConfig extends HashConfig {
 			'useSharedResources' => false,
 
 			/**
+			 * If true, an instances menu will be added to header
+			 */
+			'showInstancesMenu' => false,
+
+			/**
 			 * Path to the shared resources wiki
 			 */
 			'sharedResourcesWikiPath' => '-shared'
