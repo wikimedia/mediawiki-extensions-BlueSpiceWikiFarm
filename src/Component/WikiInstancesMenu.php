@@ -5,6 +5,7 @@ namespace BlueSpice\WikiFarm\Component;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\InstanceStore;
 use MediaWiki\Config\Config;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Html\Html;
 use MediaWiki\Message\Message;
@@ -44,6 +45,13 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 	 */
 	public function getId(): string {
 		return 'farm-wikis-btn';
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function shouldRender( IContextSource $context ): bool {
+		return $this->farmConfig->get( 'showInstancesMenu' );
 	}
 
 	/**
