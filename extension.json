@@ -479,6 +479,7 @@
 			],
 			"dependencies": [
 				"ext.bluespice.wikiFarm.bootstrap",
+				"oojs",
 				"oojs-ui"
 			]
 		},
