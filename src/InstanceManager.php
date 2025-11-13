@@ -132,7 +132,9 @@ class InstanceManager {
 		$base = $this->farmConfig->get( 'basePath' );
 		$base = trim( $base, '/' );
 		$scriptPath = $base . '/' . $path;
-		return $this->mainConfig->get( 'Server' ) . $scriptPath;
+		$server = $this->farmConfig->get( 'globalServer' );
+		$server = rtrim( $server, '/' );
+		return $server . '/' . $scriptPath;
 	}
 
 	/**
