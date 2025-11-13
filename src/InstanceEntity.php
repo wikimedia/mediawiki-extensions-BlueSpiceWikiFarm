@@ -95,7 +95,9 @@ class InstanceEntity {
 	 * @return string
 	 */
 	public function getUrl( Config $farmConfig ): string {
-		return $farmConfig->get( 'globalServer' ) . '/' . ltrim( $this->getScriptPath( $farmConfig ), '/' );
+		return $this->trimSlashes( $farmConfig->get( 'globalServer' ) ) .
+			'/' .
+			ltrim( $this->getScriptPath( $farmConfig ), '/' );
 	}
 
 	/**
@@ -257,7 +259,7 @@ class InstanceEntity {
 	 */
 	public function getVault( Config $farmConfig, bool $forWebAccess = false ): string {
 		if ( $forWebAccess ) {
-			return $farmConfig->get( 'instancePath' ) . '/' . $this->getPath();
+			return $this->trimSlashes( $farmConfig->get( 'instancePath' ) ) . '/' . $this->getPath();
 		}
 		if ( !$farmConfig->has( 'instanceDirectory' ) ) {
 			throw new RuntimeException(
@@ -280,5 +282,13 @@ class InstanceEntity {
 	 */
 	private function updateTouched() {
 		$this->updated = new DateTime();
+	}
+
+	/**
+	 * @param string $input
+	 * @return string
+	 */
+	private function trimSlashes( string $input ): string {
+		return trim( $input, '/' );
 	}
 }
