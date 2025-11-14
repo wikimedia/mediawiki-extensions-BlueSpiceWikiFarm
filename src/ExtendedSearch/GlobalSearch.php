@@ -109,7 +109,7 @@ class GlobalSearch implements
 	}
 
 	public function getContextPriority(): int {
-		return 100;
+		return 10;
 	}
 
 	public function formatFulltextResult(
