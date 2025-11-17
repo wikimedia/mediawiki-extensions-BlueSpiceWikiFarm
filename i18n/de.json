@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"*surak*",
+			"Ameisenigel",
 			"McDutchie"
 		]
 	},
@@ -14,7 +15,7 @@
 	"right-wikifarm-deletewiki": "Ein Wiki löschen",
 	"wikifarm-mainpage-content-contact-links": "+49 (0941) 660 800\n\n[mailto:support@bluespice.com Eine E-Mail senden]\n\n[https://bluespice.com/de/kontakt/ Rückruf anfordern]",
 	"wikifarm-mainpage-content-contact-text": "Kontaktieren Sie unser Support-Team unter",
-	"wikifarm-mainpage-content-contact-title": "Brauchen Sie Hilfe?",
+	"wikifarm-mainpage-content-contact-title": "Brauchst du Hilfe?",
 	"wikifarm-mainpage-content-flexiskin-links": "[[Special:FlexiSkin|Jetzt anpassen]]\n\n[https://de.wiki.bluespice.com/wiki/Handbuch:Erweiterung/FlexiSkin Mehr über FlexiSkin]",
 	"wikifarm-mainpage-content-flexiskin-text": "Fügen Sie Ihr Logo hinzu und gestalten Sie Ihr Wiki mit FlexiSkin.",
 	"wikifarm-mainpage-content-flexiskin-title-cloud": "Gestalte deine Wolke",
@@ -91,13 +92,13 @@
 	"wikifarm-non-existing-create-button": "Jetzt erstellen",
 	"wikifarm-non-existing": "Dieses Wiki existiert nicht.",
 	"wikifarm-remove-instance": "Wiki löschen",
-	"wikifarm-remove-instructions": "Bitte bestätigen Sie, dass Sie dieses Wiki löschen wollen, indem Sie seinen Pfad eingeben:",
+	"wikifarm-remove-instructions": "Bitte bestätige, dass du dieses Wiki löschen willst, indem du seinen Pfad eingibst:",
 	"wikifarm-resume-instance": "Wiki anschalten",
-	"wikifarm-resume-prompt": "Sind Sie sicher, dass Sie dieses Wiki anschalten wollen?",
+	"wikifarm-resume-prompt": "Bist du sicher, dass du dieses Wiki anschalten willst?",
 	"wikifarm-setnotsearchable-instance": "Nicht durchsuchbar",
 	"wikifarm-setsearchable-instance": "Durchsuchbar",
 	"wikifarm-suspend-instance": "Wiki abschalten",
-	"wikifarm-suspend-prompt": "Sind Sie sicher, dass Sie dieses Wiki abschalten wollen?",
+	"wikifarm-suspend-prompt": "Bist du sicher, dass du dieses Wiki abschalten willst?",
 	"wikifarm-template-blank-help": "Leeres Wiki ohne Inhalt",
 	"wikifarm-template-blank": "Leeres Wiki",
 	"wikifarm-template-clone-help": "Neues Wiki mit Daten aus einem vorhandenen Wiki",
