@@ -85,6 +85,7 @@ class GlobalDatabaseQueryExecution {
 			if ( !$currentInstance ) {
 				return [];
 			}
+			$this->instances[$currentInstance->getPath()] = $currentInstance;
 			return $this->combine( [
 				$currentInstance->getPath() => $localDb->select( $table, $vars, $conds, $fname, $options, $join_conds )
 			] );
