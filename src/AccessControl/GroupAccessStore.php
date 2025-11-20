@@ -127,7 +127,8 @@ class GroupAccessStore implements IAccessStore {
 	 */
 	private function checkTeams( UserIdentity $user, string $role, InstanceEntity $instance ): bool {
 		$userRoles = $this->teamQuery->getUserRolesForInstance( $user, $instance );
-		return in_array( $role, $userRoles );
+		$roles = array_merge( [ $role ], $this->getHigherRoles( $role ) );
+		return !empty( array_intersect( $roles, $userRoles ) );
 	}
 
 	/**
