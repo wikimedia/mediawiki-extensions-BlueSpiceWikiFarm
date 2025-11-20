@@ -109,7 +109,7 @@ class TeamQuery {
 			->from( 'wiki_team_roles', 'wtr' )
 			->join( 'wiki_teams', 'wt', [ 'wt.wt_id = wtr.wtr_team' ] )
 			->where( [
-				'wtr_instance' => $instanceEntity->getId(),
+				'wtr_instance' => [ $instanceEntity->getId(), null ],
 				'wt_name' => $teams
 			] )
 			->caller( __METHOD__ )
@@ -141,7 +141,7 @@ class TeamQuery {
 			->from( 'wiki_team_roles', 'wtr' )
 			->join( 'wiki_teams', 'wt', [ 'wt.wt_id = wtr.wtr_team' ] )
 			->where( [
-				'wtr_instance = ' . $this->db->addQuotes( $instanceEntity->getId() ) . ' OR wtr_instance IS NULL'
+				'wtr_instance' => [ $instanceEntity->getId(), null ],
 			] )
 			->caller( __METHOD__ )
 			->fetchResultSet();
