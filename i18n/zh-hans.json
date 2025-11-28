@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"ExoHyper2026"
+		]
+	},
+	"apihelp-wikifarm-group-store-summary": "从 WikiFarm 商店查询维基群组",
+	"apihelp-wikifarm-keyword-store-summary": "从 WikiFarm 商店查询 wiki 关键词"
+}
