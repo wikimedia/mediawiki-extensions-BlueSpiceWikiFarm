@@ -44,8 +44,17 @@ ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getLookupMenu
 		} ) );
 		for ( i = 0; i < grouped[ 0 ][ group ].length; i++ ) {
 			dataItem = grouped[ 0 ][ group ][ i ];
-			items.push( new OO.ui.MenuOptionWidget( this.getDataItemForOption( dataItem ) ) );
+			items.push( this.getMenuOption( {
+				label: null,
+				data: dataItem
+			} ) );
 		}
+	}
+	if ( items.length === 0 && !this.mustExist ) {
+		items.push( this.getMenuOption( {
+			label: this.getRawValue(),
+			data: { prefixed: this.getRawValue(), missing: true, _is_local_instance: true } // eslint-disable-line camelcase
+		} ) );
 	}
 
 	return items;

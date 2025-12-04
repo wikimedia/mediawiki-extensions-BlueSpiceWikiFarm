@@ -18,7 +18,8 @@ ext.bluespiceWikiFarm.ui.CombinedTitleAnnotationWidget.prototype.onTextChange = 
 
 ext.bluespiceWikiFarm.ui.CombinedTitleAnnotationWidget.prototype.addOtherTools = function () {
 	this.internalPicker = new ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget( {
-		$overlay: true
+		$overlay: true,
+		mustExist: false
 	} );
 	this.internalPicker.connect( this, {
 		change: 'onTextChange',
