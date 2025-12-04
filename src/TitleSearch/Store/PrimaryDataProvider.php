@@ -8,6 +8,7 @@ use MediaWiki\Language\Language;
 use MediaWiki\Title\NamespaceInfo;
 use MWStake\MediaWiki\Component\CommonWebAPIs\Data\TitleQueryStore\PrimaryDataProvider as Base;
 use MWStake\MediaWiki\Component\DataStore\Schema;
+use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
 
 class PrimaryDataProvider extends Base {
@@ -50,6 +51,10 @@ class PrimaryDataProvider extends Base {
 			$this->getJoinConds( $params ),
 			$this->limitToInstances ?? []
 		);
+
+		if ( $params->getQuery() !== '' ) {
+			$res = $this->rerank( $params->getQuery(), new FakeResultWrapper( $res ) );
+		}
 		foreach ( $res as $row ) {
 			$this->appendRowToData( $row );
 			// Get last item of `$this->data`
