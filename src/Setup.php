@@ -80,7 +80,7 @@ class Setup {
 			}
 			$prefix = mb_strtolower( $instance->getPath() );
 			$iwPrefix = "wiki-$prefix";
-			$GLOBALS['wgWikiFarmConfig_interwikiLinks'][$prefix] = [
+			$GLOBALS['wgWikiFarmConfig_interwikiLinks'][$iwPrefix] = [
 				'iw_prefix' => $iwPrefix,
 				'iw_url' => $instance->getUrl( $GLOBALS['wgWikiFarmConfigInternal'] ) . '/wiki/$1',
 				'iw_api' => '',
