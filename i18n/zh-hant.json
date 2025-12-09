@@ -192,5 +192,8 @@
 	"wikifarm-instances-menu-overview-text": "所有 wiki",
 	"wikifarm-instances-menu-favorite-text": "收藏",
 	"wikifarm-instances-menu-button-title": "列出所有 wiki 實例",
-	"wikifarm-instances-menu-aria-label": "Wiki 實例"
+	"wikifarm-instances-menu-aria-label": "Wiki 實例",
+	"apihelp-wikifarm-wiki-instance-store-summary": "從 WikiFarm 商店查詢 wiki 實例",
+	"apihelp-wikifarm-group-store-summary": "從 WikiFarm 商店查詢 wiki 群組",
+	"apihelp-wikifarm-keyword-store-summary": "從 WikiFarm 商店查詢 wiki 關鍵字"
 }
