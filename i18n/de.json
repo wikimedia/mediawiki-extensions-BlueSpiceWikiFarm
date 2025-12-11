@@ -176,5 +176,11 @@
 	"wikifarm-ui-access-wiki-type-private": "Privat",
 	"wikifarm-ui-access-wiki-type-protected": "Geschützt",
 	"wikifarm-ui-access-wiki-type-public-help": "Jeder kann die Inhalte <b>ansehen und bearbeiten</b>, auch anonyme Benutzer",
-	"wikifarm-ui-access-wiki-type-private-help": "Nur Benutzer/Teams mit der Rolle \"<b>Leser</b>\" oder höher können das Wiki anzeigen. Nur Benutzer/Teams mit der Rolle \"<b>Editor</b>\" oder höher können das Wiki bearbeiten."
+	"wikifarm-ui-access-wiki-type-private-help": "Nur Benutzer/Teams mit der Rolle \"<b>Leser</b>\" oder höher können das Wiki anzeigen. Nur Benutzer/Teams mit der Rolle \"<b>Editor</b>\" oder höher können das Wiki bearbeiten.",
+	"wikifarm-instances-menu-empty-favorite-text": "Zurzeit gibt es keine Wiki-Instanz, die als Favorit hinzugefügt wurde. Du kannst eine Instanz als Favorit auswählen, indem du auf das Sternsymbol klickst",
+	"wikifarm-instances-menu-overview-text": "Alle Wikis",
+	"wikifarm-instances-menu-favorite-text": "Favoriten",
+	"wikifarm-instances-menu-button-title": "Liste mit allen Wiki-Instanzen",
+	"wikifarm-instances-menu-aria-label": "Wiki-Instanzen"
+	"wikifarm-management-breadcrumb-label-create": "Erstellen"
 }
