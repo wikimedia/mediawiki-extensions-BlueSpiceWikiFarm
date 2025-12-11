@@ -66,6 +66,14 @@
 			"UploadFormPluginModules": [
 				"ext.bluespice.wikiFarm.sharedUpload"
 			]
+		},
+		"BlueSpiceDiscovery": {
+			"BreadcrumbDataProviderRegistry": {
+				"farmmanagement": {
+					"class": "BlueSpice\\WikiFarm\\BreadcrumbDataProvider\\SpecialFarmManagementProvider",
+					"services": [ "SpecialPageFactory" ]
+				}
+			}
 		}
 	},
 	"DefaultUserOptions": {
