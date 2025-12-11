@@ -172,5 +172,6 @@
 	"wikifarm-instances-menu-overview-text": "Alle Wikis",
 	"wikifarm-instances-menu-favorite-text": "Favoriten",
 	"wikifarm-instances-menu-button-title": "Liste mit allen Wiki-Instanzen",
-	"wikifarm-instances-menu-aria-label": "Wiki-Instanzen"
+	"wikifarm-instances-menu-aria-label": "Wiki-Instanzen",
+	"wikifarm-management-breadcrumb-label-create": "Erstellen"
 }
