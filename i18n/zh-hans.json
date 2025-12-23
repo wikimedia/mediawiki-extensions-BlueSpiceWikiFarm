@@ -5,8 +5,6 @@
 			"Peterxy12"
 		]
 	},
-	"apihelp-wikifarm-group-store-summary": "从 WikiFarm 商店查询维基群组",
-	"apihelp-wikifarm-keyword-store-summary": "从 WikiFarm 商店查询 wiki 关键词",
 	"wikifarm-desc": "创建和管理wiki农场",
 	"farmmanagement": "农场管理",
 	"useraccess": "用户访问管理",
@@ -19,6 +17,8 @@
 	"right-wikifarm-deletewiki": "删除wiki",
 	"action-wikifarm-deletewiki": "刪除wiki",
 	"apihelp-wikifarm-wiki-instance-store-summary": "从WikiFarm商店查询wiki实例",
+	"apihelp-wikifarm-group-store-summary": "从 WikiFarm 商店查询维基群组",
+	"apihelp-wikifarm-keyword-store-summary": "从 WikiFarm 商店查询 wiki 关键词",
 	"log-name-ext-wikifarm": "Wiki农场管理",
 	"log-name-ext-wikifarm-teams": "Wiki团队",
 	"logentry-ext-wikifarm-teams-create": "$1{{GENDER:$2|创建}}新团队“$4”",
