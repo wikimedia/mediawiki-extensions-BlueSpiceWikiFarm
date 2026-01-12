@@ -24,8 +24,6 @@ class InstanceVaultMirrorIteratorTest extends TestCase {
 			$dummyInstanceVaultPath . '/extensions/BlueSpiceFoundation/config/nm-settings.php',
 			$dummyInstanceVaultPath . '/extensions/BlueSpiceFoundation/config/pm-settings.20191030120000.php',
 			$dummyInstanceVaultPath . '/extensions/BlueSpiceFoundation/config/pm-settings.php',
-			$dummyInstanceVaultPath . '/extensions/BlueSpiceFoundation/data',
-			$dummyInstanceVaultPath . '/extensions/BlueSpiceFoundation/data/runJobsTriggerData.json',
 			$dummyInstanceVaultPath . '/images',
 			$dummyInstanceVaultPath . '/images/0',
 			$dummyInstanceVaultPath . '/images/0/07',
