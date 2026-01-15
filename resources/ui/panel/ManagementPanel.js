@@ -175,7 +175,7 @@ ext.bluespiceWikiFarm.ui.ManagementPanel.prototype.onButtonClick = function ( da
 		return;
 	}
 	if ( action === 'clone' ) {
-		this.redirect( '_create', { template: 'clone', source: this.selectedRow.path } );
+		this.redirect( '_create', { template: '_clone', source: this.selectedRow.path } );
 		return;
 	}
 	if ( action === 'edit' ) {
