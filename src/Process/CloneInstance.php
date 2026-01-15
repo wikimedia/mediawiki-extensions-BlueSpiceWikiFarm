@@ -19,7 +19,7 @@ class CloneInstance extends CreateInstance {
 				'copy-instance-data' => [
 					'class' => CopyInstanceData::class,
 					'args' => [ $this->data['instanceId'], $this->data['sourceInstanceId'] ],
-					'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'DBLoadBalancer' ]
+					'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'DBLoadBalancer', 'MWStake.StorageUtilities' ]
 				]
 			],
 			array_slice( $steps, $indexOf + 1 )

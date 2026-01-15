@@ -17,9 +17,11 @@ $GLOBALS['wgWikiFarmGlobalStore'] = new DirectInstanceStore( $managementDBFactor
 $GLOBALS['wgWikiFarmDispatcher'] = new BlueSpice\WikiFarm\Dispatcher(
 	$_REQUEST, $GLOBALS['wgWikiFarmGlobalStore'], $GLOBALS['wgWikiFarmConfigInternal']
 );
+
 foreach ( $GLOBALS['wgWikiFarmDispatcher']->getFilesToRequire() as $pathname ) {
 	require $pathname;
 }
+$GLOBALS['wgWikiFarmDispatcher']->afterConfiguration();
 
 mwsInitComponents();
 
@@ -38,3 +40,16 @@ $GLOBALS['mwsgWikiCronStore'] = [
 	'args' => [ FARMER_CALLED_INSTANCE, FARMER_IS_ROOT_WIKI_CALL ],
 	'services' => [ 'DBLoadBalancer', 'BlueSpiceWikiFarm._Config' ]
 ];
+
+$GLOBALS['wgFileBackends']['_instances'] = [
+	'name' => '_instances',
+	'class' => FSFileBackend::class,
+	'lockManager' => 'fsLockManager',
+	'containerPaths' => [
+		'instances-public' => $GLOBALS['wgWikiFarmConfigInternal' ]->get( 'instanceDirectory' ),
+		'archive-public' => $GLOBALS['wgWikiFarmConfigInternal' ]->get( 'archiveDirectory' )
+	],
+	'fileMode' => $info['fileMode'] ?? 0644,
+	'directoryMode' => $GLOBALS['wgDirectoryMode'],
+];
+$GLOBALS['wgWikiFarmConfig_instanceStorageBackend'] = '_instances';

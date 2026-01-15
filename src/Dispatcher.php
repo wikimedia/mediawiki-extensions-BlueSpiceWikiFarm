@@ -71,6 +71,7 @@ class Dispatcher {
 
 	/**
 	 * @return string[]
+	 * @throws Exception
 	 */
 	public function getFilesToRequire() {
 		$this->initInstance();
@@ -91,6 +92,11 @@ class Dispatcher {
 		}
 		$this->includeLocalSettingsAppend();
 		$this->maybeIncludeLocalSettingsCustom();
+
+		return $this->filesToRequire;
+	}
+
+	public function afterConfiguration() {
 		$this->setupSharedUserSessionsIfEnabled();
 		$this->maybeSetupSharedResources();
 
@@ -102,8 +108,6 @@ class Dispatcher {
 			// Init WikiFarmMap
 			MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm.WikiMap' );
 		};
-
-		return $this->filesToRequire;
 	}
 
 	private function onSetupAfterCache() {
@@ -195,7 +199,6 @@ class Dispatcher {
 		} else {
 			define( 'FARMER_IS_ROOT_WIKI_CALL', false );
 			define( 'FARMER_CALLED_INSTANCE', $this->instance->getPath() );
-			define( 'FARMER_CALLED_INSTANCE_VAULT', $this->instance->getVault( $this->config ) );
 		}
 	}
 

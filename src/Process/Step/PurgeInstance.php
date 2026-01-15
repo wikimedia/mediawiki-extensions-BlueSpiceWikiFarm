@@ -2,6 +2,8 @@
 
 namespace BlueSpice\WikiFarm\Process\Step;
 
+use BlueSpice\WikiFarm\Storage\InstanceTransaction;
+
 class PurgeInstance extends ArchiveInstance {
 
 	/**
@@ -16,14 +18,13 @@ class PurgeInstance extends ArchiveInstance {
 		);
 
 		$this->setSharedSetupFlag();
-		$vault = $this->getInstance()->getVault( $this->getInstanceManager()->getFarmConfig() );
-		if ( file_exists( $vault ) ) {
-			$this->getInstanceManager()->getLogger()->info(
-				"Removing vault {path} ...",
-				[ 'path' => $vault ]
-			);
-			wfRecursiveRemoveDir( $vault );
-		}
+		$backend = $this->storageHandler->getBackend(
+			$this->getInstanceManager()->getFarmConfig()->get( 'instanceStorageBackend' )
+		);
+		( new InstanceTransaction( $backend ) )
+			->deleteInstanceDirectory( $this->getInstance()->getPath() )
+			->commit();
+
 		$this->dropInstanceDatabase();
 
 		return array_merge( $data, [ 'success' => true ] );

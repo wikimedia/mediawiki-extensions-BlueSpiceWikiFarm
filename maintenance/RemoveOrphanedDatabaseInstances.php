@@ -2,7 +2,7 @@
 
 use BlueSpice\WikiFarm\InstanceManager;
 use MediaWiki\Maintenance\Maintenance;
-use MediaWiki\MediaWikiServices;
+use MWStake\MediaWiki\Component\FileStorageUtilities\StorageHandler;
 
 require_once dirname( __FILE__, 4 ) . '/maintenance/Maintenance.php';
 
@@ -23,7 +23,9 @@ class RemoveOrphanedDatabaseInstances extends Maintenance {
 	}
 
 	public function execute() {
-		$this->manager = MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm.InstanceManager' );
+		$this->manager = $this->getServiceContainer()->getService( 'BlueSpiceWikiFarm.InstanceManager' );
+		/** @var StorageHandler $storageHandler */
+		$storageHandler = $this->getServiceContainer()->getService( 'MWStake.StorageUtilities' );
 
 		$this->output(
 			"This script will check all instance entries in database and remove those which are not active\n" .
@@ -41,8 +43,11 @@ class RemoveOrphanedDatabaseInstances extends Maintenance {
 				$found = true;
 				$this->output( "> Instance \"" . $instance->getPath() . "\" has status: {$instance->getStatus()}\n" );
 				if ( !$this->hasOption( 'dry' ) ) {
+
 					// Remove vault
-					wfRecursiveRemoveDir( $instance->getVault( $this->manager->getFarmConfig() ) );
+					$storageHandler->newInstanceTransaction()
+						->deleteInstanceDirectory( $instance->getPath() )
+						->commit();
 					// Remove DB entry
 					$this->manager->getStore()->removeEntry( $instance );
 					$this->output( "removed\n" );

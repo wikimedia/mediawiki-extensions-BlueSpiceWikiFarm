@@ -33,7 +33,7 @@ class ArchiveInstance extends ManagedProcess {
 			'archive-instance' => [
 				'class' => Step\ArchiveInstance::class,
 				'args' => [ $this->data['instanceId'] ],
-				'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'MainConfig' ]
+				'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'MainConfig', 'MWStake.StorageUtilities' ]
 			],
 			'run-post-instance-deletion-commands' => [
 				'class' => RunPostInstanceDeletionCommands::class,

@@ -1,10 +1,7 @@
 <?php
 
-use BlueSpice\WikiFarm\InstanceVaultHelper;
-use BlueSpice\WikiFarm\SettingsReader;
 use BlueSpice\WikiFarm\SyncUserTableFactory;
 use MediaWiki\Config\Config;
-use MediaWiki\Config\MultiConfig;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MediaWikiServices;
 use Wikimedia\Rdbms\Database;
@@ -97,11 +94,6 @@ class SyncUsers extends Maintenance {
 	 * @var Config
 	 */
 	private $simpleFarmerConfig;
-
-	/**
-	 * @var InstanceVaultHelper
-	 */
-	private $instanceVaultHelper;
 
 	/**
 	 * @var \Wikimedia\Rdbms\IDatabase
@@ -581,7 +573,6 @@ class SyncUsers extends Maintenance {
 	 * @see SyncUsers::$sharedDb
 	 * @see SyncUsers::$syncRootDb
 	 * @see SyncUsers::$simpleFarmerConfig
-	 * @see SyncUsers::$instanceVaultHelper
 	 * @see SyncUsers::$instancesToSync
 	 */
 	private function init(): void {
@@ -592,9 +583,6 @@ class SyncUsers extends Maintenance {
 		/** @var \BlueSpice\WikiFarm\InstanceManager $instanceManager */
 		$instanceManager = MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm.InstanceManager' );
 		$this->simpleFarmerConfig = $instanceManager->getFarmConfig();
-
-		$path = $this->simpleFarmerConfig->get( 'instanceDirectory' );
-		$this->instanceVaultHelper = new InstanceVaultHelper( $path );
 
 		$instancesToSyncRaw = $this->getOption( 'instances' );
 		$this->instancesToSync = [];
@@ -634,46 +622,6 @@ class SyncUsers extends Maintenance {
 		}
 
 		return $databases;
-	}
-
-	public function extractDatabaseNames() {
-		$databaseNames = [];
-		/** @var \BlueSpice\WikiFarm\InstanceManager $instanceManager */
-		$instanceManager = MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm.InstanceManager' );
-		/** @var \BlueSpice\WikiFarm\InstanceEntity $instance */
-		foreach ( $instanceManager->getStore()->getAllInstances() as $instance ) {
-			if ( !$instance->isActive() ) {
-				continue;
-			}
-			$databaseNames[] = $instance->getDbName();
-		}
-
-		return $databaseNames;
-	}
-
-	/**
-	 * Gets name of wiki root instance database.
-	 *
-	 * @return string
-	 */
-	private function getRootDbName(): string {
-		$localSettings = $GLOBALS['IP'] . '/LocalSettings.php';
-
-		$reader = new SettingsReader( $localSettings );
-		$config = $reader->getConfig();
-
-		$customLS = dirname( $localSettings ) . "/LocalSettings.custom.php";
-
-		if ( file_exists( $customLS ) ) {
-			$reader = new SettingsReader( $customLS );
-			$customConfig = $reader->getConfig();
-			$config = new MultiConfig( [
-				$customConfig,
-				$config
-			] );
-		}
-
-		return $config->get( 'DBname' );
 	}
 }
 
