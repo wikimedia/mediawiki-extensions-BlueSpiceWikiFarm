@@ -66,7 +66,7 @@ class FarmManagement extends SpecialPage {
 				'globalAccessEnabled' => $this->instanceManager->getFarmConfig()->get( 'useGlobalAccessControl' ),
 				'templates' => ( new InstanceTemplateProvider( $this->getConfig() ) )->getTemplates()
 			];
-			if ( $createParams['template'] === 'clone' ) {
+			if ( $createParams['template'] === '_clone' ) {
 				$source = $this->getVerifiedSource();
 				if ( $source ) {
 					$createParams['source'] = $source;
