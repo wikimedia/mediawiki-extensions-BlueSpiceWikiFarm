@@ -4,10 +4,10 @@ namespace BlueSpice\WikiFarm\Process\Step;
 
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\InstanceManager;
-use BlueSpice\WikiFarm\InstanceVaultMirrorIterator;
+use BlueSpice\WikiFarm\Storage\InstanceTransaction;
 use Exception;
 use MediaWiki\Message\Message;
-use Symfony\Component\Filesystem\Filesystem;
+use MWStake\MediaWiki\Component\FileStorageUtilities\StorageHandler;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 
@@ -22,24 +22,26 @@ class CopyInstanceData extends InstanceAwareStep {
 	/** @var IDatabase */
 	private $rootDatabase;
 
+	/** @var StorageHandler */
+	protected StorageHandler $storageHandler;
+
 	/** @var string[] */
 	protected $skipTableData = [
 		'objectcache', 'module_deps', 'l10n_cache', 'bs_whoisonline', 'updatelog',
 		'oauth2_access_tokens', 'oauth_accepted_consumer', 'oauth_registered_consumer'
 	];
 
-	/** @var string[] */
-	protected $filesToSkip = [ 'extensions/BlueSpiceFoundation/data/.smw.json' ];
-
 	/**
 	 * @param InstanceManager $instanceManager
 	 * @param ILoadBalancer $lb
+	 * @param StorageHandler $storageHandler
 	 * @param string $instanceId
 	 * @param string $sourceInstanceId
 	 * @throws Exception
 	 */
 	public function __construct(
-		InstanceManager $instanceManager, ILoadBalancer $lb, string $instanceId, string $sourceInstanceId
+		InstanceManager $instanceManager, ILoadBalancer $lb, StorageHandler $storageHandler,
+		string $instanceId, string $sourceInstanceId
 	) {
 		parent::__construct( $instanceManager, $instanceId );
 		$this->lb = $lb;
@@ -47,6 +49,7 @@ class CopyInstanceData extends InstanceAwareStep {
 		if ( !$this->sourceInstance ) {
 			throw new Exception( Message::newFromKey( 'wikifarm-error-source-instance-not-ready' )->text() );
 		}
+		$this->storageHandler = $storageHandler;
 	}
 
 	/** @inheritDoc */
@@ -90,30 +93,20 @@ class CopyInstanceData extends InstanceAwareStep {
 	}
 
 	private function copyData() {
-		$sourceDir = $this->sourceInstance->getVault( $this->getInstanceManager()->getFarmConfig() );
-		$targetDir = $this->getInstance()->getVault( $this->getInstanceManager()->getFarmConfig() );
-		$time = time();
-		$tmpTarget = "$targetDir.$time";
+		$backend = $this->storageHandler->getBackend(
+			$this->getInstanceManager()->getFarmConfig()->get( 'instanceStorageBackend' )
+		);
+		$status = ( new InstanceTransaction( $backend ) )
+			->copyInstance(
+				$this->sourceInstance->getPath(),
+				$this->getInstance()->getPath()
+			)->commit();
 
-		$fileSystem = new Filesystem();
-		$fileSystem->rename( $targetDir, $tmpTarget );
-		$iterator = new InstanceVaultMirrorIterator( $sourceDir );
-		$fileSystem->mirror( $sourceDir, $targetDir, $iterator );
-
-		foreach ( $this->filesToSkip as $relFilePathname ) {
-			// If file would exist without the copying, keep that version of the file
-			if ( $fileSystem->exists( "$tmpTarget/$relFilePathname" ) ) {
-				$fileSystem->copy(
-					"$tmpTarget/$relFilePathname",
-					"$targetDir/$relFilePathname",
-					true
-				);
-				continue;
-			}
-			// If file would not exists if not for the copying, remove the file
-			$fileSystem->remove( "$targetDir/$relFilePathname" );
+		if ( !$status->isOK() ) {
+			throw new Exception(
+				Message::newFromKey( 'wikifarm-error-copy-instance-data-failed' )->text()
+			);
 		}
-		$fileSystem->remove( $tmpTarget );
 	}
 
 	/**

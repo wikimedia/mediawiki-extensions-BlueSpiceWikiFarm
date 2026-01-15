@@ -14,7 +14,6 @@ class CreateInstanceVault extends InstanceAwareStep implements IProcessStep {
 	 * @throws RuntimeException
 	 */
 	public function execute( $data = [] ): array {
-		sleep( 5 );
 		$instance = $this->getInstance();
 		$instanceVault = $instance->getVault( $this->getInstanceManager()->getFarmConfig() );
 

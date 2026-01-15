@@ -4,7 +4,6 @@ namespace BlueSpice\WikiFarm;
 
 use MediaWiki\Config\Config;
 use MediaWiki\Config\HashConfig;
-use MediaWiki\MediaWikiServices;
 use ParseError;
 use Wikimedia\AtEase\AtEase;
 
@@ -120,18 +119,4 @@ class SettingsReader {
 
 		return $dummy;
 	}
-
-	/**
-	 *
-	 * @param string $instanceName
-	 * @return SettingsReader
-	 */
-	public static function newFromInstanceName( $instanceName ) {
-		$farmConfig = MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm._Config' );
-		$vaultBaseDir = $farmConfig->get( 'instanceDirectory' );
-		$settingsPathname = "$vaultBaseDir/$instanceName/LocalSettings.php";
-
-		return new static( $settingsPathname );
-	}
-
 }

@@ -3,52 +3,67 @@
 namespace BlueSpice\WikiFarm\Process\Step;
 
 use BlueSpice\WikiFarm\InstanceManager;
+use BlueSpice\WikiFarm\Storage\InstanceTransaction;
 use Exception;
 use Ifsnop\Mysqldump\Mysqldump;
 use MediaWiki\Config\Config;
 use MediaWiki\Message\Message;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use SplFileInfo;
+use MWStake\MediaWiki\Component\FileStorageUtilities\StorageHandler;
+use Wikimedia\FileBackend\FileBackend;
 use Wikimedia\Rdbms\IDatabase;
 use ZipArchive;
 
 class ArchiveInstance extends InstanceAwareStep {
 
-	/** @var string */
-	protected $archiveDirectory;
 	/** @var \ZipArchive */
 	private $zip;
 	/** @var Config */
 	protected $mainConfig;
+	/** @var StorageHandler */
+	protected StorageHandler $storageHandler;
 
 	/** @var bool */
 	private $sharedDBSetup = false;
 
 	/** @var string[] */
-	private $skipFolders = [ 'thumb', 'temp', 'cache' ];
+	private $skipFolders = [ 'thumb/', 'temp/', 'cache/', 'images/thumb/', 'images/temp/' ];
 
 	/** @var string */
 	private $tmpDumpFilepath = '';
 
-	public function __construct( InstanceManager $instanceManager, Config $mainConfig, string $instanceId ) {
+	/** @var string */
+	private $zipFilename = '';
+
+	/** @var string */
+	private $zipLocation = '';
+
+	/** @var array */
+	private $tempFilesToBackup = [];
+
+	/** @var FileBackend */
+	private $storageBackend;
+
+	public function __construct(
+		InstanceManager $instanceManager, Config $mainConfig, StorageHandler $storageHandler, string $instanceId
+	) {
 		parent::__construct( $instanceManager, $instanceId );
 		$this->mainConfig = $mainConfig;
+		$this->storageHandler = $storageHandler;
 	}
 
 	/**
 	 * @param array $data
 	 * @return array
+	 * @throws Exception
 	 */
 	public function execute( $data = [] ): array {
-		$this->archiveDirectory = $this->getInstanceManager()->getFarmConfig()->get( 'archiveDirectory' );
-		if ( !file_exists( $this->archiveDirectory ) ) {
-			wfMkdirParents( $this->archiveDirectory );
-		}
-
 		$this->getInstanceManager()->getLogger()->info(
 			"Archiving instance {path} ...",
 			[ 'path' => $this->getInstance()->getPath() ]
+		);
+
+		$this->storageBackend = $this->storageHandler->getBackend(
+			$this->getInstanceManager()->getFarmConfig()->get( 'instanceStorageBackend' )
 		);
 
 		$this->setSharedSetupFlag();
@@ -57,8 +72,21 @@ class ArchiveInstance extends InstanceAwareStep {
 		$this->dumpDatabase();
 		$this->addInstanceVault();
 		$this->zip->close();
+
+		$status = ( new InstanceTransaction( $this->storageBackend ) )
+			->storeToArchive(
+				$this->zipLocation,
+				$this->zipFilename
+			)->commit();
+
 		$this->cleanUp();
-		wfRecursiveRemoveDir( $this->getInstance()->getVault( $this->getInstanceManager()->getFarmConfig() ) );
+		if ( !$status->isOK() ) {
+			throw new Exception( Message::newFromKey( 'wikifarm-error-archive-instance-failed' )->text() );
+		}
+		// If it fails, it fails
+		( new InstanceTransaction( $this->storageBackend ) )
+			->deleteInstanceDirectory( $this->getInstance()->getPath() )
+			->commit();
 		$this->dropInstanceDatabase();
 
 		return array_merge( $data, [ 'success' => true ] );
@@ -87,9 +115,10 @@ class ArchiveInstance extends InstanceAwareStep {
 			"Creating an archive at {path} ...",
 			[ 'path' => $destFilePath ]
 		);
+		$this->zipLocation = $destFilePath;
 		$this->zip = new ZipArchive();
 		$this->zip->open(
-			$destFilePath,
+			$this->zipLocation,
 			ZipArchive::CREATE | ZipArchive::OVERWRITE
 		);
 	}
@@ -99,24 +128,23 @@ class ArchiveInstance extends InstanceAwareStep {
 	 */
 	private function makeDestFilepath(): string {
 		$timestamp = date( 'YmdHis' );
-		return "{$this->archiveDirectory}/{$this->getInstance()->getPath()}-$timestamp.zip";
+		$this->zipFilename = "{$this->getInstance()->getPath()}-$timestamp.zip";
+		return $this->storageHandler->getTempFilePath( $this->zipFilename );
 	}
 
 	private function addInstanceVault() {
-		$vault = $this->getInstance()->getVault( $this->getInstanceManager()->getFarmConfig() );
-		$vaultDir = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $vault ) );
-		$filesToBackup = [];
+		$transaction = new InstanceTransaction( $this->storageBackend );
+		$files = $this->storageBackend->getFileList( [
+			'dir' => $transaction->makeInstancePath( $this->getInstance()->getPath() ),
+			'topOnly' => false,
+		] );
 		$this->getInstanceManager()->getLogger()->info( "Archiving instance directory..." );
 
-		foreach ( $vaultDir as $fileInfo ) {
-			$fileInfo instanceof SplFileInfo;
-			if ( $fileInfo->isDir() ) {
-				continue;
-			}
+		$filesToBackup = [];
+		foreach ( $files as $file ) {
 			$blacklisted = false;
 			foreach ( $this->skipFolders as $folder ) {
-				$skipBasePath = "$vault/images/$folder";
-				if ( strpos( $fileInfo->getPathname(), $skipBasePath ) === 0 ) {
+				if ( str_starts_with( $file, $folder ) ) {
 					$blacklisted = true;
 					break;
 				}
@@ -124,13 +152,26 @@ class ArchiveInstance extends InstanceAwareStep {
 			if ( $blacklisted ) {
 				continue;
 			}
-			$filesToBackup[] = $fileInfo->getPathname();
+			$filesToBackup[] = $file;
 		}
 
-		$pregPattern = '#^' . preg_quote( "$vault/" ) . '#';
 		foreach ( $filesToBackup as $path ) {
-			$localPath = preg_replace( $pregPattern, '', $path );
-			$this->zip->addFile( $path, $localPath );
+			$file = $this->storageBackend->getLocalCopy( [
+				'src' => $transaction->makeInstancePath( $this->getInstance()->getPath(), $path ),
+			] );
+			if ( !$file ) {
+				$this->getInstanceManager()->getLogger()->warning(
+					"Could not get local copy of file {file}", [ 'file' => $path ]
+				);
+				continue;
+			}
+			// ZIPArchive only processes files on `close()`!
+			// This means we need to keep temp files alive until after `close()`
+			// When all references to the file are gone, file is removed, so to prevent it
+			// we store them in a class member
+			$this->tempFilesToBackup[] = $file;
+			// throw new Exception( json_encode( array_map( fn( $x ) => $x->getPath(), $this->tempFilesToBackup ), JSON_PRETTY_PRINT ) );
+			$this->zip->addFile( $file->getPath(), $path );
 		}
 	}
 
@@ -154,8 +195,7 @@ class ArchiveInstance extends InstanceAwareStep {
 			$dumpOptions
 		);
 
-		$tmpPath = sys_get_temp_dir();
-		$this->tmpDumpFilepath = "$tmpPath/$dbName.sql";
+		$this->tmpDumpFilepath = $this->storageHandler->getTempFilePath( "$dbName.sql" );
 
 		$dump->start( $this->tmpDumpFilepath );
 
@@ -164,7 +204,14 @@ class ArchiveInstance extends InstanceAwareStep {
 	}
 
 	private function cleanUp() {
-		unlink( $this->tmpDumpFilepath );
+		$this->storageHandler->newTransaction( true )
+			->delete( $this->zipFilename, '' )
+			->commit();
+		$this->storageHandler->newTransaction( true )
+			->delete( "{$this->getInstance()->getDBName()}.sql", '' )
+			->commit();
+		// This actually releases temp files, removing them
+		unset( $this->tempFilesToBackup );
 	}
 
 	/**

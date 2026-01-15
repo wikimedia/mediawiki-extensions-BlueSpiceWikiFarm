@@ -58,22 +58,22 @@ class GenerateFarmSitemap extends Maintenance {
 	}
 
 	private function createInstanceSitemapData() {
-		$farmConfig = MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm._Config' );
-		$configDir = $farmConfig->get( 'instanceDirectory' );
 		$this->sitemapDataFile = $this->sitemapsDir . '/allinstancesdata.json';
 
-		$directory = new DirectoryIterator( $configDir );
-		foreach ( $directory as $fileInfo ) {
-			if ( $fileInfo->isFile() || $fileInfo->isDot() ) {
+		/** @var InstanceManager $instanceManager */
+		$instanceManager = MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm.InstanceManager' );
+		foreach ( $instanceManager->getStore()->getInstanceIds() as $instanceId ) {
+			$instance = $instanceManager->getStore()->getInstanceById( $instanceId );
+			if ( !$instance ) {
 				continue;
 			}
-
-			$sfr = $fileInfo->getBasename();
-			if ( $this->hasNoEnableSitemapMeta( $sfr ) ) {
+			$meta = $instance->getMetadata();
+			if ( isset( $meta['keywords'] ) && in_array( 'ENABLE-SITEMAP', $meta['keywords'] ) ) {
 				$this->output( "Skipping instance '$sfr', due to `ENABLE-SITEMAP` keyword\n" );
 				continue;
 			}
 
+			$sfr = $instance->getPath();
 			$phpCli = $GLOBALS['wgPhpCli'];
 			$this->output( "Create sitemap for instance '$sfr'\n" );
 			$cmd = sprintf(
@@ -92,25 +92,6 @@ class GenerateFarmSitemap extends Maintenance {
 				$this->fatalError( "An error occurred: " . implode( "\n", $result ) );
 			}
 		}
-	}
-
-	/**
-	 *
-	 * @param string $intanceDir
-	 * @return bool
-	 */
-	private function hasNoEnableSitemapMeta( string $intanceDir ) {
-		/** @var InstanceManager $instanceManager */
-		$instanceManager = MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm.InstanceManager' );
-		$instance = $instanceManager->getStore()->getInstanceByPath( $intanceDir );
-		if ( !$instance ) {
-			return true;
-		}
-		$meta = $instance->getMetadata();
-		if ( !isset( $meta['keywords'] ) || !in_array( 'ENABLE-SITEMAP', $meta['keywords'] ) ) {
-			return true;
-		}
-		return false;
 	}
 
 	/**
