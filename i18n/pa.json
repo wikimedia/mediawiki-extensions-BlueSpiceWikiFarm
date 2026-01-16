@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cabal"
+		]
+	},
+	"wikifarm-desc": "ਵਿਕੀ ਪੈਲੀ ਸਿਰਜੋ ਅਤੇ ਸੰਭਾਲੋ",
+	"farmmanagement": "ਪੈਲੀ ਸਾਂਭ-ਸੰਭਾਲ",
+	"useraccess": "ਵਰਤੋਂਕਾਰ ਲਾਂਘਾ ਸਾਂਭ-ਸੰਭਾਲ",
+	"wikiteams": "ਵਿਕੀ ਜੋਟੀਦਾਰ",
+	"right-wikifarm-deletewiki": "ਵਿਕੀ ਮਿਟਾਓ",
+	"action-wikifarm-deletewiki": "ਵਿਕੀ ਮਿਟਾਓ",
+	"wikifarm-widget-combined-title-input-local": "ਇਹ ਵਿਕੀ",
+	"wikifarm-farmmanagement-text": "ਖੇਤੀ ਮਾਮਲੇ",
+	"wikifarm-main-instance-name": "ਮੁੱਢਲੀ ਵਿਕੀ"
+}
