@@ -2,6 +2,7 @@
 
 namespace BlueSpice\WikiFarm\AccessControl;
 
+use BlueSpice\Config;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\ManagementDatabaseFactory;
 use MediaWiki\User\UserIdentity;
@@ -31,11 +32,13 @@ class GroupAccessStore implements IAccessStore {
 	 * @param ManagementDatabaseFactory $databaseFactory
 	 * @param InstanceGroupCreator $groupCreator
 	 * @param TeamQuery $teamQuery
+	 * @param Config $farmConfig
 	 */
 	public function __construct(
 		private readonly ManagementDatabaseFactory $databaseFactory,
 		private readonly InstanceGroupCreator $groupCreator,
-		private readonly TeamQuery $teamQuery
+		private readonly TeamQuery $teamQuery,
+		private readonly Config $farmConfig
 	) {
 	}
 
@@ -84,9 +87,11 @@ class GroupAccessStore implements IAccessStore {
 		$possibleGroups = $this->groupCreator->getInstanceGroups( [ $role, ...$this->getHigherRoles( $role ) ] );
 		$userGroups = $this->getUserGroups( $user );
 		$availableInstances = [];
+		$superUserGroups = $this->farmConfig->get( 'superAccessGroups' ) ?? [ 'sysop' ];
 		foreach ( $possibleGroups as $instancePath => $groups ) {
 			$toCheck = array_keys( $groups );
-			if ( array_intersect( $userGroups, $toCheck ) || in_array( 'sysop', $userGroups ) ) {
+			$isSuperUser = !empty( array_intersect( $superUserGroups, $userGroups ) );
+			if ( array_intersect( $userGroups, $toCheck ) || $isSuperUser ) {
 				if ( $instancePath === '_global' ) {
 					// All instances allowed
 					return array_diff( array_keys( $possibleGroups ), [ '_global' ] );

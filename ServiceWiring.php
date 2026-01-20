@@ -69,7 +69,8 @@ return [
 		return new GroupAccessStore(
 			$services->getService( 'BlueSpiceWikiFarm.ManagementDatabaseFactory' ),
 			$services->getService( 'BlueSpiceWikiFarm.InstanceGroupCreator' ),
-			$services->getService( 'BlueSpiceWikiFarm.TeamManager' )
+			$services->getService( 'BlueSpiceWikiFarm.TeamManager' ),
+			$services->getService( 'BlueSpiceWikiFarm._Config' )
 		);
 	},
 	'BlueSpiceWikiFarm.ManagementDatabaseFactory' => static function ( MediaWikiServices $services ) {

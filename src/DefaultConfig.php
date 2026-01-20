@@ -142,7 +142,12 @@ class DefaultConfig extends HashConfig {
 			/**
 			 * Path to the shared resources wiki
 			 */
-			'sharedResourcesWikiPath' => '-shared'
+			'sharedResourcesWikiPath' => '-shared',
+
+			/**
+			 * List of groups to be given all-access, overriding normal AccessControl group assignments (NEO)
+			 */
+			'superAccessGroups' => [ 'sysop' ],
 		] );
 	}
 }
