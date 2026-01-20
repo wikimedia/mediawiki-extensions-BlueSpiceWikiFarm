@@ -2,6 +2,7 @@
 
 namespace BlueSpice\WikiFarm\Tests;
 
+use BlueSpice\Config;
 use BlueSpice\WikiFarm\AccessControl\GroupAccessStore;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
 use BlueSpice\WikiFarm\AccessControl\TeamQuery;
@@ -65,7 +66,12 @@ class AccesssStoreTest extends TestCase {
 		$managementDBFactoryMock = $this->createMock( ManagementDatabaseFactory::class );
 		$managementDBFactoryMock->method( 'createSharedUserDatabaseConnection' )->willReturn( $dbMock );
 
-		$accessStore = new GroupAccessStore( $managementDBFactoryMock, $creator, $this->createMock( TeamQuery::class ) );
+		$accessStore = new GroupAccessStore(
+			$managementDBFactoryMock,
+			$creator,
+			$this->createMock( TeamQuery::class ),
+			$this->createMock( Config::class )
+			);
 		$accessStore->userHasRoleOnInstance( $this->getUserMock(), 'reader', $this->getInstanceMock( 'Test1' ) );
 		$accessStore->userHasRoleOnInstance( $this->getUserMock(), 'reader', $this->getInstanceMock( 'Test2' ) );
 	}
@@ -95,7 +101,12 @@ class AccesssStoreTest extends TestCase {
 		$managementDBFactoryMock = $this->createMock( ManagementDatabaseFactory::class );
 		$managementDBFactoryMock->method( 'createSharedUserDatabaseConnection' )->willReturn( $dbMock );
 
-		$accessStore = new GroupAccessStore( $managementDBFactoryMock, $creator, $this->createMock( TeamQuery::class ) );
+		$accessStore = new GroupAccessStore(
+			$managementDBFactoryMock,
+			$creator,
+			$this->createMock( TeamQuery::class ),
+			$this->createMock( Config::class )
+		);
 		$paths = $accessStore->getInstancePathsWhereUserHasRole( $this->getUserMock(), 'reader' );
 		$this->assertEquals( [ 'w', 'Test1', 'Test2' ], $paths );
 	}

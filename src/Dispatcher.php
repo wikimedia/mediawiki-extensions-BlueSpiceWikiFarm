@@ -414,7 +414,12 @@ class Dispatcher {
 		// Give native sysop rights. This is important, at least for now:
 		// - sysop will be the only group assigned by default on fresh farms + on CLI installer
 		// - {instance}_admin and global_admin can be removed in BSUserManager, leading to lockout
-		$GLOBALS['bsgGroupRoles']['sysop'] = $GLOBALS['bsgGroupRoles']['wiki__global_maintainer'] ?? [];
+		// Also, do the same for any additional super access groups defined in config
+		$superAccessGroups = $this->config->get( 'superAccessGroups' ) ?? [];
+		$superAccessGroups = array_merge( $superAccessGroups, [ 'sysop' ] );
+		foreach ( $superAccessGroups as $superGroup ) {
+			$GLOBALS['bsgGroupRoles'][$superGroup] = $GLOBALS['bsgGroupRoles']['wiki__global_maintainer'] ?? [];
+		}
 
 		// Make sure to re-apply the permissions after setup
 		/** @var RoleManager $roleManager */
