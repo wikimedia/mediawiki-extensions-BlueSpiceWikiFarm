@@ -77,7 +77,7 @@ class RunForAll extends Maintenance {
 				if ( $bQuiet ) {
 					$this->error( "Running '$sScript' for instance '$instancePath'" );
 				}
-				$this->error( "An error occured. Exit status = $iCode. Command: '$cmd'. Output of command:" );
+				$this->error( "An error occurred. Exit status = $iCode. Command: '$cmd'. Output of command:" );
 				if ( $bQuiet ) {
 					foreach ( $aResult as $sLine ) {
 						$this->error( "$sLine\n" );

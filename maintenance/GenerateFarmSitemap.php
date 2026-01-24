@@ -89,7 +89,7 @@ class GenerateFarmSitemap extends Maintenance {
 			exec( $cmd, $result, $code ); // phpcs:ignore MediaWiki.Usage.ForbiddenFunctions.exec
 
 			if ( $code > 0 ) {
-				$this->fatalError( "An error occured: " . implode( "\n", $result ) );
+				$this->fatalError( "An error occurred: " . implode( "\n", $result ) );
 			}
 		}
 	}
