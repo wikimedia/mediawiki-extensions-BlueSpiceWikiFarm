@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"McDutchie"
+			"McDutchie",
+			"Siebrand"
 		]
 	},
 	"wikifarm-desc": "Wikifarm aanmaken en beheren",
@@ -15,6 +16,9 @@
 	"action-wikifarm-managewiki": "de wiki-farm te beheren",
 	"right-wikifarm-deletewiki": "Een wiki verwijderen",
 	"action-wikifarm-deletewiki": "een wiki te verwijderen",
+	"apihelp-wikifarm-wiki-instance-store-summary": "Zoeken in wiki's in de WikiFarm-opslag",
+	"apihelp-wikifarm-group-store-summary": "Zoeken in wiki-groepen in de WikiFarm-opslag",
+	"apihelp-wikifarm-keyword-store-summary": "Zoeken in wiki-trefwoorden in de WikiFarm-opslag",
 	"log-name-ext-wikifarm": "Wikifarm-beheer",
 	"log-name-ext-wikifarm-teams": "Wiki-teams",
 	"logentry-ext-wikifarm-teams-create": "$1 heeft een nieuw team “$4” {{GENDER:$2|aangemaakt}}",
