@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"McDutchie"
+			"McDutchie",
+			"Siebrand"
 		]
 	},
 	"wikifarm-desc": "Wikifarm aanmaken en beheren",
@@ -192,5 +193,8 @@
 	"wikifarm-instances-menu-overview-text": "Alle wiki’s",
 	"wikifarm-instances-menu-favorite-text": "Favorieten",
 	"wikifarm-instances-menu-button-title": "Lijst met alle wiki-servers",
-	"wikifarm-instances-menu-aria-label": "Wiki-servers"
+	"wikifarm-instances-menu-aria-label": "Wiki-servers",
+	"apihelp-wikifarm-wiki-instance-store-summary": "Zoeken in wiki's in de WikiFarm-opslag",
+	"apihelp-wikifarm-group-store-summary": "Zoeken in wiki-groepen in de WikiFarm-opslag",
+	"apihelp-wikifarm-keyword-store-summary": "Zoeken in wiki-trefwoorden in de WikiFarm-opslag"
 }
