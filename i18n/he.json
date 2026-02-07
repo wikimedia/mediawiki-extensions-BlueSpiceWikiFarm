@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Amire80"
+			"Amire80",
+			"Neriah"
 		]
 	},
 	"wikifarm-desc": "יצירה וניהול של חוות ויקי",
@@ -99,5 +100,20 @@
 	"wikifarm-promote-to-shared-dialog-description": "העברת הדף הזה לוויקי של משאבים משותפים תעשה אותו זמין לכל אתרי הוויקי בחווה. העותק המקומי של הדף יימחק.",
 	"wikifarm-promote-to-shared-dialog-push": "מתבצעת העברה לוויקי של משאבים משותפים",
 	"wikifarm-promote-to-shared-dialog-delete-local": "מתבצעת מחיקת העותק המקומי",
-	"wikifarm-promote-to-shared-dialog-delete-local-reason": "נמחק עקב העברה לוויקי של משאבים משותפים"
+	"wikifarm-promote-to-shared-dialog-delete-local-reason": "נמחק עקב העברה לוויקי של משאבים משותפים",
+	"wikifarm-instance-actions": "פעולות",
+	"wikifarm-instance-ctime": "נוצר ב",
+	"wikifarm-instance-desc": "תיאור",
+	"wikifarm-instance-group": "קבוצה",
+	"wikifarm-instance-title": "שם האתר",
+	"wikifarm-lang-code": "שפה",
+	"wikifarm-main-instance-name": "ויקי ראשי",
+	"wikifarm-ui-search-instance-filter": "חיפוש בוויקי: $1",
+	"wikifarm-ui-teams-header-expiration": "פקיעת חברות בקבוצות",
+	"wikifarm-ui-access-assignee-type-user": "משתמש",
+	"wikifarm-ui-access-wiki-type-label": "סוג ויקי",
+	"wikifarm-ui-access-wiki-type-public": "ציבורי",
+	"wikifarm-ui-access-wiki-type-private": "פרטי",
+	"wikifarm-ui-access-wiki-type-protected": "מוגן",
+	"wikifarm-instances-menu-overview-text": "כל אתרי הוויקי"
 }
