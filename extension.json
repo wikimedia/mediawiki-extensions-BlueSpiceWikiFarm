@@ -507,7 +507,8 @@
 		"BlueSpiceDiscoveryTemplateDataProviderAfterInit": "handleSharedResources",
 		"APIAfterExecute": "handleSharedResources",
 		"MWStakeCommonUIRegisterSkinSlotComponents": "common-user-interface",
-		"GetPreferences": "userpreference"
+		"GetPreferences": "userpreference",
+		"MWStakeMCPGetWikiMap": "populateWikiMap"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -550,6 +551,13 @@
 		},
 		"userpreference": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\AddUserPreference"
+		},
+		"populateWikiMap": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\PopulateWikiMap",
+			"services": [
+				"BlueSpiceWikiFarm.InstanceStore",
+				"BlueSpiceWikiFarm._Config"
+			]
 		}
 	},
 	"RestRoutes": [
