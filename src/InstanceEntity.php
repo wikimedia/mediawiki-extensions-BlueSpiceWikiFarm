@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use MediaWiki\Config\Config;
 use MediaWiki\Message\Message;
 use RuntimeException;
+use Wikimedia\Rdbms\DatabaseDomain;
 
 class InstanceEntity {
 
@@ -275,6 +276,13 @@ class InstanceEntity {
 	 */
 	public function isComplete(): bool {
 		return $this->getStatus() !== static::STATUS_INIT && $this->getStatus() !== static::STATUS_INSTALLED;
+	}
+
+	/**
+	 * @return DatabaseDomain
+	 */
+	public function getDatabaseDomain(): DatabaseDomain {
+		return new DatabaseDomain( $this->getDbName(), null, $this->getDbPrefix() );
 	}
 
 	/**
