@@ -2,9 +2,9 @@
 
 namespace BlueSpice\WikiFarm\AccessControl;
 
-use BlueSpice\Config;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\ManagementDatabaseFactory;
+use MediaWiki\Config\Config;
 use MediaWiki\User\UserIdentity;
 
 class GroupAccessStore implements IAccessStore {
