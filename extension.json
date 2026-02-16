@@ -554,10 +554,7 @@
 		},
 		"populateWikiMap": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\PopulateWikiMap",
-			"services": [
-				"BlueSpiceWikiFarm.InstanceStore",
-				"BlueSpiceWikiFarm._Config"
-			]
+			"services": [ "BlueSpiceWikiFarm.WikiMap", "BlueSpiceWikiFarm._Config" ]
 		}
 	},
 	"RestRoutes": [

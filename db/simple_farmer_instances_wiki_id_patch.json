@@ -1,5 +1,72 @@
-[
-	{
+{
+	"before": {
+		"name": "simple_farmer_instances",
+		"comment": "Table that holds information on the farming instances",
+		"columns": [
+			{
+				"name": "sfi_id",
+				"type": "string",
+				"comment": "The unique identifier for the farming instance",
+				"options": { "length": 16 }
+			},
+			{
+				"name": "sfi_path",
+				"type": "string",
+				"comment": "Script path",
+				"options": { "length": 255 }
+			},
+			{
+				"name": "sfi_display_name",
+				"type": "string",
+				"comment": "Display name for the farming instance",
+				"options": { "length": 255 }
+			},
+			{
+				"name": "sfi_created",
+				"type": "mwtimestamp",
+				"comment": "The date the farming instance started",
+				"options": {}
+			},
+			{
+				"name": "sfi_touched",
+				"type": "mwtimestamp",
+				"comment": "The date the farming instance last updated",
+				"options": {}
+			},
+			{
+				"name": "sfi_db_prefix",
+				"type": "string",
+				"comment": "The database prefix for the farming instance",
+				"options": { "length": 17 }
+			},
+			{
+				"name": "sfi_database",
+				"type": "string",
+				"options": {}
+			},
+			{
+				"name": "sfi_meta",
+				"type": "blob",
+				"options": {}
+			},
+			{
+				"name": "sfi_config",
+				"type": "blob",
+				"options": {}
+			},
+			{
+				"name": "sfi_status",
+				"type": "string",
+				"options": { "length": 255 }
+			}
+		],
+		"pk": [ "sfi_id" ],
+		"indexes": [
+			{ "name": "sfi_path", "columns": [ "sfi_path" ], "unique": true },
+			{ "name": "sfi_storage_index", "columns": [ "sfi_database", "sfi_db_prefix" ], "unique": true }
+		]
+	},
+	"after": {
 		"name": "simple_farmer_instances",
 		"comment": "Table that holds information on the farming instances",
 		"columns": [
@@ -71,4 +138,4 @@
 			{ "name": "sfi_storage_index", "columns": [ "sfi_database", "sfi_db_prefix" ], "unique": true }
 		]
 	}
-]
+}

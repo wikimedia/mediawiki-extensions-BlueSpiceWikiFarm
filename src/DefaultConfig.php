@@ -3,6 +3,8 @@
 namespace BlueSpice\WikiFarm;
 
 use MediaWiki\Config\HashConfig;
+use MediaWiki\WikiMap\WikiMap;
+use Wikimedia\Rdbms\DatabaseDomain;
 
 class DefaultConfig extends HashConfig {
 
@@ -148,6 +150,13 @@ class DefaultConfig extends HashConfig {
 			 * List of groups to be given all-access, overriding normal AccessControl group assignments (NEO)
 			 */
 			'superAccessGroups' => [ 'sysop' ],
+
+			/**
+			 * MediaWiki WikiID for the root instance
+			 */
+			'rootInstanceWikiId' => WikiMap::getWikiIdFromDbDomain(
+				new DatabaseDomain( $globals['wgDBname'], null, $globals['wgDBprefix'] )
+			)
 		] );
 	}
 }

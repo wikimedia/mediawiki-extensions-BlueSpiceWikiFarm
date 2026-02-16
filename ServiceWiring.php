@@ -12,6 +12,7 @@ use BlueSpice\WikiFarm\InstanceManager;
 use BlueSpice\WikiFarm\InstancePathGenerator;
 use BlueSpice\WikiFarm\InstanceStore;
 use BlueSpice\WikiFarm\ManagementDatabaseFactory;
+use MediaWiki\Extension\BlueSpiceWikiFarm\FarmWikiMap;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 
@@ -92,6 +93,12 @@ return [
 	'BlueSpiceWikiFarm.ForeignRequestExecution' => static function ( MediaWikiServices $services ) {
 		return new ForeignRequestExecution(
 			$services->getHttpRequestFactory(),
+			$services->getService( 'BlueSpiceWikiFarm._Config' )
+		);
+	},
+	'BlueSpiceWikiFarm.WikiMap' => static function ( MediaWikiServices $services ) {
+		return new FarmWikiMap(
+			$services->getService( 'BlueSpiceWikiFarm.InstanceStore' ),
 			$services->getService( 'BlueSpiceWikiFarm._Config' )
 		);
 	},

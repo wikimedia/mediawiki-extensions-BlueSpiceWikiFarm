@@ -93,6 +93,18 @@ class DirectInstanceStore {
 	}
 
 	/**
+	 * @return array
+	 */
+	public function getWikiMap(): array {
+		$map = [];
+		$this->load();
+		foreach ( $this->instances as $instance ) {
+			$map[$instance->getWikiId()] = $instance;
+		}
+		return $map;
+	}
+
+	/**
 	 * @param string $id
 	 * @return InstanceEntity|null
 	 */
@@ -200,7 +212,8 @@ class DirectInstanceStore {
 			$object->sfi_database,
 			$object->sfi_db_prefix,
 			json_decode( $object->sfi_meta, 1 ),
-			json_decode( $object->sfi_config, 1 )
+			json_decode( $object->sfi_config, 1 ),
+			$object->sfr_wiki_id ?? ''
 		];
 
 		if ( str_starts_with( $object->sfi_path, '-' ) ) {
