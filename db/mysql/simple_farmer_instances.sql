@@ -13,6 +13,7 @@ CREATE TABLE /*_*/simple_farmer_instances (
   sfi_meta LONGBLOB NOT NULL,
   sfi_config LONGBLOB NOT NULL,
   sfi_status VARCHAR(255) NOT NULL,
+  sfi_wiki_id VARCHAR(255) NOT NULL,
   UNIQUE INDEX sfi_path (sfi_path),
   UNIQUE INDEX sfi_storage_index (sfi_database, sfi_db_prefix),
   PRIMARY KEY(sfi_id)

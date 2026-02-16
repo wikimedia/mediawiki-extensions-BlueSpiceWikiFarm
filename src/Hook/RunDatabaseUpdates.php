@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\Hook;
 
 use BlueSpice\WikiFarm\Maintenance\CreateAccessToken;
 use BlueSpice\WikiFarm\Maintenance\CreateSystemInstances;
+use BlueSpice\WikiFarm\Maintenance\PopulateWikiId;
 use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
 
 class RunDatabaseUpdates implements LoadExtensionSchemaUpdatesHook {
@@ -21,6 +22,12 @@ class RunDatabaseUpdates implements LoadExtensionSchemaUpdatesHook {
 				'simple_farmer_instances',
 				"$dir/db/$dbType/simple_farmer_instances.sql"
 			);
+			$updater->addExtensionField(
+				'simple_farmer_instances',
+				'sfi_wiki_id',
+				"$dir/db/$dbType/simple_farmer_instances_wiki_id_patch.sql"
+			);
+			$updater->addPostDatabaseUpdateMaintenance( PopulateWikiId::class );
 
 			$updater->addExtensionTable(
 				'simple_farmer_processes',

@@ -6,6 +6,7 @@ use DateTime;
 use InvalidArgumentException;
 use MediaWiki\Config\Config;
 use MediaWiki\Message\Message;
+use MediaWiki\WikiMap\WikiMap;
 use RuntimeException;
 use Wikimedia\Rdbms\DatabaseDomain;
 
@@ -38,6 +39,8 @@ class InstanceEntity {
 	private $metadata;
 	/** @var array */
 	private $config;
+	/** @var string */
+	private $wikiId;
 
 	/**
 	 * @param string $id
@@ -50,10 +53,11 @@ class InstanceEntity {
 	 * @param string $dbPrefix
 	 * @param array $metadata
 	 * @param array $config
+	 * @param string $wikiId
 	 */
 	public function __construct(
 		string $id, string $path, string $displayName, DateTime $created, DateTime $updated, string $status,
-		string $dbName, string $dbPrefix, array $metadata, array $config
+		string $dbName, string $dbPrefix, array $metadata, array $config, string $wikiId = ''
 	) {
 		$this->id = $id;
 		$this->created = $created;
@@ -65,6 +69,7 @@ class InstanceEntity {
 		$this->setDisplayName( $displayName );
 		$this->updated = $updated;
 		$this->setStatus( $status );
+		$this->wikiId = $wikiId;
 	}
 
 	/**
@@ -181,6 +186,17 @@ class InstanceEntity {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getWikiId(): string {
+		if ( !$this->wikiId ) {
+			$this->generateWikiId();
+			$this->updateTouched();
+		}
+		return $this->wikiId;
+	}
+
+	/**
 	 * @param string $status
 	 * @return void
 	 */
@@ -242,7 +258,8 @@ class InstanceEntity {
 			'sfi_database' => $this->dbName,
 			'sfi_meta' => json_encode( $this->metadata ),
 			'sfi_config' => json_encode( $this->config ),
-			'sfi_status' => $this->status
+			'sfi_status' => $this->status,
+			'sfi_wiki_id' => $this->getWikiId()
 		];
 	}
 
@@ -283,6 +300,15 @@ class InstanceEntity {
 	 */
 	public function getDatabaseDomain(): DatabaseDomain {
 		return new DatabaseDomain( $this->getDbName(), null, $this->getDbPrefix() );
+	}
+
+	/**
+	 * Get MediaWiki WikiID for this instance
+	 * @return void
+	 */
+	private function generateWikiId() {
+		$dbDomain = $this->getDatabaseDomain();
+		$this->wikiId = WikiMap::getWikiIdFromDbDomain( $dbDomain );
 	}
 
 	/**

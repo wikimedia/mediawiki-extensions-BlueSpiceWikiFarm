@@ -2,19 +2,18 @@
 
 namespace BlueSpice\WikiFarm\Hook;
 
-use BlueSpice\WikiFarm\InstanceStore;
 use MediaWiki\Config\Config;
-use MediaWiki\WikiMap\WikiMap;
+use MediaWiki\Extension\BlueSpiceWikiFarm\FarmWikiMap;
 use MWStake\MediaWiki\Component\MCP\Hook\MWStakeMCPGetWikiMapHook;
 
 class PopulateWikiMap implements MWStakeMCPGetWikiMapHook {
 
 	/**
-	 * @param InstanceStore $instanceStore
+	 * @param FarmWikiMap $wikiMap
 	 * @param Config $farmConfig
 	 */
 	public function __construct(
-		private readonly InstanceStore $instanceStore,
+		private readonly FarmWikiMap $wikiMap,
 		private readonly Config $farmConfig
 	) {
 	}
@@ -23,11 +22,9 @@ class PopulateWikiMap implements MWStakeMCPGetWikiMapHook {
 	 * @inheritDoc
 	 */
 	public function onMWStakeMCPGetWikiMap( &$map ): void {
-		$instances = $this->instanceStore->getAllInstances();
-		foreach ( $instances as $instance ) {
-			$dbDomain = $instance->getDatabaseDomain();
-			$instanceWikiId = WikiMap::getWikiIdFromDbDomain( $dbDomain );
-			$map[$instanceWikiId] = $instance->getScriptPath( $this->farmConfig );
+		$wikis = $this->wikiMap->getMap();
+		foreach ( $wikis as $wikiId => $instance ) {
+			$map[$wikiId] = $instance->getScriptPath( $this->farmConfig );
 		}
 	}
 }

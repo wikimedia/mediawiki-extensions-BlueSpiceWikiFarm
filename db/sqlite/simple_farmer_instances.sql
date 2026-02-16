@@ -13,6 +13,7 @@ CREATE TABLE /*_*/simple_farmer_instances (
   sfi_meta BLOB NOT NULL,
   sfi_config BLOB NOT NULL,
   sfi_status VARCHAR(255) NOT NULL,
+  sfi_wiki_id VARCHAR(255) NOT NULL,
   PRIMARY KEY(sfi_id)
 );
 
