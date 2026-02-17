@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"McDutchie"
+			"McDutchie",
+			"Siebrand"
 		]
 	},
 	"wikifarm-desc": "Wikifarm aanmaken en beheren",
@@ -35,7 +36,7 @@
 	"wikifarm-mainpage-content-helpdesk-text": "Alle onderwerpen staan in onze\n\nhelpdesk of video-tutorials.",
 	"wikifarm-mainpage-content-helpdesk-title": "Documentatie",
 	"wikifarm-mainpage-content-pagetitle-farm": "Welkom op de BlueSpice-farm",
-	"wikifarm-mainpage-content-tutorials-links": "[https://en.wiki.bluespice.com/wiki/Manual:Create_pages Hoe maak ik een pagina aan?]\n\n[https://en.wiki.bluespice.com/wiki/Manual:Extension/VisualEditor Hoe formatteer ik tekst?]\n\n[https://en.wiki.bluespice.com/wiki/Manual:Extension/VisualEditor/Tables Hoe werk ik met tabellen?]",
+	"wikifarm-mainpage-content-tutorials-links": "[https://en.wiki.bluespice.com/wiki/Manual:Create_pages Hoe maak ik een pagina aan?]\n\n[https://en.wiki.bluespice.com/wiki/Manual:Extension/VisualEditor Hoe maak ik tekst op?]\n\n[https://en.wiki.bluespice.com/wiki/Manual:Extension/VisualEditor/Tables Hoe werk ik met tabellen?]",
 	"wikifarm-mainpage-content-tutorials-text": "Maak kennis met BlueSpice.",
 	"wikifarm-mainpage-content-tutorials-title": "Voor een makkelijke start",
 	"wikifarm-widget-combined-title-input-local": "Deze wiki",
@@ -192,5 +193,8 @@
 	"wikifarm-instances-menu-overview-text": "Alle wiki’s",
 	"wikifarm-instances-menu-favorite-text": "Favorieten",
 	"wikifarm-instances-menu-button-title": "Lijst met alle wiki-servers",
-	"wikifarm-instances-menu-aria-label": "Wiki-servers"
+	"wikifarm-instances-menu-aria-label": "Wiki-servers",
+	"apihelp-wikifarm-wiki-instance-store-summary": "Zoeken in wiki's in de WikiFarm-opslag",
+	"apihelp-wikifarm-group-store-summary": "Zoeken in wiki-groepen in de WikiFarm-opslag",
+	"apihelp-wikifarm-keyword-store-summary": "Zoeken in wiki-trefwoorden in de WikiFarm-opslag"
 }

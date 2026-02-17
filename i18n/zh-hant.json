@@ -148,7 +148,7 @@
 	"wikifarm-ui-access-action-create-new-rule": "新增分配",
 	"wikifarm-ui-role-label-reader": "讀者",
 	"wikifarm-ui-role-label-editor": "編輯者",
-	"wikifarm-ui-role-label-reviewer": "審查者",
+	"wikifarm-ui-role-label-reviewer": "檢閱者",
 	"wikifarm-ui-role-label-maintainer": "維護者",
 	"wikifarm-ui-access-label-global": "全域分配",
 	"wikifarm-ui-access-confirm-delete-assignment": "您確定要移除此分配嗎？",
@@ -192,5 +192,8 @@
 	"wikifarm-instances-menu-overview-text": "所有 wiki",
 	"wikifarm-instances-menu-favorite-text": "收藏",
 	"wikifarm-instances-menu-button-title": "列出所有 wiki 實例",
-	"wikifarm-instances-menu-aria-label": "Wiki 實例"
+	"wikifarm-instances-menu-aria-label": "Wiki 實例",
+	"apihelp-wikifarm-wiki-instance-store-summary": "從 WikiFarm 商店查詢 wiki 實例",
+	"apihelp-wikifarm-group-store-summary": "從 WikiFarm 商店查詢 wiki 群組",
+	"apihelp-wikifarm-keyword-store-summary": "從 WikiFarm 商店查詢 wiki 關鍵字"
 }

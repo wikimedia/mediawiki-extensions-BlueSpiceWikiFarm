@@ -192,5 +192,8 @@
 	"wikifarm-instances-menu-overview-text": "Tote le wikis",
 	"wikifarm-instances-menu-favorite-text": "Favorites",
 	"wikifarm-instances-menu-button-title": "Lista de tote le servitores wiki",
-	"wikifarm-instances-menu-aria-label": "Servitores wiki"
+	"wikifarm-instances-menu-aria-label": "Servitores wiki",
+	"apihelp-wikifarm-wiki-instance-store-summary": "Consultar instantias wiki del deposito WikiFarm",
+	"apihelp-wikifarm-group-store-summary": "Consultar gruppos wiki del deposito WikiFarm",
+	"apihelp-wikifarm-keyword-store-summary": "Consultar parolas-clave wiki del deposito WikiFarm"
 }

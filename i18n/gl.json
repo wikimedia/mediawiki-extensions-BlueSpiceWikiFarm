@@ -192,5 +192,8 @@
 	"wikifarm-instances-menu-overview-text": "Todos os wikis",
 	"wikifarm-instances-menu-favorite-text": "Favoritos",
 	"wikifarm-instances-menu-button-title": "Lista con todas as instancias wiki",
-	"wikifarm-instances-menu-aria-label": "Instancias wiki"
+	"wikifarm-instances-menu-aria-label": "Instancias wiki",
+	"apihelp-wikifarm-wiki-instance-store-summary": "Consultar instancias wiki desde a tenda da granxa de wikis",
+	"apihelp-wikifarm-group-store-summary": "Consultar grupos do wiki desde a tenda da granxa de wikis",
+	"apihelp-wikifarm-keyword-store-summary": "Consultar palabras clave do wiki desde a tenda da granxa de wikis"
 }
