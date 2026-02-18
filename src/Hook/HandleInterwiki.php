@@ -24,6 +24,9 @@ class HandleInterwiki implements InterwikiLoadPrefixHook {
 	public function onInterwikiLoadPrefix( $prefix, &$iwData ) {
 		$links = $this->farmConfig->get( 'interwikiLinks' ) ?: [];
 		$prefix = mb_strtolower( $prefix );
+		if ( !str_starts_with( $prefix, 'wiki-' ) ) {
+			$prefix = 'wiki-' . $prefix;
+		}
 		if ( isset( $links[$prefix] ) ) {
 			$iwData = $links[$prefix];
 			return false;
