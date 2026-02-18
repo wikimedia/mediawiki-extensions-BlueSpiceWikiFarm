@@ -12,11 +12,11 @@ ext.bluespiceWikiFarm.ui.widget.SearchInstanceSelector = function ( cfg ) {
 	};
 
 	ext.bluespiceWikiFarm.ui.widget.SearchInstanceSelector.parent.call( this, cfg );
-	bs.extendedSearch.mixin.FilterRemoveButton.call( this, { showRemove: true } );
+	bs.extendedSearch.mixin.FilterRemoveButton.call( this, { showRemove: false } );
 	this.$element.append( this.$removeButton );
 
 	this.$element.addClass( 'oo-ui-popupButtonWidget bs-extendedsearch-filter-button-widget' );
-	this.$button.addClass( 'bs-extendedsearch-filter-button-button' );
+	this.$button.addClass( 'bs-extendedsearch-filter-button-button wiki-farm-instance-selector' );
 
 	if ( this.context ) {
 		this.setFromContext();
