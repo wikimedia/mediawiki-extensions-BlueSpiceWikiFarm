@@ -5,6 +5,7 @@ use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
 use BlueSpice\WikiFarm\AccessControl\NullAccessStore;
 use BlueSpice\WikiFarm\AccessControl\TeamManager;
 use BlueSpice\WikiFarm\DirectInstanceStore;
+use BlueSpice\WikiFarm\FarmWikiMap;
 use BlueSpice\WikiFarm\ForeignRequestExecution;
 use BlueSpice\WikiFarm\GlobalDatabaseQueryExecution;
 use BlueSpice\WikiFarm\InstanceCountLimiter;
@@ -12,7 +13,6 @@ use BlueSpice\WikiFarm\InstanceManager;
 use BlueSpice\WikiFarm\InstancePathGenerator;
 use BlueSpice\WikiFarm\InstanceStore;
 use BlueSpice\WikiFarm\ManagementDatabaseFactory;
-use MediaWiki\Extension\BlueSpiceWikiFarm\FarmWikiMap;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 
@@ -97,9 +97,11 @@ return [
 		);
 	},
 	'BlueSpiceWikiFarm.WikiMap' => static function ( MediaWikiServices $services ) {
-		return new FarmWikiMap(
+		$instance = new FarmWikiMap(
 			$services->getService( 'BlueSpiceWikiFarm.InstanceStore' ),
 			$services->getService( 'BlueSpiceWikiFarm._Config' )
 		);
+		$services->getHookContainer()->register( 'GetWikiInfoFromWikiId', [ $instance, 'onGetWikiInfoFromWikiId' ] );
+		return $instance;
 	},
 ];

@@ -499,6 +499,7 @@
 		"ParserFirstCallInit": "handleTag",
 		"InterwikiLoadPrefix": "handleInterwiki",
 		"BSApiInterwikiStoreMakeData": "handleInterwiki",
+		"GetInterwikiPrefixFromWikiId": "handleInterwiki",
 		"BeforePageDisplay": [ "addBootstrap", "addSearchInstanceContext", "handleSharedResources" ],
 		"SpecialPage_initList": "addSpecialPages",
 		"MessageCacheFetchOverrides": "setupGroupMessages",
