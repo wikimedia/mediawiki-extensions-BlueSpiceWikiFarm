@@ -23,6 +23,9 @@ class Setup {
 		define( 'FARMER_DIR', dirname( __DIR__ ) );
 
 		static::setupInterwikiLinks();
+
+		// Init wiki farm map
+		MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm.WikiMap' );
 	}
 
 	/**
@@ -65,11 +68,12 @@ class Setup {
 				'iw_prefix' => 'w',
 				'iw_url' => $GLOBALS['wgServer'] . '/wiki/$1',
 				'iw_api' => false,
-				'iw_wikiid' => 'w',
+				'iw_wikiid' => $GLOBALS['wgWikiFarmConfigInternal']->get( 'rootInstanceWikiId' ),
 				'iw_local' => false
 			];
 		}
 
+		/** @var InstanceEntity $instance */
 		foreach ( $GLOBALS['wgWikiFarmGlobalStore']->getAllInstances() as $instance ) {
 			if ( !$instance->isActive() ) {
 				continue;
@@ -84,7 +88,7 @@ class Setup {
 				'iw_prefix' => $iwPrefix,
 				'iw_url' => $instance->getUrl( $GLOBALS['wgWikiFarmConfigInternal'] ) . '/wiki/$1',
 				'iw_api' => '',
-				'iw_wikiid' => $prefix,
+				'iw_wikiid' => $instance->getWikiId(),
 				'iw_local' => false
 			];
 		}

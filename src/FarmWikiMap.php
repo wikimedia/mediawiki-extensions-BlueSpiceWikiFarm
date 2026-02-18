@@ -1,10 +1,7 @@
 <?php
 
-namespace MediaWiki\Extension\BlueSpiceWikiFarm;
+namespace BlueSpice\WikiFarm;
 
-use BlueSpice\WikiFarm\InstanceEntity;
-use BlueSpice\WikiFarm\InstanceStore;
-use BlueSpice\WikiFarm\RootInstanceEntity;
 use MediaWiki\Config\Config;
 
 class FarmWikiMap {
@@ -37,6 +34,20 @@ class FarmWikiMap {
 	public function getMap(): array {
 		$this->assertLoaded();
 		return $this->map;
+	}
+
+	/**
+	 * @param string $wikiId
+	 * @param array &$data
+	 * @return void
+	 */
+	public function onGetWikiInfoFromWikiId( string $wikiId, array &$data ) {
+		$instance = $this->getInstanceByWikiId( $wikiId );
+		if ( !$instance ) {
+			return;
+		}
+		$data['display_text'] = $instance->getDisplayName();
+		$data['url'] = $instance->getUrl( $this->config );
 	}
 
 	/**
