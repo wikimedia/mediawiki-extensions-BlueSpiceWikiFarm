@@ -295,6 +295,7 @@ class Setup {
 		$GLOBALS['wgSharedTables'][] = 'block_target';
 		$GLOBALS['wgSharedTables'][] = 'wiki_teams';
 		$GLOBALS['wgSharedTables'][] = 'wiki_team_roles';
+		$GLOBALS['wgSharedTables'][] = 'user_properties';
 
 		if ( $connection->tableExists( 'wikifarm_session_cache', __METHOD__ ) ) {
 			$GLOBALS['wgSharedTables'][] = 'wikifarm_session_cache';
