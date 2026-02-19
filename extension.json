@@ -512,12 +512,13 @@
 		"SpecialPage_initList": "addSpecialPages",
 		"MessageCacheFetchOverrides": "setupGroupMessages",
 		"BeforeParserFetchTemplateRevisionRecord": "handleSharedResources",
-		"SkinTemplateNavigation::Universal": "handleSharedResources",
+		"SkinTemplateNavigation::Universal": [ "handleSharedResources", "rewriteUserPageLink" ],
 		"BlueSpiceDiscoveryTemplateDataProviderAfterInit": "handleSharedResources",
 		"APIAfterExecute": "handleSharedResources",
 		"MWStakeCommonUIRegisterSkinSlotComponents": "common-user-interface",
 		"GetPreferences": "userpreference",
 		"MWStakeMCPGetWikiMap": "populateWikiMap",
+		"BeforeInitialize": "redirectUserPage",
 		"SpecialPageBeforeExecute": "addGlobalUnifiedTaskOverviewModule"
 	},
 	"HookHandlers": {
@@ -566,6 +567,14 @@
 		"populateWikiMap": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\PopulateWikiMap",
 			"services": [ "BlueSpiceWikiFarm.WikiMap", "BlueSpiceWikiFarm._Config" ]
+		},
+		"rewriteUserPageLink": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\SkinTemplateNavigation\\RewriteUserPageLink",
+			"services": [ "TitleFactory" ]
+		},
+		"redirectUserPage": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\BeforeInitialize\\RedirectUserPage",
+			"services": [ "TitleFactory" ]
 		},
 		"addGlobalUnifiedTaskOverviewModule": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\AddGlobalUTOModule"
