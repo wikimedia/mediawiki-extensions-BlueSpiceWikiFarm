@@ -8,12 +8,6 @@ use MediaWiki\Config\Config;
 use MediaWiki\User\UserIdentity;
 
 class GroupAccessStore implements IAccessStore {
-	public const ROLES = [
-		'reader' => [ 'reader' ],
-		'editor' => [ 'reader', 'editor' ],
-		'maintainer' => [ 'reader', 'editor', 'reviewer', 'admin' ],
-		'reviewer' => [ 'reader', 'editor', 'reviewer' ],
-	];
 
 	private const HIERARCHY = [
 		'reader' => [ 'editor', 'maintainer', 'reviewer' ],

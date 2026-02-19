@@ -488,6 +488,11 @@
 			"styles": [
 				"styles/wikiFarm.megamenu.css"
 			]
+		},
+		"ext.bluespice.wikiFarm.unifiedTaskOverviewModule": {
+			"scripts": [
+				"ext.bluespice.wikiFarm.unifiedTaskOverviewModule.js"
+			]
 		}
 	},
 	"ResourceFileModulePaths": {
@@ -509,7 +514,8 @@
 		"APIAfterExecute": "handleSharedResources",
 		"MWStakeCommonUIRegisterSkinSlotComponents": "common-user-interface",
 		"GetPreferences": "userpreference",
-		"MWStakeMCPGetWikiMap": "populateWikiMap"
+		"MWStakeMCPGetWikiMap": "populateWikiMap",
+		"SpecialPageBeforeExecute": "addGlobalUnifiedTaskOverviewModule"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -556,6 +562,9 @@
 		"populateWikiMap": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\PopulateWikiMap",
 			"services": [ "BlueSpiceWikiFarm.WikiMap", "BlueSpiceWikiFarm._Config" ]
+		},
+		"addGlobalUnifiedTaskOverviewModule": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\AddGlobalUTOModule"
 		}
 	},
 	"RestRoutes": [
@@ -695,6 +704,14 @@
 			"services": [
 				"HookContainer", "PermissionManager", "BlueSpiceWikiFarm.InstanceGroupCreator",
 				"DBLoadBalancer", "BlueSpiceWikiFarm.TeamManager", "BlueSpiceWikiFarm.InstanceStore"
+			]
+		},
+		{
+			"path": "/bluespice/farm/v1/access/accessible",
+			"class": "BlueSpice\\WikiFarm\\Rest\\UserAccessibleInstancesHandler",
+			"services": [
+				"BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.AccessControlStore",
+				"BlueSpiceWikiFarm.InstanceStore", "BlueSpiceWikiFarm.WikiMap"
 			]
 		}
 	],

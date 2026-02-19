@@ -115,7 +115,7 @@ class TeamManager extends TeamQuery {
 	 * @return void
 	 */
 	public function assignRoleToTeam( string $role, Team $team, ?InstanceEntity $instanceEntity, Authority $actor ) {
-		if ( !isset( GroupAccessStore::ROLES[$role] ) ) {
+		if ( !isset( IAccessStore::ROLES[$role] ) ) {
 			throw new RuntimeException( 'Invalid role' );
 		}
 		$this->db->startAtomic( __METHOD__ );

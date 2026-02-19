@@ -18,6 +18,7 @@
 	},
 	"rules": {
 		"max-len": "off",
+		"es-x/no-array-prototype-flat": "off",
 		"no-jquery/no-class-state": "off",
 		"no-jquery/no-global-selector": "off",
 		"no-prototype-builtins": "off"

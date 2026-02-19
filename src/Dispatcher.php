@@ -4,7 +4,7 @@ namespace BlueSpice\WikiFarm;
 
 use BlueSpice\ConfigDefinitionFactory;
 use BlueSpice\Permission\RoleManager;
-use BlueSpice\WikiFarm\AccessControl\GroupAccessStore;
+use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
 use BlueSpice\WikiFarm\AccessControl\TeamQuery;
 use BlueSpice\WikiFarm\MaintenanceScreens\MaintenancePageConstructor;
@@ -99,6 +99,8 @@ class Dispatcher {
 		// therefore break the DynamicSettings mechanism from BlueSpiceFoundation
 		$GLOBALS['wgHooks']['SetupAfterCache'][] = function () {
 			$this->onSetupAfterCache();
+			// Init WikiFarmMap
+			MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm.WikiMap' );
 		};
 
 		return $this->filesToRequire;
@@ -379,7 +381,7 @@ class Dispatcher {
 		$teamRolesForCurrentInstance = $teamQuery->getTeamRoles( $instance );
 		foreach ( $teamRolesForCurrentInstance as $teamData ) {
 			$teamGroup = $teamQuery->getTeamGroupName( $teamData['team'] );
-			$groupRoles = GroupAccessStore::ROLES[$teamData['role']] ?? [];
+			$groupRoles = IAccessStore::ROLES[$teamData['role']] ?? [];
 			foreach ( $groupRoles as $groupRole ) {
 				$GLOBALS['bsgGroupRoles'][$teamGroup][$groupRole] = true;
 			}
