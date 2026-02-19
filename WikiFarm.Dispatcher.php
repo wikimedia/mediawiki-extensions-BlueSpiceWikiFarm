@@ -28,8 +28,3 @@ $GLOBALS['mwsgProcessManagerQueue'] = [
 	'args' => [ FARMER_CALLED_INSTANCE, FARMER_IS_ROOT_WIKI_CALL ],
 	'services' => [ 'DBLoadBalancer', 'BlueSpiceWikiFarm._Config' ]
 ];
-$GLOBALS['mwsgWikiCronStore'] = [
-	'class' => \BlueSpice\WikiFarm\ProcessQueue\WikiCronStore::class,
-	'args' => [ FARMER_CALLED_INSTANCE, FARMER_IS_ROOT_WIKI_CALL ],
-	'services' => [ 'DBLoadBalancer', 'BlueSpiceWikiFarm._Config' ]
-];

@@ -19,8 +19,7 @@
 		"cocur/background-process": "v0.7",
 		"ifsnop/mysqldump-php": "v2.4",
 		"icamys/php-sitemap-generator": "~4.7",
-		"mwstake/mediawiki-component-processmanager": "~3",
-		"mwstake/mediawiki-component-wikicron": "~2"
+		"mwstake/mediawiki-component-processmanager": "~3"
 	},
 	"require-dev": {
 		"mediawiki/mediawiki-codesniffer": "45.0.0",
