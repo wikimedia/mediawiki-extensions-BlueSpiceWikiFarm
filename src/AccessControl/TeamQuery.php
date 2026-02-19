@@ -117,7 +117,7 @@ class TeamQuery {
 
 		$roles = [];
 		foreach ( $res as $row ) {
-			if ( !isset( GroupAccessStore::ROLES[$row->wtr_role] ) ) {
+			if ( !isset( IAccessStore::ROLES[$row->wtr_role] ) ) {
 				throw new RuntimeException( 'Invalid role' );
 			}
 			$roles[] = $row->wtr_role;

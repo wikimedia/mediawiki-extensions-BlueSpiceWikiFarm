@@ -49,7 +49,7 @@ class InstanceGroupCreator {
 	 */
 	public function getGroupsAndRolesForInstancePath( string $instancePath, array $limitToRoles = [] ): array {
 		$res = [];
-		foreach ( GroupAccessStore::ROLES as $group => $roles ) {
+		foreach ( IAccessStore::ROLES as $group => $roles ) {
 			if ( !empty( $limitToRoles ) && !in_array( $group, $limitToRoles ) ) {
 				continue;
 			}
@@ -65,7 +65,7 @@ class InstanceGroupCreator {
 	 */
 	public function getGlobalGroups( array $limitToRoles = [] ): array {
 		$res = [];
-		foreach ( GroupAccessStore::ROLES as $group => $roles ) {
+		foreach ( IAccessStore::ROLES as $group => $roles ) {
 			if ( !empty( $limitToRoles ) && !in_array( $group, $limitToRoles ) ) {
 				continue;
 			}
@@ -81,7 +81,7 @@ class InstanceGroupCreator {
 	 * @return string
 	 */
 	public function getGroupNameForUserRole( string $instancePath, string $userRole ): string {
-		if ( !isset( GroupAccessStore::ROLES[$userRole] ) ) {
+		if ( !isset( IAccessStore::ROLES[$userRole] ) ) {
 			return '';
 		}
 		return $this->getGroupPrefixForInstancePath( $instancePath ) . $userRole;
@@ -105,7 +105,7 @@ class InstanceGroupCreator {
 		if ( preg_match( $pattern, $groupName, $matches ) ) {
 			$bits = explode( '_', $matches[2] );
 			$role = array_pop( $bits );
-			if ( isset( GroupAccessStore::ROLES[$role] ) ) {
+			if ( isset( IAccessStore::ROLES[$role] ) ) {
 				return $role;
 			}
 		}

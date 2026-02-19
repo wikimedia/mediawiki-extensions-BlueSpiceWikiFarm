@@ -193,5 +193,6 @@
 	"wikifarm-instances-menu-overview-text": "All wikis",
 	"wikifarm-instances-menu-favorite-text": "Favourites",
 	"wikifarm-instances-menu-button-title": "List with all wiki instances",
-	"wikifarm-instances-menu-aria-label": "Wiki instances"
+	"wikifarm-instances-menu-aria-label": "Wiki instances",
+	"wikifarm-root-wiki-display-text": "Root wiki"
 }

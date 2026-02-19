@@ -195,5 +195,6 @@
 	"wikifarm-instances-menu-overview-text": "Label for card header in megamenu to list all wiki instances",
 	"wikifarm-instances-menu-favorite-text": "Label for card header in megamenu to list all favorite wikis",
 	"wikifarm-instances-menu-button-title": "Title for megamenu button with list of wiki instances",
-	"wikifarm-instances-menu-aria-label": "Aria label for megamenu button with list of wiki instances"
+	"wikifarm-instances-menu-aria-label": "Aria label for megamenu button with list of wiki instances",
+	"wikifarm-root-wiki-display-text": "Display name for the root instance"
 }

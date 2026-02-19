@@ -23,9 +23,6 @@ class Setup {
 		define( 'FARMER_DIR', dirname( __DIR__ ) );
 
 		static::setupInterwikiLinks();
-
-		// Init wiki farm map
-		MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm.WikiMap' );
 	}
 
 	/**

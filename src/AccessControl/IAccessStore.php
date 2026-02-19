@@ -7,6 +7,13 @@ use MediaWiki\User\UserIdentity;
 
 interface IAccessStore {
 
+	public const ROLES = [
+		'reader' => [ 'reader' ],
+		'editor' => [ 'reader', 'editor' ],
+		'maintainer' => [ 'reader', 'editor', 'reviewer', 'admin' ],
+		'reviewer' => [ 'reader', 'editor', 'reviewer' ],
+	];
+
 	/**
 	 * @param UserIdentity $user
 	 * @param string $role

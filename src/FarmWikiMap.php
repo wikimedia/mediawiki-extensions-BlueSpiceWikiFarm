@@ -3,6 +3,7 @@
 namespace BlueSpice\WikiFarm;
 
 use MediaWiki\Config\Config;
+use MediaWiki\Message\Message;
 
 class FarmWikiMap {
 
@@ -46,8 +47,23 @@ class FarmWikiMap {
 		if ( !$instance ) {
 			return;
 		}
-		$data['display_text'] = $instance->getDisplayName();
-		$data['url'] = $instance->getUrl( $this->config );
+		$data = array_merge( $data, $this->getWikiInfoFromInstance( $instance ) );
+	}
+
+	/**
+	 * @param InstanceEntity $instanceEntity
+	 * @return array
+	 */
+	public function getWikiInfoFromInstance( InstanceEntity $instanceEntity ): array {
+		return [
+			'wiki_id' => $instanceEntity instanceof RootInstanceEntity ?
+				$this->config->get( 'rootInstanceWikiId' ) :
+				$instanceEntity->getWikiId(),
+			'display_text' => $instanceEntity instanceof RootInstanceEntity ?
+				Message::newFromKey( 'wikifarm-root-wiki-display-text' )->text() :
+				$instanceEntity->getDisplayName(),
+			'url' => $instanceEntity->getUrl( $this->config )
+		];
 	}
 
 	/**
