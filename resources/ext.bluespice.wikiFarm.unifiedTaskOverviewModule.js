@@ -29,9 +29,16 @@ mw.hook( 'UnifiedTaskOverview.getList' ).add( ( collector ) => {
 				);
 
 				// ignore failures across wikis, return only successful task arrays
-				return Promise.allSettled( perWiki ).then( ( settled ) => settled // eslint-disable-line compat/compat, es-x/no-promise-all-settled
-					.filter( ( r ) => r.status === 'fulfilled' )
-					.flatMap( ( r ) => r.value )
+				return Promise.all(
+					perWiki.map( ( p ) =>
+						Promise.resolve( p ) // eslint-disable-line implicit-arrow-linebreak
+							.then( ( value ) => ( { status: 'fulfilled', value } ) )
+							.catch( ( reason ) => ( { status: 'rejected', reason } ) )
+					)
+				).then( ( settled ) =>
+					settled // eslint-disable-line implicit-arrow-linebreak
+						.filter( ( r ) => r.status === 'fulfilled' )
+						.reduce( ( acc, r ) => acc.concat( r.value ), [] )
 				);
 			} )
 	);

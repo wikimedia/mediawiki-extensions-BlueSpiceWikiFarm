@@ -100,6 +100,7 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 			Record::NOTSEARCHABLE => $instance->getMetadata()['notsearchable'] ?? false,
 			Record::META_GROUP => '',
 			Record::IS_SYSTEM => $instance instanceof SystemInstanceEntity,
+			Record::INSTANCE_COLOR => $instance->getMetadata()['instanceColor'] ?? null,
 		];
 
 		$data['meta_keywords'] = [];

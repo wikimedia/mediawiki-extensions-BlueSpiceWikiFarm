@@ -42,4 +42,47 @@
 		font-size: 0.8em;
 		display: block;
 	}
+
+	.instance-color-widget {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 5px;
+
+		.instance-color-option {
+			height: 30px;
+			width: 30px;
+			margin-right: 5px;
+			border: 2px solid var( --border-color-interactive, #a2a9b1 );
+			border-radius: 2px;
+			cursor: pointer;
+			position: relative;
+			color: white;
+
+			&.dark-text {
+				color: black;
+			}
+
+			&.default::after {
+				content: '/';
+				color: red;
+			}
+
+			&::after {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate( -50%, -50% );
+				font-weight: bold;
+			}
+
+			&.selected {
+				border-width: 4px;
+
+				&::after {
+					content: '✓';
+				}
+			}
+		}
+	}
 }

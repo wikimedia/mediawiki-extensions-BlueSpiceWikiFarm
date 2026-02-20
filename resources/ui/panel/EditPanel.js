@@ -87,6 +87,9 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.makeInputs = function () {
 		this.meta.hasOwnProperty( 'notsearchable' ) ? !this.meta.notsearchable : true
 	);
 
+	this.color = new ext.bluespiceWikiFarm.ui.widget.InstanceColorWidget();
+	this.color.setValue( this.meta.instanceColor || '' );
+
 	return [
 		this.nameLayout.$element,
 		new OO.ui.FieldLayout( this.descriptionInput, {
@@ -108,6 +111,9 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.makeInputs = function () {
 		} ).$element,
 		new OO.ui.FieldLayout( this.language, {
 			label: mw.message( 'wikifarm-lang-code' ).text()
+		} ).$element,
+		new OO.ui.FieldLayout( this.color, {
+			label: mw.message( 'wikifarm-instance-color' ).text()
 		} ).$element
 	];
 };
@@ -250,7 +256,8 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.generateSubmitData = function () {
 					desc: this.descriptionInput.getValue(),
 					group: this.groupInput.getValue(),
 					keywords: this.keywordsInput.getValue(),
-					notsearchable: !this.searchable.getValue()
+					notsearchable: !this.searchable.getValue(),
+					instanceColor: this.color.getValue()
 				},
 				language: this.language.getValue()
 			};
