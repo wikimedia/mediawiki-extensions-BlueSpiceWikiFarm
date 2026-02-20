@@ -211,6 +211,7 @@
 		},
 		"ext.bluespice.wikiFarm.edit": {
 			"scripts": [
+				"ui/widget/InstanceColorWidget.js",
 				"ui/dialog/TaskDialog.js",
 				"ui/dialog/ConfirmDialog.js",
 				"ui/dialog/RemoveInstanceDialog.js",
@@ -244,7 +245,9 @@
 				"wikifarm-suspend-prompt",
 				"wikifarm-remove-instructions",
 				"wikifarm-resume-prompt",
-				"wikifarm-error-generic"
+				"wikifarm-error-generic",
+				"wikifarm-instance-color",
+				"wikifarm-instance-color-remove"
 			],
 			"dependencies": [
 				"oojs-ui",
@@ -541,7 +544,8 @@
 			"services": [ "BlueSpiceWikiFarm._Config" ]
 		},
 		"addBootstrap": {
-			"class": "BlueSpice\\WikiFarm\\Hook\\AddBootstrap"
+			"class": "BlueSpice\\WikiFarm\\Hook\\AddBootstrap",
+			"services": [ "BlueSpiceWikiFarm.InstanceStore" ]
 		},
 		"handleSharedResources": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\HandleSharedResources",

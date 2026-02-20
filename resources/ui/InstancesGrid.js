@@ -36,15 +36,25 @@ ext.bluespiceWikiFarm.ui.InstancesGrid = function ( config ) { // eslint-disable
 							color: 'grey'
 						} ).attr( 'title', mw.msg( 'wikifarm-incomplete-instance' ) ).text( row.title ) );
 					}
-					return new OO.ui.HtmlSnippet( mw.html.element(
-						'a',
-						{
-							href: row.fullurl,
-							class: 'external',
-							target: '_blank'
-						},
-						row.title
-					) );
+
+					const $anchor = $( '<a>' ).attr( {
+						href: row.fullurl,
+						class: 'external',
+						target: '_blank'
+					} ).text( row.title );
+					const $color = $( '<div>' ).addClass( 'instance-color-indicator' );
+					$color.css( {
+						width: '5px',
+						height: '15px',
+						'margin-right': '4px',
+						display: 'inline-block',
+						'border-radius': '2px'
+					} );
+
+					if ( row.instance_color ) {
+						$color.css( 'background-color', row.instance_color.background );
+					}
+					return new OO.ui.HtmlSnippet( $( '<div>' ).append( $color, $anchor ).html() );
 				}
 			},
 			notsearchable: {

@@ -194,5 +194,7 @@
 	"wikifarm-instances-menu-favorite-text": "Favourites",
 	"wikifarm-instances-menu-button-title": "List with all wiki instances",
 	"wikifarm-instances-menu-aria-label": "Wiki instances",
-	"wikifarm-root-wiki-display-text": "Root wiki"
+	"wikifarm-root-wiki-display-text": "Root wiki",
+	"wikifarm-instance-color": "Wiki color",
+	"wikifarm-instance-color-remove": "Do not assign color"
 }
