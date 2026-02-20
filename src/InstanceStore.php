@@ -35,14 +35,4 @@ class InstanceStore extends DirectInstanceStore {
 		$hex = bin2hex( $bytes );
 		return substr( $hex, 0, 8 );
 	}
-
-	/**
-	 * @return InstanceEntity|null
-	 */
-	public function getCurrentInstance(): ?InstanceEntity {
-		if ( FARMER_CALLED_INSTANCE !== 'w' ) {
-			return $this->getInstanceByPath( FARMER_CALLED_INSTANCE );
-		}
-		return null;
-	}
 }

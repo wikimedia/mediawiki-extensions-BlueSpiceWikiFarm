@@ -52,7 +52,7 @@
 			"PluginRegistry": {
 				"global-search": {
 					"class": "BlueSpice\\WikiFarm\\ExtendedSearch\\GlobalSearch",
-					"services": [ "BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.AccessControlStore" ]
+					"services": [ "BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.AccessControlStore", "BlueSpiceWikiFarm.WikiMap" ]
 				}
 			}
 		},

@@ -3,6 +3,7 @@
 namespace BlueSpice\WikiFarm\ExtendedSearch;
 
 use BlueSpice\WikiFarm\AccessControl\IAccessStore;
+use BlueSpice\WikiFarm\FarmWikiMap;
 use BS\ExtendedSearch\Backend;
 use BS\ExtendedSearch\ISearchSource;
 use BS\ExtendedSearch\Lookup;
@@ -31,7 +32,8 @@ class GlobalSearch implements
 
 	public function __construct(
 		private readonly Config $farmConfig,
-		private readonly IAccessStore $accessStore
+		private readonly IAccessStore $accessStore,
+		private readonly FarmWikiMap $farmWikiMap
 	) {
 	}
 
@@ -66,7 +68,7 @@ class GlobalSearch implements
 	}
 
 	public function getIndexLabel( string $index ): ?string {
-		return $this->getInstanceNameForIndex( $index );
+		return $this->getInstanceDataForIndex( $index )['display_text'];
 	}
 
 	public function getContextDefinitionForPage( PageIdentity $page, Authority $authority ): ?array {
@@ -115,9 +117,13 @@ class GlobalSearch implements
 	public function formatFulltextResult(
 		array &$result, SearchResult $resultObject, ISearchSource $source, Lookup $lookup
 	): void {
-		$instanceName = $this->getInstanceNameForIndex( $resultObject->getIndex() );
-		if ( $instanceName ) {
-			$result['source'] = $instanceName;
+		$data = $this->getInstanceDataForIndex( $resultObject->getIndex() );
+		if ( $data ) {
+			if ( $data['color'] && $data['color']['lightText'] ) {
+				// Somehow bools gets lost in Search result processing, convert to int
+				$data['color']['lightText'] = 1;
+			}
+			$result['source'] = $data;
 		}
 	}
 
@@ -131,13 +137,13 @@ class GlobalSearch implements
 
 	/**
 	 * @param string $index
-	 * @return string|null
+	 * @return array|null
 	 */
-	private function getInstanceNameForIndex( string $index ): ?string {
+	private function getInstanceDataForIndex( string $index ): ?array {
 		foreach ( $this->availableInstances as $data ) {
 			foreach ( [ 'wikipage', 'repofile' ] as $source ) {
 				if ( $index === $data['index_prefix'] . '_' . $source ) {
-					return $data['instance-name'];
+					return $this->farmWikiMap->getWikiInfoFromInstance( $data['instance'] );
 				}
 			}
 		}
