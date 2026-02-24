@@ -1,6 +1,7 @@
 <?php
 
 use BlueSpice\WikiFarm\InstanceManager;
+use BlueSpice\WikiFarm\InstancePathGenerator;
 use BlueSpice\WikiFarm\InstanceTemplateProvider;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Maintenance\MaintenanceFatalError;
@@ -36,10 +37,12 @@ class BatchCreateInstances extends Maintenance {
 		$this->manager = $this->getServiceContainer()->getService( 'BlueSpiceWikiFarm.InstanceManager' );
 		/** @var ProcessManager $processManager */
 		$processManager = $this->getServiceContainer()->getService( 'ProcessManager' );
+		/** @var InstancePathGenerator $pathGenerator */
+		$pathGenerator = $this->getServiceContainer()->getService( 'BlueSpiceWikiFarm._InstancePathGenerator' );
 
 		foreach ( $decoded as $instanceKey => $data ) {
-			if ( !is_string( $instanceKey ) || $this->manager->getStore()->nameExists( $instanceKey ) ) {
-				$this->error( "Instance name $instanceKey invalid or already exists! Skipping...\n" );
+			if ( !$pathGenerator->checkIfValid( $instanceKey ) ) {
+				$this->error( "Instance name $instanceKey is not valid or already exists! Skipping...\n" );
 				continue;
 			}
 			$this->output( "----------------------------------" );
@@ -87,7 +90,7 @@ class BatchCreateInstances extends Maintenance {
 				}
 				$this->output( "Process finished: {$process->getState()}" );
 			} catch ( Throwable $ex ) {
-				$this->error( "Failed to start instance creation process\n" );
+				$this->error( "Failed to start instance creation process: {$ex->getMessage()}\n" );
 			}
 		}
 	}
