@@ -15,6 +15,9 @@
 	"action-wikifarm-managewiki": "xestionar a configuración do wiki",
 	"right-wikifarm-deletewiki": "Eliminar un wiki",
 	"action-wikifarm-deletewiki": "eliminar un wiki",
+	"apihelp-wikifarm-wiki-instance-store-summary": "Consultar instancias wiki desde a tenda da granxa de wikis",
+	"apihelp-wikifarm-group-store-summary": "Consultar grupos do wiki desde a tenda da granxa de wikis",
+	"apihelp-wikifarm-keyword-store-summary": "Consultar palabras clave do wiki desde a tenda da granxa de wikis",
 	"log-name-ext-wikifarm": "Xestión da granxa de wikis",
 	"log-name-ext-wikifarm-teams": "Equipos wiki",
 	"logentry-ext-wikifarm-teams-create": "$1 {{GENDER:$2|creou}} o equipo «$4»",
@@ -192,8 +195,5 @@
 	"wikifarm-instances-menu-overview-text": "Todos os wikis",
 	"wikifarm-instances-menu-favorite-text": "Favoritos",
 	"wikifarm-instances-menu-button-title": "Lista con todas as instancias wiki",
-	"wikifarm-instances-menu-aria-label": "Instancias wiki",
-	"apihelp-wikifarm-wiki-instance-store-summary": "Consultar instancias wiki desde a tenda da granxa de wikis",
-	"apihelp-wikifarm-group-store-summary": "Consultar grupos do wiki desde a tenda da granxa de wikis",
-	"apihelp-wikifarm-keyword-store-summary": "Consultar palabras clave do wiki desde a tenda da granxa de wikis"
+	"wikifarm-instances-menu-aria-label": "Instancias wiki"
 }
