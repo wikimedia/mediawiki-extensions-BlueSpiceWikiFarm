@@ -11,7 +11,7 @@
 	"grant-farm-management": "Crear, gerer e deler fermas de wikis",
 	"right-wikifarm-createwiki": "Crear un nove wiki",
 	"action-wikifarm-createwiki": "crear un nove wiki",
-	"right-wikifarm-managewiki": "Gerer le parametros del wiki",
+	"right-wikifarm-managewiki": "Gerer le ferma de wikis",
 	"action-wikifarm-managewiki": "gerer le ferma de wikis",
 	"right-wikifarm-deletewiki": "Deler un wiki",
 	"action-wikifarm-deletewiki": "deler un wiki",
