@@ -70,7 +70,7 @@
 	"wikifarm-error-failed-to-start-process": "התנעת התהליך נכשלה",
 	"wikifarm-error-generic": "אירעה שגיאה, נא ליצור קשר עם מנהל המערכת שלך",
 	"wikifarm-instance-actions": "פעולות",
-	"wikifarm-instance-ctime": "נוצר ב",
+	"wikifarm-instance-ctime": "נוצר ב־",
 	"wikifarm-instance-desc": "תיאור",
 	"wikifarm-instance-group": "קבוצה",
 	"wikifarm-instance-title": "שם האתר",
