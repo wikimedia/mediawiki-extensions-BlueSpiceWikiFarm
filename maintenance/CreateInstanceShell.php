@@ -22,6 +22,7 @@ class CreateInstanceShell extends Maintenance {
 		$this->addOption( 'path', 'Instance path', true, true );
 		$this->addOption( 'displayName', 'Instance display name', false, true );
 		$this->addOption( 'lang', 'Instance language', false, true );
+		$this->addOption( 'out-format', 'Output format (text or json)', false, true, 'text' );
 	}
 
 	public function execute() {
@@ -34,6 +35,18 @@ class CreateInstanceShell extends Maintenance {
 				'lang' => $this->getOption( 'lang', 'en' ),
 			]
 		);
+
+		if ( $this->getOption( 'out-format' ) === 'json' ) {
+			$this->output( json_encode( [
+				'id' => $instance->getId(),
+				'path' => $instance->getPath(),
+				'dbName' => $instance->getDbName(),
+				'dbPrefix' => $instance->getDbPrefix(),
+				'vaultTarget' => $instance->getVault( $this->manager->getFarmConfig() )
+			] ) );
+			return;
+		}
+
 		$this->output( "Created instance shell with ID: {$instance->getId()} and path {$instance->getPath()}\n" );
 
 		$this->output( "Database needs to be created with this name and/or prefix: \n" );
