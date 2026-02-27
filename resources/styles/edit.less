@@ -1,52 +1,13 @@
 #farm-create-instance,
 #farm-edit-instance {
-	.ext-bluespiceWikiFarm-edit-panel-data {
-		display: inline-block;
-		vertical-align: top;
-	}
-
-	.ext-bluespiceWikiFarm-extra-options-panel {
-		margin-top: 10px;
-		float: right;
-		vertical-align: top;
-		display: inline-block;
-
-		.oo-ui-buttonOptionWidget,
-		.oo-ui-buttonWidget {
-			display: block;
-			width: 100%;
-
-			&.action-button {
-				margin-top: 10px;
-				min-width: 200px;
-			}
-
-			a {
-				width: inherit;
-				padding-bottom: 15px;
-				padding-top: 15px;
-				text-align: left;
-			}
-		}
-
-		.oo-ui-buttonSelectWidget {
-			width: 100%;
-		}
-	}
-
 	.ext-bluespiceWikiFarm-edit-panel-submit-buttons {
 		padding: 20px;
-	}
-
-	.ext-bluespiceWikiFarm-button-with-label-help {
-		font-size: 0.8em;
-		display: block;
 	}
 
 	.instance-color-widget {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: space-between;
+		justify-content: start;
 		gap: 5px;
 
 		.instance-color-option {
@@ -83,6 +44,112 @@
 					content: '✓';
 				}
 			}
+		}
+	}
+
+	.bluespiceWikiFarm-editor-toolbar {
+		.default-actions {
+			float: right;
+
+			.oo-ui-tool-link {
+				padding: 13px;
+			}
+		}
+
+		.additional-actions .oo-ui-tool-link {
+			padding-bottom: 13px;
+			padding-top: 13px;
+		}
+	}
+
+	.ext-bluespiceWikiFarm-extra-options-panel {
+		.expander-button {
+			border-bottom: 1px solid var( --border-color-interactive, #a2a9b1 );
+
+			a {
+				width: 100%;
+
+				.oo-ui-indicatorElement-indicator {
+					width: 30px;
+					height: 30px;
+					background-size: 22px;
+				}
+			}
+		}
+
+		> div {
+			margin-top: 10px;
+		}
+	}
+
+	.bs-wiki-access-type {
+		.oojs-plus-menu-option-with-description {
+			>.oo-ui-labelElement-label {
+				font-size: 1.1em;
+				font-weight: bold;
+				margin-bottom: 5px;
+			}
+		}
+	}
+}
+
+#farm-create-instance-selection {
+	.ext-bluespiceWikiFarm-extra-options-panel {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 16px;
+		place-items: start;
+
+		.oo-ui-buttonWidget {
+			min-width: 400px;
+			width: 100%;
+			box-sizing: border-box;
+			height: 170px;
+			border: 1px solid var( --border-color-interactive, #a2a9b1 );
+			border-radius: 12px;
+			cursor: pointer;
+
+			a {
+				width: 100%;
+				height: 100%;
+				background-color: transparent;
+				border: transparent;
+				box-shadow: none;
+				padding-bottom: 15px;
+				padding-top: 25px;
+				text-align: left;
+				padding-left: 110px;
+
+				.oo-ui-iconElement-icon {
+					width: 50px;
+					height: 50px;
+					background-size: 50px;
+					margin-top: 15px;
+					margin-left: 20px;
+				}
+
+				.oo-ui-labelElement-label {
+					font-size: 1.5em;
+				}
+			}
+
+			&.noicon a {
+				padding-left: 30px;
+			}
+
+			.ext-bluespiceWikiFarm-button-with-label-help {
+				display: block;
+				white-space: break-spaces;
+				font-weight: normal;
+				font-size: 1em !important;
+				vertical-align: bottom;
+			}
+		}
+
+		.ext-bluespiceWikiFarm-template-picker-separator {
+			grid-column: span 999;
+			font-size: 1.2em;
+			margin: 10px 0;
 		}
 	}
 }

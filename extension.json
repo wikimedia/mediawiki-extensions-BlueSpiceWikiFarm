@@ -202,16 +202,10 @@
 			"scripts": [
 				"ui/InstancePicker.js",
 				"ui/PathInput.js",
-				"ui/panel/TemplatePicker.js",
 				"ui/panel/CreatePanel.js"
 			],
 			"messages": [
 				"wikifarm-create-instance",
-				"wikifarm-template-title",
-				"wikifarm-template-blank",
-				"wikifarm-template-blank-help",
-				"wikifarm-template-clone",
-				"wikifarm-template-clone-help",
 				"wikifarm-instance-path-error",
 				"wikifarm-instance-path-invalid",
 				"wikifarm-ui-access-wiki-type-label"
@@ -225,6 +219,7 @@
 		},
 		"ext.bluespice.wikiFarm.edit": {
 			"scripts": [
+				"ui/EditorToolbar.js",
 				"ui/widget/InstanceColorWidget.js",
 				"ui/dialog/TaskDialog.js",
 				"ui/dialog/ConfirmDialog.js",
@@ -253,7 +248,6 @@
 				"wikifarm-clone-instance",
 				"wikifarm-suspend-instance",
 				"wikifarm-resume-instance",
-				"wikifarm-instance-actions",
 				"wikifarm-instance-suspended-notice",
 				"wikifarm-button-action-label-delete",
 				"wikifarm-suspend-prompt",
@@ -261,7 +255,8 @@
 				"wikifarm-resume-prompt",
 				"wikifarm-error-generic",
 				"wikifarm-instance-color",
-				"wikifarm-instance-color-remove"
+				"wikifarm-instance-color-remove",
+				"wikifarm-instance-advanced-options"
 			],
 			"dependencies": [
 				"oojs-ui",
@@ -269,6 +264,28 @@
 				"ext.oOJSPlus.data",
 				"ext.oOJSPlus.widgets",
 				"oojs-ui.styles.icons-media",
+				"ext.bluespice.wikiFarm.bootstrap"
+			]
+		},
+		"ext.bluespice.wikiFarm.selection": {
+			"scripts": [
+				"ui/panel/TemplatePicker.js",
+				"ui/panel/InstanceSourcePanel.js"
+			],
+			"styles": [
+				"styles/edit.less"
+			],
+			"messages": [
+				"wikifarm-template-title",
+				"wikifarm-template-blank",
+				"wikifarm-template-blank-help",
+				"wikifarm-template-clone",
+				"wikifarm-template-clone-help",
+				"wikifarm-template-available-templates"
+			],
+			"dependencies": [
+				"ext.bluespice",
+				"oojs-ui",
 				"ext.bluespice.wikiFarm.bootstrap"
 			]
 		},

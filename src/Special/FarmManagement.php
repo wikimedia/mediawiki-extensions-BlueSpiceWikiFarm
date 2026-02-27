@@ -47,8 +47,8 @@ class FarmManagement extends SpecialPage {
 			'wgWikiFarmAvailableLanguages',
 			$this->getLanguages()
 		);
-		if ( $subPage === '_create' ) {
-			// Creating
+
+		if ( str_starts_with( $subPage, '_create' ) ) {
 			if ( !$this->countLimiter->canCreate() ) {
 				$this->getOutput()->showPermissionStatus(
 					PermissionStatus::newFatal( 'wikifarm-error-instance-limit-reached' )
@@ -61,26 +61,68 @@ class FarmManagement extends SpecialPage {
 
 			$createParams = [
 				'name' => $this->getRequest()->getText( 'name' ),
-				'template' => $this->getRequest()->getText( 'template' ),
-				'path' => $this->getRequest()->getText( 'path' ),
-				'globalAccessEnabled' => $this->instanceManager->getFarmConfig()->get( 'useGlobalAccessControl' ),
-				'templates' => ( new InstanceTemplateProvider( $this->getConfig() ) )->getTemplates()
+				'path' => $this->getRequest()->getText( 'path' )
 			];
-			if ( $createParams['template'] === '_clone' ) {
-				$source = $this->getVerifiedSource();
-				if ( $source ) {
-					$createParams['source'] = $source;
-				} else {
-					unset( $createParams['template'] );
+
+			if ( $subPage === '_create' ) {
+				$createParams['templates'] = ( new InstanceTemplateProvider( $this->getConfig() ) )->getTemplates();
+				$this->getOutput()->addHTML(
+					Html::element( 'div', [
+						'id' => 'farm-create-instance-selection',
+						'class' => 'row justify-content-md-center',
+						'data-params' => json_encode( $createParams )
+					] )
+				);
+			} else {
+				$subSub = substr( $subPage, strlen( '_create/' ) );
+				$subSub = explode( '/', $subSub )[0];
+				if ( !in_array( $subSub, [ 'template', 'blank' ] ) ) {
+					$this->showOverview();
+					return;
 				}
+				$createParams['globalAccessEnabled'] = $this->instanceManager->getFarmConfig()->get( 'useGlobalAccessControl' );
+
+				if ( $subSub === 'template' ) {
+					$template = $this->getRequest()->getText( 'template', '_default' );
+					if ( $template === '_clone' ) {
+						$source = $this->getVerifiedSource();
+						if ( $source ) {
+							$createParams['source'] = $source;
+							$createParams['template'] = '_clone';
+						} else {
+							$this->getOutput()->showErrorPage(
+								'wikifarm-management-invalid-source-title',
+								'wikifarm-management-invalid-source-text'
+							);
+							return;
+						}
+					} elseif ( $template === '_default' ) {
+						$createParams['template'] = '_clone';
+					} else {
+						$templates = ( new InstanceTemplateProvider( $this->getConfig() ) )->getTemplates();
+						if ( !isset( $templates[$template] ) ) {
+							$this->getOutput()->showErrorPage(
+								'wikifarm-management-invalid-template-title',
+								'wikifarm-management-invalid-template-text'
+							);
+							return;
+						}
+						$this->getOutput()->setPageTitle(
+							$this->msg( 'wikifarm-create-instance-title-from-template', $template )
+						);
+						$createParams['template'] = $template;
+					}
+				}
+
+				$this->getOutput()->addHTML(
+					Html::element( 'div', [
+						'id' => 'farm-create-instance',
+						'class' => 'row justify-content-md-center',
+						'data-params' => json_encode( $createParams )
+					] )
+				);
 			}
-			$this->getOutput()->addHTML(
-				Html::element( 'div', [
-					'id' => 'farm-create-instance',
-					'class' => 'row justify-content-md-center',
-					'data-params' => json_encode( $createParams )
-				] )
-			);
+
 		} elseif ( $subPage ) {
 			// Editing
 			$instance = $this->instanceManager->getStore()->getInstanceByIdOrPath( $subPage );
@@ -104,21 +146,28 @@ class FarmManagement extends SpecialPage {
 				] )
 			);
 		} else {
-			// Overview
-			if ( $this->countLimiter->isLimited() ) {
-				$this->getOutput()->addJsConfigVars(
-					'wgWikiFarmInstanceLimit',
-					[
-						'active' => $this->countLimiter->getCurrentActiveCount(),
-						'limit' => $this->countLimiter->getLimit(),
-					]
-				);
-			}
-			$this->getOutput()->addModules( [ 'ext.bluespice.wikiFarm.management' ] );
-			$this->getOutput()->addHTML(
-				Html::element( 'div', [ 'id' => 'farm-management' ] )
+			$this->showOverview();
+		}
+	}
+
+	/**
+	 * @return void
+	 */
+	private function showOverview() {
+		// Overview
+		if ( $this->countLimiter->isLimited() ) {
+			$this->getOutput()->addJsConfigVars(
+				'wgWikiFarmInstanceLimit',
+				[
+					'active' => $this->countLimiter->getCurrentActiveCount(),
+					'limit' => $this->countLimiter->getLimit(),
+				]
 			);
 		}
+		$this->getOutput()->addModules( [ 'ext.bluespice.wikiFarm.management' ] );
+		$this->getOutput()->addHTML(
+			Html::element( 'div', [ 'id' => 'farm-management' ] )
+		);
 	}
 
 	/**
