@@ -5,36 +5,36 @@ ext.bluespiceWikiFarm.ui.widget.InstanceColorWidget = function ( cfg ) {
 
 	this.INSTANCE_BADGE_COLORS = {
 		// Blues
-		'#4E79A7': true,
-		'#A0CBE8': false,
-		'#B8D8F0': false,
+		'#3F6F9F': true,
+		'#5A9BD5': true,
+		'#4F81BD': true,
 
 		// Greens
-		'#59A14F': true,
-		'#8CD17D': false,
-		'#86BCB6': false,
-		'#499894': true,
+		'#4C8C43': true,
+		'#5FAE56': true,
+		'#4F9A94': true,
+		'#3E7F7A': true,
 
 		// Purples
+		'#9A5D8C': true,
 		'#B07AA1': true,
-		'#D4A6C8': false,
-		'#8E6C8A': true,
-		'#C7B0D5': false,
+		'#7A5A78': true,
+		'#9F86B8': true,
 
-		// Reds / pinks (muted)
-		'#E15759': true,
-		'#FF9DA7': false,
-		'#D37295': true,
-		'#F2B6C6': false,
+		// Reds / pinks
+		'#C94C4E': true,
+		'#E06C75': true,
+		'#B85C82': true,
+		'#D98DA4': false,
 
-		// Oranges / warm
-		'#F28E2B': true,
-		'#FFBE7D': false,
-		'#E17C05': true,
-		'#F8CFA0': false,
+		// Oranges
+		'#D9791F': true,
+		'#E89A4C': true,
+		'#C96500': true,
+		'#E5A96E': false,
 
-		// Teals / cyans
-		'#76B7B2': false,
+		// Teals
+		'#5FA7A3': true,
 
 		_default: true
 	};

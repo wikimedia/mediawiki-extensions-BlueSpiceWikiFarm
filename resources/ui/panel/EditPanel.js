@@ -8,14 +8,24 @@ ext.bluespiceWikiFarm.ui.EditPanel = function ( config ) {
 		expanded: false,
 		padded: false
 	} );
+	this.toolbar = ext.bluespiceWikiFarm.ui.createEditorToolbar(
+		this.getSubmitButtonLabel(), this.getAdditionalToolbarActions()
+	);
+	this.toolbar.connect( this, {
+		close: 'onCancelClick',
+		save: 'onSubmit',
+		suspend: 'onSuspendClick',
+		resume: 'onResumeClick',
+		delete: 'onRemoveClick',
+		clone: 'onCloneClick'
+	} );
+	this.$element.append( this.toolbar.$element );
+
+	this.farmConfig = ext.bluespiceWikiFarm._config(); // eslint-disable-line no-underscore-dangle
+
 	this.msgPanel = new OO.ui.PanelLayout( {
 		expanded: false,
 		padded: false
-	} );
-	this.dataPanel = new OO.ui.PanelLayout( {
-		expanded: false,
-		padded: true,
-		classes: [ 'ext-bluespiceWikiFarm-edit-panel-data', 'col', 'col-lg-6' ]
 	} );
 
 	this.inputValidity = {
@@ -23,17 +33,45 @@ ext.bluespiceWikiFarm.ui.EditPanel = function ( config ) {
 	};
 
 	this.$element.append( this.msgPanel.$element );
-	this.$element.append( this.dataPanel.$element );
 
 	this.render();
 };
 
 OO.inheritClass( ext.bluespiceWikiFarm.ui.EditPanel, OO.ui.PanelLayout );
 
+ext.bluespiceWikiFarm.ui.EditPanel.prototype.getAdditionalToolbarActions = function () {
+	return [
+		{
+			visible: !this.instanceData.is_system && this.instanceData.sfi_status !== 'suspended',
+			data: 'suspend',
+			icon: 'pause',
+			label: mw.message( 'wikifarm-suspend-instance' ).plain(),
+			flags: [ 'destructive' ]
+		},
+		{
+			visible: this.instanceData.sfi_status === 'suspended',
+			data: 'resume',
+			icon: 'play',
+			label: mw.message( 'wikifarm-resume-instance' ).plain(),
+			flags: [ 'progressive' ]
+		},
+		{
+			data: 'delete',
+			icon: 'trash',
+			label: mw.message( 'wikifarm-remove-instance' ).plain(),
+			flags: [ 'primary', 'destructive' ]
+		},
+		{
+			data: 'clone',
+			icon: 'articleDisambiguation',
+			label: mw.message( 'wikifarm-clone-instance' ).plain(),
+			flags: [ 'progressive' ]
+		}
+	];
+};
+
 ext.bluespiceWikiFarm.ui.EditPanel.prototype.render = function () {
-	this.makeActionButtons();
-	this.dataPanel.$element.append( this.makeInputs() );
-	this.makeSubmitButtons();
+	this.$element.append( this.makeInputs() );
 
 	if ( this.instanceData.sfi_status === 'suspended' ) {
 		this.msgPanel.$element.append(
@@ -62,6 +100,31 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.makeInputs = function () {
 		rows: 3,
 		value: this.meta.desc || ''
 	} );
+
+	this.advancedOptions = new OOJSPlus.ui.widget.ExpandablePanel( {
+		expanded: false,
+		padded: false,
+		label: mw.msg( 'wikifarm-instance-advanced-options' ),
+		collapsed: true,
+		classes: [ 'ext-bluespiceWikiFarm-extra-options-panel' ]
+	} );
+	this.advancedOptions.$area.append( this.makeAdvancedOptionsInputs() );
+
+	return [
+		this.nameLayout.$element,
+		new OO.ui.FieldLayout( this.descriptionInput, {
+			align: 'top',
+			label: mw.message( 'wikifarm-instance-desc' ).plain()
+		} ).$element,
+		new OO.ui.FieldLayout( this.pathInput, {
+			align: 'top',
+			label: mw.message( 'wikifarm-instance-path' ).plain()
+		} ).$element,
+		this.advancedOptions.$element
+	];
+};
+
+ext.bluespiceWikiFarm.ui.EditPanel.prototype.makeAdvancedOptionsInputs = function () {
 	this.groupInput = new OOJSPlus.ui.widget.StoreDataInputWidget( {
 		queryAction: 'wikifarm-group-store',
 		labelField: 'text',
@@ -90,32 +153,33 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.makeInputs = function () {
 	this.color = new ext.bluespiceWikiFarm.ui.widget.InstanceColorWidget();
 	this.color.setValue( this.meta.instanceColor || '' );
 
-	return [
-		this.nameLayout.$element,
-		new OO.ui.FieldLayout( this.descriptionInput, {
-			align: 'top',
-			label: mw.message( 'wikifarm-instance-desc' ).plain()
-		} ).$element,
-		new OO.ui.FieldLayout( this.pathInput, {
-			label: mw.message( 'wikifarm-instance-path' ).plain()
-		} ).$element,
-		new OO.ui.FieldLayout( this.searchable, {
-			align: 'left',
-			label: mw.message( 'wikifarm-instance-notsearchable' ).plain()
-		} ).$element,
+	let items = [
 		new OO.ui.FieldLayout( this.groupInput, {
+			align: 'top',
 			label: mw.message( 'wikifarm-instance-group' ).plain()
 		} ).$element,
 		new OO.ui.FieldLayout( this.keywordsInput, {
+			align: 'top',
 			label: mw.message( 'wikifarm-instance-keywords' ).plain()
 		} ).$element,
 		new OO.ui.FieldLayout( this.language, {
+			align: 'top',
 			label: mw.message( 'wikifarm-lang-code' ).text()
 		} ).$element,
 		new OO.ui.FieldLayout( this.color, {
+			align: 'top',
 			label: mw.message( 'wikifarm-instance-color' ).text()
 		} ).$element
 	];
+	if ( !( this.farmConfig.useUnifiedSearch || false ) ) {
+		items = [
+			new OO.ui.FieldLayout( this.searchable, {
+				align: 'left',
+				label: mw.message( 'wikifarm-instance-notsearchable' ).plain()
+			} ).$element, ...items
+		];
+	}
+	return items;
 };
 
 ext.bluespiceWikiFarm.ui.EditPanel.prototype.onNameChange = function ( value ) { // eslint-disable-line no-unused-vars
@@ -144,50 +208,6 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.onNameChange = function ( value ) {
 	}, 500 );
 };
 
-ext.bluespiceWikiFarm.ui.EditPanel.prototype.makeActionButtons = function () {
-	if ( this.instanceData.is_system ) {
-		return;
-	}
-	this.suspendButton = new farmActionButton( { // eslint-disable-line new-cap, no-use-before-define
-		icon: 'pause',
-		label: mw.message( 'wikifarm-suspend-instance' ).plain(),
-		flags: [ 'destructive' ]
-	} );
-	this.resumeButton = new farmActionButton( { // eslint-disable-line new-cap, no-use-before-define
-		icon: 'play',
-		label: mw.message( 'wikifarm-resume-instance' ).plain(),
-		flags: [ 'progressive' ]
-	} );
-	this.removeButton = new farmActionButton( { // eslint-disable-line new-cap, no-use-before-define
-		icon: 'trash',
-		label: mw.message( 'wikifarm-remove-instance' ).plain(),
-		flags: [ 'primary', 'destructive' ]
-	} );
-	this.cloneButton = new farmActionButton( { // eslint-disable-line new-cap, no-use-before-define
-		icon: 'articleDisambiguation',
-		label: mw.message( 'wikifarm-clone-instance' ).plain(),
-		flags: [ 'progressive' ]
-	} );
-	this.suspendButton.connect( this, { click: 'onSuspendClick' } );
-	this.resumeButton.connect( this, { click: 'onResumeClick' } );
-	this.removeButton.connect( this, { click: 'onRemoveClick' } );
-	this.cloneButton.connect( this, { click: 'onCloneClick' } );
-
-	if ( this.instanceData.sfi_status === 'suspended' ) {
-		this.suspendButton.$element.hide();
-	} else {
-		this.resumeButton.$element.hide();
-	}
-	this.$element.append( new OO.ui.FieldsetLayout( {
-		label: mw.msg( 'wikifarm-instance-actions' ),
-		expanded: false,
-		padded: true,
-		classes: [ 'ext-bluespiceWikiFarm-extra-options-panel', 'col', 'col-md-4' ],
-		items: [ this.cloneButton, this.suspendButton, this.resumeButton, this.removeButton ]
-	} ).$element );
-
-};
-
 ext.bluespiceWikiFarm.ui.EditPanel.prototype.onSuspendClick = function () {
 	this.openTaskDialog( 'suspend' );
 };
@@ -201,7 +221,10 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.onRemoveClick = function () {
 };
 
 ext.bluespiceWikiFarm.ui.EditPanel.prototype.onCloneClick = function () {
-	window.location.href = this.getManagementUrl( '_create', { template: 'clone', source: this.instanceData.sfi_path } );
+	window.location.href = this.getManagementUrl(
+		'_create/template',
+		{ template: '_clone', source: this.instanceData.sfi_path }
+	);
 };
 
 ext.bluespiceWikiFarm.ui.EditPanel.prototype.onBeforeNameSet = function () {
@@ -220,25 +243,8 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.onSubmitDone = function ( response,
 	}
 };
 
-ext.bluespiceWikiFarm.ui.EditPanel.prototype.makeSubmitButtons = function () {
-	this.submit = new OO.ui.ButtonWidget( {
-		label: this.getSubmitButtonLabel(),
-		flags: [ 'progressive', 'primary' ]
-	} );
-	this.cancel = new OO.ui.ButtonWidget( {
-		label: mw.message( 'wikifarm-button-action-label-cancel' ).plain(),
-		flags: 'safe',
-		framed: false,
-		href: mw.Title.makeTitle( -1, mw.config.get( 'wgCanonicalSpecialPageName' ) ).getUrl()
-	} );
-	this.submit.connect( this, { click: 'onSubmit' } );
-
-	this.$element.append(
-		new OO.ui.HorizontalLayout( {
-			items: [ this.submit, this.cancel ],
-			classes: [ 'ext-bluespiceWikiFarm-edit-panel-submit-buttons' ]
-		} ).$element
-	);
+ext.bluespiceWikiFarm.ui.EditPanel.prototype.onCancelClick = function () {
+	window.location.href = mw.Title.makeTitle( -1, mw.config.get( 'wgCanonicalSpecialPageName' ) ).getUrl();
 };
 
 ext.bluespiceWikiFarm.ui.EditPanel.prototype.getSubmitButtonLabel = function () {

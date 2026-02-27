@@ -28,4 +28,15 @@ $( () => {
 		return;
 	}
 
+	// Selection
+	$cnt = $( '#farm-create-instance-selection' );
+	if ( $cnt.length > 0 ) {
+		mw.loader.using( 'ext.bluespice.wikiFarm.selection' ).done( () => {
+			$cnt.html(
+				new ext.bluespiceWikiFarm.ui.InstanceSourcePanel( $cnt.data( 'params' ) ).$element
+			);
+		} );
+		return;
+	}
+
 } );
