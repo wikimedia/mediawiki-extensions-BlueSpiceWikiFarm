@@ -11,8 +11,8 @@
 	"grant-farm-management": "Crear, xestionar e eliminar granxas de wikis",
 	"right-wikifarm-createwiki": "Crear un novo wiki",
 	"action-wikifarm-createwiki": "crear un novo wiki",
-	"right-wikifarm-managewiki": "Xestionar a configuración do wiki",
-	"action-wikifarm-managewiki": "xestionar a configuración do wiki",
+	"right-wikifarm-managewiki": "Xestionar a granxa de wikis",
+	"action-wikifarm-managewiki": "xestionar a granxa de wikis",
 	"right-wikifarm-deletewiki": "Eliminar un wiki",
 	"action-wikifarm-deletewiki": "eliminar un wiki",
 	"apihelp-wikifarm-wiki-instance-store-summary": "Consultar instancias wiki desde a tenda da granxa de wikis",
@@ -195,5 +195,8 @@
 	"wikifarm-instances-menu-overview-text": "Todos os wikis",
 	"wikifarm-instances-menu-favorite-text": "Favoritos",
 	"wikifarm-instances-menu-button-title": "Lista con todas as instancias wiki",
-	"wikifarm-instances-menu-aria-label": "Instancias wiki"
+	"wikifarm-instances-menu-aria-label": "Instancias wiki",
+	"wikifarm-root-wiki-display-text": "Wiki raíz",
+	"wikifarm-instance-color": "Cor do wiki",
+	"wikifarm-instance-color-remove": "Non asignar unha cor"
 }
