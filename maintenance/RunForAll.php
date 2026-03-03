@@ -15,6 +15,8 @@ class RunForAll extends Maintenance {
 		$this->addOption( 'script', 'The maintenance script to execute', true );
 		$this->addOption( 'quiet', 'Suppress output unless there was an error' );
 		$this->addOption( 'args', 'The arguments for the maintenance script', false );
+		$this->addOption( 'start', 'Instance index to start on (0-based)', false, true );
+		$this->addOption( 'limit', 'Number of instances to process (starting from --start)', false, true );
 		ini_set( 'error_reporting', E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED );
 	}
 
@@ -30,6 +32,10 @@ class RunForAll extends Maintenance {
 			$this->output( "$overallStartTimestamp: Processing instances ...\n" );
 		}
 
+		$currentIndex = 0;
+		$start = $this->getOption( 'start', 0 );
+		$limit = $this->getOption( 'limit', null );
+
 		/** @var \BlueSpice\WikiFarm\InstanceManager $instanceManager */
 		$instanceManager = \MediaWiki\MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm.InstanceManager' );
 		$store = $instanceManager->getStore();
@@ -41,6 +47,14 @@ class RunForAll extends Maintenance {
 			if ( $instance->getStatus() !== \BlueSpice\WikiFarm\InstanceEntity::STATUS_READY ) {
 				continue;
 			}
+			if ( $currentIndex < $start ) {
+				$currentIndex++;
+				continue;
+			}
+			if ( $limit !== null && $currentIndex >= $start + $limit ) {
+				break;
+			}
+			$currentIndex++;
 			$startTime = new DateTime();
 			$startTimestamp = $startTime->format( 'Y-m-d H:i:s' );
 			$instancePath = $instance->getPath();
@@ -60,10 +74,6 @@ class RunForAll extends Maintenance {
 
 			$aResult = [];
 			$iCode = 0;
-
-			# wfShellExec rennt hier ein Problem rein (unter diversen Linux-Installationen)
-			# Deshalb wechsel auf system()
-			# $sResult = wfShellExec( $sCmd, $iCode );
 
 			exec( $cmd, $aResult, $iCode ); // phpcs:ignore MediaWiki.Usage.ForbiddenFunctions.exec
 			if ( !$bQuiet ) {
@@ -85,23 +95,22 @@ class RunForAll extends Maintenance {
 				}
 			}
 			$endTime = new DateTime();
-			$endTimetamp = $endTime->format( 'Y-m-d H:i:s' );
+			$endTimestamp = $endTime->format( 'Y-m-d H:i:s' );
 			$runTime = $endTime->diff( $overallStartTime );
 			$runTimeStamp = $runTime->format( '%Im %Ss' );
-			$this->output( "$endTimetamp: Running '$sScript' for instance '$instancePath' in $runTimeStamp\n" );
+			$this->output( "$endTimestamp: Running '$sScript' for instance '$instancePath' in $runTimeStamp\n" );
 		}
 
 		$overallEndTime = new DateTime();
-		$overallEndTimetamp = $overallEndTime->format( 'Y-m-d H:i:s' );
+		$overallEndTimestamp = $overallEndTime->format( 'Y-m-d H:i:s' );
 		$overallRunTime = $overallEndTime->diff( $overallStartTime );
 		$overallRunTimeStamp = $overallRunTime->format( '%Im %Ss' );
 
-		$this->output( "$overallEndTimetamp: Finished all in $overallRunTimeStamp\n" );
+		$this->output( "$overallEndTimestamp: Finished all in $overallRunTimeStamp\n" );
 		if ( $iTotalErrors > 0 ) {
 			exit( 1 );
 		}
 	}
-
 }
 
 $maintClass = 'RunForAll';

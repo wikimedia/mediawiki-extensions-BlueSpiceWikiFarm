@@ -10,6 +10,9 @@ class FarmWikiMap {
 	/** @var array|null */
 	private ?array $map = null;
 
+	/** @var array */
+	private array $wikiInfo = [];
+
 	/**
 	 * @param InstanceStore $instanceStore
 	 * @param Config $config
@@ -55,7 +58,10 @@ class FarmWikiMap {
 	 * @return array
 	 */
 	public function getWikiInfoFromInstance( InstanceEntity $instanceEntity ): array {
-		return [
+		if ( isset( $this->wikiInfo[$instanceEntity->getId()] ) ) {
+			return $this->wikiInfo[$instanceEntity->getId()];
+		}
+		$this->wikiInfo[$instanceEntity->getId()] = [
 			'wiki_id' => $instanceEntity instanceof RootInstanceEntity ?
 				$this->config->get( 'rootInstanceWikiId' ) :
 				$instanceEntity->getWikiId(),
@@ -65,6 +71,7 @@ class FarmWikiMap {
 			'url' => $instanceEntity->getUrl( $this->config ),
 			'color' => $instanceEntity->getMetadata()['instanceColor'] ?? null
 		];
+		return $this->wikiInfo[$instanceEntity->getId()];
 	}
 
 	/**

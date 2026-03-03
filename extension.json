@@ -52,7 +52,7 @@
 			"PluginRegistry": {
 				"global-search": {
 					"class": "BlueSpice\\WikiFarm\\ExtendedSearch\\GlobalSearch",
-					"services": [ "BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.AccessControlStore", "BlueSpiceWikiFarm.WikiMap" ]
+					"services": [ "BlueSpiceWikiFarm._GlobalSearchDataProvider" ]
 				}
 			}
 		},
@@ -528,7 +528,8 @@
 		"MWStakeMCPGetWikiMap": "populateWikiMap",
 		"BeforeInitialize": "redirectUserPage",
 		"SpecialPageBeforeExecute": "addGlobalUnifiedTaskOverviewModule",
-		"BSUserManagerBeforeAddGroup": "addGroupPrefix"
+		"BSUserManagerBeforeAddGroup": "addGroupPrefix",
+		"MediaWikiServices": "configureContentTransfer"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -542,8 +543,8 @@
 			"services": [ "BlueSpiceWikiFarm._Config" ]
 		},
 		"addSearchInstanceContext": {
-			"class": "BlueSpice\\WikiFarm\\Hook\\AddSearchInstanceContext",
-			"services": [ "BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.AccessControlStore" ]
+			"class": "BlueSpice\\WikiFarm\\Hook\\Integration\\AddSearchInstanceContext",
+			"services": [ "BlueSpiceWikiFarm._GlobalSearchDataProvider" ]
 		},
 		"addSpecialPages": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\AddSpecialPages",
@@ -591,6 +592,9 @@
 		"addGroupPrefix": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\AddUserGroupPrefix",
 			"services": [ "BlueSpiceWikiFarm._Config" ]
+		},
+		"configureContentTransfer": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\Integration\\ConfigureContentTransfer"
 		}
 	},
 	"RestRoutes": [

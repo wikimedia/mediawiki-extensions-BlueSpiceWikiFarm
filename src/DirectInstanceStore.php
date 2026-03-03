@@ -332,6 +332,7 @@ class DirectInstanceStore {
 	 */
 	private function load( ?Database $db = null, bool $reload = false ) {
 		if ( $this->instances === null || $reload ) {
+			// Benchmark: ~100 instances => 3ms
 			$this->instances = [];
 			$shouldCloseConnection = $db === null;
 			$db = $db ?? $this->getDB();
