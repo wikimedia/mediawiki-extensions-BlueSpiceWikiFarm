@@ -195,5 +195,8 @@
 	"wikifarm-instances-menu-overview-text": "Todos os wikis",
 	"wikifarm-instances-menu-favorite-text": "Favoritos",
 	"wikifarm-instances-menu-button-title": "Lista con todas as instancias wiki",
-	"wikifarm-instances-menu-aria-label": "Instancias wiki"
+	"wikifarm-instances-menu-aria-label": "Instancias wiki",
+	"wikifarm-root-wiki-display-text": "Wiki raíz",
+	"wikifarm-instance-color": "Cor do wiki",
+	"wikifarm-instance-color-remove": "Non asignar unha cor"
 }

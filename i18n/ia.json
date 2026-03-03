@@ -195,5 +195,8 @@
 	"wikifarm-instances-menu-overview-text": "Tote le wikis",
 	"wikifarm-instances-menu-favorite-text": "Favorites",
 	"wikifarm-instances-menu-button-title": "Lista de tote le servitores wiki",
-	"wikifarm-instances-menu-aria-label": "Servitores wiki"
+	"wikifarm-instances-menu-aria-label": "Servitores wiki",
+	"wikifarm-root-wiki-display-text": "Wiki radice",
+	"wikifarm-instance-color": "Color del wiki",
+	"wikifarm-instance-color-remove": "Non assignar color"
 }

@@ -54,5 +54,6 @@
 	"wikifarm-upload-file-foreign-repo-label": "공유 리소스 위키에 업로드",
 	"wikifarm-promote-to-shared-ca": "공유 리소스 위키로 이동",
 	"wikifarm-button-action-label-promote-to-shared": "이동",
-	"wikifarm-instances-menu-overview-text": "모든 위키"
+	"wikifarm-instances-menu-overview-text": "모든 위키",
+	"wikifarm-root-wiki-display-text": "루트 위키"
 }
