@@ -6,8 +6,6 @@ use BlueSpice\WikiFarm\Session\SessionCache;
 use MediaWiki\Config\Config;
 use MediaWiki\Languages\Data\Names;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Message\Message;
-use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\WikiMap\WikiMap;
 use Wikimedia\Rdbms\DatabaseDomain;
 
@@ -93,88 +91,54 @@ class Setup {
 
 	/**
 	 * Helper method that can be registered as a callback in $wgExtensionFunctions
-	 * Adds ferderated search feature for all available wiki instances
+	 * Adds federated search feature for all available wiki instances
 	 */
 	public static function setupSearchInOtherWikisConfig() {
 		$farmConfig = MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm._Config' );
-		$store = $GLOBALS['wgWikiFarmGlobalStore'];
-		if ( $farmConfig->get( 'useUnifiedSearch' ) && $farmConfig->get( 'useGlobalAccessControl' ) ) {
-			$GLOBALS['wgWikiFarmConfig_searchTargets'] = [];
-
-			if ( !FARMER_IS_ROOT_WIKI_CALL && $farmConfig->get( 'searchInMainInstance' ) ) {
-				$GLOBALS['wgWikiFarmConfig_searchTargets']['w'] = [
-					'index_prefix' => static::getWikiId(
-						$farmConfig->get( 'managementDBname' ), $farmConfig->get( 'managementDBprefix' )
-					),
-					'instance-name' => Message::newFromKey( 'wikifarm-main-instance-name' )->plain(),
-					'instance' => new RootInstanceEntity(),
-				];
-			}
-
-			/** @var InstanceEntity $instance */
-			foreach ( $store->getAllInstances() as $instance ) {
-				if ( $instance->getPath() === FARMER_CALLED_INSTANCE ) {
-					// Do not search in the current instance
-					continue;
-				}
-				if ( !$instance->isActive() ) {
-					continue;
-				}
-
-				$metadata = $instance->getMetadata();
-				if ( isset( $metadata['notsearchable'] ) && $metadata['notsearchable'] ) {
-					continue;
-				}
-
-				$GLOBALS['wgWikiFarmConfig_searchTargets'][$instance->getPath()] = [
-					'index_prefix' => static::getWikiId( $instance->getDbName(), $instance->getDbPrefix() ),
-					'instance-name' => $instance->getDisplayName(),
-					'instance' => $instance,
-				];
-			}
+		if ( $farmConfig->get( 'useUnifiedSearch' ) ) {
+			return;
+		}
+		if ( !isset( $GLOBALS['bsgInterwikiSearchAllowMainSource'] ) ) {
+			$GLOBALS['bsgInterwikiSearchAllowMainSource'] = false;
 		} else {
-			if ( !isset( $GLOBALS['bsgInterwikiSearchAllowMainSource'] ) ) {
-				$GLOBALS['bsgInterwikiSearchAllowMainSource'] = false;
-			} else {
-				$GLOBALS['bsgInterwikiSearchAllowMainSource'] = true;
+			$GLOBALS['bsgInterwikiSearchAllowMainSource'] = true;
+		}
+		$internalServer = $farmConfig->get( 'internalServer' );
+		if ( !empty( FARMER_CALLED_INSTANCE ) && $GLOBALS['bsgInterwikiSearchAllowMainSource'] ) {
+			$GLOBALS['bsgInterwikiSearchSources']['w'] = [
+				"name" => 'w',
+				"api-endpoint" => "$internalServer/w/api.php",
+				"search-on-wiki-url" => "{$GLOBALS['wgServer']}/w/index.php?title=Special:SearchCenter&q=$1",
+				'public-wiki' => false,
+				'same-domain' => true,
+			];
+		}
+		$store = $GLOBALS['wgWikiFarmGlobalStore'];
+		/** @var InstanceEntity $instance */
+		foreach ( $store->getAllInstances() as $instance ) {
+			if ( $instance->getPath() === FARMER_CALLED_INSTANCE ) {
+				// Do not search in the current instance
+				continue;
 			}
-			$internalServer = $farmConfig->get( 'internalServer' );
-			if ( !empty( FARMER_CALLED_INSTANCE ) && $GLOBALS['bsgInterwikiSearchAllowMainSource'] ) {
-				$GLOBALS['bsgInterwikiSearchSources']['w'] = [
-					"name" => 'w',
-					"api-endpoint" => "$internalServer/w/api.php",
-					"search-on-wiki-url" => "{$GLOBALS['wgServer']}/w/index.php?title=Special:SearchCenter&q=$1",
-					'public-wiki' => false,
-					'same-domain' => true,
-				];
+			if ( !$instance->isActive() ) {
+				continue;
 			}
 
-			/** @var InstanceEntity $instance */
-			foreach ( $store->getAllInstances() as $instance ) {
-				if ( $instance->getPath() === FARMER_CALLED_INSTANCE ) {
-					// Do not search in the current instance
-					continue;
-				}
-				if ( !$instance->isActive() ) {
-					continue;
-				}
-
-				$metadata = $instance->getMetadata();
-				if ( isset( $metadata['notsearchable'] ) && $metadata['notsearchable'] ) {
-					continue;
-				}
-
-				$server = MediaWikiServices::getInstance()->getMainConfig()->get( 'Server' );
-				$scriptPath = $instance->getScriptPath( $farmConfig );
-				$GLOBALS['bsgInterwikiSearchSources'][$instance->getPath()] = [
-					"name" => $instance->getDisplayName(),
-					"api-endpoint" => $internalServer . $scriptPath . "/api.php",
-					"search-on-wiki-url" => $server . $scriptPath .
-						"/index.php?title=Special:SearchCenter&q=$1",
-					'public-wiki' => false,
-					'same-domain' => true,
-				];
+			$metadata = $instance->getMetadata();
+			if ( isset( $metadata['notsearchable'] ) && $metadata['notsearchable'] ) {
+				continue;
 			}
+
+			$server = MediaWikiServices::getInstance()->getMainConfig()->get( 'Server' );
+			$scriptPath = $instance->getScriptPath( $farmConfig );
+			$GLOBALS['bsgInterwikiSearchSources'][$instance->getPath()] = [
+				"name" => $instance->getDisplayName(),
+				"api-endpoint" => $internalServer . $scriptPath . "/api.php",
+				"search-on-wiki-url" => $server . $scriptPath .
+					"/index.php?title=Special:SearchCenter&q=$1",
+				'public-wiki' => false,
+				'same-domain' => true,
+			];
 		}
 	}
 
@@ -186,66 +150,6 @@ class Setup {
 	public static function getWikiId( string $dbName, string $dbPrefix ): string {
 		$domain = new DatabaseDomain( $dbName, $GLOBALS['wgDBmwschema'], $dbPrefix );
 		return strtolower( WikiMap::getWikiIdFromDbDomain( $domain ) );
-	}
-
-	/**
-	 * @return void
-	 */
-	public static function setupContentTransfer() {
-		if (
-			MW_ENTRY_POINT !== 'index' &&
-			MW_ENTRY_POINT !== 'api' &&
-			MW_ENTRY_POINT !== 'rest' &&
-			MW_ENTRY_POINT !== 'cli' ) {
-			return;
-		}
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'OAuth' ) ) {
-			return;
-		}
-		$farmConfig = MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm._Config' );
-		$internalServer = $farmConfig->get( 'internalServer' );
-
-		if ( !is_array( $GLOBALS['wgContentTransferTargets'] ) ) {
-			$GLOBALS['wgContentTransferTargets'] = [];
-		}
-		if ( !is_array( $GLOBALS['bsgTranslateTransferNamespaces'] ?? [] ) ) {
-			$GLOBALS['bsgTranslateTransferNamespaces'] = [];
-		}
-		foreach ( $GLOBALS['wgWikiFarmGlobalStore']->getAllInstances() as $instance ) {
-			if ( !$instance->isActive() ) {
-				continue;
-			}
-			$path = $instance->getPath();
-			if ( static::isLanguageCode( $path ) && static::isLanguageCode( FARMER_CALLED_INSTANCE ) ) {
-				$GLOBALS['bsgTranslateTransferTargets'][strtolower( $path )] = [
-					'key' => $path,
-					'url' => $instance->getUrl( $farmConfig ) . '/wiki'
-				];
-
-				$GLOBALS['bsgTranslateTransferNamespaces'][strtolower( $path )] = [ NS_MAIN ];
-			}
-			if ( $path === FARMER_CALLED_INSTANCE ) {
-				// Do not setup current instance
-				continue;
-			}
-
-			$accessToken = static::getInstanceAccessToken( $instance );
-			if ( !$accessToken ) {
-				continue;
-			}
-
-			$apiUrl = $internalServer . $instance->getScriptPath( $farmConfig ) . '/api.php';
-			$GLOBALS['wgContentTransferTargets'][$instance->getPath()] = [
-				'url' => $apiUrl,
-				'access_token' => $accessToken,
-				'pushToDraft' => false,
-				'displayText' => $instance->getDisplayName(),
-				'draftNamespace' => 'Draft'
-			];
-		}
-
-		// Set up root wiki language as "leading language" for BlueSpiceTranslationTransfer
-		$GLOBALS['bsgTranslateTransferLeadingLanguage'] = FARMER_ROOT_WIKI_LANGUAGE_CODE;
 	}
 
 	/**
@@ -267,18 +171,6 @@ class Setup {
 	public static function isLanguageCode( string $path ): bool {
 		$names = Names::NAMES;
 		return isset( $names[strtolower( $path )] );
-	}
-
-	/**
-	 * @param InstanceEntity $instanceEntity
-	 * @return string|null
-	 */
-	public static function getInstanceAccessToken( InstanceEntity $instanceEntity ): ?string {
-		$instanceConfig = $instanceEntity->getConfig();
-		if ( isset( $instanceConfig['access_token'] ) ) {
-			return $instanceConfig['access_token'];
-		}
-		return null;
 	}
 
 	/**

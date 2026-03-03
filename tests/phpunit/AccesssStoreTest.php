@@ -51,7 +51,7 @@ class AccesssStoreTest extends TestCase {
 			'wiki_Test2_reviewer',
 			...$expectedGlobalGroups
 		];
-		$dbMock->expects( $this->exactly( 2 ) )
+		$dbMock->expects( $this->once() )
 			->method( 'selectRow' )
 			->withConsecutive(
 				[ 'user_groups', [ 'ug_user' ], [

@@ -6,6 +6,8 @@ use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\ManagementDatabaseFactory;
 use MediaWiki\Config\Config;
 use MediaWiki\User\UserIdentity;
+use Wikimedia\ObjectCache\BagOStuff;
+use Wikimedia\ObjectCache\HashBagOStuff;
 
 class GroupAccessStore implements IAccessStore {
 
@@ -19,8 +21,8 @@ class GroupAccessStore implements IAccessStore {
 		'public', 'protected', 'private'
 	];
 
-	/** @var array */
-	private $userRoles = [];
+	/** @var BagOStuff */
+	private $operatingCache;
 
 	/**
 	 * @param ManagementDatabaseFactory $databaseFactory
@@ -34,50 +36,54 @@ class GroupAccessStore implements IAccessStore {
 		private readonly TeamQuery $teamQuery,
 		private readonly Config $farmConfig
 	) {
+		$this->operatingCache = new HashBagOStuff();
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	public function userHasRoleOnInstance( UserIdentity $user, string $role, InstanceEntity $instance ): bool {
-		if ( !isset( $this->userRoles[$user->getId()][$instance->getPath()][$role] ) ) {
-			$db = $this->databaseFactory->createSharedUserDatabaseConnection();
-			$groups = [
-				$this->groupCreator->getGroupNameForUserRole( $instance->getPath(), $role ),
-				...$this->getHigherGroups( $instance->getPath(), $role ),
-			];
-			$globalGroups = [
-				$this->groupCreator->getGroupNameForUserRole( '_global', $role ),
-				...$this->getHigherGroups( '_global', $role ),
-			];
-			$res = $db->selectRow(
-				'user_groups',
-				[ 'ug_user' ],
-				[
-					'ug_user' => $user->getId(),
-					'ug_group IN (' . $db->makeList( array_merge( $groups, $globalGroups ) ) . ')'
-				],
-				__METHOD__
-			);
-			$db->close( __METHOD__ );
-			$hasRole = $res !== false;
-			if ( !$hasRole ) {
-				$hasRole = $this->checkTeams( $user, $role, $instance );
-			}
-
-			$this->userRoles[$user->getId()] = $this->userRoles[$user->getId()] ?? [];
-			$this->userRoles[$user->getId()][$instance->getPath()] =
-				$this->userRoles[$user->getId()][$instance->getPath()] ?? [];
-			$this->userRoles[$user->getId()][$instance->getPath()][$role] = $hasRole;
+		$cc = $this->operatingCache->makeKey( 'access', $user->getName(), $instance->getId(), $role );
+		if ( $this->operatingCache->hasKey( $cc ) ) {
+			return $this->operatingCache->get( $cc );
 		}
 
-		return $this->userRoles[$user->getId()][$instance->getPath()][$role];
+		$db = $this->databaseFactory->createSharedUserDatabaseConnection();
+		$groups = [
+			$this->groupCreator->getGroupNameForUserRole( $instance->getPath(), $role ),
+			...$this->getHigherGroups( $instance->getPath(), $role ),
+		];
+		$globalGroups = [
+			$this->groupCreator->getGroupNameForUserRole( '_global', $role ),
+			...$this->getHigherGroups( '_global', $role ),
+		];
+		$res = $db->selectRow(
+			'user_groups',
+			[ 'ug_user' ],
+			[
+				'ug_user' => $user->getId(),
+				'ug_group IN (' . $db->makeList( array_merge( $groups, $globalGroups ) ) . ')'
+			],
+			__METHOD__
+		);
+		$db->close( __METHOD__ );
+		$hasRole = $res !== false;
+		if ( !$hasRole ) {
+			$hasRole = $this->checkTeams( $user, $role, $instance );
+		}
+
+		$this->operatingCache->set( $cc, $hasRole );
+		return $hasRole;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	public function getInstancePathsWhereUserHasRole( UserIdentity $user, string $role ): array {
+		$cc = $this->operatingCache->makeKey( 'access-all', $user->getName(), $role );
+		if ( $this->operatingCache->hasKey( $cc ) ) {
+			return $this->operatingCache->get( $cc );
+		}
 		$possibleGroups = $this->groupCreator->getInstanceGroups( [ $role, ...$this->getHigherRoles( $role ) ] );
 		$userGroups = $this->getUserGroups( $user );
 		$availableInstances = [];
@@ -93,7 +99,7 @@ class GroupAccessStore implements IAccessStore {
 				$availableInstances[] = $instancePath;
 			}
 		}
-
+		$this->operatingCache->set( $cc, $availableInstances );
 		return $availableInstances;
 	}
 

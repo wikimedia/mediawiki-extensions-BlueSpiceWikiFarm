@@ -2,122 +2,122 @@
 
 namespace BlueSpice\WikiFarm\ExtendedSearch;
 
-use BlueSpice\WikiFarm\AccessControl\IAccessStore;
-use BlueSpice\WikiFarm\FarmWikiMap;
-use BS\ExtendedSearch\Backend;
 use BS\ExtendedSearch\ISearchSource;
 use BS\ExtendedSearch\Lookup;
 use BS\ExtendedSearch\Plugin\IFormattingModifier;
-use BS\ExtendedSearch\Plugin\IIndexProvider;
 use BS\ExtendedSearch\Plugin\ISearchContextProvider;
 use BS\ExtendedSearch\Plugin\ISearchPlugin;
 use BS\ExtendedSearch\SearchResult;
-use MediaWiki\Config\Config;
 use MediaWiki\Language\Language;
 use MediaWiki\Message\Message;
 use MediaWiki\Page\PageIdentity;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\User\UserIdentity;
+use MediaWiki\WikiMap\WikiMap;
 
 class GlobalSearch implements
 	ISearchPlugin,
 	ISearchContextProvider,
-	IIndexProvider,
 	IFormattingModifier
 {
 
-	private array $availableInstances = [];
-
+	/** @var array */
 	private array $instancesToSearchIn = [];
 
+	private array $indexInstanceDisplayMapping = [];
+
+	/**
+	 * @param GlobalSearchDataProvider $dataProvider
+	 */
 	public function __construct(
-		private readonly Config $farmConfig,
-		private readonly IAccessStore $accessStore,
-		private readonly FarmWikiMap $farmWikiMap
+		private readonly GlobalSearchDataProvider $dataProvider
 	) {
 	}
 
-	public function setIndices( Backend $backend, ?array $limitToSources, array &$indices ): void {
-		if ( !$this->isAvailable() ) {
-			return;
-		}
-		$allowedSources = [ 'wikipage', 'repofile' ];
-		if ( is_array( $limitToSources ) ) {
-			$allowedSources = array_intersect( $allowedSources, $limitToSources );
-		}
-
-		if ( empty( $this->instancesToSearchIn ) ) {
-			return;
-		}
-		foreach ( $this->instancesToSearchIn as $data ) {
-			foreach ( $allowedSources as $source ) {
-				$indices[] = $data['index_prefix'] . '_' . $source;
-			}
-		}
-	}
-
-	public function typeFromIndexName( string $index, Backend $backend ): ?string {
-		foreach ( $this->availableInstances as $data ) {
-			foreach ( [ 'wikipage', 'repofile' ] as $source ) {
-				if ( $index === $data['index_prefix'] . '_' . $source ) {
-					return $source;
-				}
-			}
-		}
-		return null;
-	}
-
-	public function getIndexLabel( string $index ): ?string {
-		return $this->getInstanceDataForIndex( $index )['display_text'];
-	}
-
+	/**
+	 * @inheritDoc
+	 */
 	public function getContextDefinitionForPage( PageIdentity $page, Authority $authority ): ?array {
-		if ( !$this->isAvailable() ) {
+		if ( !$this->dataProvider->isAvailable() ) {
 			return null;
 		}
 		return [ 'searchInWikis' => [ '*' ] ];
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getContextDisplayText( array $contextDefinition, UserIdentity $user, Language $language ): Message {
 		return Message::newFromKey( 'wikifarm-search-context-global' );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function showContextFilterPill(): bool {
 		// Custom implementation will do it
 		return false;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function applyContext( array $contextDefinition, Authority $actor, Lookup $lookup ) {
-		if ( !$this->isAvailable() ) {
+		if ( !$this->dataProvider->isAvailable() ) {
 			return;
 		}
 		$searchInWikis = $contextDefinition['searchInWikis'] ?? [ '*' ];
 		$all = count( $searchInWikis ) === 1 && $searchInWikis[0] === '*';
-		$this->setAvailableInstances( $actor );
+		$availableInstances = $this->dataProvider->getAvailableInstances( $actor );
 		$this->instancesToSearchIn = [];
-		foreach ( $this->availableInstances as $key => $data ) {
+		foreach ( $availableInstances as $key => $data ) {
 			if ( $all || in_array( $key, $searchInWikis ) ) {
-				$this->instancesToSearchIn[$key] = $data;
+				$this->instancesToSearchIn[] = $data['wiki_id'];
+				$this->indexInstanceDisplayMapping[$data['wiki_id']] = $data['display_data'];
 			}
+		}
+		if (
+			!in_array( WikiMap::getCurrentWikiId(), $this->instancesToSearchIn ) &&
+			array_key_exists( FARMER_CALLED_INSTANCE, $availableInstances )
+		) {
+			// Assure current wiki is included, if readable
+			$this->instancesToSearchIn[] = WikiMap::getCurrentWikiId();
+		}
+		if ( !empty( $this->instancesToSearchIn ) ) {
+			$lookup->addTermsFilter( 'wiki_id', $this->instancesToSearchIn );
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function undoContext( array $contextDefinition, Lookup $lookup ) {
-		// NOOP
+		if ( !empty( $this->instancesToSearchIn ) ) {
+			$lookup->removeTermsFilter( 'wiki_id', $this->instancesToSearchIn );
+		}
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getContextKey(): string {
 		return 'farm-global';
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function getContextPriority(): int {
 		return 10;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function formatFulltextResult(
 		array &$result, SearchResult $resultObject, ISearchSource $source, Lookup $lookup
 	): void {
-		$data = $this->getInstanceDataForIndex( $resultObject->getIndex() );
+		$data = $this->indexInstanceDisplayMapping[$result['wiki_id']] ?? null;
 		if ( $data ) {
 			if ( $data['color'] && $data['color']['lightText'] ) {
 				// Somehow bools gets lost in Search result processing, convert to int
@@ -127,48 +127,17 @@ class GlobalSearch implements
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function formatAutocompleteResults( array &$results, array $searchData ): void {
 		// NOOP
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function modifyResultStructure( array &$resultStructure, ISearchSource $source ): void {
 		// NOOP
 	}
-
-	/**
-	 * @param string $index
-	 * @return array|null
-	 */
-	private function getInstanceDataForIndex( string $index ): ?array {
-		foreach ( $this->availableInstances as $data ) {
-			foreach ( [ 'wikipage', 'repofile' ] as $source ) {
-				if ( $index === $data['index_prefix'] . '_' . $source ) {
-					return $this->farmWikiMap->getWikiInfoFromInstance( $data['instance'] );
-				}
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * @param Authority $actor
-	 * @return void
-	 */
-	private function setAvailableInstances( Authority $actor ) {
-		$this->availableInstances = [];
-		$allTargets = $this->farmConfig->get( 'searchTargets' );
-		foreach ( $allTargets as $key => $data ) {
-			if ( $this->accessStore->userHasRoleOnInstance( $actor->getUser(), 'reader', $data['instance'] ) ) {
-				$this->availableInstances[$key] = $data;
-			}
-		}
-	}
-
-	/**
-	 * @return bool
-	 */
-	private function isAvailable(): bool {
-		return $this->farmConfig->get( 'useUnifiedSearch' ) && $this->farmConfig->get( 'shareUsers' );
-	}
-
 }

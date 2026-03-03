@@ -306,7 +306,7 @@ class InstanceEntity {
 	 * Get MediaWiki WikiID for this instance
 	 * @return void
 	 */
-	private function generateWikiId() {
+	protected function generateWikiId() {
 		$dbDomain = $this->getDatabaseDomain();
 		$this->wikiId = WikiMap::getWikiIdFromDbDomain( $dbDomain );
 	}

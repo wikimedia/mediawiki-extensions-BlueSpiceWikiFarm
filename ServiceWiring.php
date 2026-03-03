@@ -104,4 +104,12 @@ return [
 		$services->getHookContainer()->register( 'GetWikiInfoFromWikiId', [ $instance, 'onGetWikiInfoFromWikiId' ] );
 		return $instance;
 	},
+	'BlueSpiceWikiFarm._GlobalSearchDataProvider' => static function ( MediaWikiServices $services ) {
+		return new BlueSpice\WikiFarm\ExtendedSearch\GlobalSearchDataProvider(
+			$services->getService( 'BlueSpiceWikiFarm._Config' ),
+			$services->getService( 'BlueSpiceWikiFarm.AccessControlStore' ),
+			$services->getService( 'BlueSpiceWikiFarm.WikiMap' ),
+			$services->getService( 'BlueSpiceWikiFarm.InstanceStore' )
+		);
+	},
 ];

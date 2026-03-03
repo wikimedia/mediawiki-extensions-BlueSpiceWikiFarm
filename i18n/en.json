@@ -199,5 +199,6 @@
 	"wikifarm-instance-color-remove": "Do not assign color",
 	"wikifarm-management-breadcrumb-label-create": "Create",
 	"wikifarm-instances-favorite-add-btn-title-label": "Add wiki to favorites",
-	"wikifarm-instances-favorite-remove-btn-title-label": "Remove wiki from favorites"
+	"wikifarm-instances-favorite-remove-btn-title-label": "Remove wiki from favorites",
+	"wikifarm-action-purgeinstance-description": "Purge wiki"
 }

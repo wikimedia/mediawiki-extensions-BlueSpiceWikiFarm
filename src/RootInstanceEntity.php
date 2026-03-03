@@ -6,10 +6,14 @@ use DateTime;
 
 class RootInstanceEntity extends InstanceEntity {
 
-	public function __construct() {
+	/**
+	 * @param string $dbName
+	 * @param string $dbPrefix
+	 */
+	public function __construct( string $dbName = '<root>', string $dbPrefix = '' ) {
 		parent::__construct(
 			'w', 'w', 'w',
-			new DateTime(), new DateTime(), static::STATUS_READY, '<root>', '', [], []
+			new DateTime(), new DateTime(), static::STATUS_READY, $dbName, $dbPrefix, [], []
 		);
 	}
 }
