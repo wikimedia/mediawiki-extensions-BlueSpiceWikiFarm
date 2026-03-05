@@ -202,5 +202,6 @@
 	"wikifarm-management-breadcrumb-label-create": "Label for create action in breadcrumb\n{{Identical:Create}}",
 	"wikifarm-instances-favorite-add-btn-title-label": "Title for button to add wiki to favorites",
 	"wikifarm-instances-favorite-remove-btn-title-label": "Title for button to remove wiki from favorites",
-	"wikifarm-action-purgeinstance-description": "Description shown for action in management interface"
+	"wikifarm-action-purgeinstance-description": "Description shown for action in management interface",
+	"wikifarm-access-group-name-user": "Label for the \"user\" group"
 }

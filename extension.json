@@ -529,7 +529,9 @@
 		"BeforeInitialize": "redirectUserPage",
 		"SpecialPageBeforeExecute": "addGlobalUnifiedTaskOverviewModule",
 		"BSUserManagerBeforeAddGroup": "addGroupPrefix",
-		"MediaWikiServices": "configureContentTransfer"
+		"MediaWikiServices": "configureContentTransfer",
+		"MWStakeGroupStoreGroupTypeFilter": "handleTeamGroupStore",
+		"MWStakeGroupStoreGroupDisplayName": "handleTeamGroupStore"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -595,6 +597,10 @@
 		},
 		"configureContentTransfer": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\Integration\\ConfigureContentTransfer"
+		},
+		"handleTeamGroupStore": {
+			"class": "BlueSpice\\WikiFarm\\AccessControl\\TeamGroupStoreHandling",
+			"services": [ "BlueSpiceWikiFarm.TeamManager" ]
 		}
 	},
 	"RestRoutes": [
@@ -684,40 +690,6 @@
 				"BlueSpiceWikiFarm.InstanceStore",
 				"BlueSpiceWikiFarm._Config"
 			]
-		},
-		{
-			"path": "/bluespice/farm/v1/teams/{teamName}/members",
-			"class": "BlueSpice\\WikiFarm\\Rest\\GetTeamMembersHandler",
-			"services": [ "HookContainer", "BlueSpiceWikiFarm.TeamManager", "PermissionManager" ]
-		},
-		{
-			"path": "/bluespice/farm/v1/teams",
-			"class": "BlueSpice\\WikiFarm\\Rest\\GetTeamsHandler",
-			"services": [ "HookContainer", "BlueSpiceWikiFarm.TeamManager", "PermissionManager" ]
-		},
-		{
-			"method": "PUT",
-			"path": "/bluespice/farm/v1/teams/{teamName}",
-			"class": "BlueSpice\\WikiFarm\\Rest\\CreateTeamHandler",
-			"services": [ "PermissionManager", "BlueSpiceWikiFarm.TeamManager" ]
-		},
-		{
-			"method": "DELETE",
-			"path": "/bluespice/farm/v1/teams/{teamName}",
-			"class": "BlueSpice\\WikiFarm\\Rest\\DeleteTeamHandler",
-			"services": [ "PermissionManager", "BlueSpiceWikiFarm.TeamManager" ]
-		},
-		{
-			"method": "POST",
-			"path": "/bluespice/farm/v1/teams/{teamName}/assign",
-			"class": "BlueSpice\\WikiFarm\\Rest\\AssignUserToTeamHandler",
-			"services": [ "PermissionManager", "BlueSpiceWikiFarm.TeamManager", "UserFactory" ]
-		},
-		{
-			"method": "POST",
-			"path": "/bluespice/farm/v1/teams/{teamName}/unassign",
-			"class": "BlueSpice\\WikiFarm\\Rest\\RemoveUserFromTeamHandler",
-			"services": [ "PermissionManager", "BlueSpiceWikiFarm.TeamManager", "UserFactory" ]
 		},
 		{
 			"method": "POST",

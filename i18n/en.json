@@ -200,5 +200,6 @@
 	"wikifarm-management-breadcrumb-label-create": "Create",
 	"wikifarm-instances-favorite-add-btn-title-label": "Add wiki to favorites",
 	"wikifarm-instances-favorite-remove-btn-title-label": "Remove wiki from favorites",
-	"wikifarm-action-purgeinstance-description": "Purge wiki"
+	"wikifarm-action-purgeinstance-description": "Purge wiki",
+	"wikifarm-access-group-name-user": "All groups"
 }

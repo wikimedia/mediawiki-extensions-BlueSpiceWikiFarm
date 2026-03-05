@@ -5,8 +5,8 @@
 		"columns": [
 			{
 				"name": "wtr_team",
-				"type": "integer",
-				"options": { "notnull": true, "unsigned": true }
+				"type": "string",
+				"options": { "notnull": true, "length": 255 }
 			},
 			{
 				"name": "wtr_instance",

@@ -378,6 +378,7 @@ class Dispatcher {
 		foreach ( $teamGroups as $teamGroup ) {
 			$GLOBALS['wgGroupPermissions'][$teamGroup] = [ 'read' => false ];
 			$GLOBALS['wgAdditionalGroups'][$teamGroup] = [];
+			$GLOBALS['wgGroupTypes'][$teamGroup] = 'custom';
 		}
 		// Get roles that each team has on this instance and assign corresponding rights
 		$teamRolesForCurrentInstance = $teamQuery->getTeamRoles( $instance );

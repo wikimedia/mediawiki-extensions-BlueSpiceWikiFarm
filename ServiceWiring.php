@@ -80,7 +80,6 @@ return [
 	'BlueSpiceWikiFarm.TeamManager' => static function ( MediaWikiServices $services ) {
 		return new TeamManager(
 			$services->getDBLoadBalancer()->getConnection( DB_PRIMARY ),
-			$services->getUserGroupManager(),
 			$services->getUserFactory(),
 			LoggerFactory::getInstance( 'BlueSpiceWikiFarm.AccessControl' )
 		);
