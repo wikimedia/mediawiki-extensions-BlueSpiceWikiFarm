@@ -44,7 +44,7 @@ $( () => {
 			const options = mw.user.options.get( 'bs-farm-instances-favorite' );
 			const val = $( e.target ).parent().data( 'path' );
 			let newVal = '';
-			if ( $( btn ).hasClass( 'bi-star' ) ) {
+			if ( $( btn ).hasClass( 'bi-bs-unfavored' ) ) {
 				newVal = options + val + ',';
 			} else {
 				newVal = options.replace( val + ',', '' );
@@ -52,8 +52,8 @@ $( () => {
 			mw.loader.using( [ 'mediawiki.api' ] ).done( () => {
 				mw.user.options.set( 'bs-farm-instances-favorite', newVal );
 				new mw.Api().saveOption( 'bs-farm-instances-favorite', newVal );
-				btn.classList.toggle( 'bi-star' );
-				btn.classList.toggle( 'bi-star-fill' );
+				btn.classList.toggle( 'bi-bs-unfavored' );
+				btn.classList.toggle( 'bi-bs-favored' );
 			} );
 		} );
 	} );

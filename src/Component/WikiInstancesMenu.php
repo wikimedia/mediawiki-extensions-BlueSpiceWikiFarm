@@ -79,7 +79,7 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 	 * @return array
 	 */
 	public function getIconClasses(): array {
-		return [ 'bi-compass-fill' ];
+		return [ 'bi-bs-wiki-instances' ];
 	}
 
 	/**
@@ -248,12 +248,18 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 
 		$classes = 'farm-wiki-card-favorite-btn';
 		$favourites = $this->getFavouriteWikisForCurrentUser();
+		$titleMsgKey = 'wikifarm-instances-favorite-add-btn-title-label';
 		if ( in_array( $instance->getPath(), $favourites ) ) {
-			$classes .= ' bi-star-fill';
+			$classes .= ' bi-bs-favored wiki-instance-favored';
+			$titleMsgKey = 'wikifarm-instances-favorite-remove-btn-title-label';
 		} else {
-			$classes .= ' bi-star';
+			$classes .= ' bi-bs-unfavored';
 		}
-		$cardHtml .= Html::element( 'div', [ 'class' => $classes ] );
+		$cardHtml .= Html::element( 'a', [
+			'class' => $classes,
+			'role' => 'button',
+			'title' => Message::newFromKey( $titleMsgKey )->text()
+		] );
 
 		$cardHtml .= Html::openElement( 'div', [ 'class' => 'farm-wiki-card-desc' ] );
 		$cardHtml .= Html::element( 'a', [

@@ -7,10 +7,13 @@
 }
 
 .farm-wiki-card-favorite-btn {
-	color: #3e5389;
-	margin-right: 10px;
+	margin-right: 8px;
 }
 
-.farm-wiki-card-favorite-btn:hover {
-	cursor: pointer;
+#farm-wikis-mm .farm-wiki-card-favorite-btn::before {
+	vertical-align: 0.125em;
+}
+
+#farm-wikis-mm .wiki-instance-favored {
+	color: #3e5389;
 }
