@@ -197,5 +197,7 @@
 	"wikifarm-root-wiki-display-text": "Root wiki",
 	"wikifarm-instance-color": "Wiki color",
 	"wikifarm-instance-color-remove": "Do not assign color",
-	"wikifarm-management-breadcrumb-label-create": "Create"
+	"wikifarm-management-breadcrumb-label-create": "Create",
+	"wikifarm-instances-favorite-add-btn-title-label": "Add wiki to favorites",
+	"wikifarm-instances-favorite-remove-btn-title-label": "Remove wiki from favorites"
 }
