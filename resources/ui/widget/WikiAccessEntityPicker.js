@@ -15,13 +15,7 @@ ext.bluespiceWikiFarm.ui.widget.WikiAccessEntityPicker.prototype.makeLookup = fu
 
 	const promises = [
 		mws.commonwebapis.user.query( data ),
-		$.ajax( {
-			method: 'GET',
-			url: mw.util.wikiScript( 'rest' ) + '/bluespice/farm/v1/teams',
-			data: { query: data.query || '' },
-			dataType: 'json',
-			contentType: 'application/json; charset=UTF-8'
-		} )
+		mws.commonwebapis.group.query( data.query )
 	];
 	$.when.apply( $, promises ).done( ( userData, teamData ) => {
 		const data = { team: [], user: [] }; // eslint-disable-line no-shadow
@@ -31,11 +25,11 @@ ext.bluespiceWikiFarm.ui.widget.WikiAccessEntityPicker.prototype.makeLookup = fu
 				label: userData[ i ].display_name
 			} );
 		}
-		for ( let i = 0; i < teamData[ 0 ].results.length; i++ ) {
+		for ( let i = 0; i < teamData.length; i++ ) {
 			data.team.push( {
 				icon: 'userGroup',
-				data: { entityType: 'team', entityKey: teamData[ 0 ].results[ i ].name },
-				label: teamData[ 0 ].results[ i ].name
+				data: { entityType: 'team', entityKey: teamData[ i ].displayname },
+				label: teamData[ i ].displayname
 			} );
 		}
 		dfd.resolve( data );

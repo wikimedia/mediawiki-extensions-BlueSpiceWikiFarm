@@ -42,12 +42,13 @@ class RunDatabaseUpdates implements LoadExtensionSchemaUpdatesHook {
 		);
 
 		$updater->addExtensionTable(
-			'wiki_teams',
-			"$dir/db/$dbType/wiki_teams.sql"
-		);
-		$updater->addExtensionTable(
 			'wiki_team_roles',
 			"$dir/db/$dbType/wiki_team_roles.sql"
+		);
+		$updater->addExtensionField(
+			'wiki_team_roles',
+			'wtr_wiki_id',
+			"$dir/db/$dbType/wiki_team_roles_group_support.sql"
 		);
 
 		$updater->addPostDatabaseUpdateMaintenance( CreateSystemInstances::class );

@@ -87,13 +87,12 @@ class AssignRoleToEntityHandler extends RightManagementHandler {
 	 * @throws HttpException
 	 */
 	private function assignRoleToTeam( array $params ) {
-		$team = $this->teamManager->getTeam( $params['entityKey'] );
 		$instance = $this->getInstance();
 		$isGlobal = $params['globalAssignment'];
 		if ( $isGlobal ) {
-			$this->teamManager->removeAllRoles( $team, null, $this->getActor(), (bool)$params['roleName'] );
+			$this->teamManager->removeAllRoles( $params['entityKey'], null, $this->getActor(), (bool)$params['roleName'] );
 		} else {
-			$this->teamManager->removeAllRoles( $team, $instance, $this->getActor(), (bool)$params['roleName'] );
+			$this->teamManager->removeAllRoles( $params['entityKey'], $instance, $this->getActor(), (bool)$params['roleName'] );
 		}
 
 		if ( !$params['roleName'] ) {
@@ -101,7 +100,7 @@ class AssignRoleToEntityHandler extends RightManagementHandler {
 		}
 
 		$this->teamManager->assignRoleToTeam(
-			$params['roleName'], $team, $isGlobal ? null : $instance, $this->getActor()
+			$params['roleName'], $params['entityKey'], $isGlobal ? null : $instance, $this->getActor()
 		);
 
 		return $this->getResponseFactory()->createJson( [ 'success' => true ] );

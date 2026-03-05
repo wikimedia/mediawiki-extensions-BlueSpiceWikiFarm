@@ -3,7 +3,7 @@
 -- Do not modify this file directly.
 -- See https://www.mediawiki.org/wiki/Manual:Schema_changes
 CREATE TABLE wiki_team_roles (
-  wtr_team INT NOT NULL,
+  wtr_team VARCHAR(255) NOT NULL,
   wtr_instance VARCHAR(16) DEFAULT NULL,
   wtr_role TEXT NOT NULL
 );
