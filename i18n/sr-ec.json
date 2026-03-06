@@ -21,5 +21,6 @@
 	"wikifarm-ui-teams-sort-membercount": "Број чланова",
 	"wikifarm-ui-teams-header-expiration-value": "Истиче: $1",
 	"wikifarm-ui-teams-sort-user-expiration": "Истиче",
-	"wikifarm-button-action-label-promote-to-shared": "Премести"
+	"wikifarm-button-action-label-promote-to-shared": "Премести",
+	"wikifarm-management-breadcrumb-label-create": "Направи"
 }
