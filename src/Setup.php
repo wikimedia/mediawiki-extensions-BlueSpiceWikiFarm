@@ -191,7 +191,11 @@ class Setup {
 	 * @return void
 	 */
 	public static function setupContentTransfer() {
-		if ( MW_ENTRY_POINT !== 'index' && MW_ENTRY_POINT !== 'api' && MW_ENTRY_POINT !== 'rest' ) {
+		if (
+			MW_ENTRY_POINT !== 'index' &&
+			MW_ENTRY_POINT !== 'api' &&
+			MW_ENTRY_POINT !== 'rest' &&
+			MW_ENTRY_POINT !== 'cli' ) {
 			return;
 		}
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'OAuth' ) ) {
