@@ -70,5 +70,7 @@
 	"wikifarm-instances-menu-favorite-text": "Favoritten",
 	"wikifarm-instances-menu-button-title": "Lëscht mat alle Wiki-Instanzen",
 	"wikifarm-instances-menu-aria-label": "Wiki-Instanzen",
-	"wikifarm-management-breadcrumb-label-create": "Uleeën"
+	"wikifarm-management-breadcrumb-label-create": "Uleeën",
+	"wikifarm-instances-favorite-add-btn-title-label": "Wiki bei d'Favoritten derbäisetzen",
+	"wikifarm-instances-favorite-remove-btn-title-label": "Wiki aus de Favoritten eraushuelen"
 }

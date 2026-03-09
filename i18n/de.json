@@ -3,6 +3,7 @@
 		"authors": [
 			"*surak*",
 			"Ameisenigel",
+			"Brettchenweber",
 			"McDutchie"
 		]
 	},
@@ -175,5 +176,5 @@
 	"wikifarm-instances-menu-aria-label": "Wiki-Instanzen",
 	"wikifarm-management-breadcrumb-label-create": "Erstellen",
 	"wikifarm-instances-favorite-add-btn-title-label": "Wiki zu den Favoriten hinzufügen",
-	"wikifarm-instances-favorite-remove-btn-title-label": "Wiki von den Favoriten entfernen"
+	"wikifarm-instances-favorite-remove-btn-title-label": "Wiki aus den Favoriten entfernen"
 }
