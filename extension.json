@@ -527,7 +527,8 @@
 		"GetPreferences": "userpreference",
 		"MWStakeMCPGetWikiMap": "populateWikiMap",
 		"BeforeInitialize": "redirectUserPage",
-		"SpecialPageBeforeExecute": "addGlobalUnifiedTaskOverviewModule"
+		"SpecialPageBeforeExecute": "addGlobalUnifiedTaskOverviewModule",
+		"BSUserManagerBeforeAddGroup": "addGroupPrefix"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -586,6 +587,10 @@
 		},
 		"addGlobalUnifiedTaskOverviewModule": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\AddGlobalUTOModule"
+		},
+		"addGroupPrefix": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\AddUserGroupPrefix",
+			"services": [ "BlueSpiceWikiFarm._Config" ]
 		}
 	},
 	"RestRoutes": [
