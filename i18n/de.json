@@ -104,11 +104,6 @@
 	"wikifarm-template-clone-help": "Neues Wiki mit Daten aus einem vorhandenen Wiki",
 	"wikifarm-template-clone": "Von vorhandenem Wiki",
 	"wikifarm-template-title": "Vorlage für das neue Wiki auswählen",
-	"wikifarm-instances-menu-empty-favorite-text": "Zurzeit gibt es keine Wiki-Instanz, die als Favorit hinzugefügt wurde. Du kannst eine Instanz als Favorit auswählen, indem du auf das Sternsymbol klickst",
-	"wikifarm-instances-menu-overview-text": "Alle Wikis",
-	"wikifarm-instances-menu-favorite-text": "Favoriten",
-	"wikifarm-instances-menu-button-title": "Liste mit allen Wiki-Instanzen",
-	"wikifarm-instances-menu-aria-label": "Wiki-Instanzen",
 	"useraccess": "Benutzergruppenverwaltung",
 	"wikiteams": "Wiki-Teams",
 	"action-wikifarm-createwiki": "ein Wiki zu erstellen",
@@ -181,6 +176,6 @@
 	"wikifarm-instances-menu-overview-text": "Alle Wikis",
 	"wikifarm-instances-menu-favorite-text": "Favoriten",
 	"wikifarm-instances-menu-button-title": "Liste mit allen Wiki-Instanzen",
-	"wikifarm-instances-menu-aria-label": "Wiki-Instanzen"
+	"wikifarm-instances-menu-aria-label": "Wiki-Instanzen",
 	"wikifarm-management-breadcrumb-label-create": "Erstellen"
 }
