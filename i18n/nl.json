@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"HanV",
 			"McDutchie",
 			"Siebrand"
 		]
@@ -196,5 +197,11 @@
 	"wikifarm-instances-menu-overview-text": "Alle wiki’s",
 	"wikifarm-instances-menu-favorite-text": "Favorieten",
 	"wikifarm-instances-menu-button-title": "Lijst met alle wiki-servers",
-	"wikifarm-instances-menu-aria-label": "Wiki-servers"
+	"wikifarm-instances-menu-aria-label": "Wiki-servers",
+	"wikifarm-root-wiki-display-text": "Centrale wiki",
+	"wikifarm-instance-color": "Wiki kleur",
+	"wikifarm-instance-color-remove": "Geen kleur toewijzen",
+	"wikifarm-management-breadcrumb-label-create": "Aanmaken",
+	"wikifarm-instances-favorite-add-btn-title-label": "Voeg wiki toe aan favorieten",
+	"wikifarm-instances-favorite-remove-btn-title-label": "Wiki uit favorieten verwijderen"
 }
