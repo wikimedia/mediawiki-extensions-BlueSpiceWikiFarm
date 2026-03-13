@@ -267,7 +267,7 @@ class Dispatcher {
 		if ( $this->instance instanceof NonExistingInstanceEntity ) {
 			// ATM, context is not setup to `w`, so we cannot use normal methods to get URL
 			// This will happen in second phase
-			$server = $this->config->get( 'globalServer' ) ;
+			$server = $this->config->get( 'globalServer' );
 			$articlePath = $this->config->get( 'globalArticlePath' );
 			$url = $server . str_replace( '$1', 'Special:FarmManagement', $articlePath );
 			$GLOBALS['wgWikiFarmConfig_farmManagementUrl'] = $url;
