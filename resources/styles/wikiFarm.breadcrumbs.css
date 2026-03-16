@@ -1,0 +1,28 @@
+:root {
+	--breadcrumb-default-bg: #3e5389;
+	--breadcrumb-default-fg: #fff;
+}
+
+.instance-root-home::after,
+.root-node + .root-node::after {
+	content: '\2022';
+}
+
+.breadcrumb-item.instance-rootnode.root-node a {
+	margin: 0 0.2rem;
+	border-radius: 5px;
+	background-color: var( --breadcrumb-default-bg );
+	color: var( --breadcrumb-default-fg );
+}
+
+.breadcrumb-item.instance-rootnode.root-node a:hover {
+	opacity: 0.8;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+	padding-right: 0;
+}
+
+li.instance-root-home + li.root-node {
+	padding-left: 0.2rem;
+}

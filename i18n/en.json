@@ -194,11 +194,15 @@
 	"wikifarm-instances-menu-favorite-text": "Favourites",
 	"wikifarm-instances-menu-button-title": "List with all wiki instances",
 	"wikifarm-instances-menu-aria-label": "Wiki instances",
-	"wikifarm-root-wiki-display-text": "Root wiki",
 	"wikifarm-instance-color": "Wiki color",
 	"wikifarm-instance-color-remove": "Do not assign color",
 	"wikifarm-management-breadcrumb-label-create": "Create",
 	"wikifarm-instances-favorite-add-btn-title-label": "Add wiki to favorites",
 	"wikifarm-instances-favorite-remove-btn-title-label": "Remove wiki from favorites",
-	"wikifarm-action-purgeinstance-description": "Purge wiki"
+	"wikifarm-action-purgeinstance-description": "Purge wiki",
+	"wikifarm-main-wiki-name": "Main wiki",
+	"wikifarm-breadcrumb-nav-all-instances-title": "Show all wiki instances",
+	"wikifarm-breadcrumb-nav-back-to-main-title": "Back to the main wiki",
+	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Back to the main page",
+	"wikifarm-access-group-name-user": "All groups"
 }

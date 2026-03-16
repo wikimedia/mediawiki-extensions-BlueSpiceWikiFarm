@@ -176,5 +176,9 @@
 	"wikifarm-instances-menu-aria-label": "Wiki-Instanzen",
 	"wikifarm-management-breadcrumb-label-create": "Erstellen",
 	"wikifarm-instances-favorite-add-btn-title-label": "Wiki zu den Favoriten hinzufügen",
-	"wikifarm-instances-favorite-remove-btn-title-label": "Wiki aus den Favoriten entfernen"
+	"wikifarm-instances-favorite-remove-btn-title-label": "Wiki aus den Favoriten entfernen",
+	"wikifarm-main-wiki-name": "Haupt-Wiki",
+	"wikifarm-breadcrumb-nav-all-instances-title": "Alle Wiki-Instanzen anzeigen",
+	"wikifarm-breadcrumb-nav-back-to-main-title": "Zurück zum Haupt-Wiki",
+	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Zurück zur Hauptseite"
 }

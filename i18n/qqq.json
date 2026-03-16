@@ -196,11 +196,15 @@
 	"wikifarm-instances-menu-favorite-text": "Label for card header in megamenu to list all favorite wikis",
 	"wikifarm-instances-menu-button-title": "Title for megamenu button with list of wiki instances",
 	"wikifarm-instances-menu-aria-label": "Aria label for megamenu button with list of wiki instances",
-	"wikifarm-root-wiki-display-text": "Display name for the root instance",
 	"wikifarm-instance-color": "Field label for wiki color selector",
 	"wikifarm-instance-color-remove": "Label for the button to remove the wiki color",
 	"wikifarm-management-breadcrumb-label-create": "Label for create action in breadcrumb\n{{Identical:Create}}",
 	"wikifarm-instances-favorite-add-btn-title-label": "Title for button to add wiki to favorites",
 	"wikifarm-instances-favorite-remove-btn-title-label": "Title for button to remove wiki from favorites",
-	"wikifarm-action-purgeinstance-description": "Description shown for action in management interface"
+	"wikifarm-action-purgeinstance-description": "Description shown for action in management interface",
+	"wikifarm-main-wiki-name": "Display name for the root instance",
+	"wikifarm-breadcrumb-nav-all-instances-title": "Title for breadcrumb instance link",
+	"wikifarm-breadcrumb-nav-back-to-main-title": "Title for breadcrumb main wiki link",
+	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Title for breadcrumb main page link",
+	"wikifarm-access-group-name-user": "Label for the \"user\" group"
 }

@@ -73,6 +73,12 @@
 					"class": "BlueSpice\\WikiFarm\\BreadcrumbDataProvider\\SpecialFarmManagementProvider",
 					"services": [ "SpecialPageFactory" ]
 				}
+			},
+			"BreadcrumbRootProviderRegistry": {
+				"shared-instances": {
+					"class": "BlueSpice\\WikiFarm\\BreadcrumbRootProvider\\SharedInstancesRootNode",
+					"services": [ "BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.InstanceStore", "SpecialPageFactory" ]
+				}
 			}
 		}
 	},
@@ -504,6 +510,9 @@
 			"scripts": [
 				"ext.bluespice.wikiFarm.unifiedTaskOverviewModule.js"
 			]
+		},
+		"ext.bluespice.wikiFarm.breadcrumbs": {
+			"styles": "styles/wikiFarm.breadcrumbs.css"
 		}
 	},
 	"ResourceFileModulePaths": {
@@ -556,7 +565,7 @@
 		},
 		"addBootstrap": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\AddBootstrap",
-			"services": [ "BlueSpiceWikiFarm.InstanceStore" ]
+			"services": [ "BlueSpiceWikiFarm.InstanceStore", "BlueSpiceWikiFarm._Config" ]
 		},
 		"handleSharedResources": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\HandleSharedResources",

@@ -66,7 +66,7 @@ class FarmWikiMap {
 				$this->config->get( 'rootInstanceWikiId' ) :
 				$instanceEntity->getWikiId(),
 			'display_text' => $instanceEntity instanceof RootInstanceEntity ?
-				Message::newFromKey( 'wikifarm-root-wiki-display-text' )->text() :
+				Message::newFromKey( 'wikifarm-main-wiki-name' )->text() :
 				$instanceEntity->getDisplayName(),
 			'url' => $instanceEntity->getUrl( $this->config ),
 			'color' => $instanceEntity->getMetadata()['instanceColor'] ?? null
