@@ -155,6 +155,13 @@ class Setup {
 	/**
 	 * @return void
 	 */
+	public static function setupContentTransfer() {
+		// NOOP - For B/C
+	}
+
+	/**
+	 * @return void
+	 */
 	public static function setupTranslationLinks() {
 		if ( FARMER_IS_ROOT_WIKI_CALL ) {
 			return;
