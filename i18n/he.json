@@ -115,5 +115,7 @@
 	"wikifarm-promote-to-shared-dialog-push": "מתבצעת העברה לוויקי של משאבים משותפים",
 	"wikifarm-promote-to-shared-dialog-delete-local": "מתבצעת מחיקת העותק המקומי",
 	"wikifarm-promote-to-shared-dialog-delete-local-reason": "נמחק עקב העברה לוויקי של משאבים משותפים",
-	"wikifarm-instances-menu-overview-text": "כל אתרי הוויקי"
+	"wikifarm-instances-menu-overview-text": "כל אתרי הוויקי",
+	"wikifarm-instances-favorite-add-btn-title-label": "הוספת הוויקי למועדפים",
+	"wikifarm-instances-favorite-remove-btn-title-label": "הסרת הוויקי מהמועדפים"
 }

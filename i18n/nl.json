@@ -203,5 +203,6 @@
 	"wikifarm-instance-color-remove": "Geen kleur toewijzen",
 	"wikifarm-management-breadcrumb-label-create": "Aanmaken",
 	"wikifarm-instances-favorite-add-btn-title-label": "Voeg wiki toe aan favorieten",
-	"wikifarm-instances-favorite-remove-btn-title-label": "Wiki uit favorieten verwijderen"
+	"wikifarm-instances-favorite-remove-btn-title-label": "Wiki uit favorieten verwijderen",
+	"wikifarm-action-purgeinstance-description": "Wiki wissen"
 }
