@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Beta16",
+			"FL2226",
 			"McDutchie"
 		]
 	},
@@ -12,5 +13,8 @@
 	"wikifarm-main-instance-name": "Wiki principale",
 	"wikifarm-ui-teams-action-remove-member": "Rimuovi membro",
 	"wikifarm-button-action-label-promote-to-shared": "Sposta",
-	"wikifarm-management-breadcrumb-label-create": "Crea"
+	"wikifarm-management-breadcrumb-label-create": "Crea",
+	"wikifarm-instances-favorite-add-btn-title-label": "Aggiungi la wiki ai preferiti",
+	"wikifarm-instances-favorite-remove-btn-title-label": "Rimuovi la wiki dai preferiti",
+	"wikifarm-action-purgeinstance-description": "\"Wiki di Purge\" oppure \"ripulire Wiki\" secondo contesto"
 }
