@@ -199,10 +199,10 @@
 	"wikifarm-instances-menu-button-title": "Lijst met alle wiki-servers",
 	"wikifarm-instances-menu-aria-label": "Wiki-servers",
 	"wikifarm-root-wiki-display-text": "Centrale wiki",
-	"wikifarm-instance-color": "Wiki kleur",
+	"wikifarm-instance-color": "Wikikleur",
 	"wikifarm-instance-color-remove": "Geen kleur toewijzen",
 	"wikifarm-management-breadcrumb-label-create": "Aanmaken",
-	"wikifarm-instances-favorite-add-btn-title-label": "Voeg wiki toe aan favorieten",
+	"wikifarm-instances-favorite-add-btn-title-label": "Wiki toevoegen aan favorieten",
 	"wikifarm-instances-favorite-remove-btn-title-label": "Wiki uit favorieten verwijderen",
 	"wikifarm-action-purgeinstance-description": "Wiki wissen"
 }
