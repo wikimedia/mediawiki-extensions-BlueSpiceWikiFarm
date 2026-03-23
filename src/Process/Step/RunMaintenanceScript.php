@@ -5,7 +5,6 @@ namespace BlueSpice\WikiFarm\Process\Step;
 use BlueSpice\WikiFarm\InstanceManager;
 use Exception;
 use MediaWiki\Config\Config;
-use MediaWiki\Message\Message;
 use Symfony\Component\Process\Process;
 
 abstract class RunMaintenanceScript extends InstanceAwareStep {
@@ -52,7 +51,7 @@ abstract class RunMaintenanceScript extends InstanceAwareStep {
 				$this->getDataForNextStep( $process->getOutput() )
 			);
 		}
-		throw new Exception( Message::newFromKey( 'wikifarm-error-unknown' )->text() );
+		throw new Exception( $process->getErrorOutput() );
 	}
 
 	/**

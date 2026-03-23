@@ -131,7 +131,7 @@ class InstanceManager {
 	public function getUrlForNewInstance( string $path ): string {
 		$base = $this->farmConfig->get( 'basePath' );
 		$base = trim( $base, '/' );
-		$scriptPath = $base . '/' . $path;
+		$scriptPath = !empty( $base ) ? $base . '/' . $path : $path;
 		$server = $this->farmConfig->get( 'globalServer' );
 		$server = rtrim( $server, '/' );
 		return $server . '/' . $scriptPath;

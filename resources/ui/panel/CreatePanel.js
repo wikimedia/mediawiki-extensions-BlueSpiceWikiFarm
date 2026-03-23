@@ -31,9 +31,9 @@ ext.bluespiceWikiFarm.ui.CreatePanel.prototype.makeInputs = function () {
 	this.source = new ext.bluespiceWikiFarm.ui.InstancePicker( {} );
 	this.sourceLayout = new OO.ui.FieldLayout( this.source, {
 		label: mw.message( 'wikifarm-instance-sourcepath' ).plain(),
-		align: 'top',
-		hidden: true
+		align: 'top'
 	} );
+	this.sourceLayout.$element.hide();
 	this.pathInput = new ext.bluespiceWikiFarm.ui.PathInput( {} );
 	this.pathInput.connect( this, { validityChange: 'onPathValidityChange' } );
 	this.pathLayout = new OO.ui.FieldLayout( this.pathInput, {
