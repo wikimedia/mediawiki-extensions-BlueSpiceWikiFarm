@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\MaintenanceScreens;
 
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\NonExistingInstanceEntity;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\HttpException;
 use MWStake\MediaWiki\Component\ProcessManager\ProcessInfo;
@@ -36,6 +37,11 @@ class MaintenancePageConstructor {
 	 * @throws HttpException
 	 */
 	public function getHtml(): string {
+		$config = $this->services->getMainConfig();
+		if ( $config->get( MainConfigNames::TmpDirectory ) === false ) {
+			// Ensure temp directory
+			$GLOBALS['wgTmpDirectory'] = wfTempDir();
+		}
 		if ( $this->instanceEntity instanceof NonExistingInstanceEntity ) {
 			return ( new NonExistingInstanceScreen( $this->instanceEntity ) )->getHtml();
 		}
