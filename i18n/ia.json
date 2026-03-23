@@ -78,7 +78,6 @@
 	"wikifarm-error-unknown": "Un error ha occurrite",
 	"wikifarm-error-unknown-instance": "Wiki incognite",
 	"wikifarm-group-undefined": "Sin gruppo",
-	"wikifarm-instance-actions": "Actiones",
 	"wikifarm-instance-create-edit-error": "Un error ha occurrite durante le immagazinage del datos del wiki. Tenta lo de novo o contacta tu administrator.",
 	"wikifarm-instance-ctime": "Create le",
 	"wikifarm-instance-desc": "Description",
@@ -196,7 +195,6 @@
 	"wikifarm-instances-menu-favorite-text": "Favorites",
 	"wikifarm-instances-menu-button-title": "Lista de tote le servitores wiki",
 	"wikifarm-instances-menu-aria-label": "Servitores wiki",
-	"wikifarm-root-wiki-display-text": "Wiki radice",
 	"wikifarm-instance-color": "Color del wiki",
 	"wikifarm-instance-color-remove": "Non assignar color"
 }

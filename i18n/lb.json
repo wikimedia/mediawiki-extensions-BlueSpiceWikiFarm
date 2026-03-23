@@ -33,7 +33,6 @@
 	"wikifarm-error-generic": "Et ass e Feeler geschitt, kontaktéiert wgl. Ären Administrateur",
 	"wikifarm-error-unknown": "Et ass e Feeler geschitt",
 	"wikifarm-error-unknown-instance": "Onbekannt Wiki",
-	"wikifarm-instance-actions": "Aktiounen",
 	"wikifarm-instance-ctime": "Ugeluecht de(n)",
 	"wikifarm-instance-desc": "Beschreiwung",
 	"wikifarm-instance-group": "Grupp",
@@ -70,7 +69,16 @@
 	"wikifarm-instances-menu-favorite-text": "Favoritten",
 	"wikifarm-instances-menu-button-title": "Lëscht mat alle Wiki-Instanzen",
 	"wikifarm-instances-menu-aria-label": "Wiki-Instanzen",
+	"wikifarm-ui-access-field-type-user": "Benotzer",
 	"wikifarm-management-breadcrumb-label-create": "Uleeën",
 	"wikifarm-instances-favorite-add-btn-title-label": "Wiki bei d'Favoritten derbäisetzen",
-	"wikifarm-instances-favorite-remove-btn-title-label": "Wiki aus de Favoritten eraushuelen"
+	"wikifarm-instances-favorite-remove-btn-title-label": "Wiki aus de Favoritten eraushuelen",
+	"wikifarm-management-invalid-source-title": "Ongülteg Sourcewiki",
+	"wikifarm-management-invalid-template-title": "Ongülteg Schabloun",
+	"wikifarm-instance-advanced-options": "Erweidert Astellungen",
+	"wikifarm-main-wiki-name": "Haaptwiki",
+	"wikifarm-breadcrumb-nav-all-instances-title": "All Wiki-Instanze weisen",
+	"wikifarm-breadcrumb-nav-back-to-main-title": "Zeréck op d'Haaptwiki",
+	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Zeréck op d'Haaptsäit",
+	"wikifarm-access-group-name-user": "All Gruppen"
 }
