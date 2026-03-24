@@ -466,6 +466,32 @@
 		},
 		"ext.bluespice.wikiFarm.breadcrumbs": {
 			"styles": "styles/wikiFarm.breadcrumbs.css"
+		},
+		"ext.bluespice.wikiFarm.instances.special": {
+			"packageFiles": [
+				"ext.bluespice.wikiFarm.instances.js",
+				"ui/panel/UserInstancePanel.js",
+				"ui/panel/InstancePanel.js"
+			],
+			"styles": [
+				"styles/wikiFarm.css"
+			],
+			"messages": [
+				"wikifarm-instances-tab-favourite-label",
+				"wikifarm-instances-tab-all-label",
+				"wikifarm-instances-grid-column-wiki-header-label",
+				"wikifarm-instances-grid-column-favourites-header-label",
+				"wikifarm-instances-grid-column-group-header-label",
+				"wikifarm-instances-grid-favourites-label-add",
+				"wikifarm-instances-grid-favourites-label-remove",
+				"wikifarm-instances-favourite-notification-add",
+				"wikifarm-instances-favourite-notification-remove"
+			],
+			"dependencies": [
+				"oojs-ui",
+				"ext.oOJSPlus.data",
+				"oojs-ui.styles.icons-editing-core"
+			]
 		}
 	},
 	"ResourceFileModulePaths": {
@@ -545,7 +571,8 @@
 		},
 		"common-user-interface": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\CommonUserInterface",
-			"services": [ "BlueSpiceWikiFarm.InstanceStore", "BlueSpiceWikiFarm._Config", "UserOptionsLookup" ]
+			"services": [ "BlueSpiceWikiFarm.InstanceStore", "BlueSpiceWikiFarm._Config",
+				"UserOptionsLookup", "BlueSpiceWikiFarm.AccessControlStore" ]
 		},
 		"userpreference": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\AddUserPreference"
@@ -688,6 +715,15 @@
 			"services": [
 				"BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.AccessControlStore",
 				"BlueSpiceWikiFarm.InstanceStore", "BlueSpiceWikiFarm.WikiMap"
+			]
+		},
+		{
+			"path": "/bluespice/farm/v1/instance/list",
+			"class": "BlueSpice\\WikiFarm\\Rest\\GetUserInstances",
+			"services": [
+				"HookContainer", "BlueSpiceWikiFarm._Config", "MainConfig",
+				"BlueSpiceWikiFarm.AccessControlStore", "BlueSpiceWikiFarm.InstanceStore",
+				"UserOptionsLookup"
 			]
 		}
 	],

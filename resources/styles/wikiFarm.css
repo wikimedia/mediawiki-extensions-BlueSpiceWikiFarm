@@ -1,0 +1,12 @@
+.instance-color-indicator {
+	width: 5px;
+	height: 16px;
+	margin-right: 4px;
+	display: inline-block;
+	border-radius: 2px;
+}
+
+#bs-wikifarm-user-instances a.external,
+#bs-wikifarm-user-instances a.external:hover {
+	background-image: none;
+}

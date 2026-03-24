@@ -44,17 +44,35 @@ $( () => {
 			const options = mw.user.options.get( 'bs-farm-instances-favorite' );
 			const val = $( e.target ).parent().data( 'path' );
 			let newVal = '';
+			let favouriteAction = 'add';
 			if ( $( btn ).hasClass( 'bi-bs-unfavored' ) ) {
 				newVal = options + val + ',';
 			} else {
 				newVal = options.replace( val + ',', '' );
+				favouriteAction = 'remove';
 			}
 			mw.loader.using( [ 'mediawiki.api' ] ).done( () => {
 				mw.user.options.set( 'bs-farm-instances-favorite', newVal );
 				new mw.Api().saveOption( 'bs-farm-instances-favorite', newVal );
 				btn.classList.toggle( 'bi-bs-unfavored' );
 				btn.classList.toggle( 'bi-bs-favored' );
+				mw.notify(
+					// The following messages are used here:
+					// * wikifarm-instances-favourite-notification-add
+					// * wikifarm-instances-favourite-notification-remove
+					mw.message( 'wikifarm-instances-favourite-notification-' + favouriteAction, val ).text(),
+					{ type: 'success' }
+				);
 			} );
 		} );
 	} );
+
+	if ( mw.config.get( 'wgNamespaceNumber' ) === -1 && mw.config.get( 'wgTitle' ) === 'Instances' ) {
+		require( './ui/panel/UserInstancePanel.js' );
+		const $instancesCnt = $( '#bs-wikifarm-user-instances' );
+		if ( $instancesCnt.length ) {
+			const panel = new bs.bluespiceWikiFarm.ui.UserInstancePanel();
+			$instancesCnt.append( panel.$element );
+		}
+	}
 } );

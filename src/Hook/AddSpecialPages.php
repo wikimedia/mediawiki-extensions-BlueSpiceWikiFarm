@@ -3,6 +3,7 @@
 namespace BlueSpice\WikiFarm\Hook;
 
 use BlueSpice\WikiFarm\Special\UserAccess;
+use BlueSpice\WikiFarm\Special\Wikis;
 use MediaWiki\Config\Config;
 use MediaWiki\SpecialPage\Hook\SpecialPage_initListHook;
 
@@ -20,6 +21,11 @@ class AddSpecialPages implements SpecialPage_initListHook {
 			$list['UserAccess'] = [
 				'class' => UserAccess::class,
 				'services' => [ 'BlueSpiceWikiFarm._Config' ]
+			];
+		}
+		if ( $this->farmConfig->get( 'shareUsers' ) ) {
+			$list['Wikis'] = [
+				'class' => Wikis::class
 			];
 		}
 	}
