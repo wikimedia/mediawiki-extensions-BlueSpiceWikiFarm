@@ -55,5 +55,6 @@
 	"wikifarm-promote-to-shared-ca": "공유 리소스 위키로 이동",
 	"wikifarm-button-action-label-promote-to-shared": "이동",
 	"wikifarm-instances-menu-overview-text": "모든 위키",
-	"wikifarm-root-wiki-display-text": "루트 위키"
+	"wikifarm-management-breadcrumb-label-create": "만들기",
+	"wikifarm-action-purgeinstance-description": "위키 새로 고침"
 }

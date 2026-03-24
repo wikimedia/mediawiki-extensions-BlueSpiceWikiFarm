@@ -69,7 +69,6 @@
 	"wikifarm-error-createinstancevault-target-exists": "תיקיית הוויקי עבור הנתיב הנתון כבר קיימת",
 	"wikifarm-error-failed-to-start-process": "התנעת התהליך נכשלה",
 	"wikifarm-error-generic": "אירעה שגיאה, נא ליצור קשר עם מנהל המערכת שלך",
-	"wikifarm-instance-actions": "פעולות",
 	"wikifarm-instance-ctime": "נוצר ב־",
 	"wikifarm-instance-desc": "תיאור",
 	"wikifarm-instance-group": "קבוצה",
@@ -115,5 +114,7 @@
 	"wikifarm-promote-to-shared-dialog-push": "מתבצעת העברה לוויקי של משאבים משותפים",
 	"wikifarm-promote-to-shared-dialog-delete-local": "מתבצעת מחיקת העותק המקומי",
 	"wikifarm-promote-to-shared-dialog-delete-local-reason": "נמחק עקב העברה לוויקי של משאבים משותפים",
-	"wikifarm-instances-menu-overview-text": "כל אתרי הוויקי"
+	"wikifarm-instances-menu-overview-text": "כל אתרי הוויקי",
+	"wikifarm-instances-favorite-add-btn-title-label": "הוספת הוויקי למועדפים",
+	"wikifarm-instances-favorite-remove-btn-title-label": "הסרת הוויקי מהמועדפים"
 }

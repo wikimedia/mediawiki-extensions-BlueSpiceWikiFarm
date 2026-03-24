@@ -80,7 +80,6 @@
 	"wikifarm-error-unknown": "Er is een fout opgetreden",
 	"wikifarm-error-unknown-instance": "Onbekende wiki",
 	"wikifarm-group-undefined": "Geen groep",
-	"wikifarm-instance-actions": "Handelingen",
 	"wikifarm-instance-create-edit-error": "Er is een fout opgetreden bij het opslaan van de wikigegevens. Probeer het opnieuw of neem contact op met uw beheerder.",
 	"wikifarm-instance-ctime": "Aangemaakt op",
 	"wikifarm-instance-desc": "Beschrijving",
@@ -198,10 +197,10 @@
 	"wikifarm-instances-menu-favorite-text": "Favorieten",
 	"wikifarm-instances-menu-button-title": "Lijst met alle wiki-servers",
 	"wikifarm-instances-menu-aria-label": "Wiki-servers",
-	"wikifarm-root-wiki-display-text": "Centrale wiki",
-	"wikifarm-instance-color": "Wiki kleur",
+	"wikifarm-instance-color": "Wikikleur",
 	"wikifarm-instance-color-remove": "Geen kleur toewijzen",
 	"wikifarm-management-breadcrumb-label-create": "Aanmaken",
-	"wikifarm-instances-favorite-add-btn-title-label": "Voeg wiki toe aan favorieten",
-	"wikifarm-instances-favorite-remove-btn-title-label": "Wiki uit favorieten verwijderen"
+	"wikifarm-instances-favorite-add-btn-title-label": "Wiki toevoegen aan favorieten",
+	"wikifarm-instances-favorite-remove-btn-title-label": "Wiki uit favorieten verwijderen",
+	"wikifarm-action-purgeinstance-description": "Wiki wissen"
 }

@@ -79,7 +79,6 @@
 	"wikifarm-error-unknown": "发生错误",
 	"wikifarm-error-unknown-instance": "未知wiki",
 	"wikifarm-group-undefined": "沒有群组",
-	"wikifarm-instance-actions": "操作",
 	"wikifarm-instance-create-edit-error": "保存wiki数据时发生错误。请重试或联系您的管理员。",
 	"wikifarm-instance-ctime": "创建于",
 	"wikifarm-instance-desc": "描述",

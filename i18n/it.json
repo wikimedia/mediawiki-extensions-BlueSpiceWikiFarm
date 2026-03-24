@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Beta16",
-			"McDutchie"
+			"McDutchie",
+			"FL2226"
 		]
 	},
 	"right-wikifarm-deletewiki": "Cancella un wiki",
@@ -12,5 +13,8 @@
 	"wikifarm-main-instance-name": "Wiki principale",
 	"wikifarm-ui-teams-action-remove-member": "Rimuovi membro",
 	"wikifarm-button-action-label-promote-to-shared": "Sposta",
-	"wikifarm-management-breadcrumb-label-create": "Crea"
+	"wikifarm-management-breadcrumb-label-create": "Crea",
+	"wikifarm-instances-favorite-add-btn-title-label": "Aggiungi il wiki ai preferiti",
+	"wikifarm-instances-favorite-remove-btn-title-label": "Rimuovi il wiki dai preferiti",
+	"wikifarm-action-purgeinstance-description": "Purge wiki"
 }
