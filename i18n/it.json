@@ -13,8 +13,14 @@
 	"wikifarm-main-instance-name": "Wiki principale",
 	"wikifarm-ui-teams-action-remove-member": "Rimuovi membro",
 	"wikifarm-button-action-label-promote-to-shared": "Sposta",
+	"wikifarm-ui-access-field-type-user": "Utente",
 	"wikifarm-management-breadcrumb-label-create": "Crea",
 	"wikifarm-instances-favorite-add-btn-title-label": "Aggiungi il wiki ai preferiti",
 	"wikifarm-instances-favorite-remove-btn-title-label": "Rimuovi il wiki dai preferiti",
-	"wikifarm-action-purgeinstance-description": "Purge wiki"
+	"wikifarm-instance-advanced-options": "Impostazioni avanzate",
+	"wikifarm-action-purgeinstance-description": "Purge wiki",
+	"wikifarm-main-wiki-name": "Wiki principale",
+	"wikifarm-breadcrumb-nav-all-instances-title": "Mostra tutte le istanze wiki",
+	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Torna alla pagina principale",
+	"wikifarm-access-group-name-user": "Tutti i gruppi"
 }

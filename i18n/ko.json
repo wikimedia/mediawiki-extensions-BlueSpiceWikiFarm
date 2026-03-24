@@ -56,6 +56,11 @@
 	"wikifarm-promote-to-shared-ca": "공유 리소스 위키로 이동",
 	"wikifarm-button-action-label-promote-to-shared": "이동",
 	"wikifarm-instances-menu-overview-text": "모든 위키",
+	"wikifarm-ui-access-field-type-user": "사용자",
+	"wikifarm-ui-access-field-type-team": "팀",
 	"wikifarm-management-breadcrumb-label-create": "만들기",
-	"wikifarm-action-purgeinstance-description": "위키 새로 고침"
+	"wikifarm-instance-advanced-options": "고급 설정",
+	"wikifarm-action-purgeinstance-description": "위키 새로 고침",
+	"wikifarm-main-wiki-name": "주 위키",
+	"wikifarm-access-group-name-user": "모든 그룹"
 }
