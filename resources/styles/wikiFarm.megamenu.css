@@ -1,19 +1,34 @@
+:root {
+	--wiki-instance-card-bg: #f1f3f9;
+	--wiki-instance-fg--active: #3e5389;
+	--wiki-instance-main-fg: #3e5389;
+	--wiki-instance-main-border: #3e5389;
+}
+
 .farm-wiki-card-item {
 	display: inline-flex;
 	margin: 5px;
 	padding: 15px;
-	background-color: #f1f3f9;
+	border-radius: 4px;
+	background-color: var( --wiki-instance-card-bg );
 	width: 200px;
 }
 
-.farm-wiki-card-favorite-btn {
+.farm-wiki-instance-main {
+	border: 1px solid var( --wiki-instance-main-border );
+	color: var( --wiki-instance-main-fg );
+}
+
+.farm-wiki-card-favorite-btn,
+.farm-wiki-instance-main span {
 	margin-right: 8px;
 }
 
-#farm-wikis-mm .farm-wiki-card-favorite-btn::before {
-	vertical-align: 0.125em;
+#farm-wikis-mm .wiki-instance-favored {
+	color: var( --wiki-instance-fg--active );
 }
 
-#farm-wikis-mm .wiki-instance-favored {
-	color: #3e5389;
+.farm-wiki-instance-overview {
+	margin-top: 12px;
+	text-align: center;
 }

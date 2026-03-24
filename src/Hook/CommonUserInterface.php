@@ -2,6 +2,7 @@
 
 namespace BlueSpice\WikiFarm\Hook;
 
+use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\Component\WikiInstancesMenu;
 use BlueSpice\WikiFarm\GlobalActionsAdministration;
 use BlueSpice\WikiFarm\InstanceStore;
@@ -20,30 +21,34 @@ class CommonUserInterface implements MWStakeCommonUIRegisterSkinSlotComponents {
 	/** @var UserOptionsLookup */
 	private $userOptionsLookup;
 
+	/** @var IAccessStore */
+	private $accessControlStore;
+
 	/**
 	 * @param InstanceStore $instanceStore
 	 * @param Config $farmConfig
 	 * @param UserOptionsLookup $userOptionsLookup
+	 * @param IAccessStore $accessControlStore
 	 */
-	public function __construct( InstanceStore $instanceStore, Config $farmConfig, UserOptionsLookup $userOptionsLookup ) {
+	public function __construct( InstanceStore $instanceStore, Config $farmConfig,
+		UserOptionsLookup $userOptionsLookup, IAccessStore $accessControlStore ) {
 		$this->instanceStore = $instanceStore;
 		$this->farmConfig = $farmConfig;
 		$this->userOptionsLookup = $userOptionsLookup;
+		$this->accessControlStore = $accessControlStore;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	public function onMWStakeCommonUIRegisterSkinSlotComponents( $registry ): void {
-		$instanceStore = $this->instanceStore;
-		$farmConfig = $this->farmConfig;
-		$userOptionsLookup = $this->userOptionsLookup;
 		$registry->register(
 			'NavbarPrimaryCenterItems',
 			[
 				"farm-wikis-item" => [
-					'factory' => static function () use ( $instanceStore, $farmConfig, $userOptionsLookup ) {
-						return new WikiInstancesMenu( $instanceStore, $farmConfig, $userOptionsLookup );
+					'factory' => function () {
+						return new WikiInstancesMenu( $this->instanceStore,
+							$this->farmConfig, $this->userOptionsLookup, $this->accessControlStore );
 					}
 				]
 			]

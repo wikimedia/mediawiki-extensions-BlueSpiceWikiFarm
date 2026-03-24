@@ -2,14 +2,18 @@
 
 namespace BlueSpice\WikiFarm\Component;
 
+use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\InstanceStore;
+use BlueSpice\WikiFarm\RootInstanceEntity;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Html\Html;
 use MediaWiki\Message\Message;
+use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\User\Options\UserOptionsLookup;
+use MediaWiki\User\User;
 use MWStake\MediaWiki\Component\CommonUserInterface\Component\Literal;
 use MWStake\MediaWiki\Component\CommonUserInterface\Component\SimpleCard;
 use MWStake\MediaWiki\Component\CommonUserInterface\Component\SimpleCardBody;
@@ -28,16 +32,30 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 	/** @var UserOptionsLookup */
 	private $userOptionsLookup;
 
+	/** @var GroupAccessStore */
+	private $accessControlStore;
+
+	/** @var array */
+	private $favourites;
+
+	/** @var int */
+	protected const MENU_LIMIT = 10;
+
 	/**
 	 * @param InstanceStore $instanceStore
 	 * @param Config $farmConfig
 	 * @param UserOptionsLookup $userOptionsLookup
+	 * @param IAccessStore $accessControlStore
 	 */
-	public function __construct( InstanceStore $instanceStore, Config $farmConfig, UserOptionsLookup $userOptionsLookup ) {
+	public function __construct( InstanceStore $instanceStore, Config $farmConfig,
+		UserOptionsLookup $userOptionsLookup, IAccessStore $accessControlStore ) {
 		parent::__construct( [] );
 		$this->instanceStore = $instanceStore;
 		$this->farmConfig = $farmConfig;
 		$this->userOptionsLookup = $userOptionsLookup;
+		$this->accessControlStore = $accessControlStore;
+
+		$this->favourites = [];
 	}
 
 	/**
@@ -51,7 +69,7 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 	 * @inheritDoc
 	 */
 	public function shouldRender( IContextSource $context ): bool {
-		return $this->farmConfig->get( 'showInstancesMenu' );
+		return $this->farmConfig->get( 'showInstancesMenu' ) && $this->farmConfig->get( 'shareUsers' );
 	}
 
 	/**
@@ -103,6 +121,7 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 		$cardBodyItems = [];
 		$user = RequestContext::getMain()->getUser();
 		if ( !$user->isAnon() ) {
+			$this->favourites = $this->getFavouriteWikisForCurrentUser();
 			$favoriteCard = new SimpleCard( [
 				'id' => 'farm-wikis-favorite',
 				'classes' => [ 'card-mn' ],
@@ -121,7 +140,7 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 					] ),
 					new Literal(
 						'farm-wikis-favorite-items',
-						$this->getFavoriteWikisHtml()
+						$this->getFavoriteWikisHtml( $user )
 					)
 				]
 			] );
@@ -146,7 +165,7 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 				] ),
 				new Literal(
 					'farm-wikis-overview-items',
-					$this->getOverviewWikisHtml()
+					$this->getOverviewWikisHtml( $user )
 				)
 			]
 		] );
@@ -184,17 +203,35 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 	}
 
 	/**
+	 * @param User $user
 	 * @return string
 	 */
-	private function getOverviewWikisHtml(): string {
-		$instances = $this->instanceStore->getAllInstances();
-		$html = '';
+	private function getOverviewWikisHtml( $user ): string {
+		$instances = $this->accessControlStore->getInstancePathsWhereUserHasRole( $user, 'reader' );
 
-		foreach ( $instances as $instance ) {
+		$html = $this->getMainWikiInstanceCard();
+		$count = 1;
+
+		foreach ( $instances as $instancePath ) {
+			if ( in_array( $instancePath, $this->favourites ) ) {
+				continue;
+			}
+			if ( $count >= $this::MENU_LIMIT ) {
+				break;
+			}
+			if ( $instancePath === 'w' ) {
+				continue;
+			}
+			$instance = $this->instanceStore->getInstanceByPath( $instancePath );
 			if ( !$instance->isActive() ) {
 				continue;
 			}
+
 			$html .= $this->getWikiInstanceCard( $instance );
+			$count++;
+		}
+		if ( count( $instances ) > $this::MENU_LIMIT ) {
+			$html .= $this->getInstanceLink( 'all', Message::newFromKey( 'wikifarm-all-wikis-link' ) );
 		}
 
 		return $html;
@@ -214,25 +251,53 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 	}
 
 	/**
+	 * @param User $user
 	 * @return string
 	 */
-	private function getFavoriteWikisHtml(): string {
-		$favourites = $this->getFavouriteWikisForCurrentUser();
+	private function getFavoriteWikisHtml( $user ): string {
 		$html = '';
-		if ( empty( $favourites ) ) {
+		if ( empty( $this->favourites ) ) {
 			$html = Html::element( 'p', [],
 				Message::newFromKey( 'wikifarm-instances-menu-empty-favorite-text' )->text() );
 			return $html;
 		}
-		$instances = $this->instanceStore->getAllInstances();
+		$instances = $this->accessControlStore->getInstancePathsWhereUserHasRole( $user, 'reader' );
 
-		foreach ( $instances as $instance ) {
-			if ( !in_array( $instance->getPath(), $favourites ) ) {
+		$count = 0;
+		foreach ( $instances as $instancePath ) {
+			if ( !in_array( $instancePath, $this->favourites ) ) {
 				continue;
 			}
+			if ( $count >= $this::MENU_LIMIT ) {
+				break;
+			}
+			$instance = $this->instanceStore->getInstanceByPath( $instancePath );
 			$html .= $this->getWikiInstanceCard( $instance );
+			$count++;
 		}
 
+		if ( count( $instances ) > $this::MENU_LIMIT ) {
+			$html .= $this->getInstanceLink( 'favourites', Message::newFromKey( 'wikifarm-favorite-wikis-link' ) );
+		}
+
+		return $html;
+	}
+
+	/**
+	 * @param string $name
+	 * @param string $text
+	 * @return string
+	 */
+	private function getInstanceLink( $name, $text ) {
+		$sp = SpecialPage::getTitleFor( 'Wikis' );
+		$html = Html::openElement( 'div', [
+			'class' => 'farm-wiki-instance-overview'
+		] );
+		$html .= Html::element( 'a', [
+			'id' => 'wikifarm-instance-page-' . $name,
+			'href' => $sp->getLocalURL() . '#' . $name
+		], $text );
+		$html .= Html::closeElement( 'div' );
 		return $html;
 	}
 
@@ -255,16 +320,42 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 		} else {
 			$classes .= ' bi-bs-unfavored';
 		}
+		$cardHtml .= Html::openElement( 'div', [] );
 		$cardHtml .= Html::element( 'a', [
 			'class' => $classes,
 			'role' => 'button',
 			'title' => Message::newFromKey( $titleMsgKey )->text()
 		] );
+		$cardHtml .= Html::closeElement( 'div' );
 
 		$cardHtml .= Html::openElement( 'div', [ 'class' => 'farm-wiki-card-desc' ] );
 		$cardHtml .= Html::element( 'a', [
 			'href' => $instance->getUrl( $this->farmConfig )
 		], $instance->getDisplayName() );
+		$cardHtml .= Html::closeElement( 'div' );
+
+		$cardHtml .= Html::closeElement( 'div' );
+		return $cardHtml;
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getMainWikiInstanceCard(): string {
+		$mainInstance = new RootInstanceEntity();
+		$cardHtml = Html::openElement( 'div', [
+			'class' => 'farm-wiki-card-item farm-wiki-instance-main',
+			'data-path' => $mainInstance->getPath()
+		] );
+
+		$cardHtml .= Html::element( 'span', [
+			'class' => 'bi-bs-home'
+		] );
+
+		$cardHtml .= Html::openElement( 'div', [ 'class' => 'farm-wiki-card-desc' ] );
+		$cardHtml .= Html::element( 'a', [
+			'href' => $mainInstance->getUrl( $this->farmConfig )
+		], $mainInstance->getDisplayName() );
 		$cardHtml .= Html::closeElement( 'div' );
 
 		$cardHtml .= Html::closeElement( 'div' );

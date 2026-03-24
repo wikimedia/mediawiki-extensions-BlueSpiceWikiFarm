@@ -179,5 +179,17 @@
 	"wikifarm-main-wiki-name": "Haupt-Wiki",
 	"wikifarm-breadcrumb-nav-all-instances-title": "Alle Wiki-Instanzen anzeigen",
 	"wikifarm-breadcrumb-nav-back-to-main-title": "Zurück zum Haupt-Wiki",
-	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Zurück zur Hauptseite"
+	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Zurück zur Hauptseite",
+	"wikifarm-instances-tab-favourite-label": "Favoriten",
+	"wikifarm-instances-tab-all-label": "Weitere Wikis",
+	"wikifarm-instances-grid-column-wiki-header-label": "Wiki",
+	"wikis": "Wikis",
+	"wikifarm-instances-grid-column-favourites-header-label": "Favorit",
+	"wikifarm-instances-grid-column-group-header-label": "Gruppe",
+	"wikifarm-instances-grid-favourites-label-add": "Zu Favoriten hinzufügen",
+	"wikifarm-instances-grid-favourites-label-remove": "Aus Favoriten entfernen",
+	"wikifarm-instances-favourite-notification-add": "$1 zu den Favoriten hinzufügt",
+	"wikifarm-instances-favourite-notification-remove": "$1 aus den Favoriten entfernt",
+	"wikifarm-favorite-wikis-link": "Alle favorisierten Wikis anzeigen",
+	"wikifarm-all-wikis-link": "Alle Wikis anzeigen"
 }

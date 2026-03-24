@@ -3,6 +3,7 @@
 namespace BlueSpice\WikiFarm;
 
 use DateTime;
+use MediaWiki\Message\Message;
 
 class RootInstanceEntity extends InstanceEntity {
 
@@ -15,5 +16,12 @@ class RootInstanceEntity extends InstanceEntity {
 			'w', 'w', 'w',
 			new DateTime(), new DateTime(), static::STATUS_READY, $dbName, $dbPrefix, [], []
 		);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDisplayName(): string {
+		return Message::newFromKey( 'wikifarm-main-wiki-name' )->text();
 	}
 }

@@ -1,41 +1,25 @@
 <?php
 
-namespace BlueSpice\WikiFarm\Data\WikiInstances;
+namespace BlueSpice\WikiFarm\Data\FavouriteInstances;
 
+use BlueSpice\WikiFarm\AccessControl\GroupAccessStore;
+use BlueSpice\WikiFarm\AccessControl\IAccessStore;
+use BlueSpice\WikiFarm\Data\WikiInstances\PrimaryDataProvider as WikiInstancesPrimaryDataProvider;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\InstanceStore;
 use BlueSpice\WikiFarm\SystemInstanceEntity;
-use DateTime;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\IContextSource;
-use MWStake\MediaWiki\Component\DataStore\IPrimaryDataProvider;
-use MWStake\MediaWiki\Component\DataStore\ReaderParams;
+use MediaWiki\User\Options\UserOptionsLookup;
+use MediaWiki\User\User;
 
-class PrimaryDataProvider implements IPrimaryDataProvider {
+class PrimaryDataProvider extends WikiInstancesPrimaryDataProvider {
 
-	/**
-	 *
-	 * @var array
-	 */
-	protected $data = [];
+	/** @var array */
+	private $favourites = [];
 
-	/**
-	 *
-	 * @var InstanceStore
-	 */
-	protected $instanceStore = null;
-
-	/**
-	 *
-	 * @var Config
-	 */
-	protected $farmConfig = null;
-
-	/**
-	 *
-	 * @var Config
-	 */
-	protected $mainConfig = null;
+	/** @var IContextSource */
+	private $context;
 
 	/**
 	 *
@@ -43,14 +27,16 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 	 * @param Config $farmConfig
 	 * @param Config $mainConfig
 	 * @param IContextSource $context
+	 * @param IAccessStore $accessStore
+	 * @param UserOptionsLookup $userOptionsLookup
 	 */
 	public function __construct(
 		InstanceStore $instanceStore, Config $farmConfig, Config $mainConfig,
-		private readonly IContextSource $context
+		IContextSource $context, private readonly IAccessStore $accessStore,
+		private readonly UserOptionsLookup $userOptionsLookup
 	) {
-		$this->instanceStore = $instanceStore;
-		$this->farmConfig = $farmConfig;
-		$this->mainConfig = $mainConfig;
+		parent::__construct( $instanceStore, $farmConfig, $mainConfig, $context );
+		$this->context = $context;
 	}
 
 	/**
@@ -58,9 +44,14 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 	 * @return array|\MWStake\MediaWiki\Component\DataStore\Record[]
 	 */
 	public function makeData( $params ) {
-		$ids = $this->instanceStore->getInstanceIds();
-		foreach ( $ids as $id ) {
-			$instance = $this->instanceStore->getInstanceById( $id );
+		if ( !$this->accessStore instanceof GroupAccessStore ) {
+			return [];
+		}
+		$user = $this->context->getUser();
+		$this->favourites = $this->getFavouriteWikisForCurrentUser( $user );
+		$paths = $this->accessStore->getInstancePathsWhereUserHasRole( $user, 'reader' );
+		foreach ( $paths as $path ) {
+			$instance = $this->instanceStore->getInstanceByPath( $path );
 			if ( !$instance ) {
 				continue;
 			}
@@ -85,6 +76,11 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 			return;
 		}
 
+		$isFavourite = false;
+		if ( in_array( $instance->getPath(), $this->favourites ) ) {
+			$isFavourite = true;
+		}
+
 		$server = $this->mainConfig->get( 'Server' );
 		$scriptPath = $instance->getScriptPath( $this->farmConfig );
 		$fullUrl = $server . $scriptPath;
@@ -101,6 +97,7 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 			Record::META_GROUP => '',
 			Record::IS_SYSTEM => $instance instanceof SystemInstanceEntity,
 			Record::INSTANCE_COLOR => $instance->getMetadata()['instanceColor'] ?? null,
+			Record::FAVOURITE => $isFavourite,
 		];
 
 		$data['meta_keywords'] = [];
@@ -117,27 +114,16 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 	}
 
 	/**
-	 * @param string $query
-	 * @param InstanceEntity $instance
-	 * @return bool
+	 * @param User $user
+	 * @return array
 	 */
-	protected function queryMatches( string $query, InstanceEntity $instance ): bool {
-		$name = $instance->getDisplayName();
-		$path = $instance->getPath();
-
-		$name = mb_strtolower( $name );
-		$path = mb_strtolower( $path );
-		$query = mb_strtolower( $query );
-		return str_contains( $name, $query ) || str_contains( $path, $query );
+	private function getFavouriteWikisForCurrentUser( $user ): array {
+		$favouriteOptions = $this->userOptionsLookup->getOption( $user, 'bs-farm-instances-favorite' );
+		if ( !$favouriteOptions ) {
+			return [];
+		}
+		$favourites = explode( ',', $favouriteOptions );
+		return $favourites;
 	}
 
-	/**
-	 * @param DateTime $dateTime
-	 * @return string
-	 */
-	protected function formatTimestamp( DateTime $dateTime ): string {
-		return $this->context->getLanguage()->userTimeAndDate(
-			$dateTime->getTimestamp(), $this->context->getUser(), [ 'timecorrection' => true ]
-		);
-	}
 }
