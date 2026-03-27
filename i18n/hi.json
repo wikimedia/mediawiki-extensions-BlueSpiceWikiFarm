@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Abijeet Patro"
+		]
+	},
+	"wikifarm-ui-access-field-type-user": "सदस्य",
+	"wikifarm-instances-tab-favourite-label": "पसंदीदा",
+	"wikifarm-instances-grid-column-group-header-label": "समूह"
+}

@@ -12,5 +12,7 @@
 	"wikifarm-ui-access-assignee-type-team": "ٹیم",
 	"wikifarm-button-action-label-promote-to-shared": "ٹورو",
 	"wikifarm-ui-access-field-type-team": "ٹیم",
-	"wikifarm-management-breadcrumb-label-create": "بݨاؤ"
+	"wikifarm-management-breadcrumb-label-create": "بݨاؤ",
+	"wikifarm-instances-tab-favourite-label": "پسنداں",
+	"wikifarm-instances-grid-column-wiki-header-label": "وکی"
 }
