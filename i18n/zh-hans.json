@@ -2,7 +2,9 @@
 	"@metadata": {
 		"authors": [
 			"ExoHyper2026",
-			"Peterxy12"
+			"GuoPC",
+			"Peterxy12",
+			"SaoMikoto"
 		]
 	},
 	"wikifarm-desc": "创建和管理wiki农场",
@@ -14,7 +16,7 @@
 	"right-wikifarm-managewiki": "管理wiki设置",
 	"action-wikifarm-managewiki": "管理维基农场",
 	"right-wikifarm-deletewiki": "删除wiki",
-	"action-wikifarm-deletewiki": "刪除wiki",
+	"action-wikifarm-deletewiki": "删除wiki",
 	"apihelp-wikifarm-wiki-instance-store-summary": "从WikiFarm商店查询wiki实例",
 	"apihelp-wikifarm-group-store-summary": "从 WikiFarm 商店查询维基群组",
 	"apihelp-wikifarm-keyword-store-summary": "从 WikiFarm 商店查询 wiki 关键词",
@@ -164,8 +166,9 @@
 	"wikifarm-promote-to-shared-dialog-delete-local-reason": "因为转移到共享资源wiki而被删除",
 	"wikifarm-shared-resources-exists-on-shared": "此页面位于共享资源wiki中。",
 	"wikifarm-instances-menu-empty-favorite-text": "目前没有添加为收藏的wiki实例。您可以点选星形图示，来选择一个实例作为收藏。",
-	"wikifarm-instances-menu-overview-text": "所有wiki",
+	"wikifarm-instances-menu-overview-text": "更多wiki",
 	"wikifarm-instances-menu-favorite-text": "收藏",
-	"wikifarm-instances-menu-button-title": "列出所有wiki实例",
-	"wikifarm-instances-menu-aria-label": "Wiki实例"
+	"wikifarm-instances-menu-button-title": "列出所有wiki",
+	"wikifarm-instances-menu-aria-label": "Wiki",
+	"wikis": "Wiki"
 }
