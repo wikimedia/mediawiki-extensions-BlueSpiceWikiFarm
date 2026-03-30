@@ -7,9 +7,15 @@ bs.bluespiceWikiFarm.ui.InstancePanel = function ( cfg ) {
 	bs.bluespiceWikiFarm.ui.InstancePanel.parent.call( this, cfg );
 	this.favourite = cfg.favourite || false;
 	this.instances = cfg.instances || [];
+	this.farmConfig = ext.bluespiceWikiFarm._config(); // eslint-disable-line no-underscore-dangle
 
 	this.store = new OOJSPlus.ui.data.store.RemoteRestStore( {
-		path: 'bluespice/farm/v1/instance/list',
+		path: 'bluespice/farm/v1/instances/list',
+		sorter: {
+			title: {
+				direction: 'ASC'
+			}
+		},
 		filter: {
 			favourite: {
 				type: 'boolean',
@@ -18,6 +24,11 @@ bs.bluespiceWikiFarm.ui.InstancePanel = function ( cfg ) {
 		},
 		noCache: true
 	} );
+	this.store.connect( this, {
+		loaded: ( values ) => {
+			this.sortValues( values );
+		}
+	} );
 	this.makeGrid();
 	this.$element.addClass( 'wikifarm-instances-list' );
 };
@@ -25,6 +36,7 @@ bs.bluespiceWikiFarm.ui.InstancePanel = function ( cfg ) {
 OO.inheritClass( bs.bluespiceWikiFarm.ui.InstancePanel, OO.ui.PanelLayout );
 
 bs.bluespiceWikiFarm.ui.InstancePanel.prototype.makeGrid = function ( values ) {
+	const farmConfig = this.farmConfig;
 	const gridCfg = {
 		columns: {
 			title: {
@@ -62,7 +74,7 @@ bs.bluespiceWikiFarm.ui.InstancePanel.prototype.makeGrid = function ( values ) {
 				headerText: mw.msg( 'wikifarm-instances-grid-column-favourites-header-label' ),
 				width: 50,
 				valueParser: function ( value, row ) {
-					if ( row.path === 'w' ) {
+					if ( row.path === 'w' || row.path === farmConfig.sharedWikiPath ) {
 						return;
 					}
 					let iconName = 'star';
@@ -106,4 +118,19 @@ bs.bluespiceWikiFarm.ui.InstancePanel.prototype.makeGrid = function ( values ) {
 
 bs.bluespiceWikiFarm.ui.InstancePanel.prototype.reload = function () {
 	this.grid.store.reload();
+};
+
+bs.bluespiceWikiFarm.ui.InstancePanel.prototype.sortValues = function ( values ) {
+	const pinnedPaths = [ 'w', this.farmConfig.sharedWikiPath ].filter( Boolean );
+	const items = Object.values( values ); // eslint-disable-line es-x/no-object-values
+	const pinned = pinnedPaths
+		.map( ( p ) => items.find( ( i ) => i.path === p ) )
+		.filter( Boolean );
+	const rest = items.filter( ( i ) => !pinnedPaths.includes( i.path ) );
+
+	Object.keys( values ).forEach( ( k ) => delete values[ k ] );
+	[ ...pinned, ...rest ].forEach( ( item, i ) => {
+		values[ i ] = item;
+	} );
+	this.grid.setItems( Object.values( values ) ); // eslint-disable-line es-x/no-object-values
 };

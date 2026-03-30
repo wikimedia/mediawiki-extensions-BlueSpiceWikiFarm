@@ -41,6 +41,8 @@ class InstanceEntity {
 	private $config;
 	/** @var string */
 	private $wikiId;
+	/** @var bool */
+	private bool $pinned;
 
 	/**
 	 * @param string $id
@@ -54,10 +56,11 @@ class InstanceEntity {
 	 * @param array $metadata
 	 * @param array $config
 	 * @param string $wikiId
+	 * @param bool $pinned
 	 */
 	public function __construct(
 		string $id, string $path, string $displayName, DateTime $created, DateTime $updated, string $status,
-		string $dbName, string $dbPrefix, array $metadata, array $config, string $wikiId = ''
+		string $dbName, string $dbPrefix, array $metadata, array $config, string $wikiId = '', bool $pinned = false
 	) {
 		$this->id = $id;
 		$this->created = $created;
@@ -70,6 +73,7 @@ class InstanceEntity {
 		$this->updated = $updated;
 		$this->setStatus( $status );
 		$this->wikiId = $wikiId;
+		$this->pinned = $pinned;
 	}
 
 	/**
@@ -217,6 +221,22 @@ class InstanceEntity {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isPinned(): bool {
+		return $this->pinned;
+	}
+
+	/**
+	 * @param bool $pinned
+	 * @return void
+	 */
+	public function setPinned( bool $pinned ) {
+		$this->pinned = $pinned;
+		$this->updateTouched();
+	}
+
+	/**
 	 * @param array $metadata
 	 * @return void
 	 */
@@ -259,7 +279,8 @@ class InstanceEntity {
 			'sfi_meta' => json_encode( $this->metadata ),
 			'sfi_config' => json_encode( $this->config ),
 			'sfi_status' => $this->status,
-			'sfi_wiki_id' => $this->getWikiId()
+			'sfi_wiki_id' => $this->getWikiId(),
+			'sfi_pinned' => (int)$this->pinned
 		];
 	}
 

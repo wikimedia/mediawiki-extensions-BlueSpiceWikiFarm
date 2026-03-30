@@ -97,7 +97,7 @@ class PrimaryDataProvider extends WikiInstancesPrimaryDataProvider {
 			Record::NOTSEARCHABLE => $instance->getMetadata()['notsearchable'] ?? false,
 			Record::META_GROUP => '',
 			Record::IS_SYSTEM => $instance instanceof SystemInstanceEntity,
-			Record::INSTANCE_COLOR => $instance->getMetadata()['instanceColor'] ?? null,
+			Record::INSTANCE_COLOR => $instance->getMetadata()['instanceColor']['background'] ?? null,
 			Record::FAVOURITE => $isFavourite,
 		];
 

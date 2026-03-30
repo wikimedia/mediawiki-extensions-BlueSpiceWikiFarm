@@ -13,7 +13,7 @@ use MediaWiki\User\Options\UserOptionsLookup;
 use MWStake\MediaWiki\Component\CommonWebAPIs\Rest\QueryStore;
 use MWStake\MediaWiki\Component\DataStore\IStore;
 
-class GetUserInstances extends QueryStore {
+class GetInstancesWithFavouriteInfo extends QueryStore {
 
 	/**
 	 * @param HookContainer $hookContainer

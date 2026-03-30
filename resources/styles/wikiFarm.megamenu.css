@@ -1,26 +1,53 @@
 :root {
-	--wiki-instance-card-bg: #f1f3f9;
+	--wiki-instance-card-bg: #f8f9fa;
 	--wiki-instance-fg--active: #3e5389;
+	--wiki-instance-main-bg: #f1f3f9;
 	--wiki-instance-main-fg: #3e5389;
-	--wiki-instance-main-border: #3e5389;
+}
+
+#farm-wikis-mm .mega-menu-wrapper {
+	padding-bottom: 2rem;
 }
 
 .farm-wiki-card-item {
 	display: inline-flex;
 	margin: 5px;
 	padding: 15px;
-	border-radius: 4px;
+	border-radius: 0 4px 4px 0;
 	background-color: var( --wiki-instance-card-bg );
 	width: 200px;
+	justify-content: space-between;
+}
+
+.farm-wiki-card-content {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.farm-wiki-card-desc {
+	font-size: 0.8rem;
+}
+
+.farm-wiki-card-content a {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .farm-wiki-instance-main {
-	border: 1px solid var( --wiki-instance-main-border );
+	background-color: var( --wiki-instance-main-bg );
+	border-radius: 4px;
 	color: var( --wiki-instance-main-fg );
+	justify-content: normal;
+}
+
+.farm-wiki-instance-shared {
+	justify-content: normal;
 }
 
 .farm-wiki-card-favorite-btn,
-.farm-wiki-instance-main span {
+.farm-wiki-card-item span {
 	margin-right: 8px;
 }
 
@@ -31,4 +58,80 @@
 .farm-wiki-instance-overview {
 	margin-top: 12px;
 	text-align: center;
+}
+
+#farm-wikis-current,
+#farm-wikis-quickAccess {
+	min-height: 0;
+	height: 100%;
+}
+
+#farm-wikis-other .farm-wiki-card-item {
+	display: flex;
+}
+
+#farm-wikis-other .oo-ui-layout.oo-ui-fieldLayout {
+	margin-top: 0;
+}
+
+/* ── Skeleton loaders ──────────────────────────────────────────────────── */
+
+@keyframes farm-wikis-shimmer {
+	0% {
+		background-position: 200% 0;
+	}
+
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+.farm-wikis-skeleton {
+	background: linear-gradient( 90deg, #ebebeb 25%, #d6d6d6 50%, #ebebeb 75% );
+	background-size: 200% 100%;
+	animation: farm-wikis-shimmer 1.5s ease-in-out infinite;
+	border-radius: 4px;
+}
+
+/* Section header placeholder – spans ~55 % of the card width */
+.farm-wikis-skeleton--header {
+	height: 1rem;
+	width: 55%;
+	margin: 2px 0;
+}
+
+/* Search-input placeholder (for sections that have a search bar) */
+.farm-wikis-skeleton-search-wrapper {
+	margin: 10px 0;
+}
+
+.farm-wikis-skeleton--search {
+	height: 32px;
+	width: 100%;
+	border-radius: 4px;
+}
+
+/* Skeleton card – reuses .farm-wiki-card-item for identical size/spacing */
+.farm-wiki-card-item .farm-wikis-skeleton--icon {
+	width: 24px;
+	min-width: 24px;
+	height: 24px;
+	margin-right: 8px;
+	align-self: center;
+}
+
+.farm-wiki-card-item .farm-wikis-skeleton--name {
+	height: 14px;
+	width: 110px;
+	margin-bottom: 6px;
+}
+
+.farm-wiki-card-item .farm-wikis-skeleton--desc {
+	height: 10px;
+	width: 70px;
+}
+
+/* Search input inside SearchableInstanceSectionWidget */
+.farm-wikis-section-search {
+	margin: 8px 0 4px;
 }
