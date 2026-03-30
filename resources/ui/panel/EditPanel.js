@@ -153,6 +153,10 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.makeAdvancedOptionsInputs = functio
 	this.color = new ext.bluespiceWikiFarm.ui.widget.InstanceColorWidget();
 	this.color.setValue( this.meta.instanceColor || '' );
 
+	this.pinned = new OO.ui.CheckboxInputWidget( {
+		selected: this.meta.hasOwnProperty( 'pinned' ) ? this.meta.pinned : false
+	} );
+
 	let items = [
 		new OO.ui.FieldLayout( this.groupInput, {
 			align: 'top',
@@ -169,6 +173,12 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.makeAdvancedOptionsInputs = functio
 		new OO.ui.FieldLayout( this.color, {
 			align: 'top',
 			label: mw.message( 'wikifarm-instance-color' ).text()
+		} ).$element,
+		new OO.ui.FieldLayout( this.pinned, {
+			align: 'inline',
+			label: mw.message( 'wikifarm-instance-pinned' ).text(),
+			help: mw.message( 'wikifarm-instance-pinned-help' ).text(),
+			helpInline: true
 		} ).$element
 	];
 	if ( !( this.farmConfig.useUnifiedSearch || false ) ) {
@@ -263,11 +273,11 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.generateSubmitData = function () {
 					group: this.groupInput.getValue(),
 					keywords: this.keywordsInput.getValue(),
 					notsearchable: !this.searchable.getValue(),
-					instanceColor: this.color.getValue()
+					instanceColor: this.color.getValue(),
+					pinned: this.pinned.isSelected()
 				},
 				language: this.language.getValue()
 			};
-
 		dfd.resolve( path, data );
 	} );
 

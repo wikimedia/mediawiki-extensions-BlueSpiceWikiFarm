@@ -94,12 +94,4 @@ $( () => {
 		} );
 	} );
 
-	if ( mw.config.get( 'wgNamespaceNumber' ) === -1 && mw.config.get( 'wgTitle' ) === 'Instances' ) {
-		require( './ui/panel/UserInstancePanel.js' );
-		const $instancesCnt = $( '#bs-wikifarm-user-instances' );
-		if ( $instancesCnt.length ) {
-			const panel = new bs.bluespiceWikiFarm.ui.UserInstancePanel();
-			$instancesCnt.append( panel.$element );
-		}
-	}
 } );

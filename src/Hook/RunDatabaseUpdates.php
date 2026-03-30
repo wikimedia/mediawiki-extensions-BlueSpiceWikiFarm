@@ -27,6 +27,11 @@ class RunDatabaseUpdates implements LoadExtensionSchemaUpdatesHook {
 				'sfi_wiki_id',
 				"$dir/db/$dbType/simple_farmer_instances_wiki_id_patch.sql"
 			);
+			$updater->addExtensionField(
+				'simple_farmer_instances',
+				'sfi_pinned',
+				"$dir/db/$dbType/simple_farmer_instances_pinned_patch.sql"
+			);
 			$updater->addPostDatabaseUpdateMaintenance( PopulateWikiId::class );
 
 			$updater->addExtensionTable(

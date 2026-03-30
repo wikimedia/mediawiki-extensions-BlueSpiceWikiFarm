@@ -17,7 +17,12 @@ class EditInstanceHandler extends CreateInstanceHandler {
 	protected function executeAction( string $instanceName, string $displayName, array $options ): array {
 		$instance = $this->getInstanceEntity( $instanceName );
 		$instance->setDisplayName( $displayName );
-		$instance->setMetadata( $options['metadata'] ?? [] );
+		$metadata = $options['metadata'] ?? [];
+		if ( array_key_exists( 'pinned', $metadata ) ) {
+			$instance->setPinned( (bool)$metadata['pinned'] );
+			unset( $metadata['pinned'] );
+		}
+		$instance->setMetadata( $metadata );
 		$instance->setConfigItem( 'wgLanguageCode', $options['lang'] );
 		$this->getInstanceManager()->getStore()->store( $instance );
 

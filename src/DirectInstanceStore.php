@@ -79,6 +79,22 @@ class DirectInstanceStore {
 	/**
 	 * @return InstanceEntity[]
 	 */
+	public function getPinnedInstances(): array {
+		$res = $this->doQuery( [ 'sfi_pinned' => 1 ] );
+		$instances = [];
+		foreach ( $res as $row ) {
+			$instance = $this->rowToInstance( $row );
+			if ( !$instance ) {
+				continue;
+			}
+			$instances[] = $instance;
+		}
+		return $instances;
+	}
+
+	/**
+	 * @return InstanceEntity[]
+	 */
 	public function getAllInstances(): array {
 		$this->load();
 		return array_values( $this->instances ?? [] );
@@ -254,7 +270,8 @@ class DirectInstanceStore {
 			$object->sfi_db_prefix,
 			json_decode( $object->sfi_meta, 1 ),
 			json_decode( $object->sfi_config, 1 ),
-			$object->sfi_wiki_id ?? ''
+			$object->sfi_wiki_id ?? '',
+			(bool)( $object->sfi_pinned ?? 0 )
 		];
 
 		if ( str_starts_with( $object->sfi_path, '-' ) ) {

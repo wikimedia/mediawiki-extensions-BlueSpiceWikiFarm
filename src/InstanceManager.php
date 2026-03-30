@@ -153,7 +153,12 @@ class InstanceManager {
 			// Not the nicest that this is hardcoded here
 			$instance->setConfigItem( 'wgLanguageCode', $options['lang'] );
 		}
-		$instance->setMetadata( $options['metadata'] ?? [] );
+		$metadata = $options['metadata'] ?? [];
+		if ( array_key_exists( 'pinned', $metadata ) ) {
+			$instance->setPinned( (bool)$metadata['pinned'] );
+			unset( $metadata['pinned'] );
+		}
+		$instance->setMetadata( $metadata );
 		if ( isset( $options['config'] ) ) {
 			foreach ( $options['config'] as $key => $value ) {
 				$instance->setConfigItem( $key, $value );
