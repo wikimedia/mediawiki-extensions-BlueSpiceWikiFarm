@@ -6,7 +6,6 @@
 		]
 	},
 	"useraccess": "Gestion des accès utilisateurs",
-	"wikiteams": "Équipes Wiki",
 	"right-wikifarm-createwiki": "Créer un nouveau wiki",
 	"action-wikifarm-createwiki": "Créer un nouveau wiki",
 	"right-wikifarm-managewiki": "Gérer les paramètres du wiki",
@@ -23,8 +22,6 @@
 	"wikifarm-button-action-label-save": "Enregistrer",
 	"wikifarm-instance-desc": "Description",
 	"wikifarm-lang-code": "Langue",
-	"wikifarm-ui-teams-field-user": "Utilisateur",
-	"wikifarm-ui-teams-action-add-member": "Ajouter un membre",
 	"wikifarm-ui-role-label-editor": "Contributeur",
 	"wikifarm-ui-role-label-reviewer": "Relecteur",
 	"wikifarm-ui-access-wiki-type-protected": "Protégé"
