@@ -243,6 +243,12 @@ class Setup {
 			];
 		}
 
+		// Give opportunity for generic extensions to get ContentTransfer key (instance path)
+		// for current wiki instance.
+		if ( FARMER_CALLED_INSTANCE !== 'w' ) {
+			$GLOBALS['wgContentTransferCurrentWiki'] = FARMER_CALLED_INSTANCE;
+		}
+
 		// Set up root wiki language as "leading language" for BlueSpiceTranslationTransfer
 		$GLOBALS['bsgTranslateTransferLeadingLanguage'] = FARMER_ROOT_WIKI_LANGUAGE_CODE;
 	}
