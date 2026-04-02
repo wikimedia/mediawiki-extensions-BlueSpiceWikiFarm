@@ -199,5 +199,6 @@
 	"wikifarm-instances-favourite-notification-add": "Notification message\nParameters:\n* - $1 name of wiki",
 	"wikifarm-instances-favourite-notification-remove": "Notification message\nParameters:\n* - $1 name of wiki",
 	"wikifarm-favorite-wikis-link": "Link label to special page",
-	"wikifarm-all-wikis-link": "Link label to special page"
+	"wikifarm-all-wikis-link": "Link label to special page",
+	"wikifarm-global-label": "Badge label"
 }

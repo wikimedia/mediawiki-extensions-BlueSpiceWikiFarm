@@ -196,5 +196,6 @@
 	"wikifarm-instances-favourite-notification-add": "$1 added to favourites",
 	"wikifarm-instances-favourite-notification-remove": "$1 removed from favourites",
 	"wikifarm-favorite-wikis-link": "See all favorite wikis",
-	"wikifarm-all-wikis-link": "See all wikis"
+	"wikifarm-all-wikis-link": "See all wikis",
+	"wikifarm-global-label": "Global"
 }
