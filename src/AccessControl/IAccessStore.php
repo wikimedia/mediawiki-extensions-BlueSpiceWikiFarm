@@ -33,4 +33,10 @@ interface IAccessStore {
 	 * @return array
 	 */
 	public function getInstancePathsWhereUserHasRole( UserIdentity $user, string $role ): array;
+
+	/**
+	 * @param string $role
+	 * @return array
+	 */
+	public function getHigherRoles( string $role ): array;
 }
