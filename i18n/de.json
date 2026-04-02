@@ -3,6 +3,7 @@
 		"authors": [
 			"*surak*",
 			"Ameisenigel",
+			"Brettchenweber",
 			"McDutchie"
 		]
 	},
@@ -177,5 +178,23 @@
 	"wikifarm-instances-menu-favorite-text": "Favoriten",
 	"wikifarm-instances-menu-button-title": "Liste mit allen Wiki-Instanzen",
 	"wikifarm-instances-menu-aria-label": "Wiki-Instanzen",
-	"wikifarm-management-breadcrumb-label-create": "Erstellen"
+	"wikifarm-management-breadcrumb-label-create": "Erstellen",
+	"wikifarm-instances-favorite-add-btn-title-label": "Wiki zu den Favoriten hinzufügen",
+	"wikifarm-instances-favorite-remove-btn-title-label": "Wiki aus den Favoriten entfernen",
+	"wikifarm-main-wiki-name": "Haupt-Wiki",
+	"wikifarm-breadcrumb-nav-all-instances-title": "Alle Wiki-Instanzen anzeigen",
+	"wikifarm-breadcrumb-nav-back-to-main-title": "Zurück zum Haupt-Wiki",
+	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Zurück zur Hauptseite",
+	"wikifarm-instances-tab-favourite-label": "Favoriten",
+	"wikifarm-instances-tab-all-label": "Weitere Wikis",
+	"wikifarm-instances-grid-column-wiki-header-label": "Wiki",
+	"wikis": "Wikis",
+	"wikifarm-instances-grid-column-favourites-header-label": "Favorit",
+	"wikifarm-instances-grid-column-group-header-label": "Gruppe",
+	"wikifarm-instances-grid-favourites-label-add": "Zu Favoriten hinzufügen",
+	"wikifarm-instances-grid-favourites-label-remove": "Aus Favoriten entfernen",
+	"wikifarm-instances-favourite-notification-add": "$1 zu den Favoriten hinzufügt",
+	"wikifarm-instances-favourite-notification-remove": "$1 aus den Favoriten entfernt",
+	"wikifarm-favorite-wikis-link": "Alle favorisierten Wikis anzeigen",
+	"wikifarm-all-wikis-link": "Alle Wikis anzeigen"
 }

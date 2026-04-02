@@ -148,7 +148,7 @@
 	"wikifarm-ui-access-action-create-new-rule": "新增分配",
 	"wikifarm-ui-role-label-reader": "讀者",
 	"wikifarm-ui-role-label-editor": "編輯者",
-	"wikifarm-ui-role-label-reviewer": "審查者",
+	"wikifarm-ui-role-label-reviewer": "檢閱者",
 	"wikifarm-ui-role-label-maintainer": "維護者",
 	"wikifarm-ui-access-label-global": "全域分配",
 	"wikifarm-ui-access-confirm-delete-assignment": "您確定要移除此分配嗎？",

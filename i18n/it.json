@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Beta16",
+			"FL2226",
 			"McDutchie"
 		]
 	},
@@ -11,5 +12,30 @@
 	"wikifarm-instance-not-found": "Wiki non trovato",
 	"wikifarm-main-instance-name": "Wiki principale",
 	"wikifarm-ui-teams-action-remove-member": "Rimuovi membro",
-	"wikifarm-button-action-label-promote-to-shared": "Sposta"
+	"wikifarm-button-action-label-promote-to-shared": "Sposta",
+	"wikifarm-instances-menu-overview-text": "Altri wiki",
+	"wikifarm-instances-menu-button-title": "Elenco di tutti gli wiki",
+	"wikifarm-instances-menu-aria-label": "Wiki",
+	"wikifarm-ui-access-field-type-user": "Utente",
+	"wikifarm-management-breadcrumb-label-create": "Crea",
+	"wikifarm-instances-favorite-add-btn-title-label": "Aggiungi il wiki ai preferiti",
+	"wikifarm-instances-favorite-remove-btn-title-label": "Rimuovi il wiki dai preferiti",
+	"wikifarm-instance-advanced-options": "Impostazioni avanzate",
+	"wikifarm-action-purgeinstance-description": "Purge wiki",
+	"wikifarm-main-wiki-name": "Wiki principale",
+	"wikifarm-breadcrumb-nav-all-instances-title": "Mostra tutte le istanze wiki",
+	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Torna alla pagina principale",
+	"wikifarm-access-group-name-user": "Tutti i gruppi",
+	"wikifarm-instances-tab-favourite-label": "Preferiti",
+	"wikifarm-instances-tab-all-label": "Altri wiki",
+	"wikifarm-instances-grid-column-wiki-header-label": "Wiki",
+	"wikis": "Wiki",
+	"wikifarm-instances-grid-column-favourites-header-label": "Preferito",
+	"wikifarm-instances-grid-column-group-header-label": "Gruppo",
+	"wikifarm-instances-grid-favourites-label-add": "Aggiungi ai preferiti",
+	"wikifarm-instances-grid-favourites-label-remove": "Rimuovi dai preferiti",
+	"wikifarm-instances-favourite-notification-add": "$1 aggiunto ai preferiti",
+	"wikifarm-instances-favourite-notification-remove": "$1 rimosso dai preferiti",
+	"wikifarm-favorite-wikis-link": "Vedi tutti gli wiki preferiti",
+	"wikifarm-all-wikis-link": "Vedi tutti gli wiki"
 }

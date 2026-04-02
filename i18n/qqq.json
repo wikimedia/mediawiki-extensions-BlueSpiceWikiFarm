@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"McDutchie"
+			"McDutchie",
+			"Toliño"
 		]
 	},
 	"wikifarm-desc": "Description of Extension:BlueSpiceWikiFarm as listed on [[Special:Version]]",
@@ -196,5 +197,36 @@
 	"wikifarm-instances-menu-favorite-text": "Label for card header in megamenu to list all favorite wikis",
 	"wikifarm-instances-menu-button-title": "Title for megamenu button with list of wiki instances",
 	"wikifarm-instances-menu-aria-label": "Aria label for megamenu button with list of wiki instances",
-	"wikifarm-management-breadcrumb-label-create": "Label for create action in breadcrumb\n{{Identical:Create}}"
+	"wikifarm-management-breadcrumb-label-create": "Label for create action in breadcrumb\n{{Identical:Create}}",
+	"wikifarm-ui-access-field-type-user": "Wiki access level type label\n{{Identical|User}}",
+	"wikifarm-ui-access-field-type-team": "Wiki access level type label\n{{Identical|Team}}",
+	"wikifarm-instance-color": "Field label for wiki color selector",
+	"wikifarm-instance-color-remove": "Label for the button to remove the wiki color",
+	"wikifarm-instances-favorite-add-btn-title-label": "Title for button to add wiki to favorites",
+	"wikifarm-instances-favorite-remove-btn-title-label": "Title for button to remove wiki from favorites",
+	"wikifarm-management-invalid-source-title": "Error message if trying to clone from invalid instance - page title",
+	"wikifarm-management-invalid-source-text": "Error message if trying to clone from invalid instance - error text",
+	"wikifarm-management-invalid-template-title": "Error message if trying to create from invalid template - page title",
+	"wikifarm-management-invalid-template-text": "Error message if trying to create from invalid template - error text",
+	"wikifarm-create-instance-title-from-template": "Page title when creating instance from template.\n$1 - template name",
+	"wikifarm-template-available-templates": "Label for the list of available templates when creating a wiki instance",
+	"wikifarm-instance-advanced-options": "Label for button expanding advanced options when creating a wiki instance",
+	"wikifarm-action-purgeinstance-description": "Description shown for action in management interface",
+	"wikifarm-main-wiki-name": "Display name for the root instance",
+	"wikifarm-breadcrumb-nav-all-instances-title": "Title for breadcrumb instance link",
+	"wikifarm-breadcrumb-nav-back-to-main-title": "Title for breadcrumb main wiki link",
+	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Title for breadcrumb main page link",
+	"wikifarm-access-group-name-user": "Label for the \"user\" group",
+	"wikifarm-instances-tab-favourite-label": "Tab label to show all favorite wikis",
+	"wikifarm-instances-tab-all-label": "Tab label to show all wikis",
+	"wikifarm-instances-grid-column-wiki-header-label": "Grid header label",
+	"wikis": "Special page name",
+	"wikifarm-instances-grid-column-favourites-header-label": "Grid header label",
+	"wikifarm-instances-grid-column-group-header-label": "Grid header label",
+	"wikifarm-instances-grid-favourites-label-add": "Button label to add wiki to favorites",
+	"wikifarm-instances-grid-favourites-label-remove": "Button label to remove wiki from favorites",
+	"wikifarm-instances-favourite-notification-add": "Notification message\nParameters:\n* - $1 name of wiki",
+	"wikifarm-instances-favourite-notification-remove": "Notification message\nParameters:\n* - $1 name of wiki",
+	"wikifarm-favorite-wikis-link": "Link label to special page",
+	"wikifarm-all-wikis-link": "Link label to special page"
 }

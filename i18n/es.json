@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kookoriko",
+			"Monicapozo03"
+		]
+	},
+	"wikifarm-ui-access-field-type-team": "Equipo",
+	"wikifarm-management-breadcrumb-label-create": "Crear",
+	"wikifarm-create-instance-title-from-template": "Crea una nueva wiki desde la plantilla \"$1\"",
+	"wikifarm-breadcrumb-nav-all-instances-title": "Mostrar todas las instancias de la wiki",
+	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Volver a la página principal"
+}
