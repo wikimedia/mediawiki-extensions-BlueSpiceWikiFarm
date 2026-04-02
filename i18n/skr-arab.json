@@ -17,5 +17,7 @@
 	"wikifarm-access-group-name-user": "سارے گروپ",
 	"wikifarm-instances-tab-favourite-label": "پسنداں",
 	"wikifarm-instances-grid-column-wiki-header-label": "وکی",
-	"wikis": "وکیاں"
+	"wikis": "وکیاں",
+	"wikifarm-instances-tab-all-label": "ٻیاں وکیاں",
+	"wikifarm-instances-grid-column-group-header-label": "گروپ"
 }
