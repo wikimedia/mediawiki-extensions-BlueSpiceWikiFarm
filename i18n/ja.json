@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"RhAnish",
 			"Shirayuki"
 		]
 	},
 	"right-wikifarm-createwiki": "ウィキを新規作成",
 	"action-wikifarm-createwiki": "ウィキの新規作成",
 	"right-wikifarm-deletewiki": "ウィキを削除",
-	"action-wikifarm-deletewiki": "ウィキの削除"
+	"action-wikifarm-deletewiki": "ウィキの削除",
+	"wikifarm-management-breadcrumb-label-create": "作成"
 }

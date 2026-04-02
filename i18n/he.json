@@ -102,7 +102,7 @@
 	"wikifarm-promote-to-shared-dialog-delete-local": "מתבצעת מחיקת העותק המקומי",
 	"wikifarm-promote-to-shared-dialog-delete-local-reason": "נמחק עקב העברה לוויקי של משאבים משותפים",
 	"wikifarm-instance-actions": "פעולות",
-	"wikifarm-instance-ctime": "נוצר ב",
+	"wikifarm-instance-ctime": "נוצר ב־",
 	"wikifarm-instance-desc": "תיאור",
 	"wikifarm-instance-group": "קבוצה",
 	"wikifarm-instance-title": "שם האתר",
@@ -115,5 +115,7 @@
 	"wikifarm-ui-access-wiki-type-public": "ציבורי",
 	"wikifarm-ui-access-wiki-type-private": "פרטי",
 	"wikifarm-ui-access-wiki-type-protected": "מוגן",
-	"wikifarm-instances-menu-overview-text": "כל אתרי הוויקי"
+	"wikifarm-instances-menu-overview-text": "כל אתרי הוויקי",
+	"wikifarm-instances-favorite-add-btn-title-label": "הוספת הוויקי למועדפים",
+	"wikifarm-instances-favorite-remove-btn-title-label": "הסרת הוויקי מהמועדפים"
 }
