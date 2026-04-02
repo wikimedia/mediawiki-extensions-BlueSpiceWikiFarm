@@ -4,9 +4,11 @@ namespace BlueSpice\WikiFarm\Hook;
 
 use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\Component\WikiInstancesMenu;
+use BlueSpice\WikiFarm\EnhancedGlobalActionsAdministration;
 use BlueSpice\WikiFarm\GlobalActionsAdministration;
 use BlueSpice\WikiFarm\InstanceStore;
 use MediaWiki\Config\Config;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\User\Options\UserOptionsLookup;
 use MWStake\MediaWiki\Component\CommonUserInterface\Hook\MWStakeCommonUIRegisterSkinSlotComponents;
 
@@ -42,6 +44,7 @@ class CommonUserInterface implements MWStakeCommonUIRegisterSkinSlotComponents {
 	 * @inheritDoc
 	 */
 	public function onMWStakeCommonUIRegisterSkinSlotComponents( $registry ): void {
+		$skin = RequestContext::getMain()->getSkin();
 		$registry->register(
 			'NavbarPrimaryCenterItems',
 			[
@@ -58,7 +61,10 @@ class CommonUserInterface implements MWStakeCommonUIRegisterSkinSlotComponents {
 			'GlobalActionsAdministration',
 			[
 				'ga-bluespice-farmmanagement' => [
-					'factory' => static function () {
+					'factory' => static function () use ( $skin ) {
+						if ( is_a( $skin, 'SkinBlueSpiceEclipseSkin', true ) ) {
+							return new EnhancedGlobalActionsAdministration();
+						}
 						return new GlobalActionsAdministration();
 					}
 				]
