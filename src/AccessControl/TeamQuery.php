@@ -104,6 +104,57 @@ class TeamQuery {
 	}
 
 	/**
+	 * @param array $roles
+	 * @param InstanceEntity $onInstance
+	 * @return array Key is team name, value is group name
+	 */
+	public function getTeamsWithRoles( array $roles, InstanceEntity $onInstance ) {
+		$res = $this->db->newSelectQueryBuilder()
+			->select( 'wtr_team' )
+			->from( 'wiki_team_roles', 'wtr' )
+			->where( [
+				'wtr_role' => $roles,
+				$this->db->makeList( [
+					'wtr_instance IS NULL',
+					'wtr_instance' => $onInstance->getId()
+				], LIST_OR )
+			] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+
+		$teams = [];
+		foreach ( $res as $row ) {
+			$teams[$row->wtr_team] = $this->getTeamGroupName( $row->wtr_team );
+		}
+
+		return $teams;
+	}
+
+	/**
+	 * Get all teams other than teams passed
+	 *
+	 * @param array $teams to filter out
+	 * @return array
+	 */
+	public function invertTeams( array $teams ): array {
+		$invRes = $this->db->newSelectQueryBuilder()
+			->select( 'DISTINCT( wtr_team ) team' )
+			->from( 'wiki_team_roles', 'wtr' )
+			->conds( [
+				'wtr_team NOT IN (' . $this->db->makeList( array_values( $teams ) ) . ')',
+			] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+
+		$inverted = [];
+		foreach ( $invRes as $row ) {
+			$inverted[$row->team] = $this->getTeamGroupName( $row->team );
+		}
+
+		return $inverted;
+	}
+
+	/**
 	 * Get roles assigned to each team for given instance
 	 *
 	 * @param InstanceEntity $instanceEntity

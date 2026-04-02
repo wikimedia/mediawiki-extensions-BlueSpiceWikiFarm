@@ -19,4 +19,11 @@ class NullAccessStore implements IAccessStore {
 	public function getInstancePathsWhereUserHasRole( UserIdentity $user, string $role ): array {
 		return [];
 	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getHigherRoles( string $role ): array {
+		return [];
+	}
 }

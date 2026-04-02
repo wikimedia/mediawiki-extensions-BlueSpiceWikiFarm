@@ -23,16 +23,21 @@ class InstanceGroupCreator {
 	 * @param array $limitToRoles
 	 * @return array
 	 */
-	public function getInstanceGroups( array $limitToRoles = [] ): array {
+	public function getInstanceGroups( array $limitToRoles = [], ?InstanceEntity $limitToInstance = null ): array {
 		$res = [
 			'w' => $this->getGroupsAndRolesForInstancePath( 'w', $limitToRoles )
 		];
-		$instancePaths = $this->store->getInstancePathsQuick( [
-			'sfi_status NOT IN (' . implode( ',', [
-				'\'' . InstanceEntity::STATUS_ARCHIVED . '\'',
-				'\'' . InstanceEntity::STATUS_SUSPENDED . '\'',
-			] ) . ')'
-		] );
+		if ( $limitToInstance ) {
+			$instancePaths = [ $limitToInstance->getPath() ];
+		} else {
+			$instancePaths = $this->store->getInstancePathsQuick( [
+				'sfi_status NOT IN (' . implode( ',', [
+					'\'' . InstanceEntity::STATUS_ARCHIVED . '\'',
+					'\'' . InstanceEntity::STATUS_SUSPENDED . '\'',
+				] ) . ')'
+			] );
+		}
+
 		foreach ( $instancePaths as $instancePath ) {
 			$res[$instancePath] = $this->getGroupsAndRolesForInstancePath( $instancePath, $limitToRoles );
 		}

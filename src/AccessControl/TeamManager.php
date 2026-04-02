@@ -27,24 +27,6 @@ class TeamManager extends TeamQuery {
 	}
 
 	/**
-	 * @param string $team
-	 * @param Authority $actor
-	 * @return void
-	 */
-	public function deleteRolesForTeamName( string $team, Authority $actor ): void {
-		$this->db->newDeleteQueryBuilder()
-			->delete( 'wiki_team_roles' )
-			->where( [
-				'wtr_team' => $team->getId(),
-			] )
-			->caller( __METHOD__ )
-			->execute();
-
-		$this->logToSpecialLog( 'delete', $actor, [ '4::teamName' => $team ] );
-		$this->logger->info( 'Deleted team', [ 'name' => $team ] );
-	}
-
-	/**
 	 * Only one role can be assigned to a team and instance at a time
 	 *
 	 * @param string $role

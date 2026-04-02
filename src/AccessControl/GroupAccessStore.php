@@ -104,6 +104,32 @@ class GroupAccessStore implements IAccessStore {
 	}
 
 	/**
+	 * @param string $role
+	 * @param InstanceEntity|null $forInstance
+	 * @return array
+	 */
+	public function getExcludedGroupsForRole( string $role, ?InstanceEntity $forInstance ) {
+		$possibleGroups = $this->groupCreator->getInstanceGroups( [ $role, ...$this->getHigherRoles( $role ) ], $forInstance );
+		$allowedGroups = array_merge(
+			array_keys( $possibleGroups[$forInstance->getPath()] ?? [] ),
+			array_keys( $possibleGroups['_global'] )
+		);
+		$db = $this->databaseFactory->createSharedUserDatabaseConnection();
+		$excludedRes = $db->newSelectQueryBuilder()
+			->select( 'ug_group' )
+			->from( 'user_groups' )
+			->where( [ 'ug_group NOT IN (' . $db->makeList( $allowedGroups ) . ')' ] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+
+		$excluded = [];
+		foreach ( $excludedRes as $row ) {
+			$excluded[] = $row->ug_group;
+		}
+		return $excluded;
+	}
+
+	/**
 	 * @param UserIdentity $user
 	 * @return array
 	 */
@@ -140,7 +166,7 @@ class GroupAccessStore implements IAccessStore {
 	 * @param string $role
 	 * @return array
 	 */
-	private function getHigherRoles( string $role ): array {
+	public function getHigherRoles( string $role ): array {
 		return static::HIERARCHY[$role] ?? [];
 	}
 
