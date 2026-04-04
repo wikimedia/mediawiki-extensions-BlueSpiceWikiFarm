@@ -26,5 +26,6 @@
 	"wikifarm-access-group-name-user": "Све групе",
 	"wikifarm-instances-grid-column-wiki-header-label": "Вики",
 	"wikis": "Викији",
-	"wikifarm-instances-grid-column-group-header-label": "Група"
+	"wikifarm-instances-grid-column-group-header-label": "Група",
+	"wikifarm-instances-tab-favourite-label": "Омиљени"
 }
