@@ -9,6 +9,7 @@
 	"right-wikifarm-createwiki": "새 위키 생성",
 	"action-wikifarm-createwiki": "새 위키를 만들",
 	"right-wikifarm-managewiki": "위키 팜 관리",
+	"action-wikifarm-managewiki": "위키 팜을 관리할",
 	"action-wikifarm-deletewiki": "위키를 삭제할",
 	"wikifarm-mainpage-content-contact-title": "도움이 필요하신가요?",
 	"wikifarm-farmmanagement-text": "농장 인스턴스",
@@ -64,6 +65,5 @@
 	"wikifarm-instances-grid-favourites-label-remove": "즐겨찾기에서 제거",
 	"wikifarm-instances-favourite-notification-add": "$1 위키가 즐겨찾기에 추가되었습니다",
 	"wikifarm-favorite-wikis-link": "즐겨찾는 모든 위키 보기",
-	"wikifarm-all-wikis-link": "모든 위키 보기",
-	"action-wikifarm-managewiki": "위키 팜을 관리할"
+	"wikifarm-all-wikis-link": "모든 위키 보기"
 }

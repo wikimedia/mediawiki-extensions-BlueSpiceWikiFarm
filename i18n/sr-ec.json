@@ -24,8 +24,8 @@
 	"wikifarm-instance-advanced-options": "Напредна подешавања",
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Назад на почетну",
 	"wikifarm-access-group-name-user": "Све групе",
+	"wikifarm-instances-tab-favourite-label": "Омиљени",
 	"wikifarm-instances-grid-column-wiki-header-label": "Вики",
 	"wikis": "Викији",
-	"wikifarm-instances-grid-column-group-header-label": "Група",
-	"wikifarm-instances-tab-favourite-label": "Омиљени"
+	"wikifarm-instances-grid-column-group-header-label": "Група"
 }
