@@ -601,7 +601,7 @@
 		},
 		"handleTeamGroupStore": {
 			"class": "BlueSpice\\WikiFarm\\AccessControl\\TeamGroupStoreHandling",
-			"services": [ "BlueSpiceWikiFarm.TeamManager" ]
+			"services": [ "BlueSpiceWikiFarm.TeamManager", "BlueSpiceWikiFarm._Config" ]
 		}
 	},
 	"RestRoutes": [
