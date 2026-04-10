@@ -2,6 +2,7 @@
 
 namespace BlueSpice\WikiFarm\AccessControl;
 
+use MediaWiki\Config\Config;
 use MediaWiki\Message\Message;
 use MWStake\MediaWiki\Component\CommonWebAPIs\Hook\MWStakeGroupStoreGroupDisplayNameHook;
 use MWStake\MediaWiki\Component\CommonWebAPIs\Hook\MWStakeGroupStoreGroupTypeFilterHook;
@@ -11,8 +12,13 @@ class TeamGroupStoreHandling implements
 	MWStakeGroupStoreGroupDisplayNameHook
 {
 
+	/**
+	 * @param TeamManager $teamManager
+	 * @param Config $farmConfig
+	 */
 	public function __construct(
-		private readonly TeamManager $teamManager
+		private readonly TeamManager $teamManager,
+		private readonly Config $farmConfig
 	) {
 	}
 
@@ -21,6 +27,9 @@ class TeamGroupStoreHandling implements
 	 * @return void
 	 */
 	public function onMWStakeGroupStoreGroupTypeFilter( array &$types ) {
+		if ( $this->shouldSkip() ) {
+			return;
+		}
 		// Only show wiki-team groups
 		$types = [ 'custom' ];
 	}
@@ -28,6 +37,9 @@ class TeamGroupStoreHandling implements
 	public function onMWStakeGroupStoreGroupDisplayName(
 		string $groupName, string &$displayName, string $groupType
 	): void {
+		if ( $this->shouldSkip() ) {
+			return;
+		}
 		if ( $groupType === 'implicit' && $groupName === 'user' ) {
 			$displayName = Message::newFromKey( 'wikifarm-access-group-name-user' )->text();
 			return;
@@ -39,5 +51,15 @@ class TeamGroupStoreHandling implements
 		if ( str_starts_with( $groupName, $prefix ) ) {
 			$displayName = str_replace( $prefix, '', $groupName );
 		}
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function shouldSkip() {
+		if ( $this->farmConfig->get( 'useGlobalAccessControl' ) ) {
+			return false;
+		}
+		return true;
 	}
 }
