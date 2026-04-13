@@ -336,55 +336,76 @@
 				"wikifarm-widget-combined-title-input-local"
 			]
 		},
-		"ext.bluespice.wikiFarm.access": {
+		"ext.bluespice.wikiFarm.accessManagement": {
 			"scripts": [
-				"ui/panel/WikiAccess.js",
+				"ui/panel/GeneralSettingsPanel.js",
+				"ui/panel/RolesPanel.js",
+				"ui/panel/AccessManagementPanel.js",
 				"ui/widget/WikiAccessEntity.js",
 				"ui/widget/WikiAccessEntityPicker.js",
-				"ui/widget/TeamEntity.js",
 				"ui/dialog/EditAccessAssignmentDialog.js",
-				"ui/dialog/AddAccessAssignmentDialog.js",
-				"wikiAccess.special.js"
+				"ui/dialog/AddRoleAssignmentDialog.js",
+				"accessManagement.special.js"
 			],
 			"styles": [
-				"styles/wikiAccess.less"
+				"styles/accessManagement.less"
 			],
 			"messages": [
+				"wikifarm-access-tab-general-settings",
+				"wikifarm-access-tab-roles",
+				"wikifarm-access-tab-groups",
+				"wikifarm-access-tab-users",
+				"wikifarm-access-general-heading",
+				"wikifarm-access-add-role-assignment",
+				"wikifarm-access-column-group",
+				"wikifarm-access-column-user",
+				"wikifarm-access-unsaved-changes-warning",
+				"wikifarm-access-card-public-desc",
+				"wikifarm-access-card-protected-desc",
+				"wikifarm-access-card-private-desc",
+				"wikifarm-access-field-assignees",
+				"wikifarm-access-field-selected",
+				"wikifarm-access-role-desc-reader",
+				"wikifarm-access-role-desc-editor",
+				"wikifarm-access-role-desc-reviewer",
+				"wikifarm-access-role-desc-admin",
 				"wikifarm-ui-access-field-type",
 				"wikifarm-ui-access-field-key",
+				"wikifarm-ui-access-field-select-entities",
 				"wikifarm-ui-access-field-role",
-				"wikifarm-ui-access-action-create-new-rule",
 				"wikifarm-ui-role-label-reader",
 				"wikifarm-ui-role-label-editor",
 				"wikifarm-ui-role-label-reviewer",
-				"wikifarm-ui-role-label-maintainer",
+				"wikifarm-ui-role-label-admin",
 				"wikifarm-ui-access-label-global",
 				"wikifarm-button-action-label-add",
+				"wikifarm-button-action-label-save",
 				"wikifarm-button-action-label-cancel",
 				"wikifarm-ui-access-confirm-delete-assignment",
 				"wikifarm-ui-access-error-delete-assignment",
-				"wikifarm-ui-access-action-add-assignment",
 				"wikifarm-ui-access-action-delete",
 				"wikifarm-ui-access-action-edit",
 				"wikifarm-ui-access-field-global",
 				"wikifarm-ui-access-action-edit-assignment",
-				"wikifarm-ui-access-assignee-type-team",
 				"wikifarm-ui-access-assignee-type-user",
-				"wikifarm-ui-access-wiki-type-label",
-				"wikifarm-ui-access-assignments-header",
+				"wikifarm-ui-access-assignee-type-group",
+				"wikifarm-ui-access-wiki-type-public",
+				"wikifarm-ui-access-wiki-type-private",
+				"wikifarm-ui-access-wiki-type-protected",
 				"wikifarm-ui-access-success-set-level",
 				"wikifarm-ui-access-error-set-level",
 				"wikifarm-ui-access-field-type-user",
-				"wikifarm-ui-access-field-type-team"
+				"wikifarm-ui-access-field-type-group"
 			],
 			"dependencies": [
-				"ext.oOJSPlus.managerPanel",
-				"user.options",
-				"ext.bluespice",
+				"oojs-ui",
 				"ext.oOJSPlus.data",
 				"ext.oOJSPlus.widgets",
+				"ext.bluespice",
 				"oojs-ui.styles.icons-user",
-				"ext.bluespice.wikiFarm.widget.AccessLevelInput",
+				"oojs-ui.styles.icons-moderation",
+				"oojs-ui.styles.icons-editing-core",
+				"oojs-ui.styles.icons-location",
 				"ext.bluespice.wikiFarm.bootstrap"
 			]
 		},
@@ -521,8 +542,8 @@
 		"SpecialPageBeforeExecute": "addGlobalUnifiedTaskOverviewModule",
 		"BSUserManagerBeforeAddGroup": "addGroupPrefix",
 		"MediaWikiServices": "configureContentTransfer",
-		"MWStakeGroupStoreGroupTypeFilter": "handleTeamGroupStore",
-		"MWStakeGroupStoreGroupDisplayName": "handleTeamGroupStore"
+		"MWStakeGroupStoreGroupTypeFilter": "handleGroupStore",
+		"MWStakeGroupStoreGroupDisplayName": "handleGroupStore"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -593,15 +614,15 @@
 			"class": "BlueSpice\\WikiFarm\\Hook\\AddGlobalUTOModule"
 		},
 		"addGroupPrefix": {
-			"class": "BlueSpice\\WikiFarm\\Hook\\AddUserGroupPrefix",
+			"class": "BlueSpice\\WikiFarm\\Hook\\FilterImplicitGroupCreation",
 			"services": [ "BlueSpiceWikiFarm._Config" ]
 		},
 		"configureContentTransfer": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\Integration\\ConfigureContentTransfer"
 		},
-		"handleTeamGroupStore": {
-			"class": "BlueSpice\\WikiFarm\\AccessControl\\TeamGroupStoreHandling",
-			"services": [ "BlueSpiceWikiFarm.TeamManager", "BlueSpiceWikiFarm._Config" ]
+		"handleGroupStore": {
+			"class": "BlueSpice\\WikiFarm\\AccessControl\\GroupStoreHandling",
+			"services": [ "BlueSpiceWikiFarm.InstanceGroupCreator", "BlueSpiceWikiFarm._Config" ]
 		}
 	},
 	"RestRoutes": [
@@ -697,7 +718,7 @@
 			"path": "/bluespice/farm/v1/access/assign",
 			"class": "BlueSpice\\WikiFarm\\Rest\\AssignRoleToEntityHandler",
 			"services": [
-				"PermissionManager", "BlueSpiceWikiFarm.TeamManager", "UserFactory",
+				"PermissionManager", "BlueSpiceWikiFarm.GroupRoleManager", "UserFactory",
 				"UserGroupManager", "BlueSpiceWikiFarm.InstanceGroupCreator", "BlueSpiceWikiFarm.InstanceStore"
 			]
 		},
@@ -706,7 +727,7 @@
 			"class": "BlueSpice\\WikiFarm\\Rest\\AccessAssignmentsStore",
 			"services": [
 				"HookContainer", "PermissionManager", "BlueSpiceWikiFarm.InstanceGroupCreator",
-				"DBLoadBalancer", "BlueSpiceWikiFarm.TeamManager", "BlueSpiceWikiFarm.InstanceStore"
+				"DBLoadBalancer", "BlueSpiceWikiFarm.GroupRoleManager", "BlueSpiceWikiFarm.InstanceStore"
 			]
 		},
 		{
@@ -757,10 +778,10 @@
 			"value": {}
 		}
 	},
-	"LogTypes": [ "ext-wikifarm", "ext-wikifarm-teams" ],
+	"LogTypes": [ "ext-wikifarm", "ext-wikifarm-access" ],
 	"LogActionsHandlers": {
 		"ext-wikifarm/*": "LogFormatter",
-		"ext-wikifarm-teams/*": "LogFormatter"
+		"ext-wikifarm-access/*": "LogFormatter"
 	},
 	"callback": "BlueSpice\\WikiFarm\\Setup::onRegistration",
 	"manifest_version": 2

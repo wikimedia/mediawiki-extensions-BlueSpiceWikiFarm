@@ -6,7 +6,7 @@ use BlueSpice\UserManager\Hook\BSUserManagerBeforeAddGroupHook;
 use MediaWiki\Config\Config;
 use MediaWiki\Permissions\Authority;
 
-class AddUserGroupPrefix implements BSUserManagerBeforeAddGroupHook {
+class FilterImplicitGroupCreation implements BSUserManagerBeforeAddGroupHook {
 
 	/**
 	 * @param Config $farmConfig
@@ -18,8 +18,12 @@ class AddUserGroupPrefix implements BSUserManagerBeforeAddGroupHook {
 	 * @inheritDoc
 	 */
 	public function onBSUserManagerBeforeAddGroup( string &$name, Authority $actor ) {
-		if ( $this->farmConfig->get( 'useGlobalAccessControl' ) ) {
-			$name = 'team-' . $name;
+		if ( !$this->farmConfig->get( 'useGlobalAccessControl' ) ) {
+			return;
+		}
+		// Disallow creation of groups that match the implicit wiki instance group pattern
+		if ( preg_match( '/^wiki_.*_(reader|editor|reviewer|admin)$/', $name ) ) {
+			return false;
 		}
 	}
 

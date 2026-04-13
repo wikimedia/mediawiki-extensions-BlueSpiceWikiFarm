@@ -19,10 +19,11 @@ ext.bluespiceWikiFarm.ui.widget.WikiAccessEntity.prototype.build = function () {
 			user_name: this.key // eslint-disable-line camelcase
 		} ).$element );
 	}
-	if ( this.type === 'team' ) {
-		this.$element.append( new ext.bluespiceWikiFarm.ui.widget.TeamEntity( {
-			entity_key: this.key // eslint-disable-line camelcase
-		} ).$element );
+	if ( this.type === 'group' ) {
+		const icon = new OO.ui.IconWidget( { icon: 'userGroup' } );
+		const $label = $( '<span>' ).addClass( 'bs-access-group-name' )
+			.text( this.key + ' (' + mw.msg( 'wikifarm-ui-access-assignee-type-group' ) + ')' );
+		this.$element.append( icon.$element, $label );
 	}
 	if ( this.isGlobal ) {
 		this.$element.append( $( '<span>' ).addClass( 'bs-wiki-access-global-label' )

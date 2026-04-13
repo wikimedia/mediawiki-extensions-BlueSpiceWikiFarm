@@ -4,13 +4,13 @@ namespace BlueSpice\WikiFarm\Special;
 
 use MediaWiki\Config\Config;
 use MediaWiki\Html\Html;
-use OOJSPlus\Special\OOJSGridSpecialPage;
+use MediaWiki\SpecialPage\SpecialPage;
 use OOUI\MessageWidget;
 
-class UserAccess extends OOJSGridSpecialPage {
+class AccessManagement extends SpecialPage {
 
 	public function __construct( private readonly Config $farmConfig ) {
-		parent::__construct( 'UserAccess', 'userrights' );
+		parent::__construct( 'AccessManagement', 'userrights' );
 	}
 
 	/**
@@ -18,11 +18,13 @@ class UserAccess extends OOJSGridSpecialPage {
 	 * @return void
 	 */
 	public function execute( $subPage ) {
+		$this->setHeaders();
+		$this->checkPermissions();
+		$this->getOutput()->enableOOUI();
 		$this->addScopeNotice();
-		parent::execute( $subPage );
-		$this->getOutput()->addModules( [ "ext.bluespice.wikiFarm.access" ] );
+		$this->getOutput()->addModules( [ 'ext.bluespice.wikiFarm.accessManagement' ] );
 		$this->getOutput()->addHTML(
-			Html::element( 'div', [ 'id' => 'bs-wiki-access' ] )
+			Html::element( 'div', [ 'id' => 'bs-access-management' ] )
 		);
 		$this->getOutput()->addJsConfigVars( 'wikiFarmIsRoot', FARMER_IS_ROOT_WIKI_CALL );
 		$this->getOutput()->addJsConfigVars( 'wikiFarmAccessLevel', $this->getConfig()->get( 'WikiFarmAccessLevel' ) );
@@ -36,7 +38,6 @@ class UserAccess extends OOJSGridSpecialPage {
 	 * @return void
 	 */
 	private function addScopeNotice() {
-		$this->getOutput()->enableOOUI();
 		$msg = FARMER_IS_ROOT_WIKI_CALL ?
 			$this->msg( 'wikifarm-role-scope-notice-global' ) :
 			$this->msg( 'wikifarm-role-scope-notice-local' );

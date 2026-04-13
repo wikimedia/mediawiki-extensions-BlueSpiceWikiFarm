@@ -4,8 +4,8 @@ namespace BlueSpice\WikiFarm\Tests;
 
 use BlueSpice\Config;
 use BlueSpice\WikiFarm\AccessControl\GroupAccessStore;
+use BlueSpice\WikiFarm\AccessControl\GroupRoleQuery;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
-use BlueSpice\WikiFarm\AccessControl\TeamQuery;
 use BlueSpice\WikiFarm\DirectInstanceStore;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\ManagementDatabaseFactory;
@@ -34,21 +34,21 @@ class AccesssStoreTest extends TestCase {
 		$expectedGlobalGroups = [
 			'wiki__global_reader',
 			'wiki__global_editor',
-			'wiki__global_maintainer',
 			'wiki__global_reviewer',
+			'wiki__global_admin',
 		];
 		$expectedGroupsToCheckTest1 = [
 			'wiki_Test1_reader',
 			'wiki_Test1_editor',
-			'wiki_Test1_maintainer',
 			'wiki_Test1_reviewer',
+			'wiki_Test1_admin',
 			...$expectedGlobalGroups
 		];
 		$expectedGroupsToCheckTest2 = [
 			'wiki_Test2_reader',
 			'wiki_Test2_editor',
-			'wiki_Test2_maintainer',
 			'wiki_Test2_reviewer',
+			'wiki_Test2_admin',
 			...$expectedGlobalGroups
 		];
 		$dbMock->expects( $this->once() )
@@ -69,7 +69,7 @@ class AccesssStoreTest extends TestCase {
 		$accessStore = new GroupAccessStore(
 			$managementDBFactoryMock,
 			$creator,
-			$this->createMock( TeamQuery::class ),
+			$this->createMock( GroupRoleQuery::class ),
 			$this->createMock( Config::class )
 			);
 		$accessStore->userHasRoleOnInstance( $this->getUserMock(), 'reader', $this->getInstanceMock( 'Test1' ) );
@@ -104,7 +104,7 @@ class AccesssStoreTest extends TestCase {
 		$accessStore = new GroupAccessStore(
 			$managementDBFactoryMock,
 			$creator,
-			$this->createMock( TeamQuery::class ),
+			$this->createMock( GroupRoleQuery::class ),
 			$this->createMock( Config::class )
 		);
 		$paths = $accessStore->getInstancePathsWhereUserHasRole( $this->getUserMock(), 'reader' );

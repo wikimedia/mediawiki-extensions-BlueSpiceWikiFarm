@@ -12,9 +12,9 @@ use Wikimedia\ObjectCache\HashBagOStuff;
 class GroupAccessStore implements IAccessStore {
 
 	private const HIERARCHY = [
-		'reader' => [ 'editor', 'maintainer', 'reviewer' ],
-		'editor' => [ 'maintainer', 'reviewer' ],
-		'maintainer' => [ 'reviewer' ],
+		'reader' => [ 'editor', 'reviewer', 'admin' ],
+		'editor' => [ 'reviewer', 'admin' ],
+		'reviewer' => [ 'admin' ],
 	];
 
 	public const ACCESS_LEVELS = [
@@ -27,13 +27,13 @@ class GroupAccessStore implements IAccessStore {
 	/**
 	 * @param ManagementDatabaseFactory $databaseFactory
 	 * @param InstanceGroupCreator $groupCreator
-	 * @param TeamQuery $teamQuery
+	 * @param GroupRoleQuery $groupRoleQuery
 	 * @param Config $farmConfig
 	 */
 	public function __construct(
 		private readonly ManagementDatabaseFactory $databaseFactory,
 		private readonly InstanceGroupCreator $groupCreator,
-		private readonly TeamQuery $teamQuery,
+		private readonly GroupRoleQuery $groupRoleQuery,
 		private readonly Config $farmConfig
 	) {
 		$this->operatingCache = new HashBagOStuff();
@@ -69,7 +69,7 @@ class GroupAccessStore implements IAccessStore {
 		$db->close( __METHOD__ );
 		$hasRole = $res !== false;
 		if ( !$hasRole ) {
-			$hasRole = $this->checkTeams( $user, $role, $instance );
+			$hasRole = $this->checkGroupRoles( $user, $role, $instance );
 		}
 
 		$this->operatingCache->set( $cc, $hasRole );
@@ -156,8 +156,8 @@ class GroupAccessStore implements IAccessStore {
 	 * @param InstanceEntity $instance
 	 * @return bool
 	 */
-	private function checkTeams( UserIdentity $user, string $role, InstanceEntity $instance ): bool {
-		$userRoles = $this->teamQuery->getUserRolesForInstance( $user, $instance );
+	private function checkGroupRoles( UserIdentity $user, string $role, InstanceEntity $instance ): bool {
+		$userRoles = $this->groupRoleQuery->getUserRolesForInstance( $user, $instance );
 		$roles = array_merge( [ $role ], $this->getHigherRoles( $role ) );
 		return !empty( array_intersect( $roles, $userRoles ) );
 	}

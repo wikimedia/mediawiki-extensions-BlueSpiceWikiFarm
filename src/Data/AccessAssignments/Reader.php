@@ -2,8 +2,8 @@
 
 namespace BlueSpice\WikiFarm\Data\AccessAssignments;
 
+use BlueSpice\WikiFarm\AccessControl\GroupRoleManager;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
-use BlueSpice\WikiFarm\AccessControl\TeamManager;
 use BlueSpice\WikiFarm\InstanceEntity;
 use Wikimedia\Rdbms\ILoadBalancer;
 
@@ -13,13 +13,13 @@ class Reader extends \MWStake\MediaWiki\Component\DataStore\Reader {
 	 *
 	 * @param InstanceGroupCreator $instanceGroupCreator
 	 * @param ILoadBalancer $lb
-	 * @param TeamManager $teamManager
+	 * @param GroupRoleManager $groupRoleManager
 	 * @param InstanceEntity $instanceEntity
 	 */
 	public function __construct(
 		private readonly InstanceGroupCreator $instanceGroupCreator,
 		private readonly ILoadBalancer $lb,
-		private readonly TeamManager $teamManager,
+		private readonly GroupRoleManager $groupRoleManager,
 		private readonly InstanceEntity $instanceEntity
 	) {
 		parent::__construct();
@@ -30,7 +30,7 @@ class Reader extends \MWStake\MediaWiki\Component\DataStore\Reader {
 	 * @return PrimaryDataProvider
 	 */
 	protected function makePrimaryDataProvider( $params ) {
-		return new PrimaryDataProvider( $this->instanceGroupCreator, $this->lb, $this->teamManager, $this->instanceEntity );
+		return new PrimaryDataProvider( $this->instanceGroupCreator, $this->lb, $this->groupRoleManager, $this->instanceEntity );
 	}
 
 	protected function makeSecondaryDataProvider() {

@@ -53,8 +53,8 @@ ext.bluespiceWikiFarm.ui.dialog.EditAccessAssignmentDialog.prototype.addItems = 
 					label: mw.message( 'wikifarm-ui-role-label-reviewer' ).text()
 				} ),
 				new OO.ui.MenuOptionWidget( {
-					data: 'maintainer',
-					label: mw.message( 'wikifarm-ui-role-label-maintainer' ).text()
+					data: 'admin',
+					label: mw.message( 'wikifarm-ui-role-label-admin' ).text()
 				} )
 			]
 		}
