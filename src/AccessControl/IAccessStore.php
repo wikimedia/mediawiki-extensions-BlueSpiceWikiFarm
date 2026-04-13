@@ -10,8 +10,8 @@ interface IAccessStore {
 	public const ROLES = [
 		'reader' => [ 'reader' ],
 		'editor' => [ 'reader', 'editor' ],
-		'maintainer' => [ 'reader', 'editor', 'reviewer', 'admin' ],
 		'reviewer' => [ 'reader', 'editor', 'reviewer' ],
+		'admin' => [ 'reader', 'editor', 'reviewer', 'admin' ],
 	];
 
 	/**

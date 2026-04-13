@@ -1,0 +1,110 @@
+#bs-access-management {
+	margin-top: 16px;
+
+	.oo-ui-indexLayout-stackLayout > .oo-ui-panelLayout {
+		padding: 16px;
+	}
+}
+
+/* General setting - Access Level Cards */
+.bs-access-management-general {
+	h3 {
+		margin: 0 0 16px 0;
+		font-size: 1.2em;
+	}
+}
+
+.bs-access-level-cards {
+	display: flex;
+	gap: 16px;
+	margin-bottom: 24px;
+	flex-wrap: wrap;
+}
+
+.bs-access-level-card {
+	flex: 1;
+	min-width: 200px;
+	max-width: 300px;
+	padding: 20px;
+	border: 2px solid #c8ccd1;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+	background: #fff;
+
+	&:hover:not( .bs-access-level-card-disabled ) {
+		border-color: #a2a9b1;
+		box-shadow: 0 2px 8px rgba( 0, 0, 0, 0.1 );
+		background-color: #f8f9fa;
+	}
+
+	&.bs-access-level-card-selected {
+		border-color: #36c;
+		box-shadow: 0 0 0 1px #36c;
+		background-color: #eaf3ff;
+
+		&:hover {
+			background-color: #eaf3ff;
+		}
+	}
+
+	&.bs-access-level-card-disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+
+	.oo-ui-iconWidget {
+		flex-shrink: 0;
+	}
+}
+
+.bs-access-level-card-header {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
+.bs-access-level-card-title {
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+.bs-access-level-card-desc {
+	font-size: 0.9em;
+	color: #54595d;
+	line-height: 1.4;
+}
+
+/* Roles panel */
+.bs-access-management-roles {
+	.bs-access-roles-toolbar {
+		margin-bottom: 16px;
+	}
+}
+
+.bs-access-group-entity {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+
+	.oo-ui-iconWidget {
+		min-width: 20px;
+		min-height: 20px;
+		width: 20px;
+		height: 20px;
+	}
+}
+
+.bs-access-global-badge {
+	display: inline-block;
+	margin-left: 8px;
+	padding: 1px 8px;
+	background-color: #cecece;
+	border-radius: 5px;
+	font-size: 0.85em;
+}
+
+.bs-access-group-name {
+	margin-left: 4px;
+}

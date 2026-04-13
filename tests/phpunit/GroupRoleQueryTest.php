@@ -2,7 +2,7 @@
 
 namespace BlueSpice\WikiFarm\Tests;
 
-use BlueSpice\WikiFarm\AccessControl\TeamQuery;
+use BlueSpice\WikiFarm\AccessControl\GroupRoleQuery;
 use BlueSpice\WikiFarm\InstanceEntity;
 use MediaWiki\User\UserIdentity;
 use PHPUnit\Framework\TestCase;
@@ -15,119 +15,80 @@ if ( !defined( 'MW_ENTRY_POINT' ) ) {
 }
 
 /**
- * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery
+ * @covers \BlueSpice\WikiFarm\AccessControl\GroupRoleQuery
  */
-class TeamQueryTest extends TestCase {
+class GroupRoleQueryTest extends TestCase {
 
 	/**
-	 * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery::getTeamPrefix
-	 */
-	public function testGetTeamPrefix() {
-		$teamQuery = new TeamQuery( $this->createDbMock() );
-		$this->assertSame( 'team-', $teamQuery->getTeamPrefix() );
-	}
-
-	/**
-	 * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery::getTeamGroupName
-	 */
-	public function testGetTeamGroupName() {
-		$teamQuery = new TeamQuery( $this->createDbMock() );
-		$this->assertSame( 'team-developers', $teamQuery->getTeamGroupName( 'developers' ) );
-		$this->assertSame( 'team-', $teamQuery->getTeamGroupName( '' ) );
-	}
-
-	/**
-	 * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery::getAllTeamGroups
-	 */
-	public function testGetAllTeamGroupsReturnsEmptyArrayWhenNoRows() {
-		$db = $this->createDbMock( new FakeResultWrapper( [] ) );
-		$teamQuery = new TeamQuery( $db );
-		$this->assertSame( [], $teamQuery->getAllTeamGroups() );
-	}
-
-	/**
-	 * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery::getAllTeamGroups
-	 */
-	public function testGetAllTeamGroupsReturnsDistinctGroups() {
-		$db = $this->createDbMock( new FakeResultWrapper( [
-			[ 'group' => 'team-alpha' ],
-			[ 'group' => 'team-beta' ],
-		] ) );
-		$teamQuery = new TeamQuery( $db );
-		$result = $teamQuery->getAllTeamGroups();
-		$this->assertSame( [ 'team-alpha', 'team-beta' ], $result );
-	}
-
-	/**
-	 * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery::getUserRolesForInstance
+	 * @covers \BlueSpice\WikiFarm\AccessControl\GroupRoleQuery::getUserRolesForInstance
 	 */
 	public function testGetUserRolesForInstanceReturnsEmptyForUnregisteredUser() {
-		$teamQuery = new TeamQuery( $this->createDbMock() );
+		$query = new GroupRoleQuery( $this->createDbMock() );
 		$user = $this->createMock( UserIdentity::class );
 		$user->method( 'isRegistered' )->willReturn( false );
 		$instance = $this->createInstanceMock( 'test-wiki' );
 
-		$result = $teamQuery->getUserRolesForInstance( $user, $instance );
+		$result = $query->getUserRolesForInstance( $user, $instance );
 		$this->assertSame( [], $result );
 	}
 
 	/**
-	 * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery::getUserRolesForInstance
+	 * @covers \BlueSpice\WikiFarm\AccessControl\GroupRoleQuery::getUserRolesForInstance
 	 */
 	public function testGetUserRolesForInstanceFiltersInvalidRoles() {
 		$db = $this->createDbMock( new FakeResultWrapper( [
-			[ 'ug_group' => 'team-alpha', 'wtr_role' => 'invalid-role' ],
+			[ 'ug_group' => 'group-alpha', 'wtr_role' => 'invalid-role' ],
 		] ) );
-		$teamQuery = new TeamQuery( $db );
+		$query = new GroupRoleQuery( $db );
 		$user = $this->createRegisteredUserMock( 42, 'TestUser' );
 		$instance = $this->createInstanceMock( 'test-wiki', 'inst-1' );
 
-		$result = $teamQuery->getUserRolesForInstance( $user, $instance );
+		$result = $query->getUserRolesForInstance( $user, $instance );
 		$this->assertSame( [], $result );
 	}
 
 	/**
-	 * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery::getUserRolesForInstance
+	 * @covers \BlueSpice\WikiFarm\AccessControl\GroupRoleQuery::getUserRolesForInstance
 	 */
 	public function testGetUserRolesForInstanceReturnsValidRoles() {
 		$db = $this->createDbMock( new FakeResultWrapper( [
-			[ 'ug_group' => 'team-alpha', 'wtr_role' => 'reader' ],
-			[ 'ug_group' => 'team-alpha', 'wtr_role' => 'editor' ],
-			[ 'ug_group' => 'team-alpha', 'wtr_role' => 'invalid-role' ],
+			[ 'ug_group' => 'group-alpha', 'wtr_role' => 'reader' ],
+			[ 'ug_group' => 'group-alpha', 'wtr_role' => 'editor' ],
+			[ 'ug_group' => 'group-alpha', 'wtr_role' => 'invalid-role' ],
 		] ) );
-		$teamQuery = new TeamQuery( $db );
+		$query = new GroupRoleQuery( $db );
 		$user = $this->createRegisteredUserMock( 42, 'TestUser' );
 		$instance = $this->createInstanceMock( 'test-wiki', 'inst-1' );
 
-		$result = $teamQuery->getUserRolesForInstance( $user, $instance );
+		$result = $query->getUserRolesForInstance( $user, $instance );
 		$this->assertContains( 'reader', $result );
 		$this->assertContains( 'editor', $result );
 		$this->assertNotContains( 'invalid-role', $result );
 	}
 
 	/**
-	 * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery::getUserRolesForInstance
+	 * @covers \BlueSpice\WikiFarm\AccessControl\GroupRoleQuery::getUserRolesForInstance
 	 */
 	public function testGetUserRolesForInstanceDeduplicatesRoles() {
 		$db = $this->createDbMock( new FakeResultWrapper( [
-			[ 'ug_group' => 'team-alpha', 'wtr_role' => 'reader' ],
-			[ 'ug_group' => 'team-beta', 'wtr_role' => 'reader' ],
+			[ 'ug_group' => 'group-alpha', 'wtr_role' => 'reader' ],
+			[ 'ug_group' => 'group-beta', 'wtr_role' => 'reader' ],
 		] ) );
-		$teamQuery = new TeamQuery( $db );
+		$query = new GroupRoleQuery( $db );
 		$user = $this->createRegisteredUserMock( 42, 'TestUser' );
 		$instance = $this->createInstanceMock( 'test-wiki', 'inst-1' );
 
-		$result = $teamQuery->getUserRolesForInstance( $user, $instance );
+		$result = $query->getUserRolesForInstance( $user, $instance );
 		$this->assertSame( [ 'reader' ], $result );
 	}
 
 	/**
-	 * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery::getUserRolesForInstance
+	 * @covers \BlueSpice\WikiFarm\AccessControl\GroupRoleQuery::getUserRolesForInstance
 	 */
 	public function testGetUserRolesForInstanceCachesResult() {
 		$qbMock = $this->createSelectQueryBuilderMock(
 			new FakeResultWrapper( [
-				[ 'ug_group' => 'team-alpha', 'wtr_role' => 'reader' ],
+				[ 'ug_group' => 'group-alpha', 'wtr_role' => 'reader' ],
 			] )
 		);
 		$db = $this->getMockBuilder( IDatabase::class )
@@ -139,22 +100,22 @@ class TeamQueryTest extends TestCase {
 		$db->method( 'addQuotes' )->willReturnCallback( static fn ( $s ) => "'$s'" );
 		$db->method( 'tableExists' )->willReturn( true );
 
-		$teamQuery = new TeamQuery( $db );
+		$query = new GroupRoleQuery( $db );
 		$user = $this->createRegisteredUserMock( 42, 'TestUser' );
 		$instance = $this->createInstanceMock( 'test-wiki', 'inst-1' );
 
-		$teamQuery->getUserRolesForInstance( $user, $instance );
-		$teamQuery->getUserRolesForInstance( $user, $instance );
+		$query->getUserRolesForInstance( $user, $instance );
+		$query->getUserRolesForInstance( $user, $instance );
 	}
 
 	/**
-	 * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery::getUserRolesForInstance
-	 * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery::clearCache
+	 * @covers \BlueSpice\WikiFarm\AccessControl\GroupRoleQuery::getUserRolesForInstance
+	 * @covers \BlueSpice\WikiFarm\AccessControl\GroupRoleQuery::clearCache
 	 */
 	public function testClearCacheInvalidatesCache() {
 		$qbMock = $this->createSelectQueryBuilderMock(
 			new FakeResultWrapper( [
-				[ 'ug_group' => 'team-alpha', 'wtr_role' => 'reader' ],
+				[ 'ug_group' => 'group-alpha', 'wtr_role' => 'reader' ],
 			] )
 		);
 		$db = $this->getMockBuilder( IDatabase::class )
@@ -166,58 +127,64 @@ class TeamQueryTest extends TestCase {
 		$db->method( 'addQuotes' )->willReturnCallback( static fn ( $s ) => "'$s'" );
 		$db->method( 'tableExists' )->willReturn( true );
 
-		$teamQuery = new TeamQuery( $db );
+		$query = new GroupRoleQuery( $db );
 		$user = $this->createRegisteredUserMock( 42, 'TestUser' );
 		$instance = $this->createInstanceMock( 'test-wiki', 'inst-1' );
 
-		$teamQuery->getUserRolesForInstance( $user, $instance );
-		$teamQuery->clearCache( $user, $instance );
-		$teamQuery->getUserRolesForInstance( $user, $instance );
+		$query->getUserRolesForInstance( $user, $instance );
+		$query->clearCache( $user, $instance );
+		$query->getUserRolesForInstance( $user, $instance );
 	}
 
 	/**
-	 * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery::getTeamRoles
+	 * @covers \BlueSpice\WikiFarm\AccessControl\GroupRoleQuery::getGroupRoles
 	 */
-	public function testGetTeamRolesReturnsRolesForInstance() {
+	public function testGetGroupRolesReturnsRolesForInstance() {
 		$db = $this->createDbMock( new FakeResultWrapper( [
 			[ 'wtr_team' => 'alpha', 'wtr_role' => 'reader', 'wtr_instance' => 'test-wiki' ],
 			[ 'wtr_team' => 'beta', 'wtr_role' => 'editor', 'wtr_instance' => null ],
 		] ) );
-		$teamQuery = new TeamQuery( $db );
+		$query = new GroupRoleQuery( $db );
 		$instance = $this->createInstanceMock( 'test-wiki' );
 
-		$result = $teamQuery->getTeamRoles( $instance );
+		$result = $query->getGroupRoles( $instance );
 		$this->assertCount( 2, $result );
-		$this->assertSame( [ 'team' => 'alpha', 'role' => 'reader', 'isGlobal' => false ], $result[0] );
-		$this->assertSame( [ 'team' => 'beta', 'role' => 'editor', 'isGlobal' => true ], $result[1] );
+		$this->assertSame( [ 'group' => 'alpha', 'role' => 'reader', 'isGlobal' => false ], $result[0] );
+		$this->assertSame( [ 'group' => 'beta', 'role' => 'editor', 'isGlobal' => true ], $result[1] );
 	}
 
 	/**
-	 * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery::getTeamRoles
+	 * @covers \BlueSpice\WikiFarm\AccessControl\GroupRoleQuery::getGroupRoles
 	 */
-	public function testGetTeamRolesSkipsLegacyNumericTeamIds() {
-		$db = $this->createDbMock( new FakeResultWrapper( [
-			[ 'wtr_team' => '42', 'wtr_role' => 'reader', 'wtr_instance' => 'test-wiki' ],
-			[ 'wtr_team' => 'alpha', 'wtr_role' => 'editor', 'wtr_instance' => 'test-wiki' ],
-		] ) );
-		$teamQuery = new TeamQuery( $db );
-		$instance = $this->createInstanceMock( 'test-wiki' );
-
-		$result = $teamQuery->getTeamRoles( $instance );
-		$this->assertCount( 1, $result );
-		$this->assertSame( 'alpha', $result[0]['team'] );
-	}
-
-	/**
-	 * @covers \BlueSpice\WikiFarm\AccessControl\TeamQuery::getTeamRoles
-	 */
-	public function testGetTeamRolesReturnsEmptyArrayWhenNoRows() {
+	public function testGetGroupRolesReturnsEmptyArrayWhenNoRows() {
 		$db = $this->createDbMock( new FakeResultWrapper( [] ) );
-		$teamQuery = new TeamQuery( $db );
+		$query = new GroupRoleQuery( $db );
 		$instance = $this->createInstanceMock( 'test-wiki' );
 
-		$result = $teamQuery->getTeamRoles( $instance );
+		$result = $query->getGroupRoles( $instance );
 		$this->assertSame( [], $result );
+	}
+
+	/**
+	 * @covers \BlueSpice\WikiFarm\AccessControl\GroupRoleQuery::getAllGroupsWithRoles
+	 */
+	public function testGetAllGroupsWithRolesReturnsDistinctGroups() {
+		$db = $this->createDbMock( new FakeResultWrapper( [
+			[ 'group_name' => 'alpha' ],
+			[ 'group_name' => 'beta' ],
+		] ) );
+		$query = new GroupRoleQuery( $db );
+		$result = $query->getAllGroupsWithRoles();
+		$this->assertSame( [ 'alpha', 'beta' ], $result );
+	}
+
+	/**
+	 * @covers \BlueSpice\WikiFarm\AccessControl\GroupRoleQuery::getAllGroupsWithRoles
+	 */
+	public function testGetAllGroupsWithRolesReturnsEmptyArrayWhenNoRows() {
+		$db = $this->createDbMock( new FakeResultWrapper( [] ) );
+		$query = new GroupRoleQuery( $db );
+		$this->assertSame( [], $query->getAllGroupsWithRoles() );
 	}
 
 	/**

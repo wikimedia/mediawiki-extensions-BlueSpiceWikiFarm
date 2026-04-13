@@ -2,8 +2,8 @@
 
 namespace BlueSpice\WikiFarm\Rest;
 
+use BlueSpice\WikiFarm\AccessControl\GroupRoleManager;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
-use BlueSpice\WikiFarm\AccessControl\TeamManager;
 use BlueSpice\WikiFarm\Data\AccessAssignments\Store;
 use BlueSpice\WikiFarm\InstanceStore;
 use MediaWiki\Context\RequestContext;
@@ -21,7 +21,7 @@ class AccessAssignmentsStore extends QueryStore {
 	 * @param PermissionManager $permissionManager
 	 * @param InstanceGroupCreator $instanceGroupCreator
 	 * @param ILoadBalancer $lb
-	 * @param TeamManager $teamManager
+	 * @param GroupRoleManager $groupRoleManager
 	 * @param InstanceStore $instanceStore
 	 */
 	public function __construct(
@@ -29,7 +29,7 @@ class AccessAssignmentsStore extends QueryStore {
 		private readonly PermissionManager $permissionManager,
 		private readonly InstanceGroupCreator $instanceGroupCreator,
 		private readonly ILoadBalancer $lb,
-		private readonly TeamManager $teamManager,
+		private readonly GroupRoleManager $groupRoleManager,
 		private readonly InstanceStore $instanceStore
 	) {
 		parent::__construct( $hookContainer );
@@ -47,6 +47,6 @@ class AccessAssignmentsStore extends QueryStore {
 		if ( !$instance ) {
 			throw new HttpException( 'Instance not found', 404 );
 		}
-		return new Store( $this->instanceGroupCreator, $this->lb, $this->teamManager, $instance );
+		return new Store( $this->instanceGroupCreator, $this->lb, $this->groupRoleManager, $instance );
 	}
 }

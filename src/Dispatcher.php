@@ -4,9 +4,9 @@ namespace BlueSpice\WikiFarm;
 
 use BlueSpice\ConfigDefinitionFactory;
 use BlueSpice\Permission\RoleManager;
+use BlueSpice\WikiFarm\AccessControl\GroupRoleQuery;
 use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
-use BlueSpice\WikiFarm\AccessControl\TeamQuery;
 use BlueSpice\WikiFarm\MaintenanceScreens\MaintenancePageConstructor;
 use Exception;
 use ForeignAPIRepo;
@@ -343,12 +343,10 @@ class Dispatcher {
 			$instance = new RootInstanceEntity();
 		}
 		$db = ( new ManagementDatabaseFactory( $this->config ) )->createSharedUserDatabaseConnection();
-		$teamQuery = new TeamQuery( $db );
+		$groupRoleQuery = new GroupRoleQuery( $db );
 		$groupCreator = new InstanceGroupCreator( $this->store );
 		// Get groups for each role and each instance
 		$instanceGroups = $groupCreator->getInstanceGroups();
-		// Get groups for each team
-		$teamGroups = $teamQuery->getAllTeamGroups();
 
 		$GLOBALS['bsgGroupRoles'] = [
 			'*' => [],
@@ -374,21 +372,15 @@ class Dispatcher {
 			}
 		}
 
-		// Create group per team
-		foreach ( $teamGroups as $teamGroup ) {
-			$GLOBALS['wgGroupPermissions'][$teamGroup] = [ 'read' => false ];
-			$GLOBALS['wgAdditionalGroups'][$teamGroup] = [];
-			$GLOBALS['wgGroupTypes'][$teamGroup] = 'custom';
-		}
-		// Get roles that each team has on this instance and assign corresponding rights
-		$teamRolesForCurrentInstance = $teamQuery->getTeamRoles( $instance );
-		foreach ( $teamRolesForCurrentInstance as $teamData ) {
-			$teamGroup = $teamQuery->getTeamGroupName( $teamData['team'] );
-			$groupRoles = IAccessStore::ROLES[$teamData['role']] ?? [];
+		// Get roles assigned to groups for this instance and assign corresponding rights
+		$groupRolesForCurrentInstance = $groupRoleQuery->getGroupRoles( $instance );
+		foreach ( $groupRolesForCurrentInstance as $groupData ) {
+			$groupName = $groupData['group'];
+			$groupRoles = IAccessStore::ROLES[$groupData['role']] ?? [];
 			foreach ( $groupRoles as $groupRole ) {
-				$GLOBALS['bsgGroupRoles'][$teamGroup][$groupRole] = true;
+				$GLOBALS['bsgGroupRoles'][$groupName] = $GLOBALS['bsgGroupRoles'][$groupName] ?? [];
+				$GLOBALS['bsgGroupRoles'][$groupName][$groupRole] = true;
 			}
-
 		}
 		$db->close( __METHOD__ );
 
@@ -423,7 +415,7 @@ class Dispatcher {
 		$superAccessGroups = $this->config->get( 'superAccessGroups' ) ?? [];
 		$superAccessGroups = array_merge( $superAccessGroups, [ 'sysop' ] );
 		foreach ( $superAccessGroups as $superGroup ) {
-			$GLOBALS['bsgGroupRoles'][$superGroup] = $GLOBALS['bsgGroupRoles']['wiki__global_maintainer'] ?? [];
+			$GLOBALS['bsgGroupRoles'][$superGroup] = $GLOBALS['bsgGroupRoles']['wiki__global_admin'] ?? [];
 		}
 
 		// Make sure to re-apply the permissions after setup

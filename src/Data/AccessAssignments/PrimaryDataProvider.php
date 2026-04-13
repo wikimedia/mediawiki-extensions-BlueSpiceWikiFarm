@@ -2,8 +2,8 @@
 
 namespace BlueSpice\WikiFarm\Data\AccessAssignments;
 
+use BlueSpice\WikiFarm\AccessControl\GroupRoleManager;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
-use BlueSpice\WikiFarm\AccessControl\TeamManager;
 use BlueSpice\WikiFarm\InstanceEntity;
 use MWStake\MediaWiki\Component\DataStore\IPrimaryDataProvider;
 use MWStake\MediaWiki\Component\DataStore\ReaderParams;
@@ -15,13 +15,13 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 	 *
 	 * @param InstanceGroupCreator $instanceGroupCreator
 	 * @param ILoadBalancer $lb
-	 * @param TeamManager $teamManager
+	 * @param GroupRoleManager $groupRoleManager
 	 * @param InstanceEntity $instanceEntity
 	 */
 	public function __construct(
 		private readonly InstanceGroupCreator $instanceGroupCreator,
 		private readonly ILoadBalancer $lb,
-		private readonly TeamManager $teamManager,
+		private readonly GroupRoleManager $groupRoleManager,
 		private readonly InstanceEntity $instanceEntity
 	) {
 	}
@@ -33,9 +33,9 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 	public function makeData( $params ) {
 		$assignments = $this->getGlobalAssignments();
 		$localUserAssignments = $this->getLocalUserAssignments();
-		$teamAssignments = $this->getTeamAssignments( $this->teamManager->getTeamRoles( $this->instanceEntity ) );
+		$groupAssignments = $this->getGroupAssignments( $this->groupRoleManager->getGroupRoles( $this->instanceEntity ) );
 
-		$assignments = array_merge( $assignments, $localUserAssignments, $teamAssignments );
+		$assignments = array_merge( $assignments, $localUserAssignments, $groupAssignments );
 		$assignments = $this->filterByQuery( $assignments, $params );
 
 		$records = [];
@@ -122,15 +122,15 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 	}
 
 	/**
-	 * @param array $teamRoles
+	 * @param array $groupRoles
 	 * @return array
 	 */
-	private function getTeamAssignments( array $teamRoles ): array {
+	private function getGroupAssignments( array $groupRoles ): array {
 		$assignments = [];
-		foreach ( $teamRoles as $data ) {
+		foreach ( $groupRoles as $data ) {
 			$assignments[] = [
-				'type' => 'team',
-				'key' => $data['team'],
+				'type' => 'group',
+				'key' => $data['group'],
 				'role' => $data['role'],
 				'is_global' => $data['isGlobal'],
 			];

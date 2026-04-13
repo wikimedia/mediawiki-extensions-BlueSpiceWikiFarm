@@ -17,19 +17,19 @@ ext.bluespiceWikiFarm.ui.widget.WikiAccessEntityPicker.prototype.makeLookup = fu
 		mws.commonwebapis.user.query( data ),
 		mws.commonwebapis.group.query( data.query )
 	];
-	$.when.apply( $, promises ).done( ( userData, teamData ) => {
-		const data = { team: [], user: [] }; // eslint-disable-line no-shadow
+	$.when.apply( $, promises ).done( ( userData, groupData ) => {
+		const data = { group: [], user: [] }; // eslint-disable-line no-shadow
 		for ( let i = 0; i < userData.length; i++ ) {
 			data.user.push( {
 				data: userData[ i ],
 				label: userData[ i ].display_name
 			} );
 		}
-		for ( let i = 0; i < teamData.length; i++ ) {
-			data.team.push( {
+		for ( let i = 0; i < groupData.length; i++ ) {
+			data.group.push( {
 				icon: 'userGroup',
-				data: { entityType: 'team', entityKey: teamData[ i ].displayname },
-				label: teamData[ i ].displayname
+				data: { entityType: 'group', entityKey: groupData[ i ].displayname },
+				label: groupData[ i ].displayname
 			} );
 		}
 		dfd.resolve( data );
@@ -52,7 +52,7 @@ ext.bluespiceWikiFarm.ui.widget.WikiAccessEntityPicker.prototype.getLookupMenuOp
 		}
 		items.push( new OO.ui.MenuSectionOptionWidget( {
 			// * wikifarm-ui-access-assignee-type-user
-			// * wikifarm-ui-access-assignee-type-team
+			// * wikifarm-ui-access-assignee-type-group
 			label: mw.msg( 'wikifarm-ui-access-assignee-type-' + group )
 		} ) );
 		for ( i = 0; i < data[ group ].length; i++ ) {
@@ -83,7 +83,7 @@ ext.bluespiceWikiFarm.ui.widget.WikiAccessEntityPicker.prototype.onLookupMenuCho
 			entityKey: item.userWidget.user.user_name
 		};
 	} else {
-		this.setValue( mw.msg( 'wikifarm-ui-access-assignee-type-team' ) + ': ' + item.getLabel() );
+		this.setValue( mw.msg( 'wikifarm-ui-access-assignee-type-group' ) + ': ' + item.getLabel() );
 		this.selectedItem = item.getData();
 	}
 	this.emit( 'choose', this.selectedItem );

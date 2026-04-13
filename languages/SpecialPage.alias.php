@@ -4,7 +4,7 @@ $specialPageAliases = [];
 /** English */
 $specialPageAliases['en'] = [
 	'FarmManagement' => [ 'Farm management', 'SpecialSimpleFarmer', 'SimpleFarmer', 'Farm manager' ],
-	'UserAccess' => [ 'UserAccess', 'User Access' ],
+	'AccessManagement' => [ 'AccessManagement', 'Access Management' ],
 	'Wikis' => [ 'Wikis' ]
 ];
 

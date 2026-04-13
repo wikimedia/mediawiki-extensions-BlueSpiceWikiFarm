@@ -2,7 +2,7 @@
 
 namespace BlueSpice\WikiFarm\Hook;
 
-use BlueSpice\WikiFarm\Special\UserAccess;
+use BlueSpice\WikiFarm\Special\AccessManagement;
 use BlueSpice\WikiFarm\Special\Wikis;
 use MediaWiki\Config\Config;
 use MediaWiki\SpecialPage\Hook\SpecialPage_initListHook;
@@ -18,8 +18,8 @@ class AddSpecialPages implements SpecialPage_initListHook {
 	/** @inheritDoc */
 	public function onSpecialPage_initList( &$list ) {
 		if ( $this->farmConfig->get( 'useGlobalAccessControl' ) ) {
-			$list['UserAccess'] = [
-				'class' => UserAccess::class,
+			$list['AccessManagement'] = [
+				'class' => AccessManagement::class,
 				'services' => [ 'BlueSpiceWikiFarm._Config' ]
 			];
 		}

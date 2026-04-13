@@ -1,9 +1,9 @@
 <?php
 
 use BlueSpice\WikiFarm\AccessControl\GroupAccessStore;
+use BlueSpice\WikiFarm\AccessControl\GroupRoleManager;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
 use BlueSpice\WikiFarm\AccessControl\NullAccessStore;
-use BlueSpice\WikiFarm\AccessControl\TeamManager;
 use BlueSpice\WikiFarm\DirectInstanceStore;
 use BlueSpice\WikiFarm\FarmWikiMap;
 use BlueSpice\WikiFarm\ForeignRequestExecution;
@@ -70,15 +70,15 @@ return [
 		return new GroupAccessStore(
 			$services->getService( 'BlueSpiceWikiFarm.ManagementDatabaseFactory' ),
 			$services->getService( 'BlueSpiceWikiFarm.InstanceGroupCreator' ),
-			$services->getService( 'BlueSpiceWikiFarm.TeamManager' ),
+			$services->getService( 'BlueSpiceWikiFarm.GroupRoleManager' ),
 			$services->getService( 'BlueSpiceWikiFarm._Config' )
 		);
 	},
 	'BlueSpiceWikiFarm.ManagementDatabaseFactory' => static function ( MediaWikiServices $services ) {
 		return new ManagementDatabaseFactory( $services->getService( 'BlueSpiceWikiFarm._Config' ) );
 	},
-	'BlueSpiceWikiFarm.TeamManager' => static function ( MediaWikiServices $services ) {
-		return new TeamManager(
+	'BlueSpiceWikiFarm.GroupRoleManager' => static function ( MediaWikiServices $services ) {
+		return new GroupRoleManager(
 			$services->getDBLoadBalancer()->getConnection( DB_PRIMARY ),
 			$services->getUserFactory(),
 			LoggerFactory::getInstance( 'BlueSpiceWikiFarm.AccessControl' )

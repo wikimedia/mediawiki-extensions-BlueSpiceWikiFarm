@@ -2,8 +2,8 @@
 
 namespace BlueSpice\WikiFarm\Rest;
 
+use BlueSpice\WikiFarm\AccessControl\GroupRoleManager;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
-use BlueSpice\WikiFarm\AccessControl\TeamManager;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\InstanceStore;
 use MediaWiki\Permissions\PermissionManager;
@@ -17,7 +17,7 @@ class AssignRoleToEntityHandler extends RightManagementHandler {
 
 	/**
 	 * @param PermissionManager $permissionManager
-	 * @param TeamManager $teamManager
+	 * @param GroupRoleManager $groupRoleManager
 	 * @param UserFactory $userFactory
 	 * @param UserGroupManager $userGroupManager
 	 * @param InstanceGroupCreator $instanceGroupCreator
@@ -25,7 +25,7 @@ class AssignRoleToEntityHandler extends RightManagementHandler {
 	 */
 	public function __construct(
 		PermissionManager $permissionManager,
-		private readonly TeamManager $teamManager,
+		private readonly GroupRoleManager $groupRoleManager,
 		private readonly UserFactory $userFactory,
 		private readonly UserGroupManager $userGroupManager,
 		private readonly InstanceGroupCreator $instanceGroupCreator,
@@ -39,8 +39,8 @@ class AssignRoleToEntityHandler extends RightManagementHandler {
 		$params = $this->getValidatedBody();
 		if ( $params['entityType'] === 'user' ) {
 			return $this->assignRoleToUser( $params );
-		} elseif ( $params['entityType'] === 'team' ) {
-			return $this->assignRoleToTeam( $params );
+		} elseif ( $params['entityType'] === 'group' ) {
+			return $this->assignRoleToGroup( $params );
 		}
 		throw new HttpException( 'Invalid entity type', 400 );
 	}
@@ -86,20 +86,20 @@ class AssignRoleToEntityHandler extends RightManagementHandler {
 	 * @return Response
 	 * @throws HttpException
 	 */
-	private function assignRoleToTeam( array $params ) {
+	private function assignRoleToGroup( array $params ) {
 		$instance = $this->getInstance();
 		$isGlobal = $params['globalAssignment'];
 		if ( $isGlobal ) {
-			$this->teamManager->removeAllRoles( $params['entityKey'], null, $this->getActor(), (bool)$params['roleName'] );
+			$this->groupRoleManager->removeGroupRoles( $params['entityKey'], null, $this->getActor(), (bool)$params['roleName'] );
 		} else {
-			$this->teamManager->removeAllRoles( $params['entityKey'], $instance, $this->getActor(), (bool)$params['roleName'] );
+			$this->groupRoleManager->removeGroupRoles( $params['entityKey'], $instance, $this->getActor(), (bool)$params['roleName'] );
 		}
 
 		if ( !$params['roleName'] ) {
 			return $this->getResponseFactory()->createJson( [ 'success' => true ] );
 		}
 
-		$this->teamManager->assignRoleToTeam(
+		$this->groupRoleManager->assignRoleToGroup(
 			$params['roleName'], $params['entityKey'], $isGlobal ? null : $instance, $this->getActor()
 		);
 
