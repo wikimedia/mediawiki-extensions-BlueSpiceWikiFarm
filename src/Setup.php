@@ -192,19 +192,24 @@ class Setup {
 		$GLOBALS['wgSharedDB'] = $connection->getDBname();
 		$GLOBALS['wgSharedPrefix'] = $connection->tablePrefix();
 
-		$GLOBALS['wgSharedTables'][] = 'actor';
-		$GLOBALS['wgSharedTables'][] = 'user';
-		$GLOBALS['wgSharedTables'][] = 'user_autocreate_serial';
-		$GLOBALS['wgSharedTables'][] = 'user_groups';
-		$GLOBALS['wgSharedTables'][] = 'block';
-		$GLOBALS['wgSharedTables'][] = 'block_target';
-		$GLOBALS['wgSharedTables'][] = 'wiki_team_roles';
-		$GLOBALS['wgSharedTables'][] = 'user_properties';
+		$sharedTables = [
+			'actor',
+			'user',
+			'user_autocreate_serial',
+			'user_groups',
+			'block',
+			'block_target',
+			'wiki_team_roles',
+			'user_properties',
+			'uto_usertasks',
+		];
 
 		if ( $connection->tableExists( 'wikifarm_session_cache', __METHOD__ ) ) {
-			$GLOBALS['wgSharedTables'][] = 'wikifarm_session_cache';
+			$sharedTables[] = 'wikifarm_session_cache';
 		}
 		$connection->close( __METHOD__ );
+
+		$GLOBALS['wgSharedTables'] = array_merge( $GLOBALS['wgSharedTables'] ?? [], $sharedTables );
 	}
 
 	/**
