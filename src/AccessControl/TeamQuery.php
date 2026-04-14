@@ -137,6 +137,9 @@ class TeamQuery {
 	 * @return array
 	 */
 	public function invertTeams( array $teams ): array {
+		if ( empty( $teams ) ) {
+			return [];
+		}
 		$invRes = $this->db->newSelectQueryBuilder()
 			->select( 'DISTINCT( wtr_team ) team' )
 			->from( 'wiki_team_roles', 'wtr' )
