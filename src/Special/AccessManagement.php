@@ -10,7 +10,12 @@ use OOUI\MessageWidget;
 class AccessManagement extends SpecialPage {
 
 	public function __construct( private readonly Config $farmConfig ) {
-		parent::__construct( 'AccessManagement', 'userrights' );
+		parent::__construct( 'AccessManagement' );
+	}
+
+	/** @inheritDoc */
+	public function getRestriction(): string {
+		return 'userrights';
 	}
 
 	/**

@@ -8,7 +8,7 @@
 	"descriptionmsg": "wikifarm-desc",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.43.0",
+		"MediaWiki": ">= 1.46.0",
 		"extensions": {
 			"BlueSpiceFoundation": ">= 5.0.0",
 			"OOJSPlus": "*"

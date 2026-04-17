@@ -25,7 +25,12 @@ class FarmManagement extends SpecialPage {
 		private readonly InstanceCountLimiter $countLimiter,
 		private readonly InstanceManager $instanceManager
 	) {
-		parent::__construct( 'FarmManagement', 'wikifarm-managewiki' );
+		parent::__construct( 'FarmManagement' );
+	}
+
+	/** @inheritDoc */
+	public function getRestriction(): string {
+		return 'wikifarm-managewiki';
 	}
 
 	/**
