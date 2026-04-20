@@ -207,28 +207,40 @@ class GlobalDatabaseQueryExecution {
 			$this->instances = [];
 			return;
 		}
-		$accessiblePaths = $instances ?? $this->accessStore->getInstancePathsWhereUserHasRole(
-			$user, 'reader'
-		);
+		$accessiblePaths = [];
+		if ( $instances ) {
+			foreach ( $instances as $instance ) {
+				$instanceEntity = $this->instanceStore->getInstanceByPath( $instance );
+				if ( !$instanceEntity )	{
+					continue;
+				}
+				if ( $this->accessStore->userHasRoleOnInstance( $user, 'reader', $instanceEntity ) ) {
+					$accessiblePaths[] = $instanceEntity->getPath();
+				}
+			}
+		} else {
+			$accessiblePaths = $this->accessStore->getInstancePathsWhereUserHasRole(
+				$user, 'reader'
+			);
+		}
 		if ( $this->instances === null ) {
 			$this->instances = [];
 			if ( in_array( 'w', $accessiblePaths ) ) {
 				$this->instances['w'] = new RootInstanceEntity();
 			}
 			$this->instanceDatabases = [];
-			$instances = $this->instanceStore->getAllInstances();
-			foreach ( $instances as $instance ) {
-				$isCurrent = $this->instanceStore->getCurrentInstance() &&
-					$instance->getPath() === $this->instanceStore->getCurrentInstance()->getPath();
-				// TODO: We should probably check for local `reader` role here, but in general,
-				// if you are already on an instance, you can obviously read it
-				if ( !in_array( $instance->getPath(), $accessiblePaths ) && !$isCurrent	) {
+			foreach ( $accessiblePaths as $accessiblePath ) {
+				if ( $accessiblePath === 'w' ) {
+					$instance = new RootInstanceEntity(
+						$this->farmConfig->get( 'managementDBname' ), $this->farmConfig->get( 'managementDBprefix' )
+					);
+				} else {
+					$instance = $this->instanceStore->getInstanceByPath( $accessiblePath );
+				}
+				if ( !$instance ) {
 					continue;
 				}
 				if ( !$instance->isActive() ) {
-					continue;
-				}
-				if ( $instance->getMetadata()['notsearchable'] ?? false ) {
 					continue;
 				}
 				$db = ( new DatabaseFactory() )->create(
