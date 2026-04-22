@@ -151,10 +151,10 @@ class Dispatcher {
 			$this->instance = $this->getInstance( $instanceIdentifier );
 			if (
 				$this->instance &&
-				!( $this->instance instanceof RootInstanceEntity ) &&
+
 				!( $this->instance instanceof NonExistingInstanceEntity )
 			) {
-				if ( !$extractor->extractIsQuiet() ) {
+				if ( !$extractor->extractIsQuiet() && !( $this->instance instanceof RootInstanceEntity ) ) {
 					echo ">>> Running maintenance script for instance '{$this->instance->getDisplayName()}'\n";
 				}
 
@@ -433,11 +433,16 @@ class Dispatcher {
 			// No instance requested
 			return null;
 		}
-		$instance = $this->store->getInstanceByIdOrPath( $id );
+		if ( $id === $this->config->get( 'rootInstanceWikiId' ) || $id === 'w' ) {
+			$instance = new RootInstanceEntity();
+		} else {
+			$instance = $this->store->getInstanceByAny( $id );
+		}
 		if ( $instance ) {
 			// Requested instance exists
 			return $instance;
 		}
+
 		$pathGenerator = new InstancePathGenerator( $this->store );
 		if ( $pathGenerator->checkIfValid( $id ) ) {
 			// Instance does not exist, but could exist

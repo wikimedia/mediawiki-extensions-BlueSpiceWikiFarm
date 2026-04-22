@@ -6,7 +6,7 @@ use MediaWiki\Config\Config;
 use MWStake\MediaWiki\Component\WikiCron\Store\LocalDatabaseStore;
 use Wikimedia\Rdbms\ILoadBalancer;
 
-class WikiCronStore extends LocalDatabaseStore {
+class WikiCronDatabaseStore extends LocalDatabaseStore {
 
 	use GlobalProcessDatabaseTrait;
 
