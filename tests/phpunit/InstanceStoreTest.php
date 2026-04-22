@@ -73,8 +73,9 @@ class InstanceStoreTest extends TestCase {
 		$selectQueryMock->method( 'select' )->willReturnSelf();
 		$selectQueryMock->method( 'where' )->willReturnSelf();
 		$selectQueryMock->method( 'caller' )->willReturnSelf();
-		$selectQueryMock->expects( $this->once() )->method( 'fetchResultSet' )->willReturn( $queryResMock );
-		$dbMock->expects( $this->once() )->method( 'newSelectQueryBuilder' )->willReturn( $selectQueryMock );
+		$selectQueryMock->method( 'options' )->willReturnSelf();
+		$selectQueryMock->expects( $this->exactly( 5 ) )->method( 'fetchResultSet' )->willReturn( $queryResMock );
+		$dbMock->expects( $this->exactly( 5 ) )->method( 'newSelectQueryBuilder' )->willReturn( $selectQueryMock );
 
 		$dbMock->method( 'tableExists' )->willReturn( true );
 
@@ -86,15 +87,22 @@ class InstanceStoreTest extends TestCase {
 		$this->assertInstanceOf( InstanceEntity::class, $instance );
 		$this->assertSame( 'dummyPath', $instance->getPath() );
 		$this->assertNull( $store->getInstanceById( '123' ) );
+		$queryResMock->rewind();
 
 		$instance = $store->getInstanceByPath( 'dummyPath' );
 		$this->assertInstanceOf( InstanceEntity::class, $instance );
 		$this->assertSame( 'dummyPath', $instance->getPath() );
+		$queryResMock->rewind();
 
 		$instance = $store->getInstanceByPath( 'w' );
 		$this->assertInstanceOf( RootInstanceEntity::class, $instance );
 
 		$instance = $store->getInstanceByIdOrPath( 'dummyPath' );
+		$this->assertInstanceOf( InstanceEntity::class, $instance );
+		$this->assertSame( 'dummyPath', $instance->getPath() );
+		$queryResMock->rewind();
+
+		$instance = $store->getInstanceByAny( 'dummyPath' );
 		$this->assertInstanceOf( InstanceEntity::class, $instance );
 		$this->assertSame( 'dummyPath', $instance->getPath() );
 	}

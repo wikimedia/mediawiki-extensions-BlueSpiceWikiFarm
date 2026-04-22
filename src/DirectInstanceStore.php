@@ -93,6 +93,14 @@ class DirectInstanceStore {
 	}
 
 	/**
+	 * @param string $instanceIdentifier
+	 * @return InstanceEntity|null
+	 */
+	public function getInstanceByAny( string $instanceIdentifier ): ?InstanceEntity {
+		return $this->getInstanceByIdOrPath( $instanceIdentifier ) ?? $this->getInstanceByWikiId( $instanceIdentifier );
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getWikiMap(): array {
@@ -109,8 +117,10 @@ class DirectInstanceStore {
 	 * @return InstanceEntity|null
 	 */
 	public function getInstanceById( string $id ) {
-		$this->load();
-		return $this->instances[$id] ?? null;
+		if ( isset( $this->instances[$id] ) ) {
+			return $this->instances[$id];
+		}
+		return $this->getOne( [ 'sfi_id' => $id ] );
 	}
 
 	/**
@@ -124,13 +134,18 @@ class DirectInstanceStore {
 		if ( $path === 'w' || $path === 'wiki' ) {
 			return new RootInstanceEntity();
 		}
-		$this->load();
-		foreach ( $this->instances as $instance ) {
-			if ( $instance->getPath() === $path ) {
-				return $instance;
-			}
+		return $this->getOne( [ 'sfi_path' => $path ] );
+	}
+
+	/**
+	 * @param string $wikiId
+	 * @return InstanceEntity|null
+	 */
+	public function getInstanceByWikiId( string $wikiId ): ?InstanceEntity {
+		if ( !$wikiId ) {
+			return null;
 		}
-		return null;
+		return $this->getOne( [ 'sfi_wiki_id' => $wikiId ] );
 	}
 
 	/**
@@ -160,7 +175,11 @@ class DirectInstanceStore {
 		if ( $res->numRows() === 0 ) {
 			return null;
 		}
-		return $this->rowToInstance( $res->fetchObject() );
+		$instance = $this->rowToInstance( $res->fetchObject() );
+		if ( $instance ) {
+			$this->instances[$instance->getId()] = $instance;
+		}
+		return $instance;
 	}
 
 	/**
@@ -213,7 +232,7 @@ class DirectInstanceStore {
 			$object->sfi_db_prefix,
 			json_decode( $object->sfi_meta, 1 ),
 			json_decode( $object->sfi_config, 1 ),
-			$object->sfr_wiki_id ?? ''
+			$object->sfi_wiki_id ?? ''
 		];
 
 		if ( str_starts_with( $object->sfi_path, '-' ) ) {

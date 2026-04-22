@@ -1,7 +1,6 @@
 <?php
 
 use BlueSpice\WikiFarm\DirectInstanceStore;
-use BlueSpice\WikiFarm\ProcessQueue\FarmProcessQueue;
 use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Config\MultiConfig;
 
@@ -23,13 +22,19 @@ foreach ( $GLOBALS['wgWikiFarmDispatcher']->getFilesToRequire() as $pathname ) {
 }
 
 mwsInitComponents();
-$GLOBALS['mwsgProcessManagerQueue'] = [
-	'class' => FarmProcessQueue::class,
+
+$GLOBALS['mwsgWikiCronStoreConfigs']['farm-shared-database'] = [
+	'class' => \BlueSpice\WikiFarm\ProcessQueue\FarmProcessQueue::class,
 	'args' => [ FARMER_CALLED_INSTANCE, FARMER_IS_ROOT_WIKI_CALL ],
 	'services' => [ 'DBLoadBalancer', 'BlueSpiceWikiFarm._Config' ]
 ];
+
+if ( !$GLOBALS['mwsgWikiCronStore'] || $GLOBALS['mwsgWikiCronStore'] === 'local' ) {
+	$GLOBALS['mwsgWikiCronStore'] = 'farm-shared-database';
+}
+
 $GLOBALS['mwsgWikiCronStore'] = [
-	'class' => \BlueSpice\WikiFarm\ProcessQueue\WikiCronStore::class,
+	'class' => \BlueSpice\WikiFarm\ProcessQueue\WikiCronDatabaseStore::class,
 	'args' => [ FARMER_CALLED_INSTANCE, FARMER_IS_ROOT_WIKI_CALL ],
 	'services' => [ 'DBLoadBalancer', 'BlueSpiceWikiFarm._Config' ]
 ];
