@@ -109,6 +109,10 @@ class TeamQuery {
 	 * @return array Key is team name, value is group name
 	 */
 	public function getTeamsWithRoles( array $roles, InstanceEntity $onInstance ) {
+		if ( !$this->db->tableExists( 'wiki_team_roles', __METHOD__ ) ) {
+			return [];
+		}
+
 		$res = $this->db->newSelectQueryBuilder()
 			->select( 'wtr_team' )
 			->from( 'wiki_team_roles', 'wtr' )
