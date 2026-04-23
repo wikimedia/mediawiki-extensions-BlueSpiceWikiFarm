@@ -3,7 +3,7 @@
 namespace BlueSpice\WikiFarm\ProcessQueue;
 
 use MediaWiki\Config\Config;
-use MWStake\MediaWiki\Component\WikiCron\LocalDatabaseStore;
+use MWStake\MediaWiki\Component\WikiCron\Store\LocalDatabaseStore;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 class WikiCronStore extends LocalDatabaseStore {
