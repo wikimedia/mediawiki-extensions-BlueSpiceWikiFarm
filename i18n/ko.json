@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Bisang",
+			"Tensama0415",
 			"Ykhwong"
 		]
 	},
@@ -65,5 +66,6 @@
 	"wikifarm-instances-grid-favourites-label-remove": "즐겨찾기에서 제거",
 	"wikifarm-instances-favourite-notification-add": "$1 위키가 즐겨찾기에 추가되었습니다",
 	"wikifarm-favorite-wikis-link": "즐겨찾는 모든 위키 보기",
-	"wikifarm-all-wikis-link": "모든 위키 보기"
+	"wikifarm-all-wikis-link": "모든 위키 보기",
+	"wikifarm-global-label": "전역"
 }
