@@ -3,9 +3,12 @@
 	--breadcrumb-default-fg: #fff;
 }
 
-.instance-root-home::after,
 .root-node + .root-node::after {
 	content: '\2022';
+}
+
+li.instance-root-home a {
+	font-size: 1rem;
 }
 
 .breadcrumb-item.instance-rootnode.root-node a {
