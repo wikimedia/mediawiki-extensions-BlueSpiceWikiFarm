@@ -51,7 +51,7 @@ class SharedInstancesRootNode extends BaseBreadcrumbRootProvider {
 			$instanceNode = [
 				'text' => str_replace( '_', ' ', $instanceName ),
 				'href' => $activeInstance->getUrl( $this->farmConfig ),
-				'title' => Message::newFromKey( 'wikifarm-breadcrumb-nav-all-instances-title' )->text(),
+				'title' => $activeInstance->getDisplayName(),
 				'rootNode-class' => [ 'instance-rootnode' ]
 			];
 			if ( $activeInstance->getMetadata()['instanceColor'] ) {

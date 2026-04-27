@@ -177,7 +177,6 @@
 	"wikifarm-instance-advanced-options": "Label for button expanding advanced options when creating a wiki instance",
 	"wikifarm-action-purgeinstance-description": "Description shown for action in management interface",
 	"wikifarm-main-wiki-name": "Display name for the root instance",
-	"wikifarm-breadcrumb-nav-all-instances-title": "Title for breadcrumb instance link",
 	"wikifarm-breadcrumb-nav-back-to-main-title": "Title for breadcrumb main wiki link",
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Title for breadcrumb main page link",
 	"wikifarm-access-group-name-user": "Label for the \"user\" group",
