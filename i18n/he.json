@@ -115,5 +115,6 @@
 	"wikifarm-ui-access-wiki-type-protected": "מוגן",
 	"wikifarm-instances-menu-overview-text": "כל אתרי הוויקי",
 	"wikifarm-instances-favorite-add-btn-title-label": "הוספת הוויקי למועדפים",
-	"wikifarm-instances-favorite-remove-btn-title-label": "הסרת הוויקי מהמועדפים"
+	"wikifarm-instances-favorite-remove-btn-title-label": "הסרת הוויקי מהמועדפים",
+	"wikifarm-global-label": "גלובלי"
 }

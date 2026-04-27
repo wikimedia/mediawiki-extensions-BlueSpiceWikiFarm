@@ -87,5 +87,6 @@
 	"wikifarm-instances-grid-column-wiki-header-label": "Wiki",
 	"wikis": "Wikien",
 	"wikifarm-instances-grid-column-group-header-label": "Grupp",
-	"wikifarm-all-wikis-link": "All Wikie weisen"
+	"wikifarm-all-wikis-link": "All Wikie weisen",
+	"wikifarm-global-label": "Global"
 }
