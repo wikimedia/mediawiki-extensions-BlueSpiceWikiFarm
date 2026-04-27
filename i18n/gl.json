@@ -198,5 +198,6 @@
 	"wikifarm-instances-favourite-notification-add": "«$1» engadiuse aos favoritos",
 	"wikifarm-instances-favourite-notification-remove": "«$1» eliminouse dos favoritos",
 	"wikifarm-favorite-wikis-link": "Ver todos os wikis favoritos",
-	"wikifarm-all-wikis-link": "Ver todos os wikis"
+	"wikifarm-all-wikis-link": "Ver todos os wikis",
+	"wikifarm-global-label": "Global"
 }
