@@ -94,5 +94,6 @@
 	"wikifarm-promote-to-shared-dialog-delete-local-reason": "נמחק עקב העברה לוויקי של משאבים משותפים",
 	"wikifarm-instances-menu-overview-text": "כל אתרי הוויקי",
 	"wikifarm-instances-favorite-add-btn-title-label": "הוספת הוויקי למועדפים",
-	"wikifarm-instances-favorite-remove-btn-title-label": "הסרת הוויקי מהמועדפים"
+	"wikifarm-instances-favorite-remove-btn-title-label": "הסרת הוויקי מהמועדפים",
+	"wikifarm-global-label": "גלובלי"
 }

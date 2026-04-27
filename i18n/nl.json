@@ -200,5 +200,6 @@
 	"wikifarm-instances-favourite-notification-add": "$1 toegevoegd aan favorieten",
 	"wikifarm-instances-favourite-notification-remove": "$1 verwijderd uit favorieten",
 	"wikifarm-favorite-wikis-link": "Alle favoriete wiki's bekijken",
-	"wikifarm-all-wikis-link": "Alle wiki's bekijken"
+	"wikifarm-all-wikis-link": "Alle wiki's bekijken",
+	"wikifarm-global-label": "Globaal"
 }
