@@ -20,7 +20,7 @@
 		"ifsnop/mysqldump-php": "v2.4",
 		"icamys/php-sitemap-generator": "~4.7",
 		"mwstake/mediawiki-component-processmanager": "~5",
-		"mwstake/mediawiki-component-wikicron": "~2"
+		"mwstake/mediawiki-component-wikicron": "~4"
 	},
 	"require-dev": {
 		"mediawiki/mediawiki-codesniffer": "45.0.0",
