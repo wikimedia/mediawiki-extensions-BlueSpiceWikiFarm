@@ -36,5 +36,12 @@
 	"wikifarm-instances-favourite-notification-add": "$1 aggiunto ai preferiti",
 	"wikifarm-instances-favourite-notification-remove": "$1 rimosso dai preferiti",
 	"wikifarm-favorite-wikis-link": "Vedi tutti gli wiki preferiti",
-	"wikifarm-all-wikis-link": "Vedi tutti gli wiki"
+	"wikifarm-all-wikis-link": "Vedi tutti gli wiki",
+	"wikifarm-ui-access-field-select-entities": "Seleziona gruppi o utenti",
+	"wikifarm-ui-access-assignee-type-group": "Gruppo",
+	"wikifarm-ui-access-field-type-group": "Gruppo",
+	"wikifarm-access-tab-general-settings": "Impostazione generale",
+	"wikifarm-access-tab-groups": "Gruppi",
+	"wikifarm-access-column-user": "Utente",
+	"logentry-ext-wikifarm-access-remove-all-roles": "$1 {{GENDER:$2|ha rimosso}} tutti i ruoli dal gruppo \"$4\""
 }
