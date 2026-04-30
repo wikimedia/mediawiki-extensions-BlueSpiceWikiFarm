@@ -23,14 +23,14 @@ foreach ( $GLOBALS['wgWikiFarmDispatcher']->getFilesToRequire() as $pathname ) {
 
 mwsInitComponents();
 
-$GLOBALS['mwsgWikiCronStoreConfigs']['farm-shared-database'] = [
+$GLOBALS['mwsgProcessManagerQueue']['farm-shared-database'] = [
 	'class' => \BlueSpice\WikiFarm\ProcessQueue\FarmProcessQueue::class,
 	'args' => [ FARMER_CALLED_INSTANCE, FARMER_IS_ROOT_WIKI_CALL ],
 	'services' => [ 'DBLoadBalancer', 'BlueSpiceWikiFarm._Config' ]
 ];
 
-if ( !$GLOBALS['mwsgWikiCronStore'] || $GLOBALS['mwsgWikiCronStore'] === 'local' ) {
-	$GLOBALS['mwsgWikiCronStore'] = 'farm-shared-database';
+if ( !$GLOBALS['mwsgProcessManagerQueue'] || $GLOBALS['mwsgProcessManagerQueue'] === 'local' ) {
+	$GLOBALS['mwsgProcessManagerQueue'] = 'farm-shared-database';
 }
 
 $GLOBALS['mwsgWikiCronStore'] = [
