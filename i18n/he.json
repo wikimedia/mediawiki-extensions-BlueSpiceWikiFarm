@@ -95,5 +95,12 @@
 	"wikifarm-instances-menu-overview-text": "כל אתרי הוויקי",
 	"wikifarm-instances-favorite-add-btn-title-label": "הוספת הוויקי למועדפים",
 	"wikifarm-instances-favorite-remove-btn-title-label": "הסרת הוויקי מהמועדפים",
-	"wikifarm-global-label": "גלובלי"
+	"wikifarm-global-label": "גלובלי",
+	"accessmanagement": "ניהול גישה",
+	"wikifarm-ui-access-field-select-entities": "בחירת קבוצות או משתמשים",
+	"wikifarm-ui-role-label-admin": "מפעיל",
+	"wikifarm-access-tab-groups": "קבוצות",
+	"wikifarm-access-tab-users": "משתמשים",
+	"wikifarm-access-column-user": "משתמש",
+	"log-description-ext-wikifarm-access": "יומן ניהול גישה לוויקי"
 }

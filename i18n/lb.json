@@ -80,5 +80,15 @@
 	"wikis": "Wikien",
 	"wikifarm-instances-grid-column-group-header-label": "Grupp",
 	"wikifarm-all-wikis-link": "All Wikie weisen",
-	"wikifarm-global-label": "Global"
+	"wikifarm-global-label": "Global",
+	"wikifarm-ui-role-label-admin": "Admin",
+	"wikifarm-ui-access-assignee-type-group": "Grupp",
+	"wikifarm-ui-access-field-type-group": "Grupp",
+	"wikifarm-access-tab-general-settings": "Allgemeng Astellungen",
+	"wikifarm-access-tab-groups": "Gruppen",
+	"wikifarm-access-tab-users": "Benotzer",
+	"wikifarm-access-column-group": "Grupp",
+	"wikifarm-access-column-user": "Benotzer",
+	"wikifarm-access-unsaved-changes-warning": "Dir hutt net gespäichert Ännerungen. Wëllt Dir se verwerfen?",
+	"wikifarm-access-field-assignees": "Gruppen/Benotzer"
 }

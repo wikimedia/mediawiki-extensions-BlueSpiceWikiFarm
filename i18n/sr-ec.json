@@ -27,5 +27,7 @@
 	"wikifarm-instances-tab-favourite-label": "Омиљени",
 	"wikifarm-instances-grid-column-wiki-header-label": "Вики",
 	"wikis": "Викији",
-	"wikifarm-instances-grid-column-group-header-label": "Група"
+	"wikifarm-instances-grid-column-group-header-label": "Група",
+	"wikifarm-ui-role-label-admin": "Админ",
+	"wikifarm-ui-access-field-type-group": "Група"
 }
