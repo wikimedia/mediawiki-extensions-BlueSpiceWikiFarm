@@ -6,7 +6,6 @@
 	},
 	"wikifarm-desc": "ਵਿਕੀ ਪੈਲੀ ਸਿਰਜੋ ਅਤੇ ਸੰਭਾਲੋ",
 	"farmmanagement": "ਪੈਲੀ ਸਾਂਭ-ਸੰਭਾਲ",
-	"useraccess": "ਵਰਤੋਂਕਾਰ ਲਾਂਘਾ ਸਾਂਭ-ਸੰਭਾਲ",
 	"right-wikifarm-deletewiki": "ਵਿਕੀ ਮਿਟਾਓ",
 	"action-wikifarm-deletewiki": "ਵਿਕੀ ਮਿਟਾਓ",
 	"wikifarm-widget-combined-title-input-local": "ਇਹ ਵਿਕੀ",
@@ -20,7 +19,6 @@
 	"wikifarm-template-available-templates": "ਪਹਿਲਾਂ ਤੋਂ ਹੀ ਬਣਿਆ-ਬਣਾਇਆ ਫਰਮਾ ਚੁਣੋ",
 	"wikifarm-instance-advanced-options": "ਵਧੇਰੇ ਤਰਜੀਹਾਂ",
 	"wikifarm-main-wiki-name": "ਮੁੱਢਲੀ ਵਿਕੀ",
-	"wikifarm-breadcrumb-nav-all-instances-title": "ਵਿਕੀ ਦੇ ਸਾਰੇ ਰੂਪ ਵਿਖਾਓ",
 	"wikifarm-breadcrumb-nav-back-to-main-title": "ਮੁੱਢਲੀ ਵਿਕੀ 'ਤੇ ਪਰਤੋ",
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "ਮੁੱਢਲੇ ਵਰਕੇ ਉੱਤੇ ਪਰਤੋ",
 	"wikifarm-access-group-name-user": "ਸਾਰੀਆਂ ਢਾਣੀਆਂ"
