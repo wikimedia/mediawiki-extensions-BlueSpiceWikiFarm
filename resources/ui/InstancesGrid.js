@@ -31,7 +31,7 @@ ext.bluespiceWikiFarm.ui.InstancesGrid = function ( config ) { // eslint-disable
 				}
 				if ( !row.is_complete ) {
 					return new OO.ui.HtmlSnippet( $( '<span>' ).css( {
-						color: 'grey'
+						color: '#747474'
 					} ).attr( 'title', mw.msg( 'wikifarm-incomplete-instance' ) ).text( row.title ) );
 				}
 
@@ -95,6 +95,20 @@ ext.bluespiceWikiFarm.ui.InstancesGrid = function ( config ) { // eslint-disable
 		type: 'text',
 		sortable: false,
 		filter: { type: 'text' }
+	};
+	columns.meta_creator = { // eslint-disable-line camelcase
+		headerText: mw.message( 'wikifarm-instance-creator' ).plain(),
+		type: 'user',
+		sortable: true,
+		filter: { type: 'user' },
+		valueParser: function ( value ) {
+			if ( value === '' ) {
+				return new OO.ui.HtmlSnippet( $( '<i>' ).css( {
+					'font-size': '0.8rem', color: '#747474'
+				} ).text( mw.message( 'wikifarm-instance-creator-no-info-label' ).text() ) );
+			}
+			return value;
+		}
 	};
 
 	ext.bluespiceWikiFarm.ui.InstancesGrid.parent.call( this, {

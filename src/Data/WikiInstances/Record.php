@@ -15,4 +15,6 @@ class Record extends \MWStake\MediaWiki\Component\DataStore\Record {
 	public const IS_SYSTEM = 'is_system';
 
 	public const INSTANCE_COLOR = 'instance_color';
+
+	public const META_CREATOR = 'meta_creator';
 }

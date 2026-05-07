@@ -154,6 +154,9 @@ class InstanceManager {
 			$instance->setConfigItem( 'wgLanguageCode', $options['lang'] );
 		}
 		$metadata = $options['metadata'] ?? [];
+		if ( isset( $options['userName'] ) ) {
+			$metadata['creator'] = $options['userName'];
+		}
 		if ( array_key_exists( 'pinned', $metadata ) ) {
 			$instance->setPinned( (bool)$metadata['pinned'] );
 			unset( $metadata['pinned'] );

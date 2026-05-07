@@ -186,7 +186,9 @@
 				"wikifarm-edit-instance",
 				"wikifarm-instance-path",
 				"wikifarm-remove-instance",
-				"wikifarm-incomplete-instance"
+				"wikifarm-incomplete-instance",
+				"wikifarm-instance-creator",
+				"wikifarm-instance-creator-no-info-label"
 			],
 			"dependencies": [
 				"oojs-ui",

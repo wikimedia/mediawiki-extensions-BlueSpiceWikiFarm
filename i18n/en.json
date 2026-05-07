@@ -70,6 +70,8 @@
 	"wikifarm-error-unknown-instance": "Unknown wiki",
 	"wikifarm-group-undefined": "No group",
 	"wikifarm-instance-create-edit-error": "An error occurred while storing the wiki data. Please try again or contact your administrator.",
+	"wikifarm-instance-creator": "Created by",
+	"wikifarm-instance-creator-no-info-label": "No information available",
 	"wikifarm-instance-ctime": "Created at",
 	"wikifarm-instance-desc": "Description",
 	"wikifarm-instance-group": "Group",
