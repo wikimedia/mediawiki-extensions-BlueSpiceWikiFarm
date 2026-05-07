@@ -73,6 +73,8 @@
 	"wikifarm-error-unknown-instance": "Error message when the instance is unknown",
 	"wikifarm-group-undefined": "Group label when no group is defined",
 	"wikifarm-instance-create-edit-error": "Error message when the instance creation or edit fails",
+	"wikifarm-instance-creator": "Field/column label",
+	"wikifarm-instance-creator-no-info-label": "Label if no creator info is available",
 	"wikifarm-instance-ctime": "Field/column label",
 	"wikifarm-instance-desc": "Field/column label",
 	"wikifarm-instance-group": "Field/column label",

@@ -106,6 +106,7 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 		$data['meta_keywords'] = [];
 		$data['meta_group'] = '';
 		$data['meta_desc'] = '';
+		$data['meta_creator'] = '';
 		foreach ( $instance->getMetadata() as $key => $value ) {
 			if ( $key === 'notsearchable' ) {
 				continue;
