@@ -7,7 +7,11 @@ OO.inheritClass( ext.bluespiceWikiFarm.ui.dialog.RemoveInstanceDialog, ext.blues
 
 ext.bluespiceWikiFarm.ui.dialog.RemoveInstanceDialog.static.title = mw.message( 'wikifarm-remove-instance' ).plain();
 ext.bluespiceWikiFarm.ui.dialog.RemoveInstanceDialog.static.actions = [
-	{ action: 'close', label: mw.message( 'wikifarm-button-action-label-cancel' ).text(), flags: 'safe' },
+	{
+		action: 'close',
+		label: mw.message( 'wikifarm-button-action-label-cancel' ).text(),
+		flags: [ 'safe', 'close' ]
+	},
 	{
 		action: 'submit',
 		label: mw.message( 'wikifarm-button-action-label-delete' ).text(),

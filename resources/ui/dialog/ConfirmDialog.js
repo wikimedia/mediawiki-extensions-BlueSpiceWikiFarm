@@ -11,7 +11,11 @@ ext.bluespiceWikiFarm.ui.dialog.ConfirmDialog = function ( config ) {
 OO.inheritClass( ext.bluespiceWikiFarm.ui.dialog.ConfirmDialog, ext.bluespiceWikiFarm.ui.dialog.TaskDialog );
 
 ext.bluespiceWikiFarm.ui.dialog.ConfirmDialog.static.actions = [
-	{ action: 'close', label: mw.message( 'wikifarm-button-action-label-cancel' ).text(), flags: 'safe' },
+	{
+		action: 'close',
+		label: mw.message( 'wikifarm-button-action-label-cancel' ).text(),
+		flags: [ 'safe', 'close' ]
+	},
 	{
 		action: 'save',
 		label: mw.message( 'wikifarm-button-action-label-save' ).text(),
