@@ -124,6 +124,11 @@
 					"name": "farmConfig.json",
 					"callback": "BlueSpice\\WikiFarm\\Setup::getClientConfig"
 				}
+			],
+			"messages": [
+				"wikifarm-instances-favourite-notification-add",
+				"wikifarm-instances-favourite-notification-remove",
+				"wikifarm-instances-favourite-notification-error"
 			]
 		},
 		"ext.bluespice.wikiFarm.tag.wikifarmlist": {

@@ -12,6 +12,7 @@ use MediaWiki\Config\Config;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\User\User;
+use Wikimedia\Rdbms\IDBAccessObject;
 
 class PrimaryDataProvider extends WikiInstancesPrimaryDataProvider {
 
@@ -50,12 +51,12 @@ class PrimaryDataProvider extends WikiInstancesPrimaryDataProvider {
 		$user = $this->context->getUser();
 		$this->favourites = $this->getFavouriteWikisForCurrentUser( $user );
 		$paths = $this->accessStore->getInstancePathsWhereUserHasRole( $user, 'reader' );
-		foreach ( $paths as $path ) {
-			$instance = $this->instanceStore->getInstanceByPath( $path );
-			if ( !$instance ) {
-				continue;
-			}
+		if ( empty( $paths ) ) {
+			return [];
+		}
 
+		$instances = $this->instanceStore->getMultiple( 'sfi_path', $paths );
+		foreach ( $instances as $instance ) {
 			if ( !$params->getQuery() || $this->queryMatches( $params->getQuery(), $instance ) ) {
 				$this->appendToData( $instance );
 			}
@@ -118,12 +119,15 @@ class PrimaryDataProvider extends WikiInstancesPrimaryDataProvider {
 	 * @return array
 	 */
 	private function getFavouriteWikisForCurrentUser( $user ): array {
-		$favouriteOptions = $this->userOptionsLookup->getOption( $user, 'bs-farm-instances-favorite' );
+		$favouriteOptions = $this->userOptionsLookup->getOption( $user, 'bs-farm-instances-favorite', null, false, IDBAccessObject::READ_LATEST );
 		if ( !$favouriteOptions ) {
 			return [];
 		}
 		$favourites = explode( ',', $favouriteOptions );
-		return $favourites;
+		return array_map(
+			fn ( $item ) => trim( $item ),
+			$favourites
+		);
 	}
 
 }

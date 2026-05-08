@@ -7,7 +7,7 @@
 	],
 	"parserOptions": {
 		"sourceType": "commonjs",
-		"ecmaVersion": 2017
+		"ecmaVersion": 2019
 	},
 	"globals": {
 		"bs": "readonly",
@@ -20,6 +20,9 @@
 	"rules": {
 		"max-len": "off",
 		"es-x/no-array-prototype-flat": "off",
+		"es-x/no-array-prototype-includes": "off",
+		"es-x/no-async-functions": "off",
+		"es-x/no-optional-catch-binding": "off",
 		"no-jquery/no-class-state": "off",
 		"no-jquery/no-global-selector": "off",
 		"no-prototype-builtins": "off"

@@ -15,7 +15,8 @@ bs.bluespiceWikiFarm.ui.InstancePanel = function ( cfg ) {
 				type: 'boolean',
 				value: this.favourite
 			}
-		}
+		},
+		noCache: true
 	} );
 	this.makeGrid();
 	this.$element.addClass( 'wikifarm-instances-list' );
@@ -80,30 +81,16 @@ bs.bluespiceWikiFarm.ui.InstancePanel.prototype.makeGrid = function ( values ) {
 						label: mw.message( 'wikifarm-instances-grid-favourites-label-' + action ).text()
 					} );
 					button.connect( this, {
-						click: () => {
-							const options = mw.user.options.get( 'bs-farm-instances-favorite' );
-							const val = row.path;
-							let newVal = '';
-							let favouriteAction = 'add';
-							if ( row.favourite ) {
-								newVal = options.replace( val + ',', '' );
-								favouriteAction = 'remove';
-							} else {
-								newVal = options + val + ',';
-							}
-							mw.loader.using( [ 'mediawiki.api' ] ).done( () => {
-								mw.user.options.set( 'bs-farm-instances-favorite', newVal );
-								new mw.Api().saveOption( 'bs-farm-instances-favorite', newVal ).done( () => {
-									// The following messages are used here:
-									// * wikifarm-instances-favourite-notification-add
-									// * wikifarm-instances-favourite-notification-remove
-									mw.notify(
-										mw.message( 'wikifarm-instances-favourite-notification-' + favouriteAction, val ).text(),
-										{ type: 'success' }
-									);
-									this.grid.store.reload();
-								} );
-							} );
+						click: async () => {
+							ext.bluespiceWikiFarm.util.toggleFavoriteInstance( row.path, row.title ).then(
+								( performedAction ) => {
+									if ( performedAction === 'add' ) {
+										button.setIcon( 'unStar' );
+									} else if ( performedAction === 'remove' ) {
+										button.setIcon( 'star' );
+									}
+								}
+							);
 						}
 					} );
 					return button.$element;
