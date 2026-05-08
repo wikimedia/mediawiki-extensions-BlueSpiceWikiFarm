@@ -175,11 +175,33 @@ class DirectInstanceStore {
 		if ( $res->numRows() === 0 ) {
 			return null;
 		}
-		$instance = $this->rowToInstance( $res->fetchObject() );
-		if ( $instance ) {
-			$this->instances[$instance->getId()] = $instance;
+		return $this->rowToInstance( $res->fetchObject() );
+	}
+
+	/**
+	 * @param string $field
+	 * @param array $values
+	 * @param int|null $limit
+	 * @return array
+	 */
+	public function getMultiple( string $field, array $values, ?int $limit = null ): array {
+		$conds = [
+			"$field IN (" . $this->getDB()->makeList( $values ) . ")"
+		];
+		$options = [];
+		if ( $limit ) {
+			$options['LIMIT'] = $limit;
 		}
-		return $instance;
+		$res = $this->doQuery( $conds, $options );
+		$instances = [];
+		foreach ( $res as $row ) {
+			$instance = $this->rowToInstance( $row );
+			if ( !$instance ) {
+				continue;
+			}
+			$instances[] = $instance;
+		}
+		return $instances;
 	}
 
 	/**

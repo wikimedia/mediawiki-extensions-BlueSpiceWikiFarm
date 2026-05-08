@@ -120,8 +120,8 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 	public function getSubComponents(): array {
 		$cardBodyItems = [];
 		$user = RequestContext::getMain()->getUser();
+		$this->favourites = $this->getFavouriteWikisForCurrentUser();
 		if ( !$user->isAnon() ) {
-			$this->favourites = $this->getFavouriteWikisForCurrentUser();
 			$favoriteCard = new SimpleCard( [
 				'id' => 'farm-wikis-favorite',
 				'classes' => [ 'card-mn' ],
@@ -242,12 +242,14 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 	 */
 	private function getFavouriteWikisForCurrentUser(): array {
 		$user = RequestContext::getMain()->getUser();
+		if ( !$user || !$user->isRegistered() ) {
+			return [];
+		}
 		$favouriteOptions = $this->userOptionsLookup->getOption( $user, 'bs-farm-instances-favorite' );
 		if ( !$favouriteOptions ) {
 			return [];
 		}
-		$favourites = explode( ',', $favouriteOptions );
-		return $favourites;
+		return explode( ',', $favouriteOptions );
 	}
 
 	/**
@@ -256,24 +258,20 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 	 */
 	private function getFavoriteWikisHtml( $user ): string {
 		$html = '';
-		if ( empty( $this->favourites ) ) {
+		$readable = $this->accessControlStore->getInstancePathsWhereUserHasRole( $user, 'reader' );
+		$readableFavourites = array_intersect( $this->favourites, $readable );
+		if ( empty( $readableFavourites ) ) {
 			$html = Html::element( 'p', [],
 				Message::newFromKey( 'wikifarm-instances-menu-empty-favorite-text' )->text() );
 			return $html;
 		}
-		$instances = $this->accessControlStore->getInstancePathsWhereUserHasRole( $user, 'reader' );
 
-		$count = 0;
-		foreach ( $instances as $instancePath ) {
-			if ( !in_array( $instancePath, $this->favourites ) ) {
+		$instances = $this->instanceStore->getMultiple( 'sfi_path', $readableFavourites, static::MENU_LIMIT * 2 );
+		foreach ( $instances as $instance ) {
+			if ( !$instance->isActive() ) {
 				continue;
 			}
-			if ( $count >= $this::MENU_LIMIT ) {
-				break;
-			}
-			$instance = $this->instanceStore->getInstanceByPath( $instancePath );
 			$html .= $this->getWikiInstanceCard( $instance );
-			$count++;
 		}
 
 		if ( count( $instances ) > $this::MENU_LIMIT ) {
@@ -308,13 +306,13 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 	private function getWikiInstanceCard( $instance ): string {
 		$cardHtml = Html::openElement( 'div', [
 			'class' => 'farm-wiki-card-item',
-			'data-path' => $instance->getPath()
+			'data-path' => $instance->getPath(),
+			'data-display' => $instance->getDisplayName(),
 		] );
 
 		$classes = 'farm-wiki-card-favorite-btn';
-		$favourites = $this->getFavouriteWikisForCurrentUser();
 		$titleMsgKey = 'wikifarm-instances-favorite-add-btn-title-label';
-		if ( in_array( $instance->getPath(), $favourites ) ) {
+		if ( in_array( $instance->getPath(), $this->favourites ) ) {
 			$classes .= ' bi-bs-favored wiki-instance-favored';
 			$titleMsgKey = 'wikifarm-instances-favorite-remove-btn-title-label';
 		} else {
