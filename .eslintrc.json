@@ -6,7 +6,8 @@
 		"wikimedia/mediawiki"
 	],
 	"parserOptions": {
-		"sourceType": "commonjs"
+		"sourceType": "commonjs",
+		"ecmaVersion": 2017
 	},
 	"globals": {
 		"bs": "readonly",
