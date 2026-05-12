@@ -116,7 +116,6 @@
 	"wikifarm-ui-search-instance-filter-hint": "Help message for the search center filter",
 	"wikifarm-button-action-label-add": "Action label",
 	"wikifarm-ui-access-field-type": "Field label",
-	"wikifarm-ui-access-field-key": "Field label",
 	"wikifarm-ui-access-field-select-entities": "Field label",
 	"wikifarm-ui-access-field-role": "Field label",
 	"wikifarm-ui-access-action-create-new-rule": "Action label",
