@@ -26,25 +26,12 @@ ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.initialize = f
 	} );
 	this.actions.setAbilities( { submit: false } );
 
-	this.selectedEntities = [];
-
-	// Entity picker (supports adding multiple users/groups)
-	this.entityPicker = new ext.bluespiceWikiFarm.ui.widget.WikiAccessEntityPicker( {
+	this.userGroupPicker = new OOJSPlus.ui.widget.UserGroupMultiselectWidget( {
 		$overlay: this.$overlay
 	} );
-	this.entityPicker.connect( this, {
-		choose: 'onEntityChosen'
-	} );
-
-	// Tags shown below picker to display selected entities
-	this.selectedTags = new OO.ui.TagMultiselectWidget( {
-		inputPosition: 'none',
-		allowArbitrary: true
-	} );
-	this.selectedTags.connect( this, {
+	this.userGroupPicker.connect( this, {
 		change: 'checkValidity'
 	} );
-	this.selectedTags.toggle( false );
 
 	// Role picker with descriptions
 	this.rolePicker = new OO.ui.DropdownWidget( {
@@ -79,11 +66,10 @@ ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.initialize = f
 	this.globalCheck = new OO.ui.CheckboxInputWidget( { selected: false } );
 
 	this.panel.$element.append(
-		new OO.ui.FieldLayout( this.entityPicker, {
+		new OO.ui.FieldLayout( this.userGroupPicker, {
 			label: mw.message( 'wikifarm-ui-access-field-select-entities' ).text(),
 			align: 'left'
 		} ).$element,
-		this.selectedTags.$element,
 		new OO.ui.FieldLayout( this.rolePicker, {
 			label: mw.message( 'wikifarm-ui-access-field-role' ).text(),
 			align: 'left'
@@ -106,34 +92,8 @@ ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.getSetupProces
 	}, this );
 };
 
-ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.onEntityChosen = function ( selectedItem ) {
-	if ( !selectedItem ) {
-		return;
-	}
-	// Check for duplicates
-	const key = selectedItem.entityType + ':' + selectedItem.entityKey;
-	const existing = this.selectedTags.findItemFromData( key );
-	if ( existing ) {
-		return;
-	}
-
-	const typeLabel = selectedItem.entityType === 'user' ?
-		mw.msg( 'wikifarm-ui-access-assignee-type-user' ) :
-		mw.msg( 'wikifarm-ui-access-assignee-type-group' );
-
-	this.selectedTags.addTag( key, typeLabel + ': ' + selectedItem.entityKey );
-	this.selectedTags.toggle( true );
-	this.selectedEntities.push( selectedItem );
-
-	// Clear the picker
-	this.entityPicker.setValue( '' );
-	this.entityPicker.selectedItem = null;
-	this.checkValidity();
-};
-
 ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.checkValidity = function () {
-	const hasEntities = this.selectedTags.getItems().length > 0;
-	this.selectedTags.toggle( hasEntities );
+	const hasEntities = this.userGroupPicker.getValue().length > 0;
 	const hasRole = !!this.rolePicker.getMenu().findSelectedItem();
 	this.actions.setAbilities( { submit: hasEntities && hasRole } );
 };
@@ -153,19 +113,14 @@ ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.getActionProce
 			const roleName = this.rolePicker.getMenu().findSelectedItem().getData();
 			const isGlobal = this.allowGlobal && this.globalCheck && this.globalCheck.isSelected();
 
-			// Reconcile selected entities from tags
-			const currentTagKeys = this.selectedTags.getItems().map( ( item ) => item.getData() );
-			const entities = this.selectedEntities.filter( ( entity ) => {
-				const key = entity.entityType + ':' + entity.entityKey;
-				return currentTagKeys.indexOf( key ) !== -1;
-			} );
+			const userGroups = this.userGroupPicker.getValue();
 
-			const promises = entities.map( ( entity ) => $.ajax( {
+			const promises = userGroups.map( ( userGroup ) => $.ajax( {
 				url: mw.util.wikiScript( 'rest' ) + '/bluespice/farm/v1/access/assign',
 				type: 'POST',
 				data: JSON.stringify( {
-					entityType: entity.entityType,
-					entityKey: entity.entityKey,
+					entityType: userGroup.type,
+					entityKey: userGroup.key,
 					roleName: roleName,
 					globalAssignment: isGlobal
 				} ),
