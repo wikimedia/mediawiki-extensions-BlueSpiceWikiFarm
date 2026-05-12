@@ -392,6 +392,7 @@ class Dispatcher {
 		if ( $handler && $handler->getValue() ) {
 			$accessLevel = $handler->getValue();
 		}
+		$GLOBALS['bsgGroupRoles']['bot']['reader'] = true;
 		if ( $accessLevel === 'public' ) {
 			$GLOBALS['bsgGroupRoles']['*']['reader'] = true;
 			$GLOBALS['bsgGroupRoles']['*']['editor'] = true;
