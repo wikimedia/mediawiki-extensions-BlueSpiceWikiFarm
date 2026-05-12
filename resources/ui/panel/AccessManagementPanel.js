@@ -6,7 +6,7 @@ ext.bluespiceWikiFarm.ui.AccessManagementPanel = function ( cfg ) {
 
 	ext.bluespiceWikiFarm.ui.AccessManagementPanel.parent.call( this, {
 		expanded: false,
-		framed: true
+		framed: false
 	} );
 
 	this.makeTabs();
