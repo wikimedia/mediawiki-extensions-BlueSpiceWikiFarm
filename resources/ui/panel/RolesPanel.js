@@ -144,7 +144,7 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.buildGrid = function ( store, enti
 			invisibleHeader: true,
 			width: 30,
 			visibleOnHover: true,
-			disabled: ( row ) => !this.wikiFarmIsRoot && row.is_global_assignment
+			shouldShow: ( row ) => this.wikiFarmIsRoot || !row.is_global_assignment
 		},
 		actionDelete: {
 			type: 'action',
@@ -155,7 +155,7 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.buildGrid = function ( store, enti
 			invisibleHeader: true,
 			width: 30,
 			visibleOnHover: true,
-			disabled: ( row ) => !this.wikiFarmIsRoot && row.is_global_assignment
+			shouldShow: ( row ) => this.wikiFarmIsRoot || !row.is_global_assignment
 		}
 	};
 
