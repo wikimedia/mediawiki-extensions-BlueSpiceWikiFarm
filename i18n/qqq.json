@@ -113,8 +113,6 @@
 	"wikifarm-ui-search-instance-filter-all": "Search context label",
 	"wikifarm-ui-search-instance-filter-hint": "Help message for the search center filter",
 	"wikifarm-button-action-label-add": "Action label",
-	"wikifarm-role-scope-notice-local": "Notice when assigning roles on a local wiki",
-	"wikifarm-role-scope-notice-global": "Notice when assigning roles on the root wiki",
 	"wikifarm-ui-access-field-type": "Field label",
 	"wikifarm-ui-access-field-key": "Field label",
 	"wikifarm-ui-access-field-select-entities": "Field label",
