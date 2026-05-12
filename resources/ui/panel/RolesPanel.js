@@ -90,6 +90,7 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.buildGrid = function ( store, enti
 	const columns = {
 		entity_key: { // eslint-disable-line camelcase
 			type: 'text',
+			sortable: true,
 			headerText: entityType === 'group' ?
 				mw.msg( 'wikifarm-access-column-group' ) :
 				mw.msg( 'wikifarm-access-column-user' ),
@@ -115,6 +116,7 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.buildGrid = function ( store, enti
 		role: {
 			width: 150,
 			type: 'text',
+			sortable: true,
 			headerText: mw.msg( 'wikifarm-ui-access-field-role' ),
 			filter: {
 				type: 'list',
