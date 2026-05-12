@@ -68,11 +68,11 @@ ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.initialize = f
 	this.panel.$element.append(
 		new OO.ui.FieldLayout( this.userGroupPicker, {
 			label: mw.message( 'wikifarm-ui-access-field-select-entities' ).text(),
-			align: 'left'
+			align: 'top'
 		} ).$element,
 		new OO.ui.FieldLayout( this.rolePicker, {
 			label: mw.message( 'wikifarm-ui-access-field-role' ).text(),
-			align: 'left'
+			align: 'top'
 		} ).$element
 	);
 
