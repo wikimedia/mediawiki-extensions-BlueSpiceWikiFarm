@@ -16,9 +16,7 @@ ext.bluespiceWikiFarm.ui.GeneralSettingsPanel = function ( cfg ) {
 OO.inheritClass( ext.bluespiceWikiFarm.ui.GeneralSettingsPanel, OO.ui.PanelLayout );
 
 ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.build = function () {
-	this.$element.append(
-		$( '<p>' ).text( mw.msg( 'wikifarm-access-general-heading' ) )
-	);
+	this.$heading = $( '<p>' ).text( mw.msg( 'wikifarm-access-general-heading' ) );
 
 	this.cards = {};
 	this.$cardsContainer = $( '<div>' ).addClass( 'bs-access-level-cards' );
@@ -80,7 +78,13 @@ ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.build = function () {
 	} );
 	this.saveButton.connect( this, { click: 'onSave' } );
 
-	this.$element.append( this.$cardsContainer, this.saveButton.$element );
+	this.toolbar = new OO.ui.HorizontalLayout( {
+		classes: [ 'bs-access-management-toolbar' ],
+		items: [ this.saveButton ]
+	} );
+	this.toolbar.$element.css( 'justify-content', 'flex-end' );
+
+	this.$element.append( this.toolbar.$element, this.$heading, this.$cardsContainer );
 };
 
 ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.selectLevel = function ( level ) {
