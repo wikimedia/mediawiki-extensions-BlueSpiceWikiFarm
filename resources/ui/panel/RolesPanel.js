@@ -75,10 +75,12 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.build = function () {
 
 	// Build group grid
 	this.groupGrid = this.buildGrid( this.groupStore, 'group' );
+	this.groupGrid.externalFilter.input.$input.attr( 'aria-label', mw.msg( 'wikifarm-access-filter-groups' ) );
 	this.groupsTab.$element.append( this.groupGrid.$element );
 
 	// Build user grid
 	this.userGrid = this.buildGrid( this.userStore, 'user' );
+	this.userGrid.externalFilter.input.$input.attr( 'aria-label', mw.msg( 'wikifarm-access-filter-users' ) );
 	this.usersTab.$element.append( this.userGrid.$element );
 
 	this.tabLayout.addTabPanels( [ this.groupsTab, this.usersTab ] );

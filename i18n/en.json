@@ -187,6 +187,8 @@
 	"wikifarm-access-tab-users": "Users",
 	"wikifarm-access-general-heading": "Determine the access rights for this wiki by selecting a permission level",
 	"wikifarm-access-add-role-assignment": "Add role assignment",
+	"wikifarm-access-filter-groups": "Filter groups",
+	"wikifarm-access-filter-users": "Filter users",
 	"wikifarm-access-column-group": "Group",
 	"wikifarm-access-column-user": "User",
 	"wikifarm-access-unsaved-changes-warning": "You have unsaved changes. Do you want to discard them?",
