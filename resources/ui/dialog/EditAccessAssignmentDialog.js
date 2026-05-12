@@ -40,21 +40,25 @@ ext.bluespiceWikiFarm.ui.dialog.EditAccessAssignmentDialog.prototype.addItems = 
 		$overlay: this.$overlay,
 		menu: {
 			items: [
-				new OO.ui.MenuOptionWidget( {
+				new OOJSPlus.ui.widget.MenuOptionWithDescription( {
 					data: 'reader',
-					label: mw.message( 'wikifarm-ui-role-label-reader' ).text()
+					label: mw.message( 'wikifarm-ui-role-label-reader' ).text(),
+					description: mw.msg( 'wikifarm-access-role-desc-reader' )
 				} ),
-				new OO.ui.MenuOptionWidget( {
+				new OOJSPlus.ui.widget.MenuOptionWithDescription( {
 					data: 'editor',
-					label: mw.message( 'wikifarm-ui-role-label-editor' ).text()
+					label: mw.message( 'wikifarm-ui-role-label-editor' ).text(),
+					description: mw.msg( 'wikifarm-access-role-desc-editor' )
 				} ),
-				new OO.ui.MenuOptionWidget( {
+				new OOJSPlus.ui.widget.MenuOptionWithDescription( {
 					data: 'reviewer',
-					label: mw.message( 'wikifarm-ui-role-label-reviewer' ).text()
+					label: mw.message( 'wikifarm-ui-role-label-reviewer' ).text(),
+					description: mw.msg( 'wikifarm-access-role-desc-reviewer' )
 				} ),
-				new OO.ui.MenuOptionWidget( {
+				new OOJSPlus.ui.widget.MenuOptionWithDescription( {
 					data: 'admin',
-					label: mw.message( 'wikifarm-ui-role-label-admin' ).text()
+					label: mw.message( 'wikifarm-ui-role-label-admin' ).text(),
+					description: mw.msg( 'wikifarm-access-role-desc-admin' )
 				} )
 			]
 		}
