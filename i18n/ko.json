@@ -87,5 +87,21 @@
 	"wikifarm-instances-favourite-notification-add": "$1 위키가 즐겨찾기에 추가되었습니다",
 	"wikifarm-favorite-wikis-link": "즐겨찾는 모든 위키 보기",
 	"wikifarm-all-wikis-link": "모든 위키 보기",
-	"wikifarm-global-label": "전역"
+	"wikifarm-global-label": "전역",
+	"accessmanagement": "접근 관리",
+	"wikifarm-ui-access-field-select-entities": "그룹 또는 사용자 선택",
+	"wikifarm-ui-access-field-type-group": "그룹",
+	"wikifarm-access-tab-general-settings": "일반 설정",
+	"wikifarm-access-tab-roles": "역할",
+	"wikifarm-access-tab-groups": "그룹",
+	"wikifarm-access-tab-users": "사용자",
+	"wikifarm-access-column-group": "그룹",
+	"wikifarm-access-column-user": "사용자",
+	"wikifarm-access-card-public-desc": "익명 사용자를 포함하여 누구나 내용을 보고 편집할 수 있습니다",
+	"wikifarm-access-field-assignees": "그룹 / 사용자",
+	"wikifarm-access-field-selected": "선택됨",
+	"wikifarm-access-role-desc-reader": "이 위키의 문서를 볼 수 있습니다",
+	"wikifarm-access-role-desc-editor": "이 위키의 문서를 보고 편집할 수 있습니다.",
+	"log-name-ext-wikifarm-access": "위키 접근 관리",
+	"log-description-ext-wikifarm-access": "위키 접근 관리 기록"
 }
