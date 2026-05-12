@@ -25,8 +25,4 @@ ext.bluespiceWikiFarm.ui.widget.WikiAccessEntity.prototype.build = function () {
 			.text( this.key + ' (' + mw.msg( 'wikifarm-ui-access-assignee-type-group' ) + ')' );
 		this.$element.append( icon.$element, $label );
 	}
-	if ( this.isGlobal ) {
-		this.$element.append( $( '<span>' ).addClass( 'bs-wiki-access-global-label' )
-			.text( mw.msg( 'wikifarm-ui-access-label-global' ) ) );
-	}
 };
