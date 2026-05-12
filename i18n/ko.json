@@ -6,6 +6,7 @@
 			"Ykhwong"
 		]
 	},
+	"accessmanagement": "접근 관리",
 	"right-wikifarm-createwiki": "새 위키 생성",
 	"action-wikifarm-createwiki": "새 위키를 만들",
 	"right-wikifarm-managewiki": "위키 팜 관리",
@@ -49,6 +50,7 @@
 	"wikifarm-ui-search-instance-filter-local": "이 위키",
 	"wikifarm-button-action-label-add": "추가",
 	"wikifarm-ui-access-field-type": "개체 유형",
+	"wikifarm-ui-access-field-select-entities": "그룹 또는 사용자 선택",
 	"wikifarm-ui-access-field-role": "역할",
 	"wikifarm-ui-role-label-reader": "독자",
 	"wikifarm-ui-role-label-editor": "편집자",
@@ -69,6 +71,7 @@
 	"wikifarm-instances-menu-button-title": "모든 위키 목록",
 	"wikifarm-instances-menu-aria-label": "위키",
 	"wikifarm-ui-access-field-type-user": "사용자",
+	"wikifarm-ui-access-field-type-group": "그룹",
 	"wikifarm-management-breadcrumb-label-create": "만들기",
 	"wikifarm-management-invalid-template-title": "유효하지 않은 틀",
 	"wikifarm-instance-advanced-options": "고급 설정",
@@ -88,9 +91,6 @@
 	"wikifarm-favorite-wikis-link": "즐겨찾는 모든 위키 보기",
 	"wikifarm-all-wikis-link": "모든 위키 보기",
 	"wikifarm-global-label": "전역",
-	"accessmanagement": "접근 관리",
-	"wikifarm-ui-access-field-select-entities": "그룹 또는 사용자 선택",
-	"wikifarm-ui-access-field-type-group": "그룹",
 	"wikifarm-access-tab-general-settings": "일반 설정",
 	"wikifarm-access-tab-roles": "역할",
 	"wikifarm-access-tab-groups": "그룹",
