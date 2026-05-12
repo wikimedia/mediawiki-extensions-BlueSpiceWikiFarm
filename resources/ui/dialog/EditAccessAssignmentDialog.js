@@ -83,7 +83,7 @@ ext.bluespiceWikiFarm.ui.dialog.EditAccessAssignmentDialog.prototype.addItems = 
 	if ( this.allowGlobal ) {
 		this.panel.$element.append( new OO.ui.FieldLayout( this.globalCheck, {
 			label: mw.message( 'wikifarm-ui-access-field-global' ).text(),
-			align: 'left'
+			align: 'inline'
 		} ).$element );
 	}
 };
