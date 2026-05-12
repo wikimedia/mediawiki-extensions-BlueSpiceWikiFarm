@@ -143,6 +143,7 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.buildGrid = function ( store, enti
 			headerText: mw.msg( 'wikifarm-ui-access-action-edit' ),
 			invisibleHeader: true,
 			width: 30,
+			visibleOnHover: true,
 			disabled: ( row ) => !this.wikiFarmIsRoot && row.is_global_assignment
 		},
 		actionDelete: {
@@ -153,6 +154,7 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.buildGrid = function ( store, enti
 			headerText: mw.msg( 'wikifarm-ui-access-action-delete' ),
 			invisibleHeader: true,
 			width: 30,
+			visibleOnHover: true,
 			disabled: ( row ) => !this.wikiFarmIsRoot && row.is_global_assignment
 		}
 	};
