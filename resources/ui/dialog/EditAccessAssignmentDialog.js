@@ -77,7 +77,7 @@ ext.bluespiceWikiFarm.ui.dialog.EditAccessAssignmentDialog.prototype.addItems = 
 		} ).$element,
 		new OO.ui.FieldLayout( this.rolePicker, {
 			label: mw.message( 'wikifarm-ui-access-field-role' ).text(),
-			align: 'left'
+			align: 'top'
 		} ).$element
 	);
 	if ( this.allowGlobal ) {
