@@ -17,7 +17,7 @@ OO.inheritClass( ext.bluespiceWikiFarm.ui.GeneralSettingsPanel, OO.ui.PanelLayou
 
 ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.build = function () {
 	this.$element.append(
-		$( '<h6>' ).text( mw.msg( 'wikifarm-access-general-heading' ) )
+		$( '<p>' ).text( mw.msg( 'wikifarm-access-general-heading' ) )
 	);
 
 	this.cards = {};
