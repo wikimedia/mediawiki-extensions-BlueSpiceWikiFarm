@@ -18,12 +18,15 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.build = function () {
 	this.addButton = new OO.ui.ButtonWidget( {
 		label: mw.msg( 'wikifarm-access-add-role-assignment' ),
 		icon: 'add',
-		flags: [ 'progressive' ]
+		flags: [ 'progressive' ],
+		framed: false
 	} );
 	this.addButton.connect( this, { click: 'onAddRoleAssignment' } );
 
-	this.$toolbar = $( '<div>' ).addClass( 'bs-access-roles-toolbar' );
-	this.$toolbar.append( this.addButton.$element );
+	this.$toolbar = new OO.ui.HorizontalLayout( {
+		classes: [ 'bs-access-roles-toolbar' ],
+		items: [ this.addButton ]
+	} );
 
 	// Create stores for both tabs
 	this.groupStore = new OOJSPlus.ui.data.store.RemoteRestStore( {
@@ -83,7 +86,7 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.build = function () {
 	// Load counts for badges
 	this.loadCounts();
 
-	this.$element.append( this.$toolbar, this.tabLayout.$element );
+	this.$element.append( this.$toolbar.$element, this.tabLayout.$element );
 };
 
 ext.bluespiceWikiFarm.ui.RolesPanel.prototype.buildGrid = function ( store, entityType ) {
