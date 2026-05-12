@@ -113,7 +113,6 @@
 	"wikifarm-ui-search-instance-filter-hint": "... or select wikis to search in in addition to this wiki",
 	"wikifarm-button-action-label-add": "Add",
 	"wikifarm-ui-access-field-type": "Entity type",
-	"wikifarm-ui-access-field-key": "Assignee",
 	"wikifarm-ui-access-field-select-entities": "Select groups or users",
 	"wikifarm-ui-access-field-role": "Role",
 	"wikifarm-ui-access-action-create-new-rule": "Add new assignment",
