@@ -10,7 +10,7 @@ ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.static.name = 'addRoleAs
 ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.static.title = mw.msg( 'wikifarm-access-add-role-assignment' );
 ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.static.size = 'medium';
 ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.static.actions = [
-	{ action: 'close', label: mw.message( 'wikifarm-button-action-label-cancel' ).text(), flags: 'safe' },
+	{ action: 'close', icon: 'close', flags: 'safe' },
 	{
 		action: 'submit',
 		label: mw.message( 'wikifarm-button-action-label-add' ).text(),
