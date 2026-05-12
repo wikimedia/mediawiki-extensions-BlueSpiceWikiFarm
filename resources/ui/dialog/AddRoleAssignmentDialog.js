@@ -96,6 +96,7 @@ ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.checkValidity 
 	const hasEntities = this.userGroupPicker.getValue().length > 0;
 	const hasRole = !!this.rolePicker.getMenu().findSelectedItem();
 	this.actions.setAbilities( { submit: hasEntities && hasRole } );
+	this.updateSize();
 };
 
 ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.getActionProcess = function ( action ) {
