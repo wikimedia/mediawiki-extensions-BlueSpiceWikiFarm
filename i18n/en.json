@@ -110,8 +110,6 @@
 	"wikifarm-ui-search-instance-filter-all": "All available wikis",
 	"wikifarm-ui-search-instance-filter-hint": "... or select wikis to search in in addition to this wiki",
 	"wikifarm-button-action-label-add": "Add",
-	"wikifarm-role-scope-notice-local": "Role assignments will only apply to current wiki",
-	"wikifarm-role-scope-notice-global": "Role assignments will only apply to current wiki, unless globally assigned",
 	"wikifarm-ui-access-field-type": "Entity type",
 	"wikifarm-ui-access-field-key": "Assignee",
 	"wikifarm-ui-access-field-select-entities": "Select groups or users",
