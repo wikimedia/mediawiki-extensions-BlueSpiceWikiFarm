@@ -106,7 +106,7 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.buildGrid = function ( store, enti
 				if ( row.is_global_assignment ) {
 					$container.append(
 						$( '<span>' ).addClass( 'bs-access-global-badge' )
-							.text( mw.msg( 'wikifarm-ui-access-label-global' ) )
+							.text( mw.msg( 'wikifarm-global-label' ) )
 					);
 				}
 				return $container;

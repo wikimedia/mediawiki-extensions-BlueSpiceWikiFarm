@@ -382,7 +382,7 @@
 				"wikifarm-ui-role-label-editor",
 				"wikifarm-ui-role-label-reviewer",
 				"wikifarm-ui-role-label-admin",
-				"wikifarm-ui-access-label-global",
+				"wikifarm-global-label",
 				"wikifarm-button-action-label-add",
 				"wikifarm-button-action-label-save",
 				"wikifarm-button-action-label-cancel",
