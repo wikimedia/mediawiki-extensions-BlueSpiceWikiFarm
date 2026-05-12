@@ -13,7 +13,7 @@ ext.bluespiceWikiFarm.ui.dialog.EditAccessAssignmentDialog.static.actions = [
 	{ action: 'close', label: mw.message( 'wikifarm-button-action-label-cancel' ).text(), flags: 'safe' },
 	{
 		action: 'submit',
-		label: mw.message( 'wikifarm-button-action-label-add' ).text(),
+		label: mw.message( 'wikifarm-button-action-label-save' ).text(),
 		flags: [ 'progressive', 'primary' ]
 	}
 ];
