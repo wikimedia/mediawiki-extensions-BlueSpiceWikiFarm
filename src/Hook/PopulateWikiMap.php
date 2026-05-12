@@ -2,11 +2,11 @@
 
 namespace BlueSpice\WikiFarm\Hook;
 
+use BlueSpice\WikiFarm\FarmWikiMap;
 use MediaWiki\Config\Config;
-use MediaWiki\Extension\BlueSpiceWikiFarm\FarmWikiMap;
-use MWStake\MediaWiki\Component\MCP\Hook\MWStakeMCPGetWikiMapHook;
+use MediaWiki\Extension\WikiMCPTools\Hook\WikiMCPToolsGetWikiMapHook;
 
-class PopulateWikiMap implements MWStakeMCPGetWikiMapHook {
+class PopulateWikiMap implements WikiMCPToolsGetWikiMapHook {
 
 	/**
 	 * @param FarmWikiMap $wikiMap
@@ -19,9 +19,10 @@ class PopulateWikiMap implements MWStakeMCPGetWikiMapHook {
 	}
 
 	/**
-	 * @inheritDoc
+	 * @param array &$map
+	 * @return void
 	 */
-	public function onMWStakeMCPGetWikiMap( &$map ): void {
+	public function onWikiMCPToolsGetWikiMap( &$map ) {
 		$wikis = $this->wikiMap->getMap();
 		foreach ( $wikis as $wikiId => $instance ) {
 			$map[$wikiId] = $instance->getScriptPath( $this->farmConfig );

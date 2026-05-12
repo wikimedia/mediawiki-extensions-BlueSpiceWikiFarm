@@ -577,7 +577,7 @@
 		"ContentStabilizationGetCurrentInclusions": "handleSharedStabilization",
 		"ContentStabilizationFetchForeignRevisionForTransclusion": "handleSharedStabilization",
 		"ContentStabilizationGetStableForeignInclusion": "handleSharedStabilization",
-		"MWStakeMCPGetWikiMap": "populateWikiMap",
+		"WikiMCPToolsGetWikiMap": "populateWikiMap",
 		"BeforeInitialize": "redirectUserPage",
 		"SpecialPageBeforeExecute": "addGlobalUnifiedTaskOverviewModule",
 		"BSUserManagerBeforeAddGroup": "addGroupPrefix",
