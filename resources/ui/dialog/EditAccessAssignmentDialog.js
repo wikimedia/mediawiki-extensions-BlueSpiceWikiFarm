@@ -10,7 +10,7 @@ OO.inheritClass( ext.bluespiceWikiFarm.ui.dialog.EditAccessAssignmentDialog, OO.
 ext.bluespiceWikiFarm.ui.dialog.EditAccessAssignmentDialog.static.name = 'editAccessAssignment';
 ext.bluespiceWikiFarm.ui.dialog.EditAccessAssignmentDialog.static.title = mw.msg( 'wikifarm-ui-access-action-edit-assignment' );
 ext.bluespiceWikiFarm.ui.dialog.EditAccessAssignmentDialog.static.actions = [
-	{ action: 'close', label: mw.message( 'wikifarm-button-action-label-cancel' ).text(), flags: 'safe' },
+	{ action: 'close', icon: 'close', flags: 'safe' },
 	{
 		action: 'submit',
 		label: mw.message( 'wikifarm-button-action-label-save' ).text(),
