@@ -375,6 +375,8 @@
 				"wikifarm-access-column-group",
 				"wikifarm-access-column-user",
 				"wikifarm-access-unsaved-changes-warning",
+				"wikifarm-access-filter-groups",
+				"wikifarm-access-filter-users",
 				"wikifarm-access-card-public-desc",
 				"wikifarm-access-card-protected-desc",
 				"wikifarm-access-card-private-desc",
