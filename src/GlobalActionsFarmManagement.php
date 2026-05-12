@@ -6,51 +6,39 @@ use MediaWiki\Message\Message;
 use MediaWiki\SpecialPage\SpecialPage;
 use MWStake\MediaWiki\Component\CommonUserInterface\Component\RestrictedTextLink;
 
-class GlobalActionsAdministration extends RestrictedTextLink {
+class GlobalActionsFarmManagement extends RestrictedTextLink {
 
 	public function __construct() {
 		parent::__construct( [] );
 	}
 
-	/**
-	 * @return string
-	 */
+	/** @inheritDoc */
 	public function getId(): string {
 		return 'ga-bs-farmmanagement';
 	}
 
-	/**
-	 * @return array
-	 */
+	/** @inheritDoc */
 	public function getPermissions(): array {
 		return [ 'wikifarm-managewiki' ];
 	}
 
-	/**
-	 * @return string
-	 */
+	/** @inheritDoc */
 	public function getHref(): string {
 		$tool = SpecialPage::getTitleFor( 'Farm_management' );
 		return $tool->getLocalURL();
 	}
 
-	/**
-	 * @return Message
-	 */
+	/** @inheritDoc */
 	public function getText(): Message {
 		return Message::newFromKey( 'wikifarm-farmmanagement-text' );
 	}
 
-	/**
-	 * @return Message
-	 */
+	/** @inheritDoc */
 	public function getTitle(): Message {
 		return Message::newFromKey( 'wikifarm-farmmanagement-desc' );
 	}
 
-	/**
-	 * @return Message
-	 */
+	/** @inheritDoc */
 	public function getAriaLabel(): Message {
 		return Message::newFromKey( 'wikifarm-farmmanagement-text' );
 	}

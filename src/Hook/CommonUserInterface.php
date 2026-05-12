@@ -4,8 +4,9 @@ namespace BlueSpice\WikiFarm\Hook;
 
 use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\Component\WikiInstancesMenu;
-use BlueSpice\WikiFarm\EnhancedGlobalActionsAdministration;
-use BlueSpice\WikiFarm\GlobalActionsAdministration;
+use BlueSpice\WikiFarm\EnhancedGlobalActionsFarmManagement;
+use BlueSpice\WikiFarm\GlobalActionsAccessManagement;
+use BlueSpice\WikiFarm\GlobalActionsFarmManagement;
 use BlueSpice\WikiFarm\InstanceStore;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\RequestContext;
@@ -63,13 +64,26 @@ class CommonUserInterface implements MWStakeCommonUIRegisterSkinSlotComponents {
 				'ga-bluespice-farmmanagement' => [
 					'factory' => static function () use ( $skin ) {
 						if ( is_a( $skin, 'SkinBlueSpiceEclipseSkin', true ) ) {
-							return new EnhancedGlobalActionsAdministration();
+							return new EnhancedGlobalActionsFarmManagement();
 						}
-						return new GlobalActionsAdministration();
+						return new GlobalActionsFarmManagement();
 					}
 				]
 			]
 		);
+
+		if ( $this->farmConfig->get( 'useGlobalAccessControl' ) ) {
+			$registry->register(
+				'GlobalActionsAdministration',
+				[
+					'ga-bluespice-accessmanagement' => [
+						'factory' => static function () {
+							return new GlobalActionsAccessManagement();
+						}
+					]
+				]
+			);
+		}
 	}
 
 }

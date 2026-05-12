@@ -6,7 +6,7 @@ use HtmlArmor;
 use MediaWiki\Html\Html;
 use MediaWiki\Message\Message;
 
-class EnhancedGlobalActionsAdministration extends GlobalActionsAdministration {
+class EnhancedGlobalActionsFarmManagement extends GlobalActionsFarmManagement {
 
 	public function getPostHtml(): HtmlArmor {
 		$html = Html::element( 'span', [
