@@ -4,22 +4,40 @@ namespace BlueSpice\WikiFarm\Special;
 
 use MediaWiki\Config\Config;
 use MediaWiki\Html\Html;
-use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\Html\TemplateParser;
+use OOJSPlus\Special\OOJSSpecialPage;
 
-class AccessManagement extends SpecialPage {
+class AccessManagement extends OOJSSpecialPage {
 
 	public function __construct( private readonly Config $farmConfig ) {
 		parent::__construct( 'AccessManagement', 'userrights' );
+		$this->templateParser = new TemplateParser(
+			dirname( __DIR__, 2 ) . '/resources/templates'
+		);
 	}
 
 	/**
-	 * @param string $subPage
-	 * @return void
+	 * @inheritDoc
 	 */
-	public function execute( $subPage ) {
-		$this->setHeaders();
-		$this->checkPermissions();
+	protected function buildSkeleton() {
 		$this->getOutput()->enableOOUI();
+		$this->getOutput()->addModuleStyles( [ 'ext.bluespice.wikiFarm.accessManagement.skeleton' ] );
+		$skeleton = $this->templateParser->processTemplate(
+			'skeleton-access-management',
+			[]
+		);
+		$skeletonCnt = Html::openElement( 'div', [
+			'id' => 'bs-accessManagement-skeleton-cnt'
+		] );
+		$skeletonCnt .= $skeleton;
+		$skeletonCnt .= Html::closeElement( 'div' );
+		$this->getOutput()->addHTML( $skeletonCnt );
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	protected function doExecute( $subPage ) {
 		$this->getOutput()->addModules( [ 'ext.bluespice.wikiFarm.accessManagement' ] );
 		$this->getOutput()->addHTML(
 			Html::element( 'div', [ 'id' => 'bs-access-management' ] )
