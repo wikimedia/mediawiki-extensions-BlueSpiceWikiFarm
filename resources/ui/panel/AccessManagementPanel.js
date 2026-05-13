@@ -11,6 +11,11 @@ ext.bluespiceWikiFarm.ui.AccessManagementPanel = function ( cfg ) {
 
 	this.makeTabs();
 	this.setupBeforeUnload();
+
+	if ( location.hash ) {
+		const tab = location.hash.replace( '#', '' );
+		this.setTabPanel( tab );
+	}
 };
 
 OO.inheritClass( ext.bluespiceWikiFarm.ui.AccessManagementPanel, OO.ui.IndexLayout );
@@ -41,6 +46,7 @@ ext.bluespiceWikiFarm.ui.AccessManagementPanel.prototype.makeTabs = function () 
 
 	// Warn about unsaved changes when switching tabs
 	this.on( 'set', ( tabPanel ) => {
+		location.hash = tabPanel.getName();
 		if ( tabPanel.getName() !== 'general' && this.generalSettingsPanel.hasUnsavedChanges() ) {
 			OO.ui.confirm( mw.msg( 'wikifarm-access-unsaved-changes-warning' ) )
 				.then( ( confirmed ) => {
