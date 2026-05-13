@@ -6,5 +6,9 @@ $( () => {
 			accessLevel: mw.config.get( 'wikiFarmAccessLevel' ),
 			alwaysVisible: mw.config.get( 'wikiFarmAccessAlwaysVisible' )
 		} ).$element );
+
+		if ( $( document ).find( '#bs-accessManagement-skeleton-cnt' ) ) {
+			$( '#bs-accessManagement-skeleton-cnt' ).empty();
+		}
 	}
 } );

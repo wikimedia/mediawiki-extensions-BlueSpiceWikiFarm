@@ -1,0 +1,100 @@
+#bs-access-management-skeleton {
+	margin-top: 16px;
+}
+
+#bs-access-management-skeleton .skeleton {
+	background: linear-gradient( 90deg, #eee, #ddd, #eee );
+	background-size: 200% 100%;
+	animation: shimmer 1.5s infinite;
+	border-radius: 6px;
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: -200% 0;
+	}
+
+	100% {
+		background-position: 200% 0;
+	}
+}
+
+/* Toolbar */
+#bs-access-management-skeleton .skeleton-toolbar {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 16px;
+}
+
+#bs-access-management-skeleton .skeleton-button {
+	height: 36px;
+	width: 80px;
+	border-radius: 4px;
+}
+
+/* Tabs bar */
+#bs-access-management-skeleton .skeleton-tabs {
+	display: flex;
+	gap: 16px;
+	border-bottom: 1px solid #c8ccd1;
+	padding-bottom: 8px;
+	margin-bottom: 16px;
+}
+
+#bs-access-management-skeleton .skeleton-tabs .skeleton {
+	height: 20px;
+	width: 120px;
+}
+
+/* Heading */
+#bs-access-management-skeleton .skeleton-heading {
+	height: 16px;
+	width: 50%;
+	margin-bottom: 20px;
+}
+
+/* Access level cards */
+#bs-access-management-skeleton .skeleton-cards {
+	display: flex;
+	gap: 16px;
+	margin-bottom: 24px;
+	flex-wrap: wrap;
+}
+
+#bs-access-management-skeleton .skeleton-card {
+	flex: 1;
+	min-width: 200px;
+	max-width: 300px;
+	padding: 20px;
+	border: 2px solid #eee;
+	border-radius: 8px;
+}
+
+#bs-access-management-skeleton .skeleton-card-header {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+#bs-access-management-skeleton .skeleton-card-icon {
+	width: 24px;
+	height: 24px;
+	border-radius: 4px;
+}
+
+#bs-access-management-skeleton .skeleton-card-title {
+	height: 18px;
+	width: 80px;
+}
+
+#bs-access-management-skeleton .skeleton-card-desc {
+	height: 12px;
+	width: 90%;
+	margin-bottom: 6px;
+}
+
+#bs-access-management-skeleton .skeleton-card-desc-short {
+	height: 12px;
+	width: 60%;
+}

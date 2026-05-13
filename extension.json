@@ -11,7 +11,7 @@
 		"MediaWiki": ">= 1.46.0",
 		"extensions": {
 			"BlueSpiceFoundation": ">= 5.0.0",
-			"OOJSPlus": "*"
+			"OOJSPlus": ">= 3.0.0"
 		}
 	},
 	"attributes": {
@@ -334,6 +334,11 @@
 			],
 			"messages": [
 				"wikifarm-widget-combined-title-input-local"
+			]
+		},
+		"ext.bluespice.wikiFarm.accessManagement.skeleton": {
+			"styles": [
+				"styles/accessManagement.skeleton.css"
 			]
 		},
 		"ext.bluespice.wikiFarm.accessManagement": {
