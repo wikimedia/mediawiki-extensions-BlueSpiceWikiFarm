@@ -112,8 +112,6 @@
 	"wikifarm-ui-search-instance-filter-all": "Todos os wikis dispoñibles",
 	"wikifarm-ui-search-instance-filter-hint": "... ou selecciona aqueloutros wikis nos que buscar ademais deste",
 	"wikifarm-button-action-label-add": "Engadir",
-	"wikifarm-role-scope-notice-local": "As asignacións de roles só se aplicarán no wiki actual",
-	"wikifarm-role-scope-notice-global": "As asignacións de roles só se aplicarán no wiki actual, a menos que se asignen globalmente",
 	"wikifarm-ui-access-field-type": "Tipo de entidade",
 	"wikifarm-ui-access-field-key": "Cesionario/a",
 	"wikifarm-ui-access-field-select-entities": "Seleccionar grupos ou usuarios",

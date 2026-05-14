@@ -114,8 +114,6 @@
 	"wikifarm-ui-search-instance-filter-all": "Alle beschikbare wiki’s",
 	"wikifarm-ui-search-instance-filter-hint": "… of selecteer wiki’s waarin u wilt zoeken naast deze wiki",
 	"wikifarm-button-action-label-add": "Toevoegen",
-	"wikifarm-role-scope-notice-local": "Roltoewijzingen zijn alleen van toepassing op de huidige wiki",
-	"wikifarm-role-scope-notice-global": "Roltoewijzingen zijn alleen van toepassing op de huidige wiki, tenzij ze globaal worden toegewezen",
 	"wikifarm-ui-access-field-type": "Entiteitstype",
 	"wikifarm-ui-access-field-key": "Toegewezene",
 	"wikifarm-ui-access-field-select-entities": "Selecteer groepen of gebruikers",

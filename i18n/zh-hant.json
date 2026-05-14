@@ -111,8 +111,6 @@
 	"wikifarm-ui-search-instance-filter-all": "所有可用的 wiki",
 	"wikifarm-ui-search-instance-filter-hint": "…或選擇此 wiki 之外的 wiki 進行搜尋",
 	"wikifarm-button-action-label-add": "新增",
-	"wikifarm-role-scope-notice-local": "角色分配僅適用於目前 wiki",
-	"wikifarm-role-scope-notice-global": "角色分配僅適用於目前 wiki，無法全域分配",
 	"wikifarm-ui-access-field-type": "項目類型",
 	"wikifarm-ui-access-field-key": "分配",
 	"wikifarm-ui-access-field-role": "角色",

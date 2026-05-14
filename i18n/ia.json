@@ -112,8 +112,6 @@
 	"wikifarm-ui-search-instance-filter-all": "Tote le wikis disponibile",
 	"wikifarm-ui-search-instance-filter-hint": "… o selige wikis a cercar in addition a iste wiki",
 	"wikifarm-button-action-label-add": "Adder",
-	"wikifarm-role-scope-notice-local": "Le assignation de rolos se applica solmente al wiki actual.",
-	"wikifarm-role-scope-notice-global": "Le assignation de rolos se applica solmente al wiki actual, excepte si illos es assignate globalmente.",
 	"wikifarm-ui-access-field-type": "Typo de entitate",
 	"wikifarm-ui-access-field-key": "Assignato",
 	"wikifarm-ui-access-field-select-entities": "Selige gruppos o usaores",
