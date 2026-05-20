@@ -258,5 +258,6 @@
 	"log-description-ext-wikifarm-access": "Log description",
 	"logentry-ext-wikifarm-access-assign-role": "Log entry message.\n$1 - actor, $2 - actor for gender, $3 - page, $4 - group name, $5 - role name",
 	"logentry-ext-wikifarm-access-remove-all-roles": "Log entry message.\n$1 - actor, $2 - actor for gender, $3 - page, $4 - group name",
-	"logentry-ext-wikifarm-access-delete": "Log entry message.\n$1 - actor, $2 - actor for gender, $3 - page, $4 - group name"
+	"logentry-ext-wikifarm-access-delete": "Log entry message.\n$1 - actor, $2 - actor for gender, $3 - page, $4 - group name",
+	"wikifarm-instances-favourite-notification-error": "Notification message when adding or removing wiki from favorites fails"
 }
