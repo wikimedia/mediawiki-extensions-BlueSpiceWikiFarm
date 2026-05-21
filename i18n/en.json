@@ -227,7 +227,7 @@
 	"wikifarm-favorite-wikis-link": "See all favorite wikis",
 	"wikifarm-all-wikis-link": "See all wikis",
 	"wikifarm-global-label": "Global",
-	"accessmanagement": "Access Management",
+	"accessmanagement": "Access management",
 	"wikifarm-ui-access-field-select-entities": "Select groups or users",
 	"wikifarm-ui-role-label-admin": "Admin",
 	"wikifarm-ui-access-assignee-type-group": "Group",
@@ -255,5 +255,7 @@
 	"logentry-ext-wikifarm-access-assign-role": "$1 {{GENDER:$2|assigned}} role \"$5\" to group \"$4\"",
 	"logentry-ext-wikifarm-access-remove-all-roles": "$1 {{GENDER:$2|removed}} all roles from group \"$4\"",
 	"logentry-ext-wikifarm-access-delete": "$1 {{GENDER:$2|deleted}} all roles for group \"$4\"",
-	"wikifarm-instances-favourite-notification-error": "Failed to add wiki to favourites. Please try again or contact your administrator."
+	"wikifarm-instances-favourite-notification-error": "Failed to add wiki to favourites. Please try again or contact your administrator.",
+	"wikifarm-accessmanagement-text": "Access management",
+	"wikifarm-accessmanagement-desc": "Administration interface for managing access and roles"
 }
