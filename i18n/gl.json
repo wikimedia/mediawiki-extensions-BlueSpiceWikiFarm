@@ -35,6 +35,8 @@
 	"wikifarm-widget-combined-title-input-local": "Este wiki",
 	"wikifarm-farmmanagement-text": "Instancias de granxa",
 	"wikifarm-farmmanagement-desc": "Interface de administración para engadir, editar e eliminar instancias de granxa",
+	"wikifarm-accessmanagement-text": "Xestión de acceso",
+	"wikifarm-accessmanagement-desc": "Interface administrativa para xestionar o acceso e os roles",
 	"wikifarm-action-archiveinstance-description": "Arquivar",
 	"wikifarm-action-copyinstancedata-description": "Copiar os datos",
 	"wikifarm-action-copyuser-description": "Copiar a conta de usuario",
@@ -113,7 +115,6 @@
 	"wikifarm-ui-search-instance-filter-hint": "... ou selecciona aqueloutros wikis nos que buscar ademais deste",
 	"wikifarm-button-action-label-add": "Engadir",
 	"wikifarm-ui-access-field-type": "Tipo de entidade",
-	"wikifarm-ui-access-field-key": "Cesionario/a",
 	"wikifarm-ui-access-field-select-entities": "Seleccionar grupos ou usuarios",
 	"wikifarm-ui-access-field-role": "Rol",
 	"wikifarm-ui-access-action-create-new-rule": "Engadir unha nova asignación",
@@ -212,5 +213,6 @@
 	"log-description-ext-wikifarm-access": "Rexistro de xestión de acceso ao wiki",
 	"logentry-ext-wikifarm-access-assign-role": "$1 {{GENDER:$2|asignou}} o rol «$5» ao grupo «$4»",
 	"logentry-ext-wikifarm-access-remove-all-roles": "$1 {{GENDER:$2|eliminou}} todos os roles do grupo «$4»",
-	"logentry-ext-wikifarm-access-delete": "$1 {{GENDER:$2|eliminou}} todos os roles do grupo «$4»"
+	"logentry-ext-wikifarm-access-delete": "$1 {{GENDER:$2|eliminou}} todos os roles do grupo «$4»",
+	"wikifarm-instances-favourite-notification-error": "Non se puido engadir o wiki aos favoritos. Inténtao de novo ou ponte en contacto coa administración."
 }

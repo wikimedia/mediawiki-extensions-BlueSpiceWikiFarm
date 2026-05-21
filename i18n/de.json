@@ -112,7 +112,6 @@
 	"wikifarm-ui-search-instance-filter-hint": "... oder wähle Wikis aus, in denen zusätzlich zu diesem Wiki gesucht werden soll",
 	"wikifarm-button-action-label-add": "Hinzufügen",
 	"wikifarm-ui-access-field-type": "Typ:",
-	"wikifarm-ui-access-field-key": "Zugewiesen an",
 	"wikifarm-ui-access-field-role": "Rolle",
 	"wikifarm-ui-access-action-create-new-rule": "Zuweisung hinzufügen",
 	"wikifarm-ui-role-label-reader": "Leser",

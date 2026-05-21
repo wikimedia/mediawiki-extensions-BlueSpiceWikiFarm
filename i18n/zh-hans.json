@@ -116,7 +116,6 @@
 	"wikifarm-ui-search-instance-filter-hint": "…或选择此wiki之外的wiki进行搜索",
 	"wikifarm-button-action-label-add": "添加",
 	"wikifarm-ui-access-field-type": "项目类型",
-	"wikifarm-ui-access-field-key": "分配",
 	"wikifarm-ui-access-field-role": "角色",
 	"wikifarm-ui-access-action-create-new-rule": "添加分配",
 	"wikifarm-ui-role-label-reader": "读者",
