@@ -227,5 +227,8 @@
 	"log-description-ext-wikifarm-access": "Rexistro de xestión de acceso ao wiki",
 	"logentry-ext-wikifarm-access-assign-role": "$1 {{GENDER:$2|asignou}} o rol «$5» ao grupo «$4»",
 	"logentry-ext-wikifarm-access-remove-all-roles": "$1 {{GENDER:$2|eliminou}} todos os roles do grupo «$4»",
-	"logentry-ext-wikifarm-access-delete": "$1 {{GENDER:$2|eliminou}} todos os roles do grupo «$4»"
+	"logentry-ext-wikifarm-access-delete": "$1 {{GENDER:$2|eliminou}} todos os roles do grupo «$4»",
+	"wikifarm-accessmanagement-text": "Xestión de acceso",
+	"wikifarm-accessmanagement-desc": "Interface administrativa para xestionar o acceso e os roles",
+	"wikifarm-instances-favourite-notification-error": "Non se puido engadir o wiki aos favoritos. Inténtao de novo ou ponte en contacto coa administración."
 }
