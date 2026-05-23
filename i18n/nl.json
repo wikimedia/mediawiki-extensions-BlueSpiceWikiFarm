@@ -180,7 +180,7 @@
 	"wikifarm-management-invalid-source-title": "Ongeldige bronwiki",
 	"wikifarm-management-invalid-source-text": "De wiki die als bron voor het klonen is geselecteerd, bestaat niet of is niet gereed. Selecteer een andere wiki of probeer het later opnieuw.",
 	"wikifarm-management-invalid-template-title": "Onjuist sjabloon",
-	"wikifarm-management-invalid-template-text": "Het sjabloon die u voor het aanmaken van de wiki hebt geselecteerd, is ongeldig. Selecteer een ander sjabloon of probeer het later opnieuw.",
+	"wikifarm-management-invalid-template-text": "Het sjabloon die u voor het aanmaken van de wiki hebt geselecteerd, is incorrect. Selecteer een ander sjabloon of probeer het later opnieuw.",
 	"wikifarm-create-instance-title-from-template": "Nieuwe wiki aanmaken aan op basis van sjabloon \"$1\"",
 	"wikifarm-template-available-templates": "Selecteer een vooraf gedefinieerd wikisjabloon.",
 	"wikifarm-instance-advanced-options": "Geavanceerde instellingen",
