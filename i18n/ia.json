@@ -35,6 +35,8 @@
 	"wikifarm-widget-combined-title-input-local": "Iste wiki",
 	"wikifarm-farmmanagement-text": "Servitores del ferma",
 	"wikifarm-farmmanagement-desc": "Interfacie de administration pro adder, modificar e deler servitores del ferma",
+	"wikifarm-accessmanagement-text": "Gestion de accesso",
+	"wikifarm-accessmanagement-desc": "Interfacie administrative pro gerer accesso e rolos",
 	"wikifarm-action-archiveinstance-description": "Archivar",
 	"wikifarm-action-copyinstancedata-description": "Copiar datos",
 	"wikifarm-action-copyuser-description": "Copiar conto de usator",
