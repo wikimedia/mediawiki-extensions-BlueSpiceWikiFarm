@@ -146,7 +146,8 @@ ext.bluespiceWikiFarm.ui.CreatePanel.prototype.generateSubmitData = function () 
 					desc: this.descriptionInput.getValue(),
 					group: this.groupInput.getValue(),
 					keywords: this.keywordsInput.getValue(),
-					notsearchable: !this.searchable.getValue()
+					notsearchable: !this.searchable.getValue(),
+					instanceColor: this.color.getValue()
 				},
 				config: {},
 				language: this.language.getValue()

@@ -20,9 +20,23 @@ class InstanceStore extends DirectInstanceStore {
 			$farmConfig->get( 'sharedDBname' ) :
 			$farmConfig->get( 'dbPrefix' ) . $instanceId;
 		$dbPrefix = $farmConfig->get( 'useSharedDB' ) ? $instanceId . '_' : '';
+		$colors = Setup::getInstanceBadgeColors();
+		$randomColor = $colors[array_rand( $colors )];
 		return new InstanceEntity(
-			$instanceId, $path, '', new DateTime(), new DateTime(),
-			InstanceEntity::STATUS_INIT, $dbName, $dbPrefix, [ 'group' => '', 'keywords' => [], 'desc' => '', 'creator' => '' ], []
+			$instanceId,
+			$path,
+			'',
+			new DateTime(),
+			new DateTime(),
+			InstanceEntity::STATUS_INIT, $dbName, $dbPrefix,
+			[
+				'group' => '',
+				'keywords' => [],
+				'desc' => '',
+				'creator' => '',
+				'instanceColor' => $randomColor
+			],
+			[]
 		);
 	}
 
