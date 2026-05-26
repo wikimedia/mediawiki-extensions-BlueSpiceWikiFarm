@@ -153,7 +153,8 @@ class InstanceManager {
 			// Not the nicest that this is hardcoded here
 			$instance->setConfigItem( 'wgLanguageCode', $options['lang'] );
 		}
-		$metadata = $options['metadata'] ?? [];
+
+		$metadata = array_merge( $instance->getMetadata(), $options['metadata'] ?? [] );
 		if ( isset( $options['userName'] ) ) {
 			$metadata['creator'] = $options['userName'];
 		}
@@ -162,6 +163,7 @@ class InstanceManager {
 			unset( $metadata['pinned'] );
 		}
 		$instance->setMetadata( $metadata );
+
 		if ( isset( $options['config'] ) ) {
 			foreach ( $options['config'] as $key => $value ) {
 				$instance->setConfigItem( $key, $value );

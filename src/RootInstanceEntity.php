@@ -7,6 +7,10 @@ use MediaWiki\Message\Message;
 
 class RootInstanceEntity extends InstanceEntity {
 
+	private const MAIN_INSTANCE_COLOR = [
+		'background' => '#3e5389'
+	];
+
 	/**
 	 * @param string $dbName
 	 * @param string $dbPrefix
@@ -15,7 +19,8 @@ class RootInstanceEntity extends InstanceEntity {
 	public function __construct( string $dbName = '<root>', string $dbPrefix = '', string $wikiId = '' ) {
 		parent::__construct(
 			'w', 'w', 'w',
-			new DateTime(), new DateTime(), static::STATUS_READY, $dbName, $dbPrefix, [], []
+			new DateTime(), new DateTime(), static::STATUS_READY, $dbName, $dbPrefix,
+			[ 'instanceColor' => self::MAIN_INSTANCE_COLOR ], []
 		);
 	}
 

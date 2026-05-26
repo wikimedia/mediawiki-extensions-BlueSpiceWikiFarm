@@ -33,6 +33,9 @@ class CreateSystemInstances extends \MediaWiki\Maintenance\LoggedUpdateMaintenan
 				[
 					'config' => [
 						'wgWikiFarmInitialAccessLevel' => 'protected'
+					],
+					'metadata' => [
+						'instanceColor' => [ 'background' => '#747474' ]
 					]
 				]
 			);

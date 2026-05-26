@@ -13,6 +13,42 @@ class Setup {
 
 	public const LAST_VISITED_STASH_KEY = 'wiki-farm-last-visited-list';
 
+	private const INSTANCE_BADGE_COLORS = [
+		// Blues
+		[ 'background' => '#3F6F9F', 'lightText' => true ],
+		[ 'background' => '#5A9BD5', 'lightText' => true ],
+		[ 'background' => '#4F81BD', 'lightText' => true ],
+		// Greens
+		[ 'background' => '#4C8C43', 'lightText' => true ],
+		[ 'background' => '#5FAE56', 'lightText' => true ],
+		[ 'background' => '#4F9A94', 'lightText' => true ],
+		[ 'background' => '#3E7F7A', 'lightText' => true ],
+		// Purples
+		[ 'background' => '#9A5D8C', 'lightText' => true ],
+		[ 'background' => '#B07AA1', 'lightText' => true ],
+		[ 'background' => '#7A5A78', 'lightText' => true ],
+		[ 'background' => '#9F86B8', 'lightText' => true ],
+		// Reds / Pinks
+		[ 'background' => '#C94C4E', 'lightText' => true ],
+		[ 'background' => '#E06C75', 'lightText' => true ],
+		[ 'background' => '#B85C82', 'lightText' => true ],
+		[ 'background' => '#D98DA4', 'lightText' => false ],
+		// Oranges
+		[ 'background' => '#D9791F', 'lightText' => true ],
+		[ 'background' => '#E89A4C', 'lightText' => true ],
+		[ 'background' => '#C96500', 'lightText' => true ],
+		[ 'background' => '#E5A96E', 'lightText' => false ],
+		// Teals
+		[ 'background' => '#5FA7A3', 'lightText' => true ],
+	];
+
+	/**
+	 * @return string[]
+	 */
+	public static function getInstanceBadgeColors(): array {
+		return self::INSTANCE_BADGE_COLORS;
+	}
+
 	public static function onRegistration() {
 		if ( defined( 'MW_QUIBBLE_CI' ) ) {
 			define( 'FARMER_CALLED_INSTANCE', '' );
@@ -42,6 +78,7 @@ class Setup {
 			'useGlobalAccessControl' => $config->get( 'useGlobalAccessControl' ),
 			'shareUsers' => $config->get( 'shareUsers' ),
 			'shareUserSessions' => $config->get( 'shareUserSessions' ),
+			'instanceBadgeColors' => self::INSTANCE_BADGE_COLORS,
 		];
 
 		if ( $config->get( 'useSharedResources' ) ) {
