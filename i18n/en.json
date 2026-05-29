@@ -257,5 +257,9 @@
 	"logentry-ext-wikifarm-access-delete": "$1 {{GENDER:$2|deleted}} all roles for group \"$4\"",
 	"wikifarm-instances-favourite-notification-error": "Failed to add wiki to favourites. Please try again or contact your administrator.",
 	"wikifarm-accessmanagement-text": "Access management",
-	"wikifarm-accessmanagement-desc": "Administration interface for managing access and roles"
+	"wikifarm-accessmanagement-desc": "Administration interface for managing access and roles",
+	"wikifarm-instance-pinned": "Add to pinned wikis",
+	"wikifarm-instance-pinned-help": "Pinned wikis will appear in the wiki menu",
+	"wikifarm-instances-menu-search-label": "Search for wiki",
+	"wikifarm-instances-search-placeholder": "Find wiki"
 }

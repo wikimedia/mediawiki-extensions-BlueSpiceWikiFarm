@@ -197,5 +197,9 @@
 	"wikifarm-instances-favourite-notification-remove": "$1 aus den Favoriten entfernt",
 	"wikifarm-favorite-wikis-link": "Alle favorisierten Wikis anzeigen",
 	"wikifarm-all-wikis-link": "Alle Wikis anzeigen",
-	"wikifarm-global-label": "Global"
+	"wikifarm-global-label": "Global",
+	"wikifarm-instance-pinned": "Zu den angepinnten Wikis hinzufügen",
+	"wikifarm-instance-pinned-help": "Gepinnte Wikis werden im Wiki-Menü angezeigt",
+	"wikifarm-instances-menu-search-label": "Nach Wiki suchen",
+	"wikifarm-instances-search-placeholder": "Wiki finden"
 }
