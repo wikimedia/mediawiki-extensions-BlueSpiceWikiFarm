@@ -214,5 +214,9 @@
 	"logentry-ext-wikifarm-access-assign-role": "$1 {{GENDER:$2|asignou}} o rol «$5» ao grupo «$4»",
 	"logentry-ext-wikifarm-access-remove-all-roles": "$1 {{GENDER:$2|eliminou}} todos os roles do grupo «$4»",
 	"logentry-ext-wikifarm-access-delete": "$1 {{GENDER:$2|eliminou}} todos os roles do grupo «$4»",
-	"wikifarm-instances-favourite-notification-error": "Non se puido engadir o wiki aos favoritos. Inténtao de novo ou ponte en contacto coa administración."
+	"wikifarm-instances-favourite-notification-error": "Non se puido engadir o wiki aos favoritos. Inténtao de novo ou ponte en contacto coa administración.",
+	"wikifarm-instance-pinned": "Engadir aos wikis fixados",
+	"wikifarm-instance-pinned-help": "Os wikis fixados aparecerán no menú do wiki",
+	"wikifarm-instances-menu-search-label": "Buscar un wiki",
+	"wikifarm-instances-search-placeholder": "Atopar un wiki"
 }
