@@ -261,5 +261,9 @@
 	"logentry-ext-wikifarm-access-delete": "$1 heeft alle rollen {{GENDER:$2|verwijderd}} van groep “$4”",
 	"wikifarm-instances-favourite-notification-error": "Het is niet gelukt om de wiki aan uw favorieten toe te voegen. Probeer het opnieuw of neem contact op met uw beheerder.",
 	"wikifarm-accessmanagement-text": "Toegangsbeheer",
-	"wikifarm-accessmanagement-desc": "Beheersinterface voor toegang en rollen"
+	"wikifarm-accessmanagement-desc": "Beheersinterface voor toegang en rollen",
+	"wikifarm-instance-pinned": "Aan vastgepinde wiki's toevoegen",
+	"wikifarm-instance-pinned-help": "Vastgepinde wiki's verschijnen in het wiki-menu",
+	"wikifarm-instances-menu-search-label": "Wiki zoeken",
+	"wikifarm-instances-search-placeholder": "Zoek wiki"
 }

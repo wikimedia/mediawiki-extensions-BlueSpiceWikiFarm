@@ -259,5 +259,9 @@
 	"logentry-ext-wikifarm-access-delete": "$1 {{GENDER:$2|eliminou}} todos os roles do grupo «$4»",
 	"wikifarm-accessmanagement-text": "Xestión de acceso",
 	"wikifarm-accessmanagement-desc": "Interface administrativa para xestionar o acceso e os roles",
-	"wikifarm-instances-favourite-notification-error": "Non se puido engadir o wiki aos favoritos. Inténtao de novo ou ponte en contacto coa administración."
+	"wikifarm-instances-favourite-notification-error": "Non se puido engadir o wiki aos favoritos. Inténtao de novo ou ponte en contacto coa administración.",
+	"wikifarm-instance-pinned": "Engadir aos wikis fixados",
+	"wikifarm-instance-pinned-help": "Os wikis fixados aparecerán no menú do wiki",
+	"wikifarm-instances-menu-search-label": "Buscar un wiki",
+	"wikifarm-instances-search-placeholder": "Atopar un wiki"
 }
