@@ -217,5 +217,9 @@
 	"logentry-ext-wikifarm-access-delete": "$1 {{GENDER:$2|ha removite}} tote le rolos del gruppo “$4”",
 	"wikifarm-instances-favourite-notification-error": "Non poteva adder le wiki al favoritos. Per favor tenta lo de novo o contacta tu administrator.",
 	"wikifarm-accessmanagement-text": "Gestion de accesso",
-	"wikifarm-accessmanagement-desc": "Interfacie administrative pro gerer accesso e rolos"
+	"wikifarm-accessmanagement-desc": "Interfacie administrative pro gerer accesso e rolos",
+	"wikifarm-instance-pinned": "Adder al wikis clavate",
+	"wikifarm-instance-pinned-help": "Le wikis clavate apparera in le menu de wikis",
+	"wikifarm-instances-menu-search-label": "Cercar un wiki",
+	"wikifarm-instances-search-placeholder": "Cercar wiki"
 }

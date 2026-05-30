@@ -218,5 +218,9 @@
 	"logentry-ext-wikifarm-access-assign-role": "$1님이 \"$5\" 역할을 \"$4\" 그룹에 {{GENDER:$2|할당했습니다}}",
 	"logentry-ext-wikifarm-access-remove-all-roles": "$1님이 \"$4\" 그룹에서 모든 역할을 {{GENDER:$2|제거했습니다}}",
 	"logentry-ext-wikifarm-access-delete": "$1님이 \"$4\" 그룹의 모든 역할을 {{GENDER:$2|삭제했습니다}}",
-	"wikifarm-instances-favourite-notification-error": "위키를 즐겨찾기에 추가하는 데 실패했습니다. 다시 시도하거나 관리자에게 문의하세요."
+	"wikifarm-instances-favourite-notification-error": "위키를 즐겨찾기에 추가하는 데 실패했습니다. 다시 시도하거나 관리자에게 문의하세요.",
+	"wikifarm-instance-pinned": "고정한 위키에 추가",
+	"wikifarm-instance-pinned-help": "고정한 위키는 위키 메뉴에 표시됩니다",
+	"wikifarm-instances-menu-search-label": "위키 검색",
+	"wikifarm-instances-search-placeholder": "위키를 찾아보기"
 }
