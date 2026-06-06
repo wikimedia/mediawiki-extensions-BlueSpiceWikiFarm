@@ -264,5 +264,7 @@
 	"wikifarm-instance-pinned": "Label for option to add wiki to pinned wiki menu",
 	"wikifarm-instance-pinned-help": "Help label for option to add wiki to pinned wiki menu",
 	"wikifarm-instances-menu-search-label": "Label for search input to search for a wiki",
-	"wikifarm-instances-search-placeholder": "Placeholder label in search input field to search for a wiki"
+	"wikifarm-instances-search-placeholder": "Placeholder label in search input field to search for a wiki",
+	"wikifarm-instance-creator": "Field/column label",
+	"wikifarm-instance-creator-no-info-label": "Label if no creator info is available"
 }

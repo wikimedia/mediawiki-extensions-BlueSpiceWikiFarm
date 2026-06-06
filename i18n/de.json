@@ -201,5 +201,7 @@
 	"wikifarm-instance-pinned": "Zu den angepinnten Wikis hinzufügen",
 	"wikifarm-instance-pinned-help": "Gepinnte Wikis werden im Wiki-Menü angezeigt",
 	"wikifarm-instances-menu-search-label": "Nach Wiki suchen",
-	"wikifarm-instances-search-placeholder": "Wiki finden"
+	"wikifarm-instances-search-placeholder": "Wiki finden",
+	"wikifarm-instance-creator": "Erstellt von",
+	"wikifarm-instance-creator-no-info-label": "Keine Information verfügbar"
 }

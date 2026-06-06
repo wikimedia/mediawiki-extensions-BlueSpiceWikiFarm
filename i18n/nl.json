@@ -170,7 +170,7 @@
 	"wikifarm-ui-access-wiki-type-private-help": "Alleen gebruikers/groepen met de rol  <b>lezer</b> of hoger kunnen de wiki bekijken. Alleen gebruikers/groepen met de rol <b>bewerker</b> of hoger kunnen de wiki bewerken.",
 	"wikifarm-ui-access-wiki-type-protected-help": "Alle gebruikers, ook die zonder rol, kunnen de wiki bekijken. Alleen gebruikers/groepen met de rol <b>bewerker</b> of hoger kunnen de wiki bewerken.",
 	"wikifarm-ui-access-assignments-header": "Roltoewijzingen",
-	"wikifarm-ui-access-success-set-level": "Wikitype succesvol ingesteld.",
+	"wikifarm-ui-access-success-set-level": "Wikitype ingesteld.",
 	"wikifarm-ui-access-error-set-level": "Het is niet gelukt om het wikitype in te stellen. Probeer het opnieuw of neem contact op met uw beheerder.",
 	"wikifarm-ui-teams-action-details": "Details team",
 	"wikifarm-ui-teams-sort-name": "Naam team",
