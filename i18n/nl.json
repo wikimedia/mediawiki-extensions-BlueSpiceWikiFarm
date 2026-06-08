@@ -74,6 +74,8 @@
 	"wikifarm-error-unknown-instance": "Onbekende wiki",
 	"wikifarm-group-undefined": "Geen groep",
 	"wikifarm-instance-create-edit-error": "Er is een fout opgetreden bij het opslaan van de wikigegevens. Probeer het opnieuw of neem contact op met uw beheerder.",
+	"wikifarm-instance-creator": "Aangemaakt door",
+	"wikifarm-instance-creator-no-info-label": "Geen informatie beschikbaar",
 	"wikifarm-instance-ctime": "Aangemaakt op",
 	"wikifarm-instance-desc": "Beschrijving",
 	"wikifarm-instance-group": "Groep",

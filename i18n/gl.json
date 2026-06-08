@@ -72,6 +72,8 @@
 	"wikifarm-error-unknown-instance": "Wiki descoñecido",
 	"wikifarm-group-undefined": "Sen grupo",
 	"wikifarm-instance-create-edit-error": "Produciuse un erro ao almacenar os datos do wiki. Inténtao de novo ou ponte en contacto coa administración.",
+	"wikifarm-instance-creator": "Creado por",
+	"wikifarm-instance-creator-no-info-label": "Non hai información dispoñible",
 	"wikifarm-instance-ctime": "Creado o",
 	"wikifarm-instance-desc": "Descrición",
 	"wikifarm-instance-group": "Grupo",

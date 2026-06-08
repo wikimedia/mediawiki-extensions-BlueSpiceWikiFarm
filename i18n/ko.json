@@ -75,6 +75,8 @@
 	"wikifarm-error-unknown-instance": "알려지지 않은 위키",
 	"wikifarm-group-undefined": "그룹 없음",
 	"wikifarm-instance-create-edit-error": "위키 데이터를 저장하던 중에 오류가 발생했습니다. 다시 시도하거나 관리자에게 문의하세요.",
+	"wikifarm-instance-creator": "작성자",
+	"wikifarm-instance-creator-no-info-label": "사용할 수 있는 정보 없음",
 	"wikifarm-instance-ctime": "만든 날짜",
 	"wikifarm-instance-desc": "설명",
 	"wikifarm-instance-group": "그룹",
