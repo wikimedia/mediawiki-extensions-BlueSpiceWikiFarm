@@ -176,8 +176,8 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.makeAdvancedOptionsInputs = functio
 		} ).$element,
 		new OO.ui.FieldLayout( this.pinned, {
 			align: 'inline',
-			label: mw.message( 'wikifarm-instance-pinned' ).text(),
-			help: mw.message( 'wikifarm-instance-pinned-help' ).text(),
+			label: mw.message( 'wikifarm-instance-featured' ).text(),
+			help: mw.message( 'wikifarm-instance-featured-help' ).text(),
 			helpInline: true
 		} ).$element
 	];

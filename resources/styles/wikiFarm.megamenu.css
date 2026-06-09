@@ -6,6 +6,7 @@
 }
 
 #farm-wikis-mm .mega-menu-wrapper {
+	max-height: calc( 100vh - var( --navbar-primary-height ) );
 	padding-bottom: 2rem;
 }
 
@@ -61,7 +62,7 @@
 }
 
 #farm-wikis-current,
-#farm-wikis-quickAccess {
+#farm-wikis-quickaccess {
 	min-height: 0;
 	height: 100%;
 }
@@ -72,6 +73,14 @@
 
 #farm-wikis-other .oo-ui-layout.oo-ui-fieldLayout {
 	margin-top: 0;
+}
+
+#farm-wikis-results {
+	min-height: auto;
+}
+
+#farm-wikis-results .oo-ui-textInputWidget {
+	max-width: 200px;
 }
 
 /* ── Skeleton loaders ──────────────────────────────────────────────────── */

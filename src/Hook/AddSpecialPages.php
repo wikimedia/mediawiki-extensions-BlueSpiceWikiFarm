@@ -2,6 +2,7 @@
 
 namespace BlueSpice\WikiFarm\Hook;
 
+use BlueSpice\WikiFarm\InstanceCountLimiter;
 use BlueSpice\WikiFarm\Special\AccessManagement;
 use BlueSpice\WikiFarm\Special\Wikis;
 use MediaWiki\Config\Config;
@@ -11,8 +12,10 @@ class AddSpecialPages implements SpecialPage_initListHook {
 
 	/**
 	 * @param Config $farmConfig
+	 * @param InstanceCountLimiter $countLimiter
 	 */
-	public function __construct( private readonly Config $farmConfig ) {
+	public function __construct( private readonly Config $farmConfig,
+		private readonly InstanceCountLimiter $countLimiter ) {
 	}
 
 	/** @inheritDoc */
@@ -25,7 +28,8 @@ class AddSpecialPages implements SpecialPage_initListHook {
 		}
 		if ( $this->farmConfig->get( 'shareUsers' ) ) {
 			$list['Wikis'] = [
-				'class' => Wikis::class
+				'class' => Wikis::class,
+				'services' => [ 'BlueSpiceWikiFarm._InstanceCountLimiter' ]
 			];
 		}
 	}
