@@ -57,6 +57,11 @@ class Schema extends \MWStake\MediaWiki\Component\DataStore\Schema {
 				self::SORTABLE => false,
 				self::TYPE => FieldType::BOOLEAN
 			],
+			Record::PINNED => [
+				self::FILTERABLE => true,
+				self::SORTABLE => false,
+				self::TYPE => FieldType::BOOLEAN
+			],
 			Record::INSTANCE_COLOR => [
 				self::FILTERABLE => false,
 				self::SORTABLE => false,

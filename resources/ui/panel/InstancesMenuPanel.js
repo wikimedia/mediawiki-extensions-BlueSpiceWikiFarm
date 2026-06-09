@@ -15,15 +15,13 @@ ext.bluespiceWikiFarm.ui.InstancesMenuPanel = function ( cfg ) {
 	this.makeFavouritesPanel();
 	this.makePinnedPanel();
 	this.makeOtherPanel();
+	this.addSpecialPageLink();
 };
 
 OO.inheritClass( ext.bluespiceWikiFarm.ui.InstancesMenuPanel, OO.ui.Widget );
 
 ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.makeQuickAccessPanel = function () {
-	const skeleton = new ext.bluespiceWikiFarm.ui.widget.InstanceSkeletonSectionWidget( {
-		sectionId: 'context',
-		count: 2
-	} );
+	const skeleton = this.getSkeleton( 'context', 2, false );
 	this.$quickAccess.append( skeleton.$element );
 
 	const api = new mw.Rest();
@@ -31,9 +29,12 @@ ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.makeQuickAccessPanel = fun
 		skeleton.$element.remove();
 		const $contextCnt = $( '<div>' ).addClass( 'd-flex justify-content-center' );
 		for ( const [ key, elements ] of Object.entries( result ) ) { // eslint-disable-line es-x/no-object-entries
+			// The following messages are used here:
+			// * wikifarm-instances-menu-section-current
+			// * wikifarm-instances-menu-section-quickaccess
 			const section = new ext.bluespiceWikiFarm.ui.widget.InstanceSectionWidget( {
 				sectionId: key,
-				title: 'Schnellzugriff',
+				title: mw.message( 'wikifarm-instances-menu-section-' + key ).text(),
 				elements: elements
 			} );
 			$contextCnt.append( section.$element );
@@ -43,17 +44,14 @@ ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.makeQuickAccessPanel = fun
 };
 
 ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.makeFavouritesPanel = function () {
-	this.$favourite = $( '<div>' ).addClass();
+	this.$favourite = $( '<div>' );
 	this.$overview.append( this.$favourite );
 	this.loadFavourites();
 };
 
 ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.loadFavourites = function () {
 	this.$favourite.empty();
-	const skeleton = new ext.bluespiceWikiFarm.ui.widget.InstanceSkeletonSectionWidget( {
-		sectionId: 'favourites',
-		count: 10
-	} );
+	const skeleton = this.getSkeleton( 'favourites', 10, false );
 	this.$favourite.append( skeleton.$element );
 
 	const api = new mw.Rest();
@@ -68,14 +66,12 @@ ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.loadFavourites = function 
 		} ] )
 	} ).done( ( result ) => {
 		skeleton.$element.remove();
-		if ( result.results.length === 0 ) {
-			return;
-		}
 		const section = new ext.bluespiceWikiFarm.ui.widget.InstanceSectionWidget( {
 			sectionId: 'favourites',
-			title: 'Favourites',
+			title: mw.message( 'wikifarm-instances-menu-section-favourites' ).text(),
 			elements: result.results,
-			sectionHasFavourite: true
+			sectionHasFavourite: true,
+			emptyLabel: mw.message( 'wikifarm-instances-menu-empty-favorite-text' ).text()
 		} );
 		section.connect( this, { favoured: 'loadFavourites' } );
 		this.$favourite.append( section.$element );
@@ -83,46 +79,71 @@ ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.loadFavourites = function 
 };
 
 ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.makePinnedPanel = function () {
-	this.$pinned = $( '<div>' ).addClass();
+	this.$pinned = $( '<div>' );
 	this.$overview.append( this.$pinned );
-	const skeleton = new ext.bluespiceWikiFarm.ui.widget.InstanceSkeletonSectionWidget( {
-		sectionId: 'pinned',
-		count: 10
-	} );
+	const skeleton = this.getSkeleton( 'pinned', 10, false );
 	this.$pinned.append( skeleton.$element );
 
 	const api = new mw.Rest();
-	api.get( '/bluespice/farm/v1/instances/pinned' ).done( ( results ) => {
+	api.get( '/bluespice/farm/v1/instances', {
+		limit: 20,
+		sort: JSON.stringify( [ { property: 'title', direction: 'asc' } ] ),
+		filter: JSON.stringify( [ {
+			property: 'pinned',
+			value: true,
+			operator: 'eq',
+			type: 'boolean'
+		} ] )
+	} ).done( ( result ) => {
 		skeleton.$element.remove();
-		if ( results.length === 0 ) {
+		if ( result.results.length === 0 ) {
 			return;
 		}
 		const section = new ext.bluespiceWikiFarm.ui.widget.InstanceSectionWidget( {
 			sectionId: 'pinned',
-			title: 'Pinned',
-			elements: results
+			title: mw.message( 'wikifarm-instances-menu-section-featured' ).text(),
+			elements: result.results
 		} );
 		this.$pinned.append( section.$element );
 	} );
 };
 
 ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.makeOtherPanel = function () {
-	this.$other = $( '<div>' ).addClass();
+	this.$other = $( '<div>' );
 	this.$overview.append( this.$other );
-	const skeleton = new ext.bluespiceWikiFarm.ui.widget.InstanceSkeletonSectionWidget( {
-		sectionId: 'other',
-		hasSearch: true,
-		count: 5
-	} );
+	const skeleton = this.getSkeleton( 'other', 5, true );
 	this.$other.append( skeleton.$element );
 
 	// ToDO: latest visited should be added here as default - currently empty
 	skeleton.$element.remove();
 	const section = new ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget( {
 		sectionId: 'other',
-		title: 'Other',
+		title: mw.message( 'wikifarm-instances-menu-section-other' ).text(),
 		elements: []
 	} );
 	section.connect( this, { favoured: 'loadFavourites' } );
 	this.$other.append( section.$element );
+};
+
+ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.getSkeleton = function ( id, count, hasSearch ) {
+	return new ext.bluespiceWikiFarm.ui.widget.InstanceSkeletonSectionWidget( {
+		sectionId: id,
+		count: count,
+		hasSearch: hasSearch
+	} );
+};
+
+ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.addSpecialPageLink = function () {
+	let url = mw.util.getUrl( 'Special:Wikis' );
+	if ( this.farmConfig.instanceId !== 'w' ) {
+		url = mw.config.get( 'wgServer' ) + '/wiki/Special:Wikis';
+	}
+
+	const specialPageLink = new OOJSPlus.ui.widget.LinkWidget( {
+		href: url,
+		label: mw.message( 'wikifarm-instances-menu-link-wikis-label' ).text()
+	} );
+	const $linkCnt = $( '<div>' ).addClass( 'd-flex justify-content-center' );
+	$linkCnt.append( specialPageLink.$element );
+	this.$element.append( $linkCnt );
 };

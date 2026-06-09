@@ -6,7 +6,13 @@
 	border-radius: 2px;
 }
 
-#bs-wikifarm-user-instances a.external,
-#bs-wikifarm-user-instances a.external:hover {
-	background-image: none;
+#bs-wikifarm-wikis .oo-ui-tabPanelLayout,
+.wikifarm-wikis-index-layout {
+	padding: 20px 0;
+}
+
+.bs-wikis-list td[ data-column='favourite' ] {
+	display: flex;
+	justify-content: center;
+	margin-right: 0 !important;
 }

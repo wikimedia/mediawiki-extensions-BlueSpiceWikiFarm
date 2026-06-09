@@ -8,6 +8,7 @@ use BlueSpice\WikiFarm\SystemInstanceEntity;
 use DateTime;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\IContextSource;
+use MWStake\MediaWiki\Component\DataStore\Filter;
 use MWStake\MediaWiki\Component\DataStore\IPrimaryDataProvider;
 use MWStake\MediaWiki\Component\DataStore\ReaderParams;
 
@@ -58,10 +59,12 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 	 * @return array|\MWStake\MediaWiki\Component\DataStore\Record[]
 	 */
 	public function makeData( $params ) {
-		$ids = $this->instanceStore->getInstanceIds();
-		foreach ( $ids as $id ) {
-			$instance = $this->instanceStore->getInstanceById( $id );
-			if ( !$instance ) {
+		$pinnedFilter = $this->getPinnedFilter( $params );
+		$instances = $pinnedFilter === true
+			? $this->instanceStore->getPinnedInstances()
+			: $this->instanceStore->getAllInstances();
+		foreach ( $instances as $instance ) {
+			if ( $pinnedFilter !== null && $instance->isPinned() !== $pinnedFilter ) {
 				continue;
 			}
 
@@ -100,7 +103,7 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 			Record::NOTSEARCHABLE => $instance->getMetadata()['notsearchable'] ?? false,
 			Record::META_GROUP => '',
 			Record::IS_SYSTEM => $instance instanceof SystemInstanceEntity,
-			Record::INSTANCE_COLOR => $instance->getMetadata()['instanceColor'] ?? null,
+			Record::INSTANCE_COLOR => $instance->getMetadata()['instanceColor']['background'] ?? null,
 		];
 
 		$data['meta_keywords'] = [];
@@ -115,6 +118,27 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 		}
 
 		$this->data[] = new Record( (object)$data );
+	}
+
+	/**
+	 * @param ReaderParams $params
+	 * @return bool
+	 */
+	protected function getPinnedFilter( ReaderParams $params ): ?bool {
+		foreach ( $params->getFilter() as $filter ) {
+			if ( $filter->getField() !== Record::PINNED ) {
+				continue;
+			}
+
+			$filter->setApplied( true );
+			if ( !( $filter instanceof Filter\Boolean ) ) {
+				return false;
+			}
+
+			return $filter->getValue();
+		}
+
+		return false;
 	}
 
 	/**

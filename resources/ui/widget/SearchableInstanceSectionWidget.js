@@ -64,7 +64,7 @@ ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget.prototype.onSear
 		this.$searchResultSection = section.$element;
 		this.$element.append( section.$element );
 
-		if ( result.total > 5 ) {
+		if ( result.total >= 5 ) {
 			this.showAllResultsLabel( query, result.total );
 		}
 	} );
@@ -83,7 +83,7 @@ ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget.prototype.showAl
 	if ( !this.allResultsLink ) {
 		const config = {
 			href: url,
-			label: 'Zeige alle ' + numberOfResults + ' Ergebnisse an'
+			label: mw.message( 'wikifarm-instances-menu-search-more-results-label', numberOfResults ).text()
 		};
 		if ( this.farmConfig.instanceId !== 'w' ) {
 			config.target = '_blank';

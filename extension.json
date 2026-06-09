@@ -264,8 +264,8 @@
 				"wikifarm-instance-color",
 				"wikifarm-instance-color-remove",
 				"wikifarm-instance-advanced-options",
-				"wikifarm-instance-pinned",
-				"wikifarm-instance-pinned-help"
+				"wikifarm-instance-featured",
+				"wikifarm-instance-featured-help"
 			],
 			"dependencies": [
 				"oojs-ui",
@@ -497,11 +497,11 @@
 		"ext.bluespice.wikiFarm.breadcrumbs": {
 			"styles": "styles/wikiFarm.breadcrumbs.css"
 		},
-		"ext.bluespice.wikiFarm.instances.special": {
+		"ext.bluespice.wikiFarm.wikis.special": {
 			"packageFiles": [
-				"ext.bluespice.wikiFarm.instances.js",
-				"ui/panel/UserInstancePanel.js",
-				"ui/panel/InstancePanel.js"
+				"ext.bluespice.wikiFarm.wikis.js",
+				"ui/panel/WikisPanel.js",
+				"ui/panel/WikiPanel.js"
 			],
 			"styles": [
 				"styles/wikiFarm.css"
@@ -511,16 +511,23 @@
 				"wikifarm-instances-tab-all-label",
 				"wikifarm-instances-grid-column-wiki-header-label",
 				"wikifarm-instances-grid-column-favourites-header-label",
-				"wikifarm-instances-grid-column-group-header-label",
 				"wikifarm-instances-grid-favourites-label-add",
 				"wikifarm-instances-grid-favourites-label-remove",
-				"wikifarm-instances-favourite-notification-add",
-				"wikifarm-instances-favourite-notification-remove"
+				"wikifarm-instances-tab-featured-label",
+				"wikifarm-instances-panel-search-label",
+				"wikifarm-button-action-label-edit",
+				"wikifarm-button-action-label-clone",
+				"wikifarm-button-action-label-suspend",
+				"wikifarm-button-action-delete-label",
+				"wikifarm-instances-filter-show-all-label",
+				"wikifarm-error-instance-limit-reached"
 			],
 			"dependencies": [
 				"oojs-ui",
+				"ext.oOJSPlus.widgets",
 				"ext.oOJSPlus.data",
-				"oojs-ui.styles.icons-editing-core"
+				"oojs-ui.styles.icons-editing-core",
+				"ext.bluespice.wikiFarm.bootstrap"
 			]
 		},
 		"ext.bluespice.wikiFarm.instances.megamenu": {
@@ -536,19 +543,17 @@
 				"styles/wikiFarm.megamenu.css"
 			],
 			"messages": [
-				"wikifarm-main-wiki-name",
-				"wikifarm-shared-instance-name",
 				"wikifarm-instances-menu-empty-favorite-text",
-				"wikifarm-instances-menu-overview-text",
-				"wikifarm-instances-menu-favorite-text",
 				"wikifarm-instances-favorite-add-btn-title-label",
 				"wikifarm-instances-favorite-remove-btn-title-label",
-				"wikifarm-instances-favourite-notification-add",
-				"wikifarm-instances-favourite-notification-remove",
-				"wikifarm-all-wikis-link",
-				"wikifarm-favorite-wikis-link",
 				"wikifarm-instances-menu-search-label",
-				"wikifarm-instances-search-placeholder"
+				"wikifarm-instances-search-placeholder",
+				"wikifarm-instances-menu-section-current",
+				"wikifarm-instances-menu-section-quickaccess",
+				"wikifarm-instances-menu-section-favourites",
+				"wikifarm-instances-menu-section-featured",
+				"wikifarm-instances-menu-section-other",
+				"wikifarm-instances-menu-link-wikis-label"
 			],
 			"dependencies": [
 				"oojs-ui",
@@ -608,7 +613,7 @@
 		},
 		"addSpecialPages": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\AddSpecialPages",
-			"services": [ "BlueSpiceWikiFarm._Config" ]
+			"services": [ "BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm._InstanceCountLimiter" ]
 		},
 		"setupGroupMessages": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\SetupGroupMessages",
@@ -638,7 +643,10 @@
 		},
 		"common-user-interface": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\CommonUserInterface",
-			"services": [ "BlueSpiceWikiFarm._Config", "TitleFactory" ]
+			"services": [
+				"BlueSpiceWikiFarm._Config", "TitleFactory",
+				"PermissionManager", "SpecialPageFactory", "BlueSpiceWikiFarm._InstanceCountLimiter"
+			]
 		},
 		"userpreference": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\AddUserPreference"
@@ -804,10 +812,11 @@
 			]
 		},
 		{
-			"path": "/bluespice/farm/v1/instances/pinned",
-			"class": "BlueSpice\\WikiFarm\\Rest\\PinnedInstanceHandler",
+			"path": "/bluespice/farm/v1/instances",
+			"class": "BlueSpice\\WikiFarm\\Rest\\InstancesHandler",
 			"services": [
-				"BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.InstanceStore"
+				"HookContainer", "BlueSpiceWikiFarm._Config", "MainConfig",
+				"BlueSpiceWikiFarm.AccessControlStore", "BlueSpiceWikiFarm.InstanceStore"
 			]
 		},
 		{
