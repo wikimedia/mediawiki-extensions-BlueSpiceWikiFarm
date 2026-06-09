@@ -263,5 +263,7 @@
 	"wikifarm-instance-pinned": "Engadir aos wikis fixados",
 	"wikifarm-instance-pinned-help": "Os wikis fixados aparecerán no menú do wiki",
 	"wikifarm-instances-menu-search-label": "Buscar un wiki",
-	"wikifarm-instances-search-placeholder": "Atopar un wiki"
+	"wikifarm-instances-search-placeholder": "Atopar un wiki",
+	"wikifarm-instance-creator": "Creado por",
+	"wikifarm-instance-creator-no-info-label": "Non hai información dispoñible"
 }

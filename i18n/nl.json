@@ -265,5 +265,7 @@
 	"wikifarm-instance-pinned": "Aan vastgepinde wiki's toevoegen",
 	"wikifarm-instance-pinned-help": "Vastgepinde wiki's verschijnen in het wiki-menu",
 	"wikifarm-instances-menu-search-label": "Wiki zoeken",
-	"wikifarm-instances-search-placeholder": "Zoek wiki"
+	"wikifarm-instances-search-placeholder": "Zoek wiki",
+	"wikifarm-instance-creator": "Aangemaakt door",
+	"wikifarm-instance-creator-no-info-label": "Geen informatie beschikbaar"
 }

@@ -44,5 +44,7 @@
 	"wikifarm-access-tab-general-settings": "Impostazione generale",
 	"wikifarm-access-tab-groups": "Gruppi",
 	"wikifarm-access-column-user": "Utente",
-	"logentry-ext-wikifarm-access-remove-all-roles": "$1 {{GENDER:$2|ha rimosso}} tutti i ruoli dal gruppo \"$4\""
+	"logentry-ext-wikifarm-access-remove-all-roles": "$1 {{GENDER:$2|ha rimosso}} tutti i ruoli dal gruppo \"$4\"",
+	"wikifarm-instance-creator": "Creato da",
+	"wikifarm-instance-creator-no-info-label": "Nessuna informazione disponibile"
 }
