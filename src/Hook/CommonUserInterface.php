@@ -8,6 +8,7 @@ use BlueSpice\WikiFarm\GlobalActionsAccessManagement;
 use BlueSpice\WikiFarm\GlobalActionsFarmManagement;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Title\TitleFactory;
 use MWStake\MediaWiki\Component\CommonUserInterface\Hook\MWStakeCommonUIRegisterSkinSlotComponents;
 
 class CommonUserInterface implements MWStakeCommonUIRegisterSkinSlotComponents {
@@ -17,8 +18,9 @@ class CommonUserInterface implements MWStakeCommonUIRegisterSkinSlotComponents {
 
 	/**
 	 * @param Config $farmConfig
+	 * @param TitleFactory $titleFactory
 	 */
-	public function __construct( Config $farmConfig ) {
+	public function __construct( Config $farmConfig, private readonly TitleFactory $titleFactory ) {
 		$this->farmConfig = $farmConfig;
 	}
 
@@ -43,11 +45,11 @@ class CommonUserInterface implements MWStakeCommonUIRegisterSkinSlotComponents {
 			'GlobalActionsAdministration',
 			[
 				'ga-bluespice-farmmanagement' => [
-					'factory' => static function () use ( $skin ) {
+					'factory' => function () use ( $skin ) {
 						if ( is_a( $skin, 'SkinBlueSpiceEclipseSkin', true ) ) {
-							return new EnhancedGlobalActionsFarmManagement();
+							return new EnhancedGlobalActionsFarmManagement( $this->titleFactory );
 						}
-						return new GlobalActionsFarmManagement();
+						return new GlobalActionsFarmManagement( $this->titleFactory );
 					}
 				]
 			]

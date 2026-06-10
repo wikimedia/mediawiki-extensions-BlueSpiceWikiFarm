@@ -3,12 +3,17 @@
 namespace BlueSpice\WikiFarm;
 
 use MediaWiki\Message\Message;
-use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\Title\TitleFactory;
 use MWStake\MediaWiki\Component\CommonUserInterface\Component\RestrictedTextLink;
 
 class GlobalActionsFarmManagement extends RestrictedTextLink {
 
-	public function __construct() {
+	/**
+	 * @param TitleFactory $titleFactory
+	 */
+	public function __construct(
+		private readonly TitleFactory $titleFactory
+	) {
 		parent::__construct( [] );
 	}
 
@@ -24,8 +29,12 @@ class GlobalActionsFarmManagement extends RestrictedTextLink {
 
 	/** @inheritDoc */
 	public function getHref(): string {
-		$tool = SpecialPage::getTitleFor( 'Farm_management' );
-		return $tool->getLocalURL();
+		if ( FARMER_IS_ROOT_WIKI_CALL ) {
+			$title = $this->titleFactory->makeTitle( NS_SPECIAL, 'Farm_management' );
+			return $title->getLocalURL();
+		}
+		$title = $this->titleFactory->newFromText( 'w:Special:Farm_management' );
+		return $title->getFullURL();
 	}
 
 	/** @inheritDoc */
