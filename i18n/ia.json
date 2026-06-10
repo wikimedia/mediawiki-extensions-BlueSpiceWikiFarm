@@ -72,6 +72,8 @@
 	"wikifarm-error-unknown-instance": "Wiki incognite",
 	"wikifarm-group-undefined": "Sin gruppo",
 	"wikifarm-instance-create-edit-error": "Un error ha occurrite durante le immagazinage del datos del wiki. Tenta lo de novo o contacta tu administrator.",
+	"wikifarm-instance-creator": "Create per",
+	"wikifarm-instance-creator-no-info-label": "Nulle information disponibile",
 	"wikifarm-instance-ctime": "Create le",
 	"wikifarm-instance-desc": "Description",
 	"wikifarm-instance-group": "Gruppo",
