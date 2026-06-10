@@ -634,7 +634,7 @@
 		},
 		"common-user-interface": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\CommonUserInterface",
-			"services": [ "BlueSpiceWikiFarm._Config" ]
+			"services": [ "BlueSpiceWikiFarm._Config", "TitleFactory" ]
 		},
 		"userpreference": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\AddUserPreference"
