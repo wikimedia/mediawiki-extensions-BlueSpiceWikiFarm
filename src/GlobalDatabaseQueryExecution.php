@@ -160,7 +160,7 @@ class GlobalDatabaseQueryExecution {
 			->join( 'slots', 'sl', [ 'slot_content_id = content_id' ] )
 			->join( 'page', 'p', $revisionCondition )
 			->where( [
-				'page_title' => $title->getText(),
+				'page_title' => $title->getDBkey(),
 				'page_namespace' => $title->getNamespace(),
 			] )
 			->fetchRow();
