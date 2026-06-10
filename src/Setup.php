@@ -61,9 +61,12 @@ class Setup {
 	 */
 	protected static function setupInterwikiLinks() {
 		if ( !FARMER_IS_ROOT_WIKI_CALL ) {
+			$globalServer = $GLOBALS['wgWikiFarmConfigInternal']->get( 'globalServer' );
+			$basePath = $GLOBALS['wgWikiFarmConfigInternal']->get( 'basePath' );
+			$basePath = '/' . trim( $basePath, '/' ) . '/';
 			$GLOBALS['wgWikiFarmConfig_interwikiLinks']['w'] = [
 				'iw_prefix' => 'w',
-				'iw_url' => $GLOBALS['wgServer'] . '/wiki/$1',
+				'iw_url' => rtrim( $globalServer, '/' ) . $basePath . 'wiki/$1',
 				'iw_api' => false,
 				'iw_wikiid' => 'w',
 				'iw_local' => false
