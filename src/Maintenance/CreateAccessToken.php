@@ -75,7 +75,7 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 			'oauthVersion' => 2,
 			'callbackUrl' => 'https://dummy.com',
 			'grants' => json_encode( [
-				'editpage', 'createeditmovepage', 'uploadfile', 'uploadeditmovefile', 'highvolume'
+				'editpage', 'createeditmovepage', 'uploadfile', 'uploadeditmovefile', 'highvolume', 'editinterface'
 			] ),
 			'granttype' => 'normal',
 			'ownerOnly' => true,
