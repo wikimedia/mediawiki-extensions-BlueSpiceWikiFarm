@@ -112,10 +112,6 @@
 	"wikifarm-incomplete-instance": "Title attribute for incomplete instances",
 	"wikifarm-search-context-global": "Label of a search context",
 	"wikifarm-main-instance-name": "Root wiki display name",
-	"wikifarm-ui-search-instance-filter": "Label for the search center filter showing instances in which search is performed\n$1 - wiki names",
-	"wikifarm-ui-search-instance-filter-local": "Search context label",
-	"wikifarm-ui-search-instance-filter-all": "Search context label",
-	"wikifarm-ui-search-instance-filter-hint": "Help message for the search center filter",
 	"wikifarm-button-action-label-add": "Action label",
 	"wikifarm-ui-access-field-type": "Field label",
 	"wikifarm-ui-access-field-select-entities": "Field label",
@@ -145,7 +141,6 @@
 	"wikifarm-ui-access-assignments-header": "Fieldset label",
 	"wikifarm-ui-access-success-set-level": "Success message when setting wiki type",
 	"wikifarm-ui-access-error-set-level": "Error message when setting wiki type",
-	"wikifarm-ui-search-instance-filter-search": "Instance search field placeholder",
 	"wikifarm-shared-instance-name": "Name for the system instance \"-shared\"",
 	"wikifarm-action-copytemplate-description": "Step label when creating instance",
 	"wikifarm-upload-file-foreign-repo-label": "Field label",
@@ -233,5 +228,6 @@
 	"wikifarm-wikis-create-new-wiki-title": "Button title to create a new wiki",
 	"wikifarm-wikis-create-new-wiki-aria-label": "Aria label to create a new wiki",
 	"wikifarm-error-copy-instance-data-failed": "Error message when copying instance data fails",
-	"wikifarm-error-archive-instance-failed": "Error message when archiving an instance fails"
+	"wikifarm-error-archive-instance-failed": "Error message when archiving an instance fails",
+	"wikifarm-search-filter-show-all-label": "Label for filter option to show all wikis"
 }

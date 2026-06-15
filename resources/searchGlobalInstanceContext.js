@@ -4,10 +4,11 @@ mw.hook( 'bs.extendedSearch.ToolsPanel.addFilters' ).add( ( filters, tools, look
 		// Do not render if context is set to something else
 		return;
 	}
-	const instancePicker = new ext.bluespiceWikiFarm.ui.widget.SearchInstanceSelector( {
+
+	const instanceFilter = new ext.bluespiceWikiFarm.ui.widget.WikisFilter( {
 		options: mw.config.get( 'BSWikiFarmSearchInstances' ) || [],
 		context: context,
 		lookup: lookup
 	} );
-	tools.$filtersContainer.append( instancePicker.$element );
+	tools.$filtersContainer.append( instanceFilter.$element );
 } );
