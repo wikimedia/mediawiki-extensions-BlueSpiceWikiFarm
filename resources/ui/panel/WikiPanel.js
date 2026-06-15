@@ -188,9 +188,16 @@ bs.bluespiceWikiFarm.ui.WikiPanel.prototype.addGroupFilter = function ( values )
 	if ( uniqueGroups.length === 0 ) {
 		return;
 	}
+	const groups = [];
+	for ( const i in uniqueGroups ) {
+		groups.push( {
+			data: uniqueGroups[ i ],
+			label: uniqueGroups[ i ]
+		} );
+	}
 	this.filter = new OOJSPlus.ui.widget.FilterBarWidget( {
 		noFilterActiveLabel: mw.message( 'wikifarm-instances-filter-show-all-label' ).text(),
-		filterElements: uniqueGroups
+		filterElements: groups
 	} );
 
 	this.filter.connect( this, {

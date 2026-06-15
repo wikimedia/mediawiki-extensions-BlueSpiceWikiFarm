@@ -315,7 +315,7 @@
 		},
 		"ext.bluespice.wikiFarm.search": {
 			"scripts": [
-				"ui/widget/SearchInstanceSelector.js",
+				"ui/widget/WikisFilter.js",
 				"searchGlobalInstanceContext.js"
 			],
 			"styles": [
@@ -325,14 +325,11 @@
 				"ext.bluespice",
 				"oojs-ui",
 				"ext.blueSpiceExtendedSearch.SearchCenter",
-				"ext.bluespice.wikiFarm.bootstrap"
+				"ext.bluespice.wikiFarm.bootstrap",
+				"ext.oOJSPlus.widgets"
 			],
 			"messages": [
-				"wikifarm-ui-search-instance-filter",
-				"wikifarm-ui-search-instance-filter-local",
-				"wikifarm-ui-search-instance-filter-all",
-				"wikifarm-ui-search-instance-filter-hint",
-				"wikifarm-ui-search-instance-filter-search"
+				"wikifarm-search-filter-show-all-label"
 			]
 		},
 		"ext.bluespice.wikiFarm.combinedTitleInput": {

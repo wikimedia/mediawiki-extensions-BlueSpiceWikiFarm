@@ -30,7 +30,10 @@ class AddSearchInstanceContext implements BeforePageDisplayHook {
 		$availableInstances = $this->dataProvider->getAvailableInstances( $out->getUser() );
 		$outputData = [];
 		foreach ( $availableInstances as $key => $instance ) {
-			$outputData[$key] = $instance['display_data'] ? $instance['display_data']['display_text'] : $key;
+			$outputData[] = [
+				'data' => $key,
+				'label' => $instance['display_data'] ? $instance['display_data']['display_text'] : $key
+			];
 		}
 		$out->addJsConfigVars( 'BSWikiFarmSearchInstances', $outputData );
 	}
