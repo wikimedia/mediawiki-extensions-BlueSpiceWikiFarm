@@ -218,5 +218,7 @@
 	"wikifarm-instance-pinned": "Adder al wikis clavate",
 	"wikifarm-instance-pinned-help": "Le wikis clavate apparera in le menu de wikis",
 	"wikifarm-instances-menu-search-label": "Cercar un wiki",
-	"wikifarm-instances-search-placeholder": "Cercar wiki"
+	"wikifarm-instances-search-placeholder": "Cercar wiki",
+	"wikifarm-instance-creator": "Create per",
+	"wikifarm-instance-creator-no-info-label": "Nulle information disponibile"
 }
