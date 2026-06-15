@@ -262,5 +262,7 @@
 	"wikifarm-instance-pinned": "Add to pinned wikis",
 	"wikifarm-instance-pinned-help": "Pinned wikis will appear in the wiki menu",
 	"wikifarm-instances-menu-search-label": "Search for wiki",
-	"wikifarm-instances-search-placeholder": "Find wiki"
+	"wikifarm-instances-search-placeholder": "Find wiki",
+	"wikifarm-instance-creator": "Created by",
+	"wikifarm-instance-creator-no-info-label": "No information available"
 }

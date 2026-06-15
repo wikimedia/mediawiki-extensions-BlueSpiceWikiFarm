@@ -16,5 +16,7 @@
 	"wikifarm-access-unsaved-changes-warning": "Muutoksia on tallentamatta. Haluatko ohittaa ne?",
 	"wikifarm-access-field-selected": "Valittu",
 	"wikifarm-access-role-desc-reviewer": "Saa tarkastella, muokata ja tarkistaa tämän wikin sivuja",
-	"log-name-ext-wikifarm-access": "Wikin käyttöoikeuksien hallinta"
+	"log-name-ext-wikifarm-access": "Wikin käyttöoikeuksien hallinta",
+	"wikifarm-instance-creator": "Luonut",
+	"wikifarm-instance-creator-no-info-label": "Tietoja ei ole saatavilla"
 }
