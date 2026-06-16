@@ -2,6 +2,7 @@
 
 namespace BlueSpice\WikiFarm\Tests;
 
+use BlueSpice\Config;
 use BlueSpice\WikiFarm\DirectInstanceStore;
 use PHPUnit\Framework\TestCase;
 
@@ -19,7 +20,14 @@ class GroupCreatorTest extends TestCase {
 		$storeMock = $this->createMock( DirectInstanceStore::class );
 		$storeMock->method( 'getInstancePathsQuick' )->willReturn( [ 'Test1', 'Test2' ] );
 
-		$creator = new \BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator( $storeMock );
+		$configMock = $this->createMock( Config::class );
+		$configMock->method( 'get' )->willReturnCallback( static function ( $key ) {
+			return match ( $key ) {
+				'superAccessGroups' => [ 'sysop' ],
+			};
+		} );
+
+		$creator = new \BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator( $storeMock, $configMock );
 		$groups = $creator->getInstanceGroups();
 
 		$this->assertEquals( [
@@ -46,6 +54,7 @@ class GroupCreatorTest extends TestCase {
 				'wiki__global_editor' => [ 'reader', 'editor' ],
 				'wiki__global_reviewer' => [ 'reader', 'editor', 'reviewer' ],
 				'wiki__global_admin' => [ 'reader', 'editor', 'reviewer', 'admin' ],
+				'sysop' => [ 'reader', 'editor', 'reviewer', 'admin' ],
 			]
 		], $groups );
 	}

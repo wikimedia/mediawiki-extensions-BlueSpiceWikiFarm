@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\AccessControl;
 
 use BlueSpice\WikiFarm\DirectInstanceStore;
 use BlueSpice\WikiFarm\InstanceEntity;
+use Config;
 
 class InstanceGroupCreator {
 
@@ -13,10 +14,17 @@ class InstanceGroupCreator {
 	private $store;
 
 	/**
-	 * @param DirectInstanceStore $store
+	 * @var Config
 	 */
-	public function __construct( DirectInstanceStore $store ) {
+	private $farmConfig;
+
+	/**
+	 * @param DirectInstanceStore $store
+	 * @param Config $farmConfig
+	 */
+	public function __construct( DirectInstanceStore $store, Config $farmConfig ) {
 		$this->store = $store;
+		$this->farmConfig = $farmConfig;
 	}
 
 	/**
@@ -55,6 +63,11 @@ class InstanceGroupCreator {
 			}
 			$groupName = $this->getGroupNameForUserRole( $instancePath, $group );
 			$res[$groupName] = $roles;
+		}
+		if ( $instancePath === '_global' ) {
+			foreach ( $this->farmConfig->get( 'superAccessGroups' ) as $superGroup ) {
+				$res[$superGroup] = IAccessStore::ROLES['admin'];
+			}
 		}
 		return $res;
 	}

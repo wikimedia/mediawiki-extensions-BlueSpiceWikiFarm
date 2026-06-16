@@ -98,15 +98,16 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.buildGrid = function ( store, enti
 				mw.msg( 'wikifarm-access-column-group' ) :
 				mw.msg( 'wikifarm-access-column-user' ),
 			valueParser: function ( value, row ) {
-				if ( row.entity_type === 'user' ) {
-					return new OOJSPlus.ui.widget.UserWidget( {
-						user_name: row.entity_key // eslint-disable-line camelcase
-					} ).$element;
-				}
-				const icon = new OO.ui.IconWidget( { icon: 'userGroup' } );
-				const $label = $( '<span>' ).text( row.entity_key );
 				const $container = $( '<span>' ).addClass( 'bs-access-group-entity' );
-				$container.append( icon.$element, $label );
+				if ( row.entity_type === 'user' ) {
+					$container.append( new OOJSPlus.ui.widget.UserWidget( {
+						user_name: row.entity_key // eslint-disable-line camelcase
+					} ).$element );
+				} else if ( row.entity_type === 'group' ) {
+					const icon = new OO.ui.IconWidget( { icon: 'userGroup' } );
+					const $label = $( '<span>' ).text( row.entity_key );
+					$container.append( icon.$element, $label );
+				}
 				if ( row.is_global_assignment ) {
 					$container.append(
 						$( '<span>' ).addClass( 'bs-access-global-badge' )

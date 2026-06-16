@@ -10,13 +10,14 @@ use BlueSpice\WikiFarm\DirectInstanceStore;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\ManagementDatabaseFactory;
 use MediaWiki\User\UserIdentity;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers \BlueSpice\WikiFarm\AccessControl\AccessStore
  */
-class AccesssStoreTest extends TestCase {
+class AccessStoreTest extends TestCase {
 
 	/**
 	 * @covers \BlueSpice\WikiFarm\AccessControl\AccessStore::userHasRoleOnInstance
@@ -25,7 +26,7 @@ class AccesssStoreTest extends TestCase {
 		$storeMock = $this->createMock( DirectInstanceStore::class );
 		$storeMock->method( 'getInstancePathsQuick' )->willReturn( [ 'Test1', 'Test2' ] );
 
-		$creator = new InstanceGroupCreator( $storeMock );
+		$creator = new InstanceGroupCreator( $storeMock, $this->getFarmConfigMock() );
 
 		$dbMock = $this->createMock( IDatabase::class );
 		$dbMock->method( 'makeList' )->willReturnCallback( static function ( $list ) {
@@ -36,6 +37,7 @@ class AccesssStoreTest extends TestCase {
 			'wiki__global_editor',
 			'wiki__global_reviewer',
 			'wiki__global_admin',
+			'sysop'
 		];
 		$expectedGroupsToCheckTest1 = [
 			'wiki_Test1_reader',
@@ -82,7 +84,7 @@ class AccesssStoreTest extends TestCase {
 	public function testGetInstancePathsWhereUserHasRole() {
 		$storeMock = $this->createMock( DirectInstanceStore::class );
 		$storeMock->method( 'getInstancePathsQuick' )->willReturn( [ 'Test1', 'Test2' ] );
-		$creator = new InstanceGroupCreator( $storeMock );
+		$creator = new InstanceGroupCreator( $storeMock, $this->getFarmConfigMock() );
 
 		$dbMock = $this->createMock( IDatabase::class );
 		$dbMock->expects( $this->once() )
@@ -130,4 +132,16 @@ class AccesssStoreTest extends TestCase {
 		return $instanceMock;
 	}
 
+	/**
+	 * @return Config|MockObject
+	 */
+	private function getFarmConfigMock(): Config|MockObject {
+		$configMock = $this->createMock( Config::class );
+		$configMock->method( 'get' )->willReturnCallback( static function ( $key ) {
+			return match ( $key ) {
+				'superAccessGroups' => [ 'sysop' ],
+			};
+		} );
+		return $configMock;
+	}
 }

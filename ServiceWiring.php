@@ -87,7 +87,7 @@ return [
 	'BlueSpiceWikiFarm.InstanceGroupCreator' => static function ( MediaWikiServices $services ) {
 		$instanceStore = $GLOBALS['wgWikiFarmGlobalStore'] ??
 			new DirectInstanceStore( $services->getService( 'BlueSpiceWikiFarm.ManagementDatabaseFactory' ) );
-		return new InstanceGroupCreator( $instanceStore );
+		return new InstanceGroupCreator( $instanceStore, $services->getService( 'BlueSpiceWikiFarm._Config' ) );
 	},
 	'BlueSpiceWikiFarm.ForeignRequestExecution' => static function ( MediaWikiServices $services ) {
 		return new ForeignRequestExecution(
