@@ -344,7 +344,7 @@ class Dispatcher {
 		}
 		$db = ( new ManagementDatabaseFactory( $this->config ) )->createSharedUserDatabaseConnection();
 		$groupRoleQuery = new GroupRoleQuery( $db );
-		$groupCreator = new InstanceGroupCreator( $this->store );
+		$groupCreator = new InstanceGroupCreator( $this->store, $this->config );
 		// Get groups for each role and each instance
 		$instanceGroups = $groupCreator->getInstanceGroups();
 

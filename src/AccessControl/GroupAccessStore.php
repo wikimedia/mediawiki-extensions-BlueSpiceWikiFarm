@@ -57,12 +57,13 @@ class GroupAccessStore implements IAccessStore {
 			$this->groupCreator->getGroupNameForUserRole( '_global', $role ),
 			...$this->getHigherGroups( '_global', $role ),
 		];
+		$superAccessGroups = $this->farmConfig->get( 'superAccessGroups' ) ?? [ 'sysop' ];
 		$res = $db->selectRow(
 			'user_groups',
 			[ 'ug_user' ],
 			[
 				'ug_user' => $user->getId(),
-				'ug_group IN (' . $db->makeList( array_merge( $groups, $globalGroups ) ) . ')'
+				'ug_group IN (' . $db->makeList( array_merge( $groups, $globalGroups, $superAccessGroups ) ) . ')'
 			],
 			__METHOD__
 		);

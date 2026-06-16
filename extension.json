@@ -357,8 +357,8 @@
 				"ui/panel/AccessManagementPanel.js",
 				"ui/widget/WikiAccessEntity.js",
 				"ui/widget/WikiAccessEntityPicker.js",
-				"ui/dialog/EditAccessAssignmentDialog.js",
 				"ui/dialog/AddRoleAssignmentDialog.js",
+				"ui/dialog/EditAccessAssignmentDialog.js",
 				"accessManagement.special.js"
 			],
 			"styles": [

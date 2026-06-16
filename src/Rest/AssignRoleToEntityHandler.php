@@ -56,11 +56,10 @@ class AssignRoleToEntityHandler extends RightManagementHandler {
 			throw new HttpException( 'User not found', 404 );
 		}
 		$instance = $this->getInstance();
-		if ( $params['globalAssignment'] ) {
-			$allGroups = $this->instanceGroupCreator->getGlobalGroups();
-		} else {
-			$allGroups = $this->instanceGroupCreator->getGroupsAndRolesForInstancePath( $instance->getPath() );
-		}
+		$allGroups = array_merge(
+			$this->instanceGroupCreator->getGlobalGroups(),
+			$this->instanceGroupCreator->getGroupsAndRolesForInstancePath( $instance->getPath() )
+		);
 		foreach ( array_keys( $allGroups ) as $group ) {
 			$this->userGroupManager->removeUserFromGroup( $user, $group );
 		}
@@ -89,11 +88,8 @@ class AssignRoleToEntityHandler extends RightManagementHandler {
 	private function assignRoleToGroup( array $params ) {
 		$instance = $this->getInstance();
 		$isGlobal = $params['globalAssignment'];
-		if ( $isGlobal ) {
-			$this->groupRoleManager->removeGroupRoles( $params['entityKey'], null, $this->getActor(), (bool)$params['roleName'] );
-		} else {
-			$this->groupRoleManager->removeGroupRoles( $params['entityKey'], $instance, $this->getActor(), (bool)$params['roleName'] );
-		}
+		$this->groupRoleManager->removeGroupRoles( $params['entityKey'], null, $this->getActor(), (bool)$params['roleName'] );
+		$this->groupRoleManager->removeGroupRoles( $params['entityKey'], $instance, $this->getActor(), (bool)$params['roleName'] );
 
 		if ( !$params['roleName'] ) {
 			return $this->getResponseFactory()->createJson( [ 'success' => true ] );
