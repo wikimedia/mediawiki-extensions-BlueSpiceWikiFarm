@@ -1,6 +1,7 @@
 <?php
 
 use BlueSpice\WikiFarm\AccessControl\GroupAccessStore;
+use BlueSpice\WikiFarm\AccessControl\GroupListStore;
 use BlueSpice\WikiFarm\AccessControl\GroupRoleManager;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
 use BlueSpice\WikiFarm\AccessControl\NullAccessStore;
@@ -109,6 +110,11 @@ return [
 			$services->getService( 'BlueSpiceWikiFarm.AccessControlStore' ),
 			$services->getService( 'BlueSpiceWikiFarm.WikiMap' ),
 			$services->getService( 'BlueSpiceWikiFarm.InstanceStore' )
+		);
+	},
+	'BlueSpiceWikiFarm._GroupListStore' => static function ( MediaWikiServices $services ) {
+		return new GroupListStore(
+			$services->getDBLoadBalancer()
 		);
 	},
 ];

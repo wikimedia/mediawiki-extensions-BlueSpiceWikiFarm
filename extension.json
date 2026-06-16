@@ -357,6 +357,7 @@
 				"ui/panel/AccessManagementPanel.js",
 				"ui/widget/WikiAccessEntity.js",
 				"ui/widget/WikiAccessEntityPicker.js",
+				"ui/widget/AdminUserGroupMultiselectWidget.js",
 				"ui/dialog/AddRoleAssignmentDialog.js",
 				"ui/dialog/EditAccessAssignmentDialog.js",
 				"accessManagement.special.js"
@@ -585,7 +586,10 @@
 		"BSUserManagerBeforeAddGroup": "addGroupPrefix",
 		"MediaWikiServices": "configureContentTransfer",
 		"MWStakeGroupStoreGroupTypeFilter": "handleGroupStore",
-		"MWStakeGroupStoreGroupDisplayName": "handleGroupStore"
+		"MWStakeGroupStoreGroupDisplayName": "handleGroupStore",
+		"BSUserManagerGroupAdded": "updateGroupList",
+		"BSUserManagerGroupEdited": "updateGroupList",
+		"BSUserManagerGroupDeleted": "updateGroupList"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -664,6 +668,10 @@
 		"handleGroupStore": {
 			"class": "BlueSpice\\WikiFarm\\AccessControl\\GroupStoreHandling",
 			"services": [ "BlueSpiceWikiFarm.InstanceGroupCreator", "BlueSpiceWikiFarm._Config" ]
+		},
+		"updateGroupList": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\UpdateGroupList",
+			"services": [ "BlueSpiceWikiFarm._GroupListStore" ]
 		}
 	},
 	"RestRoutes": [
@@ -800,6 +808,32 @@
 			"class": "BlueSpice\\WikiFarm\\Rest\\PinnedInstanceHandler",
 			"services": [
 				"BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.InstanceStore"
+			]
+		},
+		{
+			"path": "/bluespice/farm/v1/access/assignable/users",
+			"class": "BlueSpice\\WikiFarm\\Rest\\AccessAssignableUsersStore",
+			"services": [
+				"HookContainer",
+				"DBLoadBalancer",
+				"UserFactory",
+				"LinkRenderer",
+				"TitleFactory",
+				"MWStakeCommonUtilsConfig",
+				"MWStakeCommonUtilsFactory",
+				"BlueSpiceWikiFarm._Config",
+				"PermissionManager"
+			]
+		},
+		{
+			"path": "/bluespice/farm/v1/access/assignable/groups",
+			"class": "BlueSpice\\WikiFarm\\Rest\\AccessAssignableGroupsStore",
+			"services": [
+				"HookContainer",
+				"MWStakeCommonUtilsFactory",
+				"MWStakeCommonUtilsConfig",
+				"BlueSpiceWikiFarm._GroupListStore",
+				"PermissionManager"
 			]
 		}
 	],

@@ -26,7 +26,7 @@ ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.initialize = f
 	} );
 	this.actions.setAbilities( { submit: false } );
 
-	this.userGroupPicker = new OOJSPlus.ui.widget.UserGroupMultiselectWidget( {
+	this.userGroupPicker = new ext.bluespiceWikiFarm.ui.widget.AdminUserGroupMultiselectWidget( {
 		$overlay: this.$overlay
 	} );
 	this.userGroupPicker.connect( this, {

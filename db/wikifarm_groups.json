@@ -1,0 +1,21 @@
+[
+	{
+		"name": "wikifarm_groups",
+		"comment": "Dedicated table keeping tracks of groups on wikifarm.",
+		"columns": [
+			{
+				"name": "wfg_name",
+				"type": "string",
+				"options": { "notnull": true, "length": 255 }
+			}, {
+				"name": "wfg_index",
+				"type": "string",
+				"options": { "notnull": true, "length": 255 }
+			}
+		],
+		"indexes": [
+			{ "name": "wfg_name_index", "columns": [ "wfg_name" ], "unique": true }
+		],
+		"pk": [ "wfg_name" ]
+	}
+]
