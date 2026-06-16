@@ -14,7 +14,7 @@ class PopulateGroupList extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 	 * @throws \Exception
 	 */
 	protected function doDBUpdates() {
-		if ( !FARMER_IS_ROOT_WIKI_CALL ) {
+		if ( !defined( 'FARMER_IS_ROOT_WIKI_CALL' ) || FARMER_IS_ROOT_WIKI_CALL === false ) {
 			// Only run on root wiki
 			return true;
 		}
