@@ -6,6 +6,8 @@
 		]
 	},
 	"wikifarm-button-action-label-save": "Tallenna",
+	"wikifarm-instance-creator": "Luonut",
+	"wikifarm-instance-creator-no-info-label": "Tietoja ei ole saatavilla",
 	"wikifarm-ui-access-field-select-entities": "Valitse ryhmät tai käyttäjät",
 	"wikifarm-ui-role-label-admin": "Ylläpitäjä",
 	"wikifarm-ui-access-field-type-group": "Ryhmä",
@@ -16,7 +18,5 @@
 	"wikifarm-access-unsaved-changes-warning": "Muutoksia on tallentamatta. Haluatko ohittaa ne?",
 	"wikifarm-access-field-selected": "Valittu",
 	"wikifarm-access-role-desc-reviewer": "Saa tarkastella, muokata ja tarkistaa tämän wikin sivuja",
-	"log-name-ext-wikifarm-access": "Wikin käyttöoikeuksien hallinta",
-	"wikifarm-instance-creator": "Luonut",
-	"wikifarm-instance-creator-no-info-label": "Tietoja ei ole saatavilla"
+	"log-name-ext-wikifarm-access": "Wikin käyttöoikeuksien hallinta"
 }
