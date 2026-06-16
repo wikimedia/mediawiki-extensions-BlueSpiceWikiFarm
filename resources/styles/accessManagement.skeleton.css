@@ -33,7 +33,7 @@
 }
 
 /* Tabs bar */
-#bs-access-management-skeleton .skeleton-tabs {
+#bs-access-management-skeleton .skeleton-tabs { /* stylelint-disable-line plugin/no-unsupported-browser-features */
 	display: flex;
 	gap: 16px;
 	border-bottom: 1px solid #c8ccd1;
@@ -54,7 +54,7 @@
 }
 
 /* Access level cards */
-#bs-access-management-skeleton .skeleton-cards {
+#bs-access-management-skeleton .skeleton-cards { /* stylelint-disable-line plugin/no-unsupported-browser-features */
 	display: flex;
 	gap: 16px;
 	margin-bottom: 24px;
@@ -70,7 +70,7 @@
 	border-radius: 8px;
 }
 
-#bs-access-management-skeleton .skeleton-card-header {
+#bs-access-management-skeleton .skeleton-card-header { /* stylelint-disable-line plugin/no-unsupported-browser-features */
 	display: flex;
 	align-items: center;
 	gap: 8px;
