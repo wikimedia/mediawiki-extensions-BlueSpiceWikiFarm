@@ -157,6 +157,11 @@ class DefaultConfig extends HashConfig {
 			'superAccessGroups' => [ 'sysop' ],
 
 			/**
+			 * List of groups that cannot read current instance
+			 */
+			'instanceRestrictedGroups' => [],
+
+			/**
 			 * MediaWiki WikiID for the root instance
 			 */
 			'rootInstanceWikiId' => WikiMap::getWikiIdFromDbDomain(
