@@ -203,5 +203,21 @@
 	"wikifarm-instances-menu-search-label": "Nach Wiki suchen",
 	"wikifarm-instances-search-placeholder": "Wiki finden",
 	"wikifarm-instance-creator": "Erstellt von",
-	"wikifarm-instance-creator-no-info-label": "Keine Information verfügbar"
+	"wikifarm-instance-creator-no-info-label": "Keine Information verfügbar",
+	"wikifarm-instances-menu-section-current": "Aktuell",
+	"wikifarm-instances-menu-section-quickaccess": "Schnellzugriff",
+	"wikifarm-instances-menu-section-favourites": "Favouriten",
+	"wikifarm-instances-menu-section-featured": "Featured",
+	"wikifarm-instances-menu-section-other": "Andere",
+	"wikifarm-instances-menu-link-wikis-label": "... alle Wikis anzeigen",
+	"wikifarm-instances-menu-search-more-results-label": "{{PLURAL:$1|Ein Ergebnis|Alle $1 Ergebnisse}} anzeigen",
+	"wikifarm-instances-panel-search-label": "Nach Wiki suchen",
+	"wikifarm-button-action-label-edit": "Bearbeiten",
+	"wikifarm-button-action-label-suspend": "Abschalten",
+	"wikifarm-button-action-delete-label": "Löschen",
+	"wikifarm-instances-filter-show-all-label": "Alle Wikis",
+	"wikifarm-wikis-create-new-wiki-title": "Ein neues Wiki erstellen",
+	"wikifarm-wikis-create-new-wiki-aria-label": "Ein neues Wiki erstellen",
+	"wikifarm-instance-featured": "Featured Wiki",
+	"wikifarm-instance-featured-help": "Featured Wikis werden im Bereich „Featured“ des Wiki-Menüs angezeigt"
 }
