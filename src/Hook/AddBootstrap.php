@@ -30,7 +30,7 @@ class AddBootstrap implements BeforePageDisplayHook {
 			);
 		}
 		if ( $this->farmConfig->get( 'useGlobalAccessControl' ) ) {
-			$out->addModuleStyles( [ 'ext.bluespice.wikiFarm.megamenu', 'ext.bluespice.wikiFarm.breadcrumbs' ] );
+			$out->addModuleStyles( [ 'ext.bluespice.wikiFarm.breadcrumbs' ] );
 		}
 	}
 }
