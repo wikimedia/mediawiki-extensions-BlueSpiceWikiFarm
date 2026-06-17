@@ -12,7 +12,6 @@
 	"wikifarm-ui-access-field-role": "Улога",
 	"wikifarm-ui-role-label-admin": "Админ",
 	"wikifarm-button-action-label-promote-to-shared": "Премести",
-	"wikifarm-instances-menu-overview-text": "Више викија",
 	"wikifarm-ui-access-field-type-user": "Корисник",
 	"wikifarm-ui-access-field-type-group": "Група",
 	"wikifarm-management-breadcrumb-label-create": "Направи",
@@ -21,6 +20,5 @@
 	"wikifarm-access-group-name-user": "Све групе",
 	"wikifarm-instances-tab-favourite-label": "Омиљени",
 	"wikifarm-instances-grid-column-wiki-header-label": "Вики",
-	"wikis": "Викији",
-	"wikifarm-instances-grid-column-group-header-label": "Група"
+	"wikis": "Викији"
 }

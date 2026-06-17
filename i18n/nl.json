@@ -159,8 +159,6 @@
 	"wikifarm-promote-to-shared-dialog-delete-local-reason": "Verwijderd vanwege overdracht naar gedeelde bronnenwiki",
 	"wikifarm-shared-resources-exists-on-shared": "Deze pagina bestaat op de gedeelde bronnenwiki",
 	"wikifarm-instances-menu-empty-favorite-text": "Er is momenteel geen wiki-server als favoriet toegevoegd. U kunt een server als favoriet selecteren door op het sterpictogram te klikken.",
-	"wikifarm-instances-menu-overview-text": "Meer wiki’s",
-	"wikifarm-instances-menu-favorite-text": "Favorieten",
 	"wikifarm-instances-menu-button-title": "Lijst met alle wiki's",
 	"wikifarm-instances-menu-aria-label": "Wiki's",
 	"wikifarm-ui-access-field-type-user": "Gebruiker",
@@ -187,13 +185,10 @@
 	"wikifarm-instances-grid-column-wiki-header-label": "Wiki",
 	"wikis": "Wiki’s",
 	"wikifarm-instances-grid-column-favourites-header-label": "Favoriet",
-	"wikifarm-instances-grid-column-group-header-label": "Groep",
 	"wikifarm-instances-grid-favourites-label-add": "Toevoegen aan favorieten",
 	"wikifarm-instances-grid-favourites-label-remove": "Verwijderen uit favorieten",
 	"wikifarm-instances-favourite-notification-add": "$1 toegevoegd aan favorieten",
 	"wikifarm-instances-favourite-notification-remove": "$1 verwijderd uit favorieten",
-	"wikifarm-favorite-wikis-link": "Alle favoriete wiki's bekijken",
-	"wikifarm-all-wikis-link": "Alle wiki's bekijken",
 	"wikifarm-global-label": "Globaal",
 	"wikifarm-access-tab-general-settings": "Algemene instellingen",
 	"wikifarm-access-tab-roles": "Rollen",
@@ -219,8 +214,7 @@
 	"logentry-ext-wikifarm-access-remove-all-roles": "$1 heeft alle rollen {{GENDER:$2|verwijderd}} van groep “$4”",
 	"logentry-ext-wikifarm-access-delete": "$1 heeft alle rollen {{GENDER:$2|verwijderd}} van groep “$4”",
 	"wikifarm-instances-favourite-notification-error": "Het is niet gelukt om de wiki aan uw favorieten toe te voegen. Probeer het opnieuw of neem contact op met uw beheerder.",
-	"wikifarm-instance-pinned": "Aan vastgepinde wiki's toevoegen",
-	"wikifarm-instance-pinned-help": "Vastgepinde wiki's verschijnen in het wiki-menu",
 	"wikifarm-instances-menu-search-label": "Wiki zoeken",
-	"wikifarm-instances-search-placeholder": "Zoek wiki"
+	"wikifarm-instances-search-placeholder": "Zoek wiki",
+	"wikifarm-instances-menu-section-favourites": "Favorieten"
 }

@@ -149,8 +149,7 @@
 	"wikifarm-promote-to-shared-dialog-delete-local-reason": "因為轉移到共享資源 wiki 而被刪除",
 	"wikifarm-shared-resources-exists-on-shared": "此頁面位於共享資源 wiki 上",
 	"wikifarm-instances-menu-empty-favorite-text": "目前沒有新增為收藏的 wiki 實例。您可以點選星形圖示，來選擇一個實例作為收藏。",
-	"wikifarm-instances-menu-overview-text": "所有 wiki",
-	"wikifarm-instances-menu-favorite-text": "收藏",
 	"wikifarm-instances-menu-button-title": "列出所有 wiki 實例",
-	"wikifarm-instances-menu-aria-label": "Wiki 實例"
+	"wikifarm-instances-menu-aria-label": "Wiki 實例",
+	"wikifarm-instances-menu-section-favourites": "收藏"
 }

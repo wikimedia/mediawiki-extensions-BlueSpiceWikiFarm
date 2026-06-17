@@ -157,8 +157,6 @@
 	"wikifarm-promote-to-shared-dialog-delete-local-reason": "Delite post transferimento al wiki de ressources commun",
 	"wikifarm-shared-resources-exists-on-shared": "Iste pagina existe sur le wiki de ressources commun",
 	"wikifarm-instances-menu-empty-favorite-text": "Necun servitor wiki ha actualmente essite marcate como favorite. Tu pote seliger un servitor como favorite con un clic sur le icone de stella.",
-	"wikifarm-instances-menu-overview-text": "Plus wikis",
-	"wikifarm-instances-menu-favorite-text": "Favorites",
 	"wikifarm-instances-menu-button-title": "Lista de tote le wikis",
 	"wikifarm-instances-menu-aria-label": "Wikis",
 	"wikifarm-ui-access-field-type-user": "Usator",
@@ -185,13 +183,10 @@
 	"wikifarm-instances-grid-column-wiki-header-label": "Wiki",
 	"wikis": "Wikis",
 	"wikifarm-instances-grid-column-favourites-header-label": "Favorite",
-	"wikifarm-instances-grid-column-group-header-label": "Gruppo",
 	"wikifarm-instances-grid-favourites-label-add": "Adder al favorites",
 	"wikifarm-instances-grid-favourites-label-remove": "Remover del favorites",
 	"wikifarm-instances-favourite-notification-add": "$1 addite al favorites",
 	"wikifarm-instances-favourite-notification-remove": "$1 removite del favorites",
-	"wikifarm-favorite-wikis-link": "Vider tote le wikis favorite",
-	"wikifarm-all-wikis-link": "Vider tote le wikis",
 	"wikifarm-global-label": "Global",
 	"wikifarm-access-tab-general-settings": "Parametro general",
 	"wikifarm-access-tab-roles": "Rolos",
@@ -217,8 +212,7 @@
 	"logentry-ext-wikifarm-access-remove-all-roles": "$1 {{GENDER:$2|ha removite}} tote le rolos del gruppo “$4”",
 	"logentry-ext-wikifarm-access-delete": "$1 {{GENDER:$2|ha removite}} tote le rolos del gruppo “$4”",
 	"wikifarm-instances-favourite-notification-error": "Non poteva adder le wiki al favoritos. Per favor tenta lo de novo o contacta tu administrator.",
-	"wikifarm-instance-pinned": "Adder al wikis clavate",
-	"wikifarm-instance-pinned-help": "Le wikis clavate apparera in le menu de wikis",
 	"wikifarm-instances-menu-search-label": "Cercar un wiki",
-	"wikifarm-instances-search-placeholder": "Cercar wiki"
+	"wikifarm-instances-search-placeholder": "Cercar wiki",
+	"wikifarm-instances-menu-section-favourites": "Favorites"
 }
