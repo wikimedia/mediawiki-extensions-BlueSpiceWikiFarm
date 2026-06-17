@@ -70,10 +70,6 @@ class GlobalSearchDataProvider {
 		}
 
 		foreach ( $this->instanceStore->getAllInstances() as $instance ) {
-			if ( $instance->getPath() === FARMER_CALLED_INSTANCE ) {
-				// Do not search in the current instance
-				continue;
-			}
 			if ( !$instance->isActive() ) {
 				continue;
 			}
