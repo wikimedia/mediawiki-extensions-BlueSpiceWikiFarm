@@ -158,5 +158,6 @@
 	"wikifarm-instances-menu-favorite-text": "收藏",
 	"wikifarm-instances-menu-button-title": "列出所有wiki",
 	"wikifarm-instances-menu-aria-label": "Wiki",
-	"wikis": "Wiki"
+	"wikis": "Wiki",
+	"wikifarm-instances-menu-section-favourites": "收藏"
 }

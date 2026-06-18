@@ -152,5 +152,6 @@
 	"wikifarm-instances-menu-overview-text": "所有 wiki",
 	"wikifarm-instances-menu-favorite-text": "收藏",
 	"wikifarm-instances-menu-button-title": "列出所有 wiki 實例",
-	"wikifarm-instances-menu-aria-label": "Wiki 實例"
+	"wikifarm-instances-menu-aria-label": "Wiki 實例",
+	"wikifarm-instances-menu-section-favourites": "收藏"
 }

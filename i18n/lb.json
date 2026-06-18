@@ -90,5 +90,6 @@
 	"wikifarm-access-column-group": "Grupp",
 	"wikifarm-access-column-user": "Benotzer",
 	"wikifarm-access-unsaved-changes-warning": "Dir hutt net gespäichert Ännerungen. Wëllt Dir se verwerfen?",
-	"wikifarm-access-field-assignees": "Gruppen/Benotzer"
+	"wikifarm-access-field-assignees": "Gruppen/Benotzer",
+	"wikifarm-instances-menu-section-favourites": "Favoritten"
 }

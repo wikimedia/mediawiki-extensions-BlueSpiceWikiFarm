@@ -44,5 +44,17 @@
 	"wikifarm-access-tab-general-settings": "Impostazione generale",
 	"wikifarm-access-tab-groups": "Gruppi",
 	"wikifarm-access-column-user": "Utente",
-	"logentry-ext-wikifarm-access-remove-all-roles": "$1 {{GENDER:$2|ha rimosso}} tutti i ruoli dal gruppo \"$4\""
+	"logentry-ext-wikifarm-access-remove-all-roles": "$1 {{GENDER:$2|ha rimosso}} tutti i ruoli dal gruppo \"$4\"",
+	"wikifarm-instances-menu-section-current": "Attuale",
+	"wikifarm-instances-menu-section-quickaccess": "Accesso rapido",
+	"wikifarm-instances-menu-section-other": "Altro",
+	"wikifarm-instances-menu-link-wikis-label": "... mostra tutti gli wiki",
+	"wikifarm-instances-menu-search-more-results-label": "Mostra {{PLURAL:$1|il risultato|tutti i $1 risultati}}",
+	"wikifarm-instances-panel-search-label": "Cerca wiki",
+	"wikifarm-button-action-label-edit": "Modifica",
+	"wikifarm-button-action-label-suspend": "Sospendi",
+	"wikifarm-button-action-delete-label": "Cancella",
+	"wikifarm-instances-filter-show-all-label": "Tutti i siti wiki",
+	"wikifarm-wikis-create-new-wiki-title": "Crea un nuovo wiki",
+	"wikifarm-wikis-create-new-wiki-aria-label": "Crea un nuovo wiki"
 }

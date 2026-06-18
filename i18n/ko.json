@@ -223,5 +223,6 @@
 	"wikifarm-instance-pinned": "고정한 위키에 추가",
 	"wikifarm-instance-pinned-help": "고정한 위키는 위키 메뉴에 표시됩니다",
 	"wikifarm-instances-menu-search-label": "위키 검색",
-	"wikifarm-instances-search-placeholder": "위키를 찾아보기"
+	"wikifarm-instances-search-placeholder": "위키를 찾아보기",
+	"wikifarm-instances-menu-section-favourites": "즐겨찾기"
 }
