@@ -594,7 +594,8 @@
 		"MWStakeGroupStoreGroupDisplayName": "handleGroupStore",
 		"BSUserManagerGroupAdded": "updateGroupList",
 		"BSUserManagerGroupEdited": "updateGroupList",
-		"BSUserManagerGroupDeleted": "updateGroupList"
+		"BSUserManagerGroupDeleted": "updateGroupList",
+		"OutputPageBodyAttributes": "instanceBodyClass"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -680,6 +681,9 @@
 		"updateGroupList": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\UpdateGroupList",
 			"services": [ "BlueSpiceWikiFarm._GroupListStore" ]
+		},
+		"instanceBodyClass": {
+			"class": "\\BlueSpice\\WikiFarm\\Hook\\AddInstanceClass"
 		}
 	},
 	"RestRoutes": [
