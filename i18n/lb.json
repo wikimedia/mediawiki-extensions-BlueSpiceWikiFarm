@@ -99,5 +99,6 @@
 	"wikifarm-access-column-user": "Benotzer",
 	"wikifarm-access-unsaved-changes-warning": "Dir hutt net gespäichert Ännerungen. Wëllt Dir se verwerfen?",
 	"wikifarm-access-field-assignees": "Gruppen/Benotzer",
-	"wikifarm-instance-creator-no-info-label": "Keng Informatiounen disponibel"
+	"wikifarm-instance-creator-no-info-label": "Keng Informatiounen disponibel",
+	"wikifarm-instances-menu-section-favourites": "Favoritten"
 }
