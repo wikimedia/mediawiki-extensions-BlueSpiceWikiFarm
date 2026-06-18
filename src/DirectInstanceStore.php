@@ -35,7 +35,7 @@ class DirectInstanceStore {
 	 * @return Database
 	 */
 	protected function getDB(): Database {
-		return $this->databaseFactory->createManagementConnection();
+		return $this->databaseFactory->getManagementConnection();
 	}
 
 	/**

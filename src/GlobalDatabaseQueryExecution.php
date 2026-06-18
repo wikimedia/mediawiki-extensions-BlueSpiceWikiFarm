@@ -90,7 +90,7 @@ class GlobalDatabaseQueryExecution {
 				$currentInstance->getPath() => $localDb->select( $table, $vars, $conds, $fname, $options, $join_conds )
 			] );
 		}
-		$managementDb = $this->databaseFactory->createManagementConnection();
+		$managementDb = $this->databaseFactory->getManagementConnection();
 		$instancePaths = null;
 		if ( $instances ) {
 			$instancePaths = [];
@@ -144,7 +144,7 @@ class GlobalDatabaseQueryExecution {
 	 */
 	public function getForeignPage( InstanceEntity $instanceEntity, Title $title, ?int $revisionId = null ): ?array {
 		$instancePath = $instanceEntity->getPath();
-		$this->assertInstanceDatabases( $this->databaseFactory->createManagementConnection(), [ $instancePath ] );
+		$this->assertInstanceDatabases( $this->databaseFactory->getManagementConnection(), [ $instancePath ] );
 		$db = $this->instanceDatabases[$instancePath] ?? null;
 		if ( !$db ) {
 			return null;
