@@ -51,7 +51,7 @@ class InstanceStoreTest extends TestCase {
 		$dbMock->method( 'newSelectQueryBuilder' )->willReturn( $selectQueryMock );
 
 		$managementDBFactoryMock = $this->createMock( ManagementDatabaseFactory::class );
-		$managementDBFactoryMock->method( 'createManagementConnection' )->willReturn( $dbMock );
+		$managementDBFactoryMock->method( 'getManagementConnection' )->willReturn( $dbMock );
 
 		$store = new InstanceStore( $managementDBFactoryMock );
 		$store->store( $entity );
@@ -77,7 +77,7 @@ class InstanceStoreTest extends TestCase {
 		$dbMock->method( 'tableExists' )->willReturn( true );
 
 		$managementDBFactoryMock = $this->createMock( ManagementDatabaseFactory::class );
-		$managementDBFactoryMock->method( 'createManagementConnection' )->willReturn( $dbMock );
+		$managementDBFactoryMock->method( 'getManagementConnection' )->willReturn( $dbMock );
 
 		$store = new InstanceStore( $managementDBFactoryMock );
 		$instance = $store->getInstanceById( '1234567891123456' );
@@ -117,9 +117,9 @@ class InstanceStoreTest extends TestCase {
 	 * @throws RandomException
 	 */
 	public function testNewEmptyInstance( string $path, array $config, ?array $expected ) {
-		$dbMock = $this->createMock( IDatabase::class );
+		$dbMock = $this->createMock( Database::class );
 		$managementDBFactoryMock = $this->createMock( ManagementDatabaseFactory::class );
-		$managementDBFactoryMock->method( 'createManagementConnection' )->willReturn( $dbMock );
+		$managementDBFactoryMock->method( 'getManagementConnection' )->willReturn( $dbMock );
 		$store = new InstanceStore( $managementDBFactoryMock );
 		if ( $expected === null ) {
 			$this->expectException( InvalidArgumentException::class );
