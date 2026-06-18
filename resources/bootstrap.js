@@ -95,3 +95,19 @@ $( () => {
 	} );
 
 } );
+
+mw.hook( 'oojsplus.ui.widget.batchoptionwidget.preinit' ).add( ( item, $element ) => {
+	if ( !item.data.includes( 'source' ) ) {
+		return;
+	}
+	if ( item.attr.length === 0 ) {
+		return;
+	}
+	if ( item.attr.is_root ) {
+		$( item.$label ).addClass( 'bi-bs-home' );
+		return;
+	}
+	if ( item.attr && item.attr.color ) {
+		$( $element ).css( 'border-left', '4px solid ' + item.attr.color.background );
+	}
+} );

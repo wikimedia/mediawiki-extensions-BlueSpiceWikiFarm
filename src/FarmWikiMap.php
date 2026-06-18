@@ -65,6 +65,7 @@ class FarmWikiMap {
 			'wiki_id' => $instanceEntity instanceof RootInstanceEntity ?
 				$this->config->get( 'rootInstanceWikiId' ) :
 				$instanceEntity->getWikiId(),
+			'is_root' => $instanceEntity instanceof RootInstanceEntity,
 			'display_text' => $instanceEntity instanceof RootInstanceEntity ?
 				Message::newFromKey( 'wikifarm-main-wiki-name' )->text() :
 				$instanceEntity->getDisplayName(),

@@ -125,6 +125,9 @@
 					"callback": "BlueSpice\\WikiFarm\\Setup::getClientConfig"
 				}
 			],
+			"styles": [
+				"styles/wikiFarm.styles.css"
+			],
 			"messages": [
 				"wikifarm-instances-favourite-notification-add",
 				"wikifarm-instances-favourite-notification-remove",
