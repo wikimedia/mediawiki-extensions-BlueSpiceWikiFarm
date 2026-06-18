@@ -240,5 +240,6 @@
 	"wikifarm-instances-menu-search-label": "위키 검색",
 	"wikifarm-instances-search-placeholder": "위키를 찾아보기",
 	"wikifarm-instance-creator": "작성자",
-	"wikifarm-instance-creator-no-info-label": "사용할 수 있는 정보 없음"
+	"wikifarm-instance-creator-no-info-label": "사용할 수 있는 정보 없음",
+	"wikifarm-instances-menu-section-favourites": "즐겨찾기"
 }

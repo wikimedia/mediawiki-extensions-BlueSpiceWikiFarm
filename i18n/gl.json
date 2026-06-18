@@ -265,5 +265,6 @@
 	"wikifarm-instances-menu-search-label": "Buscar un wiki",
 	"wikifarm-instances-search-placeholder": "Atopar un wiki",
 	"wikifarm-instance-creator": "Creado por",
-	"wikifarm-instance-creator-no-info-label": "Non hai información dispoñible"
+	"wikifarm-instance-creator-no-info-label": "Non hai información dispoñible",
+	"wikifarm-instances-menu-section-favourites": "Favoritos"
 }
