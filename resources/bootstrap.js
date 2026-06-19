@@ -111,3 +111,26 @@ mw.hook( 'oojsplus.ui.widget.batchoptionwidget.preinit' ).add( ( item, $element 
 		$( $element ).css( 'border-left', '4px solid ' + item.attr.color.background );
 	}
 } );
+
+mw.hook( 'bs.extendedSearch.AC.result' ).add( ( result ) => {
+	if ( !result.source ) {
+		return;
+	}
+	let bgColor = '';
+	let color = '#fff';
+	if ( result.source.color.background ) {
+		bgColor = result.source.color.background;
+	}
+	if ( !result.source.color.lightText ) {
+		color = '#000';
+	}
+
+	const $source = $( '<span>' )
+		.addClass( 'bs-extendedsearch-autocomplete-popup-item-header-path-source' )
+		.css( 'background-color', bgColor )
+		.css( 'color', color )
+		.text( result.source.display_text );
+
+	result.$header.find( '.bs-extendedsearch-autocomplete-popup-item-header-path' )
+		.prepend( $source );
+} );

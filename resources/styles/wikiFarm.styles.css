@@ -2,3 +2,10 @@
 	margin-right: 6px;
 	vertical-align: -0.125em;
 }
+
+.bs-extendedsearch-autocomplete-popup-item-header-path-source {
+	color: #fff;
+	padding: 0 5px;
+	border-radius: 5px;
+	margin-right: 5px;
+}
