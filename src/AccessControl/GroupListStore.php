@@ -78,6 +78,9 @@ class GroupListStore {
 				'wfg_index' => mb_strtolower( $group ),
 			];
 		}
+		if ( empty( $groupRows ) ) {
+			return;
+		}
 		$this->lb->getConnection( DB_PRIMARY )->newInsertQueryBuilder()
 			->insert( 'wikifarm_groups' )
 			->rows( $groupRows )
