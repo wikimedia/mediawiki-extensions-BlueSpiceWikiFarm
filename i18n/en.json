@@ -281,5 +281,7 @@
 	"wikifarm-button-action-delete-label": "Delete",
 	"wikifarm-instances-filter-show-all-label": "All wikis",
 	"wikifarm-wikis-create-new-wiki-title": "Create a new wiki",
-	"wikifarm-wikis-create-new-wiki-aria-label": "Create a new wiki"
+	"wikifarm-wikis-create-new-wiki-aria-label": "Create a new wiki",
+	"wikifarm-error-copy-instance-data-failed": "Failed to copy wiki directory",
+	"wikifarm-error-archive-instance-failed": "Failed to create wiki archive"
 }
