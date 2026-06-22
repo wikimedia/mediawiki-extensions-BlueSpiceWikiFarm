@@ -24,5 +24,10 @@
 	"wikifarm-instances-grid-column-favourites-header-label": "پسند",
 	"wikifarm-all-wikis-link": "ساریاں وکیاں ݙیکھو",
 	"wikifarm-management-invalid-template-title": "غلط سانچہ",
-	"wikifarm-global-label": "عالمی"
+	"wikifarm-global-label": "عالمی",
+	"wikifarm-instances-panel-search-label": "وکی کیتے ڳول",
+	"wikifarm-button-action-label-suspend": "معلق",
+	"wikifarm-button-action-delete-label": "مٹاؤ",
+	"wikifarm-wikis-create-new-wiki-title": "نویں وکی بݨاؤ",
+	"wikifarm-wikis-create-new-wiki-aria-label": "نویں وکی بݨاؤ"
 }
