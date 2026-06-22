@@ -286,5 +286,6 @@
 	"wikifarm-wikis-create-new-wiki-title": "Button title to create a new wiki",
 	"wikifarm-wikis-create-new-wiki-aria-label": "Aria label to create a new wiki",
 	"wikifarm-error-copy-instance-data-failed": "Error message when copying instance data fails",
-	"wikifarm-error-archive-instance-failed": "Error message when archiving an instance fails"
+	"wikifarm-error-archive-instance-failed": "Error message when archiving an instance fails",
+	"wikifarm-search-filter-show-all-label": "Label for filter option to show all wikis"
 }

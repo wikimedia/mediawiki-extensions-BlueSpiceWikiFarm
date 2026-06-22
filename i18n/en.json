@@ -283,5 +283,6 @@
 	"wikifarm-wikis-create-new-wiki-title": "Create a new wiki",
 	"wikifarm-wikis-create-new-wiki-aria-label": "Create a new wiki",
 	"wikifarm-error-copy-instance-data-failed": "Failed to copy wiki directory",
-	"wikifarm-error-archive-instance-failed": "Failed to create wiki archive"
+	"wikifarm-error-archive-instance-failed": "Failed to create wiki archive",
+	"wikifarm-search-filter-show-all-label": "All wikis"
 }
