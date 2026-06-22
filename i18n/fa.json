@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jeeputer"
+		]
+	},
+	"wikifarm-instances-menu-section-quickaccess": "دسترسی سریع",
+	"wikifarm-instances-menu-section-featured": "برگزیده",
+	"wikifarm-instances-menu-link-wikis-label": "... نمایش همهٔ ویکی‌ها",
+	"wikifarm-instances-menu-search-more-results-label": "نمایش {{PLURAL:$1|نتیجه|تمام $1 نتیجه}}",
+	"wikifarm-instances-tab-featured-label": "برگزیده",
+	"wikifarm-instances-panel-search-label": "جستجوی ویکی",
+	"wikifarm-button-action-label-edit": "ویرایش",
+	"wikifarm-button-action-delete-label": "حذف",
+	"wikifarm-instances-filter-show-all-label": "همهٔ ویکی‌ها",
+	"wikifarm-wikis-create-new-wiki-title": "ایجاد یک ویکی جدید",
+	"wikifarm-wikis-create-new-wiki-aria-label": "ایجاد یک ویکی جدید"
+}
