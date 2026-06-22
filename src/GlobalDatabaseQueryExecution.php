@@ -243,19 +243,27 @@ class GlobalDatabaseQueryExecution {
 				if ( !$instance->isActive() ) {
 					continue;
 				}
-				$db = ( new DatabaseFactory() )->create(
-					$managementDb->getType(), [
-						'host' => $this->farmConfig->get( 'managementDBserver' ),
-						'user' => $this->farmConfig->get( 'managementDBuser' ),
-						'password' => $this->farmConfig->get( 'managementDBpassword' ),
-						'tablePrefix' => $instance->getDbPrefix(),
-						'dbname' => $instance->getDbName()
-					]
-				);
-				if ( $db ) {
-					$this->instances[$instance->getPath()] = $instance;
-					$this->instanceDatabases[$instance->getPath()] = $db;
+				try {
+					$db = ( new DatabaseFactory() )->create(
+						$managementDb->getType(), [
+							'host' => $this->farmConfig->get( 'managementDBserver' ),
+							'user' => $this->farmConfig->get( 'managementDBuser' ),
+							'password' => $this->farmConfig->get( 'managementDBpassword' ),
+							'tablePrefix' => $instance->getDbPrefix(),
+							'dbname' => $instance->getDbName()
+						]
+					);
+					if ( $db ) {
+						$this->instances[$instance->getPath()] = $instance;
+						$this->instanceDatabases[$instance->getPath()] = $db;
+					}
+				} catch ( Throwable $ex ) {
+					$this->logger->error( "Failed to connect to database for instance \"{instance}\": {error}", [
+						'instance' => $accessiblePath,
+						'error' => $ex->getMessage(),
+					] );
 				}
+
 			}
 		}
 	}
