@@ -44,7 +44,7 @@ ext.bluespiceWikiFarm.ui.CombinedTitleAnnotationWidget.static.getAnnotationFromT
 			attributes: {
 				title: target,
 				normalizedTitle: target,
-				lookupTitle: title.prefixed
+				lookupTitle: target
 			}
 		} );
 	}
