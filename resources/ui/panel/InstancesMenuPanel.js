@@ -85,7 +85,7 @@ ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.makePinnedPanel = function
 	this.$pinned.append( skeleton.$element );
 
 	const api = new mw.Rest();
-	api.get( '/bluespice/farm/v1/instances', {
+	api.get( '/bluespice/farm/v1/instances/list', {
 		limit: 20,
 		sort: JSON.stringify( [ { property: 'title', direction: 'asc' } ] ),
 		filter: JSON.stringify( [ {
@@ -108,21 +108,29 @@ ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.makePinnedPanel = function
 	} );
 };
 
-ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.makeOtherPanel = function () {
+ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.makeOtherPanel = async function () {
 	this.$other = $( '<div>' );
 	this.$overview.append( this.$other );
 	const skeleton = this.getSkeleton( 'other', 5, true );
 	this.$other.append( skeleton.$element );
 
-	// ToDO: latest visited should be added here as default - currently empty
-	skeleton.$element.remove();
-	const section = new ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget( {
-		sectionId: 'other',
-		title: mw.message( 'wikifarm-instances-menu-section-other' ).text(),
-		elements: []
-	} );
-	section.connect( this, { favoured: 'loadFavourites' } );
-	this.$other.append( section.$element );
+	try {
+		const api = new mw.Rest();
+		const lastVisited = await api.get( '/bluespice/farm/v1/instances/recent?limit=5' );
+		skeleton.$element.remove();
+		const lastVisitedSection = new ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget( {
+			sectionId: 'other',
+			title: mw.message( 'wikifarm-instances-menu-section-other' ).text(),
+			elements: lastVisited,
+			sectionHasFavourite: true
+		} );
+
+		lastVisitedSection.connect( this, { favoured: 'loadFavourites' } );
+		this.$other.append( lastVisitedSection.$element );
+	} catch ( error ) {
+		console.error( 'Error loading last visited instances:', error ); // eslint-disable-line no-console
+	}
+
 };
 
 ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.getSkeleton = function ( id, count, hasSearch ) {

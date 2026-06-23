@@ -22,7 +22,8 @@
 		"mwstake/mediawiki-component-commonuserinterface": "~8",
 		"mwstake/mediawiki-component-processmanager": "~5",
 		"mwstake/mediawiki-component-wikicron": "~5",
-		"mwstake/mediawiki-component-filestorageutilities": "~1"
+		"mwstake/mediawiki-component-filestorageutilities": "~1",
+		"mwstake/mediawiki-component-datastash": "~1"
 	},
 	"require-dev": {
 		"mediawiki/mediawiki-codesniffer": "45.0.0",

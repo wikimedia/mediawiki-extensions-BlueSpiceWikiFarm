@@ -3,8 +3,9 @@
 namespace BlueSpice\WikiFarm\Rest;
 
 use BlueSpice\WikiFarm\AccessControl\IAccessStore;
-use BlueSpice\WikiFarm\Data\FavouriteInstances\Store;
+use BlueSpice\WikiFarm\Data\InstanceDisplayList\Store;
 use BlueSpice\WikiFarm\InstanceStore;
+use BlueSpice\WikiFarm\Util\InstanceDisplayRecordHelper;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\HookContainer\HookContainer;
@@ -13,7 +14,7 @@ use MediaWiki\User\Options\UserOptionsLookup;
 use MWStake\MediaWiki\Component\CommonWebAPIs\Rest\QueryStore;
 use MWStake\MediaWiki\Component\DataStore\IStore;
 
-class GetInstancesWithFavouriteInfo extends QueryStore {
+class InstancesDisplayListHandler extends QueryStore {
 
 	/**
 	 * @param HookContainer $hookContainer
@@ -22,6 +23,7 @@ class GetInstancesWithFavouriteInfo extends QueryStore {
 	 * @param IAccessStore $accessStore
 	 * @param InstanceStore $instanceStore
 	 * @param UserOptionsLookup $userOptionsLookup
+	 * @param InstanceDisplayRecordHelper $instanceDisplayRecordHelper
 	 */
 	public function __construct(
 		HookContainer $hookContainer,
@@ -30,6 +32,7 @@ class GetInstancesWithFavouriteInfo extends QueryStore {
 		private readonly IAccessStore $accessStore,
 		private readonly InstanceStore $instanceStore,
 		private readonly UserOptionsLookup $userOptionsLookup,
+		private readonly InstanceDisplayRecordHelper $instanceDisplayRecordHelper
 	) {
 		parent::__construct( $hookContainer );
 	}
@@ -44,7 +47,10 @@ class GetInstancesWithFavouriteInfo extends QueryStore {
 			throw new HttpException( 'This is not enabled for this edition', 404 );
 		}
 		$context = RequestContext::getMain();
-		return new Store( $context, $this->instanceStore, $this->farmConfig, $this->config, $this->accessStore, $this->userOptionsLookup );
+		return new Store(
+			$context, $this->instanceStore, $this->farmConfig,
+			$this->config, $this->accessStore, $this->userOptionsLookup, $this->instanceDisplayRecordHelper
+		);
 	}
 
 }
