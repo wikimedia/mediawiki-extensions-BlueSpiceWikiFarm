@@ -10,6 +10,9 @@ use MediaWiki\WikiMap\WikiMap;
 use Wikimedia\Rdbms\DatabaseDomain;
 
 class Setup {
+
+	public const LAST_VISITED_STASH_KEY = 'wiki-farm-last-visited-list';
+
 	public static function onRegistration() {
 		if ( defined( 'MW_QUIBBLE_CI' ) ) {
 			define( 'FARMER_CALLED_INSTANCE', '' );

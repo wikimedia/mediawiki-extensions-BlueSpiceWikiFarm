@@ -94,7 +94,7 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 		creationAllowed: this.creationAllowed,
 		favourite: false,
 		store: new OOJSPlus.ui.data.store.RemoteRestStore( {
-			path: 'bluespice/farm/v1/instances',
+			path: 'bluespice/farm/v1/instances/list',
 			sorter: {
 				title: {
 					direction: 'ASC'
@@ -105,8 +105,7 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 					type: 'boolean',
 					value: true
 				}
-			},
-			noCache: true
+			}
 		} )
 	} );
 	this.featuredContent.$element.append( this.featuredPanel.$element );
@@ -134,8 +133,7 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 					type: 'boolean',
 					value: false
 				}
-			},
-			noCache: true
+			}
 		} )
 	} );
 	this.allInstanceContent.$element.append( this.allInstancePanel.$element );

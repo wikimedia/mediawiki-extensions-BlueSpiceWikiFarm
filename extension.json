@@ -587,7 +587,7 @@
 		"ContentStabilizationFetchForeignRevisionForTransclusion": "handleSharedStabilization",
 		"ContentStabilizationGetStableForeignInclusion": "handleSharedStabilization",
 		"WikiMCPToolsGetWikiMap": "populateWikiMap",
-		"BeforeInitialize": "redirectUserPage",
+		"BeforeInitialize": [ "redirectUserPage", "trackLastVisitedInstances" ],
 		"SpecialPageBeforeExecute": "addGlobalUnifiedTaskOverviewModule",
 		"BSUserManagerBeforeAddGroup": "addGroupPrefix",
 		"MediaWikiServices": "configureContentTransfer",
@@ -685,6 +685,10 @@
 		},
 		"instanceBodyClass": {
 			"class": "\\BlueSpice\\WikiFarm\\Hook\\AddInstanceClass"
+		},
+		"trackLastVisitedInstances": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\BeforeInitialize\\TrackLastVisitedInstances",
+			"services": [ "MWStake.DataStash" ]
 		}
 	},
 	"RestRoutes": [
@@ -802,11 +806,20 @@
 		},
 		{
 			"path": "/bluespice/farm/v1/instances/list",
-			"class": "BlueSpice\\WikiFarm\\Rest\\GetInstancesWithFavouriteInfo",
+			"class": "BlueSpice\\WikiFarm\\Rest\\InstancesDisplayListHandler",
 			"services": [
 				"HookContainer", "BlueSpiceWikiFarm._Config", "MainConfig",
 				"BlueSpiceWikiFarm.AccessControlStore", "BlueSpiceWikiFarm.InstanceStore",
-				"UserOptionsLookup"
+				"UserOptionsLookup", "BlueSpiceWikiFarm._InstanceDisplayRecordHelper"
+			]
+		},
+		{
+			"path": "/bluespice/farm/v1/instances/recent",
+			"class": "BlueSpice\\WikiFarm\\Rest\\GetLastVisitedInstances",
+			"services": [
+				"BlueSpiceWikiFarm._InstanceDisplayRecordHelper",
+				"BlueSpiceWikiFarm.AccessControlStore", "BlueSpiceWikiFarm.InstanceStore",
+				"MWStake.DataStash"
 			]
 		},
 		{

@@ -7,11 +7,16 @@ use MediaWiki\User\UserIdentity;
 
 interface IAccessStore {
 
+	public const ROLE_READER = 'reader';
+	public const ROLE_EDITOR = 'editor';
+	public const ROLE_REVIEWER = 'reviewer';
+	public const ROLE_ADMIN = 'admin';
+
 	public const ROLES = [
-		'reader' => [ 'reader' ],
-		'editor' => [ 'reader', 'editor' ],
-		'reviewer' => [ 'reader', 'editor', 'reviewer' ],
-		'admin' => [ 'reader', 'editor', 'reviewer', 'admin' ],
+		self::ROLE_READER => [ 'reader' ],
+		self::ROLE_EDITOR => [ 'reader', 'editor' ],
+		self::ROLE_REVIEWER => [ 'reader', 'editor', 'reviewer' ],
+		self::ROLE_ADMIN => [ 'reader', 'editor', 'reviewer', 'admin' ],
 	];
 
 	/**

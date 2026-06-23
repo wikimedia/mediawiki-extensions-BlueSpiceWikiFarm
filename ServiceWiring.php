@@ -14,6 +14,8 @@ use BlueSpice\WikiFarm\InstanceManager;
 use BlueSpice\WikiFarm\InstancePathGenerator;
 use BlueSpice\WikiFarm\InstanceStore;
 use BlueSpice\WikiFarm\ManagementDatabaseFactory;
+use BlueSpice\WikiFarm\Util\FavouriteInstanceHelper;
+use BlueSpice\WikiFarm\Util\InstanceDisplayRecordHelper;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 
@@ -115,6 +117,13 @@ return [
 	'BlueSpiceWikiFarm._GroupListStore' => static function ( MediaWikiServices $services ) {
 		return new GroupListStore(
 			$services->getDBLoadBalancer()
+		);
+	},
+	'BlueSpiceWikiFarm._InstanceDisplayRecordHelper' => static function ( MediaWikiServices $services ) {
+		return new InstanceDisplayRecordHelper(
+			new FavouriteInstanceHelper( $services->getUserOptionsLookup() ),
+			$services->getMainConfig(),
+			$services->getService( 'BlueSpiceWikiFarm._Config' )
 		);
 	},
 ];
