@@ -66,7 +66,6 @@
 	"wikifarm-instance-title": "שם האתר",
 	"wikifarm-lang-code": "שפה",
 	"wikifarm-main-instance-name": "ויקי ראשי",
-	"wikifarm-ui-search-instance-filter": "חיפוש בוויקי: $1",
 	"wikifarm-button-action-label-add": "הוספה",
 	"wikifarm-ui-access-field-select-entities": "בחירת קבוצות או משתמשים",
 	"wikifarm-ui-role-label-admin": "מפעיל",
@@ -75,7 +74,6 @@
 	"wikifarm-ui-access-wiki-type-public": "ציבורי",
 	"wikifarm-ui-access-wiki-type-private": "פרטי",
 	"wikifarm-ui-access-wiki-type-protected": "מוגן",
-	"wikifarm-ui-search-instance-filter-search": "חיפוש ויקי",
 	"wikifarm-shared-instance-name": "משאבים משותפים",
 	"wikifarm-action-copytemplate-description": "יבוא תבנית",
 	"wikifarm-upload-file-foreign-repo-label": "העלאה לוויקי של משאבים משותפים",
@@ -86,12 +84,13 @@
 	"wikifarm-promote-to-shared-dialog-push": "מתבצעת העברה לוויקי של משאבים משותפים",
 	"wikifarm-promote-to-shared-dialog-delete-local": "מתבצעת מחיקת העותק המקומי",
 	"wikifarm-promote-to-shared-dialog-delete-local-reason": "נמחק עקב העברה לוויקי של משאבים משותפים",
-	"wikifarm-instances-menu-overview-text": "כל אתרי הוויקי",
 	"wikifarm-instances-favorite-add-btn-title-label": "הוספת הוויקי למועדפים",
 	"wikifarm-instances-favorite-remove-btn-title-label": "הסרת הוויקי מהמועדפים",
 	"wikifarm-global-label": "גלובלי",
 	"wikifarm-access-tab-groups": "קבוצות",
 	"wikifarm-access-tab-users": "משתמשים",
 	"wikifarm-access-column-user": "משתמש",
-	"log-description-ext-wikifarm-access": "יומן ניהול גישה לוויקי"
+	"log-description-ext-wikifarm-access": "יומן ניהול גישה לוויקי",
+	"wikifarm-ui-search-instance-filter": "חיפוש בוויקי: $1",
+	"wikifarm-ui-search-instance-filter-search": "חיפוש ויקי"
 }

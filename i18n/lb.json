@@ -48,8 +48,6 @@
 	"wikifarm-template-title": "Wielt eng Schabloun fir déi nei Wiki",
 	"wikifarm-search-context-global": "an alle Wikien",
 	"wikifarm-main-instance-name": "Haaptwiki",
-	"wikifarm-ui-search-instance-filter-local": "Dës Wiki",
-	"wikifarm-ui-search-instance-filter-all": "All disponibel Wikien",
 	"wikifarm-button-action-label-add": "Derbäisetzen",
 	"wikifarm-ui-access-field-role": "Roll",
 	"wikifarm-ui-role-label-reader": "Lieser",
@@ -61,8 +59,6 @@
 	"wikifarm-ui-access-wiki-type-private": "Privat",
 	"wikifarm-ui-access-wiki-type-public-help": "Jidderee kann den Inhalt <b>kucken an änneren</b> – och anonym Benotzer",
 	"wikifarm-action-copytemplate-description": "Schabloun importéieren",
-	"wikifarm-instances-menu-overview-text": "Méi Wikien",
-	"wikifarm-instances-menu-favorite-text": "Favoritten",
 	"wikifarm-instances-menu-button-title": "Lëscht mat alle Wikien",
 	"wikifarm-instances-menu-aria-label": "Wikien",
 	"wikifarm-ui-access-field-type-user": "Benotzer",
@@ -81,8 +77,6 @@
 	"wikifarm-instances-tab-all-label": "Méi Wikien",
 	"wikifarm-instances-grid-column-wiki-header-label": "Wiki",
 	"wikis": "Wikien",
-	"wikifarm-instances-grid-column-group-header-label": "Grupp",
-	"wikifarm-all-wikis-link": "All Wikie weisen",
 	"wikifarm-global-label": "Global",
 	"wikifarm-access-tab-general-settings": "Allgemeng Astellungen",
 	"wikifarm-access-tab-groups": "Gruppen",
@@ -91,5 +85,7 @@
 	"wikifarm-access-column-user": "Benotzer",
 	"wikifarm-access-unsaved-changes-warning": "Dir hutt net gespäichert Ännerungen. Wëllt Dir se verwerfen?",
 	"wikifarm-access-field-assignees": "Gruppen/Benotzer",
-	"wikifarm-instances-menu-section-favourites": "Favoritten"
+	"wikifarm-instances-menu-section-favourites": "Favoritten",
+	"wikifarm-ui-search-instance-filter-local": "Dës Wiki",
+	"wikifarm-ui-search-instance-filter-all": "All disponibel Wikien"
 }
