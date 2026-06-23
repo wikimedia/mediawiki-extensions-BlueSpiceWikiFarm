@@ -553,7 +553,8 @@
 				"wikifarm-instances-menu-section-favourites",
 				"wikifarm-instances-menu-section-featured",
 				"wikifarm-instances-menu-section-other",
-				"wikifarm-instances-menu-link-wikis-label"
+				"wikifarm-instances-menu-link-wikis-label",
+				"wikifarm-instances-menu-search-more-results-label"
 			],
 			"dependencies": [
 				"oojs-ui",
