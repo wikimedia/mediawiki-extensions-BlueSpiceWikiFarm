@@ -61,6 +61,7 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 
 	this.favouritePanel = new bs.bluespiceWikiFarm.ui.WikiPanel( {
 		name: 'favourite',
+		tab: this.favouriteContent,
 		permissions: this.permissions,
 		creationAllowed: this.creationAllowed,
 		favourite: true,
@@ -90,6 +91,7 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 	} );
 	this.featuredPanel = new bs.bluespiceWikiFarm.ui.WikiPanel( {
 		name: 'featured',
+		tab: this.featuredContent,
 		permissions: this.permissions,
 		creationAllowed: this.creationAllowed,
 		favourite: false,
@@ -117,6 +119,7 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 	} );
 	this.allInstancePanel = new bs.bluespiceWikiFarm.ui.WikiPanel( {
 		name: 'all',
+		tab: this.allInstanceContent,
 		permissions: this.permissions,
 		creationAllowed: this.creationAllowed,
 		favourite: false,

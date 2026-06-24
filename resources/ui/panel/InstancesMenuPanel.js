@@ -31,7 +31,7 @@ ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.makeQuickAccessPanel = fun
 		for ( const [ key, elements ] of Object.entries( result ) ) { // eslint-disable-line es-x/no-object-entries
 			// The following messages are used here:
 			// * wikifarm-instances-menu-section-current
-			// * wikifarm-instances-menu-section-quickaccess
+			// * wikifarm-instances-menu-section-central
 			const section = new ext.bluespiceWikiFarm.ui.widget.InstanceSectionWidget( {
 				sectionId: key,
 				title: mw.message( 'wikifarm-instances-menu-section-' + key ).text(),
@@ -143,13 +143,16 @@ ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.getSkeleton = function ( i
 
 ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.addSpecialPageLink = function () {
 	let url = mw.util.getUrl( 'Special:Wikis' );
+	let target = false;
 	if ( this.farmConfig.instanceId !== 'w' ) {
 		url = mw.config.get( 'wgServer' ) + '/wiki/Special:Wikis';
+		target = true;
 	}
 
 	const specialPageLink = new OOJSPlus.ui.widget.LinkWidget( {
 		href: url,
-		label: mw.message( 'wikifarm-instances-menu-link-wikis-label' ).text()
+		label: mw.message( 'wikifarm-instances-menu-link-wikis-label' ).text(),
+		target: target
 	} );
 	const $linkCnt = $( '<div>' ).addClass( 'd-flex justify-content-center' );
 	$linkCnt.append( specialPageLink.$element );

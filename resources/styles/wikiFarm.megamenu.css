@@ -62,7 +62,7 @@
 }
 
 #farm-wikis-current,
-#farm-wikis-quickaccess {
+#farm-wikis-central {
 	min-height: 0;
 	height: 100%;
 }
@@ -76,6 +76,7 @@
 }
 
 #farm-wikis-results {
+	margin-top: 0;
 	min-height: auto;
 }
 

@@ -30,6 +30,7 @@ ext.bluespiceWikiFarm.ui.widget.InstanceSectionWidget.prototype.buildContent = f
 		this.$element.append( $( '<span>' ).text( this.emptyLabel ) );
 		return;
 	}
+	this.$content = $( '<div>' ).addClass( 'farm-wikis-elements' );
 	for ( const i in this.elements ) {
 		const element = this.elements[ i ];
 		const elementWidget = new ext.bluespiceWikiFarm.ui.widget.InstanceWidget( { // eslint-disable-line mediawiki/class-doc
@@ -44,6 +45,7 @@ ext.bluespiceWikiFarm.ui.widget.InstanceSectionWidget.prototype.buildContent = f
 			classes: element.classes || ''
 		} );
 		elementWidget.connect( this, { favoured: [ 'emit', 'favoured' ] } );
-		this.$element.append( elementWidget.$element );
+		this.$content.append( elementWidget.$element );
 	}
+	this.$element.append( this.$content );
 };

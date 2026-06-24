@@ -5,6 +5,8 @@ bs.bluespiceWikiFarm.ui.WikiPanel = function ( cfg ) {
 	cfg.expanded = false;
 	cfg.padded = false;
 	bs.bluespiceWikiFarm.ui.WikiPanel.parent.call( this, cfg );
+	this.tab = cfg.tab;
+	this.labelSet = false;
 	this.favourite = cfg.favourite || false;
 	this.instances = cfg.instances || [];
 	this.permissions = cfg.permissions || [];
@@ -17,6 +19,15 @@ bs.bluespiceWikiFarm.ui.WikiPanel = function ( cfg ) {
 	this.store.connect( this, {
 		loaded: ( values ) => {
 			this.showValues( values );
+			if ( !this.labelSet ) {
+				const numberOfGroups = Object.keys( values ).length;
+				const $badgeNumer = $( '<span>' ).addClass( 'wikifarm-tab-badge' ).text( numberOfGroups );
+				const label = this.tab.getTabItem().getLabel();
+				this.tab.getTabItem().setLabel(
+					new OO.ui.HtmlSnippet( $( '<span>' ).text( label ).append( $badgeNumer ) )
+				);
+				this.labelSet = true;
+			}
 		}
 	} );
 	this.makeGrid();

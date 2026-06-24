@@ -43,6 +43,7 @@ ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget.prototype.onSear
 	}
 
 	if ( query.length === 0 ) {
+		$( this.$content ).show();
 		return;
 	}
 
@@ -51,6 +52,7 @@ ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget.prototype.onSear
 		limit: 5,
 		query: query
 	} ).done( ( result ) => {
+		$( this.$content ).hide();
 		if ( this.$searchResultSection ) {
 			this.$searchResultSection.remove();
 		}
