@@ -134,3 +134,29 @@ mw.hook( 'bs.extendedSearch.AC.result' ).add( ( result ) => {
 	result.$header.find( '.bs-extendedsearch-autocomplete-popup-item-header-path' )
 		.prepend( $source );
 } );
+
+mw.hook( 'bs.extendedSearch.result.init' ).add( ( $element, source ) => {
+	if ( !source ) {
+		return;
+	}
+
+	const defaultColor = '#747474';
+	const wikiColor = source.color && source.color.background ?
+		source.color.background : defaultColor;
+
+	$element.css( '--wiki-color', wikiColor );
+
+	const $badge = $( '<div>' ).addClass( 'farm-wiki-badge' );
+	const $icon = $( '<span>' )
+		.addClass( 'farm-wiki-badge__icon' )
+		.css( 'background-color', wikiColor );
+	const $text = $( '<span>' )
+		.addClass( 'farm-wiki-badge__text' )
+		.text( source.display_text );
+	$badge.append( $icon, $text ).css( 'color', wikiColor );
+	if ( source.color && source.color.lightText ) {
+		$badge.addClass( 'farm-wiki-badge--light-text' );
+	}
+
+	$element.find( '.bs-extendedsearch-result-wiki-label' ).append( $badge );
+} );

@@ -20,3 +20,23 @@
 .oo-ui-optionWidget-selected .wikifarm-tab-badge {
 	background-color: #f1f3f9;
 }
+
+/* Foreign wiki badge, rendered by the 'bs.extendedSearch.result.init' hook in bootstrap.js. */
+.bs-extendedsearch-result-wiki-label .farm-wiki-badge {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.farm-wiki-badge__text {
+	font-weight: bold;
+	vertical-align: middle;
+	font-size: 0.9rem;
+}
+
+.farm-wiki-badge__icon {
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 8px;
+}
