@@ -56,7 +56,7 @@ class ContextInstanceHandler extends SimpleHandler {
 		];
 
 		$context[ 'current' ] = $current;
-		$context[ 'quickaccess' ] = $quickAccess;
+		$context[ 'central' ] = $quickAccess;
 		return $this->getResponseFactory()->createJson( $context );
 	}
 }

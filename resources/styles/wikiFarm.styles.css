@@ -9,3 +9,14 @@
 	border-radius: 5px;
 	margin-right: 5px;
 }
+
+.wikifarm-tab-badge {
+	margin-left: 0.5rem;
+	padding: 4px 8px;
+	border-radius: 4px;
+	background-color: #dadde3;
+}
+
+.oo-ui-optionWidget-selected .wikifarm-tab-badge {
+	background-color: #f1f3f9;
+}
