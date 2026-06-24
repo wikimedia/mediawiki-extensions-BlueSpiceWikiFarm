@@ -64,10 +64,6 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 			? $this->instanceStore->getPinnedInstances()
 			: $this->instanceStore->getAllInstances();
 		foreach ( $instances as $instance ) {
-			if ( $pinnedFilter !== null && $instance->isPinned() !== $pinnedFilter ) {
-				continue;
-			}
-
 			if ( !$params->getQuery() || $this->queryMatches( $params->getQuery(), $instance ) ) {
 				$this->appendToData( $instance );
 			}
