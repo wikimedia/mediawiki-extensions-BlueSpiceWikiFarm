@@ -50,6 +50,7 @@ class InstanceDisplayRecordHelper {
 			InstanceDisplayRecord::FULLURL => $fullUrl,
 			InstanceDisplayRecord::INSTANCE_COLOR => $instance->getMetadata()['instanceColor']['background'] ?? null,
 			InstanceDisplayRecord::FAVOURITE => $isFavourite,
+			InstanceDisplayRecord::META_GROUP => $instance->getMetadata()['group'] ?? ''
 		] );
 	}
 
