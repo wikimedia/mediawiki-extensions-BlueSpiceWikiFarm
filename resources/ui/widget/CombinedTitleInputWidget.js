@@ -9,6 +9,7 @@ OO.inheritClass( ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget, OOJSP
 ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.makeLookup = function ( query, data ) {
 	const dfd = $.Deferred(),
 		params = Object.assign( data || {}, { query: query } );
+	params.limit = 25;
 	$.ajax( {
 		method: 'GET',
 		url: this.getUrl(),

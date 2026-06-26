@@ -2,70 +2,92 @@
 
 namespace BlueSpice\WikiFarm\TitleSearch\Store;
 
-use BlueSpice\WikiFarm\GlobalDatabaseQueryExecution;
+use BlueSpice\WikiFarm\AccessControl\IAccessStore;
+use BlueSpice\WikiFarm\AccessControl\NullAccessStore;
 use BlueSpice\WikiFarm\InstanceEntity;
+use BlueSpice\WikiFarm\InstanceStore;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Language\Language;
 use MediaWiki\Title\NamespaceInfo;
+use MediaWiki\WikiMap\WikiMap;
 use MWStake\MediaWiki\Component\CommonWebAPIs\Data\TitleQueryStore\PrimaryDataProvider as Base;
+use MWStake\MediaWiki\Component\CommonWebAPIs\Data\TitleQueryStore\TitleRecord;
 use MWStake\MediaWiki\Component\DataStore\Schema;
-use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IDatabase;
 
 class PrimaryDataProvider extends Base {
 
-	/** @var GlobalDatabaseQueryExecution */
-	private $globalDatabaseQueryExecution;
+	/** @var IAccessStore */
+	private $accessStore;
+	/** @var InstanceStore */
+	private InstanceStore $instanceStore;
 
 	/** @var InstanceEntity[]|null */
 	private $limitToInstances;
+
+	/** @var array */
+	private $instanceMap = [];
 
 	/**
 	 * @param IDatabase $db
 	 * @param Schema $schema
 	 * @param Language $language
 	 * @param NamespaceInfo $nsInfo
-	 * @param GlobalDatabaseQueryExecution $globalDatabaseQueryExecution
+	 * @param IAccessStore $accessStore
+	 * @param InstanceStore $instanceStore
 	 * @param array|null $limitToInstances
 	 */
 	public function __construct(
 		IDatabase $db, Schema $schema, Language $language, NamespaceInfo $nsInfo,
-		GlobalDatabaseQueryExecution $globalDatabaseQueryExecution, ?array $limitToInstances = null
+		IAccessStore $accessStore, InstanceStore $instanceStore, ?array $limitToInstances = null
 	) {
 		parent::__construct( $db, $schema, $language, $nsInfo );
-		$this->globalDatabaseQueryExecution = $globalDatabaseQueryExecution;
+		$this->accessStore = $accessStore;
 		$this->limitToInstances = $limitToInstances;
+		$this->instanceStore = $instanceStore;
+	}
+
+	protected function appendRowToData( \stdClass $row ) {
+		parent::appendRowToData( $row );
+		$last = array_pop( $this->data );
+
+		$wikiId = $last->get( TitleRecord::WIKI_ID );
+		/** @var InstanceEntity $instance */
+		$instance = $this->instanceMap[$wikiId] ?? null;
+		if ( !$instance ) {
+			return;
+		}
+
+		// Set the farm instance
+		$last->set( '_instance', $instance->getPath() );
+		$last->set( '_instance_display', $instance->getDisplayName() );
+		$last->set( '_is_local_instance', $wikiId === WikiMap::getCurrentWikiId() );
+		$last->set( '_instance_interwiki', 'wiki-' . mb_strtolower( $instance->getPath() ) );
+		$this->data[] = $last;
 	}
 
 	/**
-	 * @inheritDoc
+	 * @return array
 	 */
-	public function makeData( $params ) {
-		$this->data = [];
-
-		$res = $this->globalDatabaseQueryExecution->select(
-			$this->getTableNames(),
-			$this->getFields(),
-			$this->makePreFilterConds( $params ),
-			__METHOD__,
-			$this->makePreOptionConds( $params ),
-			$this->getJoinConds( $params ),
-			$this->limitToInstances ?? []
+	protected function getWikisToSearchIn(): array {
+		if ( $this->accessStore instanceof NullAccessStore ) {
+			return parent::getWikisToSearchIn();
+		}
+		$instances = $this->limitToInstances ?? $this->accessStore->getInstancePathsWhereUserHasRole(
+			RequestContext::getMain()->getUser(), IAccessStore::ROLE_READER
 		);
-
-		if ( $params->getQuery() !== '' ) {
-			$res = $this->rerank( $params->getQuery(), new FakeResultWrapper( $res ) );
+		$this->instanceMap = [];
+		$res = [];
+		foreach ( $instances as $instance ) {
+			if ( is_string( $instance ) ) {
+				$instance = $this->instanceStore->getInstanceByPath( $instance );
+			}
+			if ( !$instance ) {
+				continue;
+			}
+			$res[] = $instance->getWikiId();
+			$this->instanceMap[$instance->getWikiId()] = $instance;
 		}
-		foreach ( $res as $row ) {
-			$this->appendRowToData( $row );
-			// Get last item of `$this->data`
-			$last = end( $this->data );
-			// Set the farm instance
-			$last->set( '_instance', $row->_instance ?? '' );
-			$last->set( '_instance_display', $row->_instance_display ?? $last->get( '_instance' ) );
-			$last->set( '_is_local_instance', $row->_is_local_instance ?? true );
-			$last->set( '_instance_interwiki', $row->_instance_interwiki ?? '' );
-		}
-
-		return $this->data;
+		return $res;
 	}
 }

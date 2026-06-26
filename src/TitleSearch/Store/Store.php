@@ -1,8 +1,9 @@
 <?php
 namespace BlueSpice\WikiFarm\TitleSearch\Store;
 
-use BlueSpice\WikiFarm\GlobalDatabaseQueryExecution;
+use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\InstanceEntity;
+use BlueSpice\WikiFarm\InstanceStore;
 use MediaWiki\Language\Language;
 use MediaWiki\Page\PageProps;
 use MediaWiki\Title\NamespaceInfo;
@@ -12,8 +13,11 @@ use Wikimedia\Rdbms\ILoadBalancer;
 
 class Store extends TitleQueryStore {
 
-	/** @var GlobalDatabaseQueryExecution */
-	private $globalDatabaseQueryExecution;
+	/** @var IAccessStore */
+	private $accessStore;
+
+	/** @var InstanceStore */
+	private InstanceStore $instanceStore;
 
 	/** @var InstanceEntity[]|null */
 	private $limitToInstances;
@@ -24,16 +28,17 @@ class Store extends TitleQueryStore {
 	 * @param Language $language
 	 * @param NamespaceInfo $nsInfo
 	 * @param PageProps $pageProps
-	 * @param GlobalDatabaseQueryExecution $globalDatabaseQueryExecution
+	 * @param IAccessStore $accessStore
+	 * @param InstanceStore $instanceStore
 	 * @param array|null $limitToInstances
 	 */
 	public function __construct(
 		ILoadBalancer $lb, TitleFactory $titleFactory, Language $language, NamespaceInfo $nsInfo,
-		PageProps $pageProps, GlobalDatabaseQueryExecution $globalDatabaseQueryExecution,
-		?array $limitToInstances = null
+		PageProps $pageProps, IAccessStore $accessStore, InstanceStore $instanceStore, ?array $limitToInstances = null
 	) {
 		parent::__construct( $lb, $titleFactory, $language, $nsInfo, $pageProps );
-		$this->globalDatabaseQueryExecution = $globalDatabaseQueryExecution;
+		$this->accessStore = $accessStore;
+		$this->instanceStore = $instanceStore;
 		$this->limitToInstances = $limitToInstances;
 	}
 
@@ -43,7 +48,7 @@ class Store extends TitleQueryStore {
 	public function getReader() {
 		return new Reader(
 			$this->lb, $this->titleFactory, $this->language, $this->nsInfo,
-			$this->pageProps, $this->globalDatabaseQueryExecution, $this->limitToInstances
+			$this->pageProps, $this->accessStore, $this->instanceStore, $this->limitToInstances
 		);
 	}
 }

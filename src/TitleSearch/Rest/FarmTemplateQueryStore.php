@@ -2,7 +2,7 @@
 
 namespace BlueSpice\WikiFarm\TitleSearch\Rest;
 
-use BlueSpice\WikiFarm\GlobalDatabaseQueryExecution;
+use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\InstanceStore;
 use BlueSpice\WikiFarm\TitleSearch\Store\Store;
 use MediaWiki\Config\Config;
@@ -18,8 +18,8 @@ use Wikimedia\Rdbms\ILoadBalancer;
 
 class FarmTemplateQueryStore extends TitleQueryStore {
 
-	/** @var GlobalDatabaseQueryExecution */
-	private $globalDatabaseQueryExecution;
+	/** @var IAccessStore */
+	private $accessStore;
 
 	/** @var InstanceStore */
 	private $instanceStore;
@@ -34,17 +34,17 @@ class FarmTemplateQueryStore extends TitleQueryStore {
 	 * @param Language $language
 	 * @param NamespaceInfo $nsInfo
 	 * @param PageProps $pageProps
-	 * @param GlobalDatabaseQueryExecution $globalDatabaseQueryExecution
+	 * @param IAccessStore $accessStore
 	 * @param InstanceStore $instanceStore
 	 * @param Config $farmConfig
 	 */
 	public function __construct(
 		HookContainer $hookContainer, ILoadBalancer $lb, TitleFactory $titleFactory, Language $language,
-		NamespaceInfo $nsInfo, PageProps $pageProps, GlobalDatabaseQueryExecution $globalDatabaseQueryExecution,
+		NamespaceInfo $nsInfo, PageProps $pageProps, IAccessStore $accessStore,
 		InstanceStore $instanceStore, Config $farmConfig
 	) {
 		parent::__construct( $hookContainer, $lb, $titleFactory, $language, $nsInfo, $pageProps );
-		$this->globalDatabaseQueryExecution = $globalDatabaseQueryExecution;
+		$this->accessStore = $accessStore;
 		$this->instanceStore = $instanceStore;
 		$this->farmConfig = $farmConfig;
 	}
@@ -62,7 +62,7 @@ class FarmTemplateQueryStore extends TitleQueryStore {
 		}
 		return new Store(
 			$this->lb, $this->titleFactory, $this->language, $this->nsInfo, $this->pageProps,
-			$this->globalDatabaseQueryExecution, $limitTo
+			$this->accessStore, $this->instanceStore, $limitTo
 		);
 	}
 

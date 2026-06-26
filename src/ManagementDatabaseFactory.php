@@ -36,6 +36,13 @@ class ManagementDatabaseFactory {
 	}
 
 	/**
+	 * @return Config
+	 */
+	public function getFarmConfig(): Config {
+		return $this->config;
+	}
+
+	/**
 	 * @param string $name
 	 * @param string $prefix
 	 * @return Database

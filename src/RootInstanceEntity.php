@@ -10,8 +10,9 @@ class RootInstanceEntity extends InstanceEntity {
 	/**
 	 * @param string $dbName
 	 * @param string $dbPrefix
+	 * @param string $wikiId
 	 */
-	public function __construct( string $dbName = '<root>', string $dbPrefix = '' ) {
+	public function __construct( string $dbName = '<root>', string $dbPrefix = '', string $wikiId = '' ) {
 		parent::__construct(
 			'w', 'w', 'w',
 			new DateTime(), new DateTime(), static::STATUS_READY, $dbName, $dbPrefix, [], []
