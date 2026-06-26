@@ -763,7 +763,8 @@
 				"ContentLanguage",
 				"NamespaceInfo",
 				"PageProps",
-				"BlueSpiceWikiFarm.GlobalDatabaseQuery"
+				"BlueSpiceWikiFarm.AccessControlStore",
+				"BlueSpiceWikiFarm.InstanceStore"
 			]
 		},
 		{
@@ -776,7 +777,7 @@
 				"ContentLanguage",
 				"NamespaceInfo",
 				"PageProps",
-				"BlueSpiceWikiFarm.GlobalDatabaseQuery",
+				"BlueSpiceWikiFarm.AccessControlStore",
 				"BlueSpiceWikiFarm.InstanceStore",
 				"BlueSpiceWikiFarm._Config"
 			]

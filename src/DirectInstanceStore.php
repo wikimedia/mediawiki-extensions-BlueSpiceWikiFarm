@@ -147,8 +147,13 @@ class DirectInstanceStore {
 		if ( !$path ) {
 			return null;
 		}
+		$config = $this->databaseFactory->getFarmConfig();
 		if ( $path === 'w' || $path === 'wiki' ) {
-			return new RootInstanceEntity();
+			return new RootInstanceEntity(
+				$config->get( 'managementDBname' ) ?? '<root>',
+				$config->get( 'managementDBprefix' ) ?? '',
+				$config->get( 'rootInstanceWikiId' ) ?? ''
+			);
 		}
 		return $this->getOne( [ 'sfi_path' => $path ] );
 	}
