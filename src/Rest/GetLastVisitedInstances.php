@@ -3,6 +3,7 @@
 namespace BlueSpice\WikiFarm\Rest;
 
 use BlueSpice\WikiFarm\AccessControl\IAccessStore;
+use BlueSpice\WikiFarm\Data\InstanceDisplayList\InstanceDisplayRecord;
 use BlueSpice\WikiFarm\InstanceStore;
 use BlueSpice\WikiFarm\Setup;
 use BlueSpice\WikiFarm\Util\InstanceDisplayRecordHelper;
@@ -41,7 +42,6 @@ class GetLastVisitedInstances extends SimpleHandler {
 		if ( $limit < 1 ) {
 			$limit = 10;
 		}
-		$lastVisited = array_slice( $lastVisited, 0, $limit );
 		$data = [];
 		$instances = $this->instanceStore->getMultiple( 'sfi_path', $lastVisited );
 		foreach ( $instances as $instance ) {
@@ -52,8 +52,13 @@ class GetLastVisitedInstances extends SimpleHandler {
 				}
 			}
 		}
+		usort( $data, static function ( $a, $b ) use ( $lastVisited ) {
+			$posA = array_search( $a->get( InstanceDisplayRecord::PATH ), $lastVisited );
+			$posB = array_search( $b->get( InstanceDisplayRecord::PATH ), $lastVisited );
+			return $posA <=> $posB;
+		} );
 
-		return $data;
+		return array_slice( $data, 0, $limit );
 	}
 
 	/**
