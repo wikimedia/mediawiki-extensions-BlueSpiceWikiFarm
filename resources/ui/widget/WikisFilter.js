@@ -9,8 +9,12 @@ ext.bluespiceWikiFarm.ui.widget.WikisFilter = function ( cfg ) {
 
 	this.$element.addClass( 'bs-extendedsearch-filter-instance-widget' );
 
+	this.visibleFilter = [];
 	this.localWiki = this.options
 		.filter( ( item ) => item.data === this.config.instanceId );
+	if ( this.localWiki ) {
+		this.localWiki = this.localWiki[ 0 ];
+	}
 
 	let selected = [];
 	if ( this.context ) {
@@ -20,21 +24,30 @@ ext.bluespiceWikiFarm.ui.widget.WikisFilter = function ( cfg ) {
 		}
 		const index = selected.indexOf( this.localWiki.data );
 		if ( index !== -1 ) {
+			this.localWiki.selected = true;
 			selected.splice( index, 1 );
+		} else {
+			this.localWiki.selected = false;
 		}
 	}
+	this.visibleFilter.push( this.localWiki );
 
 	for ( const i in this.options ) {
 		if ( selected.includes( this.options[ i ].data ) ) {
 			this.options[ i ].selected = true;
+			this.visibleFilter.push( this.options[ i ] );
 		} else {
+			if ( this.localWiki.data === this.options[ i ].data ) {
+				this.options[ i ].selected = this.localWiki.selected;
+				continue;
+			}
 			this.options[ i ].selected = false;
 		}
 	}
 
 	this.filter = new OOJSPlus.ui.widget.FilterBarWidget( {
 		noFilterActiveLabel: mw.message( 'wikifarm-search-filter-show-all-label' ).text(),
-		visibleFilter: this.localWiki,
+		visibleFilter: this.visibleFilter,
 		filterElements: this.options,
 		allowUnselect: true,
 		multiSelect: true,
