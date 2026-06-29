@@ -51,6 +51,22 @@ class HandleInterwiki implements InterwikiLoadPrefixHook {
 	}
 
 	/**
+	 * @param string $interwiki
+	 * @param string|null &$wikiId
+	 * @return bool
+	 */
+	public function onGetWikiIdFromInterwikiPrefix( string $interwiki, ?string &$wikiId ) {
+		$links = $this->farmConfig->get( 'interwikiLinks' ) ?: [];
+		foreach ( $links as $iwPrefix => $data ) {
+			if ( ( $iwPrefix === $interwiki || $iwPrefix === "wiki-$interwiki" ) && isset( $data['iw_wikiid'] ) ) {
+				$wikiId = $data['iw_wikiid'];
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * @param ApiBase $api
 	 * @param array &$data
 	 * @return void

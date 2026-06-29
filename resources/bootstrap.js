@@ -8,6 +8,7 @@ window.ext.bluespiceWikiFarm = {
 		dialog: {},
 		dm: {}
 	},
+	formElement: {},
 	_config: () => require( './farmConfig.json' ),
 	util: {
 		toggleFavoriteInstance: async ( path, display ) => {

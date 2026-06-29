@@ -564,6 +564,17 @@
 				"ext.oOJSPlus.data",
 				"ext.bluespice.wikiFarm.bootstrap"
 			]
+		},
+		"ext.bluespice.wikiFarm.formElements": {
+			"scripts": [
+				"ui/widget/CombinedTitleInputWidget.js",
+				"formElement/CrossWikiTitle.js"
+			],
+			"dependencies": [
+				"ext.forms.formelements.bootstrap",
+				"ext.bluespice.wikiFarm.bootstrap",
+				"ext.forms.widgets"
+			]
 		}
 	},
 	"ResourceFileModulePaths": {
@@ -576,6 +587,7 @@
 		"InterwikiLoadPrefix": "handleInterwiki",
 		"BSApiInterwikiStoreMakeData": "handleInterwiki",
 		"GetInterwikiPrefixFromWikiId": "handleInterwiki",
+		"GetWikiIdFromInterwikiPrefix": "handleInterwiki",
 		"BeforePageDisplay": [ "addBootstrap", "addSearchInstanceContext", "handleSharedResources" ],
 		"SpecialPage_initList": "addSpecialPages",
 		"MessageCacheFetchOverrides": "setupGroupMessages",

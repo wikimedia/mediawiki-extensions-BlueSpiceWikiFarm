@@ -8,10 +8,8 @@ OO.inheritClass( ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget, OOJSP
 
 ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.makeLookup = function ( query, data ) {
 	const dfd = $.Deferred(),
-		params = Object.assign( data || {}, { query: query } );
-	params.limit = 25;
-	$.ajax( {
-		method: 'GET',
+		params = Object.assign( {}, data || {}, { query: query, limit: 25 } );
+	const req = $.ajax( {
 		url: this.getUrl(),
 		data: params
 	} ).done( ( response ) => {
@@ -20,10 +18,18 @@ ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.makeLookup = 
 		} else {
 			dfd.resolve( [] );
 		}
-	} ).fail( ( err ) => {
-		dfd.resolve( err );
+	} ).fail( ( _jqXHR, textStatus ) => {
+		if ( textStatus === 'abort' ) {
+			dfd.reject();
+			return;
+		}
+		dfd.resolve( [] );
 	} );
-	return dfd.promise();
+	return dfd.promise( {
+		abort: function () {
+			req.abort();
+		}
+	} );
 };
 
 ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getUrl = function () {
@@ -34,6 +40,9 @@ ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getLookupMenu
 	let i;
 	let dataItem;
 	const items = [];
+	if ( !Array.isArray( data ) ) {
+		return items;
+	}
 
 	const grouped = this.group( data );
 	for ( const group in grouped[ 0 ] ) {

@@ -22,6 +22,7 @@ class Setup {
 
 		define( 'FARMER_ROOT', $GLOBALS['IP'] );
 		define( 'FARMER_DIR', dirname( __DIR__ ) );
+		$GLOBALS['mwsgFormEngineElementModules'][] = 'ext.bluespice.wikiFarm.formElements';
 
 		static::setupInterwikiLinks();
 	}
