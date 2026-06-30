@@ -10,6 +10,7 @@
 	"wikifarm-instance-creator-no-info-label": "Tietoja ei ole saatavilla",
 	"wikifarm-ui-access-field-select-entities": "Valitse ryhmät tai käyttäjät",
 	"wikifarm-ui-role-label-admin": "Ylläpitäjä",
+	"wikifarm-instances-menu-empty-favorite-text": "Yhtään wikiä ei ole toistaiseksi merkitty suosikiksi. Voit asettaa wikin suosikiksesi napsauttamalla tähtikuvaketta",
 	"wikifarm-ui-access-field-type-group": "Ryhmä",
 	"wikifarm-access-tab-roles": "Roolit",
 	"wikifarm-access-tab-users": "Käyttäjät",
@@ -18,5 +19,14 @@
 	"wikifarm-access-unsaved-changes-warning": "Muutoksia on tallentamatta. Haluatko ohittaa ne?",
 	"wikifarm-access-field-selected": "Valittu",
 	"wikifarm-access-role-desc-reviewer": "Saa tarkastella, muokata ja tarkistaa tämän wikin sivuja",
-	"log-name-ext-wikifarm-access": "Wikin käyttöoikeuksien hallinta"
+	"log-name-ext-wikifarm-access": "Wikin käyttöoikeuksien hallinta",
+	"wikifarm-instance-featured": "Suositeltu wiki",
+	"wikifarm-instances-menu-section-featured": "Suositeltu",
+	"wikifarm-instances-tab-featured-label": "Suositeltu",
+	"wikifarm-instances-panel-search-label": "Etsi wikiä",
+	"wikifarm-button-action-label-edit": "Muokkaa",
+	"wikifarm-button-action-delete-label": "Poista",
+	"wikifarm-instances-filter-show-all-label": "Kaikki wikit",
+	"wikifarm-wikis-create-new-wiki-title": "Luo uusi wiki",
+	"wikifarm-wikis-create-new-wiki-aria-label": "Luo uusi wiki"
 }

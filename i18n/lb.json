@@ -48,8 +48,6 @@
 	"wikifarm-template-title": "Wielt eng Schabloun fir déi nei Wiki",
 	"wikifarm-search-context-global": "an alle Wikien",
 	"wikifarm-main-instance-name": "Haaptwiki",
-	"wikifarm-ui-search-instance-filter-local": "Dës Wiki",
-	"wikifarm-ui-search-instance-filter-all": "All disponibel Wikien",
 	"wikifarm-button-action-label-add": "Derbäisetzen",
 	"wikifarm-ui-access-field-role": "Roll",
 	"wikifarm-ui-role-label-reader": "Lieser",
@@ -87,5 +85,7 @@
 	"wikifarm-access-column-user": "Benotzer",
 	"wikifarm-access-unsaved-changes-warning": "Dir hutt net gespäichert Ännerungen. Wëllt Dir se verwerfen?",
 	"wikifarm-access-field-assignees": "Gruppen/Benotzer",
-	"wikifarm-instances-menu-section-favourites": "Favoritten"
+	"wikifarm-instances-menu-section-favourites": "Favoritten",
+	"wikifarm-button-action-delete-label": "Läschen",
+	"wikifarm-instances-filter-show-all-label": "All Wikien"
 }
