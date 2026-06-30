@@ -237,5 +237,6 @@
 	"wikifarm-ui-search-instance-filter-all": "Search context label",
 	"wikifarm-ui-search-instance-filter-hint": "Help message for the search center filter",
 	"wikifarm-ui-search-instance-filter-search": "Instance search field placeholder",
-	"wikifarm-search-filter-label": "Label for filter to select wikis which should be searched in
+	"wikifarm-search-filter-label": "Label for filter to select wikis which should be searched in",
+	"wikifarm-instances-menu-search-no-results": "Label if no wiki can be found via search"
 }

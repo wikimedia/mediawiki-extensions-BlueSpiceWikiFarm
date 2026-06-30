@@ -64,6 +64,9 @@ class PrimaryDataProvider extends WikiInstancesPrimaryDataProvider {
 		} else {
 			if ( $this->onlyFavourites( $params ) ) {
 				$paths = array_intersect( $paths, $this->favourites );
+				if ( empty( $paths ) ) {
+					return [];
+				}
 			}
 			if ( empty( $paths ) ) {
 				return [];

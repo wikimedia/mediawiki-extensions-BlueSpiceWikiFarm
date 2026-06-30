@@ -145,3 +145,9 @@
 .farm-wikis-section-search {
 	margin: 8px 0 4px;
 }
+
+.wikifarm-instances-search-no-results {
+	text-align: center;
+	width: 100%;
+	font-style: italic;
+}

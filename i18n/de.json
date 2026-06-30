@@ -172,5 +172,6 @@
 	"wikifarm-ui-search-instance-filter-all": "Alle verfügbaren Wikis",
 	"wikifarm-ui-search-instance-filter-hint": "... oder wähle Wikis aus, in denen zusätzlich zu diesem Wiki gesucht werden soll",
 	"wikifarm-instances-menu-section-quickaccess": "Schnellzugriff",
-	"wikifarm-search-filter-label": "In Wikis suchen"
+	"wikifarm-search-filter-label": "In Wikis suchen",
+	"wikifarm-instances-menu-search-no-results": "Keine Wikis gefunden"
 }

@@ -234,5 +234,6 @@
 	"wikifarm-ui-search-instance-filter-all": "All available wikis",
 	"wikifarm-ui-search-instance-filter-hint": "... or select wikis to search in in addition to this wiki",
 	"wikifarm-ui-search-instance-filter-search": "Search for wiki",
-	"wikifarm-search-filter-label": "Search in wikis"
+	"wikifarm-search-filter-label": "Search in wikis",
+	"wikifarm-instances-menu-search-no-results": "No wikis found"
 }
