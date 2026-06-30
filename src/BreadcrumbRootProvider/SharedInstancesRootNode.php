@@ -38,6 +38,9 @@ class SharedInstancesRootNode extends BaseBreadcrumbRootProvider {
 		if ( $activeInstance->getId() !== 'w' ) {
 			$mainInstance = $this->instanceStore->getInstanceByPath( 'w' );
 			$instanceName = $activeInstance->getPath();
+			if ( $this->farmConfig->get( 'sharedResourcesWikiPath' ) === $instanceName ) {
+				$instanceName = Message::newFromKey( 'wikifarm-shared-instance-name' )->text();
+			}
 
 			$nodes[] = [
 				'text' => '',
@@ -54,6 +57,7 @@ class SharedInstancesRootNode extends BaseBreadcrumbRootProvider {
 				'title' => $activeInstance->getDisplayName(),
 				'rootNode-class' => [ 'instance-rootnode' ]
 			];
+
 			if ( $activeInstance->getMetadata()['instanceColor'] ) {
 				$colorConfig = $activeInstance->getMetadata()['instanceColor'];
 				$bgColor = $colorConfig['background'];
