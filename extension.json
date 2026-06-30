@@ -557,7 +557,8 @@
 				"wikifarm-instances-menu-section-featured",
 				"wikifarm-instances-menu-section-other",
 				"wikifarm-instances-menu-link-wikis-label",
-				"wikifarm-instances-menu-search-more-results-label"
+				"wikifarm-instances-menu-search-more-results-label",
+				"wikifarm-instances-menu-search-no-results"
 			],
 			"dependencies": [
 				"oojs-ui",
@@ -847,7 +848,8 @@
 			"path": "/bluespice/farm/v1/instances/context",
 			"class": "BlueSpice\\WikiFarm\\Rest\\ContextInstanceHandler",
 			"services": [
-				"BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.InstanceStore"
+				"BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.InstanceStore",
+				"BlueSpiceWikiFarm.AccessControlStore"
 			]
 		},
 		{

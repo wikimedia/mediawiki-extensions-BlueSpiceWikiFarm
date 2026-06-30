@@ -56,6 +56,15 @@ ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget.prototype.onSear
 		if ( this.$searchResultSection ) {
 			this.$searchResultSection.remove();
 		}
+		if ( result.results.length === 0 ) {
+			const labelWidget = new OO.ui.LabelWidget( {
+				label: mw.msg( 'wikifarm-instances-menu-search-no-results' ),
+				classes: [ 'wikifarm-instances-search-no-results' ]
+			} );
+			this.$searchResultSection = labelWidget.$element;
+			this.$element.append( labelWidget.$element );
+			return;
+		}
 		const section = new ext.bluespiceWikiFarm.ui.widget.InstanceSectionWidget( {
 			sectionId: 'results',
 			title: '',
