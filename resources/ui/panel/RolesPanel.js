@@ -28,6 +28,22 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.build = function () {
 		items: [ this.addButton ]
 	} );
 
+	// Create tabs
+	this.tabLayout = new OO.ui.IndexLayout( {
+		expanded: false,
+		framed: false
+	} );
+
+	this.groupsTab = new OO.ui.TabPanelLayout( 'groups', {
+		label: mw.msg( 'wikifarm-access-tab-groups' ),
+		expanded: false
+	} );
+
+	this.usersTab = new OO.ui.TabPanelLayout( 'users', {
+		label: mw.msg( 'wikifarm-access-tab-users' ),
+		expanded: false
+	} );
+
 	// Create stores for both tabs
 	this.groupStore = new OOJSPlus.ui.data.store.RemoteRestStore( {
 		path: 'bluespice/farm/v1/access/assignments',
@@ -40,6 +56,16 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.build = function () {
 		},
 		sorter: {
 			is_global_assignment: { direction: 'desc' } // eslint-disable-line camelcase
+		}
+	} );
+	this.groupStore.connect( this, {
+		loaded: () => {
+			const numberOfGroups = this.groupStore.getTotal();
+			const $badgeGroups = $( '<span>' ).addClass( 'wikifarm-tab-badge' ).text( numberOfGroups );
+			const groupLabel = this.groupsTab.tabItem.getLabel();
+			this.groupsTab.tabItem.setLabel(
+				new OO.ui.HtmlSnippet( $( '<span>' ).text( groupLabel ).append( $badgeGroups ) )
+			);
 		}
 	} );
 
@@ -56,21 +82,15 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.build = function () {
 			is_global_assignment: { direction: 'desc' } // eslint-disable-line camelcase
 		}
 	} );
-
-	// Create tabs
-	this.tabLayout = new OO.ui.IndexLayout( {
-		expanded: false,
-		framed: true
-	} );
-
-	this.groupsTab = new OO.ui.TabPanelLayout( 'groups', {
-		label: mw.msg( 'wikifarm-access-tab-groups' ),
-		expanded: false
-	} );
-
-	this.usersTab = new OO.ui.TabPanelLayout( 'users', {
-		label: mw.msg( 'wikifarm-access-tab-users' ),
-		expanded: false
+	this.userStore.connect( this, {
+		loaded: () => {
+			const numberOfUsers = this.userStore.getTotal();
+			const $badgeUser = $( '<span>' ).addClass( 'wikifarm-tab-badge' ).text( numberOfUsers );
+			const userLabel = this.usersTab.tabItem.getLabel();
+			this.usersTab.tabItem.setLabel(
+				new OO.ui.HtmlSnippet( $( '<span>' ).text( userLabel ).append( $badgeUser ) )
+			);
+		}
 	} );
 
 	// Build group grid
@@ -84,9 +104,6 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.build = function () {
 	this.usersTab.$element.append( this.userGrid.$element );
 
 	this.tabLayout.addTabPanels( [ this.groupsTab, this.usersTab ] );
-
-	// Load counts for badges
-	this.loadCounts();
 
 	this.$element.append( this.$toolbar.$element, this.tabLayout.$element );
 };
@@ -248,31 +265,4 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.openDialog = function ( dialog, ca
 ext.bluespiceWikiFarm.ui.RolesPanel.prototype.reloadAll = function () {
 	this.groupStore.reload();
 	this.userStore.reload();
-	this.loadCounts();
-};
-
-ext.bluespiceWikiFarm.ui.RolesPanel.prototype.loadCounts = function () {
-	// Load all assignments to get counts
-	$.ajax( {
-		url: mw.util.wikiScript( 'rest' ) + '/bluespice/farm/v1/access/assignments',
-		type: 'GET',
-		dataType: 'json'
-	} ).done( ( response ) => {
-		const results = response.results || [];
-		let groupCount = 0;
-		let userCount = 0;
-		for ( const item of results ) {
-			if ( item.entity_type === 'group' ) {
-				groupCount++;
-			} else if ( item.entity_type === 'user' ) {
-				userCount++;
-			}
-		}
-		this.groupsTab.tabItem.setLabel(
-			mw.msg( 'wikifarm-access-tab-groups' ) + ' (' + groupCount + ')'
-		);
-		this.usersTab.tabItem.setLabel(
-			mw.msg( 'wikifarm-access-tab-users' ) + ' (' + userCount + ')'
-		);
-	} );
 };
