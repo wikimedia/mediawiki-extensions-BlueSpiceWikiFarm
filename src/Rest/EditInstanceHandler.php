@@ -22,6 +22,12 @@ class EditInstanceHandler extends CreateInstanceHandler {
 			$instance->setPinned( (bool)$metadata['pinned'] );
 			unset( $metadata['pinned'] );
 		}
+		$oldMetadata = $instance->getMetadata();
+		// Keep creator metadata - will be replaced otherwise
+		// ERM48670
+		if ( $oldMetadata['creator'] ) {
+			$metadata['creator'] = $oldMetadata['creator'];
+		}
 		$instance->setMetadata( $metadata );
 		$instance->setConfigItem( 'wgLanguageCode', $options['lang'] );
 		$this->getInstanceManager()->getStore()->store( $instance );
