@@ -13,15 +13,19 @@ use MediaWiki\Config\Config;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\User\Options\UserOptionsLookup;
 use MWStake\MediaWiki\Component\DataStore\Filter\Boolean;
+use MWStake\MediaWiki\Component\DataStore\IBucketProvider;
 use MWStake\MediaWiki\Component\DataStore\ReaderParams;
 
-class PrimaryDataProvider extends WikiInstancesPrimaryDataProvider {
+class PrimaryDataProvider extends WikiInstancesPrimaryDataProvider implements IBucketProvider {
 
 	/** @var array */
 	private $favourites = [];
 
 	/** @var IContextSource */
 	private $context;
+
+	/** @var ReaderParams|null */
+	private $lastParams = null;
 
 	/**
 	 * @param InstanceStore $instanceStore
@@ -46,6 +50,7 @@ class PrimaryDataProvider extends WikiInstancesPrimaryDataProvider {
 	 * @return array|\MWStake\MediaWiki\Component\DataStore\Record[]
 	 */
 	public function makeData( $params ) {
+		$this->lastParams = $params;
 		if ( !$this->accessStore instanceof GroupAccessStore ) {
 			return [];
 		}
@@ -132,5 +137,58 @@ class PrimaryDataProvider extends WikiInstancesPrimaryDataProvider {
 		}
 
 		return false;
+	}
+
+	/**
+	 * @return array[]
+	 */
+	public function getBuckets(): array {
+		return [
+			'groups' => $this->getGroupBuckets()
+		];
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getGroupBuckets(): array {
+		if ( !$this->accessStore instanceof GroupAccessStore ) {
+			return [];
+		}
+
+		$user = $this->context->getUser();
+		$paths = $this->accessStore->getInstancePathsWhereUserHasRole( $user, 'reader' );
+		if ( empty( $paths ) ) {
+			return [];
+		}
+
+		// Apply the same filters as makeData()
+		if ( $this->lastParams ) {
+			if ( $this->onlyPinned( $this->lastParams ) ) {
+				$pinned = $this->instanceStore->getPinnedInstances();
+				$instances = array_filter( $pinned, static function ( $instance ) use ( $paths ) {
+					return in_array( $instance->getPath(), $paths );
+				} );
+			} else {
+				if ( $this->onlyFavourites( $this->lastParams ) ) {
+					$paths = array_intersect( $paths, $this->favourites );
+				}
+				$instances = $this->instanceStore->getMultiple( 'sfi_path', $paths );
+			}
+		} else {
+			$instances = $this->instanceStore->getMultiple( 'sfi_path', $paths );
+		}
+
+		$groups = [];
+
+		foreach ( $instances as $instance ) {
+			$group = $instance->getMetadata()['group'] ?? null;
+			if ( $group && !in_array( $group, $groups ) ) {
+				$groups[] = $group;
+			}
+		}
+
+		sort( $groups );
+		return $groups;
 	}
 }

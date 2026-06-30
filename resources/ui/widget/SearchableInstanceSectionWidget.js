@@ -83,9 +83,9 @@ ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget.prototype.onSear
 
 ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget.prototype.getWikisSpecialPageUrl = function ( query ) {
 	if ( this.farmConfig.instanceId === 'w' ) {
-		return mw.util.getUrl( 'Special:Wikis', { query: query } );
+		return mw.util.getUrl( 'Special:Wikis', { query: query } ) + '#all';
 	}
-	return mw.config.get( 'wgServer' ) + '/wiki/Special:Wikis?query=' + encodeURIComponent( query );
+	return mw.config.get( 'wgServer' ) + '/wiki/Special:Wikis?query=' + encodeURIComponent( query ) + '#all';
 };
 
 ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget.prototype.showAllResultsLabel = function ( query, numberOfResults ) {

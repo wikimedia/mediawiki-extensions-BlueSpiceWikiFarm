@@ -21,6 +21,9 @@ bs.bluespiceWikiFarm.ui.WikisPanel = function ( cfg ) {
 		const tab = location.hash.slice( 1 );
 		this.indexLayout.setTabPanel( tab );
 	}
+	if ( mw.util.getParamValue( 'query' ) ) {
+		this.searchInput.setValue( mw.util.getParamValue( 'query' ) );
+	}
 };
 
 OO.inheritClass( bs.bluespiceWikiFarm.ui.WikisPanel, OO.ui.Widget );
@@ -61,6 +64,7 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 
 	this.favouritePanel = new bs.bluespiceWikiFarm.ui.WikiPanel( {
 		name: 'favourite',
+		label: mw.msg( 'wikifarm-instances-tab-favourite-label' ),
 		tab: this.favouriteContent,
 		permissions: this.permissions,
 		creationAllowed: this.creationAllowed,
@@ -91,6 +95,7 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 	} );
 	this.featuredPanel = new bs.bluespiceWikiFarm.ui.WikiPanel( {
 		name: 'featured',
+		label: mw.msg( 'wikifarm-instances-tab-featured-label' ),
 		tab: this.featuredContent,
 		permissions: this.permissions,
 		creationAllowed: this.creationAllowed,
@@ -119,6 +124,7 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 	} );
 	this.allInstancePanel = new bs.bluespiceWikiFarm.ui.WikiPanel( {
 		name: 'all',
+		label: mw.msg( 'wikifarm-instances-tab-all-label' ),
 		tab: this.allInstanceContent,
 		permissions: this.permissions,
 		creationAllowed: this.creationAllowed,
