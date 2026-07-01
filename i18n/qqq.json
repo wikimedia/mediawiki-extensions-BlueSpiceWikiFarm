@@ -288,5 +288,7 @@
 	"wikifarm-error-copy-instance-data-failed": "Error message when copying instance data fails",
 	"wikifarm-error-archive-instance-failed": "Error message when archiving an instance fails",
 	"wikifarm-search-filter-show-all-label": "Label for filter option to show all wikis",
-	"wikifarm-instances-menu-section-central": "Label for section to show central wiki cards"
+	"wikifarm-instances-menu-section-central": "Label for section to show central wiki cards",
+	"wikifarm-access-filter-groups": "Label above the groups filter input field",
+	"wikifarm-access-filter-users": "Label above the users filter input field"
 }
