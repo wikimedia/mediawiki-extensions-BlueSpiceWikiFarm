@@ -284,5 +284,7 @@
 	"wikifarm-error-copy-instance-data-failed": "Failed to copy wiki directory",
 	"wikifarm-error-archive-instance-failed": "Failed to create wiki archive",
 	"wikifarm-search-filter-show-all-label": "All wikis",
-	"wikifarm-instances-menu-section-central": "Central wikis"
+	"wikifarm-instances-menu-section-central": "Central wikis",
+	"wikifarm-access-filter-groups": "Filter groups",
+	"wikifarm-access-filter-users": "Filter users"
 }
