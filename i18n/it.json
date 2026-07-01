@@ -51,5 +51,6 @@
 	"wikifarm-button-action-delete-label": "Cancella",
 	"wikifarm-instances-filter-show-all-label": "Tutti i siti wiki",
 	"wikifarm-wikis-create-new-wiki-title": "Crea un nuovo wiki",
-	"wikifarm-wikis-create-new-wiki-aria-label": "Crea un nuovo wiki"
+	"wikifarm-wikis-create-new-wiki-aria-label": "Crea un nuovo wiki",
+	"wikifarm-instances-menu-section-quickaccess": "Accesso rapido"
 }
