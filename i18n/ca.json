@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lluis Cat"
+		]
+	},
+	"wikifarm-instances-menu-section-featured": "Destacats",
+	"wikifarm-instances-tab-featured-label": "Destacats",
+	"wikifarm-button-action-label-edit": "Edita",
+	"wikifarm-button-action-delete-label": "Suprimeix"
+}

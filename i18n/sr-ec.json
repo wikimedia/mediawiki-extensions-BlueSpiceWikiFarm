@@ -34,5 +34,6 @@
 	"wikifarm-instances-grid-column-group-header-label": "Група",
 	"wikifarm-instances-tab-favourite-label": "Омиљени",
 	"wikifarm-ui-role-label-admin": "Админ",
-	"wikifarm-ui-access-field-type-group": "Група"
+	"wikifarm-ui-access-field-type-group": "Група",
+	"wikifarm-button-action-label-edit": "Уреди"
 }

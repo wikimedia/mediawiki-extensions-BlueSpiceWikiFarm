@@ -18,5 +18,15 @@
 	"wikifarm-access-role-desc-reviewer": "Saa tarkastella, muokata ja tarkistaa tämän wikin sivuja",
 	"log-name-ext-wikifarm-access": "Wikin käyttöoikeuksien hallinta",
 	"wikifarm-instance-creator": "Luonut",
-	"wikifarm-instance-creator-no-info-label": "Tietoja ei ole saatavilla"
+	"wikifarm-instance-creator-no-info-label": "Tietoja ei ole saatavilla",
+	"wikifarm-instances-menu-empty-favorite-text": "Yhtään wikiä ei ole toistaiseksi merkitty suosikiksi. Voit asettaa wikin suosikiksesi napsauttamalla tähtikuvaketta",
+	"wikifarm-instance-featured": "Suositeltu wiki",
+	"wikifarm-instances-menu-section-featured": "Suositeltu",
+	"wikifarm-instances-tab-featured-label": "Suositeltu",
+	"wikifarm-instances-panel-search-label": "Etsi wikiä",
+	"wikifarm-button-action-label-edit": "Muokkaa",
+	"wikifarm-button-action-delete-label": "Poista",
+	"wikifarm-instances-filter-show-all-label": "Kaikki wikit",
+	"wikifarm-wikis-create-new-wiki-title": "Luo uusi wiki",
+	"wikifarm-wikis-create-new-wiki-aria-label": "Luo uusi wiki"
 }
