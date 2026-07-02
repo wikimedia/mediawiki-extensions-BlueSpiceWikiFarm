@@ -43,7 +43,37 @@ window.ext.bluespiceWikiFarm = {
 				mw.notify( mw.message( 'wikifarm-instances-favourite-notification-error' ).text(), { type: 'error' } );
 				return null;
 			}
+		},
+		getWikiBadge: ( source, maxLength ) => {
+			let text = source.display_text;
+			if ( maxLength > 0 ) {
+				text = text.length > maxLength ? text.slice( 0, maxLength - 1 ) + '…' : text;
+			}
+			const $badge = $( '<div>' ).addClass( 'wikifarm-wiki-badge' );
+			const $icon = $( '<span>' ).addClass( 'wikifarm-wiki-badge__icon' );
+			const $text = $( '<span>' ).addClass( 'wikifarm-wiki-badge__text' ).text( text );
 
+			$badge.append( $icon, $text );
+
+			const wikiColor = ext.bluespiceWikiFarm.util.getWikiColor( source );
+			$badge.css( 'color', wikiColor );
+			$icon.css( 'background-color', wikiColor );
+			if ( ext.bluespiceWikiFarm.util.shouldUseLightText( source ) ) {
+				$badge.addClass( 'wikifarm-wiki-badge--light-text' );
+			}
+			return $badge;
+		},
+		getWikiColor: ( source ) => {
+			if ( !source.color ) {
+				return '#3e5389';
+			}
+			return source.color.background;
+		},
+		shouldUseLightText: ( source ) => {
+			if ( !source.color ) {
+				return false;
+			}
+			return source.color.lightText || false;
 		}
 	}
 };
@@ -146,12 +176,12 @@ mw.hook( 'bs.extendedSearch.result.init' ).add( ( $element, source ) => {
 
 	$element.css( '--wiki-color', wikiColor );
 
-	const $badge = $( '<div>' ).addClass( 'farm-wiki-badge' );
+	const $badge = $( '<div>' ).addClass( 'wikifarm-wiki-badge' );
 	const $icon = $( '<span>' )
-		.addClass( 'farm-wiki-badge__icon' )
+		.addClass( 'wikifarm-wiki-badge__icon' )
 		.css( 'background-color', wikiColor );
 	const $text = $( '<span>' )
-		.addClass( 'farm-wiki-badge__text' )
+		.addClass( 'wikifarm-wiki-badge__text' )
 		.text( source.display_text );
 	$badge.append( $icon, $text ).css( 'color', wikiColor );
 	if ( source.color && source.color.lightText ) {
@@ -159,4 +189,51 @@ mw.hook( 'bs.extendedSearch.result.init' ).add( ( $element, source ) => {
 	}
 
 	$element.find( '.bs-extendedsearch-result-wiki-label' ).append( $badge );
+} );
+
+mw.hook( 'notifyme.notification.item' ).add( ( notification, data ) => {
+	if ( !data.sourceWiki ) {
+		return;
+	}
+
+	const $wikiBadge = ext.bluespiceWikiFarm.util.getWikiBadge( data.sourceWiki );
+	notification.$content.prepend( $wikiBadge );
+
+	const wikiColor = ext.bluespiceWikiFarm.util.getWikiColor( data.sourceWiki );
+	if ( wikiColor ) {
+		notification.$element.css( 'border-left', `4px solid ${ wikiColor }` );
+	}
+} );
+
+mw.hook( 'notifyme.notification.group.item' ).add( ( notification, data ) => {
+	if ( !data._source_wiki ) { // eslint-disable-line no-underscore-dangle
+		return;
+	}
+	const source = data._source_wiki; // eslint-disable-line no-underscore-dangle
+
+	const $wikiBadge = ext.bluespiceWikiFarm.util.getWikiBadge( source );
+	notification.$content.prepend( $wikiBadge );
+
+	const wikiColor = ext.bluespiceWikiFarm.util.getWikiColor( source );
+	if ( wikiColor ) {
+		notification.$element.css( 'border-left', `4px solid ${ wikiColor }` );
+	}
+} );
+
+mw.hook( 'notifyme.notification.preview.item' ).add( ( notification, data ) => {
+	if ( !data._source_wiki ) { // eslint-disable-line no-underscore-dangle
+		return;
+	}
+	const source = data._source_wiki; // eslint-disable-line no-underscore-dangle
+
+	const $wikiBadge = ext.bluespiceWikiFarm.util.getWikiBadge( source, 40 );
+	notification.$element.prepend( $wikiBadge );
+	notification.$element.addClass( 'notification-preview-item-has-wiki-badge' );
+	notification.$unreadCircle.css( 'background-color',
+		ext.bluespiceWikiFarm.util.getWikiColor( source ) );
+
+	const wikiColor = ext.bluespiceWikiFarm.util.getWikiColor( source );
+	if ( wikiColor ) {
+		notification.$element.css( 'border-left', `4px solid ${ wikiColor }` );
+	}
 } );
