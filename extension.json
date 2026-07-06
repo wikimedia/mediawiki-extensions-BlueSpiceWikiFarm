@@ -610,7 +610,8 @@
 		"BSUserManagerGroupAdded": "updateGroupList",
 		"BSUserManagerGroupEdited": "updateGroupList",
 		"BSUserManagerGroupDeleted": "updateGroupList",
-		"OutputPageBodyAttributes": "instanceBodyClass"
+		"OutputPageBodyAttributes": "instanceBodyClass",
+		"MWStakeTokenAuthenticatorGetAuthInfo": "addTokenAuthenticatorSearchableWikis"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -703,6 +704,10 @@
 		"trackLastVisitedInstances": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\BeforeInitialize\\TrackLastVisitedInstances",
 			"services": [ "MWStake.DataStash" ]
+		},
+		"addTokenAuthenticatorSearchableWikis": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\Integration\\AddTokenAuthenticatorSearchableWikis",
+			"services": [ "BlueSpiceWikiFarm.AccessControlStore", "BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.WikiMap" ]
 		}
 	},
 	"RestRoutes": [
@@ -876,6 +881,15 @@
 				"MWStakeCommonUtilsConfig",
 				"BlueSpiceWikiFarm._GroupListStore",
 				"PermissionManager"
+			]
+		},
+		{
+			"path": "/bluespice/farm/v1/wiki_info/{wiki_id}",
+			"class": "BlueSpice\\WikiFarm\\Rest\\InstanceInfoFromWikiIDHandler",
+			"services": [
+				"BlueSpiceWikiFarm.AccessControlStore",
+				"BlueSpiceWikiFarm._Config",
+				"BlueSpiceWikiFarm.WikiMap"
 			]
 		}
 	],
