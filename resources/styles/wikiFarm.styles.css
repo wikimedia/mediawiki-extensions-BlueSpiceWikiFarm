@@ -59,3 +59,10 @@
 .notification-preview-item-has-wiki-badge .notification-unread-circle-wrapper {
 	margin-top: 8px;
 }
+
+.chatbot-source-wiki-badge {
+	margin: 0 4px 0 0;
+	display: inline;
+	vertical-align: top;
+	font-size: 0.8em;
+}

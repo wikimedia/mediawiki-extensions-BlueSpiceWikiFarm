@@ -121,8 +121,7 @@ class Setup {
 				// Do not add interwiki link for the current instance
 				continue;
 			}
-			$prefix = mb_strtolower( $instance->getPath() );
-			$iwPrefix = "wiki-$prefix";
+			$iwPrefix = $instance->getInterwiki();
 			$GLOBALS['wgWikiFarmConfig_interwikiLinks'][$iwPrefix] = [
 				'iw_prefix' => $iwPrefix,
 				'iw_url' => $instance->getUrl( $GLOBALS['wgWikiFarmConfigInternal'] ) . '/wiki/$1',

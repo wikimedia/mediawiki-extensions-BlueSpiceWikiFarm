@@ -75,6 +75,20 @@ window.ext.bluespiceWikiFarm = {
 				return false;
 			}
 			return source.color.lightText || false;
+		},
+		getWikiInfoFromWikiID: async ( wikiId ) => {
+			// Make an API request to get the wiki info from the wiki_id
+			// eg. rest.php/bluespice/farm/v1/wiki_info/wiki_b8c31707
+			try {
+				const response = await fetch( mw.util.wikiScript( 'rest' ) + '/bluespice/farm/v1/wiki_info/' + wikiId );
+				if ( !response.ok ) {
+					throw new Error( 'Failed to retrieve wiki information' );
+				}
+				return await response.json();
+			} catch ( error ) {
+				console.error( 'Failed to fetch wiki info:', error ); // eslint-disable-line no-console
+				return null;
+			}
 		}
 	}
 };
@@ -236,5 +250,23 @@ mw.hook( 'notifyme.notification.preview.item' ).add( ( notification, data ) => {
 	const wikiColor = ext.bluespiceWikiFarm.util.getWikiColor( source );
 	if ( wikiColor ) {
 		notification.$element.css( 'border-left', `4px solid ${ wikiColor }` );
+	}
+} );
+
+mw.hook( 'chatbot.source.foreignWikiTitle' ).add( async ( data ) => {
+	const instanceInfo = await ext.bluespiceWikiFarm.util.getWikiInfoFromWikiID( data.wikiId );
+	if ( !instanceInfo ) {
+		return;
+	}
+	const foreignTitle = mw.Title.makeTitle( data.namespaceId, instanceInfo.interwiki + ':' + data.titleText );
+	const $wikiBadge = ext.bluespiceWikiFarm.util.getWikiBadge( instanceInfo, 16 );
+
+	data.anchor.href = data.url;
+	data.anchor.title = foreignTitle.getPrefixedText();
+	if ( data.anchor.classList.contains( 'reference-link' ) &&
+		$wikiBadge && $wikiBadge.length &&
+		!data.anchor.querySelector( '.chatbot-source-wiki-badge' ) ) {
+		$wikiBadge.addClass( 'chatbot-source-wiki-badge' );
+		$( data.anchor ).prepend( $wikiBadge, ' ' );
 	}
 } );

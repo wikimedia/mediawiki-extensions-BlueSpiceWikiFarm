@@ -265,6 +265,13 @@ class InstanceEntity {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getInterwiki(): string {
+		return 'wiki-' . mb_strtolower( $this->getPath() );
+	}
+
+	/**
 	 * @return array
 	 */
 	public function dbSerialize() {
