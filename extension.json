@@ -329,7 +329,8 @@
 				"ext.oOJSPlus.widgets"
 			],
 			"messages": [
-				"wikifarm-search-filter-show-all-label"
+				"wikifarm-search-filter-show-all-label",
+				"wikifarm-search-filter-label"
 			]
 		},
 		"ext.bluespice.wikiFarm.combinedTitleInput": {

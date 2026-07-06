@@ -66,7 +66,11 @@ ext.bluespiceWikiFarm.ui.widget.WikisFilter = function ( cfg ) {
 		}
 	} );
 
-	this.$element.append( this.filter.$element );
+	const fieldLayout = new OO.ui.FieldLayout( this.filter, {
+		label: mw.message( 'wikifarm-search-filter-label' ).text(),
+		align: 'top'
+	} );
+	this.$element.append( fieldLayout.$element );
 };
 
 OO.inheritClass( ext.bluespiceWikiFarm.ui.widget.WikisFilter, OO.ui.Widget );

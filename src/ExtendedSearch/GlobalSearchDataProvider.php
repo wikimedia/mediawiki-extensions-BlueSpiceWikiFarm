@@ -58,7 +58,7 @@ class GlobalSearchDataProvider {
 	private function getTargets(): array {
 		$targets = [];
 
-		if ( !FARMER_IS_ROOT_WIKI_CALL && $this->farmConfig->get( 'searchInMainInstance' ) ) {
+		if ( $this->farmConfig->get( 'searchInMainInstance' ) ) {
 			$instance = new RootInstanceEntity(
 				$this->farmConfig->get( 'managementDBname' ), $this->farmConfig->get( 'managementDBprefix' )
 			);
