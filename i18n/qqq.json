@@ -231,5 +231,11 @@
 	"wikifarm-wikis-create-new-wiki-aria-label": "Aria label to create a new wiki",
 	"wikifarm-error-copy-instance-data-failed": "Error message when copying instance data fails",
 	"wikifarm-error-archive-instance-failed": "Error message when archiving an instance fails",
-	"wikifarm-search-filter-show-all-label": "Label for filter option to show all wikis"
+	"wikifarm-search-filter-show-all-label": "Label for filter option to show all wikis",
+	"wikifarm-ui-search-instance-filter": "Label for the search center filter showing instances in which search is performed\n$1 - wiki names",
+	"wikifarm-ui-search-instance-filter-local": "Search context label",
+	"wikifarm-ui-search-instance-filter-all": "Search context label",
+	"wikifarm-ui-search-instance-filter-hint": "Help message for the search center filter",
+	"wikifarm-ui-search-instance-filter-search": "Instance search field placeholder",
+	"wikifarm-search-filter-label": "Label for filter to select wikis which should be searched in
 }

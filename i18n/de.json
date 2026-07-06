@@ -166,5 +166,11 @@
 	"wikifarm-button-action-delete-label": "Löschen",
 	"wikifarm-instances-filter-show-all-label": "Alle Wikis",
 	"wikifarm-wikis-create-new-wiki-title": "Ein neues Wiki erstellen",
-	"wikifarm-wikis-create-new-wiki-aria-label": "Ein neues Wiki erstellen"
+	"wikifarm-wikis-create-new-wiki-aria-label": "Ein neues Wiki erstellen",
+	"wikifarm-ui-search-instance-filter": "Suche in Wikis: $1",
+	"wikifarm-ui-search-instance-filter-local": "Dieses Wiki",
+	"wikifarm-ui-search-instance-filter-all": "Alle verfügbaren Wikis",
+	"wikifarm-ui-search-instance-filter-hint": "... oder wähle Wikis aus, in denen zusätzlich zu diesem Wiki gesucht werden soll",
+	"wikifarm-instances-menu-section-quickaccess": "Schnellzugriff",
+	"wikifarm-search-filter-label": "In Wikis suchen"
 }
