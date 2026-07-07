@@ -65,6 +65,9 @@ class PrimaryDataProvider extends WikiInstancesPrimaryDataProvider {
 			if ( $this->onlyFavourites( $params ) ) {
 				$paths = array_intersect( $paths, $this->favourites );
 			}
+			if ( empty( $paths ) ) {
+				return [];
+			}
 			$instances = $this->instanceStore->getMultiple( 'sfi_path', $paths );
 		}
 
