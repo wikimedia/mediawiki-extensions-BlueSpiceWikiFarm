@@ -86,8 +86,8 @@
 	"wikifarm-access-unsaved-changes-warning": "Dir hutt net gespäichert Ännerungen. Wëllt Dir se verwerfen?",
 	"wikifarm-access-field-assignees": "Gruppen/Benotzer",
 	"wikifarm-instances-menu-section-favourites": "Favoritten",
-	"wikifarm-ui-search-instance-filter-local": "Dës Wiki",
-	"wikifarm-ui-search-instance-filter-all": "All disponibel Wikien",
 	"wikifarm-button-action-delete-label": "Läschen",
-	"wikifarm-instances-filter-show-all-label": "All Wikien"
+	"wikifarm-instances-filter-show-all-label": "All Wikien",
+	"wikifarm-ui-search-instance-filter-local": "Dës Wiki",
+	"wikifarm-ui-search-instance-filter-all": "All disponibel Wikien"
 }
