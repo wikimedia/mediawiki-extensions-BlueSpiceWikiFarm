@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Kookoriko",
-			"Monicapozo03"
+			"Monicapozo03",
+			"SaraiSan-WMF"
 		]
 	},
+	"wikifarm-lang-code": "Idioma",
 	"wikifarm-management-breadcrumb-label-create": "Crear",
 	"wikifarm-create-instance-title-from-template": "Crea una nueva wiki desde la plantilla \"$1\"",
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Volver a la página principal"

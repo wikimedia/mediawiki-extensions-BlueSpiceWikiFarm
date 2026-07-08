@@ -28,5 +28,8 @@
 	"wikifarm-button-action-delete-label": "Poista",
 	"wikifarm-instances-filter-show-all-label": "Kaikki wikit",
 	"wikifarm-wikis-create-new-wiki-title": "Luo uusi wiki",
-	"wikifarm-wikis-create-new-wiki-aria-label": "Luo uusi wiki"
+	"wikifarm-wikis-create-new-wiki-aria-label": "Luo uusi wiki",
+	"wikifarm-error-copy-instance-data-failed": "Wikihakemiston kopiointi epäonnistui",
+	"wikifarm-error-archive-instance-failed": "Wikiarkiston luominen epäonnistui",
+	"wikifarm-search-filter-show-all-label": "Kaikki wikit"
 }

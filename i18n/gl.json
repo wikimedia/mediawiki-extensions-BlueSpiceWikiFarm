@@ -189,6 +189,8 @@
 	"wikifarm-access-tab-users": "Usuarios",
 	"wikifarm-access-general-heading": "Determina os dereitos de acceso para este wiki seleccionando un nivel de permisos",
 	"wikifarm-access-add-role-assignment": "Engadir unha asignación de rol",
+	"wikifarm-access-filter-groups": "Filtro de grupos",
+	"wikifarm-access-filter-users": "Filtro de usuarios",
 	"wikifarm-access-column-group": "Grupo",
 	"wikifarm-access-column-user": "Usuario",
 	"wikifarm-access-unsaved-changes-warning": "Tes cambios sen gardar. Queres desbotalos?",
@@ -212,6 +214,7 @@
 	"wikifarm-instances-menu-search-label": "Buscar un wiki",
 	"wikifarm-instances-search-placeholder": "Atopar un wiki",
 	"wikifarm-instances-menu-section-current": "Actual",
+	"wikifarm-instances-menu-section-central": "Wikis centrais",
 	"wikifarm-instances-menu-section-favourites": "Favoritos",
 	"wikifarm-instances-menu-section-featured": "Destacados",
 	"wikifarm-instances-menu-section-other": "Outros",
@@ -224,5 +227,8 @@
 	"wikifarm-button-action-delete-label": "Eliminar",
 	"wikifarm-instances-filter-show-all-label": "Todos os wikis",
 	"wikifarm-wikis-create-new-wiki-title": "Crear un novo wiki",
-	"wikifarm-wikis-create-new-wiki-aria-label": "Crear un novo wiki"
+	"wikifarm-wikis-create-new-wiki-aria-label": "Crear un novo wiki",
+	"wikifarm-error-copy-instance-data-failed": "Fallou a copia do directorio do wiki",
+	"wikifarm-error-archive-instance-failed": "Fallou a creación do arquivo do wiki",
+	"wikifarm-search-filter-show-all-label": "Todos os wikis"
 }

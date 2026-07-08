@@ -192,6 +192,8 @@
 	"wikifarm-access-tab-users": "사용자",
 	"wikifarm-access-general-heading": "권한 수준을 선택하여 이 위키에 대한 접근 권한을 설정하세요",
 	"wikifarm-access-add-role-assignment": "역할 할당 추가",
+	"wikifarm-access-filter-groups": "필터 그룹",
+	"wikifarm-access-filter-users": "필터 사용자",
 	"wikifarm-access-column-group": "그룹",
 	"wikifarm-access-column-user": "사용자",
 	"wikifarm-access-unsaved-changes-warning": "저장되지 않은 변경 사항이 있습니다. 버리시겠습니까?",
@@ -215,6 +217,7 @@
 	"wikifarm-instances-menu-search-label": "위키 검색",
 	"wikifarm-instances-search-placeholder": "위키를 찾아보기",
 	"wikifarm-instances-menu-section-current": "현재",
+	"wikifarm-instances-menu-section-central": "중앙 위키",
 	"wikifarm-instances-menu-section-favourites": "즐겨찾기",
 	"wikifarm-instances-menu-section-featured": "추천",
 	"wikifarm-instances-menu-section-other": "기타",
@@ -227,5 +230,8 @@
 	"wikifarm-button-action-delete-label": "삭제",
 	"wikifarm-instances-filter-show-all-label": "모든 위키",
 	"wikifarm-wikis-create-new-wiki-title": "새 위키 만들기",
-	"wikifarm-wikis-create-new-wiki-aria-label": "새 위키 만들기"
+	"wikifarm-wikis-create-new-wiki-aria-label": "새 위키 만들기",
+	"wikifarm-error-copy-instance-data-failed": "위키 디렉토리 복사에 실패했습니다",
+	"wikifarm-error-archive-instance-failed": "위키 아카이브 생성에 실패했습니다",
+	"wikifarm-search-filter-show-all-label": "모든 위키"
 }

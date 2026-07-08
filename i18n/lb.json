@@ -87,5 +87,6 @@
 	"wikifarm-access-field-assignees": "Gruppen/Benotzer",
 	"wikifarm-instances-menu-section-favourites": "Favoritten",
 	"wikifarm-button-action-delete-label": "Läschen",
-	"wikifarm-instances-filter-show-all-label": "All Wikien"
+	"wikifarm-instances-filter-show-all-label": "All Wikien",
+	"wikifarm-search-filter-show-all-label": "All Wikien"
 }
