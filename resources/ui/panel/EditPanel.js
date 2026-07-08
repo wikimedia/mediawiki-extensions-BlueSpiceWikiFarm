@@ -3,6 +3,7 @@ ext.bluespiceWikiFarm.ui.EditPanel = function ( config ) {
 	this.pathIsPredefined = config.pathIsPredefined || false;
 	this.meta = this.instanceData.sfi_meta ? JSON.parse( this.instanceData.sfi_meta ) : {};
 	this.config = this.instanceData.sfi_config ? JSON.parse( this.instanceData.sfi_config ) : {};
+	this.pinned = this.instanceData.sfi_pinned ? JSON.parse( this.instanceData.sfi_pinned ) : false;
 
 	ext.bluespiceWikiFarm.ui.EditPanel.parent.call( this, {
 		expanded: false,
@@ -154,7 +155,7 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.makeAdvancedOptionsInputs = functio
 	this.color.setValue( this.meta.instanceColor || '' );
 
 	this.pinned = new OO.ui.CheckboxInputWidget( {
-		selected: this.meta.hasOwnProperty( 'pinned' ) ? this.meta.pinned : false
+		selected: this.pinned
 	} );
 
 	let items = [
