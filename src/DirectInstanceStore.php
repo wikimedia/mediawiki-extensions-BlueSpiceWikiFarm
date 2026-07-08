@@ -206,6 +206,9 @@ class DirectInstanceStore {
 	 * @return array
 	 */
 	public function getMultiple( string $field, array $values, ?int $limit = null ): array {
+		if ( empty( $values ) ) {
+			return [];
+		}
 		$conds = [
 			"$field IN (" . $this->getDB()->makeList( $values ) . ")"
 		];
