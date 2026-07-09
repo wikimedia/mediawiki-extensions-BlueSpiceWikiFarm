@@ -102,5 +102,6 @@
 	"wikifarm-instance-creator-no-info-label": "Keng Informatiounen disponibel",
 	"wikifarm-instances-menu-section-favourites": "Favoritten",
 	"wikifarm-button-action-delete-label": "Läschen",
-	"wikifarm-instances-filter-show-all-label": "All Wikien"
+	"wikifarm-instances-filter-show-all-label": "All Wikien",
+	"wikifarm-search-filter-show-all-label": "All Wikien"
 }
