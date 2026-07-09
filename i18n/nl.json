@@ -191,6 +191,8 @@
 	"wikifarm-access-tab-users": "Gebruikers",
 	"wikifarm-access-general-heading": "Bepaal de toegangsrechten voor deze wiki door een machtigingsniveau te selecteren.",
 	"wikifarm-access-add-role-assignment": "Roltoewijzing toevoegen",
+	"wikifarm-access-filter-groups": "Groepen filteren",
+	"wikifarm-access-filter-users": "Gebruikers filteren",
 	"wikifarm-access-column-group": "Groep",
 	"wikifarm-access-column-user": "Gebruiker",
 	"wikifarm-access-unsaved-changes-warning": "U hebt niet-opgeslagen wijzigingen. Wilt u deze verwijderen?",
