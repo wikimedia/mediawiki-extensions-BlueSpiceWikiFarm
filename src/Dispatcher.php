@@ -212,7 +212,7 @@ class Dispatcher {
 
 	private function setupEnvironment() {
 		$scriptPath = $this->instance->getScriptPath( $this->config );
-		$GLOBALS['wgUploadPath'] = $this->instance->getVault( $this->config, true ) . '/images';
+		$GLOBALS['wgUploadPath'] = $scriptPath . '/img_auth.php';
 		$GLOBALS['wgUploadDirectory'] = "$this->instanceVaultPathname/images";
 		$GLOBALS['wgReadOnlyFile'] = "{$GLOBALS['wgUploadDirectory']}/lock_yBgMBwiR";
 		$GLOBALS['wgFileCacheDirectory'] = "{$GLOBALS['wgUploadDirectory']}/cache";
