@@ -231,5 +231,9 @@
 	"wikifarm-ui-search-instance-filter-local": "Deze wiki",
 	"wikifarm-ui-search-instance-filter-all": "Alle beschikbare wiki’s",
 	"wikifarm-ui-search-instance-filter-hint": "… of selecteer wiki’s waarin u wilt zoeken naast deze wiki",
-	"wikifarm-ui-search-instance-filter-search": "Wiki zoeken"
+	"wikifarm-ui-search-instance-filter-search": "Wiki zoeken",
+	"wikifarm-instances-menu-section-central": "Centrale wiki’s",
+	"wikifarm-error-copy-instance-data-failed": "Het kopiëren van de wiki-directory is mislukt",
+	"wikifarm-error-archive-instance-failed": "Het aanmaken van het wiki-archief is mislukt",
+	"wikifarm-search-filter-show-all-label": "Alle wiki’s"
 }

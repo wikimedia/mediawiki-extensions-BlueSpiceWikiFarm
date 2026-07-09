@@ -232,5 +232,11 @@
 	"wikifarm-ui-search-instance-filter-local": "이 위키",
 	"wikifarm-ui-search-instance-filter-all": "모든 가능한 위키",
 	"wikifarm-ui-search-instance-filter-hint": "... 또는 이 위키 외에 검색할 다른 위키를 선택하세요",
-	"wikifarm-ui-search-instance-filter-search": "위키 검색"
+	"wikifarm-ui-search-instance-filter-search": "위키 검색",
+	"wikifarm-access-filter-groups": "필터 그룹",
+	"wikifarm-access-filter-users": "필터 사용자",
+	"wikifarm-instances-menu-section-central": "중앙 위키",
+	"wikifarm-error-copy-instance-data-failed": "위키 디렉토리 복사에 실패했습니다",
+	"wikifarm-error-archive-instance-failed": "위키 아카이브 생성에 실패했습니다",
+	"wikifarm-search-filter-show-all-label": "모든 위키"
 }

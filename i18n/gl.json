@@ -229,5 +229,11 @@
 	"wikifarm-ui-search-instance-filter-local": "Este wiki",
 	"wikifarm-ui-search-instance-filter-all": "Todos os wikis dispoñibles",
 	"wikifarm-ui-search-instance-filter-hint": "... ou selecciona aqueloutros wikis nos que buscar ademais deste",
-	"wikifarm-ui-search-instance-filter-search": "Buscar un wiki"
+	"wikifarm-ui-search-instance-filter-search": "Buscar un wiki",
+	"wikifarm-access-filter-groups": "Filtro de grupos",
+	"wikifarm-access-filter-users": "Filtro de usuarios",
+	"wikifarm-instances-menu-section-central": "Wikis centrais",
+	"wikifarm-error-copy-instance-data-failed": "Fallou a copia do directorio do wiki",
+	"wikifarm-error-archive-instance-failed": "Fallou a creación do arquivo do wiki",
+	"wikifarm-search-filter-show-all-label": "Todos os wikis"
 }

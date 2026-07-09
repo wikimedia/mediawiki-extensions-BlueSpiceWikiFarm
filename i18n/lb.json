@@ -89,5 +89,6 @@
 	"wikifarm-button-action-delete-label": "Läschen",
 	"wikifarm-instances-filter-show-all-label": "All Wikien",
 	"wikifarm-ui-search-instance-filter-local": "Dës Wiki",
-	"wikifarm-ui-search-instance-filter-all": "All disponibel Wikien"
+	"wikifarm-ui-search-instance-filter-all": "All disponibel Wikien",
+	"wikifarm-search-filter-show-all-label": "All Wikien"
 }
