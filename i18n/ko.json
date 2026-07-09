@@ -257,5 +257,11 @@
 	"wikifarm-button-action-delete-label": "삭제",
 	"wikifarm-instances-filter-show-all-label": "모든 위키",
 	"wikifarm-wikis-create-new-wiki-title": "새 위키 만들기",
-	"wikifarm-wikis-create-new-wiki-aria-label": "새 위키 만들기"
+	"wikifarm-wikis-create-new-wiki-aria-label": "새 위키 만들기",
+	"wikifarm-access-filter-groups": "필터 그룹",
+	"wikifarm-access-filter-users": "필터 사용자",
+	"wikifarm-instances-menu-section-central": "중앙 위키",
+	"wikifarm-error-copy-instance-data-failed": "위키 디렉토리 복사에 실패했습니다",
+	"wikifarm-error-archive-instance-failed": "위키 아카이브 생성에 실패했습니다",
+	"wikifarm-search-filter-show-all-label": "모든 위키"
 }

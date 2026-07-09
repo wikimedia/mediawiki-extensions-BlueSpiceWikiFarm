@@ -282,5 +282,11 @@
 	"wikifarm-button-action-delete-label": "Eliminar",
 	"wikifarm-instances-filter-show-all-label": "Todos os wikis",
 	"wikifarm-wikis-create-new-wiki-title": "Crear un novo wiki",
-	"wikifarm-wikis-create-new-wiki-aria-label": "Crear un novo wiki"
+	"wikifarm-wikis-create-new-wiki-aria-label": "Crear un novo wiki",
+	"wikifarm-access-filter-groups": "Filtro de grupos",
+	"wikifarm-access-filter-users": "Filtro de usuarios",
+	"wikifarm-instances-menu-section-central": "Wikis centrais",
+	"wikifarm-error-copy-instance-data-failed": "Fallou a copia do directorio do wiki",
+	"wikifarm-error-archive-instance-failed": "Fallou a creación do arquivo do wiki",
+	"wikifarm-search-filter-show-all-label": "Todos os wikis"
 }
