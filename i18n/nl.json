@@ -235,5 +235,7 @@
 	"wikifarm-instances-menu-section-central": "Centrale wiki’s",
 	"wikifarm-error-copy-instance-data-failed": "Het kopiëren van de wiki-directory is mislukt",
 	"wikifarm-error-archive-instance-failed": "Het aanmaken van het wiki-archief is mislukt",
-	"wikifarm-search-filter-show-all-label": "Alle wiki’s"
+	"wikifarm-search-filter-show-all-label": "Alle wiki’s",
+	"wikifarm-access-filter-groups": "Groepen filteren",
+	"wikifarm-access-filter-users": "Gebruikers filteren"
 }
