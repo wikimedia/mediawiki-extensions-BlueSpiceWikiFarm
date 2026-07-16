@@ -208,6 +208,7 @@ mw.hook( 'bs.extendedSearch.result.init' ).add( ( $element, source ) => {
 
 mw.hook( 'notifyme.notification.item' ).add( ( notification, data ) => {
 	if ( !data.sourceWiki ) {
+		notification.$element.css( 'border-left', `4px solid ${ ext.bluespiceWikiFarm.util.getWikiColor( {} ) }` );
 		return;
 	}
 
@@ -222,6 +223,7 @@ mw.hook( 'notifyme.notification.item' ).add( ( notification, data ) => {
 
 mw.hook( 'notifyme.notification.group.item' ).add( ( notification, data ) => {
 	if ( !data._source_wiki ) { // eslint-disable-line no-underscore-dangle
+		notification.$element.css( 'border-left', `4px solid ${ ext.bluespiceWikiFarm.util.getWikiColor( {} ) }` );
 		return;
 	}
 	const source = data._source_wiki; // eslint-disable-line no-underscore-dangle
@@ -237,6 +239,7 @@ mw.hook( 'notifyme.notification.group.item' ).add( ( notification, data ) => {
 
 mw.hook( 'notifyme.notification.preview.item' ).add( ( notification, data ) => {
 	if ( !data._source_wiki ) { // eslint-disable-line no-underscore-dangle
+		notification.$element.css( 'border-left', `4px solid ${ ext.bluespiceWikiFarm.util.getWikiColor( {} ) }` );
 		return;
 	}
 	const source = data._source_wiki; // eslint-disable-line no-underscore-dangle
