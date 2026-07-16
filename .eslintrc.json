@@ -19,6 +19,7 @@
 	},
 	"rules": {
 		"max-len": "off",
+		"mediawiki/no-unlabeled-buttonwidget": "off",
 		"es-x/no-array-prototype-flat": "off",
 		"es-x/no-array-prototype-includes": "off",
 		"es-x/no-async-functions": "off",
