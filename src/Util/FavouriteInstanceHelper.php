@@ -29,7 +29,7 @@ class FavouriteInstanceHelper {
 		}
 		$favourites = explode( ',', $favouriteOptions );
 		return array_map(
-			fn ( $item ) => trim( $item ),
+			static fn ( $item ) => trim( $item ),
 			$favourites
 		);
 	}

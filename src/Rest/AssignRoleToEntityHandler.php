@@ -34,6 +34,9 @@ class AssignRoleToEntityHandler extends RightManagementHandler {
 		parent::__construct( $permissionManager );
 	}
 
+	/**
+	 * @return Response
+	 */
 	public function execute() {
 		$this->assertActorCan( 'userrights' );
 		$params = $this->getValidatedBody();

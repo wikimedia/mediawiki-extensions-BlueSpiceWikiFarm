@@ -5,13 +5,11 @@ namespace BlueSpice\WikiFarm;
 abstract class DynamicConfigurationBase implements IDynamicConfiguration {
 
 	/**
-	 *
 	 * @var string
 	 */
 	protected $instanceName = '';
 
 	/**
-	 *
 	 * @param string $instanceName
 	 */
 	public function __construct( $instanceName ) {
@@ -19,7 +17,6 @@ abstract class DynamicConfigurationBase implements IDynamicConfiguration {
 	}
 
 	/**
-	 *
 	 * @param string $instanceName
 	 * @return IDynamicConfiguration
 	 */

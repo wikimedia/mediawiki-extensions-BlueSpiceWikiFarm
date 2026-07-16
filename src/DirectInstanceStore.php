@@ -13,7 +13,6 @@ use Wikimedia\Rdbms\IResultWrapper;
 /**
  * No-service dependency provider for instances
  * Always connects to the management database
- *
  */
 class DirectInstanceStore {
 
@@ -42,7 +41,6 @@ class DirectInstanceStore {
 	/**
 	 * @param InstanceEntity $instance
 	 * @return void
-	 *
 	 */
 	public function store( InstanceEntity $instance ) {
 		if ( $instance instanceof RootInstanceEntity ) {

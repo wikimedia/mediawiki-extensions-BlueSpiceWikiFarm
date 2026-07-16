@@ -7,25 +7,21 @@ use MediaWiki\Config\Config;
 abstract class CommandDescriptionBase implements ICommandDescription {
 
 	/**
-	 *
 	 * @var string
 	 */
 	protected $instanceName = '';
 
 	/**
-	 *
 	 * @var Config
 	 */
 	protected $config = null;
 
 	/**
-	 *
 	 * @var string
 	 */
 	protected $phpCli = '/usr/bin/php';
 
 	/**
-	 *
 	 * @param string $instanceName
 	 * @param Config $config
 	 */
@@ -39,7 +35,6 @@ abstract class CommandDescriptionBase implements ICommandDescription {
 	}
 
 	/**
-	 *
 	 * @param string $instanceName
 	 * @param Config $config
 	 * @return ICommandDescription
@@ -49,7 +44,6 @@ abstract class CommandDescriptionBase implements ICommandDescription {
 	}
 
 	/**
-	 *
 	 * @return string
 	 */
 	public function getCommandPathname() {
@@ -57,7 +51,6 @@ abstract class CommandDescriptionBase implements ICommandDescription {
 	}
 
 	/**
-	 *
 	 * @return int
 	 */
 	public function getPosition() {
@@ -65,7 +58,6 @@ abstract class CommandDescriptionBase implements ICommandDescription {
 	}
 
 	/**
-	 *
 	 * @return bool
 	 */
 	public function runAsync() {
@@ -73,7 +65,6 @@ abstract class CommandDescriptionBase implements ICommandDescription {
 	}
 
 	/**
-	 *
 	 * @param string $instanceName
 	 * @return bool
 	 */

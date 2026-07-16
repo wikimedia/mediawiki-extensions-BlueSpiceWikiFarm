@@ -40,6 +40,9 @@ class Reader extends WikiInstancesReader {
 			$this->context, $this->accessStore, $this->userOptionsLookup, $this->instanceDisplayRecordHelper );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	protected function makeSecondaryDataProvider() {
 		return null;
 	}

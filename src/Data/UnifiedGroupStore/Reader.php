@@ -9,7 +9,7 @@ use MWStake\MediaWiki\Component\CommonWebAPIs\Data\GroupStore\Reader as GroupRea
 use MWStake\MediaWiki\Component\DataStore\ReaderParams;
 use MWStake\MediaWiki\Component\Utils\Utility\GroupHelper;
 
-/*
+/**
  * @stable to extend
  */
 class Reader extends GroupReader {
