@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\Rest;
 
 use BlueSpice\WikiFarm\InstanceStore;
 use MediaWiki\Config\Config;
+use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use Message;
 
@@ -19,6 +20,9 @@ class ContextInstanceHandler extends SimpleHandler {
 	) {
 	}
 
+	/**
+	 * @return Response
+	 */
 	public function execute() {
 		$mainInstance = $this->instanceStore->getInstanceByPath( 'w' );
 		$quickAccess[] = [

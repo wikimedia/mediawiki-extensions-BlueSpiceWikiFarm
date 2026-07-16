@@ -16,7 +16,6 @@ class InstanceVaultBlacklistFilter extends RecursiveFilterIterator {
 	}
 
 	/**
-	 *
 	 * @param SplFileInfo $file
 	 * @return bool
 	 */

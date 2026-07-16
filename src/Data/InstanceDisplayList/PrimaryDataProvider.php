@@ -24,7 +24,6 @@ class PrimaryDataProvider extends WikiInstancesPrimaryDataProvider {
 	private $context;
 
 	/**
-	 *
 	 * @param InstanceStore $instanceStore
 	 * @param Config $farmConfig
 	 * @param Config $mainConfig
@@ -79,7 +78,6 @@ class PrimaryDataProvider extends WikiInstancesPrimaryDataProvider {
 	}
 
 	/**
-	 *
 	 * @param InstanceEntity|null $instance
 	 */
 	protected function appendToData( ?InstanceEntity $instance ) {

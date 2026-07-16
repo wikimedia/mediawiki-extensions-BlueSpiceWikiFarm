@@ -21,9 +21,6 @@ define( 'MEDIAWIKI_INSTALL', true );
 
 class InstallInstance extends Maintenance {
 
-	/**
-	 *
-	 */
 	public function __construct() {
 		parent::__construct();
 		$this->addOption( 'instanceDisplayName', 'Display name for the new instance', true, true );

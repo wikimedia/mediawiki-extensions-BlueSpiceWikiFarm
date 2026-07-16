@@ -14,7 +14,6 @@ use MWStake\MediaWiki\Component\DataStore\NoWriterException;
 class Store extends WikiInstancesStore {
 
 	/**
-	 *
 	 * @param IContextSource $context
 	 * @param InstanceStore $instanceStore
 	 * @param Config $farmConfig

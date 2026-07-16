@@ -34,19 +34,16 @@ class Dispatcher {
 	private $config;
 
 	/**
-	 *
 	 * @var InstanceEntity
 	 */
 	private $instance = null;
 
 	/**
-	 *
 	 * @var string
 	 */
 	private $instanceVaultPathname = '';
 
 	/**
-	 *
 	 * @param array $request $_REQUEST
 	 * @param DirectInstanceStore $store
 	 * @param Config $config
@@ -58,13 +55,11 @@ class Dispatcher {
 	}
 
 	/**
-	 *
 	 * @var string
 	 */
 	private $customSettingsFile = '';
 
 	/**
-	 *
 	 * @var string[]
 	 */
 	private $filesToRequire = [];

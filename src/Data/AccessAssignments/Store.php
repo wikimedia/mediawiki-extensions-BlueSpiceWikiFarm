@@ -12,7 +12,6 @@ use Wikimedia\Rdbms\ILoadBalancer;
 class Store implements IStore {
 
 	/**
-	 *
 	 * @param InstanceGroupCreator $instanceGroupCreator
 	 * @param ILoadBalancer $lb
 	 * @param GroupRoleManager $groupRoleManager

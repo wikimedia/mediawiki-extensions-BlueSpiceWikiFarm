@@ -18,7 +18,6 @@ class CliInstanceArgExtractor {
 	}
 
 	/**
-	 *
 	 * @return string
 	 */
 	public function extractInstanceIdentifier(): string {
@@ -31,7 +30,6 @@ class CliInstanceArgExtractor {
 	}
 
 	/**
-	 *
 	 * @return bool
 	 */
 	public function extractIsQuiet(): bool {
@@ -44,7 +42,6 @@ class CliInstanceArgExtractor {
 	}
 
 	/**
-	 *
 	 * @return void
 	 */
 	private function processArgs() {

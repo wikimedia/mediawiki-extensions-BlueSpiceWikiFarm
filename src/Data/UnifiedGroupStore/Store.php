@@ -8,7 +8,7 @@ use MediaWiki\HookContainer\HookContainer;
 use MWStake\MediaWiki\Component\CommonWebAPIs\Data\GroupStore\Store as GroupStore;
 use MWStake\MediaWiki\Component\Utils\UtilityFactory;
 
-/*
+/**
  * This store is only used for AccessManagement
  */
 class Store extends GroupStore {

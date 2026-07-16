@@ -9,19 +9,16 @@ use MediaWiki\Context\IContextSource;
 class Reader extends \MWStake\MediaWiki\Component\DataStore\Reader {
 
 	/**
-	 *
 	 * @var InstanceStore
 	 */
 	protected $instanceStore = null;
 
 	/**
-	 *
 	 * @var Config
 	 */
 	protected $farmConfig = null;
 
 	/**
-	 *
 	 * @var Config
 	 */
 	protected $mainConfig = null;
@@ -49,6 +46,9 @@ class Reader extends \MWStake\MediaWiki\Component\DataStore\Reader {
 		return new PrimaryDataProvider( $this->instanceStore, $this->farmConfig, $this->mainConfig, $this->context );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	protected function makeSecondaryDataProvider() {
 		return null;
 	}

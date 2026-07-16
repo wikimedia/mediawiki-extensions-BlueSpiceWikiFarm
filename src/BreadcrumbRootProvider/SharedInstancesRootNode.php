@@ -80,7 +80,6 @@ class SharedInstancesRootNode extends BaseBreadcrumbRootProvider {
 	}
 
 	/**
-	 *
 	 * @param Title $title
 	 * @return bool
 	 */
