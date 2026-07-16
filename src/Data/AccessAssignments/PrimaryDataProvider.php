@@ -12,7 +12,6 @@ use Wikimedia\Rdbms\ILoadBalancer;
 class PrimaryDataProvider implements IPrimaryDataProvider {
 
 	/**
-	 *
 	 * @param InstanceGroupCreator $instanceGroupCreator
 	 * @param ILoadBalancer $lb
 	 * @param TeamManager $teamManager

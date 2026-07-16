@@ -14,7 +14,6 @@ use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * This class can execute a given query on every instance in the farm and return unified results
- *
  */
 class GlobalDatabaseQueryExecution {
 

@@ -7,7 +7,6 @@ use MediaWiki\Preferences\Hook\GetPreferencesHook;
 class AddUserPreference implements GetPreferencesHook {
 
 	/**
-	 *
 	 * @inheritDoc
 	 */
 	public function onGetPreferences( $user, &$preferences ) {

@@ -18,7 +18,6 @@ class RunJobs extends CommandDescriptionBase {
 	}
 
 	/**
-	 *
 	 * @return int
 	 */
 	public function getPosition() {

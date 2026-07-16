@@ -9,7 +9,6 @@ use RecursiveIteratorIterator;
 class InstanceVaultMirrorIterator extends RecursiveIteratorIterator {
 
 	/**
-	 *
 	 * @param string $source
 	 */
 	public function __construct( $source ) {

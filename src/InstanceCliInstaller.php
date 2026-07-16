@@ -99,7 +99,6 @@ class InstanceCliInstaller extends CliInstaller {
 	}
 
 	/**
-	 *
 	 * @param string $path
 	 */
 	public function writeConfigurationFile( $path ) {
@@ -119,7 +118,6 @@ class InstanceCliInstaller extends CliInstaller {
 	}
 
 	/**
-	 *
 	 * @param Status $status
 	 */
 	public function showStatusMessage( Status $status ) {

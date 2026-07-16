@@ -13,43 +13,36 @@ require_once dirname( __DIR__, 3 ) . '/maintenance/Maintenance.php';
 class GenerateSitemapData extends Maintenance {
 
 	/**
-	 *
 	 * @var string
 	 */
 	private $sitemapDataFile = '';
 
 	/**
-	 *
 	 * @var array
 	 */
 	private $sitemapData = [];
 
 	/**
-	 *
 	 * @var int[]
 	 */
 	private $namespaceBlacklist = [];
 
 	/**
-	 *
 	 * @var array
 	 */
 	private $noIndexMagicWordBlacklist = [];
 
 	/**
-	 *
 	 * @var array
 	 */
 	private $flaggedPages = [];
 
 	/**
-	 *
 	 * @var Title[]
 	 */
 	private $pageTitles = [];
 
 	/**
-	 *
 	 * @var array
 	 */
 	private $namespacePriorities = [];
@@ -99,7 +92,6 @@ class GenerateSitemapData extends Maintenance {
 	}
 
 	/**
-	 *
 	 * @param Title $title
 	 * @return string
 	 */
@@ -116,7 +108,6 @@ class GenerateSitemapData extends Maintenance {
 	}
 
 	/**
-	 *
 	 * @param Title $title
 	 * @return string
 	 */
@@ -191,7 +182,6 @@ class GenerateSitemapData extends Maintenance {
 	}
 
 	/**
-	 *
 	 * @param title $title
 	 * @return bool
 	 */
@@ -221,7 +211,6 @@ class GenerateSitemapData extends Maintenance {
 	}
 
 	/**
-	 *
 	 * @return int[]
 	 */
 	private function makeNamespaceWhitelist() {

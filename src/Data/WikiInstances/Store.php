@@ -11,31 +11,26 @@ use MWStake\MediaWiki\Component\DataStore\NoWriterException;
 class Store implements IStore {
 
 	/**
-	 *
 	 * @var IContextSource
 	 */
 	protected $context = null;
 
 	/**
-	 *
 	 * @var InstanceStore
 	 */
 	protected $instanceStore = null;
 
 	/**
-	 *
 	 * @var Config
 	 */
 	protected $farmConfig = null;
 
 	/**
-	 *
 	 * @var Config
 	 */
 	protected $mainConfig = null;
 
 	/**
-	 *
 	 * @param IContextSource $context
 	 * @param InstanceStore $instanceStore
 	 * @param Config $farmConfig

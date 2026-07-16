@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\Rest;
 
 use BlueSpice\WikiFarm\InstancePathGenerator;
 use MediaWiki\Rest\HttpException;
+use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -21,6 +22,9 @@ class CheckPathHandler extends SimpleHandler {
 		$this->pathGenerator = $pathGenerator;
 	}
 
+	/**
+	 * @return Response
+	 */
 	public function execute() {
 		$this->assertRootCall();
 		$path = $this->getValidatedParams()['path'];

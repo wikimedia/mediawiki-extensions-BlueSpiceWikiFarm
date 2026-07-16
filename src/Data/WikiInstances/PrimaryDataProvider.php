@@ -14,31 +14,26 @@ use MWStake\MediaWiki\Component\DataStore\ReaderParams;
 class PrimaryDataProvider implements IPrimaryDataProvider {
 
 	/**
-	 *
 	 * @var array
 	 */
 	protected $data = [];
 
 	/**
-	 *
 	 * @var InstanceStore
 	 */
 	protected $instanceStore = null;
 
 	/**
-	 *
 	 * @var Config
 	 */
 	protected $farmConfig = null;
 
 	/**
-	 *
 	 * @var Config
 	 */
 	protected $mainConfig = null;
 
 	/**
-	 *
 	 * @param InstanceStore $instanceStore
 	 * @param Config $farmConfig
 	 * @param Config $mainConfig
@@ -74,7 +69,6 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 	}
 
 	/**
-	 *
 	 * @param InstanceEntity|null $instance
 	 */
 	protected function appendToData( ?InstanceEntity $instance ) {

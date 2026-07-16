@@ -11,13 +11,11 @@ use Wikimedia\AtEase\AtEase;
 class SettingsReader {
 
 	/**
-	 *
 	 * @var string
 	 */
 	private $settingsPathname = '';
 
 	/**
-	 *
 	 * @param string $settingsPathname
 	 */
 	public function __construct( $settingsPathname ) {
@@ -25,7 +23,6 @@ class SettingsReader {
 	}
 
 	/**
-	 *
 	 * @param string $prefix
 	 * @return Config
 	 */
@@ -55,13 +52,11 @@ class SettingsReader {
 	}
 
 	/**
-	 *
 	 * @var array
 	 */
 	private $vars = [];
 
 	/**
-	 *
 	 * @var bool
 	 */
 	private $fileLoaded = false;

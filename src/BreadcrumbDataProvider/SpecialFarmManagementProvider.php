@@ -83,7 +83,6 @@ class SpecialFarmManagementProvider extends BaseBreadcrumbDataProvider {
 	}
 
 	/**
-	 *
 	 * @param Title $title
 	 * @return bool
 	 */
@@ -92,7 +91,6 @@ class SpecialFarmManagementProvider extends BaseBreadcrumbDataProvider {
 	}
 
 	/**
-	 *
 	 * @inheritDoc
 	 */
 	public function isSelfLink( $node ): bool {

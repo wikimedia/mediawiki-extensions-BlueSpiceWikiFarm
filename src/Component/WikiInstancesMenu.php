@@ -176,7 +176,6 @@ class WikiInstancesMenu extends SimpleDropdownIcon implements IRestrictedCompone
 	}
 
 	/**
-	 *
 	 * @return array
 	 */
 	public function getPermissions(): array {
