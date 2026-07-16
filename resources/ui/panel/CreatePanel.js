@@ -140,18 +140,22 @@ ext.bluespiceWikiFarm.ui.CreatePanel.prototype.generateSubmitData = function () 
 
 	this.validate().done( () => {
 		const path = this.pathInput.getValue(),
-			data = {
-				displayName: this.nameInput.getValue(),
-				metadata: {
-					desc: this.descriptionInput.getValue(),
-					group: this.groupInput.getValue(),
-					keywords: this.keywordsInput.getValue(),
-					notsearchable: !this.searchable.getValue(),
-					instanceColor: this.color.getValue()
-				},
-				config: {},
-				language: this.language.getValue()
-			};
+			metadata = {
+				desc: this.descriptionInput.getValue(),
+				group: this.groupInput.getValue(),
+				keywords: this.keywordsInput.getValue(),
+				notsearchable: !this.searchable.getValue()
+			},
+			colorValue = this.color.getValue();
+		if ( colorValue ) {
+			metadata.instanceColor = colorValue;
+		}
+		const data = {
+			displayName: this.nameInput.getValue(),
+			metadata: metadata,
+			config: {},
+			language: this.language.getValue()
+		};
 		if ( this.globalAccessEnabled ) {
 			const accessLevel = this.accessLevel.menu.findSelectedItem();
 			if ( accessLevel ) {
