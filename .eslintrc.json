@@ -25,6 +25,7 @@
 		"es-x/no-optional-catch-binding": "off",
 		"no-jquery/no-class-state": "off",
 		"no-jquery/no-global-selector": "off",
-		"no-prototype-builtins": "off"
+		"no-prototype-builtins": "off",
+		"no-jquery/no-done-fail": "warn"
 	}
 }

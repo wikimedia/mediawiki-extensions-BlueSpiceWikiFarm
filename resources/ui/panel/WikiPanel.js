@@ -110,7 +110,7 @@ bs.bluespiceWikiFarm.ui.WikiPanel.prototype.makeGrid = function () {
 		};
 	}
 	const subActions = [];
-	if ( this.permissions.indexOf( 'managewiki' ) > -1 ) {
+	if ( this.permissions.indexOf( 'managewiki' ) > -1 ) { // eslint-disable-line unicorn/prefer-includes
 		subActions.push( {
 			label: mw.message( 'wikifarm-button-action-label-edit' ).text(),
 			data: 'edit',
@@ -123,14 +123,14 @@ bs.bluespiceWikiFarm.ui.WikiPanel.prototype.makeGrid = function () {
 		} );
 	}
 
-	if ( this.permissions.indexOf( 'createwiki' ) > -1 || !this.creationAllowed ) {
+	if ( this.permissions.indexOf( 'createwiki' ) > -1 || !this.creationAllowed ) { // eslint-disable-line unicorn/prefer-includes
 		subActions.push( {
 			label: mw.message( 'wikifarm-button-action-label-clone' ).text(),
 			data: 'clone',
 			icon: 'copy'
 		} );
 	}
-	if ( this.permissions.indexOf( 'deletewiki' ) > -1 ) {
+	if ( this.permissions.indexOf( 'deletewiki' ) > -1 ) { // eslint-disable-line unicorn/prefer-includes
 		subActions.push( {
 			label: mw.message( 'wikifarm-button-action-delete-label' ).text(),
 			data: 'delete',
@@ -182,13 +182,13 @@ bs.bluespiceWikiFarm.ui.WikiPanel.prototype.search = function ( query ) {
 bs.bluespiceWikiFarm.ui.WikiPanel.prototype.showValues = function ( values ) {
 	const sortedValues = this.sortValues( values );
 	this.addGroupFilter( values );
-	this.grid.setItems( Object.values( sortedValues ) ); // eslint-disable-line es-x/no-object-values
+	this.grid.setItems( Object.values( sortedValues ) );
 };
 
 bs.bluespiceWikiFarm.ui.WikiPanel.prototype.addGroupFilter = function ( values ) {
 	const uniqueGroups = [
 		...new Set(
-			Object.values( values ) // eslint-disable-line es-x/no-object-values
+			Object.values( values )
 				.map( ( item ) => item.meta_group )
 				.filter( Boolean )
 		)
@@ -213,12 +213,12 @@ bs.bluespiceWikiFarm.ui.WikiPanel.prototype.addGroupFilter = function ( values )
 
 	this.filter.connect( this, {
 		select: ( filter ) => {
-			const filteredItems = Object.values( values ) // eslint-disable-line es-x/no-object-values
+			const filteredItems = Object.values( values )
 				.filter( ( item ) => item.meta_group === filter );
-			this.grid.setItems( Object.values( filteredItems ) ); // eslint-disable-line es-x/no-object-values
+			this.grid.setItems( Object.values( filteredItems ) );
 		},
 		clear: () => {
-			this.grid.setItems( Object.values( values ) ); // eslint-disable-line es-x/no-object-values
+			this.grid.setItems( Object.values( values ) );
 		}
 	} );
 	this.$element.prepend( this.filter.$element );
@@ -226,7 +226,7 @@ bs.bluespiceWikiFarm.ui.WikiPanel.prototype.addGroupFilter = function ( values )
 
 bs.bluespiceWikiFarm.ui.WikiPanel.prototype.sortValues = function ( values ) {
 	const pinnedPaths = [ 'w', this.farmConfig.sharedWikiPath ].filter( Boolean );
-	const items = Object.values( values ); // eslint-disable-line es-x/no-object-values
+	const items = Object.values( values );
 	const pinned = pinnedPaths
 		.map( ( p ) => items.find( ( i ) => i.path === p ) )
 		.filter( Boolean );

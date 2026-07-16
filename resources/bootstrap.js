@@ -198,7 +198,7 @@ mw.hook( 'notifyme.notification.item' ).add( ( notification, data ) => {
 	}
 
 	const $wikiBadge = ext.bluespiceWikiFarm.util.getWikiBadge( data.sourceWiki );
-	notification.$content.prepend( $wikiBadge );
+	notification.$content.prepend( $wikiBadge ); // eslint-disable-line compat/compat
 
 	const wikiColor = ext.bluespiceWikiFarm.util.getWikiColor( data.sourceWiki );
 	if ( wikiColor ) {
@@ -213,7 +213,7 @@ mw.hook( 'notifyme.notification.group.item' ).add( ( notification, data ) => {
 	const source = data._source_wiki; // eslint-disable-line no-underscore-dangle
 
 	const $wikiBadge = ext.bluespiceWikiFarm.util.getWikiBadge( source );
-	notification.$content.prepend( $wikiBadge );
+	notification.$content.prepend( $wikiBadge ); // eslint-disable-line compat/compat
 
 	const wikiColor = ext.bluespiceWikiFarm.util.getWikiColor( source );
 	if ( wikiColor ) {
@@ -228,9 +228,9 @@ mw.hook( 'notifyme.notification.preview.item' ).add( ( notification, data ) => {
 	const source = data._source_wiki; // eslint-disable-line no-underscore-dangle
 
 	const $wikiBadge = ext.bluespiceWikiFarm.util.getWikiBadge( source, 40 );
-	notification.$element.prepend( $wikiBadge );
-	notification.$element.addClass( 'notification-preview-item-has-wiki-badge' );
-	notification.$unreadCircle.css( 'background-color',
+	notification.$element.prepend( $wikiBadge ); // eslint-disable-line compat/compat
+	notification.$element.addClass( 'notification-preview-item-has-wiki-badge' ); // eslint-disable-line compat/compat
+	notification.$unreadCircle.css( 'background-color', // eslint-disable-line compat/compat
 		ext.bluespiceWikiFarm.util.getWikiColor( source ) );
 
 	const wikiColor = ext.bluespiceWikiFarm.util.getWikiColor( source );

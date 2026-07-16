@@ -13,7 +13,7 @@ ext.bluespiceWikiFarm.ui.widget.InstanceWidget = function ( cfg ) {
 
 	this.$element.addClass( 'farm-wiki-card-item' );
 	if ( this.classes.length > 0 ) {
-		this.$element.addClass( this.classes ); // eslint-disable-line mediawiki/class-doc
+		this.$element.addClass( this.classes );
 	}
 	this.buildWidget();
 };
@@ -26,7 +26,7 @@ ext.bluespiceWikiFarm.ui.widget.InstanceWidget.prototype.buildWidget = function 
 		this.$element.css( 'border-left', '3px solid ' + this.color );
 	}
 	if ( this.iconClass.length > 0 ) {
-		this.$element.append( $( '<span>' ).addClass( this.iconClass ) ); // eslint-disable-line mediawiki/class-doc
+		this.$element.append( $( '<span>' ).addClass( this.iconClass ) );
 	}
 
 	const $desc = $( '<div>' ).addClass( 'farm-wiki-card-content' );

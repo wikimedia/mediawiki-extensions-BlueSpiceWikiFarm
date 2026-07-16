@@ -33,7 +33,7 @@ ext.bluespiceWikiFarm.ui.widget.InstanceSectionWidget.prototype.buildContent = f
 	this.$content = $( '<div>' ).addClass( 'farm-wikis-elements' );
 	for ( const i in this.elements ) {
 		const element = this.elements[ i ];
-		const elementWidget = new ext.bluespiceWikiFarm.ui.widget.InstanceWidget( { // eslint-disable-line mediawiki/class-doc
+		const elementWidget = new ext.bluespiceWikiFarm.ui.widget.InstanceWidget( {
 			color: element.instance_color,
 			instanceName: element.title,
 			desc: element.meta_desc,

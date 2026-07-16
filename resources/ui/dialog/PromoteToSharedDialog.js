@@ -120,7 +120,7 @@ ext.bluespiceWikiFarm.ui.dialog.PromoteToSharedDialog.prototype.makeStep = funct
 		icon: 'clock'
 	} );
 	const label = new OO.ui.LabelWidget( {
-		label: mw.msg( labelMsg ) // eslint-disable-line mediawiki/msg-doc
+		label: mw.msg( labelMsg )
 	} );
 	const layout = new OO.ui.HorizontalLayout( {
 		items: [ icon, label ]

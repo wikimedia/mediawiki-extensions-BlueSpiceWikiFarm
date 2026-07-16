@@ -28,7 +28,7 @@ ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.makeQuickAccessPanel = fun
 	api.get( '/bluespice/farm/v1/instances/context' ).done( ( result ) => {
 		skeleton.$element.remove();
 		const $contextCnt = $( '<div>' ).addClass( 'd-flex justify-content-center' );
-		for ( const [ key, elements ] of Object.entries( result ) ) { // eslint-disable-line es-x/no-object-entries
+		for ( const [ key, elements ] of Object.entries( result ) ) {
 			// The following messages are used here:
 			// * wikifarm-instances-menu-section-current
 			// * wikifarm-instances-menu-section-central
