@@ -11,7 +11,6 @@ use PHPUnit\Framework\TestCase;
 class CliInstanceArgExtractorTest extends TestCase {
 
 	/**
-	 *
 	 * @param array $givenArgs
 	 * @param string $expectedInstanceName
 	 * @param array $expectedArgs

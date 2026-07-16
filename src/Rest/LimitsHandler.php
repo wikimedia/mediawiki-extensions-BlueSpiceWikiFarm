@@ -6,6 +6,7 @@ use BlueSpice\WikiFarm\InstanceCountLimiter;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Rest\HttpException;
+use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 
 class LimitsHandler extends SimpleHandler {
@@ -29,6 +30,9 @@ class LimitsHandler extends SimpleHandler {
 		$this->countLimiter = $countLimiter;
 	}
 
+	/**
+	 * @return Response
+	 */
 	public function execute() {
 		$this->assertRootCall();
 		if ( !$this->permissionManager->userHasRight( RequestContext::getMain()->getUser(), 'wikifarm-managewiki' ) ) {

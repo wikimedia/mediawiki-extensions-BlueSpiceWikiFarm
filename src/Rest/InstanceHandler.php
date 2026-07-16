@@ -34,6 +34,9 @@ abstract class InstanceHandler extends SimpleHandler {
 		$this->logger = LoggerFactory::getInstance( 'BlueSpiceWikiFarm' );
 	}
 
+	/**
+	 * @return Response
+	 */
 	public function execute() {
 		$this->assertRootCall();
 		$this->assertPermissions( $this->getRequiredPermissions() );

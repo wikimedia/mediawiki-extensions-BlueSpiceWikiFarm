@@ -113,7 +113,6 @@ abstract class RunInstanceExternalScripts extends InstanceAwareStep {
 	abstract protected function getActionAttributeName();
 
 	/**
-	 *
 	 * @param ICommandDescription $desc
 	 * @return array
 	 */

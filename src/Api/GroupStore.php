@@ -14,7 +14,6 @@ class GroupStore extends BSApiExtJSStoreBase {
 	protected $results = [];
 
 	/**
-	 *
 	 * @var InstanceStore
 	 */
 	protected $instanceStore;
@@ -28,7 +27,6 @@ class GroupStore extends BSApiExtJSStoreBase {
 	}
 
 	/**
-	 *
 	 * @param string $query
 	 * @return stdClass[]
 	 */

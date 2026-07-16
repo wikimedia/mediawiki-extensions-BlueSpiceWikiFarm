@@ -6,6 +6,7 @@ use BlueSpice\WikiFarm\InstancePathGenerator;
 use BlueSpice\WikiFarm\InstanceStore;
 use Exception;
 use MediaWiki\Rest\HttpException;
+use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -30,6 +31,9 @@ class GeneratePathHandler extends SimpleHandler {
 		$this->instanceStore = $instanceStore;
 	}
 
+	/**
+	 * @return Response
+	 */
 	public function execute() {
 		$this->assertRootCall();
 		$name = $this->getValidatedParams()['name'];

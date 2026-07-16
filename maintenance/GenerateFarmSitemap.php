@@ -12,25 +12,21 @@ use MediaWiki\Shell\Shell;
 class GenerateFarmSitemap extends Maintenance {
 
 	/**
-	 *
 	 * @var string
 	 */
 	private $basepath = '';
 
 	/**
-	 *
 	 * @var string
 	 */
 	private $baseurl = '';
 
 	/**
-	 *
 	 * @var string
 	 */
 	private $sitemapsDir = '';
 
 	/**
-	 *
 	 * @var string
 	 */
 	private $sitemapDataFile = '';
@@ -95,7 +91,6 @@ class GenerateFarmSitemap extends Maintenance {
 	}
 
 	/**
-	 *
 	 * @param string $intanceDir
 	 * @return bool
 	 */

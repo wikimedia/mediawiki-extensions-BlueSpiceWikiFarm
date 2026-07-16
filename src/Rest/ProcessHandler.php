@@ -5,6 +5,7 @@ namespace BlueSpice\WikiFarm\Rest;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Message\Message;
 use MediaWiki\Rest\HttpException;
+use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MWStake\MediaWiki\Component\ProcessManager\ProcessManager;
 use Psr\Log\LoggerInterface;
@@ -28,6 +29,9 @@ class ProcessHandler extends SimpleHandler {
 		$this->logger = LoggerFactory::getInstance( 'BlueSpiceWikiFarm' );
 	}
 
+	/**
+	 * @return Response
+	 */
 	public function execute() {
 		$this->assertRootCall();
 		$pid = $this->getValidatedParams()['processId'];

@@ -10,7 +10,6 @@ use Wikimedia\Rdbms\ILoadBalancer;
 class Reader extends \MWStake\MediaWiki\Component\DataStore\Reader {
 
 	/**
-	 *
 	 * @param InstanceGroupCreator $instanceGroupCreator
 	 * @param ILoadBalancer $lb
 	 * @param TeamManager $teamManager
@@ -33,6 +32,9 @@ class Reader extends \MWStake\MediaWiki\Component\DataStore\Reader {
 		return new PrimaryDataProvider( $this->instanceGroupCreator, $this->lb, $this->teamManager, $this->instanceEntity );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	protected function makeSecondaryDataProvider() {
 		return null;
 	}

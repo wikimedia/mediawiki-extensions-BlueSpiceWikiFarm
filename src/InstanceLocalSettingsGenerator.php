@@ -35,6 +35,9 @@ class InstanceLocalSettingsGenerator extends LocalSettingsGenerator {
 		file_put_contents( "$path/meta.json", $this->makeMetaJSONString() );
 	}
 
+	/**
+	 * @return string
+	 */
 	private function makeMetaJSONString() {
 		$meta = [
 			'desc' => '',
@@ -49,7 +52,6 @@ class InstanceLocalSettingsGenerator extends LocalSettingsGenerator {
 	}
 
 	/**
-	 *
 	 * @return string
 	 */
 	public function getDefaultText() {
