@@ -149,7 +149,7 @@ class InstanceCliInstaller extends CliInstaller {
 			$content = new WikitextContent( $processedContent );
 			$page = MediaWikiServices::getInstance()->getWikiPageFactory()
 				->newFromTitle( $title );
-			$user = User::newSystemUser( 'BlueSpice default' );
+			$user = User::newSystemUser( User::MAINTENANCE_SCRIPT_USER, [ 'steal' => true ] );
 
 			$updater = $page->newPageUpdater( $user );
 			$updater->setContent( SlotRecord::MAIN, $content );
@@ -187,7 +187,7 @@ class InstanceCliInstaller extends CliInstaller {
 			$content = new WikitextContent( $rawContent );
 			$page = MediaWikiServices::getInstance()->getWikiPageFactory()
 				->newFromTitle( $title );
-			$user = User::newSystemUser( 'BlueSpice default' );
+			$user = User::newSystemUser( User::MAINTENANCE_SCRIPT_USER, [ 'steal' => true ] );
 
 			$updater = $page->newPageUpdater( $user );
 			$updater->setContent( SlotRecord::MAIN, $content );
