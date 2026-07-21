@@ -141,7 +141,7 @@ class HandleSharedResources implements
 			return;
 		}
 		$out->enableOOUI();
-		$out->addHTML( ( new MessageWidget( [
+		$out->prependHTML( ( new MessageWidget( [
 			'label' => $out->msg( 'wikifarm-shared-resources-exists-on-shared' ),
 		] ) )->toString() );
 	}
