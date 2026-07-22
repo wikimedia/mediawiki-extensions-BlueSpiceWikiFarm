@@ -78,6 +78,35 @@ class GroupAccessStore implements IAccessStore {
 	}
 
 	/**
+	 * Get users without any group, those are always excluded
+	 * @return array
+	 */
+	public function getExcludedUsers(): array {
+		$db = $this->databaseFactory->createSharedUserDatabaseConnection();
+		$res = $db->select(
+			[ 'u' => 'user', 'ug' => 'user_groups' ],
+			[ 'user_name' ],
+			[
+				'ug_user IS NULL'
+			],
+			__METHOD__,
+			[],
+			[
+				'ug' => [
+					'LEFT JOIN',
+					[ 'u.user_id=ug.ug_user' ]
+				]
+			]
+		);
+
+		$users = [];
+		foreach ( $res as $row ) {
+			$users[] = $row->user_name;
+		}
+		return array_unique( $users );
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	public function getInstancePathsWhereUserHasRole( UserIdentity $user, string $role ): array {
@@ -86,10 +115,12 @@ class GroupAccessStore implements IAccessStore {
 			return $this->operatingCache->get( $cc );
 		}
 		$possibleGroups = $this->groupCreator->getInstanceGroups( [ $role, ...$this->getHigherRoles( $role ) ] );
+		$possibleGroupRoles = $this->groupRoleQuery->getUserRolesForInstancePaths( $user, array_keys( $possibleGroups ) );
 		$userGroups = $this->getUserGroups( $user );
 		$availableInstances = [];
 		$superUserGroups = $this->farmConfig->get( 'superAccessGroups' ) ?? [ 'sysop' ];
 		foreach ( $possibleGroups as $instancePath => $groups ) {
+			$allowed = false;
 			$toCheck = array_keys( $groups );
 			$isSuperUser = !empty( array_intersect( $superUserGroups, $userGroups ) );
 			if ( array_intersect( $userGroups, $toCheck ) || $isSuperUser ) {
@@ -97,6 +128,17 @@ class GroupAccessStore implements IAccessStore {
 					// All instances allowed
 					return array_diff( array_keys( $possibleGroups ), [ '_global' ] );
 				}
+				$allowed = true;
+			}
+			if ( !$allowed ) {
+				$groupRoles = $possibleGroupRoles[$instancePath] ?? [];
+				$allowedRoles = array_merge( [ $role ], $this->getHigherRoles( $role ) );
+
+				if ( !empty( array_intersect( $allowedRoles, $groupRoles ) ) ) {
+					$allowed = true;
+				}
+			}
+			if ( $allowed ) {
 				$availableInstances[] = $instancePath;
 			}
 		}
@@ -132,7 +174,7 @@ class GroupAccessStore implements IAccessStore {
 	 * @return bool
 	 */
 	private function checkGroupRoles( UserIdentity $user, string $role, InstanceEntity $instance ): bool {
-		$userRoles = $this->groupRoleQuery->getUserRolesForInstance( $user, $instance );
+		$userRoles = $this->groupRoleQuery->getUserRolesForInstancePath( $user, $instance->getPath() );
 		$roles = array_merge( [ $role ], $this->getHigherRoles( $role ) );
 		return !empty( array_intersect( $roles, $userRoles ) );
 	}
