@@ -99,6 +99,7 @@ class GroupRoleManagerTest extends TestCase {
 		$this->assertSame( [
 			'wtr_team' => 'alpha',
 			'wtr_instance' => 'inst-99',
+			'wtr_instance_path' => 'test-wiki',
 			'wtr_role' => 'editor',
 		], $insertedRow );
 	}

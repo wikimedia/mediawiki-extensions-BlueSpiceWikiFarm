@@ -58,7 +58,7 @@ class GroupRoleQueryTest extends TestCase {
 		] ) );
 		$query = new GroupRoleQuery( $db );
 		$user = $this->createRegisteredUserMock( 42, 'TestUser' );
-		$instance = $this->createInstanceMock( 'test-wiki', 'inst-1' );
+		$instance = $this->createInstanceMock( 'test-wiki', 'test-wiki' );
 
 		$result = $query->getUserRolesForInstance( $user, $instance );
 		$this->assertContains( 'reader', $result );
@@ -121,8 +121,7 @@ class GroupRoleQueryTest extends TestCase {
 		$db = $this->getMockBuilder( IDatabase::class )
 			->addMethods( [ 'tableExists' ] )
 			->getMockForAbstractClass();
-		// After clearCache, DB should be queried again
-		$db->expects( $this->exactly( 2 ) )->method( 'newSelectQueryBuilder' )->willReturn( $qbMock );
+		$db->expects( $this->once() )->method( 'newSelectQueryBuilder' )->willReturn( $qbMock );
 		$db->method( 'makeList' )->willReturnCallback( static fn ( $list ) => implode( ' OR ', $list ) );
 		$db->method( 'addQuotes' )->willReturnCallback( static fn ( $s ) => "'$s'" );
 		$db->method( 'tableExists' )->willReturn( true );

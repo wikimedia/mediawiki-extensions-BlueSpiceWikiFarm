@@ -5,6 +5,7 @@
 CREATE TABLE wiki_team_roles (
   wtr_team VARCHAR(255) NOT NULL,
   wtr_instance VARCHAR(16) DEFAULT NULL,
+  wtr_instance_path VARCHAR(255) DEFAULT NULL,
   wtr_role TEXT NOT NULL
 );
 

@@ -5,6 +5,7 @@ namespace BlueSpice\WikiFarm\Hook;
 use BlueSpice\WikiFarm\Maintenance\CreateAccessToken;
 use BlueSpice\WikiFarm\Maintenance\CreateSystemInstances;
 use BlueSpice\WikiFarm\Maintenance\PopulateGroupList;
+use BlueSpice\WikiFarm\Maintenance\PopulateRoleInstancePath;
 use BlueSpice\WikiFarm\Maintenance\PopulateWikiId;
 use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
 
@@ -56,6 +57,11 @@ class RunDatabaseUpdates implements LoadExtensionSchemaUpdatesHook {
 			'wtr_wiki_id',
 			"$dir/db/$dbType/wiki_team_roles_group_support.sql"
 		);
+		$updater->addExtensionField(
+			'wiki_team_roles',
+			'wtr_instance_path',
+			"$dir/db/$dbType/wiki_team_roles_instance_path.sql"
+		);
 
 		$updater->addExtensionTable(
 			'wikifarm_groups',
@@ -65,5 +71,6 @@ class RunDatabaseUpdates implements LoadExtensionSchemaUpdatesHook {
 		$updater->addPostDatabaseUpdateMaintenance( CreateSystemInstances::class );
 		$updater->addPostDatabaseUpdateMaintenance( CreateAccessToken::class );
 		$updater->addPostDatabaseUpdateMaintenance( PopulateGroupList::class );
+		$updater->addPostDatabaseUpdateMaintenance( PopulateRoleInstancePath::class );
 	}
 }

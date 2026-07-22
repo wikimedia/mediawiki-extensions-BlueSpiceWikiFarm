@@ -11,6 +11,8 @@ class GroupRoleQuery {
 
 	private HashBagOStuff $opCache;
 
+	private array $groupRoles = [];
+
 	/**
 	 * @param IDatabase $db
 	 */
@@ -28,6 +30,15 @@ class GroupRoleQuery {
 	 * @return array
 	 */
 	public function getUserRolesForInstance( UserIdentity $user, InstanceEntity $instanceEntity ): array {
+		return $this->getUserRolesForInstancePath( $user, $instanceEntity->getPath() );
+	}
+
+	/**
+	 * @param UserIdentity $user
+	 * @param string $instancePath
+	 * @return array
+	 */
+	public function getUserRolesForInstancePath( UserIdentity $user, string $instancePath ): array {
 		if ( MW_ENTRY_POINT === 'cli' && !$this->db->tableExists( 'wiki_team_roles', __METHOD__ ) ) {
 			return [];
 		}
@@ -35,7 +46,7 @@ class GroupRoleQuery {
 			return [];
 		}
 
-		$cacheKey = $this->opCache->makeKey( 'group-roles-per-instance', $user->getName(), $instanceEntity->getId() );
+		$cacheKey = $this->opCache->makeKey( 'group-roles-per-instance', $user->getName(), $instancePath );
 		if ( $this->opCache->hasKey( $cacheKey ) ) {
 			return $this->opCache->get( $cacheKey );
 		}
@@ -49,7 +60,7 @@ class GroupRoleQuery {
 				'ug_user' => $user->getId(),
 				$this->db->makeList( [
 					'wtr_instance IS NULL',
-					'wtr_instance' => $instanceEntity->getId()
+					'wtr_instance_path' => $instancePath
 				], LIST_OR )
 			] )
 			->caller( __METHOD__ )
@@ -65,6 +76,24 @@ class GroupRoleQuery {
 		$roles = array_unique( $roles );
 		$this->opCache->set( $cacheKey, $roles );
 		return $roles;
+	}
+
+	/**
+	 * @param UserIdentity $user
+	 * @param array $instancePaths
+	 * @return array
+	 */
+	public function getUserRolesForInstancePaths( UserIdentity $user, array $instancePaths ): array {
+		$cacheKey = $this->opCache->makeKey( 'group-roles-per-instance-all', $user->getName() );
+		if ( $this->opCache->hasKey( $cacheKey ) ) {
+			return $this->opCache->get( $cacheKey );
+		}
+		$res = [];
+		foreach ( $instancePaths as $instancePath ) {
+			$res[$instancePath] = $this->getUserRolesForInstancePath( $user, $instancePath );
+		}
+		$this->opCache->set( $cacheKey, $res );
+		return $res;
 	}
 
 	/**

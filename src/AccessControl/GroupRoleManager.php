@@ -49,6 +49,7 @@ class GroupRoleManager extends GroupRoleQuery {
 			->row( [
 				'wtr_team' => $groupName,
 				'wtr_instance' => $instanceEntity?->getId(),
+				'wtr_instance_path' => $instanceEntity?->getPath(),
 				'wtr_role' => $role
 			] )
 			->caller( __METHOD__ )
