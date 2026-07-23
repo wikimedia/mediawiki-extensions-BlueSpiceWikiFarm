@@ -4,7 +4,8 @@
 			"*surak*",
 			"Ameisenigel",
 			"Brettchenweber",
-			"McDutchie"
+			"McDutchie",
+			"Mschlindwein"
 		]
 	},
 	"wikifarm-desc": "Farmverwaltung",
@@ -202,7 +203,7 @@
 	"wikifarm-instance-creator-no-info-label": "Keine Information verfügbar",
 	"wikifarm-instances-menu-section-current": "Aktuell",
 	"wikifarm-instances-menu-section-quickaccess": "Schnellzugriff",
-	"wikifarm-instances-menu-section-favourites": "Favouriten",
+	"wikifarm-instances-menu-section-favourites": "Favoriten",
 	"wikifarm-instances-menu-section-featured": "Featured",
 	"wikifarm-instances-menu-section-other": "Andere",
 	"wikifarm-instances-menu-link-wikis-label": "... alle Wikis anzeigen",
