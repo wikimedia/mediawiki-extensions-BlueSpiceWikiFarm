@@ -220,5 +220,7 @@
 	"wikifarm-wikis-create-new-wiki-title": "Ein neues Wiki erstellen",
 	"wikifarm-wikis-create-new-wiki-aria-label": "Ein neues Wiki erstellen",
 	"wikifarm-instance-featured": "Featured Wiki",
-	"wikifarm-instance-featured-help": "Featured Wikis werden im Bereich „Featured“ des Wiki-Menüs angezeigt"
+	"wikifarm-instance-featured-help": "Featured Wikis werden im Bereich „Featured“ des Wiki-Menüs angezeigt",
+	"wikifarm-search-filter-label": "In Wikis suchen",
+	"wikifarm-instances-menu-search-no-results": "Keine Wikis gefunden"
 }
