@@ -230,5 +230,10 @@
 	"wikifarm-wikis-create-new-wiki-aria-label": "Crear un novo wiki",
 	"wikifarm-error-copy-instance-data-failed": "Fallou a copia do directorio do wiki",
 	"wikifarm-error-archive-instance-failed": "Fallou a creación do arquivo do wiki",
-	"wikifarm-search-filter-show-all-label": "Todos os wikis"
+	"wikifarm-search-filter-show-all-label": "Todos os wikis",
+	"wikifarm-ui-search-instance-filter": "Buscar nos wikis: $1",
+	"wikifarm-ui-search-instance-filter-local": "Este wiki",
+	"wikifarm-ui-search-instance-filter-all": "Todos os wikis dispoñibles",
+	"wikifarm-ui-search-instance-filter-hint": "... ou selecciona aqueloutros wikis nos que buscar ademais deste",
+	"wikifarm-ui-search-instance-filter-search": "Buscar un wiki"
 }

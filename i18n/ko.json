@@ -3,6 +3,7 @@
 		"authors": [
 			"Bisang",
 			"Tensama0415",
+			"YeBoy371",
 			"Ykhwong",
 			"解浪"
 		]
@@ -177,7 +178,7 @@
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "대문으로 돌아가기",
 	"wikifarm-access-group-name-user": "모든 그룹",
 	"wikifarm-instances-tab-favourite-label": "즐겨찾기",
-	"wikifarm-instances-tab-all-label": "다른 위키",
+	"wikifarm-instances-tab-all-label": "모든 위키",
 	"wikifarm-instances-grid-column-wiki-header-label": "위키",
 	"wikis": "위키",
 	"wikifarm-instances-grid-column-favourites-header-label": "즐겨찾기",
@@ -233,5 +234,10 @@
 	"wikifarm-wikis-create-new-wiki-aria-label": "새 위키 만들기",
 	"wikifarm-error-copy-instance-data-failed": "위키 디렉토리 복사에 실패했습니다",
 	"wikifarm-error-archive-instance-failed": "위키 아카이브 생성에 실패했습니다",
-	"wikifarm-search-filter-show-all-label": "모든 위키"
+	"wikifarm-search-filter-show-all-label": "모든 위키",
+	"wikifarm-ui-search-instance-filter": "위키에서 검색: $1",
+	"wikifarm-ui-search-instance-filter-local": "이 위키",
+	"wikifarm-ui-search-instance-filter-all": "모든 가능한 위키",
+	"wikifarm-ui-search-instance-filter-hint": "... 또는 이 위키 외에 검색할 다른 위키를 선택하세요",
+	"wikifarm-ui-search-instance-filter-search": "위키 검색"
 }

@@ -176,7 +176,7 @@
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Terug naar de hoofdpagina",
 	"wikifarm-access-group-name-user": "Alle groepen",
 	"wikifarm-instances-tab-favourite-label": "Favorieten",
-	"wikifarm-instances-tab-all-label": "Meer wiki's",
+	"wikifarm-instances-tab-all-label": "Alle wiki's",
 	"wikifarm-instances-grid-column-wiki-header-label": "Wiki",
 	"wikis": "Wiki’s",
 	"wikifarm-instances-grid-column-favourites-header-label": "Favoriet",
@@ -232,5 +232,12 @@
 	"wikifarm-wikis-create-new-wiki-aria-label": "Een nieuwe wiki aanmaken",
 	"wikifarm-error-copy-instance-data-failed": "Het kopiëren van de wiki-directory is mislukt",
 	"wikifarm-error-archive-instance-failed": "Het aanmaken van het wiki-archief is mislukt",
-	"wikifarm-search-filter-show-all-label": "Alle wiki’s"
+	"wikifarm-search-filter-show-all-label": "Alle wiki’s",
+	"wikifarm-ui-search-instance-filter": "Zoeken in wiki’s: $1",
+	"wikifarm-ui-search-instance-filter-local": "Deze wiki",
+	"wikifarm-ui-search-instance-filter-all": "Alle beschikbare wiki’s",
+	"wikifarm-ui-search-instance-filter-hint": "… of selecteer wiki’s waarin u wilt zoeken naast deze wiki",
+	"wikifarm-ui-search-instance-filter-search": "Wiki zoeken",
+	"wikifarm-search-filter-label": "Zoeken in wiki's",
+	"wikifarm-instances-menu-search-no-results": "Geen wiki's gevonden"
 }

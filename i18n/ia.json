@@ -209,5 +209,10 @@
 	"wikifarm-instances-favourite-notification-error": "Non poteva adder le wiki al favoritos. Per favor tenta lo de novo o contacta tu administrator.",
 	"wikifarm-instances-menu-search-label": "Cercar un wiki",
 	"wikifarm-instances-search-placeholder": "Cercar wiki",
-	"wikifarm-instances-menu-section-favourites": "Favorites"
+	"wikifarm-instances-menu-section-favourites": "Favorites",
+	"wikifarm-ui-search-instance-filter": "Cercar in wikis: $1",
+	"wikifarm-ui-search-instance-filter-local": "Iste wiki",
+	"wikifarm-ui-search-instance-filter-all": "Tote le wikis disponibile",
+	"wikifarm-ui-search-instance-filter-hint": "… o selige wikis a cercar in addition a iste wiki",
+	"wikifarm-ui-search-instance-filter-search": "Cercar un wiki"
 }

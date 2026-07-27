@@ -90,5 +90,7 @@
 	"wikifarm-access-tab-groups": "קבוצות",
 	"wikifarm-access-tab-users": "משתמשים",
 	"wikifarm-access-column-user": "משתמש",
-	"log-description-ext-wikifarm-access": "יומן ניהול גישה לוויקי"
+	"log-description-ext-wikifarm-access": "יומן ניהול גישה לוויקי",
+	"wikifarm-ui-search-instance-filter": "חיפוש בוויקי: $1",
+	"wikifarm-ui-search-instance-filter-search": "חיפוש ויקי"
 }

@@ -152,5 +152,10 @@
 	"wikifarm-instances-menu-button-title": "列出所有wiki",
 	"wikifarm-instances-menu-aria-label": "Wiki",
 	"wikis": "Wiki",
-	"wikifarm-instances-menu-section-favourites": "收藏"
+	"wikifarm-instances-menu-section-favourites": "收藏",
+	"wikifarm-ui-search-instance-filter": "在wiki里搜索：$1",
+	"wikifarm-ui-search-instance-filter-local": "此wiki",
+	"wikifarm-ui-search-instance-filter-all": "所有可用的wiki",
+	"wikifarm-ui-search-instance-filter-hint": "…或选择此wiki之外的wiki进行搜索",
+	"wikifarm-ui-search-instance-filter-search": "搜索wiki"
 }

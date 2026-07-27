@@ -146,5 +146,10 @@
 	"wikifarm-instances-menu-empty-favorite-text": "目前沒有新增為收藏的 wiki 實例。您可以點選星形圖示，來選擇一個實例作為收藏。",
 	"wikifarm-instances-menu-button-title": "列出所有 wiki 實例",
 	"wikifarm-instances-menu-aria-label": "Wiki 實例",
-	"wikifarm-instances-menu-section-favourites": "收藏"
+	"wikifarm-instances-menu-section-favourites": "收藏",
+	"wikifarm-ui-search-instance-filter": "在 wiki 裡搜尋：$1",
+	"wikifarm-ui-search-instance-filter-local": "此 wiki",
+	"wikifarm-ui-search-instance-filter-all": "所有可用的 wiki",
+	"wikifarm-ui-search-instance-filter-hint": "…或選擇此 wiki 之外的 wiki 進行搜尋",
+	"wikifarm-ui-search-instance-filter-search": "搜尋 wiki"
 }
