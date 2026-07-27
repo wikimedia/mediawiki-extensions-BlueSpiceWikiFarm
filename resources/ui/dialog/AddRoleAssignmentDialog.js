@@ -27,7 +27,8 @@ ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.initialize = f
 	this.actions.setAbilities( { submit: false } );
 
 	this.userGroupPicker = new ext.bluespiceWikiFarm.ui.widget.AdminUserGroupMultiselectWidget( {
-		$overlay: this.$overlay
+		$overlay: this.$overlay,
+		placeholder: mw.message( 'wikifarm-access-field-assignees-placeholder' ).text()
 	} );
 	this.userGroupPicker.connect( this, {
 		change: 'checkValidity'
@@ -36,6 +37,7 @@ ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.initialize = f
 	// Role picker with descriptions
 	this.rolePicker = new OO.ui.DropdownWidget( {
 		$overlay: this.$overlay,
+		label: mw.message( 'wikifarm-access-field-role-placeholder' ).text(),
 		menu: {
 			items: [
 				new OOJSPlus.ui.widget.MenuOptionWithDescription( {
@@ -67,7 +69,7 @@ ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.initialize = f
 
 	this.panel.$element.append(
 		new OO.ui.FieldLayout( this.userGroupPicker, {
-			label: mw.message( 'wikifarm-ui-access-field-select-entities' ).text(),
+			label: mw.message( 'wikifarm-access-field-assignees' ).text(),
 			align: 'top'
 		} ).$element,
 		new OO.ui.FieldLayout( this.rolePicker, {
@@ -76,12 +78,18 @@ ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.initialize = f
 		} ).$element
 	);
 
+	// Note: "Assign role globally" checkbox is currently hidden as it's an edge case.
+	// We want to get customer feedback first to determine if this functionality is desired
+	// before exposing it in the UI. The functionality remains available via this.allowGlobal
+	// and can be re-enabled by uncommenting the code below.
+	/*
 	if ( this.allowGlobal ) {
 		this.panel.$element.append( new OO.ui.FieldLayout( this.globalCheck, {
 			label: mw.message( 'wikifarm-ui-access-field-global' ).text(),
 			align: 'inline'
 		} ).$element );
 	}
+	*/
 
 	this.$body.append( this.panel.$element );
 };

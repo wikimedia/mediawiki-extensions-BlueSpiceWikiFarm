@@ -9,8 +9,16 @@
 /* General setting - Access Level Cards */
 .bs-access-management-general {
 	h3 {
-		margin: 0 0 16px 0;
+		margin: 0 0 24px 0;
 		font-size: 1.2em;
+	}
+
+	> p {
+		margin-bottom: 24px;
+	}
+
+	.bs-access-management-toolbar {
+		margin-bottom: 16px;
 	}
 }
 
@@ -19,12 +27,13 @@
 	gap: 16px;
 	margin-bottom: 24px;
 	flex-wrap: wrap;
+	justify-content: space-between;
 }
 
 .bs-access-level-card {
 	flex: 1;
 	min-width: 200px;
-	max-width: 300px;
+	max-width: 350px;
 	padding: 20px;
 	border: 1px solid #a2a9b1;
 	border-radius: 8px;
@@ -80,7 +89,6 @@
 	font-size: 0.875rem;
 	color: #252525;
 	line-height: 1.4;
-	margin-top: auto;
 }
 
 /* Roles panel */

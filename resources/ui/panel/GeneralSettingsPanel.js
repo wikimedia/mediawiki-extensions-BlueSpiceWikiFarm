@@ -55,7 +55,7 @@ ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.build = function () {
 		const icon = new OO.ui.IconWidget( { icon: level.icon } );
 		const $header = $( '<div>' ).addClass( 'bs-access-level-card-header' );
 		const $title = $( '<div>' ).addClass( 'bs-access-level-card-title' ).text( level.label );
-		const $desc = $( '<div>' ).addClass( 'bs-access-level-card-desc' ).text( level.description );
+		const $desc = $( '<div>' ).addClass( 'bs-access-level-card-desc' ).html( level.description );
 
 		$header.append( icon.$element, $title );
 		$card.append( $header, $desc );
