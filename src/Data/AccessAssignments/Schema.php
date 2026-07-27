@@ -18,8 +18,8 @@ class Schema extends \MWStake\MediaWiki\Component\DataStore\Schema {
 				self::TYPE => FieldType::STRING
 			],
 			Record::ROLE => [
-				self::FILTERABLE => false,
-				self::SORTABLE => false,
+				self::FILTERABLE => true,
+				self::SORTABLE => true,
 				self::TYPE => FieldType::STRING
 			],
 			Record::IS_GLOBAL_ASSIGNMENT => [

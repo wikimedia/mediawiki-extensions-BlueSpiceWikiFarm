@@ -53,9 +53,6 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.build = function () {
 				operator: 'eq',
 				value: 'group'
 			}
-		},
-		sorter: {
-			is_global_assignment: { direction: 'desc' } // eslint-disable-line camelcase
 		}
 	} );
 	this.groupStore.connect( this, {
@@ -77,9 +74,6 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.build = function () {
 				operator: 'eq',
 				value: 'user'
 			}
-		},
-		sorter: {
-			is_global_assignment: { direction: 'desc' } // eslint-disable-line camelcase
 		}
 	} );
 	this.userStore.connect( this, {
