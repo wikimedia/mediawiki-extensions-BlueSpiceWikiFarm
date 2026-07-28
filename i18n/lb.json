@@ -74,7 +74,7 @@
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Zeréck op d'Haaptsäit",
 	"wikifarm-access-group-name-user": "All Gruppen",
 	"wikifarm-instances-tab-favourite-label": "Favoritten",
-	"wikifarm-instances-tab-all-label": "Méi Wikien",
+	"wikifarm-instances-tab-all-label": "All Wikien",
 	"wikifarm-instances-grid-column-wiki-header-label": "Wiki",
 	"wikis": "Wikien",
 	"wikifarm-global-label": "Global",
@@ -85,10 +85,13 @@
 	"wikifarm-access-column-user": "Benotzer",
 	"wikifarm-access-unsaved-changes-warning": "Dir hutt net gespäichert Ännerungen. Wëllt Dir se verwerfen?",
 	"wikifarm-access-field-assignees": "Gruppen/Benotzer",
+	"wikifarm-access-role-desc-editor": "Ka Säiten op dëser Wiki kucken an änneren",
 	"wikifarm-instances-menu-section-favourites": "Favoritten",
 	"wikifarm-button-action-delete-label": "Läschen",
 	"wikifarm-instances-filter-show-all-label": "All Wikien",
 	"wikifarm-search-filter-show-all-label": "All Wikien",
 	"wikifarm-ui-search-instance-filter-local": "Dës Wiki",
-	"wikifarm-ui-search-instance-filter-all": "All disponibel Wikien"
+	"wikifarm-ui-search-instance-filter-all": "All disponibel Wikien",
+	"wikifarm-search-filter-label": "An de Wikie sichen",
+	"wikifarm-instances-menu-search-no-results": "Keng Wikie fonnt"
 }

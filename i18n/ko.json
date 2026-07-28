@@ -4,7 +4,8 @@
 			"Bisang",
 			"Tensama0415",
 			"Ykhwong",
-			"解浪"
+			"解浪",
+			"YeBoy371"
 		]
 	},
 	"wikifarm-desc": "위키 팜을 생성하고 관리합니다",
@@ -177,7 +178,7 @@
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "대문으로 돌아가기",
 	"wikifarm-access-group-name-user": "모든 그룹",
 	"wikifarm-instances-tab-favourite-label": "즐겨찾기",
-	"wikifarm-instances-tab-all-label": "다른 위키",
+	"wikifarm-instances-tab-all-label": "모든 위키",
 	"wikifarm-instances-grid-column-wiki-header-label": "위키",
 	"wikis": "위키",
 	"wikifarm-instances-grid-column-favourites-header-label": "즐겨찾기",
@@ -192,6 +193,8 @@
 	"wikifarm-access-tab-users": "사용자",
 	"wikifarm-access-general-heading": "권한 수준을 선택하여 이 위키에 대한 접근 권한을 설정하세요",
 	"wikifarm-access-add-role-assignment": "역할 할당 추가",
+	"wikifarm-access-filter-groups": "필터 그룹",
+	"wikifarm-access-filter-users": "필터 사용자",
 	"wikifarm-access-column-group": "그룹",
 	"wikifarm-access-column-user": "사용자",
 	"wikifarm-access-unsaved-changes-warning": "저장되지 않은 변경 사항이 있습니다. 버리시겠습니까?",
@@ -215,6 +218,7 @@
 	"wikifarm-instances-menu-search-label": "위키 검색",
 	"wikifarm-instances-search-placeholder": "위키를 찾아보기",
 	"wikifarm-instances-menu-section-current": "현재",
+	"wikifarm-instances-menu-section-central": "중앙 위키",
 	"wikifarm-instances-menu-section-favourites": "즐겨찾기",
 	"wikifarm-instances-menu-section-featured": "추천",
 	"wikifarm-instances-menu-section-other": "기타",
@@ -228,15 +232,12 @@
 	"wikifarm-instances-filter-show-all-label": "모든 위키",
 	"wikifarm-wikis-create-new-wiki-title": "새 위키 만들기",
 	"wikifarm-wikis-create-new-wiki-aria-label": "새 위키 만들기",
+	"wikifarm-error-copy-instance-data-failed": "위키 디렉토리 복사에 실패했습니다",
+	"wikifarm-error-archive-instance-failed": "위키 아카이브 생성에 실패했습니다",
+	"wikifarm-search-filter-show-all-label": "모든 위키",
 	"wikifarm-ui-search-instance-filter": "위키에서 검색: $1",
 	"wikifarm-ui-search-instance-filter-local": "이 위키",
 	"wikifarm-ui-search-instance-filter-all": "모든 가능한 위키",
 	"wikifarm-ui-search-instance-filter-hint": "... 또는 이 위키 외에 검색할 다른 위키를 선택하세요",
-	"wikifarm-ui-search-instance-filter-search": "위키 검색",
-	"wikifarm-access-filter-groups": "필터 그룹",
-	"wikifarm-access-filter-users": "필터 사용자",
-	"wikifarm-instances-menu-section-central": "중앙 위키",
-	"wikifarm-error-copy-instance-data-failed": "위키 디렉토리 복사에 실패했습니다",
-	"wikifarm-error-archive-instance-failed": "위키 아카이브 생성에 실패했습니다",
-	"wikifarm-search-filter-show-all-label": "모든 위키"
+	"wikifarm-ui-search-instance-filter-search": "위키 검색"
 }
