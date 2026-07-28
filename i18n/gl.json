@@ -174,7 +174,7 @@
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Volver á páxina principal",
 	"wikifarm-access-group-name-user": "Todos os grupos",
 	"wikifarm-instances-tab-favourite-label": "Favoritos",
-	"wikifarm-instances-tab-all-label": "Máis wikis",
+	"wikifarm-instances-tab-all-label": "Todos os wikis",
 	"wikifarm-instances-grid-column-wiki-header-label": "Wiki",
 	"wikis": "Wikis",
 	"wikifarm-instances-grid-column-favourites-header-label": "Favorito",
@@ -235,5 +235,7 @@
 	"wikifarm-ui-search-instance-filter-local": "Este wiki",
 	"wikifarm-ui-search-instance-filter-all": "Todos os wikis dispoñibles",
 	"wikifarm-ui-search-instance-filter-hint": "... ou selecciona aqueloutros wikis nos que buscar ademais deste",
-	"wikifarm-ui-search-instance-filter-search": "Buscar un wiki"
+	"wikifarm-ui-search-instance-filter-search": "Buscar un wiki",
+	"wikifarm-search-filter-label": "Buscar nos wikis",
+	"wikifarm-instances-menu-search-no-results": "Non se atoparon wikis"
 }

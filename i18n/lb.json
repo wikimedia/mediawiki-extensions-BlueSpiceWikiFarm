@@ -26,6 +26,7 @@
 	"wikifarm-create-instance": "Wiki uleeën",
 	"wikifarm-create-instance-title": "Nei Wiki uleeën",
 	"wikifarm-creation-failure-desc": "Et huet net geklappt fir dës Wiki unzeleeën. Kontaktéiert wgl. Ären Administrateur.",
+	"wikifarm-creation-failure-main-label": "D'Wiki konnt net ugeluecht ginn",
 	"wikifarm-creation-failure-process": "Prozess-ID: $1",
 	"wikifarm-creation-progress-main-label": "Nei Wiki gëtt ugeluecht",
 	"wikifarm-edit-instance": "Wiki änneren",
