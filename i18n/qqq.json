@@ -111,6 +111,8 @@
 	"wikifarm-template-title": "Label of a select field",
 	"wikifarm-incomplete-instance": "Title attribute for incomplete instances",
 	"wikifarm-search-context-global": "Label of a search context",
+	"wikifarm-search-center-filter-wiki-label": "Label for the filter on the wiki instance a result comes from, in the BlueSpiceExtendedSearch search center",
+	"wikifarm-search-center-filter-wiki-with-values-label": "Label for the filter on the wiki instance a result comes from, shown when the filter has selected values. Usually the same as {{msg-mw|wikifarm-search-center-filter-wiki-label}} followed by a colon.",
 	"wikifarm-main-instance-name": "Root wiki display name",
 	"wikifarm-button-action-label-add": "Action label",
 	"wikifarm-ui-access-field-type": "Field label",
