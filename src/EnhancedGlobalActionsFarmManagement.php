@@ -10,7 +10,7 @@ class EnhancedGlobalActionsFarmManagement extends GlobalActionsFarmManagement {
 
 	public function getPostHtml(): HtmlArmor {
 		$html = Html::element( 'span', [
-			'class' => 'badge rounded-pill text-bg-secondary'
+			'class' => 'badge'
 		], Message::newFromKey( 'wikifarm-global-label' )->text() );
 		return new HtmlArmor( $html );
 	}
