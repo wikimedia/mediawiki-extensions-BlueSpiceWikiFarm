@@ -108,6 +108,8 @@
 	"wikifarm-template-title": "Choose a template for the new wiki",
 	"wikifarm-incomplete-instance": "Instance is incomplete",
 	"wikifarm-search-context-global": "in all wikis",
+	"wikifarm-search-center-filter-wiki-label": "Wiki",
+	"wikifarm-search-center-filter-wiki-with-values-label": "Wiki:",
 	"wikifarm-main-instance-name": "Main wiki",
 	"wikifarm-button-action-label-add": "Add",
 	"wikifarm-ui-access-field-type": "Entity type",

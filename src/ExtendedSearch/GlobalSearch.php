@@ -192,6 +192,13 @@ class GlobalSearch implements
 	 * @inheritDoc
 	 */
 	public function modifyFilters( array &$aggregations, array &$filterCfg, array $fieldsWithANDEnabled, ISearchSource $source ): void {
+		if ( !isset( $filterCfg['wiki_id'] ) ) {
+			return;
+		}
+		$filterCfg['wiki_id']['label'] =
+			Message::newFromKey( 'wikifarm-search-center-filter-wiki-label' )->text();
+		$filterCfg['wiki_id']['valueLabel'] =
+			Message::newFromKey( 'wikifarm-search-center-filter-wiki-with-values-label' )->text();
 		foreach ( $filterCfg['wiki_id']['buckets'] ?? [] as $i => $bucket ) {
 			$wikiId = $bucket['key'];
 			if ( isset( $this->indexInstanceDisplayMapping[$wikiId] ) ) {
