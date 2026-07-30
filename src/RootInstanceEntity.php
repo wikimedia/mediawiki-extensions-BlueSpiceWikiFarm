@@ -8,7 +8,8 @@ use MediaWiki\Message\Message;
 class RootInstanceEntity extends InstanceEntity {
 
 	private const MAIN_INSTANCE_COLOR = [
-		'background' => '#3e5389'
+		'background' => '#3e5389',
+		'lightText' => true
 	];
 
 	/**
