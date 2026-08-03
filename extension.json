@@ -492,11 +492,6 @@
 				"oojs-ui"
 			]
 		},
-		"ext.bluespice.wikiFarm.unifiedTaskOverviewModule": {
-			"scripts": [
-				"ext.bluespice.wikiFarm.unifiedTaskOverviewModule.js"
-			]
-		},
 		"ext.bluespice.wikiFarm.breadcrumbs": {
 			"styles": "styles/wikiFarm.breadcrumbs.css"
 		},
@@ -604,7 +599,6 @@
 		"ContentStabilizationGetStableForeignInclusion": "handleSharedStabilization",
 		"WikiMCPToolsGetWikiMap": "populateWikiMap",
 		"BeforeInitialize": [ "redirectUserPage", "trackLastVisitedInstances" ],
-		"SpecialPageBeforeExecute": "addGlobalUnifiedTaskOverviewModule",
 		"BSUserManagerBeforeAddGroup": "addGroupPrefix",
 		"MediaWikiServices": "configureContentTransfer",
 		"MWStakeGroupStoreGroupTypeFilter": "handleGroupStore",
@@ -613,7 +607,8 @@
 		"BSUserManagerGroupEdited": "updateGroupList",
 		"BSUserManagerGroupDeleted": "updateGroupList",
 		"OutputPageBodyAttributes": "instanceBodyClass",
-		"MWStakeTokenAuthenticatorGetAuthInfo": "addTokenAuthenticatorSearchableWikis"
+		"MWStakeTokenAuthenticatorGetAuthInfo": "addTokenAuthenticatorSearchableWikis",
+		"UnifiedTaskOverviewTaskCollectionComplete": "updateWikiInfo"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -682,9 +677,6 @@
 			"class": "BlueSpice\\WikiFarm\\Hook\\BeforeInitialize\\RedirectUserPage",
 			"services": [ "TitleFactory" ]
 		},
-		"addGlobalUnifiedTaskOverviewModule": {
-			"class": "BlueSpice\\WikiFarm\\Hook\\AddGlobalUTOModule"
-		},
 		"addGroupPrefix": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\FilterImplicitGroupCreation",
 			"services": [ "BlueSpiceWikiFarm._Config" ]
@@ -710,6 +702,10 @@
 		"addTokenAuthenticatorSearchableWikis": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\Integration\\AddTokenAuthenticatorSearchableWikis",
 			"services": [ "BlueSpiceWikiFarm.AccessControlStore", "BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.WikiMap" ]
+		},
+		"updateWikiInfo": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\AddWikiInfoToUTO",
+			"services": [ "BlueSpiceWikiFarm.WikiMap", "BlueSpiceWikiFarm._Config" ]
 		}
 	},
 	"RestRoutes": [

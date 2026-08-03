@@ -66,3 +66,16 @@
 	vertical-align: top;
 	font-size: 0.8em;
 }
+
+.tile-content .wikifarm-wiki-badge {
+	width: 100%;
+}
+
+.tile-content .wikifarm-wiki-badge__text {
+	font-size: 12px; /* stylelint-disable-line declaration-property-unit-disallowed-list */
+	font-weight: normal;
+}
+
+.uto-tile .tile-content:has( .wikifarm-tab-badge ) {
+	padding: 8px 16px;
+}
