@@ -142,9 +142,6 @@ $( () => {
 } );
 
 mw.hook( 'oojsplus.ui.widget.batchoptionwidget.preinit' ).add( ( item, $element ) => {
-	if ( !item.data.includes( 'source' ) ) {
-		return;
-	}
 	if ( item.attr.length === 0 ) {
 		return;
 	}
@@ -271,5 +268,18 @@ mw.hook( 'chatbot.source.foreignWikiTitle' ).add( async ( data ) => {
 		!data.anchor.querySelector( '.chatbot-source-wiki-badge' ) ) {
 		$wikiBadge.addClass( 'chatbot-source-wiki-badge' );
 		$( data.anchor ).prepend( $wikiBadge, ' ' );
+	}
+} );
+
+mw.hook( 'unifiedtaskoverview.tile.init' ).add( ( task, data ) => {
+	if ( !data.source ) {
+		return;
+	}
+	const $wikiBadge = ext.bluespiceWikiFarm.util.getWikiBadge( data.source );
+	task.$content.prepend( $wikiBadge );
+
+	const wikiColor = ext.bluespiceWikiFarm.util.getWikiColor( data.source );
+	if ( wikiColor ) {
+		task.$element.css( 'border-left', `4px solid ${ wikiColor }` );
 	}
 } );
