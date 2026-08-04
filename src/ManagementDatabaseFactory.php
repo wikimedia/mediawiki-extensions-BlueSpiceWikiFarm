@@ -9,6 +9,9 @@ use Wikimedia\Rdbms\IDatabase;
 
 class ManagementDatabaseFactory {
 
+	/** @var Database|null */
+	private ?Database $managementConnection = null;
+
 	/**
 	 * @param Config $config
 	 */
@@ -20,11 +23,21 @@ class ManagementDatabaseFactory {
 	/**
 	 * @return Database
 	 */
-	public function createManagementConnection(): IDatabase {
+	private function createManagementConnection(): IDatabase {
 		return $this->createDatabaseConnection(
 			$this->config->get( 'managementDBname' ),
 			$this->config->get( 'managementDBprefix' )
 		);
+	}
+
+	/**
+	 * @return Database
+	 */
+	public function getManagementConnection(): Database {
+		if ( $this->managementConnection === null || $this->managementConnection->isOpen() === false ) {
+			$this->managementConnection = $this->createManagementConnection();
+		}
+		return $this->managementConnection;
 	}
 
 	/**
