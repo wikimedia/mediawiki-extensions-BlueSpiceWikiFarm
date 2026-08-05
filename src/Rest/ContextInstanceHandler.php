@@ -7,9 +7,9 @@ use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\InstanceStore;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Message\Message;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
-use Message;
 
 class ContextInstanceHandler extends SimpleHandler {
 
