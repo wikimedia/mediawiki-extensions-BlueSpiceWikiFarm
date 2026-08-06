@@ -4,7 +4,7 @@ namespace BlueSpice\WikiFarm\AccessControl;
 
 use BlueSpice\WikiFarm\DirectInstanceStore;
 use BlueSpice\WikiFarm\InstanceEntity;
-use Config;
+use MediaWiki\Config\Config;
 
 class InstanceGroupCreator {
 

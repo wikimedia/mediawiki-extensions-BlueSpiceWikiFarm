@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\Rest;
 
 use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\FarmWikiMap;
+use MediaWiki\Config\Config;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Rest\HttpException;
 use MediaWiki\Rest\SimpleHandler;
@@ -13,12 +14,12 @@ class InstanceInfoFromWikiIDHandler extends SimpleHandler {
 
 	/**
 	 * @param IAccessStore $accessStore
-	 * @param \Config $farmConfig
+	 * @param Config $farmConfig
 	 * @param FarmWikiMap $farmWikiMap
 	 */
 	public function __construct(
 		private readonly IAccessStore $accessStore,
-		private readonly \Config $farmConfig,
+		private readonly Config $farmConfig,
 		private readonly FarmWikiMap $farmWikiMap
 	) {
 	}
