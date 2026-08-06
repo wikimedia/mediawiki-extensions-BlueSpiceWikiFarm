@@ -2,7 +2,7 @@
 
 namespace BlueSpice\WikiFarm\Rest;
 
-use Config;
+use MediaWiki\Config\Config;
 use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\HookContainer\HookContainer;

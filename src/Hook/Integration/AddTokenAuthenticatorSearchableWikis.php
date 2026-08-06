@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\Hook\Integration;
 
 use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\FarmWikiMap;
+use MediaWiki\Config\Config;
 use MediaWiki\User\UserIdentity;
 use MWStake\MediaWiki\Component\TokenAuthenticator\MWStakeTokenAuthenticatorGetAuthInfoHook;
 
@@ -11,7 +12,7 @@ class AddTokenAuthenticatorSearchableWikis implements MWStakeTokenAuthenticatorG
 
 	public function __construct(
 		private readonly IAccessStore $accessStore,
-		private readonly \Config $farmConfig,
+		private readonly Config $farmConfig,
 		private readonly FarmWikiMap $farmWikiMap
 	) {
 	}

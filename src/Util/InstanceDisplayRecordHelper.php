@@ -4,7 +4,7 @@ namespace BlueSpice\WikiFarm\Util;
 
 use BlueSpice\WikiFarm\Data\InstanceDisplayList\InstanceDisplayRecord;
 use BlueSpice\WikiFarm\InstanceEntity;
-use Config;
+use MediaWiki\Config\Config;
 use MediaWiki\User\UserIdentity;
 
 class InstanceDisplayRecordHelper {
