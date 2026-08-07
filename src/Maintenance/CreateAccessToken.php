@@ -61,7 +61,7 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 			}
 			$this->getServiceContainer()->getUserGroupManager()->addUserToMultipleGroups( $user, [ 'bot', 'sysop' ] );
 			if ( !$user->getEmail() || !$user->isEmailConfirmed() ) {
-				$user->setEmail( 'contenttranfer@default.com' );
+				$user->setEmail( 'contenttranfer@default.invalid' );
 				$user->confirmEmail();
 			}
 			$user->saveSettings();
