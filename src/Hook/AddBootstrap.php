@@ -23,6 +23,7 @@ class AddBootstrap implements BeforePageDisplayHook {
 	 */
 	public function onBeforePageDisplay( $out, $skin ): void {
 		$out->addModules( [ 'ext.bluespice.wikiFarm.bootstrap' ] );
+		$out->addModuleStyles( [ 'ext.bluespice.wikiFarm.instanceColors' ] );
 		$instance = $this->instanceStore->getCurrentInstance();
 		if ( $instance && $instance->getMetadata()['instanceColor'] ) {
 			$out->getOutput()->addJsConfigVars(
