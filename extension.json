@@ -495,6 +495,9 @@
 		"ext.bluespice.wikiFarm.breadcrumbs": {
 			"styles": "styles/wikiFarm.breadcrumbs.css"
 		},
+		"ext.bluespice.wikiFarm.instanceColors": {
+			"class": "BlueSpice\\WikiFarm\\ResourceLoader\\InstanceColorStyles"
+		},
 		"ext.bluespice.wikiFarm.wikis.special": {
 			"packageFiles": [
 				"ext.bluespice.wikiFarm.wikis.js",
