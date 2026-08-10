@@ -7,6 +7,7 @@ use BlueSpice\WikiFarm\FarmWikiMap;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Rest\HttpException;
+use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -24,6 +25,10 @@ class InstanceInfoFromWikiIDHandler extends SimpleHandler {
 	) {
 	}
 
+	/**
+	 * @return Response
+	 * @throws HttpException
+	 */
 	public function execute() {
 		if ( !$this->farmConfig->get( 'useGlobalAccessControl' ) ) {
 			throw new HttpException( 'This endpoint only callable in global access control setup' );
