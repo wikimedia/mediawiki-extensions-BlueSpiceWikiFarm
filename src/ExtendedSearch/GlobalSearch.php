@@ -195,6 +195,7 @@ class GlobalSearch implements
 		if ( !isset( $filterCfg['wiki_id'] ) ) {
 			return;
 		}
+		$filterCfg['wiki_id']['hidden'] = 1;
 		$filterCfg['wiki_id']['label'] =
 			Message::newFromKey( 'wikifarm-search-center-filter-wiki-label' )->text();
 		$filterCfg['wiki_id']['valueLabel'] =
