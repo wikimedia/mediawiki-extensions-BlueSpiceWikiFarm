@@ -173,7 +173,7 @@
 	"wikifarm-main-wiki-name": "Display name for the root instance",
 	"wikifarm-breadcrumb-nav-back-to-main-title": "Title for breadcrumb main wiki link",
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Title for breadcrumb main page link",
-	"wikifarm-access-group-name-user": "Label for the \"user\" group",
+	"wikifarm-access-group-name-user-alt": "Label for the \"user\" group",
 	"wikifarm-instances-tab-favourite-label": "Tab label to show all favorite wikis",
 	"wikifarm-instances-tab-all-label": "Tab label to show all wikis",
 	"wikifarm-instances-grid-column-wiki-header-label": "Grid header label",

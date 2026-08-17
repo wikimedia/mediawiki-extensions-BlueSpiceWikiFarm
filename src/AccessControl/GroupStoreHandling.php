@@ -41,7 +41,7 @@ class GroupStoreHandling implements
 			return;
 		}
 		if ( $groupType === 'implicit' && $groupName === 'user' ) {
-			$displayName = Message::newFromKey( 'wikifarm-access-group-name-user' )->text();
+			$displayName = Message::newFromKey( 'wikifarm-access-group-name-user-alt' )->text();
 			return;
 		}
 	}
