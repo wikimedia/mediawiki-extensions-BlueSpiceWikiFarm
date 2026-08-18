@@ -230,7 +230,7 @@ class HandleSharedResources implements
 		}
 
 		$ns = $title->getNamespace();
-		if ( $ns === NS_TEMPLATE ) {
+		if ( $ns !== NS_TEMPLATE ) {
 			return false;
 		}
 

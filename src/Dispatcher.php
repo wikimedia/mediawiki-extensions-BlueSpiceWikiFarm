@@ -474,6 +474,10 @@ class Dispatcher {
 			'apibase' => $shared->getUrl( $this->config ) . '/api.php',
 			'hashLevels' => 2,
 		];
+		$foreignUploadTargets = $GLOBALS['wgForeignUploadTargets'] ?? [];
+		if ( !in_array( 'farmsharedresources', $foreignUploadTargets, true ) ) {
+			$GLOBALS['wgForeignUploadTargets'][] = 'farmsharedresources';
+		}
 		$GLOBALS['wgUseSharedUploads'] = true;
 		$GLOBALS['wgSharedUploadDBname'] = $shared->getDbName();
 		$GLOBALS['wgSharedUploadDBprefix'] = $shared->getDbPrefix();
