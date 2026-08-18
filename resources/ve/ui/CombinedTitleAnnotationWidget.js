@@ -38,7 +38,7 @@ ext.bluespiceWikiFarm.ui.CombinedTitleAnnotationWidget.static.getAnnotationFromT
 		if ( title._is_local_instance ) { // eslint-disable-line no-underscore-dangle
 			return ve.dm.MWInternalLinkAnnotation.static.newFromTitle( mw.Title.newFromText( title.prefixed ) );
 		}
-		const target = title._instance_interwiki + ':' + title.prefixed; // eslint-disable-line no-underscore-dangle
+		const target = title.prefixed;
 		return new ve.dm.MWInternalLinkAnnotation( {
 			type: 'link/mwInternal',
 			attributes: {
