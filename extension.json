@@ -59,7 +59,8 @@
 		"BlueSpiceVisualEditorConnector": {
 			"PluginModules": [
 				"ext.bluespice.wikiFarm.combinedTitleInput",
-				"ext.bluespice.wikiFarm.ve.overrideTemplateDialog"
+				"ext.bluespice.wikiFarm.ve.overrideTemplateDialog",
+				"ext.bluespice.wikiFarm.ve.sharedUpload"
 			]
 		},
 		"EnhancedUpload": {
@@ -344,6 +345,17 @@
 			],
 			"messages": [
 				"wikifarm-widget-combined-title-input-local"
+			]
+		},
+		"ext.bluespice.wikiFarm.ve.sharedUpload": {
+			"scripts": [
+				"ve/overrideMediaUploadBooklet.js"
+			],
+			"dependencies": [
+				"ext.bluespice.wikiFarm.bootstrap"
+			],
+			"messages": [
+				"wikifarm-upload-file-foreign-repo-label"
 			]
 		},
 		"ext.bluespice.wikiFarm.accessManagement.skeleton": {
