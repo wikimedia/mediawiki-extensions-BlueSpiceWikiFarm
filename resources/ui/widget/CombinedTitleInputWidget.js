@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget = function ( cfg ) {
 	cfg = cfg || {};
+	this.localInstanceOnly = cfg.localInstanceOnly || false;
 	ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.parent.call( this, cfg );
 };
 
@@ -75,6 +76,19 @@ ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getDataItemFo
 		label: dataItem.prefixed,
 		data: dataItem
 	};
+};
+
+ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.extendFilters = function ( filters ) {
+	if ( !this.localInstanceOnly ) {
+		return filters;
+	}
+	filters.push( {
+		type: 'list',
+		value: [ '_local' ],
+		operator: 'in',
+		property: 'wiki_id'
+	} );
+	return filters;
 };
 
 ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.group = function ( data ) {
