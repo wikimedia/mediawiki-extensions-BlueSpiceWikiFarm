@@ -91,7 +91,10 @@ class AssignRoleToEntityHandler extends RightManagementHandler {
 	private function assignRoleToGroup( array $params ) {
 		$instance = $this->getInstance();
 		$isGlobal = $params['globalAssignment'];
-		$this->groupRoleManager->removeGroupRoles( $params['entityKey'], null, $this->getActor(), (bool)$params['roleName'] );
+		if ( FARMER_CALLED_INSTANCE === 'w' ) {
+			// If assigning on root, remove global setting, otherwise leave it alone
+			$this->groupRoleManager->removeGroupRoles( $params['entityKey'], null, $this->getActor(), (bool)$params['roleName'] );
+		}
 		$this->groupRoleManager->removeGroupRoles( $params['entityKey'], $instance, $this->getActor(), (bool)$params['roleName'] );
 
 		if ( !$params['roleName'] ) {
