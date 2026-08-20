@@ -11,7 +11,7 @@ class GroupRoleQuery {
 
 	private HashBagOStuff $opCache;
 
-	private array $groupRoles = [];
+	private array $instanceRoles = [];
 
 	/**
 	 * @param IDatabase $db
@@ -50,32 +50,45 @@ class GroupRoleQuery {
 		if ( $this->opCache->hasKey( $cacheKey ) ) {
 			return $this->opCache->get( $cacheKey );
 		}
+		$this->loadRolesForUser( $user );
 
-		// Find groups the user is in that have role assignments for this instance
+		$instanceRoles = array_merge(
+			$this->instanceRoles[$user->getName()][$instancePath] ?? [],
+			$this->instanceRoles[$user->getName()]['_global'] ?? []
+		);
+
+		$roles = array_values( array_unique( $instanceRoles ) );
+		$this->opCache->set( $cacheKey, $roles );
+		return $roles;
+	}
+
+	/**
+	 * @param UserIdentity $user
+	 * @return void
+	 */
+	private function loadRolesForUser( UserIdentity $user ): void {
+		if ( isset( $this->instanceRoles[$user->getName()] ) ) {
+			return;
+		}
 		$res = $this->db->newSelectQueryBuilder()
-			->select( [ 'wtr_role' ] )
+			->select( [ 'wtr_role', 'wtr_instance_path' ] )
 			->from( 'user_groups', 'ug' )
 			->join( 'wiki_team_roles', 'wtr', [ 'ug_group = wtr_team' ] )
 			->where( [
 				'ug_user' => $user->getId(),
-				$this->db->makeList( [
-					'wtr_instance IS NULL',
-					'wtr_instance_path' => $instancePath
-				], LIST_OR )
 			] )
 			->caller( __METHOD__ )
 			->fetchResultSet();
 
-		$roles = [];
 		foreach ( $res as $row ) {
+			$instance = $row->wtr_instance_path ?? '_global';
+			if ( !isset( $this->instanceRoles[$user->getName()][$instance] ) ) {
+				$this->instanceRoles[$user->getName()][$instance] = [];
+			}
 			if ( isset( IAccessStore::ROLES[$row->wtr_role] ) ) {
-				$roles[] = $row->wtr_role;
+				$this->instanceRoles[$user->getName()][$instance][] = $row->wtr_role;
 			}
 		}
-
-		$roles = array_unique( $roles );
-		$this->opCache->set( $cacheKey, $roles );
-		return $roles;
 	}
 
 	/**
