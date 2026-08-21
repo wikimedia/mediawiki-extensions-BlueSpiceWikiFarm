@@ -63,6 +63,8 @@ class PrimaryDataProvider extends Base {
 		$last->set( '_instance_display', $instance->getDisplayName() );
 		$last->set( '_is_local_instance', $wikiId === WikiMap::getCurrentWikiId() );
 		$last->set( '_instance_interwiki', 'wiki-' . mb_strtolower( $instance->getPath() ) );
+		$last->set( '_instance_color', $instance->getMetadata()['instanceColor']['background'] ?? null );
+		$last->set( '_instance_light_text', $instance->getMetadata()['instanceColor']['lightText'] ?? true );
 		$this->data[] = $last;
 	}
 

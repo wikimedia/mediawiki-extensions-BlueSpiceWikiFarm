@@ -9,9 +9,8 @@ if ( config.useUnifiedSearch && config.useGlobalAccessControl ) {
 					expanded: false,
 					scrollable: false,
 					padded: true
-				} ),
-				component.linkTypeIndex.getTabPanel( 'external' )
-			] );
+				} )
+			], 0 );
 
 			component.combinedTitleInput =
 				new ext.bluespiceWikiFarm.ui.CombinedTitleAnnotationWidget();
@@ -23,6 +22,15 @@ if ( config.useUnifiedSearch && config.useGlobalAccessControl ) {
 				this.updateActions();
 			} } );
 			component.annotationInput = component.combinedTitleInput;
+
+			component.onLinkTypeIndexSet = function () {
+				const text = this.annotationInput.getTextInputWidget().getValue();
+				ve.ui.MWLinkAnnotationInspector.prototype.onLinkTypeIndexSet.apply( this, arguments );
+				if ( this.linkTypeIndex.getCurrentTabPanelName() === 'internal' ) {
+					this.annotationInput = this.combinedTitleInput;
+					this.combinedTitleInput.getTextInputWidget().setValue( text );
+				}
+			};
 
 			return {
 				updateActions: function () {

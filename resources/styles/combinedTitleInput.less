@@ -1,0 +1,31 @@
+.wikifarm-combined-title-section.oo-ui-menuSectionOptionWidget {
+	padding-top: 8px;
+	border-top: 1px solid var( --wiki-color );
+
+	&:first-child {
+		border-top: 0;
+	}
+}
+
+.wikifarm-combined-title-chip {
+	display: inline-block;
+	padding: 1px 8px;
+	border-radius: 10px;
+	background-color: var( --wiki-color );
+	color: #fff;
+	font-size: 0.85em;
+	line-height: 1.5;
+}
+
+.wikifarm-combined-title-chip--dark-text {
+	color: #202122;
+}
+
+.wikifarm-combined-title-option.oo-ui-menuOptionWidget {
+	&.oo-ui-optionWidget-highlighted,
+	&.oo-ui-optionWidget-selected {
+		background-color: var( --wiki-color-tint, transparent );
+		box-shadow: inset 3px 0 0 0 var( --wiki-color );
+		color: inherit;
+	}
+}

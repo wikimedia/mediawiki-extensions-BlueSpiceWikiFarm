@@ -61,6 +61,9 @@ ext.bluespiceWikiFarm.ui.CombinedTitleAnnotationWidget.prototype.getTextInputWid
 ext.bluespiceWikiFarm.ui.CombinedTitleAnnotationWidget.prototype.setAnnotation = function ( annotation, fromText ) {
 	ext.bluespiceWikiFarm.ui.CombinedTitleAnnotationWidget.parent.prototype.setAnnotation.call( this, annotation, fromText );
 	if ( !this.annotation ) {
+		if ( !fromText ) {
+			this.internalPicker.setValue( '' );
+		}
 		return;
 	}
 	if ( !fromText ) {

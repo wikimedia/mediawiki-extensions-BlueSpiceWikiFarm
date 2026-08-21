@@ -50,15 +50,27 @@ ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getLookupMenu
 		if ( !grouped[ 0 ].hasOwnProperty( group ) ) {
 			continue;
 		}
-		items.push( new OO.ui.MenuSectionOptionWidget( {
-			label: grouped[ 1 ][ group ]
-		} ) );
+		const first = grouped[ 0 ][ group ][ 0 ];
+		const color = this.getInstanceColor( first );
+		const section = new OO.ui.MenuSectionOptionWidget( {
+			label: this.getInstanceChip( grouped[ 1 ][ group ], first ),
+			classes: [ 'wikifarm-combined-title-section' ]
+		} );
+		section.$element.css( '--wiki-color', color );
+		items.push( section );
 		for ( i = 0; i < grouped[ 0 ][ group ].length; i++ ) {
 			dataItem = grouped[ 0 ][ group ][ i ];
-			items.push( this.getMenuOption( {
+			const option = this.getMenuOption( {
 				label: null,
 				data: dataItem
-			} ) );
+			} );
+			option.$element
+				.addClass( 'wikifarm-combined-title-option' )
+				.css( {
+					'--wiki-color': color,
+					'--wiki-color-tint': this.getInstanceTint( color )
+				} );
+			items.push( option );
 		}
 	}
 	if ( items.length === 0 && !this.mustExist ) {
@@ -69,6 +81,52 @@ ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getLookupMenu
 	}
 
 	return items;
+};
+
+/**
+ * Header of a result group: the wiki name on a chip in the full color of the wiki, so that
+ * the wikis are told apart at a glance, even where their colors are close to each other.
+ *
+ * @param {string} label Name of the wiki
+ * @param {Object} dataItem Any result of that wiki
+ * @return {jQuery}
+ */
+ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getInstanceChip = function ( label, dataItem ) {
+	const $chip = $( '<span>' )
+		.addClass( 'wikifarm-combined-title-chip' )
+		.text( label );
+	if ( dataItem && dataItem._instance_light_text === false ) {
+		$chip.addClass( 'wikifarm-combined-title-chip--dark-text' );
+	}
+	return $chip;
+};
+
+/**
+ * @param {Object} dataItem
+ * @return {string}
+ */
+ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getInstanceColor = function ( dataItem ) {
+	return ( dataItem && dataItem._instance_color ) || '#747474';
+};
+
+/**
+ * @param {string} color Hex color, "#abc" or "#aabbcc"
+ * @return {string} CSS color
+ */
+ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getInstanceTint = function ( color ) {
+	let hex = ( color || '' ).replace( '#', '' );
+	if ( hex.length === 3 ) {
+		hex = hex[ 0 ] + hex[ 0 ] + hex[ 1 ] + hex[ 1 ] + hex[ 2 ] + hex[ 2 ];
+	}
+	if ( !/^[0-9a-fA-F]{6}$/.test( hex ) ) {
+		return 'transparent';
+	}
+	const rgb = [
+		parseInt( hex.slice( 0, 2 ), 16 ),
+		parseInt( hex.slice( 2, 4 ), 16 ),
+		parseInt( hex.slice( 4, 6 ), 16 )
+	];
+	return 'rgba( ' + rgb.join( ', ' ) + ', 0.16 )';
 };
 
 ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getDataItemForOption = function ( dataItem ) {
