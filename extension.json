@@ -306,6 +306,9 @@
 			"scripts": [
 				"ui/widget/CombinedTitleInputWidget.js"
 			],
+			"styles": [
+				"styles/combinedTitleInput.less"
+			],
 			"dependencies": [
 				"ext.oOJSPlus.widgets",
 				"ext.bluespice.wikiFarm.bootstrap"
@@ -339,6 +342,9 @@
 				"ui/widget/CombinedTitleInputWidget.js",
 				"ve/ui/CombinedTitleAnnotationWidget.js",
 				"ve/insertLinkCombinedTitleInput.js"
+			],
+			"styles": [
+				"styles/combinedTitleInput.less"
 			],
 			"dependencies": [
 				"ext.bluespice.wikiFarm.bootstrap"
@@ -582,6 +588,9 @@
 			"scripts": [
 				"ui/widget/CombinedTitleInputWidget.js",
 				"formElement/CrossWikiTitle.js"
+			],
+			"styles": [
+				"styles/combinedTitleInput.less"
 			],
 			"dependencies": [
 				"ext.forms.formelements.bootstrap",
