@@ -633,7 +633,8 @@
 		"BSUserManagerGroupDeleted": "updateGroupList",
 		"OutputPageBodyAttributes": "instanceBodyClass",
 		"MWStakeTokenAuthenticatorGetAuthInfo": "addTokenAuthenticatorSearchableWikis",
-		"UnifiedTaskOverviewTaskCollectionComplete": "updateWikiInfo"
+		"UnifiedTaskOverviewTaskCollectionComplete": "updateWikiInfo",
+		"MWStakeUserStoreVisibleGroupsTypeFilter": "handleGroupStore"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
