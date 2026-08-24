@@ -30,7 +30,7 @@ class GlobalActionsAccessManagement extends RestrictedTextLink {
 
 	/** @inheritDoc */
 	public function getText(): Message {
-		return Message::newFromKey( 'wikifarm-accessmanagement-text' );
+		return Message::newFromKey( 'wikifarm-accessmanagement-label' );
 	}
 
 	/** @inheritDoc */
@@ -40,6 +40,6 @@ class GlobalActionsAccessManagement extends RestrictedTextLink {
 
 	/** @inheritDoc */
 	public function getAriaLabel(): Message {
-		return Message::newFromKey( 'wikifarm-accessmanagement-text' );
+		return Message::newFromKey( 'wikifarm-accessmanagement-label' );
 	}
 }

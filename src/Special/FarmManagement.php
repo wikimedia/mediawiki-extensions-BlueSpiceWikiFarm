@@ -29,6 +29,13 @@ class FarmManagement extends SpecialPage {
 	}
 
 	/**
+	 * @inheritDoc
+	 */
+	public function getDescription() {
+		return $this->msg( 'wikifarm-special-farmmanagement-title' );
+	}
+
+	/**
 	 * @param string $subPage
 	 * @return void
 	 */

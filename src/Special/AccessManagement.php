@@ -25,6 +25,13 @@ class AccessManagement extends OOJSSpecialPage {
 	/**
 	 * @inheritDoc
 	 */
+	public function getDescription() {
+		return $this->msg( 'wikifarm-special-accessmanagement-title' );
+	}
+
+	/**
+	 * @inheritDoc
+	 */
 	protected function buildSkeleton() {
 		$this->getOutput()->enableOOUI();
 		$this->getOutput()->addModuleStyles( [ 'ext.bluespice.wikiFarm.accessManagement.skeleton' ] );

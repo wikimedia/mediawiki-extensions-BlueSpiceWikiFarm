@@ -39,7 +39,7 @@ class GlobalActionsFarmManagement extends RestrictedTextLink {
 
 	/** @inheritDoc */
 	public function getText(): Message {
-		return Message::newFromKey( 'wikifarm-farmmanagement-text' );
+		return Message::newFromKey( 'wikifarm-farmmanagement-label' );
 	}
 
 	/** @inheritDoc */
@@ -49,6 +49,6 @@ class GlobalActionsFarmManagement extends RestrictedTextLink {
 
 	/** @inheritDoc */
 	public function getAriaLabel(): Message {
-		return Message::newFromKey( 'wikifarm-farmmanagement-text' );
+		return Message::newFromKey( 'wikifarm-farmmanagement-label' );
 	}
 }
