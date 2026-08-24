@@ -6,10 +6,12 @@ use MediaWiki\Config\Config;
 use MediaWiki\Message\Message;
 use MWStake\MediaWiki\Component\CommonWebAPIs\Hook\MWStakeGroupStoreGroupDisplayNameHook;
 use MWStake\MediaWiki\Component\CommonWebAPIs\Hook\MWStakeGroupStoreGroupTypeFilterHook;
+use MWStake\MediaWiki\Component\CommonWebAPIs\Hook\MWStakeUserStoreVisibleGroupsTypeFilterHook;
 
 class GroupStoreHandling implements
 	MWStakeGroupStoreGroupTypeFilterHook,
-	MWStakeGroupStoreGroupDisplayNameHook
+	MWStakeGroupStoreGroupDisplayNameHook,
+	MWStakeUserStoreVisibleGroupsTypeFilterHook
 {
 
 	/**
@@ -54,5 +56,16 @@ class GroupStoreHandling implements
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function onMWStakeUserStoreVisibleGroupsTypeFilter( array &$types ) {
+		if ( $this->shouldSkip() ) {
+			return;
+		}
+		// Only show custom groups (hide implicit wiki instance groups)
+		$types = [ 'custom' ];
 	}
 }
