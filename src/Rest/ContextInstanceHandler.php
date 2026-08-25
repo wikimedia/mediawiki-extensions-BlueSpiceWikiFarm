@@ -36,15 +36,22 @@ class ContextInstanceHandler extends SimpleHandler {
 		$user = RequestContext::getMain()->getUser();
 		$paths = $this->accessStore->getInstancePathsWhereUserHasRole( $user, 'reader' );
 
+		$activeInstance = $this->instanceStore->getCurrentInstance();
+		if ( !$activeInstance ) {
+			return;
+		}
+
 		$mainInstance = $this->instanceStore->getInstanceByPath( 'w' );
 		$quickAccess = [];
-		if ( !in_array( $mainInstance->getPath(), $paths ) ) {
+		if ( in_array( $mainInstance->getPath(), $paths ) ) {
 			$quickAccess[] = [
 				'path' => $mainInstance->getPath(),
 				'title' => $mainInstance->getDisplayName(),
 				'fullurl' => $mainInstance->getUrl( $this->farmConfig ),
 				'iconClass' => 'bi-bs-home',
-				'classes' => 'farm-wiki-instance-main'
+				'classes' => 'farm-wiki-instance-main',
+				// When not on the main wiki itself, open it in a new tab
+				'newTab' => $activeInstance->getPath() !== $mainInstance->getPath()
 			];
 		}
 
@@ -61,10 +68,6 @@ class ContextInstanceHandler extends SimpleHandler {
 					'classes' => 'farm-wiki-instance-shared'
 				];
 			}
-		}
-		$activeInstance = $this->instanceStore->getCurrentInstance();
-		if ( !$activeInstance ) {
-			return;
 		}
 		$metadata = $activeInstance->getMetadata();
 		$current[] = [

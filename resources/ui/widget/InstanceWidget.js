@@ -10,6 +10,7 @@ ext.bluespiceWikiFarm.ui.widget.InstanceWidget = function ( cfg ) {
 	this.url = cfg.url || '';
 	this.iconClass = cfg.iconClass || '';
 	this.classes = cfg.classes || '';
+	this.newTab = cfg.newTab || false;
 
 	this.$element.addClass( 'farm-wiki-card-item' );
 	if ( this.classes.length > 0 ) {
@@ -30,11 +31,13 @@ ext.bluespiceWikiFarm.ui.widget.InstanceWidget.prototype.buildWidget = function 
 	}
 
 	const $desc = $( '<div>' ).addClass( 'farm-wiki-card-content' );
-	$desc.append(
-		$( '<a>' ).attr( 'href', this.url )
-			.attr( 'title', this.instanceName )
-			.text( this.instanceName )
-	);
+	const $link = $( '<a>' ).attr( 'href', this.url )
+		.attr( 'title', this.instanceName )
+		.text( this.instanceName );
+	if ( this.newTab ) {
+		$link.attr( 'target', '_blank' ).attr( 'rel', 'noopener noreferrer' );
+	}
+	$desc.append( $link );
 	if ( this.desc.length > 0 ) {
 		$desc.append(
 			$( '<span>' ).addClass( 'farm-wiki-card-desc' )
