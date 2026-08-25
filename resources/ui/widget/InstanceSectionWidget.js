@@ -42,7 +42,8 @@ ext.bluespiceWikiFarm.ui.widget.InstanceSectionWidget.prototype.buildContent = f
 			path: element.path,
 			url: element.fullurl,
 			iconClass: element.iconClass || '',
-			classes: element.classes || ''
+			classes: element.classes || '',
+			newTab: element.newTab || false
 		} );
 		elementWidget.connect( this, { favoured: [ 'emit', 'favoured' ] } );
 		this.$content.append( elementWidget.$element );
