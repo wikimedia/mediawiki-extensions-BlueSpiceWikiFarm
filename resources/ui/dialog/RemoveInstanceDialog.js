@@ -31,7 +31,7 @@ ext.bluespiceWikiFarm.ui.dialog.RemoveInstanceDialog.prototype.addItems = functi
 
 	this.panel.$element.append(
 		new OO.ui.LabelWidget( {
-			label: new OO.ui.HtmlSnippet( mw.message( 'wikifarm-remove-instructions' ).plain() + '<code>' + this.path + '</code>' )
+			label: new OO.ui.HtmlSnippet( mw.message( 'wikifarm-remove-instructions' ).plain() + ' <code>' + this.path + '</code>' )
 
 		} ).$element,
 		new OO.ui.FieldLayout( this.pathConfirmInput, {
