@@ -89,17 +89,30 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.build = function () {
 
 	// Build group grid
 	this.groupGrid = this.buildGrid( this.groupStore, 'group' );
-	this.groupGrid.externalFilter.input.$input.attr( 'aria-label', mw.msg( 'wikifarm-access-filter-groups' ) );
+	this.labelSearchInput( this.groupGrid, mw.msg( 'wikifarm-access-filter-groups' ) );
 	this.groupsTab.$element.append( this.groupGrid.$element );
 
 	// Build user grid
 	this.userGrid = this.buildGrid( this.userStore, 'user' );
-	this.userGrid.externalFilter.input.$input.attr( 'aria-label', mw.msg( 'wikifarm-access-filter-users' ) );
+	this.labelSearchInput( this.userGrid, mw.msg( 'wikifarm-access-filter-users' ) );
 	this.usersTab.$element.append( this.userGrid.$element );
 
 	this.tabLayout.addTabPanels( [ this.groupsTab, this.usersTab ] );
 
 	this.$element.append( this.$toolbar.$element, this.tabLayout.$element );
+};
+
+/**
+ * Label the grid's search field and give its "clear" indicator a tooltip,
+ * matching the aria-label OOUI sets on it.
+ *
+ * @param {OOJSPlus.ui.data.GridWidget} grid
+ * @param {string} ariaLabel
+ */
+ext.bluespiceWikiFarm.ui.RolesPanel.prototype.labelSearchInput = function ( grid, ariaLabel ) {
+	const input = grid.externalFilter.input;
+	input.$input.attr( 'aria-label', ariaLabel );
+	input.$indicator.attr( 'title', OO.ui.msg( 'ooui-item-remove' ) );
 };
 
 ext.bluespiceWikiFarm.ui.RolesPanel.prototype.buildGrid = function ( store, entityType ) {
