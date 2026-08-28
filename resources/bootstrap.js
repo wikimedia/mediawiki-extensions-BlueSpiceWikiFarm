@@ -70,6 +70,13 @@ window.ext.bluespiceWikiFarm = {
 			}
 			return source.color.background;
 		},
+		getCurrentWikiColor: () => {
+			const color = mw.config.get( 'bsWikiFarmInstanceColor' );
+			if ( !color || !color.background ) {
+				return ext.bluespiceWikiFarm.util.getWikiColor( {} );
+			}
+			return color.background;
+		},
 		shouldUseLightText: ( source ) => {
 			if ( !source.color ) {
 				return false;
@@ -205,7 +212,7 @@ mw.hook( 'bs.extendedSearch.result.init' ).add( ( $element, source ) => {
 
 mw.hook( 'notifyme.notification.item' ).add( ( notification, data ) => {
 	if ( !data.sourceWiki ) {
-		notification.$element.css( 'border-left', `4px solid ${ ext.bluespiceWikiFarm.util.getWikiColor( {} ) }` );
+		notification.$element.css( 'border-left', `4px solid ${ ext.bluespiceWikiFarm.util.getCurrentWikiColor() }` );
 		return;
 	}
 
@@ -219,24 +226,27 @@ mw.hook( 'notifyme.notification.item' ).add( ( notification, data ) => {
 } );
 
 mw.hook( 'notifyme.notification.group.item' ).add( ( notification, data ) => {
-	if ( !data._source_wiki ) { // eslint-disable-line no-underscore-dangle
-		notification.$element.css( 'border-left', `4px solid ${ ext.bluespiceWikiFarm.util.getWikiColor( {} ) }` );
+	const source = data._source_wiki; // eslint-disable-line no-underscore-dangle
+	const $items = notification.$element
+		.add( notification.$element.find( '.notifications-ui-widget-NotificationItemWidget' ) );
+
+	if ( !source ) {
+		$items.css( 'border-left', `4px solid ${ ext.bluespiceWikiFarm.util.getCurrentWikiColor() }` );
 		return;
 	}
-	const source = data._source_wiki; // eslint-disable-line no-underscore-dangle
 
 	const $wikiBadge = ext.bluespiceWikiFarm.util.getWikiBadge( source );
 	notification.$content.prepend( $wikiBadge ); // eslint-disable-line compat/compat
 
 	const wikiColor = ext.bluespiceWikiFarm.util.getWikiColor( source );
 	if ( wikiColor ) {
-		notification.$element.css( 'border-left', `4px solid ${ wikiColor }` );
+		$items.css( 'border-left', `4px solid ${ wikiColor }` );
 	}
 } );
 
 mw.hook( 'notifyme.notification.preview.item' ).add( ( notification, data ) => {
 	if ( !data._source_wiki ) { // eslint-disable-line no-underscore-dangle
-		notification.$element.css( 'border-left', `4px solid ${ ext.bluespiceWikiFarm.util.getWikiColor( {} ) }` );
+		notification.$element.css( 'border-left', `4px solid ${ ext.bluespiceWikiFarm.util.getCurrentWikiColor() }` );
 		return;
 	}
 	const source = data._source_wiki; // eslint-disable-line no-underscore-dangle
