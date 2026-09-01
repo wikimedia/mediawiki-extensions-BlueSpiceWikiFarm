@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"PanWor"
+		]
+	},
+	"logentry-ext-wikifarm-access-assign-role": "$1 {{GENDER:$2|przypisał|przypisała|przypisał(a)}} rolę „$5” dla grupy „$4”",
+	"logentry-ext-wikifarm-access-remove-all-roles": "$1 {{GENDER:$2|usunął|usunęła|usunął(-ęła)}} wszystkie role dla grupy „$4”",
+	"logentry-ext-wikifarm-access-delete": "$1 {{GENDER:$2|usunął|usunęła|usunął(-ęła)}} wszystkie role dla grupy „$4”"
+}
