@@ -2,13 +2,13 @@ ext.bluespiceWikiFarm.ui.InstancesGrid = function ( config ) { // eslint-disable
 
 	this.store = new OOJSPlus.ui.data.store.RemoteStore( {
 		action: 'wikifarm-wiki-instance-store',
-		pageSize: 20,
 		groupField: 'meta_group',
 		sorter: {
 			meta_group: { // eslint-disable-line camelcase
 				direction: 'ASC'
 			}
-		}
+		},
+		stateId: 'wikifarm-instances-grid'
 	} );
 
 	ext.bluespiceWikiFarm.ui.InstancesGrid.parent.call( this, {
