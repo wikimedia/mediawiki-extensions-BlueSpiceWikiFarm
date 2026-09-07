@@ -1,18 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kly"
+			"Kly",
+			"LowensteinYang"
 		]
 	},
 	"wikifarm-desc": "建立和管理 wiki 農場",
 	"farmmanagement": "農場管理",
 	"grant-farm-management": "建立、管理和刪除 wiki 維基",
 	"right-wikifarm-createwiki": "建立新的 wiki",
-	"action-wikifarm-createwiki": "建立新的 wiki",
-	"right-wikifarm-managewiki": "管理 wiki 設定",
-	"action-wikifarm-managewiki": "管理 wiki 農場",
+	"action-wikifarm-createwiki": "建立新的wiki",
+	"right-wikifarm-managewiki": "管理wiki農場",
+	"action-wikifarm-managewiki": "管理wiki農場",
 	"right-wikifarm-deletewiki": "刪除 wiki",
-	"action-wikifarm-deletewiki": "刪除 wiki",
+	"action-wikifarm-deletewiki": "刪除wiki",
 	"apihelp-wikifarm-wiki-instance-store-summary": "從 WikiFarm 商店查詢 wiki 實例",
 	"apihelp-wikifarm-group-store-summary": "從 WikiFarm 商店查詢 wiki 群組",
 	"apihelp-wikifarm-keyword-store-summary": "從 WikiFarm 商店查詢 wiki 關鍵字",
@@ -127,8 +128,8 @@
 	"wikifarm-ui-access-wiki-type-private": "非公開",
 	"wikifarm-ui-access-wiki-type-protected": "受保護",
 	"wikifarm-ui-access-wiki-type-public-help": "每個人都可以<b>查看和編輯</b>內容 - 包括匿名使用者",
-	"wikifarm-ui-access-wiki-type-private-help": "只有擁有角色為<b>讀者</b>或更高權限的使用者/團隊才能查看 wiki。只有擁有角色為<b>編輯者</b>或更高權限的使用者/團隊才能編輯 wiki。",
-	"wikifarm-ui-access-wiki-type-protected-help": "所有使用者（即使沒有分配到任何角色）都可以查看 wiki。只有擁有角色為<b>編輯者</b>或更高權限的使用者/團隊才能編輯 wiki。",
+	"wikifarm-ui-access-wiki-type-private-help": "只有擁有角色為<b>讀者</b>或更高權限的使用者/群組才能查看 wiki。只有擁有角色為<b>編輯者</b>或更高權限的使用者/群組才能編輯 wiki。",
+	"wikifarm-ui-access-wiki-type-protected-help": "所有使用者（即使沒有分配到任何角色）都可以查看 wiki。只有擁有角色為<b>編輯者</b>或更高權限的使用者/群組才能編輯 wiki。",
 	"wikifarm-ui-access-assignments-header": "角色分配",
 	"wikifarm-ui-access-success-set-level": "Wiki 類型設定成功。",
 	"wikifarm-ui-access-error-set-level": "無法設定 wiki 類型。請重試或聯絡您的管理員。",
@@ -143,9 +144,9 @@
 	"wikifarm-promote-to-shared-dialog-delete-local": "刪除本地端副本",
 	"wikifarm-promote-to-shared-dialog-delete-local-reason": "因為轉移到共享資源 wiki 而被刪除",
 	"wikifarm-shared-resources-exists-on-shared": "此頁面位於共享資源 wiki 上",
-	"wikifarm-instances-menu-empty-favorite-text": "目前沒有新增為收藏的 wiki 實例。您可以點選星形圖示，來選擇一個實例作為收藏。",
-	"wikifarm-instances-menu-button-title": "列出所有 wiki 實例",
-	"wikifarm-instances-menu-aria-label": "Wiki 實例",
+	"wikifarm-instances-menu-empty-favorite-text": "目前沒有新增為收藏的wiki。您可以點選星形圖示，來選擇一個wiki作為收藏。",
+	"wikifarm-instances-menu-button-title": "列出所有的wiki",
+	"wikifarm-instances-menu-aria-label": "Wiki",
 	"wikifarm-instances-menu-section-favourites": "收藏",
 	"wikifarm-ui-search-instance-filter": "在 wiki 裡搜尋：$1",
 	"wikifarm-ui-search-instance-filter-local": "此 wiki",
