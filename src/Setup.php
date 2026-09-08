@@ -102,7 +102,12 @@ class Setup {
 		if ( !FARMER_IS_ROOT_WIKI_CALL ) {
 			$globalServer = $GLOBALS['wgWikiFarmConfigInternal']->get( 'globalServer' );
 			$basePath = $GLOBALS['wgWikiFarmConfigInternal']->get( 'basePath' );
-			$basePath = '/' . trim( $basePath, '/' ) . '/';
+			$basePath = trim( $basePath, '/' );
+			if ( $basePath ) {
+				$basePath = '/' . $basePath . '/';
+			} else {
+				$basePath = '/';
+			}
 			$GLOBALS['wgWikiFarmConfig_interwikiLinks']['w'] = [
 				'iw_prefix' => 'w',
 				'iw_url' => rtrim( $globalServer, '/' ) . $basePath . 'wiki/$1',
