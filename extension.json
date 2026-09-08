@@ -634,7 +634,9 @@
 		"OutputPageBodyAttributes": "instanceBodyClass",
 		"MWStakeTokenAuthenticatorGetAuthInfo": "addTokenAuthenticatorSearchableWikis",
 		"UnifiedTaskOverviewTaskCollectionComplete": "updateWikiInfo",
-		"MWStakeUserStoreVisibleGroupsTypeFilter": "handleGroupStore"
+		"MWStakeUserStoreVisibleGroupsTypeFilter": "handleGroupStore",
+		"IssueTrackerLinksAuth": "unifyRedirectUri",
+		"IssueTrackerLinksAuthRedirectUri": "unifyRedirectUri"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -732,6 +734,10 @@
 		"updateWikiInfo": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\AddWikiInfoToUTO",
 			"services": [ "BlueSpiceWikiFarm.WikiMap", "BlueSpiceWikiFarm._Config" ]
+		},
+		"unifyRedirectUri": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\Integration\\UnifiedIssueTrackerLinksAuthRedirectUri",
+			"services": [ "BlueSpiceWikiFarm._Config", "TitleFactory" ]
 		}
 	},
 	"RestRoutes": [
