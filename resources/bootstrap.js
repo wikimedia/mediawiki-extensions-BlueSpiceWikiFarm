@@ -153,7 +153,7 @@ mw.hook( 'oojsplus.ui.widget.batchoptionwidget.preinit' ).add( ( item, $element 
 		return;
 	}
 	if ( item.attr.is_root ) {
-		$( item.$label ).addClass( 'bi-bs-home' );
+		$( item.$label ).addClass( 'bi-bs-main-wiki' );
 		return;
 	}
 	if ( item.attr && item.attr.color ) {

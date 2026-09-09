@@ -2,12 +2,14 @@
 
 namespace BlueSpice\WikiFarm\Hook;
 
+use BlueSpice\WikiFarm\Component\BackToMainButton;
 use BlueSpice\WikiFarm\Component\CreateInstanceButton;
 use BlueSpice\WikiFarm\Component\WikiInstancesMenu;
 use BlueSpice\WikiFarm\EnhancedGlobalActionsFarmManagement;
 use BlueSpice\WikiFarm\GlobalActionsAccessManagement;
 use BlueSpice\WikiFarm\GlobalActionsFarmManagement;
 use BlueSpice\WikiFarm\InstanceCountLimiter;
+use BlueSpice\WikiFarm\InstanceStore;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Permissions\PermissionManager;
@@ -32,7 +34,8 @@ class CommonUserInterface implements MWStakeCommonUIRegisterSkinSlotComponents {
 		private readonly TitleFactory $titleFactory,
 		private readonly PermissionManager $permissionManager,
 		private readonly SpecialPageFactory $spf,
-		private readonly InstanceCountLimiter $countLimiter
+		private readonly InstanceCountLimiter $countLimiter,
+		private readonly InstanceStore $instanceStore
 	) {
 		$this->farmConfig = $farmConfig;
 	}
@@ -46,10 +49,16 @@ class CommonUserInterface implements MWStakeCommonUIRegisterSkinSlotComponents {
 		$registry->register(
 			'NavbarPrimaryCenterItems',
 			[
-				"farm-wikis-item" => [
+				'farm-back-to-main' => [
+					'factory' => function () {
+						return new BackToMainButton(
+							$this->farmConfig, $this->instanceStore );
+					}
+				],
+				'farm-wikis-item' => [
 					'factory' => function () {
 						return new WikiInstancesMenu(
-							$this->farmConfig );
+							$this->farmConfig, $this->instanceStore );
 					}
 				]
 			]

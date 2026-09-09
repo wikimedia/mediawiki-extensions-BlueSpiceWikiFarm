@@ -11,7 +11,6 @@ ext.bluespiceWikiFarm.ui.InstancesMenuPanel = function ( cfg ) {
 	this.$overview = $( '<div>' ).addClass( 'd-flex justify-content-center' );
 	this.$element.append( this.$quickAccess );
 	this.$element.append( this.$overview );
-	this.makeQuickAccessPanel();
 	this.makeFavouritesPanel();
 	this.makePinnedPanel();
 	this.makeOtherPanel();
@@ -20,34 +19,10 @@ ext.bluespiceWikiFarm.ui.InstancesMenuPanel = function ( cfg ) {
 
 OO.inheritClass( ext.bluespiceWikiFarm.ui.InstancesMenuPanel, OO.ui.Widget );
 
-ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.makeQuickAccessPanel = function () {
-	const skeleton = this.getSkeleton( 'context', 2, false );
-	this.$quickAccess.append( skeleton.$element );
-
-	const api = new mw.Rest();
-	api.get( '/bluespice/farm/v1/instances/context' ).done( ( result ) => {
-		skeleton.$element.remove();
-		const $contextCnt = $( '<div>' ).addClass( 'd-flex justify-content-center' );
-
-		for ( const [ key, elements ] of Object.entries( result ) ) { // eslint-disable-line es-x/no-object-entries
-			if ( elements.length === 0 ) {
-				continue;
-			}
-			// The following messages are used here:
-			// * wikifarm-instances-menu-section-current
-			// * wikifarm-instances-menu-section-central
-			const section = new ext.bluespiceWikiFarm.ui.widget.InstanceSectionWidget( {
-				sectionId: key,
-				title: mw.message( 'wikifarm-instances-menu-section-' + key ).text(),
-				elements: elements
-			} );
-			$contextCnt.append( section.$element );
-		}
-		this.$quickAccess.append( $contextCnt );
-	} );
-};
-
 ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.makeFavouritesPanel = function () {
+	if ( mw.user.getId() === 0 ) {
+		return;
+	}
 	this.$favourite = $( '<div>' );
 	this.$overview.append( this.$favourite );
 	this.loadFavourites();

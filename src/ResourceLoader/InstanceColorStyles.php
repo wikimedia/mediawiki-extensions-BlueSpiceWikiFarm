@@ -2,6 +2,7 @@
 
 namespace BlueSpice\WikiFarm\ResourceLoader;
 
+use BlueSpice\WikiFarm\ColorUtils;
 use BlueSpice\WikiFarm\InstanceEntity;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\Context;
@@ -27,13 +28,21 @@ class InstanceColorStyles extends ResourceLoaderModule {
 	 */
 	public function getStyles( Context $context ) {
 		$rules = [];
+		$colorUtils = new ColorUtils();
 		foreach ( $this->getInstances() as $instance ) {
 			$color = $instance->getMetadata()['instanceColor']['background'] ?? null;
+			$lightText = $instance->getMetadata()['instanceColor']['lightText'];
 			if ( !is_string( $color ) || !preg_match( self::COLOR_PATTERN, $color ) ) {
 				continue;
 			}
-			foreach ( $this->getClassNames( $instance ) as $className ) {
+			foreach ( $this->getClassNames( $instance ) as $instancePath ) {
+				$className = $instancePath . '-color';
 				$rules[$className] = ".$className { color: $color; }";
+
+				// Set lighter bg-color
+				$classNameBG = $instancePath . '-background';
+				$bgColor = $colorUtils->getLightBackground( $color, $lightText );
+				$rules[$classNameBG] = ".$classNameBG { background-color: $bgColor; }";
 			}
 		}
 
@@ -98,7 +107,7 @@ class InstanceColorStyles extends ResourceLoaderModule {
 		}
 
 		return array_map(
-			fn ( string $p ): string => $this->escapeIdentifier( $p ) . '-color',
+			fn ( string $p ): string => $this->escapeIdentifier( $p ),
 			$paths
 		);
 	}

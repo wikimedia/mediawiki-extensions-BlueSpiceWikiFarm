@@ -575,8 +575,6 @@
 				"wikifarm-instances-favorite-remove-btn-title-label",
 				"wikifarm-instances-menu-search-label",
 				"wikifarm-instances-search-placeholder",
-				"wikifarm-instances-menu-section-current",
-				"wikifarm-instances-menu-section-central",
 				"wikifarm-instances-menu-section-favourites",
 				"wikifarm-instances-menu-section-featured",
 				"wikifarm-instances-menu-section-other",
@@ -694,7 +692,8 @@
 			"class": "BlueSpice\\WikiFarm\\Hook\\CommonUserInterface",
 			"services": [
 				"BlueSpiceWikiFarm._Config", "TitleFactory",
-				"PermissionManager", "SpecialPageFactory", "BlueSpiceWikiFarm._InstanceCountLimiter"
+				"PermissionManager", "SpecialPageFactory", "BlueSpiceWikiFarm._InstanceCountLimiter",
+				"BlueSpiceWikiFarm.InstanceStore"
 			]
 		},
 		"userpreference": {
@@ -883,14 +882,6 @@
 				"BlueSpiceWikiFarm._InstanceDisplayRecordHelper",
 				"BlueSpiceWikiFarm.AccessControlStore", "BlueSpiceWikiFarm.InstanceStore",
 				"MWStake.DataStash"
-			]
-		},
-		{
-			"path": "/bluespice/farm/v1/instances/context",
-			"class": "BlueSpice\\WikiFarm\\Rest\\ContextInstanceHandler",
-			"services": [
-				"BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.InstanceStore",
-				"BlueSpiceWikiFarm.AccessControlStore"
 			]
 		},
 		{
