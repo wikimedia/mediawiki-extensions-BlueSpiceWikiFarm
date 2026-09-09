@@ -35,49 +35,14 @@ class SharedInstancesRootNode extends BaseBreadcrumbRootProvider {
 			return $nsNode;
 		}
 
-		if ( $activeInstance->getId() !== 'w' ) {
-			$mainInstance = $this->instanceStore->getInstanceByPath( 'w' );
-			$instanceName = $activeInstance->getPath();
-			if ( $this->farmConfig->get( 'sharedResourcesWikiPath' ) === $instanceName ) {
-				$instanceName = Message::newFromKey( 'wikifarm-shared-instance-name' )->text();
-			}
-
-			$nodes[] = [
-				'text' => '',
-				'href' => $mainInstance->getUrl( $this->farmConfig ),
-				'title' => Message::newFromKey( 'wikifarm-breadcrumb-nav-back-to-main-title' )->text(),
-				'rootNode-class' => [ 'instance-root-home' ],
-				'rootNode-link-class' => [ 'bi-bs-home' ],
-				'aria-label' => Message::newFromKey( 'wikifarm-breadcrumb-nav-back-to-main-title' )->text()
-			];
-
-			$instanceNode = [
-				'text' => str_replace( '_', ' ', $instanceName ),
-				'href' => $activeInstance->getUrl( $this->farmConfig ),
-				'title' => $activeInstance->getDisplayName(),
-				'rootNode-class' => [ 'instance-rootnode' ]
-			];
-
-			if ( $activeInstance->getMetadata()['instanceColor'] ) {
-				$colorConfig = $activeInstance->getMetadata()['instanceColor'];
-				$bgColor = $colorConfig['background'];
-				$fgColor = '#000';
-				if ( $colorConfig['lightText'] ) {
-					$fgColor = '#fff';
-				}
-				$instanceNode['style'] = [ 'background-color:' . $bgColor . ';color:' . $fgColor . ';' ];
-			}
-			$nodes[] = $instanceNode;
-		} else {
-			$nodes[] = [
-				'text' => '',
-				'href' => $activeInstance->getUrl( $this->farmConfig ),
-				'title' => Message::newFromKey( 'wikifarm-breadcrumb-nav-back-to-main-page-title' )->text(),
-				'rootNode-class' => [ 'instance-root-home' ],
-				'rootNode-link-class' => [ 'bi-bs-home' ],
-				'aria-label' => Message::newFromKey( 'wikifarm-breadcrumb-nav-back-to-main-page-title' )->text()
-			];
-		}
+		$nodes[] = [
+			'text' => '',
+			'href' => $activeInstance->getUrl( $this->farmConfig ),
+			'title' => Message::newFromKey( 'wikifarm-breadcrumb-nav-back-to-main-page-title' )->text(),
+			'rootNode-class' => [ 'instance-root-home' ],
+			'rootNode-link-class' => [ 'bi-bs-home' ],
+			'aria-label' => Message::newFromKey( 'wikifarm-breadcrumb-nav-back-to-main-page-title' )->text()
+		];
 
 		$nodes = array_merge( $nodes, $nsNode );
 		return $nodes;

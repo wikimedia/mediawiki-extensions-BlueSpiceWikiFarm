@@ -11,17 +11,6 @@ li.instance-root-home a {
 	font-size: 1rem;
 }
 
-.breadcrumb-item.instance-rootnode.root-node a {
-	margin: 0 0.2rem;
-	border-radius: 5px;
-	background-color: var( --breadcrumb-default-bg );
-	color: var( --breadcrumb-default-fg );
-}
-
-.breadcrumb-item.instance-rootnode.root-node a:hover {
-	opacity: 0.8;
-}
-
 .breadcrumb-item + .breadcrumb-item::before {
 	padding-right: 0;
 }

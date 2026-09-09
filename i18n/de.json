@@ -154,7 +154,6 @@
 	"wikifarm-instance-featured-help": "Featured Wikis werden im Bereich „Featured“ des Wiki-Menüs angezeigt",
 	"wikifarm-instances-menu-search-label": "Nach Wiki suchen",
 	"wikifarm-instances-search-placeholder": "Wiki finden",
-	"wikifarm-instances-menu-section-current": "Aktuell",
 	"wikifarm-instances-menu-section-favourites": "Favoriten",
 	"wikifarm-instances-menu-section-featured": "Featured",
 	"wikifarm-instances-menu-section-other": "Andere",
@@ -178,5 +177,8 @@
 	"wikifarm-instances-pinned-notification-error": "Wiki konnte nicht als \"Featured Wiki\" markiert werden. Bitte {{#FORMAL:versuche|versuchen Sie}} es erneut.",
 	"wikifarm-instances-unpinned-notification-error": "Wiki konnte nicht aus den \"Featured Wikis\" entfernt werden. Bitte {{#FORMAL:versuche|versuchen Sie}} es erneut.",
 	"wikifarm-edit-instance-feature-btn-label": "Featured Wiki",
-	"wikifarm-edit-instance-feature-btn-title": "Wiki als \"featured wiki\" markieren"
+	"wikifarm-edit-instance-feature-btn-title": "Wiki als \"featured wiki\" markieren",
+	"wikifarm-back-to-main-wiki-btn-title": "Zum Haupt-Wiki",
+	"wikifarm-back-to-main-wiki-btn-aria-label": "Haupt-Wiki öffnen",
+	"wikifarm-instances-menu-button-aria-label": "Wikis: $1"
 }

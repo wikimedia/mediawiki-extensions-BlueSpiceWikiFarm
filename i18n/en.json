@@ -153,7 +153,6 @@
 	"wikifarm-shared-resources-exists-on-shared": "This page exists on the shared resources wiki",
 	"wikifarm-instances-menu-empty-favorite-text": "There is currently no wiki added as a favourite. You can select a wiki as favourite with click on the star icon",
 	"wikifarm-instances-menu-button-title": "List with all wikis",
-	"wikifarm-instances-menu-aria-label": "Wikis",
 	"wikifarm-ui-access-field-type-user": "User",
 	"wikifarm-ui-access-field-type-group": "Group",
 	"wikifarm-instance-color": "Wiki color",
@@ -170,7 +169,6 @@
 	"wikifarm-instance-advanced-options": "Advanced settings",
 	"wikifarm-action-purgeinstance-description": "Purge wiki",
 	"wikifarm-main-wiki-name": "Main wiki",
-	"wikifarm-breadcrumb-nav-back-to-main-title": "Back to the main wiki",
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Back to the main page",
 	"wikifarm-access-group-name-user-alt": "All users",
 	"wikifarm-instances-tab-favourite-label": "Favourites",
@@ -215,8 +213,6 @@
 	"wikifarm-instance-featured-help": "Featured wikis appear in the \"Featured\" section of the wiki menu",
 	"wikifarm-instances-menu-search-label": "Search for wiki",
 	"wikifarm-instances-search-placeholder": "Find wiki",
-	"wikifarm-instances-menu-section-current": "Current",
-	"wikifarm-instances-menu-section-central": "Central wikis",
 	"wikifarm-instances-menu-section-favourites": "Favourites",
 	"wikifarm-instances-menu-section-featured": "Featured",
 	"wikifarm-instances-menu-section-other": "Other",
@@ -245,5 +241,8 @@
 	"wikifarm-instances-pinned-notification-error": "Wiki could not be set as \"featured wiki\". Please try again",
 	"wikifarm-instances-unpinned-notification-error": "Wiki could not be removed from \"featured wikis\". Please try again",
 	"wikifarm-edit-instance-feature-btn-label": "Featured wiki",
-	"wikifarm-edit-instance-feature-btn-title": "Mark wiki as \"featured wiki\""
+	"wikifarm-edit-instance-feature-btn-title": "Mark wiki as \"featured wiki\"",
+	"wikifarm-back-to-main-wiki-btn-title": "To main wiki",
+	"wikifarm-back-to-main-wiki-btn-aria-label": "Open main wiki",
+	"wikifarm-instances-menu-button-aria-label": "Wikis: $1"
 }

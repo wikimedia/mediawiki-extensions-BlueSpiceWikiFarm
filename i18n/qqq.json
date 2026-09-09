@@ -156,7 +156,6 @@
 	"wikifarm-shared-resources-exists-on-shared": "Notice if the shared resources already exist on the shared repository",
 	"wikifarm-instances-menu-empty-favorite-text": "Label for favorite menu in wiki farm mega menu if no wiki instance is added as favorite",
 	"wikifarm-instances-menu-button-title": "Title for megamenu button with list of wiki instances",
-	"wikifarm-instances-menu-aria-label": "Aria label for megamenu button with list of wiki instances",
 	"wikifarm-ui-access-field-type-user": "Wiki access level type label\n{{Identical|User}}",
 	"wikifarm-ui-access-field-type-group": "Wiki access level type label\n{{Identical|Group}}",
 	"wikifarm-instance-color": "Field label for wiki color selector",
@@ -173,7 +172,6 @@
 	"wikifarm-instance-advanced-options": "Label for button expanding advanced options when creating a wiki instance",
 	"wikifarm-action-purgeinstance-description": "Description shown for action in management interface",
 	"wikifarm-main-wiki-name": "Display name for the root instance",
-	"wikifarm-breadcrumb-nav-back-to-main-title": "Title for breadcrumb main wiki link",
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Title for breadcrumb main page link",
 	"wikifarm-access-group-name-user-alt": "Label for the \"user\" group",
 	"wikifarm-instances-tab-favourite-label": "Tab label to show all favorite wikis",
@@ -218,8 +216,6 @@
 	"wikifarm-instance-featured-help": "Help label for option to set wiki as featured wiki to menu",
 	"wikifarm-instances-menu-search-label": "Label for search input to search for a wiki",
 	"wikifarm-instances-search-placeholder": "Placeholder label in search input field to search for a wiki",
-	"wikifarm-instances-menu-section-current": "Label for section to show current wiki card",
-	"wikifarm-instances-menu-section-central": "Label for section to show central wiki cards",
 	"wikifarm-instances-menu-section-favourites": "Label for section in instances menu",
 	"wikifarm-instances-menu-section-featured": "Label for section in instances menu",
 	"wikifarm-instances-menu-section-other": "Label for section in instances menu",
@@ -248,5 +244,8 @@
 	"wikifarm-instances-pinned-notification-error": "Notification text when error appeared during mark as featured",
 	"wikifarm-instances-unpinned-notification-error": "Notification text when error appeare during removed from \"featured\".",
 	"wikifarm-edit-instance-feature-btn-label": "Button label to set wiki as featured",
-	"wikifarm-edit-instance-feature-btn-title": "Button title to set wiki as featured"
+	"wikifarm-edit-instance-feature-btn-title": "Button title to set wiki as featured",
+	"wikifarm-back-to-main-wiki-btn-title": "Title for button to open main wiki",
+	"wikifarm-back-to-main-wiki-btn-aria-label": "Aria label for button to open main wiki",
+	"wikifarm-instances-menu-button-aria-label": "Aria label for megamenu button with list of wiki instances"
 }
