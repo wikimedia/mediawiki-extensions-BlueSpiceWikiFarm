@@ -93,7 +93,7 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 		$context = RequestContext::getMain();
 		$context->setUser( $user );
 
-		$dbw = $this->getServiceContainer()->getDBLoadBalancer()->getConnectionRef( DB_PRIMARY );
+		$dbw = $this->getServiceContainer()->getDBLoadBalancer()->getConnection( DB_PRIMARY );
 		$control = new ConsumerSubmitControl( $context, $data, $dbw );
 		$status = $control->submit();
 
