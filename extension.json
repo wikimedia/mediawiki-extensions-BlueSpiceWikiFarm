@@ -80,7 +80,14 @@
 					"class": "BlueSpice\\WikiFarm\\BreadcrumbRootProvider\\SharedInstancesRootNode",
 					"services": [ "BlueSpiceWikiFarm._Config", "BlueSpiceWikiFarm.InstanceStore", "SpecialPageFactory" ]
 				}
+			},
+			"BackLinkProviderRegistry": {
+				"wiki": {
+					"class": "BlueSpice\\WikiFarm\\BackLinkProvider\\WikiBackLinkProvider",
+					"services": [ "TitleFactory", "BlueSpiceWikiFarm.InstanceStore", "BlueSpiceWikiFarm._Config" ]
+				}
 			}
+
 		}
 	},
 	"DefaultUserOptions": {

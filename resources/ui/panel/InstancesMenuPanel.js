@@ -122,16 +122,14 @@ ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.getSkeleton = function ( i
 
 ext.bluespiceWikiFarm.ui.InstancesMenuPanel.prototype.addSpecialPageLink = function () {
 	let url = mw.util.getUrl( 'Special:Wikis' );
-	let target = false;
 	if ( this.farmConfig.instanceId !== 'w' ) {
-		url = mw.config.get( 'wgServer' ) + '/wiki/Special:Wikis';
-		target = true;
+		const backTo = this.farmConfig.instanceInterwiki + ':' + mw.config.get( 'wgPageName' );
+		url = mw.config.get( 'wgServer' ) + '/wiki/Special:Wikis?backTo=' + backTo;
 	}
 
 	const specialPageLink = new OOJSPlus.ui.widget.LinkWidget( {
 		href: url,
-		label: mw.message( 'wikifarm-instances-menu-link-wikis-label' ).text(),
-		target: target
+		label: mw.message( 'wikifarm-instances-menu-link-wikis-label' ).text()
 	} );
 	const $linkCnt = $( '<div>' ).addClass( 'd-flex justify-content-center' );
 	$linkCnt.append( specialPageLink.$element );

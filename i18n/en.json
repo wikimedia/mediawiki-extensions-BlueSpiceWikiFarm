@@ -244,5 +244,7 @@
 	"wikifarm-edit-instance-feature-btn-title": "Mark wiki as \"featured wiki\"",
 	"wikifarm-back-to-main-wiki-btn-title": "To main wiki",
 	"wikifarm-back-to-main-wiki-btn-aria-label": "Open main wiki",
-	"wikifarm-instances-menu-button-aria-label": "Wikis: $1"
+	"wikifarm-instances-menu-button-aria-label": "Wikis: $1",
+	"wikifarm-wiki-back-link-title": "Back to $1",
+	"wikifarm-wiki-back-link-aria-label": "Back to $1"
 }

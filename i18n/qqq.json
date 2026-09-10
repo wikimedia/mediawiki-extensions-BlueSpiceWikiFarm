@@ -247,5 +247,7 @@
 	"wikifarm-edit-instance-feature-btn-title": "Button title to set wiki as featured",
 	"wikifarm-back-to-main-wiki-btn-title": "Title for button to open main wiki",
 	"wikifarm-back-to-main-wiki-btn-aria-label": "Aria label for button to open main wiki",
-	"wikifarm-instances-menu-button-aria-label": "Aria label for megamenu button with list of wiki instances"
+	"wikifarm-instances-menu-button-aria-label": "Aria label for megamenu button with list of wiki instances",
+	"wikifarm-wiki-back-link-title": "Title for back link to a page in other wiki\nParameter:\n* $1 - page name",
+	"wikifarm-wiki-back-link-aria-label": "Aria label for back link to a page in other wiki\nParameter:\n* $1 - page name"
 }
