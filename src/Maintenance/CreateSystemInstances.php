@@ -105,7 +105,7 @@ class CreateSystemInstances extends \MediaWiki\Maintenance\LoggedUpdateMaintenan
 			'purge-instance' => [
 				'class' => PurgeInstance::class,
 				'args' => [ $instance->getId() ],
-				'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'MainConfig' ]
+				'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'MainConfig', 'MWStake.StorageUtilities' ]
 			],
 		] );
 		$executor->executeSteps();
