@@ -28,14 +28,15 @@ class CommonUserInterface implements MWStakeCommonUIRegisterSkinSlotComponents {
 	 * @param PermissionManager $permissionManager
 	 * @param SpecialPageFactory $spf
 	 * @param InstanceCountLimiter $countLimiter
+	 * @param InstanceStore $instanceStore
 	 */
 	public function __construct(
 		Config $farmConfig,
-		private readonly TitleFactory $titleFactory,
+		protected readonly TitleFactory $titleFactory,
 		private readonly PermissionManager $permissionManager,
 		private readonly SpecialPageFactory $spf,
 		private readonly InstanceCountLimiter $countLimiter,
-		private readonly InstanceStore $instanceStore
+		protected readonly InstanceStore $instanceStore
 	) {
 		$this->farmConfig = $farmConfig;
 	}
@@ -45,7 +46,7 @@ class CommonUserInterface implements MWStakeCommonUIRegisterSkinSlotComponents {
 	 */
 	public function onMWStakeCommonUIRegisterSkinSlotComponents( $registry ): void {
 		$context = RequestContext::getMain();
-		$skin = RequestContext::getMain()->getSkin();
+		$skin = $context->getSkin();
 		$registry->register(
 			'NavbarPrimaryCenterItems',
 			[
@@ -70,7 +71,7 @@ class CommonUserInterface implements MWStakeCommonUIRegisterSkinSlotComponents {
 				'ga-bluespice-farmmanagement' => [
 					'factory' => function () use ( $skin ) {
 						if ( is_a( $skin, 'SkinBlueSpiceEclipseSkin', true ) ) {
-							return new EnhancedGlobalActionsFarmManagement( $this->titleFactory );
+							return new EnhancedGlobalActionsFarmManagement( $this->titleFactory, $this->instanceStore );
 						}
 						return new GlobalActionsFarmManagement( $this->titleFactory );
 					}

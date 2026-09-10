@@ -2,16 +2,30 @@
 
 namespace BlueSpice\WikiFarm;
 
-use HtmlArmor;
-use MediaWiki\Html\Html;
-use MediaWiki\Message\Message;
+use MediaWiki\Context\RequestContext;
+use MediaWiki\Title\TitleFactory;
 
 class EnhancedGlobalActionsFarmManagement extends GlobalActionsFarmManagement {
 
-	public function getPostHtml(): HtmlArmor {
-		$html = Html::element( 'span', [
-			'class' => 'badge'
-		], Message::newFromKey( 'wikifarm-global-label' )->text() );
-		return new HtmlArmor( $html );
+	/**
+	 * @param TitleFactory $titleFactory
+	 * @param InstanceStore $instanceStore
+	 */
+	public function __construct( TitleFactory $titleFactory,
+		private readonly InstanceStore $instanceStore ) {
+		return parent::__construct( $titleFactory );
+	}
+
+	/** @inheritDoc */
+	public function getHref(): string {
+		if ( FARMER_IS_ROOT_WIKI_CALL ) {
+			$title = $this->titleFactory->makeTitle( NS_SPECIAL, 'Farm_management' );
+			return $title->getLocalURL();
+		}
+		$contextTitle = RequestContext::getMain()->getTitle();
+		$title = $this->titleFactory->newFromText( 'w:Special:Farm_management' );
+		$instance = $this->instanceStore->getCurrentInstance();
+		$link = $instance->getPath() . ':' . $contextTitle->getFullText();
+		return $title->getLocalURL( 'backTo=wiki-' . $link );
 	}
 }

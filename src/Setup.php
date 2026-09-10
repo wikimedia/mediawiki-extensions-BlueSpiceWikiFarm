@@ -77,8 +77,11 @@ class Setup {
 	 * @return array
 	 */
 	public static function getClientConfig() {
-		$config = MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm._Config' );
-
+		$services = MediaWikiServices::getInstance();
+		$config = $services->getService( 'BlueSpiceWikiFarm._Config' );
+		/** @var InstanceStore $store */
+		$store = $services->getService( 'BlueSpiceWikiFarm.InstanceStore' );
+		$currentInstance = $store->getInstanceByPath( FARMER_CALLED_INSTANCE );
 		$data = [
 			'instanceId' => FARMER_CALLED_INSTANCE,
 			'instanceName' => FARMER_CALLED_INSTANCE,
@@ -87,11 +90,15 @@ class Setup {
 			'shareUsers' => $config->get( 'shareUsers' ),
 			'shareUserSessions' => $config->get( 'shareUserSessions' ),
 			'instanceBadgeColors' => self::INSTANCE_BADGE_COLORS,
+			'instanceInterwiki' => $currentInstance?->getInterwiki(),
+			'instanceDisplayName' => ''
 		];
+		// in root wiki we cannot accessName since its too early to get Message
+		if ( defined( 'FARMER_IS_ROOT_WIKI_CALL' ) && !FARMER_IS_ROOT_WIKI_CALL ) {
+			$data['instanceDisplayName'] = $currentInstance?->getDisplayName();
+		}
 
 		if ( $config->get( 'useSharedResources' ) ) {
-			/** @var DirectInstanceStore $store */
-			$store = $GLOBALS['wgWikiFarmGlobalStore'];
 			$sharedInstance = $store->getInstanceByPath( $config->get( 'sharedResourcesWikiPath' ) );
 			$sharedInstanceUrl = $sharedInstance?->getUrl( $config );
 

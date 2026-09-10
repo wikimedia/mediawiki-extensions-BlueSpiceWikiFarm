@@ -90,3 +90,11 @@
 .uto-tile .tile-content:has( .wikifarm-tab-badge ) {
 	padding: 8px 16px;
 }
+
+.wikifarm-back-link-badge {
+	margin-right: 5px;
+}
+
+.backto-link:hover .wikifarm-back-link-badge {
+	text-decoration: underline;
+}

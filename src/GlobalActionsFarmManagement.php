@@ -12,7 +12,7 @@ class GlobalActionsFarmManagement extends RestrictedTextLink {
 	 * @param TitleFactory $titleFactory
 	 */
 	public function __construct(
-		private readonly TitleFactory $titleFactory
+		protected readonly TitleFactory $titleFactory
 	) {
 		parent::__construct( [] );
 	}
