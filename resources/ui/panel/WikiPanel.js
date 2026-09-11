@@ -13,7 +13,6 @@ bs.bluespiceWikiFarm.ui.WikiPanel = function ( cfg ) {
 	this.permissions = cfg.permissions || [];
 	this.name = cfg.name || '';
 	this.showFavourite = cfg.showFavourite || false;
-	this.creationAllowed = cfg.creationAllowed || false;
 	this.farmConfig = ext.bluespiceWikiFarm._config(); // eslint-disable-line no-underscore-dangle
 
 	this.store = cfg.store;
@@ -110,65 +109,34 @@ bs.bluespiceWikiFarm.ui.WikiPanel.prototype.makeGrid = function () {
 			}
 		};
 	}
-	const subActions = [];
-	if ( this.permissions.indexOf( 'managewiki' ) > -1 ) { // eslint-disable-line unicorn/prefer-includes
-		subActions.push( {
-			label: mw.message( 'wikifarm-button-action-label-edit' ).text(),
-			data: 'edit',
-			icon: 'edit'
-		} );
-		subActions.push( {
-			label: mw.message( 'wikifarm-button-action-label-suspend' ).text(),
-			data: 'suspend',
-			icon: 'pause'
-		} );
+	if ( this.permissions.indexOf( 'managewiki' ) > -1 ) {
+		gridCfg.columns.actionEdit = {
+			type: 'action',
+			actionId: 'edit',
+			icon: 'edit',
+			title: mw.message( 'wikifarm-button-action-label-edit' ).text(),
+			headerText: mw.message( 'wikifarm-button-action-label-edit' ).text(),
+			invisibleHeader: true,
+			width: 30,
+			visibleOnHover: true,
+			shouldShow: ( row ) => !row.is_system
+		};
 	}
-
-	if ( this.permissions.indexOf( 'createwiki' ) > -1 || !this.creationAllowed ) { // eslint-disable-line unicorn/prefer-includes
-		subActions.push( {
-			label: mw.message( 'wikifarm-button-action-label-clone' ).text(),
-			data: 'clone',
-			icon: 'copy'
-		} );
-	}
-	if ( this.permissions.indexOf( 'deletewiki' ) > -1 ) { // eslint-disable-line unicorn/prefer-includes
-		subActions.push( {
-			label: mw.message( 'wikifarm-button-action-delete-label' ).text(),
-			data: 'delete',
-			icon: 'trash',
-			flags: [ 'destructive' ]
-		} );
-	}
-	gridCfg.columns.others = {
-		type: 'secondaryActions',
-		visibleOnHover: true,
-		actions: subActions,
-		width: 30
-	};
 	gridCfg.store = this.store;
 	this.grid = new OOJSPlus.ui.data.GridWidget( gridCfg );
 
 	this.grid.connect( this, {
 		action: ( action, row ) => {
-			if ( action === 'edit' ) {
-				const url = mw.util.getUrl( 'Special:Farm_management/' + row.path, {
-					backTo: mw.config.get( 'wgPageName' )
-				} );
-				window.location.href = url;
+			if ( action !== 'edit' ) {
 				return;
 			}
-			if ( action === 'clone' ) {
-				const url = mw.util.getUrl( 'Special:Farm_management/_create/template', {
-					template: '_clone',
-					source: row.path,
-					backTo: mw.config.get( 'wgPageName' )
-				} );
-				window.location.href = url;
-				return;
-			}
-			this.openActionDialog( action, row );
+			const url = mw.util.getUrl( 'Special:Farm_management/' + row.path, {
+				backTo: mw.config.get( 'wgPageName' )
+			} );
+			window.location.href = url;
 		}
 	} );
+
 	this.$element.append( this.grid.$element );
 };
 
@@ -222,36 +190,4 @@ bs.bluespiceWikiFarm.ui.WikiPanel.prototype.addGroupFilter = function () {
 		}
 	} );
 	this.$element.prepend( this.filter.$element );
-};
-
-bs.bluespiceWikiFarm.ui.WikiPanel.prototype.openActionDialog = function ( action, item ) {
-	let dialog;
-	mw.loader.using( [ 'ext.bluespice.wikiFarm.management' ] ).done( () => {
-		switch ( action ) {
-			case 'delete':
-				dialog = new ext.bluespiceWikiFarm.ui.dialog.RemoveInstanceDialog( { path: item.path } );
-				break;
-			case 'suspend':
-				dialog = new ext.bluespiceWikiFarm.ui.dialog.ConfirmDialog( {
-					path: item.path,
-					action: 'suspend',
-					title: mw.message( 'wikifarm-suspend-instance' ).plain(),
-					prompt: mw.message( 'wikifarm-suspend-prompt' ).plain()
-				} );
-				break;
-		}
-
-		if ( dialog ) {
-			const windowManager = new OO.ui.WindowManager();
-			$( document.body ).append( windowManager.$element );
-			windowManager.addWindows( [ dialog ] );
-			windowManager.openWindow( dialog ).closed.then( ( res ) => {
-				$( document.body ).remove( windowManager.$element );
-				if ( res && res.needsReload ) {
-					this.grid.getStore().reload();
-					this.evaluateLimits();
-				}
-			} );
-		}
-	} );
 };
