@@ -67,7 +67,6 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 		label: mw.msg( 'wikifarm-instances-tab-favourite-label' ),
 		tab: this.favouriteContent,
 		permissions: this.permissions,
-		creationAllowed: this.creationAllowed,
 		favourite: true,
 		showFavourite: true,
 		store: new OOJSPlus.ui.data.store.RemoteRestStore( {
@@ -98,7 +97,6 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 		label: mw.msg( 'wikifarm-instances-tab-featured-label' ),
 		tab: this.featuredContent,
 		permissions: this.permissions,
-		creationAllowed: this.creationAllowed,
 		favourite: false,
 		store: new OOJSPlus.ui.data.store.RemoteRestStore( {
 			path: 'bluespice/farm/v1/instances/list',
@@ -127,7 +125,6 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 		label: mw.msg( 'wikifarm-instances-tab-all-label' ),
 		tab: this.allInstanceContent,
 		permissions: this.permissions,
-		creationAllowed: this.creationAllowed,
 		favourite: false,
 		showFavourite: true,
 		store: new OOJSPlus.ui.data.store.RemoteRestStore( {

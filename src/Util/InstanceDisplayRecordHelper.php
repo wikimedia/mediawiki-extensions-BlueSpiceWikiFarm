@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\Util;
 
 use BlueSpice\WikiFarm\Data\InstanceDisplayList\InstanceDisplayRecord;
 use BlueSpice\WikiFarm\InstanceEntity;
+use BlueSpice\WikiFarm\SystemInstanceEntity;
 use MediaWiki\Config\Config;
 use MediaWiki\User\UserIdentity;
 
@@ -50,7 +51,8 @@ class InstanceDisplayRecordHelper {
 			InstanceDisplayRecord::FULLURL => $fullUrl,
 			InstanceDisplayRecord::INSTANCE_COLOR => $instance->getMetadata()['instanceColor']['background'] ?? null,
 			InstanceDisplayRecord::FAVOURITE => $isFavourite,
-			InstanceDisplayRecord::META_GROUP => $instance->getMetadata()['group'] ?? ''
+			InstanceDisplayRecord::META_GROUP => $instance->getMetadata()['group'] ?? '',
+			InstanceDisplayRecord::IS_SYSTEM => $instance instanceof SystemInstanceEntity
 		] );
 	}
 

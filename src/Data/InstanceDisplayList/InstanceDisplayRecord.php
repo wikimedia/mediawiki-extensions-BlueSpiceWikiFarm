@@ -13,4 +13,5 @@ class InstanceDisplayRecord extends BaseRecord {
 	public const INSTANCE_COLOR = 'instance_color';
 	public const FAVOURITE = 'favourite';
 	public const META_GROUP = 'meta_group';
+	public const IS_SYSTEM = 'is_system';
 }
