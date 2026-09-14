@@ -11,6 +11,15 @@
 	padding: 20px 0;
 }
 
+.wikifarm-instance-path-pill {
+	display: inline-block;
+	padding: 0 0.4rem;
+	border-radius: 5px;
+	background-color: #3e5389;
+	color: #fff;
+	white-space: nowrap;
+}
+
 .bs-wikis-list td[ data-column='favourite' ] {
 	display: flex;
 	justify-content: center;
