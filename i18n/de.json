@@ -145,6 +145,7 @@
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Zurück zur Hauptseite",
 	"wikifarm-instances-tab-favourite-label": "Favoriten",
 	"wikifarm-instances-tab-all-label": "Weitere Wikis",
+	"wikifarm-instances-grid-column-path-header-label": "Pfad",
 	"wikifarm-instances-grid-column-wiki-header-label": "Wiki",
 	"wikis": "Wikis",
 	"wikifarm-instances-grid-column-favourites-header-label": "Favorit",
