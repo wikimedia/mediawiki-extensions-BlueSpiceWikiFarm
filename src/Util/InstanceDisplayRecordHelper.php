@@ -6,6 +6,7 @@ use BlueSpice\WikiFarm\Data\InstanceDisplayList\InstanceDisplayRecord;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\SystemInstanceEntity;
 use MediaWiki\Config\Config;
+use MediaWiki\Message\Message;
 use MediaWiki\User\UserIdentity;
 
 class InstanceDisplayRecordHelper {
@@ -47,13 +48,34 @@ class InstanceDisplayRecordHelper {
 
 		return new InstanceDisplayRecord( (object)[
 			InstanceDisplayRecord::PATH => $instance->getPath(),
+			InstanceDisplayRecord::PATH_LABEL => $this->getPathLabel( $instance ),
 			InstanceDisplayRecord::TITLE => $instance->getDisplayName(),
 			InstanceDisplayRecord::FULLURL => $fullUrl,
 			InstanceDisplayRecord::INSTANCE_COLOR => $instance->getMetadata()['instanceColor']['background'] ?? null,
+			InstanceDisplayRecord::INSTANCE_COLOR_LIGHT_TEXT =>
+				(bool)( $instance->getMetadata()['instanceColor']['lightText'] ?? false ),
 			InstanceDisplayRecord::FAVOURITE => $isFavourite,
 			InstanceDisplayRecord::META_GROUP => $instance->getMetadata()['group'] ?? '',
 			InstanceDisplayRecord::IS_SYSTEM => $instance instanceof SystemInstanceEntity
 		] );
+	}
+
+	/**
+	 * Same label the instance node in the breadcrumbs shows
+	 * (see SharedInstancesRootNode). The root instance has no such node.
+	 *
+	 * @param InstanceEntity $instance
+	 * @return string
+	 */
+	private function getPathLabel( InstanceEntity $instance ): string {
+		$path = $instance->getPath();
+		if ( $path === 'w' ) {
+			return '';
+		}
+		if ( $path === $this->farmConfig->get( 'sharedResourcesWikiPath' ) ) {
+			return Message::newFromKey( 'wikifarm-shared-instance-name' )->text();
+		}
+		return str_replace( '_', ' ', $path );
 	}
 
 	/**

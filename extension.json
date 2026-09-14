@@ -542,6 +542,7 @@
 			"messages": [
 				"wikifarm-instances-tab-favourite-label",
 				"wikifarm-instances-tab-all-label",
+				"wikifarm-instances-grid-column-path-header-label",
 				"wikifarm-instances-grid-column-wiki-header-label",
 				"wikifarm-instances-grid-column-favourites-header-label",
 				"wikifarm-instances-grid-favourites-label-add",

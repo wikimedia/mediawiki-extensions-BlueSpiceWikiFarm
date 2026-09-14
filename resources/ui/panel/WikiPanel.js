@@ -43,27 +43,31 @@ bs.bluespiceWikiFarm.ui.WikiPanel.prototype.makeGrid = function () {
 		filtering: null,
 		classes: [ 'bs-wikis-list' ],
 		columns: {
+			path_label: { // eslint-disable-line camelcase
+				headerText: mw.msg( 'wikifarm-instances-grid-column-path-header-label' ),
+				sortable: true,
+				width: 150,
+				valueParser: function ( value, row ) {
+					if ( !value ) {
+						return '';
+					}
+					const $pill = $( '<span>' ).addClass( 'wikifarm-instance-path-pill' ).text( value );
+					if ( row.instance_color ) {
+						$pill.css( {
+							'background-color': row.instance_color,
+							color: row.instance_color_light_text ? '#fff' : '#000'
+						} );
+					}
+					return $pill;
+				}
+			},
 			title: {
 				headerText: mw.msg( 'wikifarm-instances-grid-column-wiki-header-label' ),
 				type: 'url',
 				sortable: true,
-				urlExternal: true,
-				autoClosePopup: true,
 				urlProperty: 'fullurl',
 				filter: {
 					type: 'text'
-				},
-				valueParser: function ( value, row ) {
-					const $anchor = $( '<a>' ).attr( {
-						href: row.fullurl,
-						class: 'external',
-						target: '_blank'
-					} ).text( value );
-					const $color = $( '<span>' ).addClass( 'instance-color-indicator' );
-					if ( row.instance_color ) {
-						$color.css( 'background-color', row.instance_color );
-					}
-					return new OO.ui.HtmlSnippet( $( '<div>' ).append( $color, $anchor ).html() );
 				}
 			}
 		}

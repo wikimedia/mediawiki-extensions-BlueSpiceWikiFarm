@@ -12,6 +12,11 @@ class Schema extends \MWStake\MediaWiki\Component\DataStore\Schema {
 				self::SORTABLE => true,
 				self::TYPE => FieldType::STRING
 			],
+			InstanceDisplayRecord::PATH_LABEL => [
+				self::FILTERABLE => true,
+				self::SORTABLE => true,
+				self::TYPE => FieldType::STRING
+			],
 			InstanceDisplayRecord::TITLE => [
 				self::FILTERABLE => true,
 				self::SORTABLE => true,
@@ -26,6 +31,11 @@ class Schema extends \MWStake\MediaWiki\Component\DataStore\Schema {
 				self::FILTERABLE => false,
 				self::SORTABLE => false,
 				self::TYPE => FieldType::STRING
+			],
+			InstanceDisplayRecord::INSTANCE_COLOR_LIGHT_TEXT => [
+				self::FILTERABLE => false,
+				self::SORTABLE => false,
+				self::TYPE => FieldType::BOOLEAN
 			],
 			InstanceDisplayRecord::FAVOURITE => [
 				self::FILTERABLE => true,
