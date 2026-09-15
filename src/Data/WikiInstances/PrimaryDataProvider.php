@@ -94,6 +94,7 @@ class PrimaryDataProvider implements IPrimaryDataProvider {
 			Record::META_GROUP => '',
 			Record::IS_SYSTEM => $instance instanceof SystemInstanceEntity,
 			Record::INSTANCE_COLOR => $instance->getMetadata()['instanceColor']['background'] ?? null,
+			Record::PINNED => $instance->isPinned()
 		];
 
 		$data['meta_keywords'] = [];

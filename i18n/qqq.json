@@ -242,5 +242,11 @@
 	"wikifarm-ui-search-instance-filter-hint": "Help message for the search center filter",
 	"wikifarm-ui-search-instance-filter-search": "Instance search field placeholder",
 	"wikifarm-search-filter-label": "Label for filter to select wikis which should be searched in",
-	"wikifarm-instances-menu-search-no-results": "Label if no wiki can be found via search"
+	"wikifarm-instances-menu-search-no-results": "Label if no wiki can be found via search",
+	"wikifarm-instances-pinned-notification-success": "Notification text when wiki is set as featured",
+	"wikifarm-instances-unpinned-notification-success": "Notification text when wiki is removed from \"featured\"",
+	"wikifarm-instances-pinned-notification-error": "Notification text when error appeared during mark as featured",
+	"wikifarm-instances-unpinned-notification-error": "Notification text when error appeare during removed from \"featured\".",
+	"wikifarm-edit-instance-feature-btn-label": "Button label to set wiki as featured",
+	"wikifarm-edit-instance-feature-btn-title": "Button title to set wiki as featured"
 }

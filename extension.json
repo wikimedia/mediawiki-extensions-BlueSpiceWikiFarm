@@ -192,7 +192,13 @@
 				"wikifarm-remove-instance",
 				"wikifarm-incomplete-instance",
 				"wikifarm-instance-creator",
-				"wikifarm-instance-creator-no-info-label"
+				"wikifarm-instance-creator-no-info-label",
+				"wikifarm-instances-pinned-notification-success",
+				"wikifarm-instances-unpinned-notification-success",
+				"wikifarm-instances-pinned-notification-error",
+				"wikifarm-instances-unpinned-notification-error",
+				"wikifarm-edit-instance-feature-btn-label",
+				"wikifarm-edit-instance-feature-btn-title"
 			],
 			"dependencies": [
 				"oojs-ui",
@@ -753,6 +759,12 @@
 			"path": "/bluespice/farm/v1/instance/edit/{instanceName}",
 			"class": "\\BlueSpice\\WikiFarm\\Rest\\EditInstanceHandler",
 			"services": [ "BlueSpiceWikiFarm.InstanceManager", "PermissionManager", "LanguageFactory", "MainConfig" ]
+		},
+		{
+			"method": "POST",
+			"path": "/bluespice/farm/v1/instance/pin/{instanceName}",
+			"class": "\\BlueSpice\\WikiFarm\\Rest\\PinInstanceHandler",
+			"services": [ "BlueSpiceWikiFarm.InstanceManager", "PermissionManager" ]
 		},
 		{
 			"method": "POST",

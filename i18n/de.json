@@ -172,5 +172,11 @@
 	"wikifarm-ui-search-instance-filter-all": "Alle verfügbaren Wikis",
 	"wikifarm-ui-search-instance-filter-hint": "... oder wähle Wikis aus, in denen zusätzlich zu diesem Wiki gesucht werden soll",
 	"wikifarm-search-filter-label": "In Wikis suchen",
-	"wikifarm-instances-menu-search-no-results": "Keine Wikis gefunden"
+	"wikifarm-instances-menu-search-no-results": "Keine Wikis gefunden",
+	"wikifarm-instances-pinned-notification-success": "Wiki als \"Featured Wiki\" markiert",
+	"wikifarm-instances-unpinned-notification-success": "Wiki aus den \"Featured Wikis\" entfernt",
+	"wikifarm-instances-pinned-notification-error": "Wiki konnte nicht als \"Featured Wiki\" markiert werden. Bitte {{#FORMAL:versuche|versuchen Sie}} es erneut.",
+	"wikifarm-instances-unpinned-notification-error": "Wiki konnte nicht aus den \"Featured Wikis\" entfernt werden. Bitte {{#FORMAL:versuche|versuchen Sie}} es erneut.",
+	"wikifarm-edit-instance-feature-btn-label": "Featured Wiki",
+	"wikifarm-edit-instance-feature-btn-title": "Wiki als \"featured wiki\" markieren"
 }

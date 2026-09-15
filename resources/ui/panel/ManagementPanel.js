@@ -93,7 +93,10 @@ ext.bluespiceWikiFarm.ui.ManagementPanel.prototype.makeActions = function () {
 		data: {
 			action: 'clone',
 			mustBeSelected: true,
-			mustBeAbleToAdd: true
+			mustBeAbleToAdd: true,
+			visibilityCallback: function ( row ) {
+				return row && !row.suspended && !row.is_system;
+			}
 		}
 	} );
 	this.suspendButton = new OO.ui.ButtonWidget( {
@@ -143,9 +146,24 @@ ext.bluespiceWikiFarm.ui.ManagementPanel.prototype.makeActions = function () {
 			}
 		}
 	} );
+	this.featuredButton = new OO.ui.ToggleButtonWidget( {
+		icon: 'pushPin',
+		label: mw.message( 'wikifarm-edit-instance-feature-btn-label' ).text(),
+		title: mw.message( 'wikifarm-edit-instance-feature-btn-title' ).text(),
+		data: {
+			action: 'featured',
+			mustBeSelected: true,
+			selectionCallback: function ( row ) {
+				return row && row.pinned;
+			},
+			visibilityCallback: function ( row ) {
+				return row;
+			}
+		}
+	} );
 
 	this.buttons = [
-		this.createButton, this.cloneButton, this.editButton,
+		this.createButton, this.cloneButton, this.editButton, this.featuredButton,
 		this.suspendButton, this.resumeButton, this.deleteButton
 	];
 
@@ -182,12 +200,49 @@ ext.bluespiceWikiFarm.ui.ManagementPanel.prototype.onButtonClick = function ( da
 		this.redirect( this.selectedRow.path );
 		return;
 	}
+	if ( action === 'featured' ) {
+		const path = this.selectedRow.path;
+		const isPinned = this.featuredButton.getValue();
+		const pinnedData = { pinned: isPinned };
+		$.ajax( {
+			method: 'POST',
+			url: this.generateSubmitUrl( path ),
+			data: JSON.stringify( pinnedData ),
+			contentType: 'application/json',
+			dataType: 'json'
+		} ).done( () => {
+			const msg = isPinned ? 'wikifarm-instances-pinned-notification-success' :
+				'wikifarm-instances-unpinned-notification-success';
+
+			// The following messages are used here:
+			// * wikifarm-instances-pinned-notification-success
+			// * wikifarm-instances-unpinned-notification-success
+			mw.notify( mw.message( msg ).text(),
+				{ type: 'success' } );
+			window.location.reload();
+		} ).fail( () => {
+			const errorMsg = isPinned ? 'wikifarm-instances-pinned-notification-error' :
+				'wikifarm-instances-unpinned-notification-error';
+
+			// The following messages are used here:
+			// * wikifarm-instances-pinned-notification-error
+			// * wikifarm-instances-unpinned-notification-error
+			mw.notify( mw.message( errorMsg ).text(),
+				{ type: 'error' } );
+		} );
+		return;
+	}
 	this.openTaskDialog( action, this.selectedRow );
 };
 
 ext.bluespiceWikiFarm.ui.ManagementPanel.prototype.redirect = function ( action, params ) {
 	params = params || {};
 	window.location.href = this.getActionUrl( action, params );
+};
+
+ext.bluespiceWikiFarm.ui.ManagementPanel.prototype.generateSubmitUrl = function ( path ) {
+	const url = '/bluespice/farm/v1/instance/pin/' + path;
+	return mw.util.wikiScript( 'rest' ) + url;
 };
 
 ext.bluespiceWikiFarm.ui.ManagementPanel.prototype.getActionUrl = function ( action, params ) {
@@ -227,6 +282,9 @@ ext.bluespiceWikiFarm.ui.ManagementPanel.prototype.setAbilities = function () {
 			} else {
 				this.buttons[ i ].$element.hide();
 			}
+		}
+		if ( btnData.hasOwnProperty( 'selectionCallback' ) ) {
+			this.buttons[ i ].setValue( btnData.selectionCallback( this.selectedRow ) );
 		}
 		const mustBeComplete = btnData.mustBeComplete === undefined ? true : btnData.mustBeComplete;
 		if ( this.selectedRow && mustBeComplete ) {
