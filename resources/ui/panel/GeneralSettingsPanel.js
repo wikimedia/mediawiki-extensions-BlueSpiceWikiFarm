@@ -82,7 +82,6 @@ ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.build = function () {
 		classes: [ 'bs-access-management-toolbar' ],
 		items: [ this.saveButton ]
 	} );
-	this.toolbar.$element.css( 'justify-content', 'flex-end' );
 
 	this.$element.append( this.toolbar.$element, this.$heading, this.$cardsContainer );
 };
