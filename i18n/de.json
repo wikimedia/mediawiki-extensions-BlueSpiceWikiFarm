@@ -69,7 +69,7 @@
 	"wikifarm-error-unknown": "Ein Fehler ist aufgetreten",
 	"wikifarm-error-unknown-instance": "Unbekanntes Wiki",
 	"wikifarm-group-undefined": "Ohne Gruppe",
-	"wikifarm-instance-create-edit-error": "Ein Fehler beim Speichern der Wikidaten ist aufgetreten. Bitte kontaktieren Sie Ihren Administrator.",
+	"wikifarm-instance-create-edit-error": "Ein Fehler beim Speichern der Wikidaten ist aufgetreten. Bitte {{#FORMAL:kontaktiere|kontaktieren Sie}} {{#FORMAL:deinen|Ihren}} Administrator.",
 	"wikifarm-instance-creator": "Erstellt von",
 	"wikifarm-instance-creator-no-info-label": "Keine Information verfügbar",
 	"wikifarm-instance-ctime": "Erstellungsdatum",

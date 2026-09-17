@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"EneshTranslates"
+			"EneshTranslates",
+			"Yurina Tatiana"
 		]
 	},
-	"wikifarm-mainpage-content-tutorials-links": "[https://en.wiki.bluespice.com/wiki/Manual:Create_pages Как создать страницу?]\n\n[https://en.wiki.bluespice.com/wiki/Manual:Extension/VisualEditor Как отформатировать текст?]\n\n[https://en.wiki.bluespice.com/wiki/Manual:Extension/VisualEditor/Tables Как работать с таблицами?]"
+	"wikifarm-mainpage-content-tutorials-links": "[https://en.wiki.bluespice.com/wiki/Manual:Create_pages Как создать страницу?]\n\n[https://en.wiki.bluespice.com/wiki/Manual:Extension/VisualEditor Как отформатировать текст?]\n\n[https://en.wiki.bluespice.com/wiki/Manual:Extension/VisualEditor/Tables Как работать с таблицами?]",
+	"wikifarm-search-center-filter-wiki-label": "Вики",
+	"wikifarm-search-center-filter-wiki-with-values-label": "Вики:"
 }
