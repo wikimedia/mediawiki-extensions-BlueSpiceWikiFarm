@@ -60,7 +60,7 @@ class FarmManagement extends SpecialPage {
 				);
 				return;
 			}
-			$this->getOutput()->setPageTitle( $this->msg( 'wikifarm-create-instance-title' ) );
+			$this->getOutput()->setPageTitleMsg( $this->msg( 'wikifarm-create-instance-title' ) );
 			$this->getOutput()->addBacklinkSubtitle( $this->getPageTitle() );
 			$this->getOutput()->addModules( [ 'ext.bluespice.wikiFarm.special.bootstrap' ] );
 
@@ -112,7 +112,7 @@ class FarmManagement extends SpecialPage {
 							);
 							return;
 						}
-						$this->getOutput()->setPageTitle(
+						$this->getOutput()->setPageTitleMsg(
 							$this->msg( 'wikifarm-create-instance-title-from-template', $template )
 						);
 						$createParams['template'] = $template;
