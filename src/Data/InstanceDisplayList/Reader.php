@@ -9,6 +9,8 @@ use BlueSpice\WikiFarm\Util\InstanceDisplayRecordHelper;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\User\Options\UserOptionsLookup;
+use MWStake\MediaWiki\Component\DataStore\ReaderParams;
+use MWStake\MediaWiki\Component\DataStore\Sorter;
 
 class Reader extends WikiInstancesReader {
 
@@ -38,6 +40,26 @@ class Reader extends WikiInstancesReader {
 	protected function makePrimaryDataProvider( $params ) {
 		return new PrimaryDataProvider( $this->instanceStore, $this->farmConfig, $this->mainConfig,
 			$this->context, $this->accessStore, $this->userOptionsLookup, $this->instanceDisplayRecordHelper );
+	}
+
+	/**
+	 * Sorting by "is_system" always takes precedence, so system wikis stay on top
+	 * regardless of the order the client sends its sorters in
+	 *
+	 * @param ReaderParams $params
+	 * @return Sorter
+	 */
+	protected function makeSorter( $params ) {
+		$systemSorts = [];
+		$otherSorts = [];
+		foreach ( $params->getSort() as $sort ) {
+			if ( $sort->getProperty() === InstanceDisplayRecord::IS_SYSTEM ) {
+				$systemSorts[] = $sort;
+			} else {
+				$otherSorts[] = $sort;
+			}
+		}
+		return new Sorter( array_merge( $systemSorts, $otherSorts ) );
 	}
 
 	/**

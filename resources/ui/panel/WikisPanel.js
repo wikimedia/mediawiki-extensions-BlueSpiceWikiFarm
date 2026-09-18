@@ -72,6 +72,9 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 		store: new OOJSPlus.ui.data.store.RemoteRestStore( {
 			path: 'bluespice/farm/v1/instances/list',
 			sorter: {
+				is_system: { // eslint-disable-line camelcase
+					direction: 'DESC'
+				},
 				title: {
 					direction: 'ASC'
 				}
@@ -101,6 +104,9 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 		store: new OOJSPlus.ui.data.store.RemoteRestStore( {
 			path: 'bluespice/farm/v1/instances/list',
 			sorter: {
+				is_system: { // eslint-disable-line camelcase
+					direction: 'DESC'
+				},
 				title: {
 					direction: 'ASC'
 				}
@@ -130,6 +136,9 @@ bs.bluespiceWikiFarm.ui.WikisPanel.prototype.makeTabs = function () {
 		store: new OOJSPlus.ui.data.store.RemoteRestStore( {
 			path: 'bluespice/farm/v1/instances/list',
 			sorter: {
+				is_system: { // eslint-disable-line camelcase
+					direction: 'DESC'
+				},
 				title: {
 					direction: 'ASC'
 				}
