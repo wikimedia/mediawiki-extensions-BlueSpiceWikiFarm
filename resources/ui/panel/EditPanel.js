@@ -36,6 +36,7 @@ ext.bluespiceWikiFarm.ui.EditPanel = function ( config ) {
 	this.$element.append( this.msgPanel.$element );
 
 	this.render();
+	this.setSaveDisabled( this.nameInput.getValue().trim() === '' );
 };
 
 OO.inheritClass( ext.bluespiceWikiFarm.ui.EditPanel, OO.ui.PanelLayout );
@@ -193,7 +194,8 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.makeAdvancedOptionsInputs = functio
 	return items;
 };
 
-ext.bluespiceWikiFarm.ui.EditPanel.prototype.onNameChange = function ( value ) { // eslint-disable-line no-unused-vars
+ext.bluespiceWikiFarm.ui.EditPanel.prototype.onNameChange = function ( value ) {
+	this.setSaveDisabled( value.trim() === '' );
 	this.onBeforeNameSet();
 	// Wait for the user to stop typing
 	if ( this.nameChangeTimeout ) {
@@ -217,6 +219,10 @@ ext.bluespiceWikiFarm.ui.EditPanel.prototype.onNameChange = function ( value ) {
 			this.onAfterNameSet( false, false, {} );
 		} );
 	}, 500 );
+};
+
+ext.bluespiceWikiFarm.ui.EditPanel.prototype.setSaveDisabled = function ( disabled ) {
+	this.toolbar.tools.save.setDisabled( disabled );
 };
 
 ext.bluespiceWikiFarm.ui.EditPanel.prototype.onSuspendClick = function () {
