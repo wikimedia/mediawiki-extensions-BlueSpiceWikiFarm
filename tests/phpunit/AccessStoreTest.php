@@ -37,7 +37,6 @@ class AccessStoreTest extends TestCase {
 			'wiki__global_editor',
 			'wiki__global_reviewer',
 			'wiki__global_admin',
-			'sysop'
 		];
 		$expectedGroupsToCheckTest1 = [
 			'wiki_Test1_reader',
@@ -98,7 +97,6 @@ class AccessStoreTest extends TestCase {
 				[ 'ug_group' => 'wiki_Test1_reader' ],
 				[ 'ug_group' => 'wiki_Test2_reader' ],
 				[ 'ug_group' => 'wiki_Test2_editor' ],
-				[ 'ug_group' => 'sysop' ],
 			] ) );
 		$managementDBFactoryMock = $this->createMock( ManagementDatabaseFactory::class );
 		$managementDBFactoryMock->method( 'createSharedUserDatabaseConnection' )->willReturn( $dbMock );
@@ -110,7 +108,7 @@ class AccessStoreTest extends TestCase {
 			$this->createMock( Config::class )
 		);
 		$paths = $accessStore->getInstancePathsWhereUserHasRole( $this->getUserMock(), 'reader' );
-		$this->assertEquals( [ 'w', 'Test1', 'Test2' ], $paths );
+		$this->assertEquals( [ 'Test1', 'Test2' ], $paths );
 	}
 
 	/**

@@ -2,9 +2,14 @@
 
 namespace BlueSpice\WikiFarm\Process\Step;
 
+use BlueSpice\WikiFarm\AccessControl\IAccessStore;
+use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
 use BlueSpice\WikiFarm\InstanceManager;
+use BlueSpice\WikiFarm\RootInstanceEntity;
 use Exception;
 use MediaWiki\Message\Message;
+use MediaWiki\User\UserFactory;
+use MediaWiki\User\UserGroupManager;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 
@@ -19,12 +24,21 @@ class CopyUser extends InstanceAwareStep {
 	/**
 	 * @param InstanceManager $instanceManager
 	 * @param ILoadBalancer $lb
+	 * @param IAccessStore $accessStore
+	 * @param UserFactory $userFactory
+	 * @param InstanceGroupCreator $instanceGroupCreator
+	 * @param UserGroupManager $groupManager
 	 * @param string $instanceId
 	 * @param string $username
 	 * @throws Exception
 	 */
 	public function __construct(
-		InstanceManager $instanceManager, ILoadBalancer $lb, string $instanceId, string $username
+		InstanceManager $instanceManager, ILoadBalancer $lb,
+		private readonly IAccessStore $accessStore,
+		private readonly UserFactory $userFactory,
+		private readonly InstanceGroupCreator $instanceGroupCreator,
+		private readonly UserGroupManager $groupManager,
+		string $instanceId, string $username
 	) {
 		parent::__construct( $instanceManager, $instanceId );
 		$this->username = $username;
@@ -37,6 +51,34 @@ class CopyUser extends InstanceAwareStep {
 	 * @throws Exception
 	 */
 	public function execute( $data = [] ): array {
+		$config = $this->getInstanceManager()->getFarmConfig();
+		$sharingUsers = $config->get( 'shareUsers' ) ?? false;
+		$globalAccess = $config->get( 'useGlobalAccessControl' ) ?? false;
+
+		if ( $sharingUsers && !$globalAccess ) {
+			// User already there, groups already assigned, nothing to do
+			return $data;
+		}
+
+		if ( $sharingUsers && $globalAccess ) {
+			// Assign same roles user has on this instance on target instance
+			$user = $this->userFactory->newFromName( $this->username );
+			if ( !$user ) {
+				throw new Exception( Message::newFromKey( 'wikifarm-error-unknown' )->text() );
+			}
+			$rootInstance = new RootInstanceEntity();
+			$userGroups = $this->groupManager->getUserGroups( $user );
+			foreach ( $this->accessStore::ROLES as $role => $ununsed ) {
+				$rootRoleGroup = $this->instanceGroupCreator->getGroupNameForUserRole( $rootInstance->getPath(), $role );
+				if ( in_array( $rootRoleGroup, $userGroups ) ) {
+					$group = $this->instanceGroupCreator->getGroupNameForUserRole( $this->instance->getPath(), $role );
+					$this->groupManager->addUserToGroup( $user, $group );
+				}
+			}
+
+			return $data;
+		}
+
 		$instanceDb = $this->getInstanceManager()->getDatabaseConnectionForInstance( $this->getInstance() );
 		if ( !$instanceDb ) {
 			$this->getInstanceManager()->getLogger()->error( 'Could not get database connection for instance {path}', [

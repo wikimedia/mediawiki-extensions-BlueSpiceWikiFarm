@@ -8,6 +8,7 @@ use BlueSpice\WikiFarm\Storage\InstanceTransaction;
 use Exception;
 use MediaWiki\Message\Message;
 use MWStake\MediaWiki\Component\FileStorageUtilities\StorageHandler;
+use Throwable;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 
@@ -56,6 +57,12 @@ class CopyInstanceData extends InstanceAwareStep {
 	public function execute( $data = [] ): array {
 		$this->copyDB();
 		$this->copyData();
+		try {
+			$this->copyDynamicConfig();
+		} catch ( Throwable $e ) {
+			$data['copy-dynamic-config-error'] = $e->getMessage();
+		}
+
 		return $data;
 	}
 
@@ -106,6 +113,35 @@ class CopyInstanceData extends InstanceAwareStep {
 			throw new Exception(
 				Message::newFromKey( 'wikifarm-error-copy-instance-data-failed' )->text()
 			);
+		}
+	}
+
+	/**
+	 * @return void
+	 */
+	private function copyDynamicConfig() {
+		$sourceWikiId = $this->sourceInstance->getWikiId();
+		$targetWikiId = $this->getInstance()->getWikiId();
+		// Copy all rows from `mwstake_dynamic_config` where `mwdc_wiki_id` = $sourceWikiId to `mwstake_dynamic_config` where `mwdc_wiki_id` = $targetWikiId
+		$rows = $this->rootDatabase->newSelectQueryBuilder()
+			->select( '*' )
+			->from( 'mwstake_dynamic_config' )
+			->where( [ 'mwdc_wiki_id' => $sourceWikiId ] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+
+		$newRows = [];
+		foreach ( $rows as $row ) {
+			$newRow = (array)$row;
+			$newRow['mwdc_wiki_id'] = $targetWikiId;
+			$newRows[] = $newRow;
+		}
+		if ( !empty( $newRows ) ) {
+			$this->rootDatabase->newInsertQueryBuilder()
+				->insert( 'mwstake_dynamic_config' )
+				->rows( $newRows )
+				->caller( __METHOD__ )
+				->execute();
 		}
 	}
 
