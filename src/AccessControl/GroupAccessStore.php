@@ -28,12 +28,14 @@ class GroupAccessStore implements IAccessStore {
 	 * @param ManagementDatabaseFactory $databaseFactory
 	 * @param InstanceGroupCreator $groupCreator
 	 * @param GroupRoleQuery $groupRoleQuery
+	 * @param WikiAccessLookup $wikiAccessLookup
 	 * @param Config $farmConfig
 	 */
 	public function __construct(
 		private readonly ManagementDatabaseFactory $databaseFactory,
 		private readonly InstanceGroupCreator $groupCreator,
 		private readonly GroupRoleQuery $groupRoleQuery,
+		private readonly WikiAccessLookup $wikiAccessLookup,
 		private readonly Config $farmConfig
 	) {
 		$this->operatingCache = new HashBagOStuff();
@@ -46,6 +48,10 @@ class GroupAccessStore implements IAccessStore {
 		$cc = $this->operatingCache->makeKey( 'access', $user->getName(), $instance->getId(), $role );
 		if ( $this->operatingCache->hasKey( $cc ) ) {
 			return $this->operatingCache->get( $cc );
+		}
+		if ( $role === 'reader' && $this->instanceHasReaderAccessByLevel( $instance ) ) {
+			$this->operatingCache->set( $cc, true );
+			return true;
 		}
 
 		$db = $this->databaseFactory->createSharedUserDatabaseConnection();
@@ -142,8 +148,26 @@ class GroupAccessStore implements IAccessStore {
 				$availableInstances[] = $instancePath;
 			}
 		}
+		if ( $role === 'reader' ) {
+			$availableInstances = array_merge(
+				$availableInstances,
+				$this->wikiAccessLookup->getInstancePathsForLevels( [ 'public', 'protected' ] )
+			);
+		}
+		$availableInstances = array_values( array_unique( $availableInstances ) );
 		$this->operatingCache->set( $cc, $availableInstances );
 		return $availableInstances;
+	}
+
+	/**
+	 * @param InstanceEntity $instance
+	 * @return bool
+	 */
+	private function instanceHasReaderAccessByLevel( InstanceEntity $instance ): bool {
+		return in_array(
+			$this->wikiAccessLookup->getAccessLevelForInstance( $instance ),
+			[ 'public', 'protected' ]
+		);
 	}
 
 	/**

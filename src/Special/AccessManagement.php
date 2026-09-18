@@ -2,6 +2,8 @@
 
 namespace BlueSpice\WikiFarm\Special;
 
+use BlueSpice\WikiFarm\AccessControl\WikiAccessLookup;
+use BlueSpice\WikiFarm\InstanceStore;
 use MediaWiki\Config\Config;
 use MediaWiki\Html\Html;
 use MediaWiki\Html\TemplateParser;
@@ -9,7 +11,11 @@ use OOJSPlus\Special\OOJSSpecialPage;
 
 class AccessManagement extends OOJSSpecialPage {
 
-	public function __construct( private readonly Config $farmConfig ) {
+	public function __construct(
+		private readonly Config $farmConfig,
+		private readonly InstanceStore $instanceStore,
+		private readonly WikiAccessLookup $wikiAccessLookup
+	) {
 		parent::__construct( 'AccessManagement' );
 		$this->templateParser = new TemplateParser(
 			dirname( __DIR__, 2 ) . '/resources/templates'
@@ -48,11 +54,22 @@ class AccessManagement extends OOJSSpecialPage {
 			Html::element( 'div', [ 'id' => 'bs-access-management' ] )
 		);
 		$this->getOutput()->addJsConfigVars( 'wikiFarmIsRoot', FARMER_IS_ROOT_WIKI_CALL );
-		$this->getOutput()->addJsConfigVars( 'wikiFarmAccessLevel', $this->getConfig()->get( 'WikiFarmAccessLevel' ) );
+		$this->getOutput()->addJsConfigVars( 'wikiFarmAccessLevel', $this->getAccessLevel() );
 		$this->getOutput()->addJsConfigVars(
 			'wikiFarmAccessAlwaysVisible',
 			FARMER_CALLED_INSTANCE === $this->farmConfig->get( 'sharedResourcesWikiPath' )
 		);
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getAccessLevel(): string {
+		$instance = $this->instanceStore->getInstanceByPath( FARMER_CALLED_INSTANCE );
+		if ( !$instance ) {
+			return 'private';
+		}
+		return $this->wikiAccessLookup->getAccessLevelForInstance( $instance );
 	}
 
 }

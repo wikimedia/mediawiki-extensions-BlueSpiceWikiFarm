@@ -5,6 +5,7 @@ use BlueSpice\WikiFarm\AccessControl\GroupListStore;
 use BlueSpice\WikiFarm\AccessControl\GroupRoleManager;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
 use BlueSpice\WikiFarm\AccessControl\NullAccessStore;
+use BlueSpice\WikiFarm\AccessControl\WikiAccessLookup;
 use BlueSpice\WikiFarm\DirectInstanceStore;
 use BlueSpice\WikiFarm\FarmWikiMap;
 use BlueSpice\WikiFarm\ForeignRequestExecution;
@@ -34,7 +35,8 @@ return [
 			$services->getMainConfig(),
 			$services->getDatabaseFactory(),
 			$services->getService( 'BlueSpiceWikiFarm._InstanceCountLimiter' ),
-			$services->getService( 'BlueSpiceWikiFarm._InstancePathGenerator' )
+			$services->getService( 'BlueSpiceWikiFarm._InstancePathGenerator' ),
+			$services->getService( 'BlueSpiceWikiFarm.WikiAccessLookup' )
 		);
 	},
 	'BlueSpiceWikiFarm._Config' => static function ( MediaWikiServices $services ) {
@@ -74,6 +76,7 @@ return [
 			$services->getService( 'BlueSpiceWikiFarm.ManagementDatabaseFactory' ),
 			$services->getService( 'BlueSpiceWikiFarm.InstanceGroupCreator' ),
 			$services->getService( 'BlueSpiceWikiFarm.GroupRoleManager' ),
+			$services->getService( 'BlueSpiceWikiFarm.WikiAccessLookup' ),
 			$services->getService( 'BlueSpiceWikiFarm._Config' )
 		);
 	},
@@ -85,6 +88,11 @@ return [
 			$services->getDBLoadBalancer()->getConnection( DB_PRIMARY ),
 			$services->getUserFactory(),
 			LoggerFactory::getInstance( 'BlueSpiceWikiFarm.AccessControl' )
+		);
+	},
+	'BlueSpiceWikiFarm.WikiAccessLookup' => static function ( MediaWikiServices $services ) {
+		return new WikiAccessLookup(
+			$services->getDBLoadBalancer()
 		);
 	},
 	'BlueSpiceWikiFarm.InstanceGroupCreator' => static function ( MediaWikiServices $services ) {

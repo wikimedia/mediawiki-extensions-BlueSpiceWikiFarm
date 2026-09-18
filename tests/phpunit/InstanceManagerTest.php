@@ -2,6 +2,7 @@
 
 namespace BlueSpice\WikiFarm\Tests;
 
+use BlueSpice\WikiFarm\AccessControl\WikiAccessLookup;
 use BlueSpice\WikiFarm\InstanceCountLimiter;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\InstanceManager;
@@ -107,7 +108,8 @@ class InstanceManagerTest extends TestCase {
 			$this->createMock( Config::class ),
 			$this->createMock( DatabaseFactory::class ),
 			$limiterMock,
-			$pathGeneratorMock
+			$pathGeneratorMock,
+			$this->createMock( WikiAccessLookup::class )
 		);
 	}
 }

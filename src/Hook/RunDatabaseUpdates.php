@@ -67,6 +67,10 @@ class RunDatabaseUpdates implements LoadExtensionSchemaUpdatesHook {
 			'wikifarm_groups',
 			"$dir/db/$dbType/wikifarm_groups.sql"
 		);
+		$updater->addExtensionTable(
+			'wiki_access_levels',
+			"$dir/db/$dbType/wiki_access_levels.sql"
+		);
 
 		$updater->addPostDatabaseUpdateMaintenance( CreateSystemInstances::class );
 		$updater->addPostDatabaseUpdateMaintenance( CreateAccessToken::class );

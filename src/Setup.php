@@ -263,6 +263,7 @@ class Setup {
 			'block',
 			'block_target',
 			'wiki_team_roles',
+			'wiki_access_levels',
 			'user_properties',
 			'uto_usertasks',
 		];

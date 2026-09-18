@@ -6,6 +6,7 @@ use BlueSpice\Config;
 use BlueSpice\WikiFarm\AccessControl\GroupAccessStore;
 use BlueSpice\WikiFarm\AccessControl\GroupRoleQuery;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
+use BlueSpice\WikiFarm\AccessControl\WikiAccessLookup;
 use BlueSpice\WikiFarm\DirectInstanceStore;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\ManagementDatabaseFactory;
@@ -71,6 +72,7 @@ class AccessStoreTest extends TestCase {
 			$managementDBFactoryMock,
 			$creator,
 			$this->createMock( GroupRoleQuery::class ),
+			$this->createMock( WikiAccessLookup::class ),
 			$this->createMock( Config::class )
 			);
 		$accessStore->userHasRoleOnInstance( $this->getUserMock(), 'reader', $this->getInstanceMock( 'Test1' ) );
@@ -105,6 +107,7 @@ class AccessStoreTest extends TestCase {
 			$managementDBFactoryMock,
 			$creator,
 			$this->createMock( GroupRoleQuery::class ),
+			$this->createMock( WikiAccessLookup::class ),
 			$this->createMock( Config::class )
 		);
 		$paths = $accessStore->getInstancePathsWhereUserHasRole( $this->getUserMock(), 'reader' );

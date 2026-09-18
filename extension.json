@@ -874,6 +874,15 @@
 			]
 		},
 		{
+			"method": "POST",
+			"path": "/bluespice/farm/v1/access/level",
+			"class": "BlueSpice\\WikiFarm\\Rest\\WikiAccessLevelHandler",
+			"services": [
+				"PermissionManager", "BlueSpiceWikiFarm.WikiAccessLookup",
+				"BlueSpiceWikiFarm.InstanceStore"
+			]
+		},
+		{
 			"path": "/bluespice/farm/v1/instances/list",
 			"class": "BlueSpice\\WikiFarm\\Rest\\InstancesDisplayListHandler",
 			"services": [

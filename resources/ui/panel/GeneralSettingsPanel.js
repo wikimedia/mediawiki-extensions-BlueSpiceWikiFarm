@@ -96,6 +96,7 @@ ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.selectLevel = function (
 ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.onSave = function () {
 	this.saveButton.setDisabled( true );
 
+	const api = new mw.Rest();
 	const data = { WikiFarmAccessLevel: this.accessLevel };
 	bs.api.tasks.exec( 'configmanager', 'save', data )
 		.done( ( response ) => {
@@ -104,12 +105,24 @@ ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.onSave = function () {
 				this.saveButton.setDisabled( false );
 				return;
 			}
-			this.savedAccessLevel = this.accessLevel;
-			mw.notify( mw.msg( 'wikifarm-ui-access-success-set-level' ) );
+			api.post( '/bluespice/farm/v1/access/level', { level: this.accessLevel } )
+				.done( ( accessResponse ) => {
+					if ( !accessResponse.hasOwnProperty( 'success' ) || !accessResponse.success ) {
+						OO.ui.alert( mw.msg( 'wikifarm-ui-access-error-set-level' ) );
+						this.saveButton.setDisabled( false );
+						return;
+					}
+					this.savedAccessLevel = this.accessLevel;
+					mw.notify( mw.msg( 'wikifarm-ui-access-success-set-level' ) );
+				} ).fail( () => {
+					OO.ui.alert( mw.msg( 'wikifarm-ui-access-error-set-level' ) );
+					this.saveButton.setDisabled( false );
+				} );
 		} ).fail( () => {
 			OO.ui.alert( mw.msg( 'wikifarm-ui-access-error-set-level' ) );
 			this.saveButton.setDisabled( false );
 		} );
+
 };
 
 ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.hasUnsavedChanges = function () {
