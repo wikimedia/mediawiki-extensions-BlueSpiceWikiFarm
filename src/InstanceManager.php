@@ -2,6 +2,7 @@
 
 namespace BlueSpice\WikiFarm;
 
+use BlueSpice\WikiFarm\AccessControl\WikiAccessLookup;
 use BlueSpice\WikiFarm\Process\ArchiveInstance;
 use BlueSpice\WikiFarm\Process\CloneInstance;
 use BlueSpice\WikiFarm\Process\CreateInstance;
@@ -42,6 +43,9 @@ class InstanceManager {
 	/** @var InstancePathGenerator */
 	private $pathGenerator;
 
+	/** @var WikiAccessLookup */
+	private $wikiAccessLookup;
+
 	/**
 	 * @param InstanceStore $instanceStore
 	 * @param ProcessManager $processManager
@@ -51,11 +55,13 @@ class InstanceManager {
 	 * @param DatabaseFactory $databaseFactory
 	 * @param InstanceCountLimiter $countLimiter
 	 * @param InstancePathGenerator $pathGenerator
+	 * @param WikiAccessLookup $wikiAccessLookup
 	 */
 	public function __construct(
 		InstanceStore $instanceStore, ProcessManager $processManager, LoggerInterface $logger,
 		Config $farmConfig, Config $mainConfig, DatabaseFactory $databaseFactory,
-		InstanceCountLimiter $countLimiter, InstancePathGenerator $pathGenerator
+		InstanceCountLimiter $countLimiter, InstancePathGenerator $pathGenerator,
+		WikiAccessLookup $wikiAccessLookup
 	) {
 		$this->instanceStore = $instanceStore;
 		$this->processManager = $processManager;
@@ -65,6 +71,7 @@ class InstanceManager {
 		$this->databaseFactory = $databaseFactory;
 		$this->countLimiter = $countLimiter;
 		$this->pathGenerator = $pathGenerator;
+		$this->wikiAccessLookup = $wikiAccessLookup;
 	}
 
 	/**
@@ -170,6 +177,10 @@ class InstanceManager {
 			}
 		}
 		$this->instanceStore->store( $instance );
+		$this->wikiAccessLookup->setAccessLevelForInstance(
+			$instance,
+			$this->wikiAccessLookup->getAccessLevelForInstance( $instance )
+		);
 		return $instance;
 	}
 

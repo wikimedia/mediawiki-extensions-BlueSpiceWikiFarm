@@ -2,6 +2,8 @@
 
 namespace BlueSpice\WikiFarm\Process\Step;
 
+use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
+use BlueSpice\WikiFarm\AccessControl\WikiAccessLookup;
 use BlueSpice\WikiFarm\InstanceManager;
 use BlueSpice\WikiFarm\Storage\InstanceTransaction;
 use Exception;
@@ -11,6 +13,7 @@ use MediaWiki\Message\Message;
 use MWStake\MediaWiki\Component\FileStorageUtilities\StorageHandler;
 use Wikimedia\FileBackend\FileBackend;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ILoadBalancer;
 use ZipArchive;
 
 class ArchiveInstance extends InstanceAwareStep {
@@ -44,7 +47,10 @@ class ArchiveInstance extends InstanceAwareStep {
 	private $storageBackend;
 
 	public function __construct(
-		InstanceManager $instanceManager, Config $mainConfig, StorageHandler $storageHandler, string $instanceId
+		InstanceManager $instanceManager, Config $mainConfig, StorageHandler $storageHandler,
+		private readonly WikiAccessLookup $accessLookup, private readonly InstanceGroupCreator $instanceGroupCreator,
+		private readonly ILoadBalancer $lb, string $instanceId,
+
 	) {
 		parent::__construct( $instanceManager, $instanceId );
 		$this->mainConfig = $mainConfig;
@@ -88,6 +94,8 @@ class ArchiveInstance extends InstanceAwareStep {
 			->deleteInstanceDirectory( $this->getInstance()->getPath() )
 			->commit();
 		$this->dropInstanceDatabase();
+
+		$this->removeInstanceData();
 
 		return array_merge( $data, [ 'success' => true ] );
 	}
@@ -281,4 +289,29 @@ class ArchiveInstance extends InstanceAwareStep {
 		return $tables;
 	}
 
+	/**
+	 * @return void
+	 */
+	private function removeInstanceData(): void {
+		$this->accessLookup->removeAccessLevelForInstance( $this->instance );
+
+		$groupNames = array_keys(
+			$this->instanceGroupCreator->getGroupsAndRolesForInstancePath( $this->instance->getPath() )
+		);
+
+		$db = $this->lb->getConnection( DB_PRIMARY );
+		if ( !empty( $groupNames ) ) {
+			$db->newDeleteQueryBuilder()
+				->delete( 'user_groups' )
+				->where( [ 'ug_group' => $groupNames ] )
+				->caller( __METHOD__ )
+				->execute();
+		}
+
+		$db->newDeleteQueryBuilder()
+			->delete( 'wiki_team_roles' )
+			->where( [ 'wtr_instance' => $this->instance->getId() ] )
+			->caller( __METHOD__ )
+			->execute();
+	}
 }

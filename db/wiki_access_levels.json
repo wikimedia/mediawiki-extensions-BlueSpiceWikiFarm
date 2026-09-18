@@ -1,0 +1,28 @@
+[
+	{
+		"name": "wiki_access_levels",
+		"comment": "Access level assignments for wiki farm instances",
+		"columns": [
+			{
+				"name": "wal_instance",
+				"type": "string",
+				"options": { "notnull": true, "length": 16 }
+			},
+			{
+				"name": "wal_instance_path",
+				"type": "string",
+				"options": { "notnull": true, "length": 255 }
+			},
+			{
+				"name": "wal_level",
+				"type": "binary",
+				"options": { "notnull": true, "length": 32 }
+			}
+		],
+		"indexes": [
+			{ "name": "wal_instance_path", "columns": [ "wal_instance_path" ], "unique": true },
+			{ "name": "wal_level", "columns": [ "wal_level" ] }
+		],
+		"pk": [ "wal_instance" ]
+	}
+]

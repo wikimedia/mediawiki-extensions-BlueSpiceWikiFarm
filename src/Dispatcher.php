@@ -2,11 +2,11 @@
 
 namespace BlueSpice\WikiFarm;
 
-use BlueSpice\ConfigDefinitionFactory;
 use BlueSpice\Permission\RoleManager;
 use BlueSpice\WikiFarm\AccessControl\GroupRoleQuery;
 use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
+use BlueSpice\WikiFarm\AccessControl\WikiAccessLookup;
 use BlueSpice\WikiFarm\MaintenanceScreens\MaintenancePageConstructor;
 use Exception;
 use ForeignAPIRepo;
@@ -384,13 +384,11 @@ class Dispatcher {
 		$db->close( __METHOD__ );
 
 		// Handle * and user groups
-		$accessLevel = $this->instance?->getConfig()['wgWikiFarmInitialAccessLevel'] ?? 'private';
-		/** @var ConfigDefinitionFactory $cfgDfn */
-		$cfgDfn = MediaWikiServices::getInstance()->getService( 'BSConfigDefinitionFactory' );
-		$handler = $cfgDfn->factory( 'WikiFarmAccessLevel' );
-		if ( $handler && $handler->getValue() ) {
-			$accessLevel = $handler->getValue();
-		}
+		/** @var WikiAccessLookup $wikiAccessLockup */
+		$wikiAccessLockup = MediaWikiServices::getInstance()->getService(
+			'BlueSpiceWikiFarm.WikiAccessLookup'
+		);
+		$accessLevel = $wikiAccessLockup->getAccessLevelForInstance( $instance );
 		$GLOBALS['bsgGroupRoles']['bot']['reader'] = true;
 		if ( $accessLevel === 'public' ) {
 			$GLOBALS['bsgGroupRoles']['*']['reader'] = true;

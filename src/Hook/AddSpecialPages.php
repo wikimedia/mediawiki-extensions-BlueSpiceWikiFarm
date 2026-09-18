@@ -23,7 +23,11 @@ class AddSpecialPages implements SpecialPage_initListHook {
 		if ( $this->farmConfig->get( 'useGlobalAccessControl' ) ) {
 			$list['AccessManagement'] = [
 				'class' => AccessManagement::class,
-				'services' => [ 'BlueSpiceWikiFarm._Config' ]
+				'services' => [
+					'BlueSpiceWikiFarm._Config',
+					'BlueSpiceWikiFarm.InstanceStore',
+					'BlueSpiceWikiFarm.WikiAccessLookup'
+				]
 			];
 		}
 		if ( $this->farmConfig->get( 'shareUsers' ) ) {
