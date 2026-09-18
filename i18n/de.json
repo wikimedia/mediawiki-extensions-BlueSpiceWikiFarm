@@ -82,7 +82,7 @@
 	"wikifarm-instance-not-found": "Wiki nicht gefunden",
 	"wikifarm-instance-notsearchable": "Global durchsuchbar",
 	"wikifarm-instance-path-error": "Es konnte kein güliger Pfad erzeugt werden. Bitte wählen Sie einen anderen Namen.",
-	"wikifarm-instance-path-invalid": "Der Pfad kann nur Buchstaben, Zahlen, Binde- und Unteerstriche enthalten und muss weniger als 255 Zeichen lang sein.",
+	"wikifarm-instance-path-invalid": "Der Pfad kann nur Buchstaben, Zahlen, Binde- und Unterstriche enthalten und muss weniger als 255 Zeichen lang sein.",
 	"wikifarm-instance-path": "Pfad",
 	"wikifarm-instance-sourcepath": "Quellpfad",
 	"wikifarm-instance-suspended-notice": "Dieses Wiki ist derzeit deaktivert",
