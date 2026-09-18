@@ -57,7 +57,7 @@ class GroupAccessStore implements IAccessStore {
 			$this->groupCreator->getGroupNameForUserRole( '_global', $role ),
 			...$this->getHigherGroups( '_global', $role ),
 		];
-		$superAccessGroups = $this->farmConfig->get( 'superAccessGroups' ) ?? [ 'sysop' ];
+		$superAccessGroups = $this->farmConfig->get( 'superAccessGroups' ) ?? [];
 		$res = $db->selectRow(
 			'user_groups',
 			[ 'ug_user' ],
@@ -118,7 +118,7 @@ class GroupAccessStore implements IAccessStore {
 		$possibleGroupRoles = $this->groupRoleQuery->getUserRolesForInstancePaths( $user, array_keys( $possibleGroups ) );
 		$userGroups = $this->getUserGroups( $user );
 		$availableInstances = [];
-		$superUserGroups = $this->farmConfig->get( 'superAccessGroups' ) ?? [ 'sysop' ];
+		$superUserGroups = $this->farmConfig->get( 'superAccessGroups' ) ?? [];
 		foreach ( $possibleGroups as $instancePath => $groups ) {
 			$allowed = false;
 			$toCheck = array_keys( $groups );

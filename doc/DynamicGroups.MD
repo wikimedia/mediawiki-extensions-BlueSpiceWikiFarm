@@ -4,14 +4,12 @@ If wiki is set up to share users (`$wgWikiFarm_shareUsers = true;`), dynamic gro
 management can be used.
 
 For each instance, following groups will be created:
-- `<instance path>_reader` - read-only access
-- `<instance path>_editor` - edit access
-- `<instance path>_admin` - full access
-- `<instance path>_reviewer` - QM
+- `wiki_<instance path>_reader` - read-only access
+- `wiki_<instance path>_editor` - edit access
+- `wiki_<instance path>_admin` - full access
+- `wiki_<instance path>_reviewer` - QM
 
 Since users are shared, users can be assigned to these groups in any instance.
-
-Users with group `sysop` are excluded from dynamic groups, they can always access anything.
 
 ## Checking for user role on the wiki
 
