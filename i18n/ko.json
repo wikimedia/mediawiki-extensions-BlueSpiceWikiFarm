@@ -197,7 +197,7 @@
 	"wikifarm-access-column-group": "그룹",
 	"wikifarm-access-column-user": "사용자",
 	"wikifarm-access-unsaved-changes-warning": "저장되지 않은 변경 사항이 있습니다. 버리시겠습니까?",
-	"wikifarm-access-card-public-desc": "익명 사용자를 포함하여 누구나 내용을 보고 편집할 수 있습니다",
+	"wikifarm-access-card-public-desc": "익명 사용자를 포함하여 누구나 내용을 보고 편집할 수 있습니다.",
 	"wikifarm-access-card-protected-desc": "익명 사용자를 포함한 모든 사용자는 이 위키를 볼 수 있습니다. 편집 권한은 '편집자' 이상의 역할을 가진 사용자 또는 그룹에게만 주어집니다.",
 	"wikifarm-access-card-private-desc": "독자 권한 이상을 가진 사용자는 이 위키를 볼 수 있습니다. 편집 권한은 편집자 권한 이상을 가진 사용자 또는 그룹에게만 주어집니다.",
 	"wikifarm-access-field-assignees": "그룹 / 사용자",
