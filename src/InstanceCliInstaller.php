@@ -14,6 +14,7 @@ use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
+use StatusValue;
 
 $GLOBALS['wgMessagesDirs']['BlueSpiceFarmInstaller'] = __DIR__ . '/../i18n';
 
@@ -56,13 +57,11 @@ class InstanceCliInstaller extends CliInstaller {
 			[ $this, 'startStage' ],
 			[ $this, 'endStage' ]
 		);
-		// PerformInstallation bails on a fatal, so make sure the last item
-		// completed before giving 'next.' Likewise, only provide back on failure
-		$lastStepStatus = end( $result );
-		if ( $lastStepStatus->isOK() ) {
+
+		if ( $result->isOK() ) {
 			return Status::newGood();
 		} else {
-			return $lastStepStatus;
+			return Status::newFatal( $result->getValue() );
 		}
 	}
 
@@ -118,9 +117,9 @@ class InstanceCliInstaller extends CliInstaller {
 	}
 
 	/**
-	 * @param Status $status
+	 * @param StatusValue $status
 	 */
-	public function showStatusMessage( Status $status ) {
+	public function showStatusMessage( StatusValue $status ) {
 		if ( !$status->isGood() ) {
 			wfDebugLog( 'BlueSpiceWikiFarm', $status->getMessage()->inLanguage( 'en' )->text() );
 		}

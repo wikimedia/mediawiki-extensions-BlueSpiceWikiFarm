@@ -8,13 +8,10 @@ use MediaWiki\Maintenance\MaintenanceFatalError;
 
 $mwInstallPath = getenv( 'MW_INSTALL_PATH' ) !== false
 	? getenv( 'MW_INSTALL_PATH' )
-	: dirname( __DIR__, 4 );
-$extInstallPath = dirname( __DIR__, 2 );
+	: dirname( __DIR__, 5 );
 
 require_once $mwInstallPath . '/maintenance/Maintenance.php';
-
 unset( $mwInstallPath );
-unset( $extInstallPath );
 
 define( 'MW_CONFIG_CALLBACK', [ Installer::class, 'overrideConfig' ] );
 define( 'MEDIAWIKI_INSTALL', true );
@@ -40,28 +37,37 @@ class InstallInstance extends Maintenance {
 	 * @throws MaintenanceFatalError
 	 */
 	public function execute() {
-		$installer = new InstanceCliInstaller(
-			$this->getOption( 'instanceDisplayName' ),
-			'WikiSysop',
-			[
-				'scriptpath' => $this->getOption( 'scriptpath' ),
-				'dbname' => $this->getOption( 'dbname' ),
-				'dbserver' => $this->getOption( 'dbserver' ),
-				'dbuser' => $this->getOption( 'dbuser' ),
-				'dbpass' => $this->getOption( 'dbpass' ),
-				'dbprefix' => $this->getOption( 'dbprefix' ),
-				'server' => $this->getOption( 'server' ),
-				'pass' => MWCryptRand::generateHex( 16 ),
-				'lang' => $this->getOption( 'lang' )
-			]
-		);
+		try {
+			$installer = new InstanceCliInstaller(
+				$this->getOption( 'instanceDisplayName' ),
+				'WikiSysop',
+				[
+					'scriptpath' => $this->getOption( 'scriptpath' ),
+					'dbname' => $this->getOption( 'dbname' ),
+					'dbserver' => $this->getOption( 'dbserver' ),
+					'dbuser' => $this->getOption( 'dbuser' ),
+					'dbpass' => $this->getOption( 'dbpass' ),
+					'dbprefix' => $this->getOption( 'dbprefix' ),
+					'server' => $this->getOption( 'server' ),
+					'pass' => MWCryptRand::generateHex( 16 ),
+					'lang' => $this->getOption( 'lang' )
+				]
+			);
+		} catch ( InstallException $e ) {
+			$this->error( $e->getStatus() );
+			return false;
+		}
+
 
 		$status = $installer->execute();
 		if ( !$status->isGood() ) {
 			$this->fatalError( $status->getMessage()->inLanguage( 'en' )->text() );
+			return false;
 		}
+
+		return true;
 	}
 }
 
-$maintClass = 'InstallInstance';
+$maintClass = InstallInstance::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

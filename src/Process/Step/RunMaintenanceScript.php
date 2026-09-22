@@ -30,12 +30,26 @@ abstract class RunMaintenanceScript extends InstanceAwareStep {
 	 * @throws Exception
 	 */
 	public function execute( $data = [] ): array {
-		$process = new Process( array_merge(
-			[
-				$this->getPhpExecutable(), $this->getFullScriptPath(),
-			],
-			$this->getFormattedArgs( $data )
-		) );
+		if ( get_class( $this ) === RunUpdates::class ) {
+			$process = new Process( array_merge(
+				[
+					$this->getPhpExecutable(),
+					$this->getFullScriptPath(),
+				],
+				$this->getFormattedArgs( $data )
+			) );
+		} else {
+			// workflow/InstallInstance.php needs to be run with the maintenance runner.
+			$process = new Process( array_merge(
+				[
+					$this->getPhpExecutable(),
+					$GLOBALS['IP'] . '/maintenance/run.php',
+					$this->getFullScriptPath(),
+				],
+				$this->getFormattedArgs( $data )
+			) );
+		}
+
 		$this->getInstanceManager()->getLogger()->debug(
 			'Running maintenance script: {cmd}', [
 				'cmd' => $process->getCommandLine()
