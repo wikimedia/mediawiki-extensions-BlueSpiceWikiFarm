@@ -1,0 +1,16 @@
+#farm-wikis-mm .mega-menu-wrapper > div {
+	display: block !important;
+}
+
+.card.card-mn {
+	max-width: 100%;
+}
+
+.farm-wiki-card-item {
+	width: 100%;
+}
+
+#farm-wikis-pinned .farm-wikis-elements,
+#farm-wikis-favourites .farm-wikis-elements {
+	columns: 1;
+}

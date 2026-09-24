@@ -32,8 +32,10 @@ ext.bluespiceWikiFarm.ui.widget.InstanceWidget.prototype.buildWidget = function 
 
 	const $desc = $( '<div>' ).addClass( 'farm-wiki-card-content' );
 	const $link = $( '<a>' ).attr( 'href', this.url )
-		.attr( 'title', this.instanceName )
+		.attr( 'title', this.instanceName );
+	const $linkText = $( '<span>' ).addClass( 'farm-wiki-card-link-label' )
 		.text( this.instanceName );
+	$link.append( $linkText );
 	if ( this.newTab ) {
 		$link.attr( 'target', '_blank' ).attr( 'rel', 'noopener noreferrer' );
 	}
@@ -67,7 +69,8 @@ ext.bluespiceWikiFarm.ui.widget.InstanceWidget.prototype.buildWidget = function 
 		.attr( 'title', mw.message( titleMsgKey ).text() );
 
 	$favBtn.on( 'click', async ( e ) => {
-		e.stopPropagation();
+		e.preventDefault();
+		e.stopImmediatePropagation();
 		const action = await ext.bluespiceWikiFarm.util.toggleFavoriteInstance( this.path, this.instanceName );
 		if ( action === 'add' ) {
 			$( $favBtn ).toggleClass( 'bi-bs-unfavored' );
