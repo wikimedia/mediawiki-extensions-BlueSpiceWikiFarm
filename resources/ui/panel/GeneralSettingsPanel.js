@@ -16,10 +16,20 @@ ext.bluespiceWikiFarm.ui.GeneralSettingsPanel = function ( cfg ) {
 OO.inheritClass( ext.bluespiceWikiFarm.ui.GeneralSettingsPanel, OO.ui.PanelLayout );
 
 ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.build = function () {
-	this.$heading = $( '<p>' ).text( mw.msg( 'wikifarm-access-general-heading' ) );
+	const headingId = OO.ui.generateElementId();
+	this.$heading = $( '<p>' )
+		.attr( 'id', headingId )
+		.text( mw.msg( 'wikifarm-access-general-heading' ) );
 
 	this.cards = {};
-	this.$cardsContainer = $( '<div>' ).addClass( 'bs-access-level-cards' );
+	this.$cardsContainer = $( '<div>' )
+		.addClass( 'bs-access-level-cards' )
+		.attr( {
+			role: 'radiogroup',
+			'aria-labelledby': headingId
+		} );
+	this.inputs = {};
+	const inputName = OO.ui.generateElementId();
 
 	const levels = [
 		{
@@ -46,28 +56,40 @@ ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.build = function () {
 	];
 
 	for ( const level of levels ) {
-		const $card = $( '<div>' )
-			.addClass( 'bs-access-level-card' )
-			.toggleClass( 'bs-access-level-card-selected', level.key === this.accessLevel )
-			.toggleClass( 'bs-access-level-card-disabled', level.disabled )
-			.attr( 'data-level', level.key );
+		const titleId = OO.ui.generateElementId();
+		const descId = OO.ui.generateElementId();
+		const $input = $( '<input>' )
+			.addClass( 'bs-access-level-card-input' )
+			.attr( {
+				type: 'radio',
+				name: inputName,
+				value: level.key,
+				'aria-labelledby': titleId,
+				'aria-describedby': descId
+			} )
+			.prop( 'disabled', level.disabled );
+		$input.on( 'change', () => this.selectLevel( level.key ) );
 
 		const icon = new OO.ui.IconWidget( { icon: level.icon } );
-		const $header = $( '<div>' ).addClass( 'bs-access-level-card-header' );
-		const $title = $( '<div>' ).addClass( 'bs-access-level-card-title' ).text( level.label );
-		const $desc = $( '<div>' ).addClass( 'bs-access-level-card-desc' ).html( level.description );
+		const $header = $( '<span>' ).addClass( 'bs-access-level-card-header' );
+		const $title = $( '<span>' )
+			.addClass( 'bs-access-level-card-title' )
+			.attr( 'id', titleId )
+			.text( level.label );
+		const $desc = $( '<span>' )
+			.addClass( 'bs-access-level-card-desc' )
+			.attr( 'id', descId )
+			.html( level.description );
 
 		$header.append( icon.$element, $title );
-		$card.append( $header, $desc );
-
-		if ( !level.disabled ) {
-			$card.on( 'click', ( e ) => {
-				const selectedLevel = $( e.currentTarget ).attr( 'data-level' );
-				this.selectLevel( selectedLevel );
-			} );
-		}
+		const $card = $( '<label>' )
+			.addClass( 'bs-access-level-card' )
+			.toggleClass( 'bs-access-level-card-disabled', level.disabled )
+			.attr( 'data-level', level.key )
+			.append( $input, $header, $desc );
 
 		this.cards[ level.key ] = $card;
+		this.inputs[ level.key ] = $input;
 		this.$cardsContainer.append( $card );
 	}
 
@@ -77,6 +99,7 @@ ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.build = function () {
 		disabled: true
 	} );
 	this.saveButton.connect( this, { click: 'onSave' } );
+	this.selectLevel( this.accessLevel );
 
 	this.toolbar = new OO.ui.HorizontalLayout( {
 		classes: [ 'bs-access-management-toolbar' ],
@@ -87,9 +110,11 @@ ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.build = function () {
 };
 
 ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.selectLevel = function ( level ) {
-	this.$cardsContainer.find( '.bs-access-level-card' ).removeClass( 'bs-access-level-card-selected' );
-	this.cards[ level ].addClass( 'bs-access-level-card-selected' );
 	this.accessLevel = level;
+	for ( const key in this.cards ) {
+		this.cards[ key ].toggleClass( 'bs-access-level-card-selected', key === level );
+		this.inputs[ key ].prop( 'checked', key === level );
+	}
 	this.saveButton.setDisabled( this.accessLevel === this.savedAccessLevel );
 };
 

@@ -51,6 +51,7 @@
 	color: #252525;
 	display: flex;
 	flex-direction: column;
+	position: relative;
 
 	&:hover:not( .bs-access-level-card-disabled ) {
 		border-color: #a2a9b1;
@@ -71,6 +72,11 @@
 		}
 	}
 
+	&:has( .bs-access-level-card-input:focus-visible ) { /* stylelint-disable-line plugin/no-unsupported-browser-features */
+		outline: 2px solid var( --focus-visible );
+		outline-offset: 2px;
+	}
+
 	&.bs-access-level-card-disabled {
 		opacity: 0.5;
 		cursor: not-allowed; /* stylelint-disable-line plugin/no-unsupported-browser-features */
@@ -79,6 +85,15 @@
 	.oo-ui-iconWidget {
 		flex-shrink: 0;
 	}
+}
+
+.bs-access-level-card-input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: 0;
+	opacity: 0;
+	pointer-events: none;
 }
 
 .bs-access-level-card-header { /* stylelint-disable-line plugin/no-unsupported-browser-features */
