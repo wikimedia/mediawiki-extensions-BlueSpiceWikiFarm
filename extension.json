@@ -559,9 +559,10 @@
 				"ui/widget/SearchableInstanceSectionWidget.js",
 				"ui/widget/InstanceWidget.js"
 			],
-			"styles": [
-				"styles/wikiFarm.megamenu.css"
-			],
+			"styles": {
+				"styles/wikiFarm.megamenu.css": {},
+				"styles/wikiFarm.megamenu.sm.css": { "media": "all and ( max-width: 767px )" }
+			},
 			"messages": [
 				"wikifarm-instances-menu-empty-favorite-text",
 				"wikifarm-instances-favorite-add-btn-title-label",
