@@ -195,6 +195,7 @@ class Dispatcher {
 			define( 'FARMER_IS_ROOT_WIKI_CALL', false );
 			define( 'FARMER_CALLED_INSTANCE', $this->instance->getPath() );
 		}
+		define( 'FARMER_CALLED_INSTANCE_OBJECT', $this->instance );
 	}
 
 	/**
