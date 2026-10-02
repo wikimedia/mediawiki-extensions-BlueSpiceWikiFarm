@@ -25,7 +25,7 @@ class EnhancedGlobalActionsFarmManagement extends GlobalActionsFarmManagement {
 		$contextTitle = RequestContext::getMain()->getTitle();
 		$title = $this->titleFactory->newFromText( 'w:Special:Farm_management' );
 		$instance = $this->instanceStore->getCurrentInstance();
-		$link = $instance->getPath() . ':' . $contextTitle->getFullText();
-		return $title->getLocalURL( 'backTo=wiki-' . $link );
+		$link = $instance->getInterwiki() . ':' . $contextTitle->getFullText();
+		return $title->getLocalURL( 'backTo=' . $link );
 	}
 }
