@@ -31,7 +31,7 @@ class InstanceColorStyles extends ResourceLoaderModule {
 		$colorUtils = new ColorUtils();
 		foreach ( $this->getInstances() as $instance ) {
 			$color = $instance->getMetadata()['instanceColor']['background'] ?? null;
-			$lightText = $instance->getMetadata()['instanceColor']['lightText'];
+			$lightText = $instance->getMetadata()['instanceColor']['lightText'] ?? false;
 			if ( !is_string( $color ) || !preg_match( self::COLOR_PATTERN, $color ) ) {
 				continue;
 			}
