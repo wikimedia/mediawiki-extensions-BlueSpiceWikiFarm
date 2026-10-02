@@ -146,7 +146,6 @@
 	"wikifarm-shared-resources-exists-on-shared": "此頁面位於共享資源 wiki 上",
 	"wikifarm-instances-menu-empty-favorite-text": "目前沒有新增為收藏的wiki。您可以點選星形圖示，來選擇一個wiki作為收藏。",
 	"wikifarm-instances-menu-button-title": "列出所有的wiki",
-	"wikifarm-instances-menu-aria-label": "Wiki",
 	"wikifarm-instances-menu-section-favourites": "收藏",
 	"wikifarm-ui-search-instance-filter": "在 wiki 裡搜尋：$1",
 	"wikifarm-ui-search-instance-filter-local": "此 wiki",

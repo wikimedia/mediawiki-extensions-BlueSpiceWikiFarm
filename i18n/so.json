@@ -155,7 +155,6 @@
 	"wikifarm-shared-resources-exists-on-shared": "Boggan wuxuu ka jiraa wikiga khayraadka la wadaago",
 	"wikifarm-instances-menu-empty-favorite-text": "Hadda ma jiro wiki loo doortay inuu yahay kuwa la jecel yahay. Waxaad wiki ugu dari kartaa kuwa la jecel yahay adigoo gujinaya astaanta xiddigta",
 	"wikifarm-instances-menu-button-title": "Liiska dhammaan wikiyada",
-	"wikifarm-instances-menu-aria-label": "Wikiyada",
 	"wikifarm-ui-access-field-type-user": "Isticmaale",
 	"wikifarm-ui-access-field-type-group": "Kooxda",
 	"wikifarm-instance-color": "Midabka Wiki",
@@ -172,7 +171,6 @@
 	"wikifarm-instance-advanced-options": "Dejimaha horumarsan",
 	"wikifarm-action-purgeinstance-description": "Wiki-ga nadiifi",
 	"wikifarm-main-wiki-name": "Wiki-ga ugu weyn",
-	"wikifarm-breadcrumb-nav-back-to-main-title": "Ku noqo wikiga weyn",
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Ku noqo bogga hore",
 	"wikifarm-access-group-name-user-alt": "Dhammaan isticmaalayaasha",
 	"wikifarm-instances-tab-favourite-label": "Kuwa la jecel yahay",
@@ -217,8 +215,6 @@
 	"wikifarm-instance-featured-help": "Wiki-yada la xushay waxay ka soo muuqdaan qaybta \"La xushay\" ee liiska wiki-ga",
 	"wikifarm-instances-menu-search-label": "Ka raadi wiki",
 	"wikifarm-instances-search-placeholder": "Raadi wiki",
-	"wikifarm-instances-menu-section-current": "Hadda",
-	"wikifarm-instances-menu-section-central": "Wikiyada dhexe",
 	"wikifarm-instances-menu-section-favourites": "Kuwa la jecel yahay",
 	"wikifarm-instances-menu-section-featured": "La xushay",
 	"wikifarm-instances-menu-section-other": "Kale",
@@ -241,5 +237,11 @@
 	"wikifarm-ui-search-instance-filter-hint": "... ama dooro wiki-yo aad ka raadinayso marka lagu daro wiki-gan",
 	"wikifarm-ui-search-instance-filter-search": "Ka raadi wiki",
 	"wikifarm-search-filter-label": "Ka raadi wiki-yada",
-	"wikifarm-instances-menu-search-no-results": "Wax wiki ah lama helin"
+	"wikifarm-instances-menu-search-no-results": "Wax wiki ah lama helin",
+	"wikifarm-instances-pinned-notification-success": "Wiki-ga waxaa loo calaamadeeyay inuu yahay \"wiki la soo bandhigay\"",
+	"wikifarm-instances-unpinned-notification-success": "Wiki-ga waxaa laga saaray \"wiki-yada la soo bandhigay\"",
+	"wikifarm-instances-pinned-notification-error": "Wiki-ga looma dejin karin inuu noqdo \"wiki la soo bandhigay\". Fadlan mar kale isku day",
+	"wikifarm-instances-unpinned-notification-error": "Wiki-ga lagama saari karin \"wiki-yada la soo bandhigay\". Fadlan mar kale isku day",
+	"wikifarm-edit-instance-feature-btn-label": "Wiki la soo bandhigay",
+	"wikifarm-edit-instance-feature-btn-title": "Ku calaamadee wiki-ga inuu yahay \"wiki la soo bandhigay\""
 }
