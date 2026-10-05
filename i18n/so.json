@@ -243,5 +243,10 @@
 	"wikifarm-instances-pinned-notification-error": "Wiki-ga looma dejin karin inuu noqdo \"wiki la soo bandhigay\". Fadlan mar kale isku day",
 	"wikifarm-instances-unpinned-notification-error": "Wiki-ga lagama saari karin \"wiki-yada la soo bandhigay\". Fadlan mar kale isku day",
 	"wikifarm-edit-instance-feature-btn-label": "Wiki la soo bandhigay",
-	"wikifarm-edit-instance-feature-btn-title": "Ku calaamadee wiki-ga inuu yahay \"wiki la soo bandhigay\""
+	"wikifarm-edit-instance-feature-btn-title": "Ku calaamadee wiki-ga inuu yahay \"wiki la soo bandhigay\"",
+	"wikifarm-back-to-main-wiki-btn-title": "U gudub wiki-ga weyn",
+	"wikifarm-back-to-main-wiki-btn-aria-label": "Fur wiki-ga weyn",
+	"wikifarm-instances-menu-button-aria-label": "Wikiyada: $1",
+	"wikifarm-wiki-back-link-title": "Ku noqo $1",
+	"wikifarm-wiki-back-link-aria-label": "Ku noqo $1"
 }

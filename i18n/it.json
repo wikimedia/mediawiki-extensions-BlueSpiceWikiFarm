@@ -48,5 +48,10 @@
 	"wikifarm-button-action-delete-label": "Cancella",
 	"wikifarm-instances-filter-show-all-label": "Tutti i siti wiki",
 	"wikifarm-wikis-create-new-wiki-title": "Crea un nuovo wiki",
-	"wikifarm-wikis-create-new-wiki-aria-label": "Crea un nuovo wiki"
+	"wikifarm-wikis-create-new-wiki-aria-label": "Crea un nuovo wiki",
+	"wikifarm-back-to-main-wiki-btn-title": "Al wiki principale",
+	"wikifarm-back-to-main-wiki-btn-aria-label": "Apri wiki principale",
+	"wikifarm-instances-menu-button-aria-label": "Wiki: $1",
+	"wikifarm-wiki-back-link-title": "Torna a $1",
+	"wikifarm-wiki-back-link-aria-label": "Torna a $1"
 }
