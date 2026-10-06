@@ -13,5 +13,9 @@
 	"wikifarm-button-action-delete-label": "حذف",
 	"wikifarm-instances-filter-show-all-label": "همهٔ ویکی‌ها",
 	"wikifarm-wikis-create-new-wiki-title": "ایجاد یک ویکی جدید",
-	"wikifarm-wikis-create-new-wiki-aria-label": "ایجاد یک ویکی جدید"
+	"wikifarm-wikis-create-new-wiki-aria-label": "ایجاد یک ویکی جدید",
+	"wikifarm-back-to-main-wiki-btn-aria-label": "گشودن ویکی اصلی",
+	"wikifarm-instances-menu-button-aria-label": "ویکی‌ها: $1",
+	"wikifarm-wiki-back-link-title": "بازگشت به $1",
+	"wikifarm-wiki-back-link-aria-label": "بازگشت به $1"
 }
