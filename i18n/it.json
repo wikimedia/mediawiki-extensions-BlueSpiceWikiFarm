@@ -17,7 +17,6 @@
 	"wikifarm-ui-access-assignee-type-group": "Gruppo",
 	"wikifarm-button-action-label-promote-to-shared": "Sposta",
 	"wikifarm-instances-menu-button-title": "Elenco di tutti gli wiki",
-	"wikifarm-instances-menu-aria-label": "Wiki",
 	"wikifarm-ui-access-field-type-user": "Utente",
 	"wikifarm-ui-access-field-type-group": "Gruppo",
 	"wikifarm-management-breadcrumb-label-create": "Crea",
@@ -40,7 +39,6 @@
 	"wikifarm-access-tab-groups": "Gruppi",
 	"wikifarm-access-column-user": "Utente",
 	"logentry-ext-wikifarm-access-remove-all-roles": "$1 {{GENDER:$2|ha rimosso}} tutti i ruoli dal gruppo \"$4\"",
-	"wikifarm-instances-menu-section-current": "Attuale",
 	"wikifarm-instances-menu-section-other": "Altro",
 	"wikifarm-instances-menu-link-wikis-label": "... mostra tutti gli wiki",
 	"wikifarm-instances-menu-search-more-results-label": "Mostra {{PLURAL:$1|il risultato|tutti i $1 risultati}}",
@@ -50,5 +48,10 @@
 	"wikifarm-button-action-delete-label": "Cancella",
 	"wikifarm-instances-filter-show-all-label": "Tutti i siti wiki",
 	"wikifarm-wikis-create-new-wiki-title": "Crea un nuovo wiki",
-	"wikifarm-wikis-create-new-wiki-aria-label": "Crea un nuovo wiki"
+	"wikifarm-wikis-create-new-wiki-aria-label": "Crea un nuovo wiki",
+	"wikifarm-back-to-main-wiki-btn-title": "Al wiki principale",
+	"wikifarm-back-to-main-wiki-btn-aria-label": "Apri wiki principale",
+	"wikifarm-instances-menu-button-aria-label": "Wiki: $1",
+	"wikifarm-wiki-back-link-title": "Torna a $1",
+	"wikifarm-wiki-back-link-aria-label": "Torna a $1"
 }

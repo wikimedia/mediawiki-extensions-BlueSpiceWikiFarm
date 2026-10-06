@@ -151,7 +151,6 @@
 	"wikifarm-shared-resources-exists-on-shared": "此页面位于共享资源wiki中。",
 	"wikifarm-instances-menu-empty-favorite-text": "目前还没有添加到收藏夹的维基。您可以点击星形图标将维基添加为收藏夹。",
 	"wikifarm-instances-menu-button-title": "列出所有wiki",
-	"wikifarm-instances-menu-aria-label": "Wiki",
 	"wikis": "Wiki",
 	"wikifarm-instances-menu-section-favourites": "收藏",
 	"wikifarm-ui-search-instance-filter": "在wiki里搜索：$1",
