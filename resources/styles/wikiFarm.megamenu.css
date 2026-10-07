@@ -1,5 +1,7 @@
 :root {
 	--wiki-instance-card-bg: #f8f9fa;
+	--wiki-instance-fg--hover: #3e5389;
+	--wiki-instance-bg--hover: #fff;
 	--wiki-instance-fg--active: #3e5389;
 	--wiki-instance-main-bg: #f1f3f9;
 	--wiki-instance-main-fg: #3e5389;
@@ -23,6 +25,7 @@
 
 .farm-wiki-card-content {
 	min-width: 0;
+	width: 85%;
 	display: flex;
 	align-items: center;
 }
@@ -33,6 +36,7 @@
 
 .farm-wiki-card-content a {
 	max-width: 100%;
+	width: 100%;
 	display: inline-block;
 }
 
@@ -63,8 +67,15 @@
 	margin-right: 8px;
 }
 
+#farm-wikis-mm .farm-wiki-card-favorite-btn:hover {
+	color: var( --wiki-instance-fg--hover );
+	background-color: var( --wiki-instance-bg--hover );
+	border-radius: var( --icon-border-size );
+}
+
 #farm-wikis-mm .wiki-instance-favored {
 	color: var( --wiki-instance-fg--active );
+	padding: 6px;
 }
 
 .farm-wiki-instance-overview {
@@ -95,6 +106,10 @@
 #farm-wikis-favourites .farm-wikis-elements {
 	columns: 2;
 	display: block;
+}
+
+#farm-wikis-pinned .farm-wiki-card-content {
+	width: 100%;
 }
 
 #farm-wikis-results .oo-ui-textInputWidget {
