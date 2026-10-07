@@ -3,7 +3,7 @@
 namespace BlueSpice\WikiFarm\AccessControl;
 
 use BlueSpice\WikiFarm\InstanceEntity;
-use ManualLogEntry;
+use MediaWiki\Logging\ManualLogEntry;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\User\UserFactory;
