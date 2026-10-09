@@ -41,4 +41,16 @@ It template exists on the `-shared` instance, its content will be fetched and a 
 created and returned to the parser. From parsers POV, it will be as if the template was local.
 Done in `BeforeParserFetchTemplateRevisionRecord` hook.
 
+3. Displaying shared TemplateStyles
+
+`<templatestyles src="...">` does not resolve revisions through `BeforeParserFetchTemplateRevisionRecord`.
+For missing local stylesheets that exist in `-shared`, we replace
+`ParserOptions::getCurrentRevisionRecordCallback` via parser options hooks
+(`ArticleParserOptions`, `ApiMakeParserOptions`, and `ParserBeforeInternalParse`)
+so TemplateStyles resolves the stylesheet revision from shared resources without
+overriding the tag itself.
+
+Since we cannot say with certainty that the css file being retrieved is actually a template style,
+as a side-effect, it will also retrieve other CSS pages in case they exist in shared resources (Commons.css excluded)
+
  

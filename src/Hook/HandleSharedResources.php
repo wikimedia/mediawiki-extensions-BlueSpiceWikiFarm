@@ -10,13 +10,19 @@ use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\InstanceStore;
 use MediaWiki\Api\ApiQuery;
 use MediaWiki\Api\Hook\APIAfterExecuteHook;
+use MediaWiki\Api\Hook\ApiMakeParserOptionsHook;
 use MediaWiki\Config\Config;
-use MediaWiki\Content\WikitextContent;
+use MediaWiki\Content\ContentHandler;
 use MediaWiki\Extension\TemplateData\Api\ApiTemplateData;
+use MediaWiki\Extension\TemplateStyles\Hooks as TemplateStylesHooks;
 use MediaWiki\Hook\BeforeParserFetchTemplateRevisionRecordHook;
+use MediaWiki\Hook\ParserBeforeInternalParseHook;
 use MediaWiki\Hook\SkinTemplateNavigation__UniversalHook;
 use MediaWiki\Linker\LinkTarget;
 use MediaWiki\Output\Hook\BeforePageDisplayHook;
+use MediaWiki\Page\Article;
+use MediaWiki\Page\Hook\ArticleParserOptionsHook;
+use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Request\WebRequest;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
@@ -29,14 +35,21 @@ use OOUI\MessageWidget;
 
 class HandleSharedResources implements
 	BeforeParserFetchTemplateRevisionRecordHook,
+	ArticleParserOptionsHook,
+	ApiMakeParserOptionsHook,
+	ParserBeforeInternalParseHook,
 	SkinTemplateNavigation__UniversalHook,
 	BlueSpiceDiscoveryTemplateDataProviderAfterInit,
 	BeforePageDisplayHook,
 	APIAfterExecuteHook
 {
 
+	/** @var array */
+	private array $sharedRevisions = [];
 	/** @var InstanceEntity|null */
 	protected ?InstanceEntity $sharedInstance = null;
+	/** @var array<int,bool> */
+	private array $registeredRevisionCallbacks = [];
 
 	/**
 	 * @param Config $farmConfig
@@ -90,6 +103,70 @@ class HandleSharedResources implements
 		if ( $sharedRevision ) {
 			$revRecord = $sharedRevision;
 		}
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function onArticleParserOptions( Article $article, ParserOptions $popts ) {
+		$this->registerSharedTemplateStylesRevisionCallback( $popts );
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function onApiMakeParserOptions(
+		$options, $title, $params, $module, &$reset, &$suppressCache
+	) {
+		$this->registerSharedTemplateStylesRevisionCallback( $options );
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function onParserBeforeInternalParse( $parser, &$text, $stripState ) {
+		$options = $parser->getOptions();
+		if ( $options ) {
+			$this->registerSharedTemplateStylesRevisionCallback( $options );
+		}
+	}
+
+	private function registerSharedTemplateStylesRevisionCallback( ParserOptions $options ): void {
+		if ( !$this->sharedInstance ) {
+			return;
+		}
+		if (
+			!$this->farmConfig->get( 'useSharedResources' ) ||
+			FARMER_CALLED_INSTANCE === $this->farmConfig->get( 'sharedResourcesWikiPath' )
+		) {
+			return;
+		}
+
+		$config = TemplateStylesHooks::getConfig();
+		if ( $config->get( 'TemplateStylesDisable' ) ) {
+			return;
+		}
+		$optionsId = spl_object_id( $options );
+		if ( isset( $this->registeredRevisionCallbacks[$optionsId] ) ) {
+			return;
+		}
+		$oldCurrentRevisionRecordCallback = $options->setCurrentRevisionRecordCallback(
+			function ( LinkTarget $link, $callbackParser = null ) use ( &$oldCurrentRevisionRecordCallback ) {
+				$linkTitle = $this->titleFactory->castFromLinkTarget( $link );
+				if (
+					!str_ends_with( strtolower( $linkTitle->getDBkey() ), '.css' ) ||
+					$linkTitle->exists()
+				) {
+					return $oldCurrentRevisionRecordCallback( $link, $callbackParser );
+				}
+				$sharedRevision = $this->getSharedRevision( $linkTitle, $this->sharedInstance );
+				if ( $sharedRevision ) {
+					return $sharedRevision;
+				}
+				return $oldCurrentRevisionRecordCallback( $link, $callbackParser );
+			}
+		);
+		$this->registeredRevisionCallbacks[$optionsId] = true;
 	}
 
 	/**
@@ -292,14 +369,21 @@ class HandleSharedResources implements
 	protected function getSharedRevision(
 		Title $title, InstanceEntity $sharedInstance, ?int $revisionId = null
 	): ?MutableRevisionRecord {
+		if ( isset( $this->sharedRevisions[$title->getPrefixedDBkey()] ) ) {
+			return $this->sharedRevisions[$title->getPrefixedDBkey()];
+		}
 		$foreign = $this->globalDatabaseQueryExecution->getForeignPage( $sharedInstance, $title, $revisionId );
 		if ( $foreign === null ) {
+			$this->sharedRevisions[$title->getPrefixedDBkey()] = null;
 			return null;
 		}
 		$rev = new MutableRevisionRecord( $title );
 		$rev->setId( $foreign['revision'] );
-		$rev->setContent( SlotRecord::MAIN, new WikitextContent( $foreign['content'] ) );
+		$model = $foreign['model'] ?? CONTENT_MODEL_WIKITEXT;
+		$content = ContentHandler::makeContent( $foreign['content'], $title, $model );
+		$rev->setContent( SlotRecord::MAIN, $content );
 
+		$this->sharedRevisions[$title->getPrefixedDBkey()] = $rev;
 		return $rev;
 	}
 

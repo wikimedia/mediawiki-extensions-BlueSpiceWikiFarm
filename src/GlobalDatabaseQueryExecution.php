@@ -153,7 +153,7 @@ class GlobalDatabaseQueryExecution {
 			[ 'slot_revision_id = ' . $revisionId ] :
 			[ 'slot_revision_id = page_latest' ];
 		$row = $db->newSelectQueryBuilder()
-			->select( [ 'old_text', 'page_latest', 'page_id', 'page_namespace', 'page_title' ] )
+			->select( [ 'old_text', 'page_content_model', 'page_latest', 'page_id', 'page_namespace', 'page_title' ] )
 			->from( 'text' )
 			->join( 'content', 'c', [ 'old_id = \'tt:\' + content_id' ] )
 			->join( 'slots', 'sl', [ 'slot_content_id = content_id' ] )
@@ -170,6 +170,7 @@ class GlobalDatabaseQueryExecution {
 
 		return [
 			'content' => $row->old_text,
+			'model' => $row->page_content_model,
 			'id' => $row->page_id,
 			'revision' => $revisionId ?? $row->page_latest,
 			'namespace' => $row->page_namespace,
