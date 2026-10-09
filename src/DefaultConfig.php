@@ -52,6 +52,11 @@ class DefaultConfig extends HashConfig {
 			'globalArticlePath' => $globals['wgArticlePath'],
 
 			/**
+			 * The upload path of the wiki farm
+			 */
+			'globalUploadPath' => $globals['wgUploadPath'],
+
+			/**
 			 * Common prefix for all automatically created databases.
 			 */
 			'dbPrefix' => 'wiki_',

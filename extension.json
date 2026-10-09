@@ -652,7 +652,9 @@
 		"UnifiedTaskOverviewTaskCollectionComplete": "updateWikiInfo",
 		"MWStakeUserStoreVisibleGroupsTypeFilter": "handleGroupStore",
 		"IssueTrackerLinksAuth": "unifyRedirectUri",
-		"IssueTrackerLinksAuthRedirectUri": "unifyRedirectUri"
+		"IssueTrackerLinksAuthRedirectUri": "unifyRedirectUri",
+		"FlexiSkinGetActiveSkin": "shareFlexiSkin",
+		"FlexiSkinAdaptConfiguration": "shareFlexiSkin"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -755,6 +757,10 @@
 		"unifyRedirectUri": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\Integration\\UnifiedIssueTrackerLinksAuthRedirectUri",
 			"services": [ "BlueSpiceWikiFarm._Config", "TitleFactory" ]
+		},
+		"shareFlexiSkin": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\ShareFlexiSkin",
+			"services": [ "BlueSpiceWikiFarm._Config", "RepoGroup" ]
 		}
 	},
 	"RestRoutes": [
