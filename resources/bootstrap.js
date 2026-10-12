@@ -225,8 +225,8 @@ mw.hook( 'notifyme.notification.item' ).add( ( notification, data ) => {
 
 mw.hook( 'notifyme.notification.group.item' ).add( ( notification, data ) => {
 	const source = data._source_wiki; // eslint-disable-line no-underscore-dangle
-	const $items = notification.$element
-		.add( notification.$element.find( '.notifications-ui-widget-NotificationItemWidget' ) );
+	const $items = notification.$element // eslint-disable-line compat/compat
+		.add( notification.$element.find( '.notifications-ui-widget-NotificationItemWidget' ) ); // eslint-disable-line compat/compat
 
 	if ( !source ) {
 		$items.css( 'border-left', `4px solid ${ ext.bluespiceWikiFarm.util.getCurrentWikiColor() }` );
