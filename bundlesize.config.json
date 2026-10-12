@@ -6,5 +6,9 @@
 	{
 		"resourceModule": "ext.bluespice.wikiFarm.bootstrap",
 		"maxSize": "4 kB"
+	},
+	{
+		"resourceModule": "ext.bluespice.wikiFarm.instanceColors",
+		"maxSize": "2 kB"
 	}
 ]
