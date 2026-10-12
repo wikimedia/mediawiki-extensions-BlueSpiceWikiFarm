@@ -58,7 +58,6 @@ class InstallInstance extends Maintenance {
 			return false;
 		}
 
-
 		$status = $installer->execute();
 		if ( !$status->isGood() ) {
 			$this->fatalError( $status->getMessage()->inLanguage( 'en' )->text() );
