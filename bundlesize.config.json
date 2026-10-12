@@ -1,10 +1,10 @@
 [
 	{
 		"resourceModule": "ext.bluespice.wikiFarm.instances.megamenu",
-		"maxSize": "4 kB"
+		"maxSize": "6 kB"
 	},
 	{
 		"resourceModule": "ext.bluespice.wikiFarm.bootstrap",
-		"maxSize": "2 kB"
+		"maxSize": "4 kB"
 	}
 ]
