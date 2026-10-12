@@ -109,7 +109,7 @@ bs.bluespiceWikiFarm.ui.WikiPanel.prototype.makeGrid = function () {
 			}
 		};
 	}
-	if ( this.permissions.indexOf( 'managewiki' ) > -1 ) {
+	if ( this.permissions.includes( 'managewiki' ) ) {
 		gridCfg.columns.actionEdit = {
 			type: 'action',
 			actionId: 'edit',
