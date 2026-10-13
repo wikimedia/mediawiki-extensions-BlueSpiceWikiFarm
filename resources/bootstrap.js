@@ -193,6 +193,8 @@ mw.hook( 'bs.extendedSearch.result.init' ).add( ( $element, source ) => {
 	const wikiColor = source.color && source.color.background ?
 		source.color.background : defaultColor;
 
+	$element.css( 'border-left', `4px solid ${ wikiColor }` );
+
 	const $badge = $( '<div>' ).addClass( 'wikifarm-wiki-badge' );
 	const $icon = $( '<span>' )
 		.addClass( 'wikifarm-wiki-badge__icon' )
