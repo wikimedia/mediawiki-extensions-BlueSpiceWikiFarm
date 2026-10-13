@@ -49,12 +49,14 @@
 	mask-size: contain;
 }
 
-.bs-extendedsearch-result-wiki-label .wikifarm-wiki-badge__text {
+.bs-extendedsearch-result-wiki-label .wikifarm-wiki-badge__text,
+.notifications-ui-widget-NotificationItemWidget-notification-content .wikifarm-wiki-badge__text {
 	font-size: 0.75rem;
 	font-weight: normal;
 }
 
-.bs-extendedsearch-result-wiki-label .wikifarm-wiki-badge__icon {
+.bs-extendedsearch-result-wiki-label .wikifarm-wiki-badge__icon,
+.notifications-ui-widget-NotificationItemWidget-notification-content .wikifarm-wiki-badge__icon {
 	width: 16px;
 	height: 16px;
 	margin-right: 6px;
