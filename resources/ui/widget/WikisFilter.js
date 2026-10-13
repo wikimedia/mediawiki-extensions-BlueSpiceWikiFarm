@@ -23,9 +23,14 @@ ext.bluespiceWikiFarm.ui.widget.WikisFilter = function ( cfg ) {
 			selected = [];
 		}
 		const index = selected.indexOf( this.localWiki.data );
-		if ( index !== -1 ) {
+		// if selected contains wikis current instance is also searched
+		// add it to selection
+		if ( index !== -1 || selected.length > 0 ) {
 			this.localWiki.selected = true;
-			selected.splice( index, 1 );
+			this.localWiki.allowUnselect = false;
+			if ( index !== -1 ) {
+				selected.splice( index, 1 );
+			}
 		} else {
 			this.localWiki.selected = false;
 		}
