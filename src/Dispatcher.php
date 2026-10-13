@@ -159,10 +159,24 @@ class Dispatcher {
 
 				// We need to reset let the maintenance script reload the arguments, as we now have
 				// removed the "--sfr" flag, which would lead to an "Unexpected option" error
-				// Since '--sfr' is already removed from $argv in the extractor, just re-init the runner
+				// Since '--sfr' is already removed from $argv in the extractor, re-init the runner.
+				// Re-init mode must match the invocation mode:
+				// - run.php uses initFromWrapper()
+				// - direct script execution uses initForClass()
 				/** @var MaintenanceRunner */
 				$runner = $GLOBALS['runner'];
-				$runner->initForClass( $GLOBALS['maintClass'], $GLOBALS['argv'] );
+				$maintClass = $GLOBALS['maintClass'] ?? null;
+				if ( is_string( $maintClass ) && $maintClass !== '' ) {
+					$runner->initForClass( $maintClass, $GLOBALS['argv'] );
+				} else {
+					// run.php already initialized this runner via initFromWrapper(). Calling
+					// it again would re-declare the "script" argument, so only refresh the
+					// wrapped script argv (everything after run.php + script path).
+					$reflection = new \ReflectionObject( $runner );
+					$scriptArgvProperty = $reflection->getProperty( 'scriptArgv' );
+					$scriptArgvProperty->setAccessible( true );
+					$scriptArgvProperty->setValue( $runner, array_slice( $GLOBALS['argv'], 2 ) );
+				}
 			}
 		} else {
 			$this->instance = $this->getInstance( $this->request['sfr'] ?? null );
