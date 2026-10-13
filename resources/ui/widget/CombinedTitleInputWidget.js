@@ -67,8 +67,7 @@ ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getLookupMenu
 			option.$element
 				.addClass( 'wikifarm-combined-title-option' )
 				.css( {
-					'--wiki-color': color,
-					'--wiki-color-tint': this.getInstanceTint( color )
+					'--wiki-color': color
 				} );
 			items.push( option );
 		}
@@ -106,27 +105,7 @@ ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getInstanceCh
  * @return {string}
  */
 ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getInstanceColor = function ( dataItem ) {
-	return ( dataItem && dataItem._instance_color ) || '#747474';
-};
-
-/**
- * @param {string} color Hex color, "#abc" or "#aabbcc"
- * @return {string} CSS color
- */
-ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getInstanceTint = function ( color ) {
-	let hex = ( color || '' ).replace( '#', '' );
-	if ( hex.length === 3 ) {
-		hex = hex[ 0 ] + hex[ 0 ] + hex[ 1 ] + hex[ 1 ] + hex[ 2 ] + hex[ 2 ];
-	}
-	if ( !/^[0-9a-fA-F]{6}$/.test( hex ) ) {
-		return 'transparent';
-	}
-	const rgb = [
-		parseInt( hex.slice( 0, 2 ), 16 ),
-		parseInt( hex.slice( 2, 4 ), 16 ),
-		parseInt( hex.slice( 4, 6 ), 16 )
-	];
-	return 'rgba( ' + rgb.join( ', ' ) + ', 0.16 )';
+	return ( dataItem && dataItem._instance_color ) || '#3e5389';
 };
 
 ext.bluespiceWikiFarm.ui.widget.CombinedTitleInputWidget.prototype.getDataItemForOption = function ( dataItem ) {
