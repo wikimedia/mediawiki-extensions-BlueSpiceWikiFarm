@@ -136,12 +136,15 @@ class InstanceManager {
 	 * @throws Exception
 	 */
 	public function getUrlForNewInstance( string $path ): string {
-		$base = $this->farmConfig->get( 'basePath' );
-		$base = trim( $base, '/' );
+		$base = trim( $this->farmConfig->get( 'basePath' ), '/' );
 		$scriptPath = $base . '/' . $path;
-		$server = $this->farmConfig->get( 'globalServer' );
-		$server = rtrim( $server, '/' );
-		return $server . '/' . $scriptPath;
+		$server = rtrim( $this->farmConfig->get( 'globalServer' ), '/' );
+		// Script path here would already have a leading / so we don't need to prefix
+		// it with a slash below. Since we're already right trimming the trailing slash
+		// from the server URL above, the slash in the script path would suffice here.
+		// This avoids having a URLs after creating sub-wikis such as: `scheme://url//subwiki`
+		// It should be: `scheme://url/subwiki`.
+		return $server . $scriptPath;
 	}
 
 	/**
