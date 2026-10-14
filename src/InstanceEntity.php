@@ -312,7 +312,13 @@ class InstanceEntity {
 				Message::newFromKey( 'wikifarm-error-instance-directory-not-set' )->plain()
 			);
 		}
-		return $farmConfig->get( 'instanceDirectory' ) . '/' . $this->getPath();
+		// $GLOBALS['wgWikiFarmConfig_instanceDirectory'] already has a trailing slash at the
+		// end, so we don't need to add a / here since that will cause a double slash in the
+		// script path like so: //fooPath.
+		// Also, note that on most POSIX systems, trying to create a child and parent directory
+		// with `mkdir -p foo//bar` will be resolved by the kernel's path resolution system to
+		// `mkdir -p foo/bar` automatically stripping away the extra slash(es).
+		return $farmConfig->get( 'instanceDirectory' ) . $this->getPath();
 	}
 
 	/**
