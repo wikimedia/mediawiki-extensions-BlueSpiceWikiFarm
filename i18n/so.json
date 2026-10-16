@@ -248,5 +248,9 @@
 	"wikifarm-back-to-main-wiki-btn-aria-label": "Fur wiki-ga weyn",
 	"wikifarm-instances-menu-button-aria-label": "Wikiyada: $1",
 	"wikifarm-wiki-back-link-title": "Ku noqo $1",
-	"wikifarm-wiki-back-link-aria-label": "Ku noqo $1"
+	"wikifarm-wiki-back-link-aria-label": "Ku noqo $1",
+	"wikifarm-special-farmmanagement-title": "Maareeyaha Wikiga",
+	"wikifarm-special-accessmanagement-title": "Maareeyaha gelitaanka",
+	"wikifarm-farmmanagement-label": "Wikiyada",
+	"wikifarm-accessmanagement-label": "Helitaanka"
 }

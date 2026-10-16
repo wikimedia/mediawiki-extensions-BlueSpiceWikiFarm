@@ -97,5 +97,6 @@
 	"wikifarm-instances-menu-search-no-results": "Keng Wikie fonnt",
 	"wikifarm-instances-menu-button-aria-label": "Wikien: $1",
 	"wikifarm-wiki-back-link-title": "Zeréck op $1",
-	"wikifarm-wiki-back-link-aria-label": "Zeréck op $1"
+	"wikifarm-wiki-back-link-aria-label": "Zeréck op $1",
+	"wikifarm-farmmanagement-label": "Wikien"
 }

@@ -248,5 +248,9 @@
 	"wikifarm-back-to-main-wiki-btn-aria-label": "Abrir o wiki principal",
 	"wikifarm-instances-menu-button-aria-label": "Wikis: $1",
 	"wikifarm-wiki-back-link-title": "Volver a «$1»",
-	"wikifarm-wiki-back-link-aria-label": "Volver a «$1»"
+	"wikifarm-wiki-back-link-aria-label": "Volver a «$1»",
+	"wikifarm-special-farmmanagement-title": "Xestor de wikis",
+	"wikifarm-special-accessmanagement-title": "Xestor de acceso",
+	"wikifarm-farmmanagement-label": "Wikis",
+	"wikifarm-accessmanagement-label": "Acceso"
 }
