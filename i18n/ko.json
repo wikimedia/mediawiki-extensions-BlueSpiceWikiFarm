@@ -3,6 +3,7 @@
 		"authors": [
 			"Bisang",
 			"Tensama0415",
+			"YeBoy371",
 			"Ykhwong",
 			"解浪"
 		]
@@ -70,7 +71,7 @@
 	"wikifarm-breadcrumb-nav-back-to-main-title": "주 위키로 돌아가기",
 	"wikifarm-access-group-name-user": "모든 그룹",
 	"wikifarm-instances-tab-favourite-label": "즐겨찾기",
-	"wikifarm-instances-tab-all-label": "다른 위키",
+	"wikifarm-instances-tab-all-label": "모든 위키",
 	"wikifarm-instances-grid-column-wiki-header-label": "위키",
 	"wikis": "위키",
 	"wikifarm-instances-grid-column-favourites-header-label": "즐겨찾기",
@@ -114,7 +115,7 @@
 	"wikifarm-access-tab-users": "사용자",
 	"wikifarm-access-column-group": "그룹",
 	"wikifarm-access-column-user": "사용자",
-	"wikifarm-access-card-public-desc": "익명 사용자를 포함하여 누구나 내용을 보고 편집할 수 있습니다",
+	"wikifarm-access-card-public-desc": "익명 사용자를 포함하여 누구나 내용을 보고 편집할 수 있습니다.",
 	"wikifarm-access-field-assignees": "그룹 / 사용자",
 	"wikifarm-access-field-selected": "선택됨",
 	"wikifarm-access-role-desc-reader": "이 위키의 문서를 볼 수 있습니다",
@@ -228,7 +229,7 @@
 	"wikifarm-instances-menu-empty-favorite-text": "현재 즐겨찾기에 추가된 위키가 없습니다. 별표 아이콘을 클릭하여 위키를 즐겨찾기에 추가할 수 있습니다",
 	"wikifarm-management-invalid-source-text": "복제 원본으로 선택한 위키가 존재하지 않거나 준비되지 않았습니다. 다른 위키를 선택하거나 나중에 다시 시도해 주세요.",
 	"wikifarm-management-invalid-template-text": "위키 생성을 위해 선택한 틀이 유효하지 않습니다. 다른 틀을 선택하거나 나중에 다시 시도해 주세요.",
-	"wikifarm-access-general-heading": "권한 수준을 선택하여 이 위키에 대한 접근 권한을 설정하세요",
+	"wikifarm-access-general-heading": "권한 수준을 선택하여 이 위키에 대한 접근 권한을 설정하세요.",
 	"wikifarm-access-card-protected-desc": "익명 사용자를 포함한 모든 사용자는 이 위키를 볼 수 있습니다. 편집 권한은 '편집자' 이상의 역할을 가진 사용자 또는 그룹에게만 주어집니다.",
 	"wikifarm-access-card-private-desc": "독자 권한 이상을 가진 사용자는 이 위키를 볼 수 있습니다. 편집 권한은 편집자 권한 이상을 가진 사용자 또는 그룹에게만 주어집니다.",
 	"logentry-ext-wikifarm-access-assign-role": "$1님이 \"$5\" 역할을 \"$4\" 그룹에 {{GENDER:$2|할당했습니다}}",
@@ -263,5 +264,7 @@
 	"wikifarm-instances-menu-section-central": "중앙 위키",
 	"wikifarm-error-copy-instance-data-failed": "위키 디렉토리 복사에 실패했습니다",
 	"wikifarm-error-archive-instance-failed": "위키 아카이브 생성에 실패했습니다",
-	"wikifarm-search-filter-show-all-label": "모든 위키"
+	"wikifarm-search-filter-show-all-label": "모든 위키",
+	"wikifarm-search-filter-label": "위키에서 검색",
+	"wikifarm-instances-menu-search-no-results": "위키가 없습니다"
 }

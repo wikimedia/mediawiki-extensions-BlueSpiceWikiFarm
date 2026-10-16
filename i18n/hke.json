@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Muisha wiki hke"
+		]
+	},
+	"wikifarm-back-to-main-wiki-btn-title": "Kwa mbulukitso",
+	"wikifarm-back-to-main-wiki-btn-aria-label": "Kingula mbulukitso ya wiki",
+	"wikifarm-instances-menu-button-aria-label": "Wiki:$1",
+	"wikifarm-wiki-back-link-title": "Fuluka kwa $1",
+	"wikifarm-wiki-back-link-aria-label": "Fuluka kwa $1"
+}

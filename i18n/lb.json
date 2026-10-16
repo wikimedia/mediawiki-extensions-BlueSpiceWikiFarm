@@ -83,7 +83,7 @@
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Zeréck op d'Haaptsäit",
 	"wikifarm-access-group-name-user": "All Gruppen",
 	"wikifarm-instances-tab-favourite-label": "Favoritten",
-	"wikifarm-instances-tab-all-label": "Méi Wikien",
+	"wikifarm-instances-tab-all-label": "All Wikien",
 	"wikifarm-instances-grid-column-wiki-header-label": "Wiki",
 	"wikis": "Wikien",
 	"wikifarm-instances-grid-column-group-header-label": "Grupp",
@@ -103,5 +103,16 @@
 	"wikifarm-instances-menu-section-favourites": "Favoritten",
 	"wikifarm-button-action-delete-label": "Läschen",
 	"wikifarm-instances-filter-show-all-label": "All Wikien",
-	"wikifarm-search-filter-show-all-label": "All Wikien"
+	"wikifarm-search-filter-show-all-label": "All Wikien",
+	"wikifarm-farmmanagement-label": "Wikien",
+	"wikifarm-creation-failure-main-label": "D'Wiki konnt net ugeluecht ginn",
+	"wikifarm-search-center-filter-wiki-label": "Wiki",
+	"wikifarm-search-center-filter-wiki-with-values-label": "Wiki:",
+	"wikifarm-access-group-name-user-alt": "All Benotzer",
+	"wikifarm-access-role-desc-editor": "Ka Säiten op dëser Wiki kucken an änneren",
+	"wikifarm-search-filter-label": "An de Wikie sichen",
+	"wikifarm-instances-menu-search-no-results": "Keng Wikie fonnt",
+	"wikifarm-instances-menu-button-aria-label": "Wikien: $1",
+	"wikifarm-wiki-back-link-title": "Zeréck op $1",
+	"wikifarm-wiki-back-link-aria-label": "Zeréck op $1"
 }
