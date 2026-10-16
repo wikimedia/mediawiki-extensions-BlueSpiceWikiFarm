@@ -52,5 +52,4 @@ class InstancesDisplayListHandler extends QueryStore {
 			$this->config, $this->accessStore, $this->userOptionsLookup, $this->instanceDisplayRecordHelper
 		);
 	}
-
 }

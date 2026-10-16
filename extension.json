@@ -902,6 +902,14 @@
 			]
 		},
 		{
+			"path": "/bluespice/farm/v1/instances/details/{identifier}",
+			"class": "BlueSpice\\WikiFarm\\Rest\\InstanceDisplayData",
+			"services": [
+				"BlueSpiceWikiFarm.AccessControlStore", "BlueSpiceWikiFarm.InstanceStore",
+				"BlueSpiceWikiFarm._InstanceDisplayRecordHelper"
+			]
+		},
+		{
 			"path": "/bluespice/farm/v1/instances/recent",
 			"class": "BlueSpice\\WikiFarm\\Rest\\GetLastVisitedInstances",
 			"services": [

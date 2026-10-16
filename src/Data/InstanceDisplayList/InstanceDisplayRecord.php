@@ -16,4 +16,6 @@ class InstanceDisplayRecord extends BaseRecord {
 	public const FAVOURITE = 'favourite';
 	public const META_GROUP = 'meta_group';
 	public const IS_SYSTEM = 'is_system';
+
+	public const WIKI_ID = 'wiki_id';
 }

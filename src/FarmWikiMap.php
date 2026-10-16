@@ -33,6 +33,20 @@ class FarmWikiMap {
 	}
 
 	/**
+	 * @param string $path
+	 * @return string|null
+	 */
+	public function getWikiIdByPath( string $path ): ?string {
+		$this->assertLoaded();
+		foreach ( $this->map as $wikiId => $instance ) {
+			if ( $instance->getPath() === $path ) {
+				return $wikiId;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getMap(): array {

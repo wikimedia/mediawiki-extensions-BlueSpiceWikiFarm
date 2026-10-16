@@ -52,6 +52,11 @@ class Schema extends \MWStake\MediaWiki\Component\DataStore\Schema {
 				self::SORTABLE => true,
 				self::TYPE => FieldType::BOOLEAN
 			],
+			InstanceDisplayRecord::WIKI_ID => [
+				self::FILTERABLE => true,
+				self::SORTABLE => true,
+				self::TYPE => FieldType::STRING
+			]
 		] );
 	}
 }

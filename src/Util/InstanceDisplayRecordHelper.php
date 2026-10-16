@@ -56,7 +56,8 @@ class InstanceDisplayRecordHelper {
 				(bool)( $instance->getMetadata()['instanceColor']['lightText'] ?? false ),
 			InstanceDisplayRecord::FAVOURITE => $isFavourite,
 			InstanceDisplayRecord::META_GROUP => $instance->getMetadata()['group'] ?? '',
-			InstanceDisplayRecord::IS_SYSTEM => $instance instanceof SystemInstanceEntity
+			InstanceDisplayRecord::IS_SYSTEM => $instance instanceof SystemInstanceEntity,
+			InstanceDisplayRecord::WIKI_ID => $instance->getWikiId(),
 		] );
 	}
 
