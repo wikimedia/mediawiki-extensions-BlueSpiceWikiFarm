@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"JLTRY",
+			"NClara",
 			"SleaY"
 		]
 	},
@@ -27,5 +28,6 @@
 	"wikifarm-ui-teams-action-add-member": "Ajouter un membre",
 	"wikifarm-ui-role-label-editor": "Contributeur",
 	"wikifarm-ui-role-label-reviewer": "Relecteur",
-	"wikifarm-ui-access-wiki-type-protected": "Protégé"
+	"wikifarm-ui-access-wiki-type-protected": "Protégé",
+	"wikifarm-access-general-heading": "Déterminez les droits d'accès à ce wiki en sélectionnant un niveau d'autorisation."
 }
