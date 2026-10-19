@@ -4,7 +4,13 @@
     <link rel="stylesheet" type="text/css" href="{{style}}">
 </head>
 <body>
-    <div class="main">
-        {{{content}}}
+    <div class="maintenance">
+        <div class="content">
+            <h1 class="heading">{{heading}}</h1>
+            {{{content}}}
+            {{#main_wiki_url}}
+                <a class="main-wiki-link" href="{{main_wiki_url}}">{{main_wiki_label}}</a>
+            {{/main_wiki_url}}
+        </div>
     </div>
 </body>

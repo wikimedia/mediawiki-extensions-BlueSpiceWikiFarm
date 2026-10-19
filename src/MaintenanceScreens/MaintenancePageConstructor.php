@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\MaintenanceScreens;
 
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\NonExistingInstanceEntity;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\HttpException;
@@ -43,7 +44,12 @@ class MaintenancePageConstructor {
 			$GLOBALS['wgTmpDirectory'] = wfTempDir();
 		}
 		if ( $this->instanceEntity instanceof NonExistingInstanceEntity ) {
-			return ( new NonExistingInstanceScreen( $this->instanceEntity ) )->getHtml();
+			$context = RequestContext::getMain();
+			if ( $this->services->getPermissionManager()->userHasRight( $context->getUser(), 'wikifarm-createwiki' ) ) {
+				return ( new NonExistingInstanceScreen( $this->instanceEntity ) )->getHtml();
+			}
+			$context->getRequest()->response()->statusHeader( 404 );
+			return ( new NotFoundScreen( $this->instanceEntity ) )->getHtml();
 		}
 		switch ( $this->instanceEntity->getStatus() ) {
 			case InstanceEntity::STATUS_INIT:

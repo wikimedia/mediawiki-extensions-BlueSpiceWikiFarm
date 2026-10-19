@@ -3,6 +3,8 @@
 namespace BlueSpice\WikiFarm\MaintenanceScreens;
 
 use BlueSpice\WikiFarm\InstanceEntity;
+use BlueSpice\WikiFarm\RootInstanceEntity;
+use MediaWiki\Config\Config;
 use MediaWiki\Html\TemplateParser;
 use MediaWiki\Message\Message;
 
@@ -76,13 +78,26 @@ class MaintenanceScreen {
 		return $parser->processTemplate(
 			'wrapper',
 			[
+				'heading' => $this->getPageTitle(),
 				'content' => $content,
 				'title' => $this->getPageTitle(),
+				'main_wiki_url' => $this->getMainWikiUrl(),
+				'main_wiki_label' => Message::newFromKey( 'wikifarm-back-to-main-wiki-btn-title' )->text(),
 				'refresh_interval' => $this->getRefreshInterval(),
 				'style' => $GLOBALS['wgServer'] .
 					$GLOBALS['wgScriptPath'] .
 					'/extensions/BlueSpiceWikiFarm/src/MaintenanceScreens/templates/style.css'
 			]
 		);
+	}
+
+	private function getMainWikiUrl(): ?string {
+		$isRootWiki = defined( 'FARMER_IS_ROOT_WIKI_CALL' ) ?
+			FARMER_IS_ROOT_WIKI_CALL : $this->instanceEntity->getPath() === 'w';
+		$config = $GLOBALS['wgWikiFarmConfigInternal'] ?? null;
+		if ( $isRootWiki || !( $config instanceof Config ) ) {
+			return null;
+		}
+		return ( new RootInstanceEntity() )->getUrl( $config );
 	}
 }

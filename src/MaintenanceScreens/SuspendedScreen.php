@@ -17,8 +17,17 @@ class SuspendedScreen extends MaintenanceScreen {
 	 * @return array
 	 */
 	protected function getTemplateData(): array {
-		$data = [ 'instance_name' => $this->instanceEntity->getDisplayName() ];
-		$data['message'] = Message::newFromKey( 'wikifarm-instance-suspended-notice' )->text();
+		$data = [];
+		$data['message'] = Message::newFromKey( 'wikifarm-instance-suspended-label' )->text();
 		return $data;
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function getPageTitle(): string {
+		return Message::newFromKey(
+			'wikifarm-instance-suspended-heading', $this->instanceEntity->getDisplayName()
+		)->text();
 	}
 }

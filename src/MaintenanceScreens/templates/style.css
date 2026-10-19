@@ -6,54 +6,81 @@
 body {
 	margin: 0;
 	height: 100vh;
-	background-image: url( ./images/BS_Icon_BG.svg );
-	background-size: 30%;
+	width: 100vw;
+	background-image: url( ./images/bs_background.png );
+	background-size: cover;
 	background-repeat: no-repeat;
-	background-position: center;
 	font-family: 'Lato', sans-serif;
 }
 
-.main {
-	width: 100%;
+.maintenance {
+	margin: auto;
+	width: 32em;
 	text-align: center;
 	padding-top: 10%;
+}
+
+.content {
+	margin: 0 auto;
+	background: white;
+	padding: 15px 25px;
+	border: 1px solid #a2a9b1;
+	box-shadow: 0 2px 2px #0003;
+	border-radius: 2px;
+}
+
+.maintenance h1 {
+	color: #3e5389;
+}
+
+.maintenance a {
+	line-height: 1.5;
+	display: block;
+	color: #3e5389;
+	text-decoration: none;
+}
+
+.maintenance a:hover {
+	text-decoration: underline;
+}
+
+.main-wiki-link {
+	padding-top: 1rem;
 }
 
 .instance-name {
 	font-weight: bold;
 	display: block;
-	font-size: 3em;
-}
-
-.maintenance-message {
-	display: block;
-	font-size: 2em;
-	margin-top: 40px;
-	color: #2e6096;
-	font-weight: bold;
 }
 
 .status-image {
-	background-size: 200px;
+	width: 100px;
+	background-size: 100px;
 	background-repeat: no-repeat;
 	background-position: center;
-	height: 200px;
+	height: 100px;
+	margin-inline: auto;
 	margin-top: 5%;
 }
 
-#maintenance-image {
+.status-image--maintenance {
 	background-image: url( ./images/Maintenance.svg );
 }
 
-#suspended-image {
-	/* TODO: Add image */
-	/* background-image: url("./images/Maintenance.svg"); */
+.status-image--creation-failure {
+	background-image: url( ./images/CreationFailure.svg );
 }
 
-.creation-desc {
-	font-size: 1.2em;
-	margin-top: 50px;
-	display: block;
+.status-image--non-existing {
+	background-image: url( ./images/Create.svg );
+}
+
+.status-image--not-found {
+	background-image: url( ./images/NotFound.svg );
+}
+
+.status-image--suspended {
+	background-image: url( ./images/Suspended.svg );
 }
 
 #process-steps {
@@ -68,7 +95,7 @@ body {
 		list-style-type: none;
 
 		li { /* stylelint-disable-line plugin/no-unsupported-browser-features */
-			font-size: 1.3em;
+			font-size: 1rem;
 			padding: 10px 0;
 
 			.step-label { /* stylelint-disable-line plugin/no-unsupported-browser-features */

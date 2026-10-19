@@ -33,8 +33,6 @@ class CreationFailure extends MaintenanceScreen {
 	 */
 	protected function getTemplateData(): array {
 		return [
-			'instance' => $this->instanceEntity->getDisplayName(),
-			'main_label' => Message::newFromKey( 'wikifarm-creation-failure-main-label' )->text(),
 			'desc_message' => Message::newFromKey( 'wikifarm-creation-failure-desc' )->text(),
 			'process_id' => Message::newFromKey( 'wikifarm-creation-failure-process', $this->pid )->text(),
 		];
@@ -44,6 +42,7 @@ class CreationFailure extends MaintenanceScreen {
 	 * @return string
 	 */
 	protected function getPageTitle(): string {
-		return Message::newFromKey( 'wikifarm-creation-failure-main-label' )->text();
+		$instanceName = $this->instanceEntity->getDisplayName();
+		return Message::newFromKey( 'wikifarm-creation-failure-heading-label', $instanceName )->text();
 	}
 }

@@ -650,7 +650,7 @@
 		"ContentStabilizationFetchForeignRevisionForTransclusion": "handleSharedStabilization",
 		"ContentStabilizationGetStableForeignInclusion": "handleSharedStabilization",
 		"WikiMCPToolsGetWikiMap": "populateWikiMap",
-		"BeforeInitialize": [ "redirectUserPage", "trackLastVisitedInstances" ],
+		"BeforeInitialize": [ "handleAccessScreens", "redirectUserPage", "trackLastVisitedInstances" ],
 		"BSUserManagerBeforeAddGroup": "addGroupPrefix",
 		"MediaWikiServices": "configureContentTransfer",
 		"MWStakeGroupStoreGroupTypeFilter": "handleGroupStore",
@@ -739,6 +739,10 @@
 		"redirectUserPage": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\BeforeInitialize\\RedirectUserPage",
 			"services": [ "TitleFactory" ]
+		},
+		"handleAccessScreens": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\BeforeInitialize\\HandleAccessScreens",
+			"services": [ "BlueSpiceWikiFarm.InstanceStore", "PermissionManager" ]
 		},
 		"addGroupPrefix": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\FilterImplicitGroupCreation",
