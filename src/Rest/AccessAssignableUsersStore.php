@@ -49,9 +49,13 @@ class AccessAssignableUsersStore extends UserQueryStore {
 		// This removes limitation to only list users that can read current wiki, so user can select users to give them access
 		$excludedGroups = $this->farmConfig->get( 'instanceRestrictedGroups' );
 		$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeGroups'] = $GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeGroups'] ?? [];
-		$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeGroups'] = array_diff(
+		$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeGroups'] = array_unique( array_diff(
 			$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeGroups'],
 			$excludedGroups
+		) );
+		$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeUsers'] = array_diff(
+			$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeUsers'],
+			$this->farmConfig->get( 'instanceRestrictedUsers' ) ?? []
 		);
 		return parent::getResult( $store, $readerParams );
 	}
