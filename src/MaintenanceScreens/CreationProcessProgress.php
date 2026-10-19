@@ -18,7 +18,6 @@ class CreationProcessProgress extends ProcessProgressScreen {
 	 */
 	protected function getTemplateData(): array {
 		return parent::getTemplateData() + [
-			'main_label' => Message::newFromKey( 'wikifarm-creation-progress-main-label' )->text(),
 			'desc_message' => Message::newFromKey( 'wikifarm-creation-desc' )->text(),
 		];
 	}
@@ -27,6 +26,7 @@ class CreationProcessProgress extends ProcessProgressScreen {
 	 * @return string
 	 */
 	protected function getPageTitle(): string {
-		return Message::newFromKey( 'wikifarm-maintenance-creation-title' )->text();
+		$instanceName = $this->instanceEntity->getDisplayName();
+		return Message::newFromKey( 'wikifarm-maintenance-creation-heading-label', $instanceName )->text();
 	}
 }

@@ -75,9 +75,18 @@ class Dispatcher {
 		if ( $this->isCliInstallerContext() ) {
 			return [];
 		}
-
 		if ( $this->isInstanceWikiCall() ) {
-			if ( $this->instance->getStatus() !== InstanceEntity::STATUS_READY ) {
+			if ( $this->instance instanceof NonExistingInstanceEntity ) {
+				$server = $this->config->get( 'globalServer' );
+				$articlePath = $this->config->get( 'globalArticlePath' );
+				$GLOBALS['wgWikiFarmConfig_farmManagementUrl'] =
+					$server . str_replace( '$1', 'Special:FarmManagement', $articlePath );
+			}
+			$deferAccessScreen = !$this->isMaintenanceScript() &&
+				defined( 'MW_ENTRY_POINT' ) && MW_ENTRY_POINT === 'index' &&
+				( $this->instance instanceof NonExistingInstanceEntity ||
+					$this->instance->getStatus() === InstanceEntity::STATUS_SUSPENDED );
+			if ( $this->instance->getStatus() !== InstanceEntity::STATUS_READY && !$deferAccessScreen ) {
 				$this->showNotReadyScreen();
 			}
 			if ( !( $this->instance instanceof NonExistingInstanceEntity ) ) {
@@ -281,14 +290,6 @@ class Dispatcher {
 			$GLOBALS['wgWikiFarmConfig_maintenanceMessage'] = $config['wgWikiFarmConfig_maintenanceMessage'];
 		}
 		$constructor = new MaintenancePageConstructor( MediaWikiServices::getInstance(), $this->instance );
-		if ( $this->instance instanceof NonExistingInstanceEntity ) {
-			// ATM, context is not setup to `w`, so we cannot use normal methods to get URL
-			// This will happen in second phase
-			$server = $this->config->get( 'globalServer' );
-			$articlePath = $this->config->get( 'globalArticlePath' );
-			$url = $server . str_replace( '$1', 'Special:FarmManagement', $articlePath );
-			$GLOBALS['wgWikiFarmConfig_farmManagementUrl'] = $url;
-		}
 		echo $constructor->getHtml();
 		die;
 	}
@@ -349,11 +350,8 @@ class Dispatcher {
 	 * @return void
 	 */
 	private function setupAccessGroups() {
-		if ( $this->instance instanceof NonExistingInstanceEntity ) {
-			return;
-		}
 		$instance = $this->instance;
-		if ( !$instance ) {
+		if ( !$instance || $instance instanceof NonExistingInstanceEntity ) {
 			$instance = new RootInstanceEntity();
 		}
 		$db = ( new ManagementDatabaseFactory( $this->config ) )->createSharedUserDatabaseConnection();
