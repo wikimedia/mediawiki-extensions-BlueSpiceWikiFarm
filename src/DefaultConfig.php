@@ -167,6 +167,11 @@ class DefaultConfig extends HashConfig {
 			'instanceRestrictedGroups' => [],
 
 			/**
+			 * List of users that cannot read current instance
+			 */
+			'instanceRestrictedUsers' => [],
+
+			/**
 			 * MediaWiki WikiID for the root instance
 			 */
 			'rootInstanceWikiId' => WikiMap::getWikiIdFromDbDomain(
