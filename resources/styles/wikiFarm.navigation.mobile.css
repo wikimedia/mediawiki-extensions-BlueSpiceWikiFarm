@@ -1,0 +1,15 @@
+.wikifarm-instances-button-group #farm-wikis-btn {
+	width: auto;
+}
+
+.wikifarm-instances-button-group #farm-wikis-btn > .wikifarm-instance-label-path {
+	display: block;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.wikifarm-instances-button-group #farm-wikis-btn > span:last-child {
+	display: none;
+}

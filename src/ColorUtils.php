@@ -5,6 +5,22 @@ namespace BlueSpice\WikiFarm;
 class ColorUtils {
 
 	/**
+	 * @param InstanceEntity $instance
+	 * @return string
+	 */
+	public function getInstanceForeground( InstanceEntity $instance ): string {
+		$color = $instance->getMetadata()['instanceColor']['background'] ?? null;
+		if ( !is_string( $color ) ) {
+			$color = '#3e5389';
+		}
+		$lightText = $instance->getMetadata()['instanceColor']['lightText'] ?? true;
+		if ( !$lightText && !( $instance instanceof RootInstanceEntity ) ) {
+			return $this->getContrastForeground( $color, false );
+		}
+		return $color;
+	}
+
+	/**
 	 * Creates a light background color based on wiki color
 	 * @param string $hexCode
 	 * @param bool $lightText

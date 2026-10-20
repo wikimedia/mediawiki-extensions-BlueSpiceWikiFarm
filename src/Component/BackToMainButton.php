@@ -2,11 +2,14 @@
 
 namespace BlueSpice\WikiFarm\Component;
 
+use BlueSpice\WikiFarm\ColorUtils;
 use BlueSpice\WikiFarm\InstanceStore;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\IContextSource;
+use MediaWiki\Html\Html;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\Message\Message;
+use MWStake\MediaWiki\Component\CommonUserInterface\Component\Literal;
 use MWStake\MediaWiki\Component\CommonUserInterface\Component\SimpleLink;
 use MWStake\MediaWiki\Component\CommonUserInterface\IRestrictedComponent;
 
@@ -36,7 +39,7 @@ class BackToMainButton extends SimpleLink implements IRestrictedComponent {
 			return false;
 		}
 
-		if ( !FARMER_IS_ROOT_WIKI_CALL ) {
+		if ( !FARMER_IS_ROOT_WIKI_CALL && $this->instanceStore->getCurrentInstance() ) {
 			return true;
 		}
 		return false;
@@ -46,7 +49,20 @@ class BackToMainButton extends SimpleLink implements IRestrictedComponent {
 	 * @return array
 	 */
 	public function getClasses(): array {
-		return [ 'ico-btn', 'bi-bs-main-wiki' ];
+		return [ 'farm-back-to-main-btn' ];
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getSubComponents(): array {
+		$instance = $this->instanceStore->getCurrentInstance();
+		$color = ( new ColorUtils() )->getInstanceForeground( $instance );
+		return [ new Literal( 'farm-back-to-main-icon', Html::element( 'span', [
+			'class' => 'bi-bs-main-wiki',
+			'style' => "color: $color;",
+			'aria-hidden' => 'true'
+		] ) ) ];
 	}
 
 	/**

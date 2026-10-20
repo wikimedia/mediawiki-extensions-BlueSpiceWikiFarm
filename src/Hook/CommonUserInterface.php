@@ -2,10 +2,9 @@
 
 namespace BlueSpice\WikiFarm\Hook;
 
-use BlueSpice\WikiFarm\Component\BackToMainButton;
 use BlueSpice\WikiFarm\Component\CreateInstanceButton;
 use BlueSpice\WikiFarm\Component\WikiContext;
-use BlueSpice\WikiFarm\Component\WikiInstancesMenu;
+use BlueSpice\WikiFarm\Component\WikiInstancesButtonGroup;
 use BlueSpice\WikiFarm\EnhancedGlobalActionsFarmManagement;
 use BlueSpice\WikiFarm\GlobalActionsAccessManagement;
 use BlueSpice\WikiFarm\GlobalActionsFarmManagement;
@@ -61,15 +60,9 @@ class CommonUserInterface implements MWStakeCommonUIRegisterSkinSlotComponents {
 		$registry->register(
 			'NavbarPrimaryCenterItems',
 			[
-				'farm-back-to-main' => [
-					'factory' => function () {
-						return new BackToMainButton(
-							$this->farmConfig, $this->instanceStore );
-					}
-				],
 				'farm-wikis-item' => [
 					'factory' => function () {
-						return new WikiInstancesMenu(
+						return new WikiInstancesButtonGroup(
 							$this->farmConfig, $this->instanceStore );
 					}
 				]

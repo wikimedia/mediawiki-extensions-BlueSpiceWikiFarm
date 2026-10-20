@@ -540,6 +540,12 @@
 		"ext.bluespice.wikiFarm.wikiContext": {
 			"styles": "styles/wikiContext.css"
 		},
+		"ext.bluespice.wikiFarm.navigation": {
+			"styles": {
+				"styles/wikiFarm.navigation.css": {},
+				"styles/wikiFarm.navigation.mobile.css": { "media": "all and ( max-width: 1199px )" }
+			}
+		},
 		"ext.bluespice.wikiFarm.wikis.special": {
 			"packageFiles": [
 				"ext.bluespice.wikiFarm.wikis.js",
