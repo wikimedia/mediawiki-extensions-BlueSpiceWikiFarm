@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"KormiSK"
+		]
+	},
+	"wikifarm-special-farmmanagement-title": "Správca Wiki",
+	"wikifarm-special-accessmanagement-title": "Správca prístupu",
+	"wikifarm-farmmanagement-label": "Wiki",
+	"wikifarm-accessmanagement-label": "Prístup"
+}
