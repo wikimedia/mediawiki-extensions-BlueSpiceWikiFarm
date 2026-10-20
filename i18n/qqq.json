@@ -242,6 +242,7 @@
 	"wikifarm-promote-to-shared-dialog-delete-local-reason": "Page deletion reason",
 	"wikifarm-shared-resources-exists-on-shared": "Notice if the shared resources already exist on the shared repository",
 	"wikifarm-instances-menu-empty-favorite-text": "Label for favorite menu in wiki farm mega menu if no wiki instance is added as favorite",
+	"wikifarm-navigation-aria-label": "Accessible name for the button group containing the link to the main wiki and the wiki instances menu.",
 	"wikifarm-instances-menu-button-title": "Title for megamenu button with list of wiki instances",
 	"wikifarm-ui-access-field-type-user": "Wiki access level type label\n{{Identical|User}}",
 	"wikifarm-ui-access-field-type-group": "Wiki access level type label\n{{Identical|Group}}",

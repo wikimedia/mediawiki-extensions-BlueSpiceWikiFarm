@@ -19,12 +19,6 @@ use Wikimedia\HtmlArmor\HtmlArmor;
 
 class WikiInstancesMenu extends SimpleDropdownButton implements IRestrictedComponent {
 
-	private const LABEL_MAX_LENGTH = 10;
-	private const DEFAULT_INSTANCE_COLOR = '#3e5389';
-
-	/** @var string|null */
-	private $instanceColor = null;
-
 	/** @var InstanceEntity */
 	private $instance = null;
 
@@ -70,10 +64,7 @@ class WikiInstancesMenu extends SimpleDropdownButton implements IRestrictedCompo
 	 * @return array
 	 */
 	public function getButtonClasses(): array {
-		$classes = [ 'ico-btn', 'wikifarm-instances-btn' ];
-		$path = $this->instance->getPath();
-		$classes[] = $path . '-background';
-		return $classes;
+		return [ 'ico-btn', 'wikifarm-instances-btn' ];
 	}
 
 	/**
@@ -145,20 +136,15 @@ class WikiInstancesMenu extends SimpleDropdownButton implements IRestrictedCompo
 	 */
 	public function getText(): Message {
 		$full = $this->instance->getDisplayName();
-
-		$display = $full;
-		if ( mb_strlen( $full ) > self::LABEL_MAX_LENGTH ) {
-			$display = mb_substr( $full, 0, self::LABEL_MAX_LENGTH - 1 ) . '…';
-		}
-		return new RawMessage( $display );
+		return new RawMessage( $full );
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	public function getPreHtml(): HtmlArmor {
-		$this->instanceColor = $this->resolveInstanceColor();
-		return new HtmlArmor( $this->buildInstanceLabelHtml( $this->instanceColor ) );
+		$color = ( new ColorUtils() )->getInstanceForeground( $this->instance );
+		return new HtmlArmor( $this->buildInstanceLabelHtml( $color ) );
 	}
 
 	/**
@@ -173,34 +159,11 @@ class WikiInstancesMenu extends SimpleDropdownButton implements IRestrictedCompo
 				'style' => "color: $color;"
 			] );
 		}
-		if ( !$this->isLightText() ) {
-			$colorHelper = new ColorUtils();
-			$color = $colorHelper->getContrastForeground( $color, false );
-		}
-
 		return Html::element( 'span', [
 			'class' => 'wikifarm-instance-label-path',
 			'style' => "color: $color;",
 			'aria-hidden' => 'true'
 		], $pathPrefix );
-	}
-
-	/**
-	 * @return string
-	 */
-	private function resolveInstanceColor(): string {
-		$background = $this->instance->getMetadata()['instanceColor']['background'] ?? null;
-		if ( is_string( $background ) ) {
-			return $background;
-		}
-		return self::DEFAULT_INSTANCE_COLOR;
-	}
-
-	/**
-	 * @return bool
-	 */
-	private function isLightText(): bool {
-		return $this->instance->getMetadata()['instanceColor']['lightText'] ?? true;
 	}
 
 }

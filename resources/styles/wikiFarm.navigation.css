@@ -1,0 +1,73 @@
+.btn-group.wikifarm-instances-button-group {
+	border-radius: var( --icon-border-size, 8px );
+	align-items: stretch;
+	position: static;
+}
+
+.wikifarm-instances-button-group #farm-back-to-main-btn,
+.wikifarm-instances-button-group #farm-wikis-btn {
+	background-color: transparent;
+}
+
+.wikifarm-instances-button-group #farm-wikis-btn {
+	box-sizing: border-box;
+	width: 170px;
+	height: 40px;
+}
+
+.wikifarm-instances-button-group #farm-wikis-btn > span:last-child {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.wikifarm-instances-button-group #farm-wikis-btn::after,
+.wikifarm-instances-button-group #farm-wikis-btn > .bi-bs-main-wiki {
+	flex-shrink: 0;
+}
+
+.wikifarm-instances-button-group #farm-back-to-main-btn:hover,
+.wikifarm-instances-button-group #farm-wikis-btn:hover {
+	background-color: var( --navbar-primary-instances-bg--hover, #fff );
+	color: var( --navbar-primary-instances-fg--hover, #3e5389 );
+	text-decoration: none;
+	height: 40px;
+}
+
+.wikifarm-instances-button-group #farm-back-to-main-btn {
+	border-radius: var( --icon-border-size ) 0 0 var( --icon-border-size );
+}
+
+#farm-back-to-main-btn:focus-visible {
+	border: none; /* stylelint-disable-line declaration-property-value-disallowed-list */
+	outline: 2px solid var( --focus-visible );
+}
+
+.wikifarm-instances-button-group > .farm-back-to-main-btn + .has-megamenu {
+	border-left: 2px solid var( --navbar-primary-bg, #fff );
+}
+
+.wikifarm-instances-button-group > .has-megamenu:not( :first-child ) #farm-wikis-btn {
+	border-radius: 0 var( --icon-border-size ) var( --icon-border-size ) 0;
+}
+
+.farm-back-to-main-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: var( --bs-eclipse-spacing-8, 8px ) 10px;
+	border-radius: var( --icon-border-size, 8px );
+	text-decoration: none;
+}
+
+.farm-back-to-main-btn > .bi-bs-main-wiki {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+}
+
+.wikifarm-instance-label-path {
+	display: none;
+}

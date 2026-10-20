@@ -230,6 +230,7 @@
 	"wikifarm-promote-to-shared-dialog-delete-local-reason": "Deleted due to transfer to shared resources wiki",
 	"wikifarm-shared-resources-exists-on-shared": "This page exists on the shared resources wiki",
 	"wikifarm-instances-menu-empty-favorite-text": "There is currently no wiki added as a favourite. You can select a wiki as favourite with click on the star icon",
+	"wikifarm-navigation-aria-label": "Wiki navigation",
 	"wikifarm-instances-menu-button-title": "List with all wikis",
 	"wikifarm-ui-access-field-type-user": "User",
 	"wikifarm-ui-access-field-type-group": "Group",
