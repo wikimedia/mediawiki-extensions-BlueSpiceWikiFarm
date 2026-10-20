@@ -8,6 +8,7 @@
 	},
 	"right-wikifarm-deletewiki": "Cancella un wiki",
 	"action-wikifarm-deletewiki": "cancellare un wiki",
+	"wikifarm-farmmanagement-label": "Wiki",
 	"wikifarm-instance-creator": "Creato da",
 	"wikifarm-instance-creator-no-info-label": "Nessuna informazione disponibile",
 	"wikifarm-instance-desc": "Descrizione",
@@ -53,6 +54,5 @@
 	"wikifarm-back-to-main-wiki-btn-aria-label": "Apri wiki principale",
 	"wikifarm-instances-menu-button-aria-label": "Wiki: $1",
 	"wikifarm-wiki-back-link-title": "Torna a $1",
-	"wikifarm-wiki-back-link-aria-label": "Torna a $1",
-	"wikifarm-farmmanagement-label": "Wiki"
+	"wikifarm-wiki-back-link-aria-label": "Torna a $1"
 }

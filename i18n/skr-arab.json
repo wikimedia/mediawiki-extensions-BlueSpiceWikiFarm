@@ -4,6 +4,7 @@
 			"Saraiki"
 		]
 	},
+	"wikifarm-farmmanagement-label": "وکیاں",
 	"wikifarm-button-action-label-cancel": "منسوخ",
 	"wikifarm-instance-desc": "تفصیل",
 	"wikifarm-instance-keywords": "خاص لفظ",
@@ -24,6 +25,5 @@
 	"wikifarm-button-action-label-suspend": "معلق",
 	"wikifarm-button-action-delete-label": "مٹاؤ",
 	"wikifarm-wikis-create-new-wiki-title": "نویں وکی بݨاؤ",
-	"wikifarm-wikis-create-new-wiki-aria-label": "نویں وکی بݨاؤ",
-	"wikifarm-farmmanagement-label": "وکیاں"
+	"wikifarm-wikis-create-new-wiki-aria-label": "نویں وکی بݨاؤ"
 }

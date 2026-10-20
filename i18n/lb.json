@@ -12,6 +12,7 @@
 	"wikifarm-mainpage-content-contact-title": "Braucht Dir Hëllef?",
 	"wikifarm-mainpage-content-helpdesk-title": "Dokumentatioun",
 	"wikifarm-widget-combined-title-input-local": "Dës Wiki",
+	"wikifarm-farmmanagement-label": "Wikien",
 	"wikifarm-action-archiveinstance-description": "Archivéieren",
 	"wikifarm-action-copyinstancedata-description": "Donnéeë kopéieren",
 	"wikifarm-action-copyuser-description": "Benotzerkont kopéieren",
@@ -97,6 +98,5 @@
 	"wikifarm-instances-menu-search-no-results": "Keng Wikie fonnt",
 	"wikifarm-instances-menu-button-aria-label": "Wikien: $1",
 	"wikifarm-wiki-back-link-title": "Zeréck op $1",
-	"wikifarm-wiki-back-link-aria-label": "Zeréck op $1",
-	"wikifarm-farmmanagement-label": "Wikien"
+	"wikifarm-wiki-back-link-aria-label": "Zeréck op $1"
 }
