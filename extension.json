@@ -166,6 +166,8 @@
 		"ext.bluespice.wikiFarm.management": {
 			"scripts": [
 				"ui/dialog/TaskDialog.js",
+				"ui/dialog/ExportInstanceDialog.js",
+				"ui/dialog/ImportInstanceDialog.js",
 				"ui/dialog/RemoveInstanceDialog.js",
 				"ui/dialog/ConfirmDialog.js",
 				"ui/InstancesGrid.js",
@@ -208,7 +210,37 @@
 				"wikifarm-instances-pinned-notification-error",
 				"wikifarm-instances-unpinned-notification-error",
 				"wikifarm-edit-instance-feature-btn-label",
-				"wikifarm-edit-instance-feature-btn-title"
+				"wikifarm-edit-instance-feature-btn-title",
+				"wikifarm-export-instance",
+				"wikifarm-import-instance",
+				"wikifarm-button-action-label-export",
+				"wikifarm-export-instructions",
+				"wikifarm-action-preparetarget-description",
+				"wikifarm-action-exportdbschema-description",
+				"wikifarm-action-exportdbdata-description",
+				"wikifarm-action-exportimages-description",
+				"wikifarm-action-createmanifest-description",
+				"wikifarm-action-createpackage-description",
+				"wikifarm-action-cleanup-description",
+				"wikifarm-export-fail",
+				"wikifarm-export-success",
+				"wikifarm-export-checksum",
+				"wikifarm-import-select-file",
+				"wikifarm-import-checksum",
+				"wikifarm-button-action-label-verify",
+				"wikifarm-button-action-label-import",
+				"wikifarm-import-verification-success",
+				"wikifarm-import-verification-error",
+				"wikifarm-action-verifypackage-description",
+				"wikifarm-action-createinstance-description",
+				"wikifarm-action-createdatabase-description",
+				"wikifarm-action-importdata-description",
+				"wikifarm-action-importimages-description",
+				"wikifarm-action-runpostimportscripts-description",
+				"wikifarm-action-setinstanceready-description",
+				"wikifarm-import-fail",
+				"wikifarm-import-success",
+				"wikifarm-create-instance-menu-title"
 			],
 			"dependencies": [
 				"oojs-ui",
@@ -676,7 +708,8 @@
 		"FlexiSkinGetActiveSkin": "shareFlexiSkin",
 		"FlexiSkinAdaptConfiguration": "shareFlexiSkin",
 		"MWStakeDynamicConfigManagerLoaded": "setSystemGroupType",
-		"MWStakeDynamicConfigRegisterConfigs": "registerDynamicConfig"
+		"MWStakeDynamicConfigRegisterConfigs": "registerDynamicConfig",
+		"NotifyMeRegisterEvents": "registerNotifyMeEvents"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -802,7 +835,13 @@
 		},
 		"updateGroupAssignment": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\UpdateGroupAssignmentsOnGroupChange",
-			"services": [ "BlueSpiceWikiFarm.GroupRoleManager", "BlueSpiceWikiFarm._Config" ]
+			"services": [
+				"BlueSpiceWikiFarm.GroupRoleManager",
+				"BlueSpiceWikiFarm._Config"
+			]
+		},
+		"registerNotifyMeEvents": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\RegisterNotifyMeEvents"
 		}
 	},
 	"RestRoutes": [
@@ -841,6 +880,12 @@
 			"path": "/bluespice/farm/v1/instance/resume/{instanceName}",
 			"class": "\\BlueSpice\\WikiFarm\\Rest\\ResumeHandler",
 			"services": [ "BlueSpiceWikiFarm.InstanceManager", "PermissionManager", "BlueSpiceWikiFarm._InstanceCountLimiter" ]
+		},
+		{
+			"method": "POST",
+			"path": "/bluespice/farm/v1/instance/export/{instanceName}",
+			"class": "\\BlueSpice\\WikiFarm\\Rest\\ExportHandler",
+			"services": [ "BlueSpiceWikiFarm.InstanceManager", "PermissionManager", "MainConfig" ]
 		},
 		{
 			"method": "DELETE",
@@ -1001,6 +1046,37 @@
 				"BlueSpiceWikiFarm._Config",
 				"BlueSpiceWikiFarm.WikiMap"
 			]
+		},
+		{
+			"method": "GET",
+			"path": "/bluespice/farm/v1/export/package/{packageFile}",
+			"class": "BlueSpice\\WikiFarm\\Rest\\DownloadExportPackageHandler",
+			"services": [
+				"BlueSpiceWikiFarm.InstanceManager",
+				"PermissionManager",
+				"MWStake.StorageUtilities"
+			]
+		},
+		{
+			"method": "POST",
+			"path": "/bluespice/farm/v1/import/verify",
+			"class": "BlueSpice\\WikiFarm\\Rest\\VerifyImportPackageHandler",
+			"services": [
+				"BlueSpiceWikiFarm.InstanceManager",
+				"PermissionManager",
+				"MWStake.StorageUtilities",
+				"BlueSpiceWikiFarm.Import.PackageValidator"
+			]
+		},
+		{
+			"method": "POST",
+			"path": "/bluespice/farm/v1/import/execute/{packageName}",
+			"class": "BlueSpice\\WikiFarm\\Rest\\ImportHandler",
+			"services": [
+				"PermissionManager",
+				"BlueSpiceWikiFarm.InstanceManager",
+				"MainConfig"
+			]
 		}
 	],
 	"ServiceWiringFiles": [
@@ -1031,6 +1107,10 @@
 		},
 		"WikiFarmInstanceTemplates": {
 			"value": {}
+		},
+		"WikiFarmEnableImportExport": {
+			"value": false,
+			"description": "Enables the import and export of wiki instances."
 		}
 	},
 	"LogTypes": [ "ext-wikifarm", "ext-wikifarm-access" ],

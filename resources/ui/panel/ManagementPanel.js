@@ -7,6 +7,7 @@ ext.bluespiceWikiFarm.ui.ManagementPanel = function ( config ) { // eslint-disab
 	this.selectedRow = null;
 	this.canAdd = true;
 	this.limits = null;
+	this.enableImportExport = config.enableImportExport || false;
 
 	this.$noticeCnt = $( '<div>' ).css( 'margin-bottom', '20px' );
 	this.$element.append( this.$noticeCnt );
@@ -161,11 +162,67 @@ ext.bluespiceWikiFarm.ui.ManagementPanel.prototype.makeActions = function () {
 			}
 		}
 	} );
+	this.exportButton = new OO.ui.ButtonWidget( {
+		icon: 'download',
+		label: mw.msg( 'wikifarm-export-instance' ),
+		data: {
+			action: 'export',
+			mustBeSelected: true,
+			mustBeComplete: true,
+			visibilityCallback: function ( row ) {
+				return row && !row.is_system;
+			}
+		}
+	} );
 
-	this.buttons = [
-		this.createButton, this.cloneButton, this.editButton, this.featuredButton,
-		this.suspendButton, this.resumeButton, this.deleteButton
-	];
+	const createMenuButton = new OO.ui.ButtonMenuSelectWidget( {
+		icon: 'expand',
+		title: mw.msg( 'wikifarm-create-instance-menu-title' ),
+		flags: [ 'primary', 'progressive' ],
+		$overlay: true,
+		menu: {
+			horizontalPosition: 'end',
+			items: [
+				new OO.ui.MenuOptionWidget( {
+					icon: 'upload',
+					data: 'import',
+					label: mw.msg( 'wikifarm-import-instance' ),
+					flags: [ 'progressive' ]
+				} )
+			]
+		}
+	} );
+	createMenuButton.menu.connect( this, {
+		select: function ( item ) {
+			if ( !item ) {
+				return;
+			}
+			this.onButtonClick( { action: item.getData() } );
+		}
+	} );
+	this.createButtonGroup = new OO.ui.ButtonGroupWidget( {
+		data: {
+			mustBeSelected: false,
+			mustBeAbleToAdd: true,
+			mustBeComplete: false
+		},
+		items: [
+			this.createButton,
+			createMenuButton
+		]
+	} );
+
+	if ( this.enableImportExport ) {
+		this.buttons = [
+			this.createButtonGroup, this.cloneButton, this.editButton, this.featuredButton,
+			this.exportButton, this.suspendButton, this.resumeButton, this.deleteButton
+		];
+	} else {
+		this.buttons = [
+			this.createButton, this.cloneButton, this.editButton, this.featuredButton,
+			this.suspendButton, this.resumeButton, this.deleteButton
+		];
+	}
 
 	const me = this;
 	for ( let i = 0; i < this.buttons.length; i++ ) {
@@ -316,6 +373,12 @@ ext.bluespiceWikiFarm.ui.ManagementPanel.prototype.openTaskDialog = function ( a
 				title: mw.message( 'wikifarm-resume-instance' ).plain(),
 				prompt: mw.message( 'wikifarm-resume-prompt' ).plain()
 			} );
+			break;
+		case 'export':
+			dialog = new ext.bluespiceWikiFarm.ui.dialog.ExportInstanceDialog( { path: item.path } );
+			break;
+		case 'import':
+			dialog = new ext.bluespiceWikiFarm.ui.dialog.ImportInstanceDialog();
 			break;
 	}
 

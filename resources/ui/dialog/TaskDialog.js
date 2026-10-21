@@ -43,8 +43,8 @@ ext.bluespiceWikiFarm.ui.dialog.TaskDialog.prototype.getActionProcess = function
 				this.makeProcessPanel();
 				this.startProcess().done( ( id ) => {
 					this.popPending();
-					this.waitForProcess( id ).done( () => {
-						this.close( { needsReload: this.needsReload(), goToOverview: this.shouldGoToOverview() } );
+					this.waitForProcess( id ).done( ( response ) => {
+						this.onProcessComplete( response );
 					} ).fail( () => {
 						dfd.reject(
 							new OO.ui.Error( mw.message( 'wikifarm-error-generic' ).text(),
@@ -68,6 +68,10 @@ ext.bluespiceWikiFarm.ui.dialog.TaskDialog.prototype.getActionProcess = function
 	return ext.bluespiceWikiFarm.ui.dialog.TaskDialog.parent.prototype.getActionProcess.call( this, action );
 };
 
+ext.bluespiceWikiFarm.ui.dialog.TaskDialog.prototype.onProcessComplete = function () {
+	this.close( { needsReload: this.needsReload(), goToOverview: this.shouldGoToOverview() } );
+};
+
 ext.bluespiceWikiFarm.ui.dialog.TaskDialog.prototype.startProcess = function () {
 	// Override this
 	return $.Deferred().reject().promise();
@@ -83,8 +87,8 @@ ext.bluespiceWikiFarm.ui.dialog.TaskDialog.prototype.shouldGoToOverview = functi
 
 ext.bluespiceWikiFarm.ui.dialog.TaskDialog.prototype.waitForProcess = function ( id, dfd ) {
 	dfd = dfd || $.Deferred();
-	this.checkProcess( id ).done( () => {
-		dfd.resolve();
+	this.checkProcess( id ).done( ( response ) => {
+		dfd.resolve( response );
 	} ).fail( () => {
 		dfd.reject();
 	} );
@@ -134,10 +138,10 @@ ext.bluespiceWikiFarm.ui.dialog.TaskDialog.prototype.checkProcess = function ( i
 	const dfd = $.Deferred();
 	this.ajax( 'process/' + id, 'GET' ).done( ( response ) => {
 		this.emit( 'stepsRetrieved', response.steps );
-		if ( response.state === 'failed' ) {
+		if ( response.exitCode > 0 ) {
 			dfd.reject();
-		} else if ( response.state === 'success' ) {
-			dfd.resolve();
+		} else if ( response.exitCode === 0 ) {
+			dfd.resolve( response );
 		} else {
 			if ( response.hasOwnProperty( 'doneStep' ) ) {
 				this.emit( 'stepCompleted', response.doneStep );
