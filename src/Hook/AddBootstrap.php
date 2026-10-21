@@ -25,10 +25,13 @@ class AddBootstrap implements BeforePageDisplayHook {
 		$out->addModules( [ 'ext.bluespice.wikiFarm.bootstrap' ] );
 		$out->addModuleStyles( [ 'ext.bluespice.wikiFarm.instanceColors' ] );
 		$instance = $this->instanceStore->getCurrentInstance();
-		if ( $instance && $instance->getMetadata()['instanceColor'] ) {
-			$out->getOutput()->addJsConfigVars(
-				'bsWikiFarmInstanceColor', $instance->getMetadata()['instanceColor']
-			);
+		$instanceColor = $instance ? ( $instance->getMetadata()['instanceColor'] ?? null ) : null;
+		if ( $instanceColor ) {
+			$out->addJsConfigVars( 'bsWikiFarmInstanceColor', $instanceColor );
+			$color = $instanceColor['background'] ?? null;
+			if ( $color !== null ) {
+				$out->addInlineStyle( ":root { --bs-wiki-color: $color; }" );
+			}
 		}
 		if ( $this->farmConfig->get( 'useGlobalAccessControl' ) ) {
 			$out->addModuleStyles( [ 'ext.bluespice.wikiFarm.breadcrumbs' ] );
