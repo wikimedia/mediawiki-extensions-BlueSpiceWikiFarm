@@ -308,5 +308,6 @@
 	"wikifarm-back-to-main-wiki-btn-aria-label": "Open main wiki",
 	"wikifarm-instances-menu-button-aria-label": "Wikis: $1",
 	"wikifarm-wiki-back-link-title": "Back to $1",
-	"wikifarm-wiki-back-link-aria-label": "Back to $1"
+	"wikifarm-wiki-back-link-aria-label": "Back to $1",
+	"wikifarm-instances-grid-column-path-header-label": "Path"
 }
