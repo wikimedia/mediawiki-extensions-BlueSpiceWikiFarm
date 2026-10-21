@@ -61,7 +61,9 @@ class ProcessHandler extends SimpleHandler {
 					'output' => implode( "\n", $processInfo->getOutput() )
 				] );
 			}
+			$data['exitCode'] = $processInfo->getExitCode();
 			$data['state'] = $processInfo->getExitStateMessage();
+			$data['rawOutput'] = $processInfo->getOutput();
 			$data['output'] = is_array( $processInfo->getOutput() ) ?
 				implode( "\n", $processInfo->getOutput() ) : $processInfo->getOutput();
 			return $this->getResponseFactory()->createJson( $data );

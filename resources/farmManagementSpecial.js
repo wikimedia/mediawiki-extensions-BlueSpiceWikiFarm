@@ -2,7 +2,9 @@ $( () => {
 	let $cnt = $( '#farm-management' );
 	if ( $cnt.length ) {
 		$cnt.html(
-			new ext.bluespiceWikiFarm.ui.ManagementPanel( {} ).$element
+			new ext.bluespiceWikiFarm.ui.ManagementPanel( {
+				enableImportExport: mw.config.get( 'wgWikiFarmEnableImportExport' ) || false
+			} ).$element
 		);
 		return;
 	}

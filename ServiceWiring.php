@@ -10,11 +10,13 @@ use BlueSpice\WikiFarm\DirectInstanceStore;
 use BlueSpice\WikiFarm\FarmWikiMap;
 use BlueSpice\WikiFarm\ForeignRequestExecution;
 use BlueSpice\WikiFarm\GlobalDatabaseQueryExecution;
+use BlueSpice\WikiFarm\Import\PackageValidator;
 use BlueSpice\WikiFarm\InstanceCountLimiter;
 use BlueSpice\WikiFarm\InstanceManager;
 use BlueSpice\WikiFarm\InstancePathGenerator;
 use BlueSpice\WikiFarm\InstanceStore;
 use BlueSpice\WikiFarm\ManagementDatabaseFactory;
+use BlueSpice\WikiFarm\Util\DoctrineDatabaseConnection;
 use BlueSpice\WikiFarm\Util\FavouriteInstanceHelper;
 use BlueSpice\WikiFarm\Util\InstanceDisplayRecordHelper;
 use BlueSpice\WikiFarm\Util\OAuthTokenProvider;
@@ -149,6 +151,20 @@ return [
 		return new OAuthTokenProvider(
 			$services->getMainConfig(),
 			$services->getService( 'MWStakeDynamicConfigManager' )
+		);
+	},
+	'BlueSpiceWikiFarm.Util.DoctrineDatabaseConnection' => static function ( MediaWikiServices $services ) {
+		return new DoctrineDatabaseConnection(
+			$services->getService( 'BlueSpiceWikiFarm._Config' )
+		);
+	},
+	'BlueSpiceWikiFarm.Import.PackageValidator' => static function ( MediaWikiServices $services ) {
+		return new PackageValidator(
+			farmConfig: $services->getService( 'BlueSpiceWikiFarm._Config' ),
+			storage: $services->getService( 'MWStake.StorageUtilities' ),
+			logger: LoggerFactory::getInstance( 'BlueSpiceWikiFarm.Import' ),
+			managementDatabaseFactory: $services->getService( 'BlueSpiceWikiFarm.ManagementDatabaseFactory' ),
+			hookContainer: $services->getHookContainer()
 		);
 	}
 ];

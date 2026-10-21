@@ -59,6 +59,10 @@ class FarmManagement extends SpecialPage {
 			'wgWikiFarmAvailableLanguages',
 			$this->getLanguages()
 		);
+		$this->getOutput()->addJsConfigVars(
+			'wgWikiFarmEnableImportExport',
+			$this->getConfig()->get( 'WikiFarmEnableImportExport' ) ?? false
+		);
 
 		if ( str_starts_with( $subPage, '_create' ) ) {
 			if ( !$this->countLimiter->canCreate() ) {

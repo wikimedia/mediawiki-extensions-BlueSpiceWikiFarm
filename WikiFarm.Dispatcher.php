@@ -47,7 +47,8 @@ $GLOBALS['wgFileBackends']['_instances'] = [
 	'lockManager' => 'fsLockManager',
 	'containerPaths' => [
 		'instances-public' => $GLOBALS['wgWikiFarmConfigInternal' ]->get( 'instanceDirectory' ),
-		'archive-public' => $GLOBALS['wgWikiFarmConfigInternal' ]->get( 'archiveDirectory' )
+		'archive-public' => $GLOBALS['wgWikiFarmConfigInternal' ]->get( 'archiveDirectory' ),
+		'export-import' => $GLOBALS['wgWikiFarmConfigInternal' ]->get( 'exportImportDirectory' )
 	],
 	'fileMode' => $info['fileMode'] ?? 0644,
 	'directoryMode' => $GLOBALS['wgDirectoryMode'],

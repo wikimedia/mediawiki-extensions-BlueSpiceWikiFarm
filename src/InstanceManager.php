@@ -3,6 +3,8 @@
 namespace BlueSpice\WikiFarm;
 
 use BlueSpice\WikiFarm\AccessControl\WikiAccessLookup;
+use BlueSpice\WikiFarm\Export\ExporterFactory;
+use BlueSpice\WikiFarm\Import\ImporterFactory;
 use BlueSpice\WikiFarm\Process\ArchiveInstance;
 use BlueSpice\WikiFarm\Process\CloneInstance;
 use BlueSpice\WikiFarm\Process\CreateInstance;
@@ -11,6 +13,7 @@ use Exception;
 use InvalidArgumentException;
 use MediaWiki\Config\Config;
 use MediaWiki\Message\Message;
+use MediaWiki\User\UserIdentity;
 use MWStake\MediaWiki\Component\ProcessManager\ManagedProcess;
 use MWStake\MediaWiki\Component\ProcessManager\ProcessManager;
 use Psr\Log\LoggerInterface;
@@ -206,6 +209,29 @@ class InstanceManager {
 	}
 
 	/**
+	 * @param InstanceEntity $instance
+	 * @param UserIdentity $actor
+	 * @param ExporterFactory $exporterFactory
+	 * @return string
+	 * @throws Exception
+	 */
+	public function exportInstance(
+		InstanceEntity $instance, UserIdentity $actor, ExporterFactory $exporterFactory
+	): string {
+		return $this->startProcess( $exporterFactory->getProcess( $instance, $actor ), $instance->getId() );
+	}
+
+	/**
+	 * @param string $packageName
+	 * @param ImporterFactory $importerFactory
+	 * @return string
+	 * @throws Exception
+	 */
+	public function importInstance( string $packageName, ImporterFactory $importerFactory ): string {
+		return $this->startProcess( $importerFactory->getProcess( $packageName ), id: '' );
+	}
+
+	/**
 	 * @param ManagedProcess $process
 	 * @param string $id Instance id
 	 * @return string
@@ -217,7 +243,9 @@ class InstanceManager {
 			$this->logger->error( 'Failed to start process of type ' . get_class( $process ) );
 			$this->throwException( RuntimeException::class, 'wikifarm-error-failed-to-start-process' );
 		}
-		$this->instanceStore->storeRunningProcess( $id, $pid, get_class( $process ) );
+		if ( $id ) {
+			$this->instanceStore->storeRunningProcess( $id, $pid, get_class( $process ) );
+		}
 		$this->logger->info( 'Started process of type ' . get_class( $process ) . ' with pid ' . $pid );
 		return $pid;
 	}
@@ -227,12 +255,21 @@ class InstanceManager {
 	 * @return IDatabase|null
 	 */
 	public function getDatabaseConnectionForInstance( InstanceEntity $instance ): ?IDatabase {
+		return $this->getDatabaseConnectionForRawParams( $instance->getDbName(), $instance->getDBPrefix() );
+	}
+
+	/**
+	 * @param string $dbName
+	 * @param string $dbPrefix
+	 * @return \Wikimedia\Rdbms\Database|null
+	 */
+	public function getDatabaseConnectionForRawParams( string $dbName, string $dbPrefix ) {
 		$params = [
 			'host' => $this->mainConfig->get( 'DBserver' ),
 			'user' => $this->mainConfig->get( 'DBuser' ),
 			'password' => $this->mainConfig->get( 'DBpassword' ),
-			'tablePrefix' => $instance->getDBPrefix(),
-			'dbname' => $instance->getDBName()
+			'tablePrefix' => $dbPrefix,
+			'dbname' => $dbName,
 		];
 
 		try {

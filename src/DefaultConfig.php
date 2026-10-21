@@ -30,6 +30,11 @@ class DefaultConfig extends HashConfig {
 			'archiveDirectory' => "$IP/_sf_archive/",
 
 			/**
+			 * Where should WikiFarm save the export/import files?
+			 */
+			'exportImportDirectory' => "$IP/_sf_export_import/",
+
+			/**
 			 * The web accessible path to the file repository directory.
 			 */
 			'instancePath' => '/w/_sf_instances/',
