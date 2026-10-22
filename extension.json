@@ -629,6 +629,7 @@
 		"ParserBeforeInternalParse": "handleSharedResources",
 		"SpecialPage_initList": "addSpecialPages",
 		"MessageCacheFetchOverrides": "setupGroupMessages",
+		"MessagesPreLoad": "defaultSidebar",
 		"BeforeParserFetchTemplateRevisionRecord": "handleSharedResources",
 		"ArticleParserOptions": "handleSharedResources",
 		"ApiMakeParserOptions": "handleSharedResources",
@@ -680,6 +681,9 @@
 		"setupGroupMessages": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\SetupGroupMessages",
 			"services": [ "BlueSpiceWikiFarm._Config" ]
+		},
+		"defaultSidebar": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\DefaultSidebar"
 		},
 		"addBootstrap": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\AddBootstrap",
