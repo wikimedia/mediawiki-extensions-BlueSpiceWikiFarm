@@ -9,6 +9,25 @@ use Random\RandomException;
 class InstanceStore extends DirectInstanceStore {
 
 	/**
+	 * Resolve a case-insensitive interwiki prefix without changing path lookup semantics.
+	 *
+	 * @param string $prefix
+	 * @return InstanceEntity|null
+	 */
+	public function getInstanceByInterwiki( string $prefix ): ?InstanceEntity {
+		$prefix = mb_strtolower( $prefix );
+		if ( $prefix === 'w' ) {
+			return $this->getInstanceByPath( 'w' );
+		}
+		foreach ( $this->getAllInstances() as $instance ) {
+			if ( $instance->getInterwiki() === $prefix ) {
+				return $instance;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * @param string $path
 	 * @param Config $farmConfig
 	 * @return InstanceEntity

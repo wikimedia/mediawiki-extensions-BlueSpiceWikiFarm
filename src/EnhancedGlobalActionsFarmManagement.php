@@ -17,6 +17,11 @@ class EnhancedGlobalActionsFarmManagement extends GlobalActionsFarmManagement {
 	}
 
 	/** @inheritDoc */
+	public function getTarget(): string {
+		return '_self';
+	}
+
+	/** @inheritDoc */
 	public function getHref(): string {
 		if ( FARMER_IS_ROOT_WIKI_CALL ) {
 			$title = $this->titleFactory->makeTitle( NS_SPECIAL, 'Farm_management' );

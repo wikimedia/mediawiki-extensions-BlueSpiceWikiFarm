@@ -42,27 +42,23 @@ class WikiBackLinkProvider implements IBackLinkProvider {
 			return false;
 		}
 
-		if ( !str_starts_with( $backToValue, 'w' ) &&
-			!str_starts_with( strtolower( $backToValue ), 'wiki-' ) ) {
+		$valueParts = explode( ':', $backToValue, 2 );
+		if ( count( $valueParts ) !== 2 ) {
 			return false;
 		}
-		$valueParts = explode( ':', $backToValue );
-		$prefix = $valueParts[0];
+		$prefix = mb_strtolower( $valueParts[0] );
 
-		if ( str_starts_with( strtolower( $prefix ), 'wiki-' ) ) {
-			$prefix = str_replace( 'wiki-', '', $prefix );
-		}
-		$wiki = $this->instanceStore->getInstanceByPath( $prefix );
+		$wiki = $this->instanceStore->getInstanceByInterwiki( $prefix );
 		if ( !$wiki ) {
 			return false;
 		}
-		$titleText = str_replace( 'wiki-' . $prefix, '', $backToValue );
+		$titleText = $valueParts[1];
 		$this->displayTitle = $this->titleFactory->newFromText( urldecode( $titleText ) );
 		if ( !( $this->displayTitle instanceof Title ) ) {
 			return false;
 		}
 		$interwikiTitle = Title::makeTitle( $this->displayTitle->getNamespace(), $this->displayTitle->getText(),
-			'', $wiki->getPath() );
+			'', $prefix );
 		$this->backToTitle = $interwikiTitle;
 		$this->wiki = $wiki;
 		return true;
