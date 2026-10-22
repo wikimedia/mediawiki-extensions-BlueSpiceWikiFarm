@@ -108,6 +108,45 @@ class InstanceStoreTest extends TestCase {
 	}
 
 	/**
+	 * @dataProvider provideInterwikiPrefixes
+	 * @param string $prefix
+	 * @param bool $found
+	 */
+	public function testGetInstanceByInterwiki( string $prefix, bool $found ) {
+		$entity = $this->getEntity();
+		$entity->setPath( 'TW' );
+		$store = $this->getMockBuilder( InstanceStore::class )
+			->disableOriginalConstructor()
+			->onlyMethods( [ 'getAllInstances' ] )
+			->getMock();
+		$store->expects( $this->once() )->method( 'getAllInstances' )->willReturn( [ $entity ] );
+
+		$this->assertSame( $found ? $entity : null, $store->getInstanceByInterwiki( $prefix ) );
+		$this->assertSame( 'TW', $entity->getPath() );
+	}
+
+	public static function provideInterwikiPrefixes(): array {
+		return [
+			'lowercase-prefix-uppercase-path' => [ 'wiki-tw', true ],
+			'uppercase-prefix-uppercase-path' => [ 'WIKI-TW', true ],
+			'unknown-prefix' => [ 'wiki-unknown', false ],
+			'path-is-not-an-interwiki-prefix' => [ 'TW', false ],
+		];
+	}
+
+	public function testGetRootInstanceByInterwiki() {
+		$root = $this->createMock( RootInstanceEntity::class );
+		$store = $this->getMockBuilder( InstanceStore::class )
+			->disableOriginalConstructor()
+			->onlyMethods( [ 'getInstanceByPath', 'getAllInstances' ] )
+			->getMock();
+		$store->expects( $this->once() )->method( 'getInstanceByPath' )->with( 'w' )->willReturn( $root );
+		$store->expects( $this->never() )->method( 'getAllInstances' );
+
+		$this->assertSame( $root, $store->getInstanceByInterwiki( 'w' ) );
+	}
+
+	/**
 	 * @return void
 	 */
 	public function getRemoveEntry() {
