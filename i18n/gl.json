@@ -179,6 +179,7 @@
 	"wikifarm-access-group-name-user-alt": "Todos os usuarios",
 	"wikifarm-instances-tab-favourite-label": "Favoritos",
 	"wikifarm-instances-tab-all-label": "Todos os wikis",
+	"wikifarm-instances-grid-column-path-header-label": "Ruta",
 	"wikifarm-instances-grid-column-wiki-header-label": "Wiki",
 	"wikis": "Wikis",
 	"wikifarm-instances-grid-column-favourites-header-label": "Favorito",
