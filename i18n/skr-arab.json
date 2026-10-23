@@ -25,5 +25,6 @@
 	"wikifarm-button-action-label-suspend": "معلق",
 	"wikifarm-button-action-delete-label": "مٹاؤ",
 	"wikifarm-wikis-create-new-wiki-title": "نویں وکی بݨاؤ",
-	"wikifarm-wikis-create-new-wiki-aria-label": "نویں وکی بݨاؤ"
+	"wikifarm-wikis-create-new-wiki-aria-label": "نویں وکی بݨاؤ",
+	"wikifarm-instances-grid-column-path-header-label": "راہ"
 }

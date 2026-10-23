@@ -252,5 +252,6 @@
 	"wikifarm-special-farmmanagement-title": "Xestor de wikis",
 	"wikifarm-special-accessmanagement-title": "Xestor de acceso",
 	"wikifarm-farmmanagement-label": "Wikis",
-	"wikifarm-accessmanagement-label": "Acceso"
+	"wikifarm-accessmanagement-label": "Acceso",
+	"wikifarm-instances-grid-column-path-header-label": "Ruta"
 }

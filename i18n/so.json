@@ -252,5 +252,6 @@
 	"wikifarm-special-farmmanagement-title": "Maareeyaha Wikiga",
 	"wikifarm-special-accessmanagement-title": "Maareeyaha gelitaanka",
 	"wikifarm-farmmanagement-label": "Wikiyada",
-	"wikifarm-accessmanagement-label": "Helitaanka"
+	"wikifarm-accessmanagement-label": "Helitaanka",
+	"wikifarm-instances-grid-column-path-header-label": "Waddo"
 }
