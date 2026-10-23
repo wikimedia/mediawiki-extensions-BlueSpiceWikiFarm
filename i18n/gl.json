@@ -310,5 +310,6 @@
 	"wikifarm-back-to-main-wiki-btn-aria-label": "Abrir o wiki principal",
 	"wikifarm-instances-menu-button-aria-label": "Wikis: $1",
 	"wikifarm-wiki-back-link-title": "Volver a «$1»",
-	"wikifarm-wiki-back-link-aria-label": "Volver a «$1»"
+	"wikifarm-wiki-back-link-aria-label": "Volver a «$1»",
+	"wikifarm-instances-grid-column-path-header-label": "Ruta"
 }
