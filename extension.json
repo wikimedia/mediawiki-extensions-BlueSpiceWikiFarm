@@ -662,8 +662,8 @@
 		"MWStakeGroupStoreGroupTypeFilter": "handleGroupStore",
 		"MWStakeGroupStoreGroupDisplayName": "handleGroupStore",
 		"BSUserManagerGroupAdded": "updateGroupList",
-		"BSUserManagerGroupEdited": "updateGroupList",
-		"BSUserManagerGroupDeleted": "updateGroupList",
+		"BSUserManagerGroupEdited": [ "updateGroupList", "updateGroupAssignment" ],
+		"BSUserManagerGroupDeleted": [ "updateGroupList", "updateGroupAssignment" ],
 		"OutputPageBodyAttributes": "instanceBodyClass",
 		"MWStakeTokenAuthenticatorGetAuthInfo": "addTokenAuthenticatorSearchableWikis",
 		"UnifiedTaskOverviewTaskCollectionComplete": "updateWikiInfo",
@@ -793,6 +793,10 @@
 		},
 		"registerDynamicConfig": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\RegisterDynamicConfig"
+		},
+		"updateGroupAssignment": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\UpdateGroupAssignmentsOnGroupChange",
+			"services": [ "BlueSpiceWikiFarm.GroupRoleManager", "BlueSpiceWikiFarm._Config" ]
 		}
 	},
 	"RestRoutes": [

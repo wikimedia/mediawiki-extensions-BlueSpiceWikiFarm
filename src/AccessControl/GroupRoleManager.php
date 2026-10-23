@@ -99,6 +99,45 @@ class GroupRoleManager extends GroupRoleQuery {
 	}
 
 	/**
+	 * @param string $groupName
+	 * @return void
+	 */
+	public function onGroupDeleted( string $groupName ): void {
+		$this->db->newDeleteQueryBuilder()
+			->delete( 'wiki_team_roles' )
+			->where( [
+				'wtr_team' => $groupName,
+			] )
+			->caller( __METHOD__ )
+			->execute();
+
+		$this->logger->info( 'Removed all roles from group "{group}", after group was deleted', [
+			'group' => $groupName,
+		] );
+	}
+
+	/**
+	 * @param string $oldName
+	 * @param string $newName
+	 * @return void
+	 */
+	public function onGroupRenamed( string $oldName, string $newName ): void {
+		$this->db->newUpdateQueryBuilder()
+			->update( 'wiki_team_roles' )
+			->set( [ 'wtr_team' => $newName ] )
+			->where( [
+				'wtr_team' => $oldName,
+			] )
+			->caller( __METHOD__ )
+			->execute();
+
+		$this->logger->info( 'Renamed group "{oldGroup}" to "{newGroup}" in role assignments', [
+			'oldGroup' => $oldName,
+			'newGroup' => $newName,
+		] );
+	}
+
+	/**
 	 * Delete all role assignments for a group (across all instances)
 	 *
 	 * @param string $groupName
