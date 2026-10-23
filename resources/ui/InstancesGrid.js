@@ -114,7 +114,10 @@ ext.bluespiceWikiFarm.ui.InstancesGrid = function ( config ) { // eslint-disable
 		deletable: false,
 		columns: columns,
 		store: this.store,
-		stateId: 'wikifarm-instances-grid'
+		stateId: 'wikifarm-instances-grid',
+		filtering: {
+			showQueryField: true
+		}
 	} );
 };
 
