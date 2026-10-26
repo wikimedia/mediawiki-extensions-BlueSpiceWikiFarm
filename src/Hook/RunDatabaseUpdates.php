@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\Hook;
 
 use BlueSpice\WikiFarm\Maintenance\CreateAccessToken;
 use BlueSpice\WikiFarm\Maintenance\CreateSystemInstances;
+use BlueSpice\WikiFarm\Maintenance\ImportDefaultContentFiles;
 use BlueSpice\WikiFarm\Maintenance\PopulateGroupList;
 use BlueSpice\WikiFarm\Maintenance\PopulateRoleInstancePath;
 use BlueSpice\WikiFarm\Maintenance\PopulateWikiId;
@@ -76,5 +77,6 @@ class RunDatabaseUpdates implements LoadExtensionSchemaUpdatesHook {
 		$updater->addPostDatabaseUpdateMaintenance( CreateAccessToken::class );
 		$updater->addPostDatabaseUpdateMaintenance( PopulateGroupList::class );
 		$updater->addPostDatabaseUpdateMaintenance( PopulateRoleInstancePath::class );
+		$updater->addPostDatabaseUpdateMaintenance( ImportDefaultContentFiles::class );
 	}
 }
