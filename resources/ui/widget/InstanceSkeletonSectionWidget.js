@@ -51,8 +51,7 @@ ext.bluespiceWikiFarm.ui.widget.InstanceSkeletonSectionWidget.prototype.buildSke
 	return $( '<div>' ).addClass( 'farm-wiki-card-item' ).append(
 		$( '<div>' ).addClass( 'farm-wikis-skeleton farm-wikis-skeleton--icon' ),
 		$( '<div>' ).addClass( 'farm-wiki-card-content' ).append(
-			$( '<div>' ).addClass( 'farm-wikis-skeleton farm-wikis-skeleton--name' ),
-			$( '<div>' ).addClass( 'farm-wikis-skeleton farm-wikis-skeleton--desc' )
+			$( '<div>' ).addClass( 'farm-wikis-skeleton farm-wikis-skeleton--name' )
 		)
 	);
 };

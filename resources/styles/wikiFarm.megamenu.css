@@ -14,8 +14,7 @@
 
 .farm-wiki-card-item {
 	display: inline-flex;
-	margin: 5px;
-	padding: 15px;
+	margin: 4px;
 	border-radius: 0 4px 4px 0;
 	background-color: var( --wiki-instance-card-bg );
 	width: 200px;
@@ -34,10 +33,11 @@
 	font-size: 0.8rem;
 }
 
-.farm-wiki-card-content a {
+#farm-wikis-mm .farm-wiki-card-content a {
 	max-width: 100%;
 	width: 100%;
 	display: inline-block;
+	padding: 12px 16px;
 }
 
 .farm-wiki-card-content .farm-wiki-card-link-label {
@@ -67,6 +67,10 @@
 	margin-right: 8px;
 }
 
+#farm-wikis-mm .farm-wiki-card-favorite-btn {
+	padding: 4px 8px;
+}
+
 #farm-wikis-mm .farm-wiki-card-favorite-btn:hover {
 	color: var( --wiki-instance-fg--hover );
 	background-color: var( --wiki-instance-bg--hover );
@@ -75,7 +79,6 @@
 
 #farm-wikis-mm .wiki-instance-favored {
 	color: var( --wiki-instance-fg--active );
-	padding: 6px;
 }
 
 .farm-wiki-instance-overview {
@@ -108,6 +111,12 @@
 	display: block;
 }
 
+#farm-wikis-pinned .farm-wikis-elements:has( > :nth-child( -n + 5 ) ),
+#farm-wikis-favourites .farm-wikis-elements:has( > :nth-child( -n + 5 ) ) {
+	columns: 1;
+	display: inline-flex;
+}
+
 #farm-wikis-pinned .farm-wiki-card-content {
 	width: 100%;
 }
@@ -133,6 +142,13 @@
 	background-size: 200% 100%;
 	animation: farm-wikis-shimmer 1.5s ease-in-out infinite;
 	border-radius: 4px;
+}
+
+#farm-wikis-favourites-skeleton .farm-wiki-card-item,
+#farm-wikis-pinned-skeleton .farm-wiki-card-item,
+#farm-wikis-other-skeleton .farm-wiki-card-item {
+	height: 40px;
+	padding: 16px;
 }
 
 /* Section header placeholder – spans ~55 % of the card width */
@@ -163,14 +179,8 @@
 }
 
 .farm-wiki-card-item .farm-wikis-skeleton--name {
-	height: 14px;
+	height: 16px;
 	width: 110px;
-	margin-bottom: 6px;
-}
-
-.farm-wiki-card-item .farm-wikis-skeleton--desc {
-	height: 10px;
-	width: 70px;
 }
 
 /* Search input inside SearchableInstanceSectionWidget */
