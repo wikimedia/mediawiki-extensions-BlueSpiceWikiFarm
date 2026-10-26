@@ -444,7 +444,9 @@
 				"wikifarm-ui-access-success-set-level",
 				"wikifarm-ui-access-error-set-level",
 				"wikifarm-ui-access-field-type-user",
-				"wikifarm-ui-access-field-type-group"
+				"wikifarm-ui-access-field-type-group",
+				"wikifarm-ui-access-confirm-delete-action-remove",
+				"cancel"
 			],
 			"dependencies": [
 				"oojs-ui",

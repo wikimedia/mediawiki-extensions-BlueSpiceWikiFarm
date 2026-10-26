@@ -254,5 +254,6 @@
 	"wikifarm-back-to-main-wiki-btn-aria-label": "Aria label for button to open main wiki",
 	"wikifarm-instances-menu-button-aria-label": "Aria label for megamenu button with list of wiki instances",
 	"wikifarm-wiki-back-link-title": "Title for back link to a page in other wiki\nParameter:\n* $1 - page name",
-	"wikifarm-wiki-back-link-aria-label": "Aria label for back link to a page in other wiki\nParameter:\n* $1 - page name"
+	"wikifarm-wiki-back-link-aria-label": "Aria label for back link to a page in other wiki\nParameter:\n* $1 - page name",
+	"wikifarm-ui-access-confirm-delete-action-remove": "Action button label to confirm to remove access assignment"
 }
