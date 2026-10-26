@@ -2,6 +2,7 @@
 
 namespace BlueSpice\WikiFarm;
 
+use BlueSpice\WikiFarm\Util\SystemInstancesHelper;
 use Exception;
 
 class InstancePathGenerator {
@@ -23,8 +24,12 @@ class InstancePathGenerator {
 
 	/**
 	 * @param DirectInstanceStore $store
+	 * @param SystemInstancesHelper $systemInstancesHelper
 	 */
-	public function __construct( DirectInstanceStore $store ) {
+	public function __construct(
+		DirectInstanceStore $store,
+		private readonly SystemInstancesHelper $systemInstancesHelper
+	) {
 		$this->store = $store;
 	}
 
@@ -66,7 +71,7 @@ class InstancePathGenerator {
 	 * @return bool
 	 */
 	public function checkIfValid( string $path, bool $userInput = false ): bool {
-		$reserved = [ '__global' ];
+		$reserved = [ '__global' ] + $this->systemInstancesHelper->getSystemInstancePaths();
 		$maxLength = $userInput ? static::PATH_USER_LENGHT : static::PATH_LENGTH;
 		return strlen( $path ) > 0 &&
 			strlen( $path ) < $maxLength + 1 &&

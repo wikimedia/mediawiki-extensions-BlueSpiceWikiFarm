@@ -17,6 +17,7 @@ use BlueSpice\WikiFarm\InstanceStore;
 use BlueSpice\WikiFarm\ManagementDatabaseFactory;
 use BlueSpice\WikiFarm\Util\FavouriteInstanceHelper;
 use BlueSpice\WikiFarm\Util\InstanceDisplayRecordHelper;
+use BlueSpice\WikiFarm\Util\SystemInstancesHelper;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 
@@ -45,12 +46,15 @@ return [
 	'BlueSpiceWikiFarm._InstanceCountLimiter' => static function ( MediaWikiServices $services ) {
 		return new InstanceCountLimiter(
 			$services->getService( 'BlueSpiceWikiFarm._Config' ),
-			$services->getService( 'BlueSpiceWikiFarm.InstanceStore' )
+			$services->getService( 'BlueSpiceWikiFarm.InstanceStore' ),
+			$services->getService( 'BlueSpiceWikiFarm._SystemInstancesHelper' )
 		);
 	},
+
 	'BlueSpiceWikiFarm._InstancePathGenerator' => static function ( MediaWikiServices $services ) {
 		return new InstancePathGenerator(
-			$services->getService( 'BlueSpiceWikiFarm.InstanceStore' )
+			$services->getService( 'BlueSpiceWikiFarm.InstanceStore' ),
+			$services->getService( 'BlueSpiceWikiFarm._SystemInstancesHelper' )
 		);
 	},
 	'BlueSpiceWikiFarm.GlobalDatabaseQuery' => static function ( MediaWikiServices $services ) {
@@ -134,4 +138,9 @@ return [
 			$services->getService( 'BlueSpiceWikiFarm._Config' )
 		);
 	},
+	'BlueSpiceWikiFarm._SystemInstancesHelper' => static function ( MediaWikiServices $services ) {
+		return new SystemInstancesHelper(
+			$services->getService( 'BlueSpiceWikiFarm._Config' )
+		);
+	}
 ];
