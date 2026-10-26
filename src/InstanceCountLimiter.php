@@ -2,6 +2,7 @@
 
 namespace BlueSpice\WikiFarm;
 
+use BlueSpice\WikiFarm\Util\SystemInstancesHelper;
 use MediaWiki\Config\Config;
 
 class InstanceCountLimiter {
@@ -19,8 +20,12 @@ class InstanceCountLimiter {
 	/**
 	 * @param Config $farmConfig
 	 * @param InstanceStore $instanceStore
+	 * @param SystemInstancesHelper $systemInstancesHelper
 	 */
-	public function __construct( Config $farmConfig, InstanceStore $instanceStore ) {
+	public function __construct(
+		Config $farmConfig, InstanceStore $instanceStore,
+		private readonly SystemInstancesHelper $systemInstancesHelper
+	) {
 		$this->farmConfig = $farmConfig;
 		$this->instanceStore = $instanceStore;
 	}
@@ -37,9 +42,10 @@ class InstanceCountLimiter {
 	 */
 	public function getCurrentActiveCount(): int {
 		$count = 0;
+		$systemPaths = $this->systemInstancesHelper->getSystemInstancePaths();
 		foreach ( $this->instanceStore->getInstanceIds() as $id ) {
 			$instance = $this->instanceStore->getInstanceById( $id );
-			if ( $instance && $instance->isActive() ) {
+			if ( $instance && $instance->isActive() && !in_array( $instance->getPath(), $systemPaths ) ) {
 				$count++;
 			}
 		}

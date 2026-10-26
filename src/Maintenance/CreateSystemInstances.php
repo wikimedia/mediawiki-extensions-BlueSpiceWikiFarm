@@ -9,6 +9,7 @@ use BlueSpice\WikiFarm\Process\Step\InstallInstance;
 use BlueSpice\WikiFarm\Process\Step\PurgeInstance;
 use BlueSpice\WikiFarm\Process\Step\RunPostInstanceCreationTasks;
 use BlueSpice\WikiFarm\Process\Step\RunUpdates;
+use BlueSpice\WikiFarm\Util\SystemInstancesHelper;
 use MediaWiki\Message\Message;
 use MWStake\MediaWiki\Component\ProcessManager\CodeExecutor;
 use Throwable;
@@ -22,11 +23,10 @@ class CreateSystemInstances extends \MediaWiki\Maintenance\LoggedUpdateMaintenan
 	 * @throws \Exception
 	 */
 	protected function doDBUpdates() {
-		if (
-			$GLOBALS['wgWikiFarmConfigInternal']->get( 'shareUserSessions' ) &&
-			$GLOBALS['wgWikiFarmConfigInternal']->get( 'shareUsers' ) &&
-			$GLOBALS['wgWikiFarmConfigInternal']->get( 'useSharedResources' )
-		) {
+		/** @var SystemInstancesHelper $systemInstancesHelper */
+		$systemInstancesHelper = $this->getServiceContainer()
+			->getService( 'BlueSpiceWikiFarm._SystemInstancesHelper' );
+		if ( $systemInstancesHelper->usesSharedResourcesInstance() ) {
 			return $this->createInstance(
 				$GLOBALS['wgWikiFarmConfigInternal']->get( 'sharedResourcesWikiPath' ),
 				Message::newFromKey( 'wikifarm-shared-instance-name' )->text(),
