@@ -8,7 +8,7 @@ use Exception;
 use MediaWiki\CommentStore\CommentStoreComment;
 use MediaWiki\Content\WikitextContent;
 use MediaWiki\Installer\CliInstaller;
-use MediaWiki\Installer\DatabaseInstaller;
+use MediaWiki\Installer\Task\ITaskContext;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Status\Status;
@@ -27,6 +27,20 @@ class InstanceCliInstaller extends CliInstaller {
 	 * @var array
 	 */
 	private $processedAutoExtensions = [];
+
+	/**
+	 * @inheritDoc
+	 */
+	public function __construct( $siteName, $admin = null, array $options = [] ) {
+		parent::__construct( $siteName, $admin, $options );
+
+		$this->setVar( 'wgInstallerInitialPages', [] );
+		$this->addInstallStep( [
+			'name' => 'wikifarm-default-content',
+			'description' => 'config-install-mainpage',
+			'callback' => [ $this, 'createMainpage' ],
+		], 'mainpage' );
+	}
 
 	/**
 	 * Basically a copy of `CliInstaller::execute` but without the check for "$IP/LocalSettings.php"
@@ -125,77 +139,123 @@ class InstanceCliInstaller extends CliInstaller {
 		}
 	}
 
-	/** @inheritDoc */
-	protected function createMainpage( DatabaseInstaller $installer ) {
-		$status = Status::newGood();
-		$title = MediaWikiServices::getInstance()->getTitleFactory()->newMainPage();
-		if ( $title->exists() ) {
-			$status->warning( 'config-install-mainpage-exists' );
-			return $status;
+	/**
+	 * Install task: main page, "Getting started" help page (if the edition has one) and sidebar.
+	 * Files used by these pages are imported by `ImportDefaultContentFiles` during update.php,
+	 * because the installer does not know the upload directory of the instance.
+	 *
+	 * @param ITaskContext $context
+	 * @return Status
+	 */
+	public function createMainpage( ITaskContext $context ) {
+		$contentDir = dirname( __DIR__ ) . '/content';
+		$edition = $this->getEdition();
+
+		$mainpagePath = "$contentDir/mainpage/$edition.html";
+		if ( $edition === '' || !file_exists( $mainpagePath ) ) {
+			$mainpagePath = "$contentDir/mainpage/farm.html";
 		}
-		try {
-			$path = dirname( __DIR__ ) . '/content/mainpage/farm.html';
-			echo "$path\n";
+		$status = $this->createPage(
+			MediaWikiServices::getInstance()->getTitleFactory()->newMainPage(),
+			$this->getLocalizedContent( $mainpagePath ),
+			'config-install-mainpage-failed'
+		);
 
-			$rawContent = file_get_contents( $path );
-			$processedContent = preg_replace_callback(
-				'#\{\{int:(.*?)\}\}#si',
-				static function ( $matches ) {
-					return wfMessage( $matches[1] )->inContentLanguage()->text();
-				},
-				$rawContent
-			);
-			$content = new WikitextContent( $processedContent );
-			$page = MediaWikiServices::getInstance()->getWikiPageFactory()
-				->newFromTitle( $title );
-			$user = User::newSystemUser( User::MAINTENANCE_SCRIPT_USER, [ 'steal' => true ] );
-
-			$updater = $page->newPageUpdater( $user );
-			$updater->setContent( SlotRecord::MAIN, $content );
-			$comment = CommentStoreComment::newUnsavedComment( '' );
-			$updater->saveRevision( $comment, EDIT_NEW );
-			$status = $updater->getStatus();
-		} catch ( Exception $e ) {
-			// using raw, because $wgShowExceptionDetails can not be set yet
-			$status->fatal( 'config-install-mainpage-failed', $e->getMessage() );
+		$helpPath = "$contentDir/gettingstarted/$edition.html";
+		if ( $edition !== '' && file_exists( $helpPath ) ) {
+			$helpTitle = wfMessage( "wikifarm-gettingstarted-content-$edition-title" )
+				->inContentLanguage()->plain();
+			$status->merge( $this->createPage(
+				Title::makeTitleSafe( NS_HELP, $helpTitle ),
+				$this->getLocalizedContent( $helpPath ),
+				'config-install-mainpage-failed'
+			) );
 		}
-
-		$this->createSidebar( $installer );
+		$status->merge( $this->createSidebar() );
 
 		return $status;
 	}
 
 	/**
+	 * BlueSpice edition from `$IP/BLUESPICE-EDITION`, same source as the
+	 * `BsEdition` class of bluespice/mw-config-overrides
+	 *
+	 * @return string Empty if unknown
+	 */
+	private function getEdition(): string {
+		$path = $GLOBALS['IP'] . '/BLUESPICE-EDITION';
+		if ( !file_exists( $path ) ) {
+			return '';
+		}
+		$lines = explode( "\n", file_get_contents( $path ) );
+		$edition = strtolower( trim( $lines[0] ) );
+
+		return preg_match( '/^[a-z]+$/', $edition ) ? $edition : '';
+	}
+
+	/**
 	 * Sidebar with BlueSpice content
 	 *
-	 * @param DatabaseInstaller $installer
 	 * @return Status
 	 */
-	protected function createSidebar( DatabaseInstaller $installer ) {
+	protected function createSidebar() {
+		return $this->createPage(
+			Title::makeTitleSafe( NS_MEDIAWIKI, 'Sidebar' ),
+			file_get_contents( dirname( __DIR__ ) . '/content/sidebar/farm.wikitext' ),
+			'config-install-sidebar-failed'
+		);
+	}
+
+	/**
+	 * Replaces `{{int:...}}` with the raw wikitext of the message in the content language,
+	 * so templates and magic words inside the messages are kept for the page to render,
+	 * and `{{InstallerOption:...}}` like core's InitialContentTask does.
+	 *
+	 * @param string $path
+	 * @return string
+	 */
+	private function getLocalizedContent( string $path ): string {
+		$content = preg_replace_callback(
+			'#\{\{int:(.*?)\}\}#si',
+			static function ( $matches ) {
+				return wfMessage( $matches[1] )->inContentLanguage()->plain();
+			},
+			file_get_contents( $path )
+		);
+		return preg_replace_callback(
+			'/\{\{ *InstallerOption: *(\w+) *}}/',
+			function ( $matches ) {
+				return (string)$this->getVar( '_' . $matches[1] );
+			},
+			$content
+		);
+	}
+
+	/**
+	 * @param Title $title
+	 * @param string $text
+	 * @param string $failureMessage
+	 * @return Status
+	 */
+	private function createPage( Title $title, string $text, string $failureMessage ) {
 		$status = Status::newGood();
-		$title = Title::makeTitleSafe( NS_MEDIAWIKI, 'Sidebar' );
 		if ( $title->exists() ) {
 			$status->warning( 'config-install-mainpage-exists' );
 			return $status;
 		}
 		try {
-			$path = dirname( __DIR__ ) . '/content/sidebar/farm.wikitext';
-			echo "$path\n";
-
-			$rawContent = file_get_contents( $path );
-			$content = new WikitextContent( $rawContent );
 			$page = MediaWikiServices::getInstance()->getWikiPageFactory()
 				->newFromTitle( $title );
 			$user = User::newSystemUser( User::MAINTENANCE_SCRIPT_USER, [ 'steal' => true ] );
 
 			$updater = $page->newPageUpdater( $user );
-			$updater->setContent( SlotRecord::MAIN, $content );
+			$updater->setContent( SlotRecord::MAIN, new WikitextContent( $text ) );
 			$comment = CommentStoreComment::newUnsavedComment( '' );
 			$updater->saveRevision( $comment, EDIT_NEW );
 			$status = $updater->getStatus();
 		} catch ( Exception $e ) {
 			// using raw, because $wgShowExceptionDetails can not be set yet
-			$status->fatal( 'config-install-sidebar-failed', $e->getMessage() );
+			$status->fatal( $failureMessage, $e->getMessage() );
 		}
 
 		return $status;
