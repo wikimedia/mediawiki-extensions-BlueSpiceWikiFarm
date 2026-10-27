@@ -13,5 +13,6 @@
 	"wikifarm-back-to-main-wiki-btn-aria-label": "Otwórz główną wiki",
 	"wikifarm-instances-menu-button-aria-label": "Wiki: $1",
 	"wikifarm-wiki-back-link-title": "Wróć do $1",
-	"wikifarm-wiki-back-link-aria-label": "Wróć do $1"
+	"wikifarm-wiki-back-link-aria-label": "Wróć do $1",
+	"wikifarm-instances-grid-column-path-header-label": "Ścieżka"
 }
