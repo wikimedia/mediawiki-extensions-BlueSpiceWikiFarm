@@ -111,8 +111,8 @@
 	display: block;
 }
 
-#farm-wikis-pinned .farm-wikis-elements:has( > :nth-child( -n + 5 ) ),
-#farm-wikis-favourites .farm-wikis-elements:has( > :nth-child( -n + 5 ) ) {
+#farm-wikis-pinned .farm-wikis-elements:not( :has( > :nth-child( 5 ) ) ),
+#farm-wikis-favourites .farm-wikis-elements:not( :has( > :nth-child( 5 ) ) ) {
 	columns: 1;
 	display: inline-flex;
 }
