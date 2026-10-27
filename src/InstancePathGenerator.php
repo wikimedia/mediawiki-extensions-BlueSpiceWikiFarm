@@ -7,7 +7,7 @@ use Exception;
 class InstancePathGenerator {
 	public const PATH_LENGTH = 10;
 	// Max length for a path explicitly provided by the user
-	private const PATH_USER_LENGHT = 255;
+	private const PATH_USER_LENGHT = 200;
 
 	private const PATH_PATTERN = '/^[a-zA-Z0-9_-]*$/';
 	private const PATH_PATTERN_ALLOW_SUB = '/^[a-zA-Z0-9_\-\/]*$/';
