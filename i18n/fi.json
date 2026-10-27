@@ -35,5 +35,6 @@
 	"wikifarm-edit-instance-feature-btn-label": "Suositeltu wiki",
 	"wikifarm-back-to-main-wiki-btn-aria-label": "Avaa pääwiki",
 	"wikifarm-instances-menu-button-aria-label": "Wikejä: $1",
-	"wikifarm-wiki-back-link-aria-label": "Takaisin sivulle $1"
+	"wikifarm-wiki-back-link-aria-label": "Takaisin sivulle $1",
+	"wikifarm-instances-grid-column-path-header-label": "Polku"
 }
