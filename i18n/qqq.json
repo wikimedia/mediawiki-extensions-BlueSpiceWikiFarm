@@ -334,5 +334,7 @@
 	"wikifarm-instances-menu-button-aria-label": "Aria label for megamenu button with list of wiki instances",
 	"wikifarm-wiki-back-link-title": "Title for back link to a page in other wiki\nParameter:\n* $1 - page name",
 	"wikifarm-wiki-back-link-aria-label": "Aria label for back link to a page in other wiki\nParameter:\n* $1 - page name",
-	"wikifarm-ui-access-confirm-delete-action-remove": "Action button label to confirm to remove access assignment"
+	"wikifarm-ui-access-confirm-delete-action-remove": "Action button label to confirm to remove access assignment",
+	"wikifarm-ui-access-grid-header-group-info-label": "Grid table header for group info column",
+	"wikifarm-ui-access-action-group-info": "Group info button label"
 }
