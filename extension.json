@@ -446,7 +446,9 @@
 				"wikifarm-ui-access-field-type-user",
 				"wikifarm-ui-access-field-type-group",
 				"wikifarm-ui-access-confirm-delete-action-remove",
-				"cancel"
+				"cancel",
+				"wikifarm-ui-access-grid-header-group-info-label",
+				"wikifarm-ui-access-action-group-info"
 			],
 			"dependencies": [
 				"oojs-ui",

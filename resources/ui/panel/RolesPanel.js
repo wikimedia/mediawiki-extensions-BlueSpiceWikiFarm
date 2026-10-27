@@ -171,6 +171,17 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.buildGrid = function ( store, enti
 				return mw.msg( 'wikifarm-ui-role-label-' + value );
 			}
 		},
+		actionInfo: {
+			type: 'action',
+			title: mw.msg( 'wikifarm-ui-access-action-group-info' ),
+			actionId: 'info',
+			icon: 'info',
+			headerText: mw.msg( 'wikifarm-ui-access-grid-header-group-info-label' ),
+			invisibleHeader: true,
+			width: 30,
+			visibleOnHover: true,
+			shouldShow: ( row ) => row.entity_type === 'group'
+		},
 		actionEdit: {
 			type: 'action',
 			title: mw.msg( 'wikifarm-ui-access-action-edit' ),
@@ -212,6 +223,22 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.buildGrid = function ( store, enti
 };
 
 ext.bluespiceWikiFarm.ui.RolesPanel.prototype.onGridAction = function ( action, row, store ) { // eslint-disable-line no-unused-vars
+	if ( action === 'info' ) {
+		const config = ext.bluespiceWikiFarm._config(); // eslint-disable-line no-underscore-dangle
+		const pageName = mw.config.get( 'wgPageName' ) + '#roles';
+		if ( config.instanceId === 'w' ) {
+			window.location.href = mw.util.getUrl( 'Special:UserManager', {
+				group: row.entity_key,
+				backTo: pageName
+			} );
+			return;
+		}
+		const backTo = config.instanceInterwiki + ':' + pageName;
+		const groupName = mw.util.rawurlencode( row.entity_key );
+		const url = mw.config.get( 'wgServer' ) + '/wiki/Special:UserManager?group=' + groupName + '&backTo=' + backTo;
+		window.location.href = url;
+		return;
+	}
 	if ( action === 'edit' ) {
 		if ( !row ) {
 			return;

@@ -331,5 +331,7 @@
 	"wikifarm-instances-menu-button-aria-label": "Wikis: $1",
 	"wikifarm-wiki-back-link-title": "Back to $1",
 	"wikifarm-wiki-back-link-aria-label": "Back to $1",
-	"wikifarm-ui-access-confirm-delete-action-remove": "Remove"
+	"wikifarm-ui-access-confirm-delete-action-remove": "Remove",
+	"wikifarm-ui-access-grid-header-group-info-label": "Group info",
+	"wikifarm-ui-access-action-group-info": "Show group info"
 }
