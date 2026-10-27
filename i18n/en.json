@@ -309,5 +309,6 @@
 	"wikifarm-instances-menu-button-aria-label": "Wikis: $1",
 	"wikifarm-wiki-back-link-title": "Back to $1",
 	"wikifarm-wiki-back-link-aria-label": "Back to $1",
-	"wikifarm-instances-grid-column-path-header-label": "Path"
+	"wikifarm-instances-grid-column-path-header-label": "Path",
+	"wikifarm-ui-access-confirm-delete-action-remove": "Remove"
 }
