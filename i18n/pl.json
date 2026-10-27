@@ -7,12 +7,12 @@
 	"wikifarm-search-center-filter-wiki-label": "Wiki",
 	"wikifarm-search-center-filter-wiki-with-values-label": "Wiki:",
 	"wikifarm-access-group-name-user-alt": "Wszyscy użytkownicy",
+	"wikifarm-instances-grid-column-path-header-label": "Ścieżka",
 	"logentry-ext-wikifarm-access-assign-role": "$1 {{GENDER:$2|przypisał|przypisała|przypisał(a)}} rolę „$5” dla grupy „$4”",
 	"logentry-ext-wikifarm-access-remove-all-roles": "$1 {{GENDER:$2|usunął|usunęła|usunął(-ęła)}} wszystkie role dla grupy „$4”",
 	"logentry-ext-wikifarm-access-delete": "$1 {{GENDER:$2|usunął|usunęła|usunął(-ęła)}} wszystkie role dla grupy „$4”",
 	"wikifarm-back-to-main-wiki-btn-aria-label": "Otwórz główną wiki",
 	"wikifarm-instances-menu-button-aria-label": "Wiki: $1",
 	"wikifarm-wiki-back-link-title": "Wróć do $1",
-	"wikifarm-wiki-back-link-aria-label": "Wróć do $1",
-	"wikifarm-instances-grid-column-path-header-label": "Ścieżka"
+	"wikifarm-wiki-back-link-aria-label": "Wróć do $1"
 }

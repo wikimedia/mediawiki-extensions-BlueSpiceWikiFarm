@@ -17,6 +17,7 @@
 	"wikifarm-management-invalid-template-title": "غلط سانچہ",
 	"wikifarm-instances-tab-favourite-label": "پسنداں",
 	"wikifarm-instances-tab-all-label": "ٻیاں وکیاں",
+	"wikifarm-instances-grid-column-path-header-label": "راہ",
 	"wikifarm-instances-grid-column-wiki-header-label": "وکی",
 	"wikis": "وکیاں",
 	"wikifarm-instances-grid-column-favourites-header-label": "پسند",
@@ -25,6 +26,5 @@
 	"wikifarm-button-action-label-suspend": "معلق",
 	"wikifarm-button-action-delete-label": "مٹاؤ",
 	"wikifarm-wikis-create-new-wiki-title": "نویں وکی بݨاؤ",
-	"wikifarm-wikis-create-new-wiki-aria-label": "نویں وکی بݨاؤ",
-	"wikifarm-instances-grid-column-path-header-label": "راہ"
+	"wikifarm-wikis-create-new-wiki-aria-label": "نویں وکی بݨاؤ"
 }
