@@ -3,7 +3,7 @@
 namespace BlueSpice\WikiFarm\Hook\BeforeInitialize;
 
 use BlueSpice\WikiFarm\Setup;
-use DeferredUpdates;
+use MediaWiki\Deferred\DeferredUpdates;
 use MediaWiki\Hook\BeforeInitializeHook;
 use MWStake\MediaWiki\Component\DataStash\StashManager;
 
