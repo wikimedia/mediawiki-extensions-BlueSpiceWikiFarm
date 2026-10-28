@@ -6,7 +6,6 @@ use BlueSpice\WikiFarm\ColorUtils;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\InstanceStore;
 use BlueSpice\WikiFarm\RootInstanceEntity;
-use HtmlArmor;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
@@ -16,6 +15,7 @@ use MWStake\MediaWiki\Component\CommonUserInterface\Component\Literal;
 use MWStake\MediaWiki\Component\CommonUserInterface\Component\SimpleCard;
 use MWStake\MediaWiki\Component\CommonUserInterface\Component\SimpleDropdownButton;
 use MWStake\MediaWiki\Component\CommonUserInterface\IRestrictedComponent;
+use Wikimedia\HtmlArmor\HtmlArmor;
 
 class WikiInstancesMenu extends SimpleDropdownButton implements IRestrictedComponent {
 
