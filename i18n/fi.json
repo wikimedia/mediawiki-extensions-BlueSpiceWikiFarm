@@ -12,6 +12,7 @@
 	"wikifarm-ui-role-label-admin": "Ylläpitäjä",
 	"wikifarm-instances-menu-empty-favorite-text": "Yhtään wikiä ei ole toistaiseksi merkitty suosikiksi. Voit asettaa wikin suosikiksesi napsauttamalla tähtikuvaketta",
 	"wikifarm-ui-access-field-type-group": "Ryhmä",
+	"wikifarm-instances-grid-column-path-header-label": "Polku",
 	"wikifarm-access-tab-roles": "Roolit",
 	"wikifarm-access-tab-users": "Käyttäjät",
 	"wikifarm-access-column-group": "Ryhmä",
