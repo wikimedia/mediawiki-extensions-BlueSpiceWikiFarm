@@ -9,6 +9,7 @@ use BlueSpice\WikiFarm\Maintenance\ImportDefaultContentFiles;
 use BlueSpice\WikiFarm\Maintenance\PopulateGroupList;
 use BlueSpice\WikiFarm\Maintenance\PopulateRoleInstancePath;
 use BlueSpice\WikiFarm\Maintenance\PopulateWikiId;
+use BlueSpice\WikiFarm\Maintenance\PromoteRootCreator;
 use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
 
 class RunDatabaseUpdates implements LoadExtensionSchemaUpdatesHook {
@@ -80,5 +81,6 @@ class RunDatabaseUpdates implements LoadExtensionSchemaUpdatesHook {
 		$updater->addPostDatabaseUpdateMaintenance( PopulateGroupList::class );
 		$updater->addPostDatabaseUpdateMaintenance( PopulateRoleInstancePath::class );
 		$updater->addPostDatabaseUpdateMaintenance( ImportDefaultContentFiles::class );
+		$updater->addPostDatabaseUpdateMaintenance( PromoteRootCreator::class );
 	}
 }
