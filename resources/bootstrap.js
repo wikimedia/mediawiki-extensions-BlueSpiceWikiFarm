@@ -293,3 +293,14 @@ mw.hook( 'unifiedtaskoverview.tile.init' ).add( ( task, data ) => {
 		task.$element.css( 'border-left', `4px solid ${ wikiColor }` );
 	}
 } );
+
+mw.hook( 'ext.bluespice.galaxyDistributionConnector.neoWiki.Grid.appendRow' ).add( ( $row, data ) => {
+	if ( !data._source_wiki ) { // eslint-disable-line no-underscore-dangle
+		return;
+	}
+
+	const wikiColor = ext.bluespiceWikiFarm.util.getWikiColor( data._source_wiki ); // eslint-disable-line no-underscore-dangle
+	if ( wikiColor ) {
+		$row.css( 'border-left', `4px solid ${ wikiColor }` );
+	}
+} );
