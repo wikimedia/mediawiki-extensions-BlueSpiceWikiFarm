@@ -36,7 +36,8 @@ class CreateSystemInstances extends \MediaWiki\Maintenance\LoggedUpdateMaintenan
 					],
 					'metadata' => [
 						'instanceColor' => [ 'background' => '#747474', 'lightText' => true ]
-					]
+					],
+					'isSystemInstance' => true
 				]
 			);
 		}

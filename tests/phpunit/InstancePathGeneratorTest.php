@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\Tests;
 
 use BlueSpice\WikiFarm\DirectInstanceStore;
 use BlueSpice\WikiFarm\InstancePathGenerator;
+use BlueSpice\WikiFarm\Util\SystemInstancesHelper;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -31,13 +32,15 @@ class InstancePathGeneratorTest extends TestCase {
 			$this->expectException( \Exception::class );
 		}
 
-		$generator = new InstancePathGenerator( $store );
+		$systemInstancesHelper = $this->createMock( SystemInstancesHelper::class );
+		$systemInstancesHelper->method( 'getSystemInstancePaths' )->willReturn( [] );
+		$generator = new InstancePathGenerator( $store, $systemInstancesHelper );
 		$generated = $generator->generateFromName( $input );
 
 		if ( is_string( $expected ) ) {
 			$this->assertSame( $expected, $generated );
 			$this->assertTrue( !in_array( $generated, $blacklist ) );
-			$this->assertTrue( strlen( $generated ) <= InstancePathGenerator::PATH_LENGTH );
+			$this->assertTrue( $generator->checkIfValid( $generated ) );
 		}
 	}
 
@@ -52,7 +55,7 @@ class InstancePathGeneratorTest extends TestCase {
 			],
 			'valid-too-long' => [
 				'input' => 'MyWikiDummyFooBar',
-				'expected' => 'MWDFB',
+				'expected' => 'MyWikiDummyFooBar',
 			],
 			'invalid-char-too-long' => [
 				'input' => 'This is a name with invalid characters & is too long',
@@ -87,5 +90,28 @@ class InstancePathGeneratorTest extends TestCase {
 				'expected' => 'Foo',
 			],
 		];
+	}
+
+	/**
+	 * @covers \BlueSpice\WikiFarm\InstancePathGenerator::checkIfValid
+	 * @return void
+	 */
+	public function testSystemInstancePathsAreInvalid(): void {
+		$store = $this->createMock( DirectInstanceStore::class );
+		$store->method( 'pathAvailable' )->willReturn( true );
+
+		$systemInstancesHelper = $this->createMock( SystemInstancesHelper::class );
+		$systemInstancesHelper->method( 'getSystemInstancePaths' )->willReturn( [
+			'sharedresources',
+			'systemwiki',
+		] );
+
+		$generator = new InstancePathGenerator( $store, $systemInstancesHelper );
+
+		$this->assertFalse( $generator->checkIfValid( 'sharedresources' ) );
+		$this->assertFalse( $generator->checkIfValid( 'systemwiki' ) );
+		$this->assertFalse( $generator->checkIfValid( '__global' ) );
+
+		$this->assertTrue( $generator->checkIfValid( 'sharedresources', userInput: false ) );
 	}
 }
