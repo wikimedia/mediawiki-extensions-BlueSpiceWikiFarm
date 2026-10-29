@@ -659,7 +659,8 @@
 		"IssueTrackerLinksAuth": "unifyRedirectUri",
 		"IssueTrackerLinksAuthRedirectUri": "unifyRedirectUri",
 		"FlexiSkinGetActiveSkin": "shareFlexiSkin",
-		"FlexiSkinAdaptConfiguration": "shareFlexiSkin"
+		"FlexiSkinAdaptConfiguration": "shareFlexiSkin",
+		"MWStakeDynamicConfigManagerLoaded": "setSystemGroupType"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -769,6 +770,9 @@
 		"shareFlexiSkin": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\ShareFlexiSkin",
 			"services": [ "BlueSpiceWikiFarm._Config", "RepoGroup" ]
+		},
+		"setSystemGroupType": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\SetSystemGroupType"
 		}
 	},
 	"RestRoutes": [
