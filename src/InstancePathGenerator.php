@@ -6,7 +6,7 @@ use BlueSpice\WikiFarm\Util\SystemInstancesHelper;
 use Exception;
 
 class InstancePathGenerator {
-	public const PATH_LENGTH = 10;
+	public const PATH_LENGTH = 30;
 	// Max length for a path explicitly provided by the user
 	private const PATH_USER_LENGHT = 200;
 
@@ -70,14 +70,17 @@ class InstancePathGenerator {
 	 * @param bool $userInput
 	 * @return bool
 	 */
-	public function checkIfValid( string $path, bool $userInput = false ): bool {
-		$reserved = [ '__global' ] + $this->systemInstancesHelper->getSystemInstancePaths();
+	public function checkIfValid( string $path, bool $userInput = true ): bool {
+		$reserved = $userInput ?
+			array_merge( [ '__global' ], $this->systemInstancesHelper->getSystemInstancePaths() ) :
+			[ '__global' ];
 		$maxLength = $userInput ? static::PATH_USER_LENGHT : static::PATH_LENGTH;
+
 		return strlen( $path ) > 0 &&
 			strlen( $path ) < $maxLength + 1 &&
 			preg_match( self::PATH_PATTERN, $path ) === 1 &&
 			$this->store->pathAvailable( $path ) &&
-			!in_array( mb_strtolower( $path ), $reserved );
+			!in_array( mb_strtolower( $path ), array_map( 'mb_strtolower', $reserved ) );
 	}
 
 	/**

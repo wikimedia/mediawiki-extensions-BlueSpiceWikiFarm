@@ -8,6 +8,7 @@ use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
 use BlueSpice\WikiFarm\AccessControl\WikiAccessLookup;
 use BlueSpice\WikiFarm\MaintenanceScreens\MaintenancePageConstructor;
+use BlueSpice\WikiFarm\Util\SystemInstancesHelper;
 use Exception;
 use ForeignAPIRepo;
 use MediaWiki\Config\Config;
@@ -455,7 +456,7 @@ class Dispatcher {
 			return $instance;
 		}
 
-		$pathGenerator = new InstancePathGenerator( $this->store );
+		$pathGenerator = new InstancePathGenerator( $this->store, new SystemInstancesHelper( $this->config ) );
 		if ( $pathGenerator->checkIfValid( $id ) ) {
 			// Instance does not exist, but could exist
 			return new NonExistingInstanceEntity( $id );

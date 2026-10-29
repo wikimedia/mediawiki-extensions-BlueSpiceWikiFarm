@@ -152,7 +152,7 @@ class InstanceManager {
 	 * @throws Exception
 	 */
 	public function createEmptyInstance( string $path, string $displayName, array $options = [] ): InstanceEntity {
-		$this->assertCreatable( $path );
+		$this->assertCreatable( $path, $options['isSystemInstance'] ?? false );
 		// Create empty instance shell
 		$instance = $this->instanceStore->newEmptyInstance( $path, $this->getFarmConfig() );
 		$instance->setDisplayName( $displayName );
@@ -241,23 +241,25 @@ class InstanceManager {
 
 	/**
 	 * @param string $path
+	 * @param bool $isSystemInstance
 	 * @return void
 	 * @throws Exception
 	 */
-	public function assertCreatable( string $path ) {
+	public function assertCreatable( string $path, bool $isSystemInstance = false ) {
 		if ( !$this->countLimiter->canCreate() ) {
 			$this->throwException( InvalidArgumentException::class, 'wikifarm-error-instance-limit-reached' );
 		}
-		$this->assertValidPath( $path );
+		$this->assertValidPath( $path, $isSystemInstance );
 	}
 
 	/**
 	 * @param string $path
+	 * @param bool $isSystemInstance
 	 * @return void
 	 * @throws Exception
 	 */
-	private function assertValidPath( string $path ) {
-		if ( !$this->pathGenerator->checkIfValid( $path, true ) ) {
+	private function assertValidPath( string $path, bool $isSystemInstance = false ) {
+		if ( !$this->pathGenerator->checkIfValid( $path, userInput: !$isSystemInstance ) ) {
 			$this->throwException( InvalidArgumentException::class, 'wikifarm-error-invalid-path' );
 		}
 	}
