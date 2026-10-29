@@ -179,8 +179,10 @@ ext.bluespiceWikiFarm.ui.ManagementPanel.prototype.makeActions = function () {
 		}
 	}
 
-	const panel = new OO.ui.HorizontalLayout( { items: this.buttons } );
-	panel.$element.css( 'margin-bottom', '20px' );
+	const panel = new OO.ui.HorizontalLayout( {
+		items: this.buttons,
+		classes: [ 'wikifarm-management-actions' ]
+	} );
 	panel.$element.insertBefore( this.grid.$element );
 
 	this.setAbilities();
