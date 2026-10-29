@@ -5,6 +5,7 @@ namespace BlueSpice\WikiFarm\Tests;
 use BlueSpice\WikiFarm\InstanceCountLimiter;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\InstanceStore;
+use BlueSpice\WikiFarm\Util\SystemInstancesHelper;
 use MediaWiki\Config\Config;
 use PHPUnit\Framework\TestCase;
 
@@ -30,7 +31,9 @@ class InstanceCountLimiterTest extends TestCase {
 			return $instanceMock;
 		} );
 
-		$limiter = new InstanceCountLimiter( $configMock, $instanceStoreMock );
+		$systemInstancesHelperMock = $this->createMock( SystemInstancesHelper::class );
+
+		$limiter = new InstanceCountLimiter( $configMock, $instanceStoreMock, $systemInstancesHelperMock );
 		$this->assertTrue( $limiter->canCreate() );
 		$this->assertFalse( $limiter->isLimited() );
 	}
@@ -57,7 +60,9 @@ class InstanceCountLimiterTest extends TestCase {
 			return $instanceMock;
 		} );
 
-		$limiter = new InstanceCountLimiter( $configMock, $instanceStoreMock );
+		$systemInstancesHelperMock = $this->createMock( SystemInstancesHelper::class );
+
+		$limiter = new InstanceCountLimiter( $configMock, $instanceStoreMock, $systemInstancesHelperMock );
 		$this->assertSame( $limit, $limiter->getLimit() );
 		$this->assertSame( $activeCount, $limiter->getCurrentActiveCount() );
 		$this->assertSame( $canCreate, $limiter->canCreate() );
