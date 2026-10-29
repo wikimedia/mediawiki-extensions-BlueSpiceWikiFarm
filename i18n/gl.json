@@ -311,5 +311,6 @@
 	"wikifarm-instances-menu-button-aria-label": "Wikis: $1",
 	"wikifarm-wiki-back-link-title": "Volver a «$1»",
 	"wikifarm-wiki-back-link-aria-label": "Volver a «$1»",
-	"wikifarm-instances-grid-column-path-header-label": "Ruta"
+	"wikifarm-instances-grid-column-path-header-label": "Ruta",
+	"wikifarm-ui-access-confirm-delete-action-remove": "Eliminar"
 }
