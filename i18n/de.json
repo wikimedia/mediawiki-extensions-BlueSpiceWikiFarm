@@ -201,7 +201,7 @@
 	"wikifarm-ui-role-label-editor": "Bearbeiter",
 	"wikifarm-ui-role-label-reviewer": "Prüfer",
 	"wikifarm-ui-access-label-global": "Globale Zuordnung",
-	"wikifarm-ui-access-confirm-delete-assignment": "Möchtest du diese Zuweisung wirklich löschen?",
+	"wikifarm-ui-access-confirm-delete-assignment": "{{#FORMAL:Möchtest du|Möchten Sie}} diese Zuweisung wirklich entfernen?",
 	"wikifarm-ui-access-error-delete-assignment": "Die Zuweisung konnte nicht entfernt werden. Bitte versuche es erneut, oder wende dich an deinen Administrator.",
 	"wikifarm-ui-access-action-add-assignment": "Zugriffszuweisung hinzufügen",
 	"wikifarm-ui-access-action-delete": "Zuordnung entfernen",
