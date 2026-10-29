@@ -32,6 +32,7 @@ class InstanceCountLimiterTest extends TestCase {
 		} );
 
 		$systemInstancesHelperMock = $this->createMock( SystemInstancesHelper::class );
+		$systemInstancesHelperMock->method( 'getSystemInstancePaths' )->willReturn( [] );
 
 		$limiter = new InstanceCountLimiter( $configMock, $instanceStoreMock, $systemInstancesHelperMock );
 		$this->assertTrue( $limiter->canCreate() );
@@ -61,6 +62,7 @@ class InstanceCountLimiterTest extends TestCase {
 		} );
 
 		$systemInstancesHelperMock = $this->createMock( SystemInstancesHelper::class );
+		$systemInstancesHelperMock->method( 'getSystemInstancePaths' )->willReturn( [] );
 
 		$limiter = new InstanceCountLimiter( $configMock, $instanceStoreMock, $systemInstancesHelperMock );
 		$this->assertSame( $limit, $limiter->getLimit() );

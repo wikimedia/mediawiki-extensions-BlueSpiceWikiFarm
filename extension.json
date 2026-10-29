@@ -172,6 +172,9 @@
 				"ui/panel/ManagementPanel.js",
 				"farmManagementSpecial.js"
 			],
+			"styles": [
+				"styles/management.less"
+			],
 			"messages": [
 				"wikifarm-create-instance",
 				"wikifarm-clone-instance",
