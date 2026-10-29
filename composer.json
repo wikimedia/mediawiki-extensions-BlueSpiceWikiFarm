@@ -23,7 +23,7 @@
 		"mwstake/mediawiki-component-processmanager": "~6",
 		"mwstake/mediawiki-component-wikicron": "~7",
 		"mwstake/mediawiki-component-filestorageutilities": "~1",
-		"mwstake/mediawiki-component-datastash": "~1"
+		"mwstake/mediawiki-component-datastash": "~2"
 	},
 	"require-dev": {
 		"mediawiki/mediawiki-codesniffer": "52.0.0",
