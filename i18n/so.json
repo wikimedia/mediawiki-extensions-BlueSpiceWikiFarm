@@ -253,5 +253,6 @@
 	"wikifarm-instances-menu-button-aria-label": "Wikiyada: $1",
 	"wikifarm-wiki-back-link-title": "Ku noqo $1",
 	"wikifarm-wiki-back-link-aria-label": "Ku noqo $1",
-	"wikifarm-instances-grid-column-path-header-label": "Waddo"
+	"wikifarm-instances-grid-column-path-header-label": "Waddo",
+	"wikifarm-ui-access-confirm-delete-action-remove": "Ka saar"
 }

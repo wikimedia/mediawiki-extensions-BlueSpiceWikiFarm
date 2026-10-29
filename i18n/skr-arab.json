@@ -32,5 +32,6 @@
 	"wikifarm-wikis-create-new-wiki-aria-label": "نویں وکی بݨاؤ",
 	"wikifarm-search-center-filter-wiki-label": "وکی",
 	"wikifarm-farmmanagement-label": "وکیاں",
-	"wikifarm-instances-grid-column-path-header-label": "راہ"
+	"wikifarm-instances-grid-column-path-header-label": "راہ",
+	"wikifarm-ui-access-confirm-delete-action-remove": "ہٹاؤ"
 }
