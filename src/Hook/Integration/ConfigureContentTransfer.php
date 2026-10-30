@@ -2,16 +2,21 @@
 
 namespace BlueSpice\WikiFarm\Hook\Integration;
 
+use BlueSpice\WikiFarm\DynamicConfig\CentralOAuthAccessToken;
 use BlueSpice\WikiFarm\InstanceEntity;
+use BlueSpice\WikiFarm\Util\OAuthTokenProvider;
 use MediaWiki\Hook\MediaWikiServicesHook;
 use MediaWiki\Languages\Data\Names;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Registration\ExtensionRegistry;
+use MWStake\MediaWiki\Component\DynamicConfig\DynamicConfigManager;
 
 class ConfigureContentTransfer implements MediaWikiServicesHook {
 
 	/** * @var bool */
 	private bool $isConfigured = false;
+	private bool $isCentralAccessTokenLoaded = false;
+	private ?string $centralAccessToken = null;
 
 	/**
 	 * @inheritDoc
@@ -54,6 +59,9 @@ class ConfigureContentTransfer implements MediaWikiServicesHook {
 		if ( !is_array( $GLOBALS['bsgTranslateTransferNamespaces'] ?? [] ) ) {
 			$GLOBALS['bsgTranslateTransferNamespaces'] = [];
 		}
+
+		/** @var OAuthTokenProvider $tokenProvider */
+		$tokenProvider = $services->getService( 'BlueSpiceWikiFarm._OAuthTokentProvider' );
 		foreach ( $GLOBALS['wgWikiFarmGlobalStore']->getAllInstances() as $instance ) {
 			if ( !$instance->isActive() ) {
 				continue;
@@ -72,7 +80,7 @@ class ConfigureContentTransfer implements MediaWikiServicesHook {
 				continue;
 			}
 
-			$accessToken = $this->getInstanceAccessToken( $instance );
+			$accessToken = $tokenProvider->getTokenForInstance( $instance );
 			if ( !$accessToken ) {
 				continue;
 			}
@@ -105,10 +113,42 @@ class ConfigureContentTransfer implements MediaWikiServicesHook {
 	 * @return string|null
 	 */
 	public function getInstanceAccessToken( InstanceEntity $instanceEntity ): ?string {
+		$centralAccessToken = $this->getCentralAccessToken();
+		if ( $centralAccessToken ) {
+			return $centralAccessToken;
+		}
+
 		$instanceConfig = $instanceEntity->getConfig();
 		if ( isset( $instanceConfig['access_token'] ) ) {
 			return $instanceConfig['access_token'];
 		}
 		return null;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	private function getCentralAccessToken(): ?string {
+		if ( $this->isCentralAccessTokenLoaded ) {
+			return $this->centralAccessToken;
+		}
+
+		$this->isCentralAccessTokenLoaded = true;
+		$services = MediaWikiServices::getInstance();
+		if ( !$services->hasService( 'MWStakeDynamicConfigManager' ) ) {
+			return null;
+		}
+
+		/** @var DynamicConfigManager $configManager */
+		$configManager = $services->getService( 'MWStakeDynamicConfigManager' );
+		$config = $configManager->getConfigObject( CentralOAuthAccessToken::KEY );
+		if ( !$config ) {
+			return null;
+		}
+
+		$this->centralAccessToken = CentralOAuthAccessToken::extractToken(
+			$configManager->retrieveRaw( $config )
+		);
+		return $this->centralAccessToken;
 	}
 }

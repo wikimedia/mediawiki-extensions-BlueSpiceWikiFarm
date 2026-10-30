@@ -2,6 +2,7 @@
 
 namespace BlueSpice\WikiFarm;
 
+use BlueSpice\WikiFarm\Util\OAuthTokenProvider;
 use MediaWiki\Config\Config;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Status\Status;
@@ -10,7 +11,8 @@ class ForeignRequestExecution {
 
 	public function __construct(
 		private readonly HttpRequestFactory $httpRequestFactory,
-		private readonly Config $farmConfig
+		private readonly Config $farmConfig,
+		private readonly OAuthTokenProvider $tokenProvider
 	) {
 	}
 
@@ -32,7 +34,7 @@ class ForeignRequestExecution {
 			$options['postData'] = $params;
 		}
 		$request = $this->httpRequestFactory->create( $url, $options );
-		$at = $instanceEntity->getConfig()['accessToken'];
+		$at = $this->tokenProvider->getTokenForInstance( $instanceEntity );
 		if ( $at ) {
 			$request->setHeader( 'Authorization', 'Bearer ' . $at );
 		}
