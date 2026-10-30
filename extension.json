@@ -949,7 +949,6 @@
 				"TitleFactory",
 				"MWStakeCommonUtilsConfig",
 				"MWStakeCommonUtilsFactory",
-				"BlueSpiceWikiFarm._Config",
 				"PermissionManager"
 			]
 		},
@@ -960,7 +959,6 @@
 				"HookContainer",
 				"MWStakeCommonUtilsFactory",
 				"MWStakeCommonUtilsConfig",
-				"BlueSpiceWikiFarm._GroupListStore",
 				"PermissionManager"
 			]
 		},
@@ -1010,5 +1008,8 @@
 		"ext-wikifarm-access/*": "LogFormatter"
 	},
 	"callback": "BlueSpice\\WikiFarm\\Setup::onRegistration",
+	"ExtensionFunctions": [
+		"BlueSpice\\WikiFarm\\Setup::filterOutRestrictedGroupsAndUsers"
+	],
 	"manifest_version": 2
 }

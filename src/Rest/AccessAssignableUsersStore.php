@@ -2,7 +2,6 @@
 
 namespace BlueSpice\WikiFarm\Rest;
 
-use MediaWiki\Config\Config;
 use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\HookContainer\HookContainer;
@@ -27,14 +26,12 @@ class AccessAssignableUsersStore extends UserQueryStore {
 	 * @param TitleFactory $titleFactory
 	 * @param GlobalVarConfig $mwsgConfig
 	 * @param UtilityFactory $utilityFactory
-	 * @param Config $farmConfig
 	 * @param PermissionManager $permissionManager
 	 */
 	public function __construct(
 		HookContainer $hookContainer, ILoadBalancer $lb, UserFactory $userFactory,
 		LinkRenderer $linkRenderer, TitleFactory $titleFactory, GlobalVarConfig $mwsgConfig,
 		UtilityFactory $utilityFactory,
-		private readonly Config $farmConfig,
 		private readonly PermissionManager $permissionManager
 	) {
 		parent::__construct(
@@ -46,17 +43,6 @@ class AccessAssignableUsersStore extends UserQueryStore {
 		if ( !$this->permissionManager->userHasRight( RequestContext::getMain()->getUser(), 'userrights' ) ) {
 			throw new \PermissionsError( 'userrights' );
 		}
-		// This removes limitation to only list users that can read current wiki, so user can select users to give them access
-		$excludedGroups = $this->farmConfig->get( 'instanceRestrictedGroups' );
-		$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeGroups'] = $GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeGroups'] ?? [];
-		$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeGroups'] = array_unique( array_diff(
-			$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeGroups'],
-			$excludedGroups
-		) );
-		$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeUsers'] = array_diff(
-			$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeUsers'],
-			$this->farmConfig->get( 'instanceRestrictedUsers' ) ?? []
-		);
 		return parent::getResult( $store, $readerParams );
 	}
 }

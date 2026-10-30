@@ -198,33 +198,6 @@ class GroupRoleQuery {
 	}
 
 	/**
-	 * Get all groups from wiki_team_roles that are NOT in the given set
-	 *
-	 * @param array $groups Groups to exclude
-	 * @return array Map of group name => group name
-	 */
-	public function invertGroups( array $groups ): array {
-		if ( empty( $groups ) ) {
-			return [];
-		}
-		$res = $this->db->newSelectQueryBuilder()
-			->select( 'DISTINCT( wtr_team ) team' )
-			->from( 'wiki_team_roles', 'wtr' )
-			->conds( [
-				'wtr_team NOT IN (' . $this->db->makeList( array_values( $groups ) ) . ')',
-			] )
-			->caller( __METHOD__ )
-			->fetchResultSet();
-
-		$inverted = [];
-		foreach ( $res as $row ) {
-			$inverted[$row->team] = $row->team;
-		}
-
-		return $inverted;
-	}
-
-	/**
 	 * @param UserIdentity $user
 	 * @param InstanceEntity $instanceEntity
 	 * @return void

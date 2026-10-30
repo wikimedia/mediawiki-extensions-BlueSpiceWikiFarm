@@ -55,21 +55,13 @@ class GroupAccessStore implements IAccessStore {
 		}
 
 		$db = $this->databaseFactory->createSharedUserDatabaseConnection();
-		$groups = [
-			$this->groupCreator->getGroupNameForUserRole( $instance->getPath(), $role ),
-			...$this->getHigherGroups( $instance->getPath(), $role ),
-		];
-		$globalGroups = [
-			$this->groupCreator->getGroupNameForUserRole( '_global', $role ),
-			...$this->getHigherGroups( '_global', $role ),
-		];
-		$superAccessGroups = $this->farmConfig->get( 'superAccessGroups' ) ?? [];
+		$allowedGroups = $this->getAllowedGroupsForInstance( $instance, $role );
 		$res = $db->selectRow(
 			'user_groups',
 			[ 'ug_user' ],
 			[
 				'ug_user' => $user->getId(),
-				'ug_group IN (' . $db->makeList( array_merge( $groups, $globalGroups, $superAccessGroups ) ) . ')'
+				'ug_group IN (' . $db->makeList( $allowedGroups ) . ')'
 			],
 			__METHOD__
 		);
@@ -84,32 +76,40 @@ class GroupAccessStore implements IAccessStore {
 	}
 
 	/**
-	 * Get users without any group, those are always excluded
+	 * Get all users unavailable for given instance
+	 *
+	 * @param InstanceEntity $instance
+	 * @param array $additionalGroups groups allowed by group roles
 	 * @return array
 	 */
-	public function getExcludedUsers(): array {
-		$db = $this->databaseFactory->createSharedUserDatabaseConnection();
-		$res = $db->select(
-			[ 'u' => 'user', 'ug' => 'user_groups' ],
-			[ 'user_name' ],
-			[
-				'ug_user IS NULL'
-			],
-			__METHOD__,
-			[],
-			[
-				'ug' => [
-					'LEFT JOIN',
-					[ 'u.user_id=ug.ug_user' ]
-				]
-			]
-		);
-
-		$users = [];
-		foreach ( $res as $row ) {
-			$users[] = $row->user_name;
+	public function getExcludedUsers( InstanceEntity $instance, array $additionalGroups = [] ): array {
+		$allowedGroups = $this->getAllowedGroupsForInstance( $instance, 'reader' );
+		if ( !empty( $additionalGroups ) ) {
+			$allowedGroups = array_merge( $allowedGroups, $additionalGroups );
 		}
-		return array_unique( $users );
+
+		$db = $this->databaseFactory->createSharedUserDatabaseConnection();
+		$allowedUsers = $db->newSelectQueryBuilder()
+			->select( 'u.user_id' )
+			->distinct()
+			->from( 'user', 'u' )
+			->join(
+				'user_groups',
+				'ug',
+				[
+					'ug.ug_user = u.user_id',
+					'ug.ug_group' => $allowedGroups,
+				]
+			)
+			->caller( __METHOD__ )
+			->fetchFieldValues();
+
+		return $db->newSelectQueryBuilder()
+			->select( 'user_name' )
+			->from( 'user' )
+			->where( [ 'user_id NOT IN (' . $db->makeList( $allowedUsers ) . ')' ] )
+			->caller( __METHOD__ )
+			->fetchFieldValues();
 	}
 
 	/**
@@ -171,32 +171,6 @@ class GroupAccessStore implements IAccessStore {
 	}
 
 	/**
-	 * @param string $role
-	 * @param InstanceEntity|null $forInstance
-	 * @return array
-	 */
-	public function getExcludedGroupsForRole( string $role, ?InstanceEntity $forInstance ) {
-		$possibleGroups = $this->groupCreator->getInstanceGroups( [ $role, ...$this->getHigherRoles( $role ) ], $forInstance );
-		$allowedGroups = array_merge(
-			array_keys( $possibleGroups[$forInstance->getPath()] ?? [] ),
-			array_keys( $possibleGroups['_global'] )
-		);
-		$db = $this->databaseFactory->createSharedUserDatabaseConnection();
-		$excludedRes = $db->newSelectQueryBuilder()
-			->select( 'ug_group' )
-			->from( 'user_groups' )
-			->where( [ 'ug_group NOT IN (' . $db->makeList( $allowedGroups ) . ')' ] )
-			->caller( __METHOD__ )
-			->fetchResultSet();
-
-		$excluded = [];
-		foreach ( $excludedRes as $row ) {
-			$excluded[] = $row->ug_group;
-		}
-		return $excluded;
-	}
-
-	/**
 	 * @param UserIdentity $user
 	 * @return array
 	 */
@@ -246,6 +220,24 @@ class GroupAccessStore implements IAccessStore {
 		return array_map( function ( $role ) use ( $path ) {
 			return $this->groupCreator->getGroupNameForUserRole( $path, $role );
 		}, $this->getHigherRoles( $role ) );
+	}
+
+	/**
+	 * @param InstanceEntity|null $instance
+	 * @param string $role
+	 * @return array
+	 */
+	private function getAllowedGroupsForInstance( ?InstanceEntity $instance, string $role ): array {
+		$groups = $instance ? [
+			$this->groupCreator->getGroupNameForUserRole( $instance->getPath(), $role ),
+			...$this->getHigherGroups( $instance->getPath(), $role ),
+		] : [];
+		$globalGroups = [
+			$this->groupCreator->getGroupNameForUserRole( '_global', $role ),
+			...$this->getHigherGroups( '_global', $role ),
+		];
+		$superAccessGroups = $this->farmConfig->get( 'superAccessGroups' ) ?? [];
+		return array_merge( $groups, $globalGroups, $superAccessGroups );
 	}
 
 }
