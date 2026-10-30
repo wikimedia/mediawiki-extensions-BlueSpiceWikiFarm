@@ -2,11 +2,15 @@
 
 namespace BlueSpice\WikiFarm;
 
+use BlueSpice\WikiFarm\AccessControl\GroupAccessStore;
+use BlueSpice\WikiFarm\AccessControl\GroupRoleQuery;
 use BlueSpice\WikiFarm\Session\SessionCache;
 use MediaWiki\Config\Config;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Languages\Data\Names;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\WikiMap\WikiMap;
+use Wikimedia\LightweightObjectStore\ExpirationAwareness;
 use Wikimedia\Rdbms\DatabaseDomain;
 
 class Setup {
@@ -288,5 +292,114 @@ class Setup {
 		];
 		$GLOBALS['wgCookiePrefix'] = 'wikifarm';
 		$GLOBALS['wgCookiePath'] = '/';
+	}
+
+	/**
+	 * @return void
+	 */
+	public static function filterOutRestrictedGroupsAndUsers(): void {
+		if ( MW_ENTRY_POINT !== 'rest' ) {
+			return;
+		}
+		$path = RequestContext::getMain()->getRequest()->getText( 'title' );
+		$instance = FARMER_CALLED_INSTANCE === 'w' ?
+			new RootInstanceEntity() :
+			FARMER_CALLED_INSTANCE_OBJECT;
+		if (
+			in_array( $path, [
+				'bluespice/farm/v1/access/assignable/users',
+				'bluespice/farm/v1/access/assignable/groups'
+			] )
+		) {
+			// Unrestricted stores
+			return;
+		}
+
+		if (
+			$instance instanceof RootInstanceEntity &&
+			in_array( $path, [
+				'bs-usermanager/v1/user-store',
+				'bs-usermanager/v1/group-store'
+			] )
+		) {
+			// Unrestricted stores
+			return;
+		}
+
+		$ocf = MediaWikiServices::getInstance()->getObjectCacheFactory();
+		$cache = $ocf->getLocalServerInstance();
+		$key = $cache->makeKey(
+			'BlueSpiceGalaxyDistributionConnector', 'filterOutRestrictedGroups', FARMER_CALLED_INSTANCE
+		);
+
+		$data = $cache->getWithSetCallback( $key, ExpirationAwareness::TTL_MINUTE,
+			static function () use ( $instance ) {
+				/** @var GroupAccessStore $service */
+				$accessStore = MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm.AccessControlStore' );
+				if ( !( $accessStore instanceof GroupAccessStore ) ) {
+					return null;
+				}
+				/** @var GroupRoleQuery $groupRoleQuery */
+				$groupRoleQuery = MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm.GroupRoleManager' );
+
+				$roles = array_merge( [ 'reader' ], $accessStore->getHigherRoles( 'reader' ) );
+
+				// Groups that can read this wiki - custom groups - not system wiki_*_* groups
+				$groupsWithRoles = $groupRoleQuery->getGroupsWithRoles( $roles, $instance );
+
+				$utilityFactory = MediaWikiServices::getInstance()->getService( 'MWStakeCommonUtilsFactory' );
+				$all = $utilityFactory->getGroupHelper()->getAvailableGroups( [ 'filter' => [ 'custom' ] ] );
+				$excludedUsers = $accessStore->getExcludedUsers( $instance, $groupsWithRoles );
+
+				return [
+					'excludedGroups' => array_diff( $all, $groupsWithRoles ),
+					'excludedUsers' => $excludedUsers,
+				];
+			}
+		);
+		if ( !is_array( $data ) ) {
+			return;
+		}
+
+		$GLOBALS['mwsgCommonWebAPIsComponentGroupStoreExcludeGroups'] =
+			$GLOBALS['mwsgCommonWebAPIsComponentGroupStoreExcludeGroups'] ?? [];
+		$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeGroups'] =
+			$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeGroups'] ?? [];
+
+		$data['excludedGroups'] = array_diff(
+			$data['excludedGroups'],
+			$GLOBALS['mwsgCommonWebAPIsComponentGroupStoreExcludeGroups']
+		);
+		RequestContext::getMain()->getRequest()->getSession()->set(
+			'defaultExcludedGroups', $GLOBALS['mwsgCommonWebAPIsComponentGroupStoreExcludeGroups']
+		);
+		RequestContext::getMain()->getRequest()->getSession()->set(
+			'defaultExcludedUsers', $GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeUsers']
+		);
+
+		$GLOBALS['wgWikiFarmConfig_instanceRestrictedGroups'] = array_diff(
+			$data['excludedGroups'],
+			$GLOBALS['mwsgCommonWebAPIsComponentGroupStoreExcludeGroups'],
+			$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeGroups']
+		);
+
+		// Filter out any group that cannot read this wiki
+		$GLOBALS['mwsgCommonWebAPIsComponentGroupStoreExcludeGroups'] = array_merge(
+			$GLOBALS['mwsgCommonWebAPIsComponentGroupStoreExcludeGroups'],
+			$data['excludedGroups'],
+			[ 'bureaucrat', 'sysop', 'bot', 'autoconfirmed', 'interface-admin' ]
+		);
+
+		$data['excludedUsers'] = array_diff(
+			$data['excludedUsers'],
+			$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeUsers']
+		);
+
+		$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeUsers'] = array_merge(
+			$GLOBALS['mwsgCommonWebAPIsComponentUserStoreExcludeUsers'],
+			array_values( $data['excludedUsers'] )
+		);
+
+		$GLOBALS['wgWikiFarmConfig_instanceRestrictedUsers'] = array_values( $data['excludedUsers'] );
 	}
 }

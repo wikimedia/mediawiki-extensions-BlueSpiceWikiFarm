@@ -159,7 +159,7 @@ class DefaultConfig extends HashConfig {
 			/**
 			 * List of groups to be given all-access, overriding normal AccessControl group assignments (NEO)
 			 */
-			'superAccessGroups' => [ 'sysop' ],
+			'superAccessGroups' => [],
 
 			/**
 			 * List of groups that cannot read current instance
