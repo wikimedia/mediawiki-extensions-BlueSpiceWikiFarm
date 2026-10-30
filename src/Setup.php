@@ -7,6 +7,7 @@ use BlueSpice\WikiFarm\AccessControl\GroupRoleQuery;
 use BlueSpice\WikiFarm\Session\SessionCache;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Exception\MWException;
 use MediaWiki\Languages\Data\Names;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\WikiMap\WikiMap;
@@ -296,20 +297,22 @@ class Setup {
 
 	/**
 	 * @return void
+	 * @throws MWException
 	 */
 	public static function filterOutRestrictedGroupsAndUsers(): void {
 		if ( MW_ENTRY_POINT !== 'rest' ) {
 			return;
 		}
-		$path = RequestContext::getMain()->getRequest()->getText( 'title' );
+		$path = RequestContext::getMain()->getRequest()->getRequestURL();
+		$restPath = wfScript( 'rest' );
+		// Remove /scriptPath/rest.php from the path
+		$path = substr( $path, strlen( $restPath ) );
 		$instance = FARMER_CALLED_INSTANCE === 'w' ?
 			new RootInstanceEntity() :
 			FARMER_CALLED_INSTANCE_OBJECT;
 		if (
-			in_array( $path, [
-				'bluespice/farm/v1/access/assignable/users',
-				'bluespice/farm/v1/access/assignable/groups'
-			] )
+			str_starts_with( $path, '/bluespice/farm/v1/access/assignable/users' ) ||
+			str_starts_with( $path, '/bluespice/farm/v1/access/assignable/groups' )
 		) {
 			// Unrestricted stores
 			return;
@@ -317,10 +320,10 @@ class Setup {
 
 		if (
 			$instance instanceof RootInstanceEntity &&
-			in_array( $path, [
-				'bs-usermanager/v1/user-store',
-				'bs-usermanager/v1/group-store'
-			] )
+			(
+				str_starts_with( $path, '/bs-usermanager/v1/user-store' ) ||
+				str_starts_with( $path, '/bs-usermanager/v1/group-store' )
+			)
 		) {
 			// Unrestricted stores
 			return;
