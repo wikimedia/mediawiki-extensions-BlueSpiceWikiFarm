@@ -32,7 +32,7 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 	 * @return string|null
 	 * @throws MaintenanceFatalError|Exception
 	 */
-	private function generateAccessToken(): ?string {
+	protected function generateAccessToken(): ?string {
 		$explicitUser = $this->getOption( 'for-user' );
 		if ( $explicitUser ) {
 			$user = $this->getServiceContainer()->getUserFactory()->newFromName( $explicitUser );
@@ -70,7 +70,7 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 		$data = [
 			'action' => 'propose',
 			'name'         => 'ContentTransfer',
-			'version'      => '1.2',
+			'version'      => $this->getConsumerVersion(),
 			'description'  => 'ContentTransfer client',
 			'oauthVersion' => 2,
 			'callbackUrl' => 'https://dummy.com',
@@ -124,11 +124,23 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 	}
 
 	/**
+	 * @return string
+	 */
+	protected function getConsumerVersion(): string {
+		return '1.2';
+	}
+
+	/**
 	 * @return bool
 	 * @throws Exception
 	 * @throws MaintenanceFatalError
 	 */
 	protected function doDBUpdates() {
+		$oauthCentralWiki = $this->getConfig()->get( 'MWOAuthCentralWiki' );
+		if ( $oauthCentralWiki ) {
+			$this->output( "OAuth central wiki is enabled, skipping\n" );
+			return true;
+		}
 		$this->logger = LoggerFactory::getInstance( 'BlueSpiceWikiFarm' );
 		/** @var InstanceStore $store */
 		$store = $this->getServiceContainer()->getService( 'BlueSpiceWikiFarm.InstanceStore' );
@@ -144,8 +156,8 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 			return false;
 		}
 		if ( FARMER_IS_ROOT_WIKI_CALL ) {
-			$this->output( 'This script must be run on a farm instance' );
-			return false;
+			$this->output( "This script must be run on a farm instance, skipping\n" );
+			return true;
 		}
 		$instance = $store->getInstanceByPath( FARMER_CALLED_INSTANCE );
 		if ( !$instance ) {

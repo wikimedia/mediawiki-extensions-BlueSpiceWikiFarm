@@ -17,6 +17,7 @@ use BlueSpice\WikiFarm\InstanceStore;
 use BlueSpice\WikiFarm\ManagementDatabaseFactory;
 use BlueSpice\WikiFarm\Util\FavouriteInstanceHelper;
 use BlueSpice\WikiFarm\Util\InstanceDisplayRecordHelper;
+use BlueSpice\WikiFarm\Util\OAuthTokenProvider;
 use BlueSpice\WikiFarm\Util\SystemInstancesHelper;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
@@ -107,7 +108,8 @@ return [
 	'BlueSpiceWikiFarm.ForeignRequestExecution' => static function ( MediaWikiServices $services ) {
 		return new ForeignRequestExecution(
 			$services->getHttpRequestFactory(),
-			$services->getService( 'BlueSpiceWikiFarm._Config' )
+			$services->getService( 'BlueSpiceWikiFarm._Config' ),
+			$services->getService( 'BlueSpiceWikiFarm._OAuthTokentProvider' )
 		);
 	},
 	'BlueSpiceWikiFarm.WikiMap' => static function ( MediaWikiServices $services ) {
@@ -141,6 +143,12 @@ return [
 	'BlueSpiceWikiFarm._SystemInstancesHelper' => static function ( MediaWikiServices $services ) {
 		return new SystemInstancesHelper(
 			$services->getService( 'BlueSpiceWikiFarm._Config' )
+		);
+	},
+	'BlueSpiceWikiFarm._OAuthTokentProvider' => static function ( MediaWikiServices $services ) {
+		return new OAuthTokenProvider(
+			$services->getMainConfig(),
+			$services->getService( 'MWStakeDynamicConfigManager' )
 		);
 	}
 ];
