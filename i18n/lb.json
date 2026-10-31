@@ -99,5 +99,8 @@
 	"wikifarm-instances-menu-search-no-results": "Keng Wikie fonnt",
 	"wikifarm-instances-menu-button-aria-label": "Wikien: $1",
 	"wikifarm-wiki-back-link-title": "Zeréck op $1",
-	"wikifarm-wiki-back-link-aria-label": "Zeréck op $1"
+	"wikifarm-wiki-back-link-aria-label": "Zeréck op $1",
+	"wikifarm-mainpage-content-galaxy-link-wikipages": "Wiki-Säiten",
+	"wikifarm-mainpage-content-galaxy-recentchanges-title": "Rezent Ännerungen",
+	"wikifarm-gettingstarted-content-galaxy-wikipage-heading": "Wiki-Säit"
 }
