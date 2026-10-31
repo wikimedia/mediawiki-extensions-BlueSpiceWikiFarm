@@ -33,5 +33,11 @@
 	"wikifarm-search-center-filter-wiki-label": "وکی",
 	"wikifarm-farmmanagement-label": "وکیاں",
 	"wikifarm-instances-grid-column-path-header-label": "راہ",
-	"wikifarm-ui-access-confirm-delete-action-remove": "ہٹاؤ"
+	"wikifarm-ui-access-confirm-delete-action-remove": "ہٹاؤ",
+	"wikifarm-mainpage-content-galaxy-link-wikipages": "وکی ورقے",
+	"wikifarm-mainpage-content-galaxy-link-minutes": "منٹ",
+	"wikifarm-mainpage-content-galaxy-recentchanges-title": "نویاں تبدیلیاں",
+	"wikifarm-gettingstarted-content-galaxy-wikipage-heading": "وکی ورقہ",
+	"wikifarm-gettingstarted-content-galaxy-minutes-heading": "منٹ",
+	"wikifarm-gettingstarted-content-galaxy-process-heading": "پراسس"
 }
