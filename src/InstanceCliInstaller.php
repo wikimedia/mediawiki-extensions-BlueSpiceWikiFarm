@@ -140,7 +140,7 @@ class InstanceCliInstaller extends CliInstaller {
 	}
 
 	/**
-	 * Install task: main page, "Getting started" help page (if the edition has one) and sidebar.
+	 * Install task: main page, "Getting started" help page (if the product has one) and sidebar.
 	 * Files used by these pages are imported by `ImportDefaultContentFiles` during update.php,
 	 * because the installer does not know the upload directory of the instance.
 	 *
@@ -148,22 +148,16 @@ class InstanceCliInstaller extends CliInstaller {
 	 * @return Status
 	 */
 	public function createMainpage( ITaskContext $context ) {
-		$contentDir = dirname( __DIR__ ) . '/content';
-		$edition = $this->getEdition();
-
-		$mainpagePath = "$contentDir/mainpage/$edition.html";
-		if ( $edition === '' || !file_exists( $mainpagePath ) ) {
-			$mainpagePath = "$contentDir/mainpage/farm.html";
-		}
 		$status = $this->createPage(
 			MediaWikiServices::getInstance()->getTitleFactory()->newMainPage(),
-			$this->getLocalizedContent( $mainpagePath ),
+			$this->getLocalizedContent( ProductContent::getPath( 'mainpage', 'html' ) ),
 			'config-install-mainpage-failed'
 		);
 
-		$helpPath = "$contentDir/gettingstarted/$edition.html";
-		if ( $edition !== '' && file_exists( $helpPath ) ) {
-			$helpTitle = wfMessage( "wikifarm-gettingstarted-content-$edition-title" )
+		$helpPath = ProductContent::getPath( 'gettingstarted', 'html' );
+		if ( $helpPath ) {
+			$product = basename( $helpPath, '.html' );
+			$helpTitle = wfMessage( "wikifarm-gettingstarted-content-$product-title" )
 				->inContentLanguage()->plain();
 			$status->merge( $this->createPage(
 				Title::makeTitleSafe( NS_HELP, $helpTitle ),
@@ -177,23 +171,6 @@ class InstanceCliInstaller extends CliInstaller {
 	}
 
 	/**
-	 * BlueSpice edition from `$IP/BLUESPICE-EDITION`, same source as the
-	 * `BsEdition` class of bluespice/mw-config-overrides
-	 *
-	 * @return string Empty if unknown
-	 */
-	private function getEdition(): string {
-		$path = $GLOBALS['IP'] . '/BLUESPICE-EDITION';
-		if ( !file_exists( $path ) ) {
-			return '';
-		}
-		$lines = explode( "\n", file_get_contents( $path ) );
-		$edition = strtolower( trim( $lines[0] ) );
-
-		return preg_match( '/^[a-z]+$/', $edition ) ? $edition : '';
-	}
-
-	/**
 	 * Sidebar with BlueSpice content
 	 *
 	 * @return Status
@@ -201,7 +178,7 @@ class InstanceCliInstaller extends CliInstaller {
 	protected function createSidebar() {
 		return $this->createPage(
 			Title::makeTitleSafe( NS_MEDIAWIKI, 'Sidebar' ),
-			file_get_contents( dirname( __DIR__ ) . '/content/sidebar/farm.wikitext' ),
+			file_get_contents( ProductContent::getPath( 'sidebar', 'wikitext' ) ),
 			'config-install-sidebar-failed'
 		);
 	}

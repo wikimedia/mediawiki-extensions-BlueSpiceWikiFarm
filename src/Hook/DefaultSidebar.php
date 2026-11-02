@@ -2,6 +2,7 @@
 
 namespace BlueSpice\WikiFarm\Hook;
 
+use BlueSpice\WikiFarm\ProductContent;
 use MediaWiki\Language\Hook\MessagesPreLoadHook;
 use RuntimeException;
 
@@ -13,8 +14,8 @@ class DefaultSidebar implements MessagesPreLoadHook {
 			return;
 		}
 
-		$path = dirname( __DIR__, 2 ) . '/content/sidebar/farm.wikitext';
-		$content = file_get_contents( $path );
+		$path = ProductContent::getPath( 'sidebar', 'wikitext' );
+		$content = $path ? file_get_contents( $path ) : false;
 		if ( $content === false ) {
 			throw new RuntimeException( "Could not read default sidebar: $path" );
 		}
