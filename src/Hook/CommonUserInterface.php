@@ -47,16 +47,19 @@ class CommonUserInterface implements MWStakeCommonUIRegisterSkinSlotComponents {
 	public function onMWStakeCommonUIRegisterSkinSlotComponents( $registry ): void {
 		$context = RequestContext::getMain();
 		$skin = $context->getSkin();
-		$registry->register(
-			'SidebarPrimaryTabPanels',
-			[
-				'000-wiki-context' => [
-					'factory' => function () {
-						return new WikiContext( $this->instanceStore );
-					}
+		if ( is_a( $skin, 'SkinBlueSpiceEclipseSkin', true ) ) {
+			$registry->register(
+				'MainTabPanelBeforeContent',
+				[
+					'000-wiki-context' => [
+						'factory' => function () {
+							return new WikiContext( $this->instanceStore );
+						}
+					]
 				]
-			]
-		);
+			);
+		}
+
 		$registry->register(
 			'NavbarPrimaryCenterItems',
 			[

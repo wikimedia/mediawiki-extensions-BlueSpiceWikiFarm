@@ -4,14 +4,9 @@
 	position: static;
 }
 
-.wikifarm-instances-button-group #farm-back-to-main-btn,
-.wikifarm-instances-button-group #farm-wikis-btn {
-	background-color: transparent;
-}
-
 .wikifarm-instances-button-group #farm-wikis-btn {
 	box-sizing: border-box;
-	width: 170px;
+	max-width: 170px;
 	height: 40px;
 }
 
@@ -27,12 +22,21 @@
 	flex-shrink: 0;
 }
 
+.wikifarm-instances-button-group #farm-back-to-main-btn,
+.wikifarm-instances-button-group #farm-wikis-btn {
+	background-color: transparent;
+}
+
 .wikifarm-instances-button-group #farm-back-to-main-btn:hover,
 .wikifarm-instances-button-group #farm-wikis-btn:hover {
 	background-color: var( --navbar-primary-instances-bg--hover, #fff );
 	color: var( --navbar-primary-instances-fg--hover, #3e5389 );
 	text-decoration: none;
 	height: 40px;
+}
+
+.wikifarm-instances-button-group #farm-wikis-btn.wikifarm-main-wiki:hover {
+	border-radius: var( --icon-border-size );
 }
 
 .wikifarm-instances-button-group #farm-back-to-main-btn {
