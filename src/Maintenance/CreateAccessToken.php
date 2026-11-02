@@ -136,11 +136,6 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 	 * @throws MaintenanceFatalError
 	 */
 	protected function doDBUpdates() {
-		$oauthCentralWiki = $this->getConfig()->get( 'MWOAuthCentralWiki' );
-		if ( $oauthCentralWiki ) {
-			$this->output( "OAuth central wiki is enabled, skipping\n" );
-			return true;
-		}
 		$this->logger = LoggerFactory::getInstance( 'BlueSpiceWikiFarm' );
 		/** @var InstanceStore $store */
 		$store = $this->getServiceContainer()->getService( 'BlueSpiceWikiFarm.InstanceStore' );
@@ -149,6 +144,11 @@ class CreateAccessToken extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 			$this->logger->info( 'CreateAccessToken: OAuth extension is not enabled' );
 			$this->output( 'OAuth extension is not enabled' );
 			return false;
+		}
+		$oauthCentralWiki = $this->getConfig()->get( 'MWOAuthCentralWiki' );
+		if ( $oauthCentralWiki ) {
+			$this->output( "OAuth central wiki is enabled, skipping\n" );
+			return true;
 		}
 		if ( !defined( 'WIKI_FARMING' ) ) {
 			$this->logger->info( 'CreateAccessToken: Wiki farming is not enabled' );
