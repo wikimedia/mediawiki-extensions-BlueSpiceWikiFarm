@@ -62,7 +62,7 @@ class FarmTemplateQueryStore extends TitleQueryStore {
 		}
 		return new Store(
 			$this->lb, $this->titleFactory, $this->language, $this->nsInfo, $this->pageProps,
-			$this->accessStore, $this->instanceStore, $limitTo
+			$this->accessStore, $this->instanceStore, $this->farmConfig, $limitTo
 		);
 	}
 

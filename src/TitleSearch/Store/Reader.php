@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\TitleSearch\Store;
 use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\InstanceStore;
+use MediaWiki\Config\Config;
 use MediaWiki\Language\Language;
 use MediaWiki\Page\PageProps;
 use MediaWiki\Title\NamespaceInfo;
@@ -19,6 +20,9 @@ class Reader extends BaseReader {
 	/** @var InstanceStore */
 	private $instanceStore;
 
+	/** @var Config */
+	private Config $farmConfig;
+
 	/** @var InstanceEntity[]|null */
 	private $limitToInstances;
 
@@ -30,17 +34,19 @@ class Reader extends BaseReader {
 	 * @param PageProps $pageProps
 	 * @param IAccessStore $accessStore
 	 * @param InstanceStore $instanceStore
+	 * @param Config $farmConfig
 	 * @param array|null $limitToInstances
 	 */
 	public function __construct(
 		ILoadBalancer $lb, TitleFactory $titleFactory, Language $language, NamespaceInfo $nsInfo,
-		PageProps $pageProps, IAccessStore $accessStore, InstanceStore $instanceStore,
+		PageProps $pageProps, IAccessStore $accessStore, InstanceStore $instanceStore, Config $farmConfig,
 		?array $limitToInstances = null
 	) {
 		parent::__construct( $lb, $titleFactory, $language, $nsInfo, $pageProps );
 		$this->accessStore = $accessStore;
 		$this->instanceStore = $instanceStore;
 		$this->limitToInstances = $limitToInstances;
+		$this->farmConfig = $farmConfig;
 	}
 
 	/**
@@ -50,7 +56,8 @@ class Reader extends BaseReader {
 	public function makePrimaryDataProvider( $params ) {
 		return new PrimaryDataProvider(
 			$this->lb->getConnection( DB_REPLICA ), $this->getSchema(),
-			$this->language, $this->nsInfo, $this->accessStore, $this->instanceStore, $this->limitToInstances
+			$this->language, $this->nsInfo, $this->accessStore, $this->instanceStore, $this->farmConfig,
+			$this->limitToInstances
 		);
 	}
 }
