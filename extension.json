@@ -415,13 +415,11 @@
 				"wikifarm-access-card-public-desc",
 				"wikifarm-access-card-protected-desc",
 				"wikifarm-access-card-private-desc",
-				"wikifarm-access-field-assignees",
 				"wikifarm-access-field-selected",
 				"wikifarm-access-role-desc-reader",
 				"wikifarm-access-role-desc-editor",
 				"wikifarm-access-role-desc-reviewer",
 				"wikifarm-access-role-desc-admin",
-				"wikifarm-access-field-assignees-placeholder",
 				"wikifarm-access-field-role-placeholder",
 				"wikifarm-ui-access-field-type",
 				"wikifarm-ui-access-field-role",
@@ -451,7 +449,10 @@
 				"wikifarm-ui-access-confirm-delete-action-remove",
 				"cancel",
 				"wikifarm-ui-access-grid-header-group-info-label",
-				"wikifarm-ui-access-action-group-info"
+				"wikifarm-ui-access-action-group-info",
+				"wikifarm-access-roles-heading",
+				"wikifarm-access-field-assignee-group",
+				"wikifarm-access-field-assignee-user"
 			],
 			"dependencies": [
 				"oojs-ui",

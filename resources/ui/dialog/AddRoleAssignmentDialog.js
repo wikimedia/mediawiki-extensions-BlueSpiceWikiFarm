@@ -1,6 +1,7 @@
 ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog = function ( config ) {
 	config = config || {};
 	this.allowGlobal = config.allowGlobalAssignments || false;
+	this.type = config.type || 'group';
 	ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.parent.call( this, config );
 };
 
@@ -28,7 +29,7 @@ ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.initialize = f
 
 	this.userGroupPicker = new ext.bluespiceWikiFarm.ui.widget.AdminUserGroupMultiselectWidget( {
 		$overlay: this.$overlay,
-		placeholder: mw.message( 'wikifarm-access-field-assignees-placeholder' ).text()
+		entityTypes: [ this.type ]
 	} );
 	this.userGroupPicker.connect( this, {
 		change: 'checkValidity'
@@ -69,7 +70,9 @@ ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog.prototype.initialize = f
 
 	this.panel.$element.append(
 		new OO.ui.FieldLayout( this.userGroupPicker, {
-			label: mw.message( 'wikifarm-access-field-assignees' ).text(),
+			// wikifarm-access-field-assignee-group
+			// wikifarm-access-field-assignee-user
+			label: mw.message( 'wikifarm-access-field-assignee-' + this.type ).text(),
 			align: 'top'
 		} ).$element,
 		new OO.ui.FieldLayout( this.rolePicker, {

@@ -288,8 +288,6 @@
 	"wikifarm-access-card-public-desc": "Description text for the public wiki access level card",
 	"wikifarm-access-card-protected-desc": "Description text for the protected wiki access level card. \"Editor\" should be translated as in {{msg-mw|Wikifarm-ui-role-label-editor}}.",
 	"wikifarm-access-card-private-desc": "Description text for the private wiki access level card. \"Reader\" should be translated as in {{msg-mw|Wikifarm-ui-role-label-reader}}. \"Editor\" should be translated as in {{msg-mw|Wikifarm-ui-role-label-editor}}.",
-	"wikifarm-access-field-assignees": "Field label",
-	"wikifarm-access-field-assignees-placeholder": "Placeholder text for the groups/users selection field",
 	"wikifarm-access-field-role-placeholder": "Placeholder text for the role selection dropdown",
 	"wikifarm-access-field-selected": "Field label",
 	"wikifarm-access-role-desc-reader": "Description text for the reader role",
@@ -342,5 +340,8 @@
 	"wikifarm-wiki-back-link-aria-label": "Aria label for back link to a page in other wiki\nParameter:\n* $1 - page name",
 	"wikifarm-ui-access-confirm-delete-action-remove": "Action button label to confirm to remove access assignment",
 	"wikifarm-ui-access-grid-header-group-info-label": "Grid table header for group info column",
-	"wikifarm-ui-access-action-group-info": "Group info button label"
+	"wikifarm-ui-access-action-group-info": "Group info button label",
+	"wikifarm-access-roles-heading": "Heading label for wiki role assignments",
+	"wikifarm-access-field-assignee-group": "Label for input field to select groups",
+	"wikifarm-access-field-assignee-user": "Label for input field to select users"
 }
