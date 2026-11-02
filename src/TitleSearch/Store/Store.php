@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\TitleSearch\Store;
 use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\InstanceStore;
+use MediaWiki\Config\Config;
 use MediaWiki\Language\Language;
 use MediaWiki\Page\PageProps;
 use MediaWiki\Title\NamespaceInfo;
@@ -19,6 +20,9 @@ class Store extends TitleQueryStore {
 	/** @var InstanceStore */
 	private InstanceStore $instanceStore;
 
+	/** @var Config */
+	private Config $farmConfig;
+
 	/** @var InstanceEntity[]|null */
 	private $limitToInstances;
 
@@ -30,16 +34,19 @@ class Store extends TitleQueryStore {
 	 * @param PageProps $pageProps
 	 * @param IAccessStore $accessStore
 	 * @param InstanceStore $instanceStore
+	 * @param Config $farmConfig
 	 * @param array|null $limitToInstances
 	 */
 	public function __construct(
 		ILoadBalancer $lb, TitleFactory $titleFactory, Language $language, NamespaceInfo $nsInfo,
-		PageProps $pageProps, IAccessStore $accessStore, InstanceStore $instanceStore, ?array $limitToInstances = null
+		PageProps $pageProps, IAccessStore $accessStore, InstanceStore $instanceStore,
+		Config $farmConfig, ?array $limitToInstances = null
 	) {
 		parent::__construct( $lb, $titleFactory, $language, $nsInfo, $pageProps );
 		$this->accessStore = $accessStore;
 		$this->instanceStore = $instanceStore;
 		$this->limitToInstances = $limitToInstances;
+		$this->farmConfig = $farmConfig;
 	}
 
 	/**
@@ -48,7 +55,7 @@ class Store extends TitleQueryStore {
 	public function getReader() {
 		return new Reader(
 			$this->lb, $this->titleFactory, $this->language, $this->nsInfo,
-			$this->pageProps, $this->accessStore, $this->instanceStore, $this->limitToInstances
+			$this->pageProps, $this->accessStore, $this->instanceStore, $this->farmConfig, $this->limitToInstances
 		);
 	}
 }

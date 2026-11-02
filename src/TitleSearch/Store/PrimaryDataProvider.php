@@ -6,6 +6,8 @@ use BlueSpice\WikiFarm\AccessControl\IAccessStore;
 use BlueSpice\WikiFarm\AccessControl\NullAccessStore;
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\InstanceStore;
+use BlueSpice\WikiFarm\RootInstanceEntity;
+use MediaWiki\Config\Config;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Language\Language;
 use MediaWiki\Title\NamespaceInfo;
@@ -22,6 +24,9 @@ class PrimaryDataProvider extends Base {
 	/** @var InstanceStore */
 	private InstanceStore $instanceStore;
 
+	/** @var Config */
+	private Config $farmConfig;
+
 	/** @var InstanceEntity[]|null */
 	private $limitToInstances;
 
@@ -35,16 +40,18 @@ class PrimaryDataProvider extends Base {
 	 * @param NamespaceInfo $nsInfo
 	 * @param IAccessStore $accessStore
 	 * @param InstanceStore $instanceStore
+	 * @param Config $farmConfig
 	 * @param array|null $limitToInstances
 	 */
 	public function __construct(
 		IDatabase $db, Schema $schema, Language $language, NamespaceInfo $nsInfo,
-		IAccessStore $accessStore, InstanceStore $instanceStore, ?array $limitToInstances = null
+		IAccessStore $accessStore, InstanceStore $instanceStore, Config $farmConfig, ?array $limitToInstances = null
 	) {
 		parent::__construct( $db, $schema, $language, $nsInfo );
 		$this->accessStore = $accessStore;
 		$this->limitToInstances = $limitToInstances;
 		$this->instanceStore = $instanceStore;
+		$this->farmConfig = $farmConfig;
 	}
 
 	protected function appendRowToData( \stdClass $row ) {
@@ -87,8 +94,12 @@ class PrimaryDataProvider extends Base {
 			if ( !$instance ) {
 				continue;
 			}
-			$res[] = $instance->getWikiId();
-			$this->instanceMap[$instance->getWikiId()] = $instance;
+			$wikiId = $instance->getWikiId();
+			if ( $instance instanceof RootInstanceEntity ) {
+				$wikiId = $this->farmConfig->get( 'rootInstanceWikiId' );
+			}
+			$res[] = $wikiId;
+			$this->instanceMap[$wikiId] = $instance;
 		}
 		return $res;
 	}
