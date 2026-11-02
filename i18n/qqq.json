@@ -279,8 +279,6 @@
 	"wikifarm-access-card-public-desc": "Description text for the public wiki access level card",
 	"wikifarm-access-card-protected-desc": "Description text for the protected wiki access level card. \"Editor\" should be translated as in {{msg-mw|Wikifarm-ui-role-label-editor}}.",
 	"wikifarm-access-card-private-desc": "Description text for the private wiki access level card. \"Reader\" should be translated as in {{msg-mw|Wikifarm-ui-role-label-reader}}. \"Editor\" should be translated as in {{msg-mw|Wikifarm-ui-role-label-editor}}.",
-	"wikifarm-access-field-assignees": "Field label",
-	"wikifarm-access-field-assignees-placeholder": "Placeholder text for the groups/users selection field",
 	"wikifarm-access-field-role-placeholder": "Placeholder text for the role selection dropdown",
 	"wikifarm-access-field-selected": "Field label",
 	"wikifarm-access-role-desc-reader": "Description text for the reader role",
@@ -342,5 +340,8 @@
 	"wikifarm-creation-failure-heading-label": "Heading for the creation failure screen. $1 is the wiki name.",
 	"wikifarm-maintenance-creation-heading-label": "Heading for the wiki creation progress screen. $1 is the wiki name.",
 	"wikifarm-instance-not-found-heading": "Heading shown when a wiki or page is not available.",
-	"wikifarm-instance-not-found-desc-label": "Message explaining that the page does not exist or the user lacks access."
+	"wikifarm-instance-not-found-desc-label": "Message explaining that the page does not exist or the user lacks access.",
+	"wikifarm-access-roles-heading": "Heading label for wiki role assignments",
+	"wikifarm-access-field-assignee-group": "Label for input field to select groups",
+	"wikifarm-access-field-assignee-user": "Label for input field to select users"
 }

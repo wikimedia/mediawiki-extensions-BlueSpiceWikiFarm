@@ -274,5 +274,8 @@
 	"wikifarm-creation-failure-heading-label": "Das Erstellen des Wikis \"$1\" ist fehlgeschlagen.",
 	"wikifarm-maintenance-creation-heading-label": "Wiki \"$1\" erstellen",
 	"wikifarm-instance-not-found-heading": "Diese Seite ist nicht verfügbar",
-	"wikifarm-instance-not-found-desc-label": "Diese Seite existiert nicht oder {{#FORMAL:du hast|Sie haben}} keinen Zugriff darauf."
+	"wikifarm-instance-not-found-desc-label": "Diese Seite existiert nicht oder {{#FORMAL:du hast|Sie haben}} keinen Zugriff darauf.",
+	"wikifarm-access-roles-heading": "Rollen von Gruppen und einzelnen Benutzern in diesem Wiki verwalten.",
+	"wikifarm-access-field-assignee-group": "Gruppen",
+	"wikifarm-access-field-assignee-user": "Benutzer"
 }

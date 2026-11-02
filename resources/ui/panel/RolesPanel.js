@@ -14,19 +14,8 @@ ext.bluespiceWikiFarm.ui.RolesPanel = function ( cfg ) {
 OO.inheritClass( ext.bluespiceWikiFarm.ui.RolesPanel, OO.ui.PanelLayout );
 
 ext.bluespiceWikiFarm.ui.RolesPanel.prototype.build = function () {
-	// Add role assignment button in toolbar
-	this.addButton = new OO.ui.ButtonWidget( {
-		label: mw.msg( 'wikifarm-access-add-role-assignment' ),
-		icon: 'add',
-		flags: [ 'progressive' ],
-		framed: false
-	} );
-	this.addButton.connect( this, { click: 'onAddRoleAssignment' } );
-
-	this.$toolbar = new OO.ui.HorizontalLayout( {
-		classes: [ 'bs-access-roles-toolbar' ],
-		items: [ this.addButton ]
-	} );
+	this.$heading = $( '<p>' )
+		.text( mw.msg( 'wikifarm-access-roles-heading' ) );
 
 	// Create tabs
 	this.tabLayout = new OO.ui.IndexLayout( {
@@ -75,19 +64,11 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.build = function () {
 		reload: 'updateUserNumberBadge'
 	} );
 
-	// Build group grid
-	this.groupGrid = this.buildGrid( this.groupStore, 'group' );
-	this.labelSearchInput( this.groupGrid, mw.msg( 'wikifarm-access-filter-groups' ) );
-	this.groupsTab.$element.append( this.groupGrid.$element );
-
-	// Build user grid
-	this.userGrid = this.buildGrid( this.userStore, 'user' );
-	this.labelSearchInput( this.userGrid, mw.msg( 'wikifarm-access-filter-users' ) );
-	this.usersTab.$element.append( this.userGrid.$element );
-
+	this.buildGroupTab();
+	this.buildUserTab();
 	this.tabLayout.addTabPanels( [ this.groupsTab, this.usersTab ] );
 
-	this.$element.append( this.$toolbar.$element, this.tabLayout.$element );
+	this.$element.append( this.$heading, this.tabLayout.$element );
 };
 
 /**
@@ -101,6 +82,55 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.labelSearchInput = function ( grid
 	const input = grid.externalFilter.input;
 	input.$input.attr( 'aria-label', ariaLabel );
 	input.$indicator.attr( 'title', OO.ui.msg( 'ooui-item-remove' ) );
+};
+
+ext.bluespiceWikiFarm.ui.RolesPanel.prototype.buildGroupTab = function () {
+	this.addGroupButton = new OO.ui.ButtonWidget( {
+		label: mw.msg( 'wikifarm-access-add-role-assignment' ),
+		icon: 'add',
+		flags: [ 'progressive' ],
+		framed: false
+	} );
+	this.addGroupButton.connect( this, {
+		click: () => {
+			this.onAddRoleAssignment( 'group' );
+		}
+	} );
+
+	this.$groupToolbar = new OO.ui.HorizontalLayout( {
+		classes: [ 'bs-access-roles-toolbar' ],
+		items: [ this.addGroupButton ]
+	} );
+	this.groupsTab.$element.append( this.$groupToolbar.$element );
+
+	this.groupGrid = this.buildGrid( this.groupStore, 'group' );
+	this.labelSearchInput( this.groupGrid, mw.msg( 'wikifarm-access-filter-groups' ) );
+	this.groupsTab.$element.append( this.groupGrid.$element );
+};
+
+ext.bluespiceWikiFarm.ui.RolesPanel.prototype.buildUserTab = function () {
+	this.addUserRoleButton = new OO.ui.ButtonWidget( {
+		label: mw.msg( 'wikifarm-access-add-role-assignment' ),
+		icon: 'add',
+		flags: [ 'progressive' ],
+		framed: false
+	} );
+	this.addUserRoleButton.connect( this, {
+		click: () => {
+			this.onAddRoleAssignment( 'user' );
+		}
+	} );
+
+	this.$userToolbar = new OO.ui.HorizontalLayout( {
+		classes: [ 'bs-access-roles-toolbar' ],
+		items: [ this.addUserRoleButton ]
+	} );
+	this.usersTab.$element.append( this.$userToolbar.$element );
+
+	// Build user grid
+	this.userGrid = this.buildGrid( this.userStore, 'user' );
+	this.labelSearchInput( this.userGrid, mw.msg( 'wikifarm-access-filter-users' ) );
+	this.usersTab.$element.append( this.userGrid.$element );
 };
 
 ext.bluespiceWikiFarm.ui.RolesPanel.prototype.updateGroupNumberBadge = function () {
@@ -246,7 +276,8 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.onGridAction = function ( action, 
 		this.openDialog(
 			new ext.bluespiceWikiFarm.ui.dialog.EditAccessAssignmentDialog( {
 				allowGlobalAssignments: this.wikiFarmIsRoot,
-				entity: row
+				entity: row,
+				type: row.entity_type
 			} ),
 			( data ) => {
 				if ( data.action === 'submit' ) {
@@ -295,10 +326,11 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.onGridAction = function ( action, 
 	}
 };
 
-ext.bluespiceWikiFarm.ui.RolesPanel.prototype.onAddRoleAssignment = function () {
+ext.bluespiceWikiFarm.ui.RolesPanel.prototype.onAddRoleAssignment = function ( type ) {
 	this.openDialog(
 		new ext.bluespiceWikiFarm.ui.dialog.AddRoleAssignmentDialog( {
-			allowGlobalAssignments: this.wikiFarmIsRoot
+			allowGlobalAssignments: this.wikiFarmIsRoot,
+			type: type
 		} ),
 		( data ) => {
 			if ( data.action === 'submit' ) {

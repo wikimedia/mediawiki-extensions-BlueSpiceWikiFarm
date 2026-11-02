@@ -276,8 +276,6 @@
 	"wikifarm-access-card-public-desc": "Everyone can view and edit the content - including anonymous users.",
 	"wikifarm-access-card-protected-desc": "Everyone, including anonymous users, can view this wiki. Editing is only available to users or groups with at least the role <i>editor</i>.",
 	"wikifarm-access-card-private-desc": "Users with at least the role <i>reader</i> can view this wiki. Editing is only available to users or groups with at least the role <i>editor</i>.",
-	"wikifarm-access-field-assignees": "Groups / Users",
-	"wikifarm-access-field-assignees-placeholder": "Select groups or users...",
 	"wikifarm-access-field-role-placeholder": "Select role...",
 	"wikifarm-access-field-selected": "Selected",
 	"wikifarm-access-role-desc-reader": "Can view pages in this wiki",
@@ -339,5 +337,8 @@
 	"wikifarm-creation-failure-heading-label": "Failed to create wiki \"$1\"",
 	"wikifarm-maintenance-creation-heading-label": "Creating wiki \"$1\"",
 	"wikifarm-instance-not-found-heading": "This page is not available",
-	"wikifarm-instance-not-found-desc-label": "The page does not exist, or you do not have access to it."
+	"wikifarm-instance-not-found-desc-label": "The page does not exist, or you do not have access to it.",
+	"wikifarm-access-roles-heading": "Manage the roles of groups and individual users in this wiki.",
+	"wikifarm-access-field-assignee-group": "Groups",
+	"wikifarm-access-field-assignee-user": "Users"
 }
