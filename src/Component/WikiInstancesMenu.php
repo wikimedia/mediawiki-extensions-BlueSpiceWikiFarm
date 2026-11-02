@@ -64,7 +64,11 @@ class WikiInstancesMenu extends SimpleDropdownButton implements IRestrictedCompo
 	 * @return array
 	 */
 	public function getButtonClasses(): array {
-		return [ 'ico-btn', 'wikifarm-instances-btn' ];
+		$classes = [ 'ico-btn', 'wikifarm-instances-btn' ];
+		if ( $this->isRootWiki() ) {
+			$classes[] = 'wikifarm-main-wiki';
+		}
+		return $classes;
 	}
 
 	/**
@@ -153,7 +157,7 @@ class WikiInstancesMenu extends SimpleDropdownButton implements IRestrictedCompo
 	 */
 	private function buildInstanceLabelHtml( string $color ): string {
 		$pathPrefix = $this->instance->getPath();
-		if ( $this->instance instanceof RootInstanceEntity ) {
+		if ( $this->isRootWiki() ) {
 			return Html::element( 'span', [
 				'class' => 'bi-bs-main-wiki',
 				'style' => "color: $color;"
@@ -164,6 +168,13 @@ class WikiInstancesMenu extends SimpleDropdownButton implements IRestrictedCompo
 			'style' => "color: $color;",
 			'aria-hidden' => 'true'
 		], $pathPrefix );
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function isRootWiki(): bool {
+		return $this->instance instanceof RootInstanceEntity;
 	}
 
 }
