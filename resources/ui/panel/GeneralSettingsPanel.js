@@ -93,18 +93,16 @@ ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.build = function () {
 		this.$cardsContainer.append( $card );
 	}
 
-	this.saveButton = new OO.ui.ButtonWidget( {
-		label: mw.msg( 'wikifarm-button-action-label-save' ),
-		flags: [ 'primary', 'progressive' ],
-		disabled: true
+	this.toolbar = new OOJSPlus.ui.toolbar.ManagerToolbar( {
+		saveable: true,
+		sticky: false
 	} );
-	this.saveButton.connect( this, { click: 'onSave' } );
+	this.toolbar.$element.addClass( 'bs-access-management-toolbar' );
+	this.toolbar.setup();
+	this.toolbar.initialize();
+	this.toolbar.connect( this, { save: 'onSave' } );
+	this.saveButton = this.toolbar.getTool( 'save' );
 	this.selectLevel( this.accessLevel );
-
-	this.toolbar = new OO.ui.HorizontalLayout( {
-		classes: [ 'bs-access-management-toolbar' ],
-		items: [ this.saveButton ]
-	} );
 
 	this.$element.append( this.toolbar.$element, this.$heading, this.$cardsContainer );
 };
