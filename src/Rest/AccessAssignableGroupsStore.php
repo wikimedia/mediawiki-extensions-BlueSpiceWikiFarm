@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\Rest;
 
 use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Exception\PermissionsError;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Permissions\PermissionManager;
 use MWStake\MediaWiki\Component\CommonWebAPIs\Rest\GroupStore;
@@ -29,7 +30,7 @@ class AccessAssignableGroupsStore extends GroupStore {
 
 	protected function getStore(): IStore {
 		if ( !$this->permissionManager->userHasRight( RequestContext::getMain()->getUser(), 'userrights' ) ) {
-			throw new \PermissionsError( 'userrights' );
+			throw new PermissionsError( 'userrights' );
 		}
 		return parent::getStore();
 	}
