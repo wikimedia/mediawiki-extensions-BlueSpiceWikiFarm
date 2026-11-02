@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\Rest;
 
 use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Exception\PermissionsError;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Permissions\PermissionManager;
@@ -41,7 +42,7 @@ class AccessAssignableUsersStore extends UserQueryStore {
 
 	protected function getResult( IStore $store, ReaderParams $readerParams ): ResultSet {
 		if ( !$this->permissionManager->userHasRight( RequestContext::getMain()->getUser(), 'userrights' ) ) {
-			throw new \PermissionsError( 'userrights' );
+			throw new PermissionsError( 'userrights' );
 		}
 		return parent::getResult( $store, $readerParams );
 	}
