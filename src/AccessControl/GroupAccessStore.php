@@ -104,12 +104,16 @@ class GroupAccessStore implements IAccessStore {
 			->caller( __METHOD__ )
 			->fetchFieldValues();
 
-		return $db->newSelectQueryBuilder()
+		$query = $db->newSelectQueryBuilder()
 			->select( 'user_name' )
 			->from( 'user' )
-			->where( [ 'user_id NOT IN (' . $db->makeList( $allowedUsers ) . ')' ] )
-			->caller( __METHOD__ )
-			->fetchFieldValues();
+			->caller( __METHOD__ );
+
+		if ( !empty( $allowedUsers ) ) {
+			$query->where( [ 'user_id NOT IN (' . $db->makeList( $allowedUsers ) . ')' ] );
+		}
+
+		return $query->fetchFieldValues();
 	}
 
 	/**
