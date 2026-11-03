@@ -11,7 +11,9 @@ ext.bluespiceWikiFarm.ui.widget.InstanceSectionWidget = function ( cfg ) {
 
 	this.$element.attr( 'id', 'farm-wikis-' + this.sectionId );
 	this.$element.addClass( 'card card-mn' );
-	this.buildHeader();
+	if ( this.title.trim() ) {
+		this.buildHeader();
+	}
 	this.buildContent();
 };
 
@@ -31,7 +33,9 @@ ext.bluespiceWikiFarm.ui.widget.InstanceSectionWidget.prototype.buildContent = f
 		return;
 	}
 	this.$content = $( '<ul>' ).addClass( 'farm-wikis-elements list-group menu-card-body menu-list' );
-	this.$content.attr( 'aria-labelledby', 'farm-wikis-' + this.sectionId + '-head' );
+	if ( this.title.trim() ) {
+		this.$content.attr( 'aria-labelledby', 'farm-wikis-' + this.sectionId + '-head' );
+	}
 	for ( const i in this.elements ) {
 		const element = this.elements[ i ];
 		const elementWidget = new ext.bluespiceWikiFarm.ui.widget.InstanceWidget( {
