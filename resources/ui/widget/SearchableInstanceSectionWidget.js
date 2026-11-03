@@ -12,26 +12,34 @@ OO.inheritClass(
 );
 
 ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget.prototype.buildSearch = function () {
+	this.searchRequestId = 0;
+	this.$searchStatus = $( '<div>' )
+		.attr( { role: 'status', 'aria-live': 'polite', 'aria-atomic': 'true' } )
+		.addClass( 'wikifarm-instances-search-status' );
 	this.searchInput = new OO.ui.SearchInputWidget( {
 		placeholder: mw.msg( 'wikifarm-instances-search-placeholder' ),
 		icon: 'search',
 		classes: [ 'farm-wikis-section-search' ]
 	} );
 
-	this.searchInput.on(
-		'change',
-		OO.ui.debounce( this.onSearchChange.bind( this ), 200 )
-	);
+	this.debouncedSearch = OO.ui.debounce( this.onSearchChange.bind( this ), 200 );
+	this.searchInput.on( 'change', ( value ) => {
+		this.searchRequestId++;
+		this.$searchStatus.empty();
+		this.debouncedSearch( value );
+	} );
 
 	this.$header.after( new OO.ui.FieldLayout( this.searchInput,
 		{
 			label: mw.msg( 'wikifarm-instances-menu-search-label' ),
 			invisibleLabel: true
 		} ).$element );
+	this.$element.append( this.$searchStatus );
 };
 
 ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget.prototype.onSearchChange = function ( value ) {
 	const query = value.toLowerCase().trim();
+	const requestId = this.searchRequestId;
 
 	if ( this.$searchResultSection ) {
 		this.$searchResultSection.remove();
@@ -52,10 +60,16 @@ ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget.prototype.onSear
 		limit: 5,
 		query: query
 	} ).done( ( result ) => {
+		if ( requestId !== this.searchRequestId ) {
+			return;
+		}
 		$( this.$content ).hide();
 		if ( this.$searchResultSection ) {
 			this.$searchResultSection.remove();
 		}
+		this.$searchStatus.text(
+			mw.message( 'wikifarm-instances-menu-search-result-count', result.total ).text()
+		);
 		if ( result.results.length === 0 ) {
 			const labelWidget = new OO.ui.LabelWidget( {
 				label: mw.msg( 'wikifarm-instances-menu-search-no-results' ),
@@ -78,6 +92,11 @@ ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget.prototype.onSear
 		if ( result.total >= 5 ) {
 			this.showAllResultsLabel( query, result.total );
 		}
+	} ).fail( () => {
+		if ( requestId !== this.searchRequestId ) {
+			return;
+		}
+		mw.notify( mw.msg( 'wikifarm-instances-menu-search-error' ), { type: 'error' } );
 	} );
 };
 
@@ -102,6 +121,9 @@ ext.bluespiceWikiFarm.ui.widget.SearchableInstanceSectionWidget.prototype.showAl
 		this.allResultsLink = new OOJSPlus.ui.widget.LinkWidget( config );
 	} else {
 		this.allResultsLink.$link.attr( 'href', url );
+		this.allResultsLink.$link.find( 'span' ).text(
+			mw.message( 'wikifarm-instances-menu-search-more-results-label', numberOfResults ).text()
+		);
 	}
 
 	this.$element.append( this.allResultsLink.$element );

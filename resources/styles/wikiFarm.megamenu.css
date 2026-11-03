@@ -96,12 +96,19 @@
 	display: flex;
 }
 
-#farm-wikis-other .oo-ui-layout.oo-ui-fieldLayout {
-	margin-top: 0;
+#farm-wikis-other .farm-wikis-elements {
+	margin-top: 0.5rem;
+}
+
+#farm-wikis-other .oojsplus-ui-widget-linkwidget {
+	margin-top: 0.5rem;
+	text-align: center;
+	width: 100%;
 }
 
 #farm-wikis-results {
 	margin-top: 0;
+	padding: 0;
 	min-height: auto;
 }
 
@@ -185,7 +192,20 @@
 
 /* Search input inside SearchableInstanceSectionWidget */
 .farm-wikis-section-search {
-	margin: 8px 0 4px;
+	margin: 4px 4px;
+	max-width: 200px;
+}
+
+.wikifarm-instances-search-status {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip-path: inset( 50% );
+	white-space: nowrap;
+	border: 0;
 }
 
 .wikifarm-instances-search-no-results {

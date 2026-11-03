@@ -606,6 +606,8 @@
 				"wikifarm-instances-menu-section-other",
 				"wikifarm-instances-menu-link-wikis-label",
 				"wikifarm-instances-menu-search-more-results-label",
+				"wikifarm-instances-menu-search-result-count",
+				"wikifarm-instances-menu-search-error",
 				"wikifarm-instances-menu-search-no-results"
 			],
 			"dependencies": [
