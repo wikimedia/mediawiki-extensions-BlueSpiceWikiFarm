@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\Util;
 
 use BlueSpice\WikiFarm\Data\InstanceDisplayList\InstanceDisplayRecord;
 use BlueSpice\WikiFarm\InstanceEntity;
+use BlueSpice\WikiFarm\RootInstanceEntity;
 use BlueSpice\WikiFarm\SystemInstanceEntity;
 use MediaWiki\Config\Config;
 use MediaWiki\Message\Message;
@@ -56,23 +57,25 @@ class InstanceDisplayRecordHelper {
 				(bool)( $instance->getMetadata()['instanceColor']['lightText'] ?? false ),
 			InstanceDisplayRecord::FAVOURITE => $isFavourite,
 			InstanceDisplayRecord::META_GROUP => $instance->getMetadata()['group'] ?? '',
-			InstanceDisplayRecord::IS_SYSTEM => $instance instanceof SystemInstanceEntity,
+			InstanceDisplayRecord::IS_SYSTEM =>
+				$instance instanceof SystemInstanceEntity || $instance instanceof RootInstanceEntity,
 			InstanceDisplayRecord::WIKI_ID => $instance->getWikiId(),
 		] );
 	}
 
 	/**
 	 * Same label the instance node in the breadcrumbs shows
-	 * (see SharedInstancesRootNode). The root instance has no such node.
+	 * (see SharedInstancesRootNode). The root instance has no such node,
+	 * so it is labeled with its display name, like the shared resources instance.
 	 *
 	 * @param InstanceEntity $instance
 	 * @return string
 	 */
 	private function getPathLabel( InstanceEntity $instance ): string {
-		$path = $instance->getPath();
-		if ( $path === 'w' ) {
-			return '';
+		if ( $instance instanceof RootInstanceEntity ) {
+			return $instance->getDisplayName();
 		}
+		$path = $instance->getPath();
 		if ( $path === $this->farmConfig->get( 'sharedResourcesWikiPath' ) ) {
 			return Message::newFromKey( 'wikifarm-shared-instance-name' )->text();
 		}
