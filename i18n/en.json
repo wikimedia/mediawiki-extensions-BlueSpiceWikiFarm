@@ -391,5 +391,15 @@
 	"wikifarm-gettingstarted-content-galaxy-sso-heading": "Single sign-on assignment",
 	"wikifarm-gettingstarted-content-galaxy-sso-body": "If your Galaxy is already connected to an authentication provider so that you don't have to create users directly in your main wiki, you still need to assign them their roles in each wiki (unless this is handled by a script). To do so, follow the steps under \"Manage access\" in the previous section.",
 	"wikifarm-ui-access-grid-header-group-info-label": "Group info",
-	"wikifarm-ui-access-action-group-info": "Show group info"
+	"wikifarm-ui-access-action-group-info": "Show group info",
+	"wikifarm-navigation-aria-label": "Wiki navigation",
+	"wikifarm-non-existing-title": "This wiki does not exist.",
+	"wikifarm-non-existing-label": "There is no wiki with path \"$1\".",
+	"wikifarm-non-existing-create-button-label": "Create wiki",
+	"wikifarm-instance-suspended-heading": "The wiki \"$1\" is deactivated.",
+	"wikifarm-instance-suspended-label": "Its content cannot be accessed.",
+	"wikifarm-creation-failure-heading-label": "Failed to create wiki \"$1\"",
+	"wikifarm-maintenance-creation-heading-label": "Creating wiki \"$1\"",
+	"wikifarm-instance-not-found-heading": "This page is not available",
+	"wikifarm-instance-not-found-desc-label": "The page does not exist, or you do not have access to it."
 }
