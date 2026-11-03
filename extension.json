@@ -872,7 +872,8 @@
 				"NamespaceInfo",
 				"PageProps",
 				"BlueSpiceWikiFarm.AccessControlStore",
-				"BlueSpiceWikiFarm.InstanceStore"
+				"BlueSpiceWikiFarm.InstanceStore",
+				"BlueSpiceWikiFarm._Config"
 			]
 		},
 		{
