@@ -61,9 +61,7 @@
 	"wikifarm-create-instance-title": "创建新的wiki",
 	"wikifarm-creation-desc": "安装正在进行中。<br><br>请等待所有后续步骤完成。<br>一旦完成后，您会被重定向到新的wiki。",
 	"wikifarm-creation-failure-desc": "创建此wiki失败。请联系您的管理员。",
-	"wikifarm-creation-failure-main-label": "创建wiki失败",
 	"wikifarm-creation-failure-process": "进程ID：$1",
-	"wikifarm-creation-progress-main-label": "创建新的wiki",
 	"wikifarm-edit-instance": "编辑wiki",
 	"wikifarm-error-createinstancevault-target-exists": "指定路径的wiki目录已存在",
 	"wikifarm-error-failed-to-start-process": "无法启动程序",
@@ -92,13 +90,10 @@
 	"wikifarm-instance-suspended-notice": "此wiki目前被暂停",
 	"wikifarm-instance-title": "网站名称",
 	"wikifarm-lang-code": "语言",
-	"wikifarm-maintenance-creation-title": "创建wiki",
 	"wikifarm-maintenance-generic": "此wiki目前处于维护模式。请稍候再试。",
 	"wikifarm-maintenance-title": "Wiki处于维护模式",
 	"wikifarm-management-not-available-text": "农场管理只能从[[w:Special:FarmManagement|root wiki]]访问",
 	"wikifarm-management-not-available-title": "农场管理不可用",
-	"wikifarm-non-existing-create-button": "立即创建",
-	"wikifarm-non-existing": "此wiki不存在。",
 	"wikifarm-remove-instance": "移除wiki",
 	"wikifarm-remove-instructions": "请输入其路径来确认您要删除此wiki：",
 	"wikifarm-resume-instance": "恢复wiki",
@@ -158,5 +153,6 @@
 	"wikifarm-ui-search-instance-filter-local": "此wiki",
 	"wikifarm-ui-search-instance-filter-all": "所有可用的wiki",
 	"wikifarm-ui-search-instance-filter-hint": "…或选择此wiki之外的wiki进行搜索",
-	"wikifarm-ui-search-instance-filter-search": "搜索wiki"
+	"wikifarm-ui-search-instance-filter-search": "搜索wiki",
+	"wikifarm-non-existing-title": "此wiki不存在。"
 }

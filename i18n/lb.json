@@ -34,9 +34,7 @@
 	"wikifarm-create-instance": "Wiki uleeën",
 	"wikifarm-create-instance-title": "Nei Wiki uleeën",
 	"wikifarm-creation-failure-desc": "Et huet net geklappt fir dës Wiki unzeleeën. Kontaktéiert wgl. Ären Administrateur.",
-	"wikifarm-creation-failure-main-label": "D'Wiki konnt net ugeluecht ginn",
 	"wikifarm-creation-failure-process": "Prozess-ID: $1",
-	"wikifarm-creation-progress-main-label": "Nei Wiki gëtt ugeluecht",
 	"wikifarm-edit-instance": "Wiki änneren",
 	"wikifarm-error-failed-to-start-process": "Prozess konnt net gestart ginn",
 	"wikifarm-error-generic": "Et ass e Feeler geschitt, kontaktéiert wgl. Ären Administrateur",
@@ -50,8 +48,6 @@
 	"wikifarm-instance-not-found": "Wiki net fonnt",
 	"wikifarm-instance-path": "Pad",
 	"wikifarm-lang-code": "Sprooch",
-	"wikifarm-maintenance-creation-title": "Wiki gëtt ugeluecht",
-	"wikifarm-non-existing": "Dës Wiki gëtt et net.",
 	"wikifarm-template-blank": "Eidel Wiki",
 	"wikifarm-template-blank-help": "Eidel Wiki ouni Inhalt",
 	"wikifarm-template-title": "Wielt eng Schabloun fir déi nei Wiki",
@@ -71,6 +67,7 @@
 	"wikifarm-ui-access-wiki-type-private": "Privat",
 	"wikifarm-ui-access-wiki-type-public-help": "Jidderee kann den Inhalt <b>kucken an änneren</b> – och anonym Benotzer",
 	"wikifarm-action-copytemplate-description": "Schabloun importéieren",
+	"wikifarm-navigation-aria-label": "Wiki-Navigatioun",
 	"wikifarm-instances-menu-button-title": "Lëscht mat alle Wikien",
 	"wikifarm-ui-access-field-type-user": "Benotzer",
 	"wikifarm-ui-access-field-type-group": "Grupp",
@@ -107,5 +104,9 @@
 	"wikifarm-instances-menu-search-no-results": "Keng Wikie fonnt",
 	"wikifarm-instances-menu-button-aria-label": "Wikien: $1",
 	"wikifarm-wiki-back-link-title": "Zeréck op $1",
-	"wikifarm-wiki-back-link-aria-label": "Zeréck op $1"
+	"wikifarm-wiki-back-link-aria-label": "Zeréck op $1",
+	"wikifarm-non-existing-title": "Dës Wiki gëtt et net.",
+	"wikifarm-non-existing-label": "Et gëtt keng Wiki mam Pad „$1“.",
+	"wikifarm-instance-suspended-heading": "D'Wiki „$1“ ass desaktivéiert.",
+	"wikifarm-instance-not-found-heading": "Dës Säit ass net disponibel"
 }
