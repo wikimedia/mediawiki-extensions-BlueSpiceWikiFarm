@@ -77,6 +77,9 @@ class PrimaryDataProvider extends WikiInstancesPrimaryDataProvider implements IB
 				return [];
 			}
 			$instances = $this->instanceStore->getMultiple( 'sfi_path', $paths );
+			if ( in_array( 'w', $paths, true ) ) {
+				array_unshift( $instances, $this->instanceStore->getInstanceByPath( 'w' ) );
+			}
 		}
 
 		foreach ( $instances as $instance ) {
