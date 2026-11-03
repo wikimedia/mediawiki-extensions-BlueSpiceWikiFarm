@@ -336,5 +336,15 @@
 	"wikifarm-gettingstarted-content-galaxy-sso-heading": "Default help page \"Getting started\" ({{msg-mw|wikifarm-gettingstarted-content-galaxy-title}}) created on a new BlueSpice Galaxy wiki: heading of the \"Single sign-on assignment\" subsection.",
 	"wikifarm-gettingstarted-content-galaxy-sso-body": "Default help page \"Getting started\" ({{msg-mw|wikifarm-gettingstarted-content-galaxy-title}}) created on a new BlueSpice Galaxy wiki: body of the \"Single sign-on assignment\" subsection.",
 	"wikifarm-ui-access-grid-header-group-info-label": "Grid table header for group info column",
-	"wikifarm-ui-access-action-group-info": "Group info button label"
+	"wikifarm-ui-access-action-group-info": "Group info button label",
+	"wikifarm-creation-failure-heading-label": "Heading for the creation failure screen. $1 is the wiki name.",
+	"wikifarm-maintenance-creation-heading-label": "Heading for the wiki creation progress screen. $1 is the wiki name.",
+	"wikifarm-instance-not-found-heading": "Heading shown when a wiki or page is not available.",
+	"wikifarm-instance-not-found-desc-label": "Message explaining that the page does not exist or the user lacks access.",
+	"wikifarm-instance-suspended-heading": "Heading for a suspended wiki screen. $1 is the wiki name.",
+	"wikifarm-instance-suspended-label": "Explanation shown below the suspended wiki heading.",
+	"wikifarm-non-existing-title": "Heading for the non-existing wiki screen shown to users who can create wikis.",
+	"wikifarm-non-existing-label": "Message on the non-existing wiki screen. $1 is the requested wiki path.",
+	"wikifarm-non-existing-create-button-label": "Label for the button to create the non-existing wiki.",
+	"wikifarm-navigation-aria-label": "Accessible name for the button group containing the link to the main wiki and the wiki instances menu."
 }

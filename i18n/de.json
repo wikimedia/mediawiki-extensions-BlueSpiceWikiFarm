@@ -268,5 +268,15 @@
 	"wikifarm-gettingstarted-content-galaxy-sso-heading": "Zuweisung bei Single Sign-On",
 	"wikifarm-gettingstarted-content-galaxy-sso-body": "Wenn Ihre Galaxy-Instanz bereits mit einem Authentifizierungs-Provider verbunden ist, sodass Sie Benutzer nicht manuell im Haupt-Wiki anlegen, müssen Sie diesen dennoch in jedem einzelnen Wiki eine Rolle zuweisen (sofern dies nicht durch ein Skript automatisiert erfolgt). Befolgen Sie hierfür die Schritte im vorhergehenden Abschnitt „Zugriffsverwaltung“.",
 	"wikifarm-ui-access-grid-header-group-info-label": "Gruppeninfo",
-	"wikifarm-ui-access-action-group-info": "Gruppeninfo anzeigen"
+	"wikifarm-ui-access-action-group-info": "Gruppeninfo anzeigen",
+	"wikifarm-navigation-aria-label": "Wiki-Navigation",
+	"wikifarm-non-existing-title": "Dieses Wiki existiert nicht.",
+	"wikifarm-non-existing-label": "Unter dem Pfad \"$1\" gibt es kein Wiki.",
+	"wikifarm-non-existing-create-button-label": "Wiki erstellen",
+	"wikifarm-instance-suspended-heading": "Das Wiki \"$1\" ist abgeschaltet.",
+	"wikifarm-instance-suspended-label": "Die Inhalte können nicht aufgerufen werden.",
+	"wikifarm-creation-failure-heading-label": "Das Erstellen des Wikis \"$1\" ist fehlgeschlagen.",
+	"wikifarm-maintenance-creation-heading-label": "Wiki \"$1\" erstellen",
+	"wikifarm-instance-not-found-heading": "Diese Seite ist nicht verfügbar",
+	"wikifarm-instance-not-found-desc-label": "Diese Seite existiert nicht oder {{#FORMAL:du hast|Sie haben}} keinen Zugriff darauf."
 }
