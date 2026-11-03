@@ -158,5 +158,6 @@
 	"wikifarm-ui-search-instance-filter-local": "此wiki",
 	"wikifarm-ui-search-instance-filter-all": "所有可用的wiki",
 	"wikifarm-ui-search-instance-filter-hint": "…或选择此wiki之外的wiki进行搜索",
-	"wikifarm-ui-search-instance-filter-search": "搜索wiki"
+	"wikifarm-ui-search-instance-filter-search": "搜索wiki",
+	"wikifarm-non-existing-title": "此wiki不存在。"
 }

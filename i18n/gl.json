@@ -335,5 +335,15 @@
 	"wikifarm-gettingstarted-content-galaxy-sso-heading": "Asignación de inicio de sesión único",
 	"wikifarm-gettingstarted-content-galaxy-sso-body": "Se o teu Galaxy xa está conectado a un provedor de autenticación para que non teñas que crear usuarios directamente no teu wiki principal, tes que asignarlles os seus roles en cada wiki (agás que isto estea xestionado por un script). Para facelo, sigue os pasos que se indican en «Xestión do acceso», na sección anterior.",
 	"wikifarm-ui-access-grid-header-group-info-label": "Información do grupo",
-	"wikifarm-ui-access-action-group-info": "Mostrar a información do grupo"
+	"wikifarm-ui-access-action-group-info": "Mostrar a información do grupo",
+	"wikifarm-navigation-aria-label": "Navegación do wiki",
+	"wikifarm-non-existing-title": "Este wiki non existe.",
+	"wikifarm-non-existing-label": "Non existe ningún wiki coa ruta «$1».",
+	"wikifarm-non-existing-create-button-label": "Crear o wiki",
+	"wikifarm-instance-suspended-heading": "O wiki «$1» está desactivado.",
+	"wikifarm-instance-suspended-label": "Non se pode acceder ao seu contido.",
+	"wikifarm-creation-failure-heading-label": "Fallou a creación do wiki «$1»",
+	"wikifarm-maintenance-creation-heading-label": "Creando o wiki «$1»",
+	"wikifarm-instance-not-found-heading": "Esta páxina non está dispoñible",
+	"wikifarm-instance-not-found-desc-label": "A páxina non existe ou non tes acceso a ela."
 }

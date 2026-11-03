@@ -239,5 +239,6 @@
 	"wikifarm-ui-search-instance-filter-hint": "… of selecteer wiki’s waarin u wilt zoeken naast deze wiki",
 	"wikifarm-ui-search-instance-filter-search": "Wiki zoeken",
 	"wikifarm-search-filter-label": "Zoeken in wiki's",
-	"wikifarm-instances-menu-search-no-results": "Geen wiki's gevonden"
+	"wikifarm-instances-menu-search-no-results": "Geen wiki's gevonden",
+	"wikifarm-non-existing-title": "Deze wiki bestaat niet."
 }

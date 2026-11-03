@@ -107,5 +107,10 @@
 	"wikifarm-mainpage-content-galaxy-usermanual-title": "Benotzerhandbuch",
 	"wikifarm-mainpage-content-galaxy-adminmanual-title": "Adminhandbuch",
 	"wikifarm-gettingstarted-content-galaxy-wikipage-heading": "Wiki-Säit",
-	"wikifarm-gettingstarted-content-galaxy-process-heading": "Prozess"
+	"wikifarm-gettingstarted-content-galaxy-process-heading": "Prozess",
+	"wikifarm-navigation-aria-label": "Wiki-Navigatioun",
+	"wikifarm-non-existing-title": "Dës Wiki gëtt et net.",
+	"wikifarm-non-existing-label": "Et gëtt keng Wiki mam Pad „$1“.",
+	"wikifarm-instance-suspended-heading": "D'Wiki „$1“ ass desaktivéiert.",
+	"wikifarm-instance-not-found-heading": "Dës Säit ass net disponibel"
 }

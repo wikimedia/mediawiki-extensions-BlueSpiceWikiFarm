@@ -151,5 +151,6 @@
 	"wikifarm-ui-search-instance-filter-local": "此 wiki",
 	"wikifarm-ui-search-instance-filter-all": "所有可用的 wiki",
 	"wikifarm-ui-search-instance-filter-hint": "…或選擇此 wiki 之外的 wiki 進行搜尋",
-	"wikifarm-ui-search-instance-filter-search": "搜尋 wiki"
+	"wikifarm-ui-search-instance-filter-search": "搜尋 wiki",
+	"wikifarm-non-existing-title": "此 wiki 不存在。"
 }

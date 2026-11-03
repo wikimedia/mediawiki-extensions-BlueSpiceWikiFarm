@@ -335,5 +335,15 @@
 	"wikifarm-gettingstarted-content-galaxy-sso-heading": "U qoondeynta gelitaanka hal mar",
 	"wikifarm-gettingstarted-content-galaxy-sso-body": "Haddii Galaxy-gaagu hore ugu xiran yahay adeeg bixiye aqoonsi oo kuu oggolaanaya inaadan isticmaalayaasha si toos ah ugu abuurin wiki-gaaga weyn, weli waxaad u baahan tahay inaad doorarkooda ugu qoondayso wiki kasta (haddii aan tan lagu maamulin qoraal barnaamijeed). Si aad taas u samayso, raac tallaabooyinka ku hoos qoran \"Maaree gelitaanka\" ee qaybtii hore.",
 	"wikifarm-ui-access-grid-header-group-info-label": "Macluumaadka kooxda",
-	"wikifarm-ui-access-action-group-info": "Muuji macluumaadka kooxda"
+	"wikifarm-ui-access-action-group-info": "Muuji macluumaadka kooxda",
+	"wikifarm-navigation-aria-label": "Hagidda wiki-ga",
+	"wikifarm-non-existing-title": "Wiki-gan ma jiro.",
+	"wikifarm-non-existing-label": "Ma jiro wiki leh jidka \"$1\".",
+	"wikifarm-non-existing-create-button-label": "Abuur wiki",
+	"wikifarm-instance-suspended-heading": "Wiki-ga \"$1\" waa la damiyay.",
+	"wikifarm-instance-suspended-label": "Nuxurkiisa lama geli karo.",
+	"wikifarm-creation-failure-heading-label": "Abuurista wiki-ga \"$1\" way fashilantay",
+	"wikifarm-maintenance-creation-heading-label": "Abuuritaanka wiki \"$1\"",
+	"wikifarm-instance-not-found-heading": "Boggan lama heli karo",
+	"wikifarm-instance-not-found-desc-label": "Boggu ma jiro, ama ma lihid oggolaansho aad ku geli karto."
 }

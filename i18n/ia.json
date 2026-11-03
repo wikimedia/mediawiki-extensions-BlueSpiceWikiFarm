@@ -211,5 +211,6 @@
 	"wikifarm-ui-search-instance-filter-local": "Iste wiki",
 	"wikifarm-ui-search-instance-filter-all": "Tote le wikis disponibile",
 	"wikifarm-ui-search-instance-filter-hint": "… o selige wikis a cercar in addition a iste wiki",
-	"wikifarm-ui-search-instance-filter-search": "Cercar un wiki"
+	"wikifarm-ui-search-instance-filter-search": "Cercar un wiki",
+	"wikifarm-non-existing-title": "Iste wiki non existe."
 }
