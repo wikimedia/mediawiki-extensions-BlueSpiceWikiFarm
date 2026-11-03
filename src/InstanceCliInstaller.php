@@ -156,7 +156,7 @@ class InstanceCliInstaller extends CliInstaller {
 
 		$helpPath = ProductContent::getPath( 'gettingstarted', 'html' );
 		if ( $helpPath ) {
-			$product = basename( $helpPath, '.html' );
+			$product = ProductContent::getProductFromPath( $helpPath );
 			$helpTitle = wfMessage( "wikifarm-gettingstarted-content-$product-title" )
 				->inContentLanguage()->plain();
 			$status->merge( $this->createPage(
