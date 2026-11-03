@@ -53,6 +53,7 @@
 	"wikifarm-search-center-filter-wiki-with-values-label": "Wiki:",
 	"wikifarm-main-instance-name": "Haaptwiki",
 	"wikifarm-button-action-label-add": "Derbäisetzen",
+	"wikifarm-ui-access-field-type": "Entitéitstyp",
 	"wikifarm-ui-access-field-role": "Roll",
 	"wikifarm-ui-role-label-reader": "Lieser",
 	"wikifarm-ui-role-label-admin": "Admin",
@@ -101,11 +102,10 @@
 	"wikifarm-wiki-back-link-title": "Zeréck op $1",
 	"wikifarm-wiki-back-link-aria-label": "Zeréck op $1",
 	"wikifarm-mainpage-content-galaxy-link-wikipages": "Wiki-Säiten",
-	"wikifarm-mainpage-content-galaxy-recentchanges-title": "Rezent Ännerungen",
-	"wikifarm-gettingstarted-content-galaxy-wikipage-heading": "Wiki-Säit",
 	"wikifarm-mainpage-content-galaxy-link-processes": "Prozesser",
+	"wikifarm-mainpage-content-galaxy-recentchanges-title": "Rezent Ännerungen",
 	"wikifarm-mainpage-content-galaxy-usermanual-title": "Benotzerhandbuch",
 	"wikifarm-mainpage-content-galaxy-adminmanual-title": "Adminhandbuch",
-	"wikifarm-gettingstarted-content-galaxy-process-heading": "Prozess",
-	"wikifarm-ui-access-field-type": "Entitéitstyp"
+	"wikifarm-gettingstarted-content-galaxy-wikipage-heading": "Wiki-Säit",
+	"wikifarm-gettingstarted-content-galaxy-process-heading": "Prozess"
 }
