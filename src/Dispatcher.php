@@ -174,7 +174,6 @@ class Dispatcher {
 					// wrapped script argv (everything after run.php + script path).
 					$reflection = new \ReflectionObject( $runner );
 					$scriptArgvProperty = $reflection->getProperty( 'scriptArgv' );
-					$scriptArgvProperty->setAccessible( true );
 					$scriptArgvProperty->setValue( $runner, array_slice( $GLOBALS['argv'], 2 ) );
 				}
 			}
