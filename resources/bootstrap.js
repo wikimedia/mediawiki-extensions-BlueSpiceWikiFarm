@@ -165,13 +165,15 @@ mw.hook( 'bs.extendedSearch.AC.result' ).add( ( result ) => {
 	if ( !result.source ) {
 		return;
 	}
-	let bgColor = '';
+	let bgColor = '#3e5389';
 	let color = '#fff';
-	if ( result.source.color.background ) {
-		bgColor = result.source.color.background;
-	}
-	if ( !result.source.color.lightText ) {
-		color = '#000';
+	if ( result.source.color ) {
+		if ( result.source.color.background ) {
+			bgColor = result.source.color.background;
+		}
+		if ( !result.source.color.lightText ) {
+			color = '#000';
+		}
 	}
 
 	const $source = $( '<span>' )
