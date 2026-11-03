@@ -292,7 +292,7 @@ class ArchiveInstance extends InstanceAwareStep {
 	/**
 	 * @return void
 	 */
-	private function removeInstanceData(): void {
+	protected function removeInstanceData(): void {
 		$this->accessLookup->removeAccessLevelForInstance( $this->instance );
 
 		$groupNames = array_keys(

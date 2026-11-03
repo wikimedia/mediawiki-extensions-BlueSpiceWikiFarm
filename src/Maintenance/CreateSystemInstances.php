@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\Maintenance;
 
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\InstanceManager;
+use BlueSpice\WikiFarm\Process\Step\CopyUser;
 use BlueSpice\WikiFarm\Process\Step\CreateInstanceVault;
 use BlueSpice\WikiFarm\Process\Step\InstallInstance;
 use BlueSpice\WikiFarm\Process\Step\PurgeInstance;
@@ -17,6 +18,8 @@ use Throwable;
 require_once dirname( __FILE__, 5 ) . '/maintenance/Maintenance.php';
 
 class CreateSystemInstances extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
+
+	private const ROOT_USER_ID = 1;
 
 	/**
 	 * @return bool
@@ -48,10 +51,12 @@ class CreateSystemInstances extends \MediaWiki\Maintenance\LoggedUpdateMaintenan
 	/**
 	 * @param string $path
 	 * @param string $display
+	 * @param array $options
 	 * @return bool
 	 * @throws \Exception
 	 */
 	private function createInstance( string $path, string $display, array $options ): bool {
+		$this->output( "Starting creation of instance $path\n" );
 		if ( !str_starts_with( $path, '-' ) ) {
 			$this->error( "Path $path is not a system instance path\n" );
 			return false;
@@ -64,6 +69,7 @@ class CreateSystemInstances extends \MediaWiki\Maintenance\LoggedUpdateMaintenan
 		}
 		$instance = $manager->createEmptyInstance( $path, $display, $options );
 		try {
+			$user = $this->getServiceContainer()->getUserFactory()->newFromId( self::ROOT_USER_ID );
 			$id = $instance->getId();
 			$executor = new CodeExecutor( [
 				'create-instance-vault' => [
@@ -76,9 +82,17 @@ class CreateSystemInstances extends \MediaWiki\Maintenance\LoggedUpdateMaintenan
 					'args' => [ $id, '' ],
 					'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'MainConfig', 'LanguageFactory' ]
 				],
+				'copy-user' => [
+					'class' => CopyUser::class,
+					'args' => [ $id, $user->getName() ],
+					'services' => [
+						'BlueSpiceWikiFarm.InstanceManager', 'DBLoadBalancer', 'BlueSpiceWikiFarm.AccessControlStore',
+						'UserFactory', 'BlueSpiceWikiFarm.InstanceGroupCreator', 'UserGroupManager'
+					]
+				],
 				'run-update' => [
 					'class' => RunUpdates::class,
-					'args' => [ $id ],
+					'args' => [ $id . '123' ],
 					'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'MainConfig' ]
 				],
 				'run-post-instance-creation-commands' => [
@@ -88,8 +102,10 @@ class CreateSystemInstances extends \MediaWiki\Maintenance\LoggedUpdateMaintenan
 				]
 			] );
 			$executor->executeSteps();
+
+			$this->output( "Instance $path created\n" );
 		} catch ( Throwable $ex ) {
-			$this->error( "Error creating instance $path: " . $ex->getMessage() );
+			$this->error( "Error creating instance $path, rolling back:" . $ex->getMessage() );
 			$this->purgeInstance( $instance );
 		}
 
@@ -106,7 +122,8 @@ class CreateSystemInstances extends \MediaWiki\Maintenance\LoggedUpdateMaintenan
 			'purge-instance' => [
 				'class' => PurgeInstance::class,
 				'args' => [ $instance->getId() ],
-				'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'MainConfig', 'MWStake.StorageUtilities' ]
+				'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'MainConfig', 'MWStake.StorageUtilities',
+					'BlueSpiceWikiFarm.WikiAccessLookup', 'BlueSpiceWikiFarm.InstanceGroupCreator', 'DBLoadBalancer' ]
 			],
 		] );
 		$executor->executeSteps();

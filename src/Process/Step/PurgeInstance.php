@@ -25,7 +25,10 @@ class PurgeInstance extends ArchiveInstance {
 			->deleteInstanceDirectory( $this->getInstance()->getPath() )
 			->commit();
 
+		$this->removeInstanceData();
 		$this->dropInstanceDatabase();
+
+		$this->getInstanceManager()->removeInstance( $this->getInstance() );
 
 		return array_merge( $data, [ 'success' => true ] );
 	}

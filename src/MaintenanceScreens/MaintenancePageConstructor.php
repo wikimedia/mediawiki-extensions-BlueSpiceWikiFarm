@@ -38,28 +38,33 @@ class MaintenancePageConstructor {
 	 * @throws HttpException
 	 */
 	public function getHtml(): string {
-		$config = $this->services->getMainConfig();
-		if ( $config->get( MainConfigNames::TmpDirectory ) === false ) {
-			// Ensure temp directory
-			$GLOBALS['wgTmpDirectory'] = wfTempDir();
-		}
-		if ( $this->instanceEntity instanceof NonExistingInstanceEntity ) {
-			$context = RequestContext::getMain();
-			if ( $this->services->getPermissionManager()->userHasRight( $context->getUser(), 'wikifarm-createwiki' ) ) {
-				return ( new NonExistingInstanceScreen( $this->instanceEntity ) )->getHtml();
+		try {
+			$config = $this->services->getMainConfig();
+			if ( $config->get( MainConfigNames::TmpDirectory ) === false ) {
+				// Ensure temp directory
+				$GLOBALS['wgTmpDirectory'] = wfTempDir();
 			}
-			$context->getRequest()->response()->statusHeader( 404 );
-			return ( new NotFoundScreen( $this->instanceEntity ) )->getHtml();
-		}
-		switch ( $this->instanceEntity->getStatus() ) {
-			case InstanceEntity::STATUS_INIT:
-			case InstanceEntity::STATUS_INSTALLED:
-				return $this->showCreationPage();
-			case InstanceEntity::STATUS_SUSPENDED:
-				return ( new SuspendedScreen( $this->instanceEntity ) )->getHtml();
-			case InstanceEntity::STATUS_MAINTENANCE:
-			default:
-				return ( new MaintenanceScreen( $this->instanceEntity ) )->getHtml();
+			if ( $this->instanceEntity instanceof NonExistingInstanceEntity ) {
+				$context = RequestContext::getMain();
+				if ( $this->services->getPermissionManager()->userHasRight( $context->getUser(), 'wikifarm-createwiki' ) ) {
+					return ( new NonExistingInstanceScreen( $this->instanceEntity ) )->getHtml();
+				}
+				$context->getRequest()->response()->statusHeader( 404 );
+				return ( new NotFoundScreen( $this->instanceEntity ) )->getHtml();
+			}
+			switch ( $this->instanceEntity->getStatus() ) {
+				case InstanceEntity::STATUS_INIT:
+				case InstanceEntity::STATUS_INSTALLED:
+					return $this->showCreationPage();
+				case InstanceEntity::STATUS_SUSPENDED:
+					return ( new SuspendedScreen( $this->instanceEntity ) )->getHtml();
+				case InstanceEntity::STATUS_MAINTENANCE:
+				default:
+					return ( new MaintenanceScreen( $this->instanceEntity ) )->getHtml();
+			}
+		} catch ( Throwable ) {
+			// Something went wrong, show generic failure, better than an empty page
+			return $this->showFailurePage( '', 'unknown' );
 		}
 	}
 
@@ -75,7 +80,7 @@ class MaintenancePageConstructor {
 		if ( $status === 'failed' ) {
 			return $this->showFailurePage( $type, $pid );
 		}
-		return '';
+		return $this->showFailurePage( '', 'unknown' );
 	}
 
 	/**

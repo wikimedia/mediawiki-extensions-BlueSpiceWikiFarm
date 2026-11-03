@@ -75,12 +75,12 @@ class RunDatabaseUpdates implements LoadExtensionSchemaUpdatesHook {
 			"$dir/db/$dbType/wiki_access_levels.sql"
 		);
 
+		$updater->addPostDatabaseUpdateMaintenance( PromoteRootCreator::class );
 		$updater->addPostDatabaseUpdateMaintenance( CreateSystemInstances::class );
 		$updater->addPostDatabaseUpdateMaintenance( CreateAccessToken::class );
 		$updater->addPostDatabaseUpdateMaintenance( CreateCentralAccessToken::class );
 		$updater->addPostDatabaseUpdateMaintenance( PopulateGroupList::class );
 		$updater->addPostDatabaseUpdateMaintenance( PopulateRoleInstancePath::class );
 		$updater->addPostDatabaseUpdateMaintenance( ImportDefaultContentFiles::class );
-		$updater->addPostDatabaseUpdateMaintenance( PromoteRootCreator::class );
 	}
 }
