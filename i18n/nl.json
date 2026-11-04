@@ -59,9 +59,7 @@
 	"wikifarm-create-instance-title": "Nieuwe wiki aanmaken",
 	"wikifarm-creation-desc": "De installatie is aan de gang.<br><br>Wacht totdat alle volgende stappen zijn voltooid.<br>Na voltooiing wordt u doorverwezen naar de nieuwe wiki.",
 	"wikifarm-creation-failure-desc": "Het aanmaken van deze wiki is mislukt. Neem contact op met uw beheerder.",
-	"wikifarm-creation-failure-main-label": "Wiki aanmaken mislukt",
 	"wikifarm-creation-failure-process": "Proces-ID: $1",
-	"wikifarm-creation-progress-main-label": "Een nieuwe wiki aanmaken",
 	"wikifarm-edit-instance": "Wiki bewerken",
 	"wikifarm-error-createinstancevault-target-exists": "De wiki-directory voor het opgegeven pad bestaat al",
 	"wikifarm-error-failed-to-start-process": "Het proces kon niet worden gestart",
@@ -92,13 +90,10 @@
 	"wikifarm-instance-suspended-notice": "Deze wiki is momenteel opgeschort",
 	"wikifarm-instance-title": "Sitenaam",
 	"wikifarm-lang-code": "Taal",
-	"wikifarm-maintenance-creation-title": "Wiki-aanmaak",
 	"wikifarm-maintenance-generic": "Deze wiki bevindt zich momenteel in onderhoudsmodus. Probeer het later opnieuw.",
 	"wikifarm-maintenance-title": "Wiki in onderhoudsmodus",
 	"wikifarm-management-not-available-text": "Farmbeheer is alleen toegankelijk via de [[w:Special:FarmManagement|centrale wiki]]",
 	"wikifarm-management-not-available-title": "Farmbeheer niet beschikbaar",
-	"wikifarm-non-existing-create-button": "Nu aanmaken",
-	"wikifarm-non-existing": "Deze wiki bestaat niet.",
 	"wikifarm-remove-instance": "Wiki verwijderen",
 	"wikifarm-remove-instructions": "Bevestig dat u deze wiki wilt verwijderen door het pad ervan in te voeren:",
 	"wikifarm-resume-instance": "Wiki hervatten",
@@ -239,5 +234,6 @@
 	"wikifarm-ui-search-instance-filter-hint": "… of selecteer wiki’s waarin u wilt zoeken naast deze wiki",
 	"wikifarm-ui-search-instance-filter-search": "Wiki zoeken",
 	"wikifarm-search-filter-label": "Zoeken in wiki's",
-	"wikifarm-instances-menu-search-no-results": "Geen wiki's gevonden"
+	"wikifarm-instances-menu-search-no-results": "Geen wiki's gevonden",
+	"wikifarm-non-existing-title": "Deze wiki bestaat niet."
 }

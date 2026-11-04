@@ -61,9 +61,7 @@
 	"wikifarm-create-instance-title": "새 위키 만들기",
 	"wikifarm-creation-desc": "설치 작업이 진행 중입니다.<br><br>이후의 모든 단계가 완료될 때까지 기다려 주세요.<br>완료되면 새 위키로 이동합니다.",
 	"wikifarm-creation-failure-desc": "위키 생성에 실패했습니다. 관리자에게 문의해 주세요.",
-	"wikifarm-creation-failure-main-label": "위키 생성애 실패했습니다",
 	"wikifarm-creation-failure-process": "프로세스 ID: $1",
-	"wikifarm-creation-progress-main-label": "새 위키를 만드는 중",
 	"wikifarm-edit-instance": "위키 편집",
 	"wikifarm-error-createinstancevault-target-exists": "지정된 경로에 대한 위키 디렉터리가 이미 존재합니다.",
 	"wikifarm-error-failed-to-start-process": "프로세스를 시작하지 못했습니다",
@@ -94,13 +92,10 @@
 	"wikifarm-instance-suspended-notice": "이 위키는 현재 정지되었습니다",
 	"wikifarm-instance-title": "사이트 이름",
 	"wikifarm-lang-code": "언어",
-	"wikifarm-maintenance-creation-title": "새 위키를 만드는 중",
 	"wikifarm-maintenance-generic": "이 위키는 현재 점검 중입니다. 잠시 후 다시 시도해 주세요.",
 	"wikifarm-maintenance-title": "위키가 유지보수 모드입니다",
 	"wikifarm-management-not-available-text": "팜 관리는 루트 위키인 [[w:Special:FarmManagement|루트 위키]]에서만 접근할 수 있습니다.",
 	"wikifarm-management-not-available-title": "팜 관리 기능을 이용할 수 없습니다",
-	"wikifarm-non-existing-create-button": "지금 생성하기",
-	"wikifarm-non-existing": "이 위키는 존재하지 않습니다.",
 	"wikifarm-remove-instance": "위키 제거",
 	"wikifarm-remove-instructions": "위키를 삭제하시겠습니까? 위키 경로를 입력하여 확인해 주세요:",
 	"wikifarm-resume-instance": "위키 재개",
@@ -236,5 +231,6 @@
 	"wikifarm-ui-search-instance-filter-hint": "... 또는 이 위키 외에 검색할 다른 위키를 선택하세요",
 	"wikifarm-ui-search-instance-filter-search": "위키 검색",
 	"wikifarm-search-filter-label": "위키에서 검색",
-	"wikifarm-instances-menu-search-no-results": "위키가 없습니다"
+	"wikifarm-instances-menu-search-no-results": "위키가 없습니다",
+	"wikifarm-non-existing-title": "이 위키는 존재하지 않습니다."
 }

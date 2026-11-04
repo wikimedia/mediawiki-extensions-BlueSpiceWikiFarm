@@ -4,6 +4,14 @@
 			"Saraiki"
 		]
 	},
+	"wikifarm-mainpage-content-galaxy-link-wikipages": "وکی ورقے",
+	"wikifarm-mainpage-content-galaxy-link-minutes": "منٹ",
+	"wikifarm-mainpage-content-galaxy-link-blogs": "بلاگ",
+	"wikifarm-mainpage-content-galaxy-recentchanges-title": "نویاں تبدیلیاں",
+	"wikifarm-gettingstarted-content-galaxy-table-type": "ایہ ورتو",
+	"wikifarm-gettingstarted-content-galaxy-wikipage-heading": "وکی ورقہ",
+	"wikifarm-gettingstarted-content-galaxy-minutes-heading": "منٹ",
+	"wikifarm-gettingstarted-content-galaxy-process-heading": "پراسس",
 	"wikifarm-farmmanagement-label": "وکیاں",
 	"wikifarm-button-action-label-cancel": "منسوخ",
 	"wikifarm-instance-desc": "تفصیل",
@@ -27,13 +35,5 @@
 	"wikifarm-button-action-delete-label": "مٹاؤ",
 	"wikifarm-wikis-create-new-wiki-title": "نویں وکی بݨاؤ",
 	"wikifarm-wikis-create-new-wiki-aria-label": "نویں وکی بݨاؤ",
-	"wikifarm-ui-access-confirm-delete-action-remove": "ہٹاؤ",
-	"wikifarm-mainpage-content-galaxy-link-wikipages": "وکی ورقے",
-	"wikifarm-mainpage-content-galaxy-link-minutes": "منٹ",
-	"wikifarm-mainpage-content-galaxy-recentchanges-title": "نویاں تبدیلیاں",
-	"wikifarm-gettingstarted-content-galaxy-wikipage-heading": "وکی ورقہ",
-	"wikifarm-gettingstarted-content-galaxy-minutes-heading": "منٹ",
-	"wikifarm-gettingstarted-content-galaxy-process-heading": "پراسس",
-	"wikifarm-mainpage-content-galaxy-link-blogs": "بلاگ",
-	"wikifarm-gettingstarted-content-galaxy-table-type": "ایہ ورتو"
+	"wikifarm-ui-access-confirm-delete-action-remove": "ہٹاؤ"
 }

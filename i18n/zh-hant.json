@@ -55,9 +55,7 @@
 	"wikifarm-create-instance-title": "建立新的 wiki",
 	"wikifarm-creation-desc": "安裝正在進行中。<br><br>請等待所有後續步驟完成。<br>一旦完成後，您會被重新導向到新的 wiki。",
 	"wikifarm-creation-failure-desc": "建立此 wiki 失敗。請聯絡您的管理員。",
-	"wikifarm-creation-failure-main-label": "建立 wiki 失敗",
 	"wikifarm-creation-failure-process": "程序 ID：$1",
-	"wikifarm-creation-progress-main-label": "建立新的 wiki",
 	"wikifarm-edit-instance": "編輯 wiki",
 	"wikifarm-error-createinstancevault-target-exists": "指定路徑的 wiki 目錄已存在",
 	"wikifarm-error-failed-to-start-process": "無法啟動程序",
@@ -86,13 +84,10 @@
 	"wikifarm-instance-suspended-notice": "此 wiki 目前被暫停",
 	"wikifarm-instance-title": "網站名稱",
 	"wikifarm-lang-code": "語言",
-	"wikifarm-maintenance-creation-title": "建立 wiki",
 	"wikifarm-maintenance-generic": "此 wiki 目前處於維護模式。請稍後再試。",
 	"wikifarm-maintenance-title": "Wiki 處於維護模式",
 	"wikifarm-management-not-available-text": "農場管理只能從 [[w:Special:FarmManagement|root wiki]] 存取",
 	"wikifarm-management-not-available-title": "農場管理不可用",
-	"wikifarm-non-existing-create-button": "立即建立",
-	"wikifarm-non-existing": "此 wiki 不存在。",
 	"wikifarm-remove-instance": "移除 wiki",
 	"wikifarm-remove-instructions": "請輸入其路徑來確認您要刪除此 wiki：",
 	"wikifarm-resume-instance": "恢復 wiki",
@@ -151,5 +146,6 @@
 	"wikifarm-ui-search-instance-filter-local": "此 wiki",
 	"wikifarm-ui-search-instance-filter-all": "所有可用的 wiki",
 	"wikifarm-ui-search-instance-filter-hint": "…或選擇此 wiki 之外的 wiki 進行搜尋",
-	"wikifarm-ui-search-instance-filter-search": "搜尋 wiki"
+	"wikifarm-ui-search-instance-filter-search": "搜尋 wiki",
+	"wikifarm-non-existing-title": "此 wiki 不存在。"
 }

@@ -57,9 +57,7 @@
 	"wikifarm-create-instance-title": "Crear nove wiki",
 	"wikifarm-creation-desc": "Le installation es in curso.<br><br>Per favor attende que tote le passos subsequente se termina.<br>Un vice terminate, tu essera redirigite al nove wiki.",
 	"wikifarm-creation-failure-desc": "Le creation de iste wiki ha fallite. Per favor contacta tu administrator.",
-	"wikifarm-creation-failure-main-label": "Creation de wiki fallite",
 	"wikifarm-creation-failure-process": "ID del processo: $1",
-	"wikifarm-creation-progress-main-label": "Creation del nove wiki",
 	"wikifarm-edit-instance": "Modificar wiki",
 	"wikifarm-error-createinstancevault-target-exists": "Le directorio del wiki con le percurso date ja existe",
 	"wikifarm-error-failed-to-start-process": "Le lanceamento del processo ha fallite",
@@ -90,13 +88,10 @@
 	"wikifarm-instance-suspended-notice": "Iste wiki es actualmente suspendite",
 	"wikifarm-instance-title": "Nomine del sito",
 	"wikifarm-lang-code": "Lingua",
-	"wikifarm-maintenance-creation-title": "Creation del wiki",
 	"wikifarm-maintenance-generic": "Iste wiki es actualmente in modo de mantenentia. Tenta lo de novo plus tarde.",
 	"wikifarm-maintenance-title": "Le wiki es in modo de mantenentia",
 	"wikifarm-management-not-available-text": "Le gestion del ferma es solmente accessibile a partir del [[w:Special:FarmManagement|wiki central]]",
 	"wikifarm-management-not-available-title": "Gestion del ferma indisponibile",
-	"wikifarm-non-existing-create-button": "Crear lo ora",
-	"wikifarm-non-existing": "Iste wiki non existe.",
 	"wikifarm-remove-instance": "Remover wiki",
 	"wikifarm-remove-instructions": "Confirma que tu vole deler iste wiki dactylographante su percurso:",
 	"wikifarm-resume-instance": "Reprender wiki",
@@ -211,5 +206,6 @@
 	"wikifarm-ui-search-instance-filter-local": "Iste wiki",
 	"wikifarm-ui-search-instance-filter-all": "Tote le wikis disponibile",
 	"wikifarm-ui-search-instance-filter-hint": "… o selige wikis a cercar in addition a iste wiki",
-	"wikifarm-ui-search-instance-filter-search": "Cercar un wiki"
+	"wikifarm-ui-search-instance-filter-search": "Cercar un wiki",
+	"wikifarm-non-existing-title": "Iste wiki non existe."
 }
