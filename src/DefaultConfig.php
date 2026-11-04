@@ -162,6 +162,12 @@ class DefaultConfig extends HashConfig {
 			'superAccessGroups' => [],
 
 			/**
+			 * Name of the admin user created by the installer.
+			 * Gets admin access to the root wiki and system instances on installation
+			 */
+			'initialAdminUser' => '',
+
+			/**
 			 * List of groups that cannot read current instance
 			 */
 			'instanceRestrictedGroups' => [],

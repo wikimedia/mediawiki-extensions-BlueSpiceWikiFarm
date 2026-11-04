@@ -27,10 +27,10 @@ class PromoteRootCreator extends LoggedUpdateMaintenance {
 		}
 
 		$this->output( 'Promoting root wiki creator to admin...' );
-		$user = $this->getServiceContainer()->getUserFactory()->newFromId( 1 );
-		if ( !$user->isRegistered() ) {
-			$this->output( "failed - user not registered\n" );
-			// Dont know how this could happen...
+		$userName = $farmConfig->get( 'initialAdminUser' );
+		$user = $userName ? $this->getServiceContainer()->getUserFactory()->newFromName( $userName ) : null;
+		if ( !$user || !$user->isRegistered() ) {
+			$this->output( "failed - initial admin user '$userName' not found\n" );
 			return false;
 		}
 

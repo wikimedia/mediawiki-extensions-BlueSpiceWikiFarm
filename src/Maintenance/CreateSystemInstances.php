@@ -19,8 +19,6 @@ require_once dirname( __FILE__, 5 ) . '/maintenance/Maintenance.php';
 
 class CreateSystemInstances extends \MediaWiki\Maintenance\LoggedUpdateMaintenance {
 
-	private const ROOT_USER_ID = 1;
-
 	/**
 	 * @return bool
 	 * @throws \Exception
@@ -67,9 +65,14 @@ class CreateSystemInstances extends \MediaWiki\Maintenance\LoggedUpdateMaintenan
 			$this->output( "Instance $path already exists, skipping\n" );
 			return true;
 		}
+		$userName = $this->getServiceContainer()->getService( 'BlueSpiceWikiFarm._Config' )->get( 'initialAdminUser' );
+		$user = $userName ? $this->getServiceContainer()->getUserFactory()->newFromName( $userName ) : null;
+		if ( !$user || !$user->isRegistered() ) {
+			$this->error( "Initial admin user '$userName' not found, cannot create instance $path\n" );
+			return false;
+		}
 		$instance = $manager->createEmptyInstance( $path, $display, $options );
 		try {
-			$user = $this->getServiceContainer()->getUserFactory()->newFromId( self::ROOT_USER_ID );
 			$id = $instance->getId();
 			$executor = new CodeExecutor( [
 				'create-instance-vault' => [
