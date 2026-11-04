@@ -92,7 +92,7 @@ class CreateSystemInstances extends \MediaWiki\Maintenance\LoggedUpdateMaintenan
 				],
 				'run-update' => [
 					'class' => RunUpdates::class,
-					'args' => [ $id . '123' ],
+					'args' => [ $id ],
 					'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'MainConfig' ]
 				],
 				'run-post-instance-creation-commands' => [
