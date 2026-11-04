@@ -1,6 +1,7 @@
 <?php
 
 use BlueSpice\WikiFarm\InstanceManager;
+use BlueSpice\WikiFarm\Storage\InstanceTransaction;
 use MediaWiki\Maintenance\Maintenance;
 use MWStake\MediaWiki\Component\FileStorageUtilities\StorageHandler;
 
@@ -27,6 +28,10 @@ class RemoveOrphanedDatabaseInstances extends Maintenance {
 		/** @var StorageHandler $storageHandler */
 		$storageHandler = $this->getServiceContainer()->getService( 'MWStake.StorageUtilities' );
 
+		$backend = $storageHandler->getBackend(
+			$this->manager->getFarmConfig()->get( 'instanceStorageBackend' )
+		);
+
 		$this->output(
 			"This script will check all instance entries in database and remove those which are not active\n" .
 			"It will NOT remove databases, directories or any other resources\n\n"
@@ -45,7 +50,7 @@ class RemoveOrphanedDatabaseInstances extends Maintenance {
 				if ( !$this->hasOption( 'dry' ) ) {
 
 					// Remove vault
-					$storageHandler->newInstanceTransaction()
+					( new InstanceTransaction( $backend ) )
 						->deleteInstanceDirectory( $instance->getPath() )
 						->commit();
 					// Remove DB entry
