@@ -266,5 +266,6 @@
 	"wikifarm-instances-search-placeholder": "Cercar wiki",
 	"wikifarm-instance-creator": "Create per",
 	"wikifarm-instance-creator-no-info-label": "Nulle information disponibile",
-	"wikifarm-instances-menu-section-favourites": "Favorites"
+	"wikifarm-instances-menu-section-favourites": "Favorites",
+	"wikifarm-non-existing-title": "Iste wiki non existe."
 }

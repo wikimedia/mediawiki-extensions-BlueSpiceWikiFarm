@@ -266,5 +266,6 @@
 	"wikifarm-error-archive-instance-failed": "위키 아카이브 생성에 실패했습니다",
 	"wikifarm-search-filter-show-all-label": "모든 위키",
 	"wikifarm-search-filter-label": "위키에서 검색",
-	"wikifarm-instances-menu-search-no-results": "위키가 없습니다"
+	"wikifarm-instances-menu-search-no-results": "위키가 없습니다",
+	"wikifarm-non-existing-title": "이 위키는 존재하지 않습니다."
 }
