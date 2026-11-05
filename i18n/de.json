@@ -278,5 +278,9 @@
 	"wikifarm-creation-failure-heading-label": "Das Erstellen des Wikis \"$1\" ist fehlgeschlagen.",
 	"wikifarm-maintenance-creation-heading-label": "Wiki \"$1\" erstellen",
 	"wikifarm-instance-not-found-heading": "Diese Seite ist nicht verfügbar",
-	"wikifarm-instance-not-found-desc-label": "Diese Seite existiert nicht oder {{#FORMAL:du hast|Sie haben}} keinen Zugriff darauf."
+	"wikifarm-instance-not-found-desc-label": "Diese Seite existiert nicht oder {{#FORMAL:du hast|Sie haben}} keinen Zugriff darauf.",
+	"wikifarm-gettingstarted-content-galaxy-logo-body-local": "Laden Sie Ihr Logo in das Wiki hoch, in dem Sie es verwenden möchten:\n\n# Klicken Sie in der Kopfleiste auf den Dropdown-Pfeil neben der <code>+</code>-Schaltfläche und wählen Sie „Neue Datei“.\n# Ziehen Sie Ihr Logo in den Dialog „Datei hochladen“.\n# Laden Sie die Datei hoch.\n# Folgen Sie dem Link zur hochgeladenen Datei.\n# Klicken Sie auf der Dateibeschreibungsseite auf das Vorschaubild.\n# Kopieren Sie den Bildpfad aus der Adresszeile Ihres Browsers. Er enthält <code>img_auth.php</code>:<br /><code>Beispiel: /img_auth.php/5/5a/my-logo.png</code>\n\nFügen Sie anschließend den Logo-Pfad in der Konfiguration desselben Wikis hinzu:\n\n# Klicken Sie in der oberen Leiste auf die Schaltfläche „{{Icon|bi bi-gear|||}} '''Wiki-Aktionen'''“ (Zahnrad-Symbol).\n# Wählen Sie in der Gruppe „Administration“ den Punkt „Konfiguration“.\n# Geben Sie „logo“ in das Suchfeld ein.\n# Fügen Sie den Logo-Pfad aus Ihrer Zwischenablage in das Feld ein.\n# Speichern Sie die Änderungen.\n# Aktualisieren Sie die Seite (<code>Strg</code>+<code>F5</code>).\n\nWiederholen Sie diese Schritte in jedem Subwiki, in dem Sie das Logo verwenden möchten.",
+	"wikifarm-access-roles-heading": "Rollen von Gruppen und einzelnen Benutzern in diesem Wiki verwalten.",
+	"wikifarm-access-field-assignee-group": "Gruppen",
+	"wikifarm-access-field-assignee-user": "Benutzer"
 }

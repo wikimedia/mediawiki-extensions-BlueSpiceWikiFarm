@@ -343,5 +343,9 @@
 	"wikifarm-creation-failure-heading-label": "Failed to create wiki \"$1\"",
 	"wikifarm-maintenance-creation-heading-label": "Creating wiki \"$1\"",
 	"wikifarm-instance-not-found-heading": "This page is not available",
-	"wikifarm-instance-not-found-desc-label": "The page does not exist, or you do not have access to it."
+	"wikifarm-instance-not-found-desc-label": "The page does not exist, or you do not have access to it.",
+	"wikifarm-gettingstarted-content-galaxy-logo-body-local": "Upload your logo to the wiki in which you want to use it:\n\n# Click the drop-down arrow next to the +-button in the top bar and select \"New file.\"\n# Drop your logo in the \"Upload file\" dialog.\n# Upload the file.\n# Follow the link to the uploaded file.\n# Click on the preview image on the file description page.\n# Copy the path of the image from the image path in your browser's address bar. It contains <code>img_auth.php</code>:<br /><code>Example: /img_auth.php/5/5a/my-logo.png</code>\n\nNext, add the logo path to the configuration of the same wiki:\n\n# Click the \"{{Icon|bi bi-gear|||}} '''Wiki actions'''\" button (gear symbol) in the top bar.\n# Select \"Configuration\" in the Administration group.\n# Type \"logo\" in the search box.\n# Paste the logo path from your clipboard into the field.\n# Save the changes.\n# Refresh the page (Ctrl+F5).\n\nRepeat these steps in every subwiki in which you want to use the logo.",
+	"wikifarm-access-roles-heading": "Manage the roles of groups and individual users in this wiki.",
+	"wikifarm-access-field-assignee-group": "Groups",
+	"wikifarm-access-field-assignee-user": "Users"
 }

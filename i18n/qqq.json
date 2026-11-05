@@ -346,5 +346,9 @@
 	"wikifarm-non-existing-title": "Heading for the non-existing wiki screen shown to users who can create wikis.",
 	"wikifarm-non-existing-label": "Message on the non-existing wiki screen. $1 is the requested wiki path.",
 	"wikifarm-non-existing-create-button-label": "Label for the button to create the non-existing wiki.",
-	"wikifarm-navigation-aria-label": "Accessible name for the button group containing the link to the main wiki and the wiki instances menu."
+	"wikifarm-navigation-aria-label": "Accessible name for the button group containing the link to the main wiki and the wiki instances menu.",
+	"wikifarm-gettingstarted-content-galaxy-logo-body-local": "Default help page \"Getting started\" ({{msg-mw|wikifarm-gettingstarted-content-galaxy-title}}) created on a new BlueSpice Galaxy wiki of an edition without a \"Shared resources\" wiki (e.g. \"Glacier\"): body of the \"Changing the logo\" section. Variant of {{msg-mw|wikifarm-gettingstarted-content-galaxy-logo-body}} that uploads the logo locally. Wikitext; keep the list markup and the {{Icon}} template calls.",
+	"wikifarm-access-roles-heading": "Heading label for wiki role assignments",
+	"wikifarm-access-field-assignee-group": "Label for input field to select groups",
+	"wikifarm-access-field-assignee-user": "Label for input field to select users"
 }
