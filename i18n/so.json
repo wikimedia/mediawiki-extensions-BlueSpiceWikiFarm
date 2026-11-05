@@ -335,5 +335,16 @@
 	"wikifarm-gettingstarted-content-galaxy-sso-heading": "U qoondeynta gelitaanka hal mar",
 	"wikifarm-gettingstarted-content-galaxy-sso-body": "Haddii Galaxy-gaagu hore ugu xiran yahay adeeg bixiye aqoonsi oo kuu oggolaanaya inaadan isticmaalayaasha si toos ah ugu abuurin wiki-gaaga weyn, weli waxaad u baahan tahay inaad doorarkooda ugu qoondayso wiki kasta (haddii aan tan lagu maamulin qoraal barnaamijeed). Si aad taas u samayso, raac tallaabooyinka ku hoos qoran \"Maaree gelitaanka\" ee qaybtii hore.",
 	"wikifarm-ui-access-grid-header-group-info-label": "Macluumaadka kooxda",
-	"wikifarm-ui-access-action-group-info": "Muuji macluumaadka kooxda"
+	"wikifarm-ui-access-action-group-info": "Muuji macluumaadka kooxda",
+	"wikifarm-gettingstarted-content-galaxy-logo-body-local": "Soo geli astaantaada wiki-ga aad rabto inaad ku isticmaasho:\n\n# Guji falaarta hoos u dhaca ee ku xigta badhanka + ee ku yaal barta sare, kadibna dooro \"Fayl cusub\".\n# Ku rid astaantaada daaqadda \"Soo geli faylka\".\n# Soo geli faylka.\n# Raac xiriiriyaha faylka la soo geliyey.\n# Guji sawirka hordhaca ah ee ku yaal bogga sharraxaadda faylka.\n# Ka koobi garee jidka sawirka barta cinwaanka ee biraawsarkaaga. Wuxuu ka kooban yahay <code>img_auth.php</code>:<br /><code>Tusaale: /img_auth.php/5/5a/my-logo.png</code>\n\nMarka xigta, ku dar jidka astaanta dejimaha wiki-gaas:\n\n# Guji badhanka \"{{Icon|bi bi-gear|||}} '''Ficillada wiki-ga'''\" (astaanta qalabka) ee ku yaal barta sare.\n# Ka dooro \"Qaabayn\" qaybta Maamulka.\n# Ku qor \"logo\" sanduuqa raadinta.\n# Ku dheji goobta jidka astaanta ee aad ka soo koobi garaysay.\n# Kaydi isbeddellada.\n# Dib u cusboonaysii bogga (Ctrl+F5).\n\nKu celi tallaabooyinkan wiki-hoosaad kasta oo aad rabto inaad astaanta ku isticmaasho.",
+	"wikifarm-navigation-aria-label": "Hagidda wiki-ga",
+	"wikifarm-non-existing-title": "Wiki-gan ma jiro.",
+	"wikifarm-non-existing-label": "Ma jiro wiki leh jidka \"$1\".",
+	"wikifarm-non-existing-create-button-label": "Abuur wiki",
+	"wikifarm-instance-suspended-heading": "Wiki-ga \"$1\" waa la damiyay.",
+	"wikifarm-instance-suspended-label": "Nuxurkiisa lama geli karo.",
+	"wikifarm-creation-failure-heading-label": "Abuurista wiki-ga \"$1\" way fashilantay",
+	"wikifarm-maintenance-creation-heading-label": "Abuuritaanka wiki \"$1\"",
+	"wikifarm-instance-not-found-heading": "Boggan lama heli karo",
+	"wikifarm-instance-not-found-desc-label": "Boggu ma jiro, ama ma lihid oggolaansho aad ku geli karto."
 }

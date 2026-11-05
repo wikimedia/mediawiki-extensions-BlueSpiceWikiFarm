@@ -175,5 +175,6 @@
 	"wikifarm-instances-menu-button-title": "列出所有wiki",
 	"wikifarm-instances-menu-aria-label": "Wiki",
 	"wikis": "Wiki",
-	"wikifarm-instances-menu-section-favourites": "收藏"
+	"wikifarm-instances-menu-section-favourites": "收藏",
+	"wikifarm-non-existing-title": "此wiki不存在。"
 }
