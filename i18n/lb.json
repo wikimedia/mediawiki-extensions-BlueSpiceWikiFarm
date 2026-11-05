@@ -92,7 +92,6 @@
 	"wikifarm-access-column-group": "Grupp",
 	"wikifarm-access-column-user": "Benotzer",
 	"wikifarm-access-unsaved-changes-warning": "Dir hutt net gespäichert Ännerungen. Wëllt Dir se verwerfen?",
-	"wikifarm-access-field-assignees": "Gruppen/Benotzer",
 	"wikifarm-access-role-desc-editor": "Ka Säiten op dëser Wiki kucken an änneren",
 	"wikifarm-instances-menu-section-favourites": "Favoritten",
 	"wikifarm-button-action-delete-label": "Läschen",
@@ -108,5 +107,7 @@
 	"wikifarm-non-existing-title": "Dës Wiki gëtt et net.",
 	"wikifarm-non-existing-label": "Et gëtt keng Wiki mam Pad „$1“.",
 	"wikifarm-instance-suspended-heading": "D'Wiki „$1“ ass desaktivéiert.",
-	"wikifarm-instance-not-found-heading": "Dës Säit ass net disponibel"
+	"wikifarm-instance-not-found-heading": "Dës Säit ass net disponibel",
+	"wikifarm-access-field-assignee-group": "Gruppen",
+	"wikifarm-access-field-assignee-user": "Benotzer"
 }

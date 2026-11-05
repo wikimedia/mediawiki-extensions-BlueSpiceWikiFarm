@@ -278,8 +278,6 @@
 	"wikifarm-access-card-public-desc": "Calquera persoa pode ver e editar o contido, incluídos os usuarios anónimos.",
 	"wikifarm-access-card-protected-desc": "Calquera persoa, incluídos os usuarios anónimos, pode ver este wiki. A edición só está dispoñible para usuarios ou grupos que teñan como mínimo o rol de <i>editor/a</i>.",
 	"wikifarm-access-card-private-desc": "Os usuarios que teñan polo menos o rol de <i>lector/a</i> poden ver este wiki. A edición só está dispoñible para usuarios ou grupos que teñan polo menos o rol de <i>editor/a</i>.",
-	"wikifarm-access-field-assignees": "Grupos / Usuarios",
-	"wikifarm-access-field-assignees-placeholder": "Selecciona grupos ou usuarios...",
 	"wikifarm-access-field-role-placeholder": "Selecciona un rol...",
 	"wikifarm-access-field-selected": "Seleccionado",
 	"wikifarm-access-role-desc-reader": "Pode ver páxinas deste wiki",
@@ -341,5 +339,8 @@
 	"wikifarm-creation-failure-heading-label": "Fallou a creación do wiki «$1»",
 	"wikifarm-maintenance-creation-heading-label": "Creando o wiki «$1»",
 	"wikifarm-instance-not-found-heading": "Esta páxina non está dispoñible",
-	"wikifarm-instance-not-found-desc-label": "A páxina non existe ou non tes acceso a ela."
+	"wikifarm-instance-not-found-desc-label": "A páxina non existe ou non tes acceso a ela.",
+	"wikifarm-access-roles-heading": "Xestiona os roles de grupos e usuarios individuais neste wiki.",
+	"wikifarm-access-field-assignee-group": "Grupos",
+	"wikifarm-access-field-assignee-user": "Usuarios"
 }

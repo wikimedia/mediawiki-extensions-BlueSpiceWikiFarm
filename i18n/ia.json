@@ -187,7 +187,6 @@
 	"wikifarm-access-card-public-desc": "Omnes pote vider e modificar le contento, incluse le usatores anonyme",
 	"wikifarm-access-card-protected-desc": "Omnes, incluse le usatores anonyme, pote leger iste wiki. Le modification es solmente permittite al usatores o gruppos con al minus le rolo de redactor.",
 	"wikifarm-access-card-private-desc": "Le usatores con al minus le rolo de lector pote leger iste wiki. Le modification es solmente permittite al usatores o gruppos con al minus le rolo de redactor.",
-	"wikifarm-access-field-assignees": "Gruppos / Usatores",
 	"wikifarm-access-field-selected": "Seligite",
 	"wikifarm-access-role-desc-reader": "Pote leger paginas in iste wiki",
 	"wikifarm-access-role-desc-editor": "Pote leger e modificar paginas in iste wiki",

@@ -278,8 +278,6 @@
 	"wikifarm-access-card-public-desc": "Qof kastaa wuu arki karaa oo wax ka beddeli karaa nuxurka - oo ay ku jiraan isticmaalayaasha aan la aqoon.",
 	"wikifarm-access-card-protected-desc": "Qof kastaa, oo ay ku jiraan isticmaalayaasha aan la diiwaangelin, wuu arki karaa wikigan. Wax ka beddelidda waxaa heli kara oo keliya isticmaalayaasha ama kooxaha leh ugu yaraan doorka <i>tifaftire</i>.",
 	"wikifarm-access-card-private-desc": "Isticmaalayaasha leh ugu yaraan doorka <i>akhriste</i> ayaa arki kara wikigan. Wax ka beddelidda waxaa heli kara oo keliya isticmaalayaasha ama kooxaha leh ugu yaraan doorka <i>tifaftire</i>.",
-	"wikifarm-access-field-assignees": "Kooxaha / Isticmaalayaasha",
-	"wikifarm-access-field-assignees-placeholder": "Dooro kooxo ama isticmaalayaal...",
 	"wikifarm-access-field-role-placeholder": "Dooro doorka...",
 	"wikifarm-access-field-selected": "La doortay",
 	"wikifarm-access-role-desc-reader": "Wuxuu arki karaa bogagga wikigan",
@@ -341,5 +339,8 @@
 	"wikifarm-creation-failure-heading-label": "Abuurista wiki-ga \"$1\" way fashilantay",
 	"wikifarm-maintenance-creation-heading-label": "Abuuritaanka wiki \"$1\"",
 	"wikifarm-instance-not-found-heading": "Boggan lama heli karo",
-	"wikifarm-instance-not-found-desc-label": "Boggu ma jiro, ama ma lihid oggolaansho aad ku geli karto."
+	"wikifarm-instance-not-found-desc-label": "Boggu ma jiro, ama ma lihid oggolaansho aad ku geli karto.",
+	"wikifarm-access-roles-heading": "Maamul doorarka kooxaha iyo isticmaalayaasha gaarka ah ee wikigan.",
+	"wikifarm-access-field-assignee-group": "Kooxaha",
+	"wikifarm-access-field-assignee-user": "Isticmaalayaasha"
 }
