@@ -295,7 +295,7 @@ ext.bluespiceWikiFarm.ui.RolesPanel.prototype.onGridAction = function ( action, 
 				{
 					label: mw.msg( 'wikifarm-ui-access-confirm-delete-action-remove' ),
 					flags: [ 'destructive' ],
-					action: 'delete'
+					action: 'accept'
 				},
 				{
 					label: mw.msg( 'cancel' ),
