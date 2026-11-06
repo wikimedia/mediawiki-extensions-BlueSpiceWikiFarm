@@ -28,15 +28,6 @@ ext.bluespiceWikiFarm.ui.widget.InstanceColorWidget = function ( cfg ) {
 		this.$element.append( this.colorBlocks[ color ] );
 	}
 
-	const $resetOption = $( '<div>' )
-		.addClass( 'instance-color-option default dark-text' )
-		.attr( 'title', mw.msg( 'wikifarm-instance-color-remove' ) )
-		.on( 'click', () => {
-			this.clearValue();
-			this.emit( 'select', null );
-		} );
-	this.$element.append( $resetOption );
-
 	this.$element.addClass( 'instance-color-widget' );
 };
 
