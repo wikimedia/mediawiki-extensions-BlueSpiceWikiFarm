@@ -284,6 +284,13 @@ class Dispatcher {
 			return;
 		}
 		mwsInitComponents();
+		if (
+			isset( $GLOBALS['wgWikiFarmConfig_maintenanceScreenLoadCallback'] ) &&
+			is_callable( $GLOBALS['wgWikiFarmConfig_maintenanceScreenLoadCallback'] )
+		) {
+			// Let other things be set up before loading the screen
+			call_user_func( $GLOBALS['wgWikiFarmConfig_maintenanceScreenLoadCallback'] );
+		}
 		$config = $this->instance->getConfig();
 		if ( isset( $config['wgWikiFarmConfig_maintenanceMessage'] ) ) {
 			$GLOBALS['wgWikiFarmConfig_maintenanceMessage'] = $config['wgWikiFarmConfig_maintenanceMessage'];
