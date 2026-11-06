@@ -128,5 +128,7 @@
 	"wikifarm-non-existing-title": "Dës Wiki gëtt et net.",
 	"wikifarm-non-existing-label": "Et gëtt keng Wiki mam Pad „$1“.",
 	"wikifarm-instance-suspended-heading": "D'Wiki „$1“ ass desaktivéiert.",
-	"wikifarm-instance-not-found-heading": "Dës Säit ass net disponibel"
+	"wikifarm-instance-not-found-heading": "Dës Säit ass net disponibel",
+	"wikifarm-access-field-assignee-group": "Gruppen",
+	"wikifarm-access-field-assignee-user": "Benotzer"
 }
