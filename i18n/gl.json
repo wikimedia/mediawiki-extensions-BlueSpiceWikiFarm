@@ -404,5 +404,8 @@
 	"wikifarm-creation-failure-heading-label": "Fallou a creación do wiki «$1»",
 	"wikifarm-maintenance-creation-heading-label": "Creando o wiki «$1»",
 	"wikifarm-instance-not-found-heading": "Esta páxina non está dispoñible",
-	"wikifarm-instance-not-found-desc-label": "A páxina non existe ou non tes acceso a ela."
+	"wikifarm-instance-not-found-desc-label": "A páxina non existe ou non tes acceso a ela.",
+	"wikifarm-access-roles-heading": "Xestiona os roles de grupos e usuarios individuais neste wiki.",
+	"wikifarm-access-field-assignee-group": "Grupos",
+	"wikifarm-access-field-assignee-user": "Usuarios"
 }

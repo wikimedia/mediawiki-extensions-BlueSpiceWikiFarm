@@ -408,5 +408,7 @@
 	"wikifarm-gettingstarted-content-galaxy-logo-body-local": "Default help page \"Getting started\" ({{msg-mw|wikifarm-gettingstarted-content-galaxy-title}}) created on a new BlueSpice Galaxy wiki of an edition without a \"Shared resources\" wiki (e.g. \"Glacier\"): body of the \"Changing the logo\" section. Variant of {{msg-mw|wikifarm-gettingstarted-content-galaxy-logo-body}} that uploads the logo locally. Wikitext; keep the list markup and the {{Icon}} template calls.",
 	"wikifarm-access-roles-heading": "Heading label for wiki role assignments",
 	"wikifarm-access-field-assignee-group": "Label for input field to select groups",
-	"wikifarm-access-field-assignee-user": "Label for input field to select users"
+	"wikifarm-access-field-assignee-user": "Label for input field to select users",
+	"wikifarm-instances-menu-search-result-count": "Screen-reader status message after searching for a wiki, including when there are no matches.\nParameters:\n* $1 - total number of matching wikis, not just the displayed results",
+	"wikifarm-instances-menu-search-error": "Error notification when searching for a wiki fails."
 }

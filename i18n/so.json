@@ -346,5 +346,8 @@
 	"wikifarm-creation-failure-heading-label": "Abuurista wiki-ga \"$1\" way fashilantay",
 	"wikifarm-maintenance-creation-heading-label": "Abuuritaanka wiki \"$1\"",
 	"wikifarm-instance-not-found-heading": "Boggan lama heli karo",
-	"wikifarm-instance-not-found-desc-label": "Boggu ma jiro, ama ma lihid oggolaansho aad ku geli karto."
+	"wikifarm-instance-not-found-desc-label": "Boggu ma jiro, ama ma lihid oggolaansho aad ku geli karto.",
+	"wikifarm-access-roles-heading": "Maamul doorarka kooxaha iyo isticmaalayaasha gaarka ah ee wikigan.",
+	"wikifarm-access-field-assignee-group": "Kooxaha",
+	"wikifarm-access-field-assignee-user": "Isticmaalayaasha"
 }
