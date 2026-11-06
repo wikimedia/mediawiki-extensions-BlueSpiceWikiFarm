@@ -182,7 +182,13 @@ class DefaultConfig extends HashConfig {
 			 */
 			'rootInstanceWikiId' => WikiMap::getWikiIdFromDbDomain(
 				new DatabaseDomain( $globals['wgDBname'], null, $globals['wgDBprefix'] )
-			)
+			),
+
+			/**
+			 * Callback function to be called when the maintenance screen is loaded
+			 * Use it to load dependencies for the maintenance screen
+			 */
+			'maintenanceScreenLoadCallback' => null,
 		] );
 	}
 }

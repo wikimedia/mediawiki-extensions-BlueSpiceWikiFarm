@@ -90,33 +90,26 @@ class MaintenancePageConstructor {
 	private function getProcess(): ?array {
 		try {
 			$db = $this->services->getDBLoadBalancer()->getConnection( DB_REPLICA );
-			$running = $db->newSelectQueryBuilder()
-				->select( [ 'sfp_pid pid', 'sfp_pid type' ] )
+			$process = $db->newSelectQueryBuilder()
+				->select( [ 'sfp_pid pid', 'sfp_type type' ] )
 				->from( 'simple_farmer_processes' )
-				->join( 'processes', 'p', [ 'p.p_pid = simple_farmer_processes.sfp_pid' ] )
-				->where( [ 'sfp_instance' => $this->instanceEntity->getId(), 'p.p_state' => [ 'ready', 'started' ] ] )
+				->where( [ 'sfp_instance' => $this->instanceEntity->getId() ] )
 				->caller( __METHOD__ )
+				->orderBy( 'sfp_started', 'DESC' )
 				->fetchRow();
-			if ( $running ) {
+			if ( $process ) {
 				$processManager = MediaWikiServices::getInstance()->getService( 'ProcessManager' );
-				$processInfo = $processManager->getProcessInfo( $running->pid );
+				/** @var ProcessInfo $processInfo */
+				$processInfo = $processManager->getProcessInfo( $process->pid );
 				if ( !$processInfo ) {
 					return null;
 				}
-				return [ $running->type, $processInfo, 'running', $running->pid ];
-			}
-			$failed = $db->newSelectQueryBuilder()
-				->select( [ 'sfp_pid pid', 'sfp_type type' ] )
-				->from( 'simple_farmer_processes' )
-				->join( 'processes', 'p', [ 'p.p_pid = simple_farmer_processes.sfp_pid' ] )
-				->where( [ 'sfp_instance' => $this->instanceEntity->getId(), 'p.p_state' => 'terminated', 'p.p_exitstatus' => 'failed' ] )
-				->caller( __METHOD__ )
-				->fetchRow();
-			if ( $failed ) {
-				return [ $failed->type, null, 'failed', $failed->pid ];
+				return [
+					$process->type, $processInfo, $processInfo->getExitStateMessage() ?? 'running', $process->pid
+				];
 			}
 			return null;
-		} catch ( Throwable $ex ) {
+		} catch ( Throwable ) {
 			return null;
 		}
 	}
