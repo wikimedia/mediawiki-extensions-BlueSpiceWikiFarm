@@ -34,10 +34,10 @@ class CopyUser extends InstanceAwareStep {
 	 */
 	public function __construct(
 		InstanceManager $instanceManager, ILoadBalancer $lb,
-		private readonly IAccessStore $accessStore,
-		private readonly UserFactory $userFactory,
-		private readonly InstanceGroupCreator $instanceGroupCreator,
-		private readonly UserGroupManager $groupManager,
+		protected readonly IAccessStore $accessStore,
+		protected readonly UserFactory $userFactory,
+		protected readonly InstanceGroupCreator $instanceGroupCreator,
+		protected readonly UserGroupManager $groupManager,
 		string $instanceId, string $username
 	) {
 		parent::__construct( $instanceManager, $instanceId );
@@ -61,21 +61,7 @@ class CopyUser extends InstanceAwareStep {
 		}
 
 		if ( $sharingUsers && $globalAccess ) {
-			// Assign same roles user has on this instance on target instance
-			$user = $this->userFactory->newFromName( $this->username );
-			if ( !$user ) {
-				throw new Exception( Message::newFromKey( 'wikifarm-error-unknown' )->text() );
-			}
-			$rootInstance = new RootInstanceEntity();
-			$userGroups = $this->groupManager->getUserGroups( $user );
-			foreach ( $this->accessStore::ROLES as $role => $ununsed ) {
-				$rootRoleGroup = $this->instanceGroupCreator->getGroupNameForUserRole( $rootInstance->getPath(), $role );
-				if ( in_array( $rootRoleGroup, $userGroups ) ) {
-					$group = $this->instanceGroupCreator->getGroupNameForUserRole( $this->instance->getPath(), $role );
-					$this->groupManager->addUserToGroup( $user, $group );
-				}
-			}
-
+			$this->assignAdminRoleToCreator();
 			return $data;
 		}
 
@@ -96,6 +82,28 @@ class CopyUser extends InstanceAwareStep {
 		$this->syncUserGroups( $rootDb, $instanceDb, $sourceUserId, $targetUserId );
 
 		return $data;
+	}
+
+	/**
+	 * @return void
+	 * @throws Exception
+	 */
+	protected function assignAdminRoleToCreator(): void {
+		// Assign same roles user has on this instance on target instance
+		$user = $this->userFactory->newFromName( $this->username );
+		if ( !$user ) {
+			throw new Exception( Message::newFromKey( 'wikifarm-error-unknown' )->text() );
+		}
+		$rootInstance = new RootInstanceEntity();
+		// We do not care about other roles, as this step can only be performed by an admin
+		$isAdmin = $this->accessStore->userHasRoleOnInstance( $user, IAccessStore::ROLE_ADMIN, $rootInstance );
+		if ( $isAdmin ) {
+			// If user is admin on local instance, set it as admin on target instance
+			$group = $this->instanceGroupCreator->getGroupNameForUserRole(
+				$this->instance->getPath(), userRole: IAccessStore::ROLE_ADMIN
+			);
+			$this->groupManager->addUserToGroup( $user, $group );
+		}
 	}
 
 	/**
