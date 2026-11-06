@@ -236,7 +236,6 @@
 	"wikifarm-ui-access-field-type-user": "User",
 	"wikifarm-ui-access-field-type-group": "Group",
 	"wikifarm-instance-color": "Wiki color",
-	"wikifarm-instance-color-remove": "Do not assign color",
 	"wikifarm-management-breadcrumb-label-create": "Create",
 	"wikifarm-instances-favorite-add-btn-title-label": "Add wiki to favorites",
 	"wikifarm-instances-favorite-remove-btn-title-label": "Remove wiki from favorites",
