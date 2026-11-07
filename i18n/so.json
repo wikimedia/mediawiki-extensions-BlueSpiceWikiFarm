@@ -218,7 +218,7 @@
 	"wikifarm-instance-featured": "Wiki-ga la xushay",
 	"wikifarm-instance-featured-help": "Wiki-yada la xushay waxay ka soo muuqdaan qaybta \"La xushay\" ee liiska wiki-ga",
 	"wikifarm-instances-menu-search-label": "Ka raadi wiki",
-	"wikifarm-instances-search-placeholder": "Raadi wiki",
+	"wikifarm-instances-search-placeholder": "Raadi wiki-ga...",
 	"wikifarm-instances-menu-section-favourites": "Kuwa la jecel yahay",
 	"wikifarm-instances-menu-section-featured": "La xushay",
 	"wikifarm-instances-menu-section-other": "Kale",
@@ -349,5 +349,7 @@
 	"wikifarm-instance-not-found-desc-label": "Boggu ma jiro, ama ma lihid oggolaansho aad ku geli karto.",
 	"wikifarm-access-roles-heading": "Maamul doorarka kooxaha iyo isticmaalayaasha gaarka ah ee wikigan.",
 	"wikifarm-access-field-assignee-group": "Kooxaha",
-	"wikifarm-access-field-assignee-user": "Isticmaalayaasha"
+	"wikifarm-access-field-assignee-user": "Isticmaalayaasha",
+	"wikifarm-instances-menu-search-result-count": "$1 {{PLURAL:$1|wiki|wiki-yada}} la helay.",
+	"wikifarm-instances-menu-search-error": "Raadinta wiki-ga way fashilantay. Fadlan mar kale isku day."
 }
