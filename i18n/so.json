@@ -219,7 +219,7 @@
 	"wikifarm-instance-featured": "Wiki-ga la xushay",
 	"wikifarm-instance-featured-help": "Wiki-yada la xushay waxay ka soo muuqdaan qaybta \"La xushay\" ee liiska wiki-ga",
 	"wikifarm-instances-menu-search-label": "Ka raadi wiki",
-	"wikifarm-instances-search-placeholder": "Raadi wiki",
+	"wikifarm-instances-search-placeholder": "Raadi wiki-ga...",
 	"wikifarm-instances-menu-section-favourites": "Kuwa la jecel yahay",
 	"wikifarm-instances-menu-section-featured": "La xushay",
 	"wikifarm-instances-menu-section-other": "Kale",
@@ -349,5 +349,7 @@
 	"wikifarm-gettingstarted-content-galaxy-logo-body-local": "Soo geli astaantaada wiki-ga aad rabto inaad ku isticmaasho:\n\n# Guji falaarta hoos u dhaca ee ku xigta badhanka + ee ku yaal barta sare, kadibna dooro \"Fayl cusub\".\n# Ku rid astaantaada daaqadda \"Soo geli faylka\".\n# Soo geli faylka.\n# Raac xiriiriyaha faylka la soo geliyey.\n# Guji sawirka hordhaca ah ee ku yaal bogga sharraxaadda faylka.\n# Ka koobi garee jidka sawirka barta cinwaanka ee biraawsarkaaga. Wuxuu ka kooban yahay <code>img_auth.php</code>:<br /><code>Tusaale: /img_auth.php/5/5a/my-logo.png</code>\n\nMarka xigta, ku dar jidka astaanta dejimaha wiki-gaas:\n\n# Guji badhanka \"{{Icon|bi bi-gear|||}} '''Ficillada wiki-ga'''\" (astaanta qalabka) ee ku yaal barta sare.\n# Ka dooro \"Qaabayn\" qaybta Maamulka.\n# Ku qor \"logo\" sanduuqa raadinta.\n# Ku dheji goobta jidka astaanta ee aad ka soo koobi garaysay.\n# Kaydi isbeddellada.\n# Dib u cusboonaysii bogga (Ctrl+F5).\n\nKu celi tallaabooyinkan wiki-hoosaad kasta oo aad rabto inaad astaanta ku isticmaasho.",
 	"wikifarm-access-roles-heading": "Maamul doorarka kooxaha iyo isticmaalayaasha gaarka ah ee wikigan.",
 	"wikifarm-access-field-assignee-group": "Kooxaha",
-	"wikifarm-access-field-assignee-user": "Isticmaalayaasha"
+	"wikifarm-access-field-assignee-user": "Isticmaalayaasha",
+	"wikifarm-instances-menu-search-result-count": "$1 {{PLURAL:$1|wiki|wiki-yada}} la helay.",
+	"wikifarm-instances-menu-search-error": "Raadinta wiki-ga way fashilantay. Fadlan mar kale isku day."
 }
