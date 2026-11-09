@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\Process\Step;
 
 use BlueSpice\WikiFarm\InstanceManager;
 use Exception;
+use MediaWiki\Config\Config;
 use MediaWiki\Message\Message;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -16,19 +17,24 @@ class CopyUser extends InstanceAwareStep {
 	/** @var ILoadBalancer */
 	protected $lb;
 
+	/** @var Config */
+	protected $config;
+
 	/**
 	 * @param InstanceManager $instanceManager
 	 * @param ILoadBalancer $lb
+	 * @param Config $config
 	 * @param string $instanceId
 	 * @param string $username
 	 * @throws Exception
 	 */
 	public function __construct(
-		InstanceManager $instanceManager, ILoadBalancer $lb, string $instanceId, string $username
+		InstanceManager $instanceManager, ILoadBalancer $lb, Config $config, string $instanceId, string $username
 	) {
 		parent::__construct( $instanceManager, $instanceId );
 		$this->username = $username;
 		$this->lb = $lb;
+		$this->config = $config;
 	}
 
 	/**
@@ -37,6 +43,7 @@ class CopyUser extends InstanceAwareStep {
 	 * @throws Exception
 	 */
 	public function execute( $data = [] ): array {
+		$sharedTables = $this->config->get( 'SharedTables' ) ?? [];
 		$instanceDb = $this->getInstanceManager()->getDatabaseConnectionForInstance( $this->getInstance() );
 		if ( !$instanceDb ) {
 			$this->getInstanceManager()->getLogger()->error( 'Could not get database connection for instance {path}', [
@@ -48,10 +55,18 @@ class CopyUser extends InstanceAwareStep {
 		$userData = $this->readUser( $rootDb );
 		$sourceUserId = $userData['user_id'];
 		unset( $userData['user_id'] );
-		$targetUserId = $this->insertUser( $instanceDb, $userData );
 
-		$this->syncUserProperties( $rootDb, $instanceDb, $sourceUserId, $targetUserId );
-		$this->syncUserGroups( $rootDb, $instanceDb, $sourceUserId, $targetUserId );
+		if ( !in_array( 'user', $sharedTables ) ) {
+			$targetUserId = $this->insertUser( $instanceDb, $userData );
+		}
+
+		if ( !in_array( 'user_properties', $sharedTables ) ) {
+			$this->syncUserProperties( $rootDb, $instanceDb, $sourceUserId, $targetUserId );
+		}
+
+		if ( !in_array( 'user_groups', $sharedTables ) ) {
+			$this->syncUserGroups( $rootDb, $instanceDb, $sourceUserId, $targetUserId );
+		}
 
 		return $data;
 	}

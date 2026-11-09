@@ -42,7 +42,7 @@ class CreateInstance extends ManagedProcess {
 			'copy-user' => [
 				'class' => CopyUser::class,
 				'args' => [ $this->data['instanceId'], $this->data['userName'] ],
-				'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'DBLoadBalancer' ]
+				'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'DBLoadBalancer', 'MainConfig' ]
 			],
 			'run-update' => [
 				'class' => RunUpdates::class,
