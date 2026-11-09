@@ -101,6 +101,7 @@
 	"wikifarm-ui-search-instance-filter-all": "All disponibel Wikien",
 	"wikifarm-search-filter-label": "An de Wikie sichen",
 	"wikifarm-instances-menu-search-no-results": "Keng Wikie fonnt",
+	"wikifarm-instances-menu-search-result-count": "$1 {{PLURAL:$1|Wiki|Wikie}} fonnt.",
 	"wikifarm-instances-menu-button-aria-label": "Wikien: $1",
 	"wikifarm-wiki-back-link-title": "Zeréck op $1",
 	"wikifarm-wiki-back-link-aria-label": "Zeréck op $1",
