@@ -4,5 +4,7 @@
 			"Kareyac"
 		]
 	},
-	"wikifarm-management-breadcrumb-label-create": "Ստեղծել"
+	"wikifarm-management-breadcrumb-label-create": "Ստեղծել",
+	"wikifarm-access-field-assignee-group": "Խմբեր",
+	"wikifarm-access-field-assignee-user": "Մասնակիցներ"
 }
