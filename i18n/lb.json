@@ -130,5 +130,6 @@
 	"wikifarm-instance-suspended-heading": "D'Wiki „$1“ ass desaktivéiert.",
 	"wikifarm-instance-not-found-heading": "Dës Säit ass net disponibel",
 	"wikifarm-access-field-assignee-group": "Gruppen",
-	"wikifarm-access-field-assignee-user": "Benotzer"
+	"wikifarm-access-field-assignee-user": "Benotzer",
+	"wikifarm-instances-menu-search-result-count": "$1 {{PLURAL:$1|Wiki|Wikie}} fonnt."
 }
