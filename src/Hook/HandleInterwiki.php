@@ -72,12 +72,29 @@ class HandleInterwiki implements InterwikiLoadPrefixHook {
 	 * @return void
 	 */
 	public function onBSApiInterwikiStoreMakeData( $api, &$data ) {
-		foreach ( $data as $item ) {
-			$item->editable = true;
+		$links = [];
+		foreach ( $this->farmConfig->get( 'interwikiLinks' ) ?: [] as $prefix => $link ) {
+			$prefix = mb_strtolower( $link['iw_prefix'] ?? $prefix );
+			$links[$prefix] = (object)$link;
 		}
-		$links = $this->farmConfig->get( 'interwikiLinks' ) ?: [];
+
+		$found = [];
+		foreach ( $data as $item ) {
+			$prefix = mb_strtolower( $item->iw_prefix );
+			if ( isset( $links[$prefix] ) ) {
+				foreach ( $links[$prefix] as $key => $value ) {
+					$item->$key = $value;
+				}
+				$item->editable = false;
+				$found[$prefix] = true;
+			} else {
+				$item->editable = true;
+			}
+		}
 		foreach ( $links as $prefix => $link ) {
-			$link = (object)$link;
+			if ( isset( $found[$prefix] ) ) {
+				continue;
+			}
 			$link->editable = false;
 			$data[] = $link;
 		}
