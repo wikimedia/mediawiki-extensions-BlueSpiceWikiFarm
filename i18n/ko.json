@@ -213,7 +213,7 @@
 	"wikifarm-instance-featured": "추천 위키",
 	"wikifarm-instance-featured-help": "추천 위키는 위키 메뉴의 \"추천\" 섹션에 표시됩니다.",
 	"wikifarm-instances-menu-search-label": "위키 검색",
-	"wikifarm-instances-search-placeholder": "위키를 찾아보기",
+	"wikifarm-instances-search-placeholder": "위키 검색....",
 	"wikifarm-instances-menu-section-favourites": "즐겨찾기",
 	"wikifarm-instances-menu-section-featured": "추천",
 	"wikifarm-instances-menu-section-other": "기타",
@@ -237,5 +237,10 @@
 	"wikifarm-ui-search-instance-filter-search": "위키 검색",
 	"wikifarm-search-filter-label": "위키에서 검색",
 	"wikifarm-instances-menu-search-no-results": "위키가 없습니다",
-	"wikifarm-non-existing-title": "이 위키는 존재하지 않습니다."
+	"wikifarm-non-existing-title": "이 위키는 존재하지 않습니다.",
+	"wikifarm-special-farmmanagement-title": "위키 관리자",
+	"wikifarm-special-accessmanagement-title": "접근 관리자",
+	"wikifarm-mainpage-content-galaxy-heading": "{{SITENAME}} 지식 기반",
+	"wikifarm-mainpage-content-galaxy-gettingstarted-title": "시작하기",
+	"wikifarm-mainpage-content-galaxy-link-wikipages": "위키 문서"
 }
