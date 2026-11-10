@@ -160,7 +160,6 @@
 	"wikifarm-ui-access-field-type-user": "사용자",
 	"wikifarm-ui-access-field-type-group": "그룹",
 	"wikifarm-instance-color": "위키 색상",
-	"wikifarm-instance-color-remove": "색상을 지정하지 않습니다",
 	"wikifarm-management-breadcrumb-label-create": "만들기",
 	"wikifarm-instances-favorite-add-btn-title-label": "위키를 즐겨찾기에 추가",
 	"wikifarm-instances-favorite-remove-btn-title-label": "위키를 즐겨찾기에서 제거",
