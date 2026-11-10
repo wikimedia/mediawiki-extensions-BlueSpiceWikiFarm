@@ -263,7 +263,7 @@
 	"wikifarm-instance-pinned": "Engadir aos wikis fixados",
 	"wikifarm-instance-pinned-help": "Os wikis fixados aparecerán no menú do wiki",
 	"wikifarm-instances-menu-search-label": "Buscar un wiki",
-	"wikifarm-instances-search-placeholder": "Atopar un wiki",
+	"wikifarm-instances-search-placeholder": "Buscar un wiki...",
 	"wikifarm-instance-creator": "Creado por",
 	"wikifarm-instance-creator-no-info-label": "Non hai información dispoñible",
 	"wikifarm-instances-menu-section-favourites": "Favoritos",
@@ -407,5 +407,7 @@
 	"wikifarm-instance-not-found-desc-label": "A páxina non existe ou non tes acceso a ela.",
 	"wikifarm-access-roles-heading": "Xestiona os roles de grupos e usuarios individuais neste wiki.",
 	"wikifarm-access-field-assignee-group": "Grupos",
-	"wikifarm-access-field-assignee-user": "Usuarios"
+	"wikifarm-access-field-assignee-user": "Usuarios",
+	"wikifarm-instances-menu-search-result-count": "{{PLURAL:$1|Atopouse un wiki|Atopáronse $1 wikis}}.",
+	"wikifarm-instances-menu-search-error": "Fallou a busca de wikis. Inténtao de novo."
 }
