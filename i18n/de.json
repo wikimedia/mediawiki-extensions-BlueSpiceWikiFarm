@@ -58,6 +58,7 @@
 	"wikifarm-mainpage-content-galaxy-adminmanual-url": "https://de.wiki.bluespice.com/Adminhandbuch",
 	"wikifarm-mainpage-content-galaxy-adminmanual-text": "Verwalten Sie ein einzelnes Wiki oder die gesamte Galaxy-Umgebung.",
 	"wikifarm-mainpage-content-galaxy-admincontact-title": "Galaxy-Administrator kontaktieren",
+	"wikifarm-mainpage-content-galaxy-admincontact-label": "Bei Fragen zu Inhalten, zum Zugriff oder zu technischen Problemen {{#FORMAL:findest du|finden Sie}} hier den richtigen Ansprechpartner.",
 	"wikifarm-gettingstarted-content-galaxy-title": "Erste Schritte",
 	"wikifarm-gettingstarted-content-galaxy-intro": "BlueSpice Galaxy ist mehr als ein klassisches Wiki – es ist eine Sammlung verschiedener Inhaltstypen, die jeweils für eine bestimmte Art der Wissensarbeit konzipiert sind. Diese Seite vermittelt Ihnen einen ersten Eindruck davon, welche Arten von Seiten Sie erstellen können.\n\nSie benötigen keine technischen Vorkenntnisse, um Ihr Wissen in das gemeinsame Wiki (oder die Wikis) einzubringen. Wenn Sie Texte schreiben können, sind Sie mit wenigen Klicks startklar.",
 	"wikifarm-gettingstarted-content-galaxy-documents-heading": "Welchen Inhaltstyp sollte ich erstellen?",

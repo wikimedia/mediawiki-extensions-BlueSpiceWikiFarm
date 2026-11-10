@@ -58,6 +58,7 @@
 	"wikifarm-mainpage-content-galaxy-adminmanual-url": "Default main page created on a new BlueSpice Galaxy wiki: URL of the online admin manual. Only change it if the manual exists in your language.",
 	"wikifarm-mainpage-content-galaxy-adminmanual-text": "Default main page created on a new BlueSpice Galaxy wiki: link text of the \"Admin manual\" card.",
 	"wikifarm-mainpage-content-galaxy-admincontact-title": "Default main page created on a new BlueSpice Galaxy wiki: title of the card showing the administrator's user profile.",
+	"wikifarm-mainpage-content-galaxy-admincontact-label": "Default main page created on a new BlueSpice Galaxy wiki: label in card showing the administrator's user profile.",
 	"wikifarm-gettingstarted-content-galaxy-title": "Name of the default help page created on a new BlueSpice Galaxy wiki, without the \"Help:\" namespace prefix. Must be a valid page title.",
 	"wikifarm-gettingstarted-content-galaxy-intro": "Default help page \"Getting started\" ({{msg-mw|wikifarm-gettingstarted-content-galaxy-title}}) created on a new BlueSpice Galaxy wiki: introduction.",
 	"wikifarm-gettingstarted-content-galaxy-documents-heading": "Default help page \"Getting started\" ({{msg-mw|wikifarm-gettingstarted-content-galaxy-title}}) created on a new BlueSpice Galaxy wiki: heading of the content type overview.",
