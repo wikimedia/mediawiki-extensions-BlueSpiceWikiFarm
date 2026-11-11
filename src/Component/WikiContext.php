@@ -3,6 +3,7 @@
 namespace BlueSpice\WikiFarm\Component;
 
 use BlueSpice\WikiFarm\InstanceStore;
+use BlueSpice\WikiFarm\RootInstanceEntity;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
 use MWStake\MediaWiki\Component\CommonUserInterface\Component\Literal;
@@ -34,11 +35,21 @@ class WikiContext extends Literal {
 
 		$color = $instance->getMetadata()['instanceColor']['background'] ?? '#3e5389';
 
-		return Html::element( 'div', [
+		$iconClass = 'wikifarm-wiki-context__icon';
+		if ( $instance instanceof RootInstanceEntity ) {
+			$iconClass = 'wikifarm-wiki-context__main';
+		}
+		$contentHtml = Html::element( 'span', [
+			'class' => $iconClass,
+			'style' => "background-color: $color;"
+		], );
+		$contentHtml .= Html::element( 'span', [], $instance->getDisplayName() );
+
+		return Html::rawElement( 'div', [
 			'id' => $this->getId(),
 			'class' => 'wikifarm-wiki-context',
 			'style' => "color: $color;"
-		], $instance->getDisplayName() );
+		], $contentHtml );
 	}
 
 	/**

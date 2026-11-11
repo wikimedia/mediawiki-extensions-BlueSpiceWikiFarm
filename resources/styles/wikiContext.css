@@ -1,9 +1,33 @@
 .wikifarm-wiki-context {
 	background-color: #fff;
-	padding: 0.75rem 1rem 0.75rem 2rem;
+	padding: 0.75rem 1rem 0.75rem 12px;
 	overflow-wrap: anywhere;
 	font-size: var( --font-size-x-small );
 	font-weight: 500;
 	font-variant-caps: normal;
 	letter-spacing: 0.04em;
+}
+
+.wikifarm-wiki-context__main {
+	width: 12px;
+	height: 12px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 8px;
+	-webkit-mask: url( data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktYnVsbHNleWUiIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHBhdGggZD0iTTggMTVBNyA3IDAgMSAxIDggMWE3IDcgMCAwIDEgMCAxNG0wIDFBOCA4IDAgMSAwIDggMGE4IDggMCAwIDAgMCAxNiIvPgogIDxwYXRoIGQ9Ik04IDEzQTUgNSAwIDEgMSA4IDNhNSA1IDAgMCAxIDAgMTBtMCAxQTYgNiAwIDEgMCA4IDJhNiA2IDAgMCAwIDAgMTIiLz4KICA8cGF0aCBkPSJNOCAxMWEzIDMgMCAxIDEgMC02IDMgMyAwIDAgMSAwIDZtMCAxYTQgNCAwIDEgMCAwLTggNCA0IDAgMCAwIDAgOCIvPgogIDxwYXRoIGQ9Ik05LjUgOGExLjUgMS41IDAgMSAxLTMgMCAxLjUgMS41IDAgMCAxIDMgMCIvPgo8L3N2Zz4= ) no-repeat center;
+	mask: url( data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktYnVsbHNleWUiIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHBhdGggZD0iTTggMTVBNyA3IDAgMSAxIDggMWE3IDcgMCAwIDEgMCAxNG0wIDFBOCA4IDAgMSAwIDggMGE4IDggMCAwIDAgMCAxNiIvPgogIDxwYXRoIGQ9Ik04IDEzQTUgNSAwIDEgMSA4IDNhNSA1IDAgMCAxIDAgMTBtMCAxQTYgNiAwIDEgMCA4IDJhNiA2IDAgMCAwIDAgMTIiLz4KICA8cGF0aCBkPSJNOCAxMWEzIDMgMCAxIDEgMC02IDMgMyAwIDAgMSAwIDZtMCAxYTQgNCAwIDEgMCAwLTggNCA0IDAgMCAwIDAgOCIvPgogIDxwYXRoIGQ9Ik05LjUgOGExLjUgMS41IDAgMSAxLTMgMCAxLjUgMS41IDAgMCAxIDMgMCIvPgo8L3N2Zz4= ) no-repeat center;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+}
+
+.wikifarm-wiki-context__icon {
+	width: 12px;
+	height: 12px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 8px;
+	-webkit-mask: url( data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiB2aWV3Qm94PSIwIDAgMTYgMTYiPjxwYXRoIGQ9Ik04LjIzNSAxLjU1OWEuNS41IDAgMCAwLS40NyAwbC03LjUgNGEuNS41IDAgMCAwIDAgLjg4MkwzLjE4OCA4IC4yNjQgOS41NTlhLjUuNSAwIDAgMCAwIC44ODJsNy41IDRhLjUuNSAwIDAgMCAuNDcgMGw3LjUtNGEuNS41IDAgMCAwIDAtLjg4MkwxMi44MTMgOGwyLjkyMi0xLjU1OWEuNS41IDAgMCAwIDAtLjg4MnpNOCA5LjQzMyAxLjU2MiA2IDggMi41NjcgMTQuNDM4IDZ6Ii8+PC9zdmc+ ) no-repeat center;
+	mask: url( data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiB2aWV3Qm94PSIwIDAgMTYgMTYiPjxwYXRoIGQ9Ik04LjIzNSAxLjU1OWEuNS41IDAgMCAwLS40NyAwbC03LjUgNGEuNS41IDAgMCAwIDAgLjg4MkwzLjE4OCA4IC4yNjQgOS41NTlhLjUuNSAwIDAgMCAwIC44ODJsNy41IDRhLjUuNSAwIDAgMCAuNDcgMGw3LjUtNGEuNS41IDAgMCAwIDAtLjg4MkwxMi44MTMgOGwyLjkyMi0xLjU1OWEuNS41IDAgMCAwIDAtLjg4MnpNOCA5LjQzMyAxLjU2MiA2IDggMi41NjcgMTQuNDM4IDZ6Ii8+PC9zdmc+ ) no-repeat center;
+	-webkit-mask-size: contain;
+	mask-size: contain;
 }
