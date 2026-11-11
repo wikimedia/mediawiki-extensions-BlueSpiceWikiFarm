@@ -352,5 +352,6 @@
 	"wikifarm-access-field-assignee-group": "Label for input field to select groups",
 	"wikifarm-access-field-assignee-user": "Label for input field to select users",
 	"wikifarm-instances-menu-search-result-count": "Screen-reader status message after searching for a wiki, including when there are no matches.\nParameters:\n* $1 - total number of matching wikis, not just the displayed results",
-	"wikifarm-instances-menu-search-error": "Error notification when searching for a wiki fails."
+	"wikifarm-instances-menu-search-error": "Error notification when searching for a wiki fails.",
+	"wikifarm-mainpage-content-galaxy-admincontact-label": "Default main page created on a new BlueSpice Galaxy wiki: label in card showing the administrator's user profile."
 }
