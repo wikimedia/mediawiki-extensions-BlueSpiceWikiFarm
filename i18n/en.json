@@ -322,7 +322,7 @@
 	"wikifarm-mainpage-content-galaxy-link-blogs": "Blogs",
 	"wikifarm-mainpage-content-galaxy-adminsteps-label": "First steps for administrators",
 	"wikifarm-mainpage-content-galaxy-link-logo": "Changing the logo",
-	"wikifarm-mainpage-content-galaxy-link-subwiki": "Creating a subwiki",
+	"wikifarm-mainpage-content-galaxy-link-subwiki": "Creating a wiki",
 	"wikifarm-mainpage-content-galaxy-link-users": "Managing users",
 	"wikifarm-mainpage-content-galaxy-recentchanges-title": "Recent changes",
 	"wikifarm-mainpage-content-galaxy-usermanual-title": "User manual",
@@ -333,7 +333,7 @@
 	"wikifarm-mainpage-content-galaxy-adminmanual-alt": "Illustration of a closed book with a cogwheel and a lock symbol",
 	"wikifarm-mainpage-content-galaxy-adminmanual-url": "https://en.wiki.bluespice.com/Admin_manual",
 	"wikifarm-mainpage-content-galaxy-adminmanual-text": "Get ready to manage an individual wiki or the entire Galaxy environment.",
-	"wikifarm-mainpage-content-galaxy-admincontact-title": "Contact your Galaxy administrator",
+	"wikifarm-mainpage-content-galaxy-admincontact-title": "Questions about the wiki?",
 	"wikifarm-gettingstarted-content-galaxy-title": "Getting started",
 	"wikifarm-gettingstarted-content-galaxy-intro": "BlueSpice Galaxy is more than a classic wiki — it's a collection of different content types, each built for a specific kind of work. This page gives you a first idea what types of pages you can create.\n\nYou don't need any technical background to contribute your knowledge to your shared wiki(s). If you can write text and click a few buttons, you're ready.",
 	"wikifarm-gettingstarted-content-galaxy-documents-heading": "What documents can I create?",
@@ -407,5 +407,6 @@
 	"wikifarm-access-field-assignee-group": "Groups",
 	"wikifarm-access-field-assignee-user": "Users",
 	"wikifarm-instances-menu-search-result-count": "$1 {{PLURAL:$1|wiki|wikis}} found.",
-	"wikifarm-instances-menu-search-error": "The wiki search failed. Please try again."
+	"wikifarm-instances-menu-search-error": "The wiki search failed. Please try again.",
+	"wikifarm-mainpage-content-galaxy-admincontact-label": "For questions about content, access or technical issues, find the right contact person here."
 }
