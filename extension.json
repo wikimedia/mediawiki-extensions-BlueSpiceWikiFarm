@@ -661,7 +661,7 @@
 		"WikiMCPToolsGetWikiMap": "populateWikiMap",
 		"BeforeInitialize": [ "handleAccessScreens", "redirectUserPage", "trackLastVisitedInstances" ],
 		"BSUserManagerBeforeAddGroup": "addGroupPrefix",
-		"MediaWikiServices": [ "configureContentTransfer", "configureInterwikiLookup" ],
+		"MediaWikiServices": [ "configureContentTransfer", "configureInterwikiLookup", "registerMCPTools" ],
 		"MWStakeGroupStoreGroupTypeFilter": "handleGroupStore",
 		"MWStakeGroupStoreGroupDisplayName": "handleGroupStore",
 		"BSUserManagerGroupAdded": "updateGroupList",
@@ -743,6 +743,9 @@
 		"populateWikiMap": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\PopulateWikiMap",
 			"services": [ "BlueSpiceWikiFarm.WikiMap", "BlueSpiceWikiFarm._Config" ]
+		},
+		"registerMCPTools": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\RegisterMCPTools"
 		},
 		"rewriteUserPageLink": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\SkinTemplateNavigation\\RewriteUserPageLink",
