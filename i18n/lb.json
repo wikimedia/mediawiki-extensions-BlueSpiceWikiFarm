@@ -92,7 +92,6 @@
 	"wikifarm-access-column-group": "Grupp",
 	"wikifarm-access-column-user": "Benotzer",
 	"wikifarm-access-unsaved-changes-warning": "Dir hutt net gespäichert Ännerungen. Wëllt Dir se verwerfen?",
-	"wikifarm-access-field-assignees": "Gruppen/Benotzer",
 	"wikifarm-access-role-desc-editor": "Ka Säiten op dëser Wiki kucken an änneren",
 	"wikifarm-instances-menu-section-favourites": "Favoritten",
 	"wikifarm-button-action-delete-label": "Läschen",
@@ -102,6 +101,7 @@
 	"wikifarm-ui-search-instance-filter-all": "All disponibel Wikien",
 	"wikifarm-search-filter-label": "An de Wikie sichen",
 	"wikifarm-instances-menu-search-no-results": "Keng Wikie fonnt",
+	"wikifarm-instances-menu-search-result-count": "$1 {{PLURAL:$1|Wiki|Wikie}} fonnt.",
 	"wikifarm-instances-menu-button-aria-label": "Wikien: $1",
 	"wikifarm-wiki-back-link-title": "Zeréck op $1",
 	"wikifarm-wiki-back-link-aria-label": "Zeréck op $1",
@@ -110,6 +110,5 @@
 	"wikifarm-instance-suspended-heading": "D'Wiki „$1“ ass desaktivéiert.",
 	"wikifarm-instance-not-found-heading": "Dës Säit ass net disponibel",
 	"wikifarm-access-field-assignee-group": "Gruppen",
-	"wikifarm-access-field-assignee-user": "Benotzer",
-	"wikifarm-instances-menu-search-result-count": "$1 {{PLURAL:$1|Wiki|Wikie}} fonnt."
+	"wikifarm-access-field-assignee-user": "Benotzer"
 }
