@@ -140,12 +140,12 @@ class Setup {
 			} else {
 				$GLOBALS['bsgInterwikiSearchAllowMainSource'] = true;
 			}
-			$internalServer = $farmConfig->get( 'internalServer' );
+			$server = $farmConfig->get( 'globalServer' );
 			if ( !empty( FARMER_CALLED_INSTANCE ) && $GLOBALS['bsgInterwikiSearchAllowMainSource'] ) {
 				$GLOBALS['bsgInterwikiSearchSources']['w'] = [
 					"name" => 'w',
-					"api-endpoint" => "$internalServer/w/api.php",
-					"search-on-wiki-url" => "{$GLOBALS['wgServer']}/w/index.php?title=Special:SearchCenter&q=$1",
+					"api-endpoint" => "$server/w/api.php",
+					"search-on-wiki-url" => "$server/w/index.php?title=Special:SearchCenter&q=$1",
 					'public-wiki' => false,
 					'same-domain' => true,
 				];
@@ -166,11 +166,10 @@ class Setup {
 					continue;
 				}
 
-				$server = MediaWikiServices::getInstance()->getMainConfig()->get( 'Server' );
 				$scriptPath = $instance->getScriptPath( $farmConfig );
 				$GLOBALS['bsgInterwikiSearchSources'][$instance->getPath()] = [
 					"name" => $instance->getDisplayName(),
-					"api-endpoint" => $internalServer . $scriptPath . "/api.php",
+					"api-endpoint" => $server . $scriptPath . "/api.php",
 					"search-on-wiki-url" => $server . $scriptPath .
 						"/index.php?title=Special:SearchCenter&q=$1",
 					'public-wiki' => false,
