@@ -45,7 +45,7 @@
 	"wikifarm-mainpage-content-galaxy-link-blogs": "Baloogyada",
 	"wikifarm-mainpage-content-galaxy-adminsteps-label": "Tallaabooyinka ugu horreeya ee maamulayaasha",
 	"wikifarm-mainpage-content-galaxy-link-logo": "Beddelidda astaanta",
-	"wikifarm-mainpage-content-galaxy-link-subwiki": "Abuurista wiki-hoosaad",
+	"wikifarm-mainpage-content-galaxy-link-subwiki": "Abuurista wiki",
 	"wikifarm-mainpage-content-galaxy-link-users": "Maaraynta isticmaalayaasha",
 	"wikifarm-mainpage-content-galaxy-recentchanges-title": "Isbedelada dhow",
 	"wikifarm-mainpage-content-galaxy-usermanual-title": "Buugga isticmaalaha",
@@ -56,7 +56,7 @@
 	"wikifarm-mainpage-content-galaxy-adminmanual-alt": "Sawirka buug xiran oo leh giraangiraha qalabka iyo calaamadda qufulka",
 	"wikifarm-mainpage-content-galaxy-adminmanual-url": "https://so.wiki.bluespice.com/Buug gacmeedka maamulka",
 	"wikifarm-mainpage-content-galaxy-adminmanual-text": "U diyaar garow inaad maamusho wiki gaar ah ama dhammaan deegaanka Galaxy.",
-	"wikifarm-mainpage-content-galaxy-admincontact-title": "La xiriir maamulahaaga Galaxy",
+	"wikifarm-mainpage-content-galaxy-admincontact-title": "Su'aalo ku saabsan wiki-ga?",
 	"wikifarm-gettingstarted-content-galaxy-title": "Bilaabidda",
 	"wikifarm-gettingstarted-content-galaxy-intro": "BlueSpice Galaxy waa wax ka badan wiki caadi ah — waa ururin ka kooban noocyo kala duwan oo nuxur ah, mid kastaana loo sameeyay nooc shaqo oo gaar ah. Boggan wuxuu ku siinayaa fikrad kooban oo ku saabsan noocyada bogagga aad abuuri karto.\n\nUma baahnid aqoon farsamo si aad aqoontaada ugu biiriso wiki-gaaga/wikiyadaada la wadaago. Haddii aad qori karto qoraal oo aad gujin karto dhowr badhan, waad diyaar tahay.",
 	"wikifarm-gettingstarted-content-galaxy-documents-heading": "Waa maxay dukumeentiyada aan abuuri karo?",
@@ -343,5 +343,6 @@
 	"wikifarm-instance-not-found-desc-label": "Boggu ma jiro, ama ma lihid oggolaansho aad ku geli karto.",
 	"wikifarm-access-roles-heading": "Maamul doorarka kooxaha iyo isticmaalayaasha gaarka ah ee wikigan.",
 	"wikifarm-access-field-assignee-group": "Kooxaha",
-	"wikifarm-access-field-assignee-user": "Isticmaalayaasha"
+	"wikifarm-access-field-assignee-user": "Isticmaalayaasha",
+	"wikifarm-mainpage-content-galaxy-admincontact-label": "Su'aalaha ku saabsan nuxurka, gelitaanka ama dhibaatooyinka farsamo, halkan ka hel qofka ku habboon ee lala xiriirayo."
 }
