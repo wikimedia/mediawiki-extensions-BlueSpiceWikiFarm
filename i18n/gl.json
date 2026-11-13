@@ -324,7 +324,7 @@
 	"wikifarm-mainpage-content-galaxy-link-blogs": "Blogs",
 	"wikifarm-mainpage-content-galaxy-adminsteps-label": "Primeiros pasos para a administración",
 	"wikifarm-mainpage-content-galaxy-link-logo": "Cambiar o logotipo",
-	"wikifarm-mainpage-content-galaxy-link-subwiki": "Crear un subwiki",
+	"wikifarm-mainpage-content-galaxy-link-subwiki": "Crear un wiki",
 	"wikifarm-mainpage-content-galaxy-link-users": "Xestión de usuarios",
 	"wikifarm-mainpage-content-galaxy-recentchanges-title": "Cambios recentes",
 	"wikifarm-mainpage-content-galaxy-usermanual-title": "Manual de usuario",
@@ -335,7 +335,7 @@
 	"wikifarm-mainpage-content-galaxy-adminmanual-alt": "Ilustración dun libro pechado cunha roda dentada e un símbolo de cadeado",
 	"wikifarm-mainpage-content-galaxy-adminmanual-url": "https://en.wiki.bluespice.com/Admin_manual",
 	"wikifarm-mainpage-content-galaxy-adminmanual-text": "Prepárate para xestionares un wiki individual ou todo o contorno Galaxy.",
-	"wikifarm-mainpage-content-galaxy-admincontact-title": "Ponte en contacto coa administración de Galaxy",
+	"wikifarm-mainpage-content-galaxy-admincontact-title": "Tes dúbidas sobre o wiki?",
 	"wikifarm-gettingstarted-content-galaxy-title": "Primeiros pasos",
 	"wikifarm-gettingstarted-content-galaxy-intro": "BlueSpice Galaxy é máis que un wiki clásico: é unha colección de diferentes tipos de contido, cada un deseñado para un tipo de traballo específico. Esta páxina ofréceche unha primeira idea dos tipos de páxinas que podes crear.\n\nNon necesitas ningún coñecemento técnico para contribuíres cos teus coñecementos aos teus wikis compartidos. Se podes escribir texto e premer nuns cantos botóns, tes preparación abonda.",
 	"wikifarm-gettingstarted-content-galaxy-documents-heading": "Que documentos podo crear?",
@@ -409,5 +409,6 @@
 	"wikifarm-access-field-assignee-group": "Grupos",
 	"wikifarm-access-field-assignee-user": "Usuarios",
 	"wikifarm-instances-menu-search-result-count": "{{PLURAL:$1|Atopouse un wiki|Atopáronse $1 wikis}}.",
-	"wikifarm-instances-menu-search-error": "Fallou a busca de wikis. Inténtao de novo."
+	"wikifarm-instances-menu-search-error": "Fallou a busca de wikis. Inténtao de novo.",
+	"wikifarm-mainpage-content-galaxy-admincontact-label": "Para facer preguntas sobre contido, o acceso ou resolver problemas técnicos, podes atopar aquí a persoa de contacto axeitada."
 }
