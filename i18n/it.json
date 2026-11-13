@@ -56,5 +56,6 @@
 	"wikifarm-wiki-back-link-title": "Torna a $1",
 	"wikifarm-wiki-back-link-aria-label": "Torna a $1",
 	"wikifarm-non-existing-create-button-label": "Crea wiki",
-	"wikifarm-instance-not-found-heading": "Questa pagina non è disponibile"
+	"wikifarm-instance-not-found-heading": "Questa pagina non è disponibile",
+	"wikifarm-mainpage-content-galaxy-admincontact-title": "Domande sul wiki?"
 }
