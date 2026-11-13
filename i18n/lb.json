@@ -110,5 +110,8 @@
 	"wikifarm-instance-suspended-heading": "D'Wiki „$1“ ass desaktivéiert.",
 	"wikifarm-instance-not-found-heading": "Dës Säit ass net disponibel",
 	"wikifarm-access-field-assignee-group": "Gruppen",
-	"wikifarm-access-field-assignee-user": "Benotzer"
+	"wikifarm-access-field-assignee-user": "Benotzer",
+	"wikifarm-export-instance": "Wiki exportéieren",
+	"wikifarm-button-action-label-export": "Exportéieren",
+	"wikifarm-button-action-label-import": "Importéieren"
 }
