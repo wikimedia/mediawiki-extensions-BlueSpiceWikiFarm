@@ -25,7 +25,9 @@
 		"mwstake/mediawiki-component-filestorageutilities": "~1",
 		"mwstake/mediawiki-component-datastash": "~2",
 		"mwstake/mediawiki-component-dynamicconfig": "~3",
-		"mwstake/mediawiki-component-schemaversion": "~1"
+		"mwstake/mediawiki-component-schemaversion": "~1",
+		"doctrine/dbal": "3.10.6",
+		"doctrine/sql-formatter": "1.5.4"
 	},
 	"require-dev": {
 		"mediawiki/mediawiki-codesniffer": "52.0.0",
