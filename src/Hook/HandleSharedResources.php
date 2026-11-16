@@ -13,9 +13,12 @@ use MediaWiki\Api\Hook\APIAfterExecuteHook;
 use MediaWiki\Api\Hook\ApiMakeParserOptionsHook;
 use MediaWiki\Config\Config;
 use MediaWiki\Content\ContentHandler;
+use MediaWiki\Content\TextContent;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Extension\TemplateData\Api\ApiTemplateData;
 use MediaWiki\Extension\TemplateStyles\Hooks as TemplateStylesHooks;
 use MediaWiki\Hook\BeforeParserFetchTemplateRevisionRecordHook;
+use MediaWiki\Hook\EditFormPreloadTextHook;
 use MediaWiki\Hook\ParserBeforeInternalParseHook;
 use MediaWiki\Hook\SkinTemplateNavigation__UniversalHook;
 use MediaWiki\Linker\LinkTarget;
@@ -41,7 +44,8 @@ class HandleSharedResources implements
 	SkinTemplateNavigation__UniversalHook,
 	BlueSpiceDiscoveryTemplateDataProviderAfterInit,
 	BeforePageDisplayHook,
-	APIAfterExecuteHook
+	APIAfterExecuteHook,
+	EditFormPreloadTextHook
 {
 
 	/** @var array */
@@ -233,6 +237,42 @@ class HandleSharedResources implements
 		if ( $module instanceof ApiQuery ) {
 			$this->handleImageInfo( $module );
 		}
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function onEditFormPreloadText( &$text, $title ) {
+		if ( !$this->sharedInstance ) {
+			// No shared instance configured, bail out
+			return;
+		}
+		if (
+			!$this->farmConfig->get( 'useSharedResources' ) ||
+			FARMER_CALLED_INSTANCE === $this->farmConfig->get( 'sharedResourcesWikiPath' )
+		) {
+			return;
+		}
+
+		$preload = RequestContext::getMain()->getRequest()->getVal( 'preload', '' );
+		if ( $preload === '' ) {
+			return;
+		}
+
+		$preloadTitle = $this->titleFactory->newFromText( $preload );
+		if ( !$preloadTitle || $preloadTitle->getNamespace() !== NS_TEMPLATE || $preloadTitle->exists() ) {
+			return;
+		}
+
+		$sharedRevision = $this->getSharedRevision( $preloadTitle, $this->sharedInstance );
+		if ( !$sharedRevision ) {
+			return;
+		}
+		$content = $sharedRevision->getContent( SlotRecord::MAIN );
+		if ( !( $content instanceof TextContent ) ) {
+			return;
+		}
+		$text = $content->getText();
 	}
 
 	/**
