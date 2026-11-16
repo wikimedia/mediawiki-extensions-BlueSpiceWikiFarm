@@ -119,6 +119,12 @@ class DefaultConfig extends HashConfig {
 			 * Url used for inter-instance communication
 			 */
 			'internalServer' => $globals['wgServer'],
+
+			/**
+			 * Name for root instance
+			 */
+			'rootInstanceName' => $globals['wgSitename'],
+
 			/**
 			 * Set dynamically to all available active instances
 			 */
