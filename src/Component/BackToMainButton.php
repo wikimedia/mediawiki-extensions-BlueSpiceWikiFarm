@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\Component;
 
 use BlueSpice\WikiFarm\ColorUtils;
 use BlueSpice\WikiFarm\InstanceStore;
+use BlueSpice\WikiFarm\RootInstanceEntity;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
@@ -83,7 +84,8 @@ class BackToMainButton extends SimpleLink implements IRestrictedComponent {
 	 * @return Message
 	 */
 	public function getTitle(): Message {
-		return Message::newFromKey( 'wikifarm-back-to-main-wiki-btn-title' );
+		$mainInstance = $this->getMainInstance();
+		return Message::newFromKey( 'wikifarm-back-to-main-wiki-btn-title', $mainInstance->getDisplayName() );
 	}
 
 	/**
@@ -97,7 +99,7 @@ class BackToMainButton extends SimpleLink implements IRestrictedComponent {
 	 * @inheritDoc
 	 */
 	public function getHref(): string {
-		$mainInstance = $this->instanceStore->getInstanceByPath( 'w' );
+		$mainInstance = $this->getMainInstance();
 		return '/' . $mainInstance->getPath();
 	}
 
@@ -106,6 +108,13 @@ class BackToMainButton extends SimpleLink implements IRestrictedComponent {
 	 */
 	public function getPermissions(): array {
 		return [ 'read' ];
+	}
+
+	/**
+	 * @return RootInstanceEntity
+	 */
+	private function getMainInstance(): RootInstanceEntity {
+		return $this->instanceStore->getInstanceByPath( 'w' );
 	}
 
 }
