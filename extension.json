@@ -682,6 +682,7 @@
 		"BeforeParserFetchTemplateRevisionRecord": "handleSharedResources",
 		"ArticleParserOptions": "handleSharedResources",
 		"ApiMakeParserOptions": "handleSharedResources",
+		"EditFormPreloadText": "handleSharedResources",
 		"SkinTemplateNavigation::Universal": [ "handleSharedResources", "rewriteUserPageLink" ],
 		"BlueSpiceDiscoveryTemplateDataProviderAfterInit": "handleSharedResources",
 		"APIAfterExecute": "handleSharedResources",
