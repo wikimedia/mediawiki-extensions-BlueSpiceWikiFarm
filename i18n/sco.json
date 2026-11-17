@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Monospaced"
+		]
+	},
+	"wikifarm-import-instance-already-exists": "Wiki awready exists",
+	"wikifarm-import-error-cannot-open-xml": "Cannae open XML file for database data"
+}
