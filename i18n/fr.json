@@ -3,7 +3,9 @@
 		"authors": [
 			"JLTRY",
 			"NClara",
-			"SleaY"
+			"SleaY",
+			"Uriel",
+			"Wladek92"
 		]
 	},
 	"right-wikifarm-createwiki": "Créer un nouveau wiki",
@@ -22,5 +24,17 @@
 	"wikifarm-ui-role-label-editor": "Contributeur",
 	"wikifarm-ui-role-label-reviewer": "Relecteur",
 	"wikifarm-ui-access-wiki-type-protected": "Protégé",
-	"wikifarm-access-general-heading": "Déterminez les droits d'accès à ce wiki en sélectionnant un niveau d'autorisation."
+	"wikifarm-access-general-heading": "Déterminez les droits d'accès à ce wiki en sélectionnant un niveau d'autorisation.",
+	"wikifarm-import-instance-creation-failed": "Échec de création de l'entité wiki",
+	"wikifarm-import-instance": "Importer un wiki",
+	"wikifarm-button-action-label-export": "Exporter",
+	"wikifarm-action-exportdbdata-description": "Exporter les données",
+	"wikifarm-action-exportimages-description": "Exporter les fichiers",
+	"wikifarm-action-createpackage-description": "Créer un paquet",
+	"wikifarm-button-action-label-verify": "Vérifier le paquet",
+	"wikifarm-button-action-label-import": "Importer",
+	"wikifarm-import-error-package-name-invalid": "Le paquet est invalide. Il doit avoir l'extension '.bluespice'",
+	"wikifarm-action-createinstance-description": "Créer une instance wiki",
+	"wikifarm-action-createdatabase-description": "Créer la base de données",
+	"wikifarm-action-importimages-description": "Importer des fichiers"
 }
