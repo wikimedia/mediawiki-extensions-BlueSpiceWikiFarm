@@ -5,7 +5,8 @@
 			"Ameisenigel",
 			"Brettchenweber",
 			"McDutchie",
-			"Mschlindwein"
+			"Mschlindwein",
+			"Osnard"
 		]
 	},
 	"wikifarm-desc": "Farmverwaltung",
@@ -170,7 +171,7 @@
 	"wikifarm-ui-access-wiki-type-protected": "Geschützt",
 	"wikifarm-ui-access-wiki-type-public-help": "Jeder kann die Inhalte <b>ansehen und bearbeiten</b>, auch anonyme Benutzer",
 	"wikifarm-ui-access-wiki-type-private-help": "Nur Benutzer/Gruppen mit der Rolle \"<b>Leser</b>\" oder höher können das Wiki lesen. Nur Benutzer/Gruppen mit der Rolle \"<b>Editor</b>\" oder höher können das Wiki bearbeiten.",
-	"wikifarm-instances-menu-empty-favorite-text": "Es gibt derzeit kein Wiki, das als Favorit hinzugefügt wurde. {{#FORMAL:Du kannst|Sie können}} ein Wiki als Favorit auswählen, indem {{FORMAL:du|Sie}} auf das Sternsymbol {{#FORMAL:klickst|klicken}}",
+	"wikifarm-instances-menu-empty-favorite-text": "Es gibt derzeit kein Wiki, das als Favorit hinzugefügt wurde. {{#FORMAL:Du kannst|Sie können}} ein Wiki als Favorit auswählen, indem {{#FORMAL:du|Sie}} auf das Sternsymbol {{#FORMAL:klickst|klicken}}",
 	"wikifarm-instances-menu-overview-text": "Alle Wikis",
 	"wikifarm-instances-menu-favorite-text": "Favoriten",
 	"wikifarm-instances-menu-button-title": "Liste mit allen Wikis",
