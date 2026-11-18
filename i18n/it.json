@@ -8,6 +8,7 @@
 	},
 	"right-wikifarm-deletewiki": "Cancella un wiki",
 	"action-wikifarm-deletewiki": "cancellare un wiki",
+	"wikifarm-mainpage-content-galaxy-admincontact-title": "Domande sul wiki?",
 	"wikifarm-farmmanagement-label": "Wiki",
 	"wikifarm-instance-creator": "Creato da",
 	"wikifarm-instance-creator-no-info-label": "Nessuna informazione disponibile",
@@ -56,6 +57,5 @@
 	"wikifarm-wiki-back-link-title": "Torna a $1",
 	"wikifarm-wiki-back-link-aria-label": "Torna a $1",
 	"wikifarm-non-existing-create-button-label": "Crea wiki",
-	"wikifarm-instance-not-found-heading": "Questa pagina non è disponibile",
-	"wikifarm-mainpage-content-galaxy-admincontact-title": "Domande sul wiki?"
+	"wikifarm-instance-not-found-heading": "Questa pagina non è disponibile"
 }
