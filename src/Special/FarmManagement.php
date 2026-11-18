@@ -40,10 +40,7 @@ class FarmManagement extends SpecialPage {
 		return $this->msg( 'wikifarm-special-farmmanagement-title' );
 	}
 
-	/**
-	 * @param string $subPage
-	 * @return void
-	 */
+	/** @inheritDoc */
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 
@@ -64,7 +61,7 @@ class FarmManagement extends SpecialPage {
 			$this->getConfig()->get( 'WikiFarmEnableImportExport' ) ?? false
 		);
 
-		if ( str_starts_with( $subPage, '_create' ) ) {
+		if ( is_string( $subPage ) && str_starts_with( $subPage, '_create' ) ) {
 			if ( !$this->countLimiter->canCreate() ) {
 				$this->getOutput()->showPermissionStatus(
 					PermissionStatus::newFatal( 'wikifarm-error-instance-limit-reached' )
