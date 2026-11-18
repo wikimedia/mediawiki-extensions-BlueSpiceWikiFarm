@@ -79,15 +79,10 @@ class GlobalSearch implements
 		}
 		$searchInWikis = $contextDefinition['searchInWikis'] ?? [ '*' ];
 		$all = count( $searchInWikis ) === 1 && $searchInWikis[0] === '*';
-		$availableInstances = $this->setInstancesToSearchIn( $actor, $all, $searchInWikis );
-		if (
-			!in_array( $this->currentInstance, $this->instancesToSearchIn ) &&
-			array_key_exists( FARMER_CALLED_INSTANCE, $availableInstances )
-		) {
-			// Assure current wiki is included, if readable
-			$this->instancesToSearchIn[] = $this->currentInstance;
-		}
+		$this->setInstancesToSearchIn( $actor, $all, $searchInWikis );
 		if ( !empty( $this->instancesToSearchIn ) ) {
+			// Remove implicit local wiki_id, if configured to search in, it will be re-added below
+			$lookup->removeTermsFilter( 'wiki_id', [ WikiMap::getCurrentWikiId() ] );
 			$lookup->addTermsFilter( 'wiki_id', $this->instancesToSearchIn );
 		}
 	}
