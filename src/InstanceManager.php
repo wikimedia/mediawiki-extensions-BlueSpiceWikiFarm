@@ -142,6 +142,12 @@ class InstanceManager {
 		$base = trim( $this->farmConfig->get( 'basePath' ), '/' );
 		$scriptPath = $base . '/' . $path;
 		$server = rtrim( $this->farmConfig->get( 'globalServer' ), '/' );
+
+		if ( $this->farmConfig->get( 'useGlobalAccessControl' ) ) {
+			// When using global access control, redirect to Access management page
+			// `/wiki` article path is hardcoded in Dispatcher
+			return $server . $scriptPath . '/wiki/Special:AccessManagement';
+		}
 		// Script path here would already have a leading / so we don't need to prefix
 		// it with a slash below. Since we're already right trimming the trailing slash
 		// from the server URL above, the slash in the script path would suffice here.
