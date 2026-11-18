@@ -18,21 +18,14 @@ ext.bluespiceWikiFarm.ui.widget.WikisFilter = function ( cfg ) {
 
 	let selected = [];
 	if ( this.context ) {
-		selected = this.context.definition.searchInWikis;
+		selected = ( this.context.definition.searchInWikis || [] ).concat( [] );
 		if ( selected.length === 1 && selected[ 0 ] === '*' ) {
 			selected = [];
 		}
 		const index = selected.indexOf( this.localWiki.data );
-		// if selected contains wikis current instance is also searched
-		// add it to selection
-		if ( index !== -1 || selected.length > 0 ) {
-			this.localWiki.selected = true;
-			this.localWiki.allowUnselect = false;
-			if ( index !== -1 ) {
-				selected.splice( index, 1 );
-			}
-		} else {
-			this.localWiki.selected = false;
+		this.localWiki.selected = index !== -1;
+		if ( index !== -1 ) {
+			selected.splice( index, 1 );
 		}
 	}
 	this.visibleFilter.push( this.localWiki );
