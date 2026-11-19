@@ -82,7 +82,7 @@ class MaintenanceScreen {
 				'content' => $content,
 				'title' => $this->getPageTitle(),
 				'main_wiki_url' => $this->getMainWikiUrl(),
-				'main_wiki_label' => Message::newFromKey( 'wikifarm-back-to-main-wiki-btn-title' )->text(),
+				'main_wiki_label' => Message::newFromKey( 'wikifarm-back-to-main-wiki-btn-title', $GLOBALS['wgSitename'] )->text(),
 				'refresh_interval' => $this->getRefreshInterval(),
 				'style' => $GLOBALS['wgServer'] .
 					$GLOBALS['wgScriptPath'] .
