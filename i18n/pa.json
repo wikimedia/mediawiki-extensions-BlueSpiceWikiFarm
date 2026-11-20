@@ -10,7 +10,6 @@
 	"action-wikifarm-deletewiki": "ਵਿਕੀ ਮਿਟਾਓ",
 	"wikifarm-widget-combined-title-input-local": "ਇਹ ਵਿਕੀ",
 	"wikifarm-farmmanagement-text": "ਖੇਤੀ ਮਾਮਲੇ",
-	"wikifarm-main-instance-name": "ਮੁੱਢਲੀ ਵਿਕੀ",
 	"wikifarm-ui-access-field-type-user": "ਵਰਤੋਂਕਾਰ",
 	"wikifarm-management-invalid-source-title": "ਗਲਤ ਸਰੋਤ ਵਿਕੀ",
 	"wikifarm-management-invalid-template-title": "ਗਲਤ ਫਰਮਾ",
@@ -18,6 +17,5 @@
 	"wikifarm-create-instance-title-from-template": "\"$1\" ਫਰਮੇ ਤੋਂ ਨਵਾਂ ਵਿਕੀ ਬਣਾਓ",
 	"wikifarm-template-available-templates": "ਪਹਿਲਾਂ ਤੋਂ ਹੀ ਬਣਿਆ-ਬਣਾਇਆ ਫਰਮਾ ਚੁਣੋ",
 	"wikifarm-instance-advanced-options": "ਵਧੇਰੇ ਤਰਜੀਹਾਂ",
-	"wikifarm-main-wiki-name": "ਮੁੱਢਲੀ ਵਿਕੀ",
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "ਮੁੱਢਲੇ ਵਰਕੇ ਉੱਤੇ ਪਰਤੋ"
 }
