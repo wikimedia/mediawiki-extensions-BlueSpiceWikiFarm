@@ -113,5 +113,6 @@
 	"wikifarm-access-field-assignee-user": "Benotzer",
 	"wikifarm-export-instance": "Wiki exportéieren",
 	"wikifarm-button-action-label-export": "Exportéieren",
-	"wikifarm-button-action-label-import": "Importéieren"
+	"wikifarm-button-action-label-import": "Importéieren",
+	"wikifarm-back-to-main-wiki-btn-aria-label": "$1 opmaachen"
 }
