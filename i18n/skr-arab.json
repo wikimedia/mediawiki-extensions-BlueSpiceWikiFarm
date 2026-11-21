@@ -45,5 +45,7 @@
 	"wikifarm-non-existing-create-button-label": "وکی بݨاؤ",
 	"wikifarm-instance-not-found-heading": "ایہ ورقہ دستیاب کائنی۔",
 	"wikifarm-access-field-assignee-group": "گروپس",
-	"wikifarm-access-field-assignee-user": "ورتݨ آلے"
+	"wikifarm-access-field-assignee-user": "ورتݨ آلے",
+	"wikifarm-button-action-label-export": "ٻاہر بھیڄو",
+	"wikifarm-button-action-label-import": "اندر گھن آؤ"
 }
