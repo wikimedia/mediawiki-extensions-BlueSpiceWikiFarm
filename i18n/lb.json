@@ -118,5 +118,6 @@
 	"wikifarm-instances-menu-search-result-count": "$1 {{PLURAL:$1|Wiki|Wikie}} fonnt.",
 	"wikifarm-export-instance": "Wiki exportéieren",
 	"wikifarm-button-action-label-export": "Exportéieren",
-	"wikifarm-button-action-label-import": "Importéieren"
+	"wikifarm-button-action-label-import": "Importéieren",
+	"wikifarm-back-to-main-wiki-btn-aria-label": "$1 opmaachen"
 }
