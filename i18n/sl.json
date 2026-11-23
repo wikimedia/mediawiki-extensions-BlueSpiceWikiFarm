@@ -4,8 +4,12 @@
 			"Eleassar"
 		]
 	},
+	"wikifarm-gettingstarted-content-galaxy-logo-body": "Najprej naložite svoj logotip v viki Skupni viri, če ga želite ponovno uporabiti za več vikijev.\n\n# V zgornji vrstici odprite meni, ki prikazuje vse vikije. Poiščite viki »Skupni viri«.\n# Kliknite spustno puščico poleg gumba + in izberite »Nova datoteka«.\n# Spustite svoj logotip v pogovorno okno »Naloži datoteko«.\n# Naložite datoteko.\n# Sledite povezavi do naložene datoteke.\n# Kliknite sliko predogleda na strani z opisom datoteke.\n# Kopirajte pot do slike iz poti do slike v naslovni vrstici brskalnika. Začne se z <code>/-shared/img_auth.php</code>:<br /><code>Example: /-shared/img_auth.php/5/5a/my-logo.png</code> \n\nNato dodajte pot do logotipa v svoj viki {{SITENAME}} ali kateri koli drug viki:\n\n# Preklopite v viki, kjer želite uporabiti logotip.\n# Kliknite gumb »{{Icon|bi bi-gear|||}} '''Wiki dejanja'''« (simbol zobnika) v zgornji vrstici.\n# V skupini Administracija izberite »Konfiguracija«.\n# V iskalno polje vnesite »logo«.\n# Prilepite pot do logotipa iz odložišča v polje.\n# Shranite spremembe.\n# Osvežite stran (Ctrl + F5).",
+	"wikifarm-gettingstarted-content-galaxy-sso-body": "Če je vaš Galaxy že povezan s ponudnikom avtentikacije, teako da vam ni treba ustvarjati uporabnikov neposredno v vašem vikiju {{SITENAME}}, mu morate še vedno dodeliti vloge v vsakem vikiju (razen če to ureja skript). To storite tako, da sledite korakom pod »Upravljanje dostopa« v prejšnjem razdelku.",
 	"wikifarm-button-action-label-delete": "Odstrani",
 	"wikifarm-button-action-label-add": "Dodaj",
+	"wikifarm-back-to-main-wiki-btn-title": "V $1",
+	"wikifarm-back-to-main-wiki-btn-aria-label": "Odpri $1",
 	"wikifarm-export-error-instance-not-exportable": "Zahtevana instanca bodisi ne obstaja bodisi ni aktivna",
 	"wikifarm-export-error-instance-no-db": "Podatkovne zbirke instance ni mogoče pridobiti",
 	"wikifarm-export-error-cannot-open-xml": "Ne morem ustvariti datoteke XML za podatke podatkovne zbirke",
