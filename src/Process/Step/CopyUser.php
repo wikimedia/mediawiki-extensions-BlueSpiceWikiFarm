@@ -44,6 +44,10 @@ class CopyUser extends InstanceAwareStep {
 	 */
 	public function execute( $data = [] ): array {
 		$sharedTables = $this->config->get( 'SharedTables' ) ?? [];
+		$sharedDb = $this->config->get( 'SharedDB' ) ?? null;
+		if ( !$sharedDb ) {
+			$sharedTables = [];
+		}
 		$instanceDb = $this->getInstanceManager()->getDatabaseConnectionForInstance( $this->getInstance() );
 		if ( !$instanceDb ) {
 			$this->getInstanceManager()->getLogger()->error( 'Could not get database connection for instance {path}', [
@@ -55,6 +59,7 @@ class CopyUser extends InstanceAwareStep {
 		$userData = $this->readUser( $rootDb );
 		$sourceUserId = $userData['user_id'];
 		unset( $userData['user_id'] );
+		$targetUserId = $sourceUserId;
 
 		if ( !in_array( 'user', $sharedTables ) ) {
 			$targetUserId = $this->insertUser( $instanceDb, $userData );
