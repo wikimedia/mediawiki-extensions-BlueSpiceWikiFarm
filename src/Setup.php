@@ -96,7 +96,8 @@ class Setup {
 			'shareUserSessions' => $config->get( 'shareUserSessions' ),
 			'instanceBadgeColors' => self::INSTANCE_BADGE_COLORS,
 			'instanceInterwiki' => $currentInstance?->getInterwiki(),
-			'instanceDisplayName' => ''
+			'instanceDisplayName' => '',
+			'accessLevels' => $services->getService( 'BlueSpiceWikiFarm.WikiAccessLookup' )->getAccessLevels()
 		];
 		// in root wiki we cannot accessName since its too early to get Message
 		if ( defined( 'FARMER_IS_ROOT_WIKI_CALL' ) && !FARMER_IS_ROOT_WIKI_CALL ) {

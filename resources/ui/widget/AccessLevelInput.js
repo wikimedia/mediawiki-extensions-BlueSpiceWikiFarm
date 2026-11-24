@@ -2,7 +2,7 @@ ext.bluespiceWikiFarm.ui.widget.AccessLevelInput = function ( cfg ) {
 	cfg = cfg || {};
 	cfg.menu = cfg.menu || {};
 
-	cfg.menu.items = [
+	const items = [
 		new OOJSPlus.ui.widget.MenuOptionWithDescription( {
 			data: 'public',
 			label: mw.msg( 'wikifarm-ui-access-wiki-type-public' ),
@@ -22,6 +22,9 @@ ext.bluespiceWikiFarm.ui.widget.AccessLevelInput = function ( cfg ) {
 			disabled: cfg.enabledItems ? cfg.enabledItems.indexOf( 'private' ) === -1 : false // eslint-disable-line unicorn/prefer-includes
 		} )
 	];
+	// Only levels configured in the farm config `accessLevels`
+	const configuredLevels = ext.bluespiceWikiFarm._config().accessLevels || []; // eslint-disable-line no-underscore-dangle
+	cfg.menu.items = items.filter( ( item ) => configuredLevels.includes( item.getData() ) );
 
 	cfg.classes = [ 'bs-wiki-access-type' ];
 

@@ -99,7 +99,8 @@ return [
 	},
 	'BlueSpiceWikiFarm.WikiAccessLookup' => static function ( MediaWikiServices $services ) {
 		return new WikiAccessLookup(
-			$services->getDBLoadBalancer()
+			$services->getDBLoadBalancer(),
+			$services->getService( 'BlueSpiceWikiFarm._Config' )
 		);
 	},
 	'BlueSpiceWikiFarm.InstanceGroupCreator' => static function ( MediaWikiServices $services ) {

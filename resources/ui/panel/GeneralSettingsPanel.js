@@ -55,7 +55,13 @@ ext.bluespiceWikiFarm.ui.GeneralSettingsPanel.prototype.build = function () {
 		}
 	];
 
-	for ( const level of levels ) {
+	// Only levels configured in the farm config `accessLevels`, and the current one
+	const configuredLevels = ext.bluespiceWikiFarm._config().accessLevels || []; // eslint-disable-line no-underscore-dangle
+	const availableLevels = levels.filter(
+		( level ) => configuredLevels.includes( level.key ) || level.key === this.accessLevel
+	);
+
+	for ( const level of availableLevels ) {
 		const titleId = OO.ui.generateElementId();
 		const descId = OO.ui.generateElementId();
 		const $input = $( '<input>' )
