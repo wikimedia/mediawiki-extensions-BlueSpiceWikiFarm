@@ -73,7 +73,6 @@
 	"wikifarm-management-invalid-source-title": "Ongülteg Sourcewiki",
 	"wikifarm-management-invalid-template-title": "Ongülteg Schabloun",
 	"wikifarm-instance-advanced-options": "Erweidert Astellungen",
-	"wikifarm-main-wiki-name": "Haaptwiki",
 	"wikifarm-breadcrumb-nav-back-to-main-page-title": "Zeréck op d'Haaptsäit",
 	"wikifarm-access-group-name-user-alt": "All Benotzer",
 	"wikifarm-instances-tab-favourite-label": "Favoritten",
@@ -98,6 +97,7 @@
 	"wikifarm-ui-search-instance-filter-all": "All disponibel Wikien",
 	"wikifarm-search-filter-label": "An de Wikie sichen",
 	"wikifarm-instances-menu-search-no-results": "Keng Wikie fonnt",
+	"wikifarm-back-to-main-wiki-btn-aria-label": "$1 opmaachen",
 	"wikifarm-instances-menu-button-aria-label": "Wikien: $1",
 	"wikifarm-wiki-back-link-title": "Zeréck op $1",
 	"wikifarm-wiki-back-link-aria-label": "Zeréck op $1",
@@ -118,6 +118,5 @@
 	"wikifarm-instances-menu-search-result-count": "$1 {{PLURAL:$1|Wiki|Wikie}} fonnt.",
 	"wikifarm-export-instance": "Wiki exportéieren",
 	"wikifarm-button-action-label-export": "Exportéieren",
-	"wikifarm-button-action-label-import": "Importéieren",
-	"wikifarm-back-to-main-wiki-btn-aria-label": "$1 opmaachen"
+	"wikifarm-button-action-label-import": "Importéieren"
 }
