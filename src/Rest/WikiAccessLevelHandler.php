@@ -35,10 +35,8 @@ class WikiAccessLevelHandler extends RightManagementHandler {
 		$this->assertActorCan( 'userrights' );
 		$params = $this->getValidatedBody();
 		$level = $params['level'];
-		if ( !in_array( $level, GroupAccessStore::ACCESS_LEVELS ) ) {
-			throw new HttpException( "Invalid access level: $level", 400 );
-		}
 
+		// Validated against the configured access levels; throws on invalid level
 		try {
 			$this->wikiAccessLookup->setAccessLevelForInstance( $this->getInstance(), $level );
 		} catch ( InvalidArgumentException $ex ) {

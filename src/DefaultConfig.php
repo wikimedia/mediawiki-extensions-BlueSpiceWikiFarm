@@ -173,6 +173,12 @@ class DefaultConfig extends HashConfig {
 			'superAccessGroups' => [],
 
 			/**
+			 * Access levels that can be set for a wiki. "public" (anonymous users can edit) is not available
+			 * in every edition, e.g. not in BlueSpice Galaxy CE ("Glacier")
+			 */
+			'accessLevels' => [ 'protected', 'private' ],
+
+			/**
 			 * Name of the admin user created by the installer.
 			 * Gets admin access to the root wiki and system instances on installation
 			 */

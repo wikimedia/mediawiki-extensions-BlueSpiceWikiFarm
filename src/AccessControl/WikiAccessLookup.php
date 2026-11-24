@@ -4,6 +4,7 @@ namespace BlueSpice\WikiFarm\AccessControl;
 
 use BlueSpice\WikiFarm\InstanceEntity;
 use InvalidArgumentException;
+use MediaWiki\Config\Config;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 class WikiAccessLookup {
@@ -12,10 +13,46 @@ class WikiAccessLookup {
 
 	/**
 	 * @param ILoadBalancer $lb
+	 * @param Config $farmConfig
 	 */
 	public function __construct(
-		private readonly ILoadBalancer $lb
+		private readonly ILoadBalancer $lb,
+		private readonly Config $farmConfig
 	) {
+	}
+
+	/**
+	 * Access levels that can be set for a wiki (farm config `accessLevels`)
+	 *
+	 * @return string[]
+	 */
+	public function getAccessLevels(): array {
+		$levels = $this->farmConfig->get( 'accessLevels' );
+		if ( !is_array( $levels ) ) {
+			return GroupAccessStore::ACCESS_LEVELS;
+		}
+		return array_values( array_intersect( GroupAccessStore::ACCESS_LEVELS, $levels ) );
+	}
+
+	/**
+	 * Whether the level can be set for a wiki (farm config `accessLevels`)
+	 *
+	 * @param string $level
+	 * @return bool
+	 */
+	public function isValidAccessLevel( string $level ): bool {
+		return in_array( $level, $this->getAccessLevels(), true );
+	}
+
+	/**
+	 * Whether the level is known at all, regardless of the farm config.
+	 * Wikis may still have a level that is not configured (anymore)
+	 *
+	 * @param string $level
+	 * @return bool
+	 */
+	private function isKnownAccessLevel( string $level ): bool {
+		return in_array( $level, GroupAccessStore::ACCESS_LEVELS, true );
 	}
 
 	/**
@@ -34,7 +71,7 @@ class WikiAccessLookup {
 			->caller( __METHOD__ )
 			->fetchRow();
 
-		if ( !$row || !in_array( $row->wal_level, GroupAccessStore::ACCESS_LEVELS ) ) {
+		if ( !$row || !$this->isKnownAccessLevel( $row->wal_level ) ) {
 			return $this->getLegacyAccessLevel( $instance );
 		}
 
@@ -111,7 +148,7 @@ class WikiAccessLookup {
 	public function getInstancePathsForLevels( array $levels ): array {
 		$levels = array_values( array_unique( $levels ) );
 		foreach ( $levels as $level ) {
-			$this->assertValidAccessLevel( $level );
+			$this->assertValidAccessLevel( $level, false );
 		}
 
 		if ( empty( $levels ) ) {
@@ -139,11 +176,14 @@ class WikiAccessLookup {
 
 	/**
 	 * @param string $level
+	 * @param bool $configuredOnly Whether the level must be configured, or only be known
 	 * @return void
+	 * @throws InvalidArgumentException
 	 */
-	private function assertValidAccessLevel( string $level ): void {
-		if ( !in_array( $level, GroupAccessStore::ACCESS_LEVELS ) ) {
-			throw new InvalidArgumentException( "Invalid wiki access level: $level" );
+	private function assertValidAccessLevel( string $level, bool $configuredOnly = true ): void {
+		$isValid = $configuredOnly ? $this->isValidAccessLevel( $level ) : $this->isKnownAccessLevel( $level );
+		if ( !$isValid ) {
+			throw new InvalidArgumentException( "Invalid access level: $level" );
 		}
 	}
 
@@ -153,6 +193,6 @@ class WikiAccessLookup {
 	 */
 	private function getLegacyAccessLevel( InstanceEntity $instance ): string {
 		$level = $instance->getConfig()['wgWikiFarmInitialAccessLevel'] ?? 'private';
-		return in_array( $level, GroupAccessStore::ACCESS_LEVELS ) ? $level : 'private';
+		return $this->isKnownAccessLevel( $level ) ? $level : 'private';
 	}
 }
