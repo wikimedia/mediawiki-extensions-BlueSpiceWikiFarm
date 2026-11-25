@@ -423,5 +423,6 @@
 	"wikifarm-create-instance-menu-title": "More creation options",
 	"wikifarm-import-warning-package-schema-version-mismatch": "Import package contains a database schema that is newer then the current version of the wiki. This might cause problems when importing the data.",
 	"wikifarm-import-warning-package-schema-version-missing": "Import package does not contain a database schema version. Make sure that the package is compatible with the current version of the wiki.",
-	"wikifarm-import-warning-package-schema-version-local-missing": "Current wiki does not contain a database schema version. Make sure that the package is compatible with the current version of the wiki."
+	"wikifarm-import-warning-package-schema-version-local-missing": "Current wiki does not contain a database schema version. Make sure that the package is compatible with the current version of the wiki.",
+	"wikifarm-gettingstarted-content-galaxy-access-instructions": "Next, determine who can either read, edit, or approve pages in the wikis.\n\n# Click the \"{{Icon|bi bi-gear|||}} '''Wiki actions'''\" button (gear symbol) in the top bar.\n# Select \"Access management\" in the Administration group.\n# Review the General setting: who can view and edit the wiki?\n# Switch to the \"Roles\" tab.\n# Click \"Add role assignment\".\n# Select a group or user and assign their role for this wiki."
 }
