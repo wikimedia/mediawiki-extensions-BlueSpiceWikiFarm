@@ -77,6 +77,9 @@ abstract class RunInstanceExternalScripts extends InstanceAwareStep {
 		} );
 
 		foreach ( $commandDescriptions as $desc ) {
+			if ( !$desc->shouldRun( $this->instance->getPath() ) ) {
+				continue;
+			}
 			$commandLine = $this->buildCommandline( $desc );
 			try {
 				if ( $desc->runAsync() ) {
