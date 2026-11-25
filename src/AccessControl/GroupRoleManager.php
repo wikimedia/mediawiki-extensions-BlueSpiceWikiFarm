@@ -67,6 +67,50 @@ class GroupRoleManager extends GroupRoleQuery {
 	}
 
 	/**
+	 * @param InstanceEntity $source
+	 * @param InstanceEntity $target
+	 * @return void
+	 */
+	public function cloneRoles( InstanceEntity $source, InstanceEntity $target ): void {
+		$sourceRoles = $this->db->newSelectQueryBuilder()
+			->table( 'wiki_team_roles' )
+			->fields( [ 'wtr_team', 'wtr_role' ] )
+			->where( [ 'wtr_instance' => $source->getId() ] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+
+		$targetRoles = [];
+		foreach ( $sourceRoles as $row ) {
+			$targetRoles[] = [
+				'wtr_team' => $row->wtr_team,
+				'wtr_instance' => $target->getId(),
+				'wtr_instance_path' => $target->getPath(),
+				'wtr_role' => $row->wtr_role,
+			];
+		}
+
+		if ( !empty( $targetRoles ) ) {
+			$this->db->newInsertQueryBuilder()
+				->insert( 'wiki_team_roles' )
+				->rows( $targetRoles )
+				->caller( __METHOD__ )
+				->execute();
+		}
+	}
+
+	/**
+	 * @param InstanceEntity $instance
+	 * @return void
+	 */
+	public function deleteForInstance( InstanceEntity $instance ): void {
+		$this->db->newDeleteQueryBuilder()
+			->delete( 'wiki_team_roles' )
+			->where( [ 'wtr_instance' => $instance->getId() ] )
+			->caller( __METHOD__ )
+			->execute();
+	}
+
+	/**
 	 * Remove all role assignments for a group on an instance
 	 *
 	 * @param string $groupName

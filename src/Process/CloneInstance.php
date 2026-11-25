@@ -2,8 +2,8 @@
 
 namespace BlueSpice\WikiFarm\Process;
 
+use BlueSpice\WikiFarm\Process\Step\CloneAccess;
 use BlueSpice\WikiFarm\Process\Step\CopyInstanceData;
-use BlueSpice\WikiFarm\Process\Step\CopyUserOnClone;
 
 class CloneInstance extends CreateInstance {
 
@@ -21,19 +21,21 @@ class CloneInstance extends CreateInstance {
 					'class' => CopyInstanceData::class,
 					'args' => [ $this->data['instanceId'], $this->data['sourceInstanceId'] ],
 					'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'DBLoadBalancer', 'MWStake.StorageUtilities' ]
+				],
+				'clone-access' => [
+					'class' => CloneAccess::class,
+					'args' => [ $this->data['instanceId'], $this->data['userName'], $this->data['sourceInstanceId'] ],
+					'services' => [
+						'BlueSpiceWikiFarm.InstanceManager', 'DBLoadBalancer', 'BlueSpiceWikiFarm.AccessControlStore',
+						'BlueSpiceWikiFarm.GroupRoleManager', 'BlueSpiceWikiFarm.WikiAccessLookup'
+					]
 				]
 			],
 			array_slice( $steps, $indexOf + 1 )
 		);
 
-		$steps['copy-user'] = [
-			'class' => CopyUserOnClone::class,
-			'args' => [ $this->data['instanceId'], $this->data['userName'], $this->data['sourceInstanceId'] ],
-			'services' => [
-				'BlueSpiceWikiFarm.InstanceManager', 'DBLoadBalancer', 'BlueSpiceWikiFarm.AccessControlStore',
-				'UserFactory', 'BlueSpiceWikiFarm.InstanceGroupCreator', 'UserGroupManager'
-			]
-		];
+		// We do not assign current actor as admin on target instance when cloning
+		unset( $steps['copy-user'] );
 
 		return $steps;
 	}

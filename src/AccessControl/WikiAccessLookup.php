@@ -96,6 +96,51 @@ class WikiAccessLookup {
 	}
 
 	/**
+	 * @param InstanceEntity $source
+	 * @param InstanceEntity $target
+	 * @return void
+	 */
+	public function cloneAccessLevel( InstanceEntity $source, InstanceEntity $target ): void {
+		$db = $this->lb->getConnection( DB_PRIMARY );
+		if ( !$db ) {
+			return;
+		}
+		$level = $this->getAccessLevelForInstance( $source );
+		$row = $db->newSelectQueryBuilder()
+			->table( static::TABLE )
+			->fields( 'wal_level' )
+			->where( [
+				'wal_instance' => $target->getId(),
+				'wal_instance_path' => $target->getPath(),
+			] )
+			->caller( __METHOD__ )
+			->fetchRow();
+		if ( $row ) {
+			$db->newUpdateQueryBuilder()
+				->update( static::TABLE )
+				->set( [
+					'wal_level' => $level
+				] )
+				->where( [
+					'wal_instance' => $target->getId(),
+					'wal_instance_path' => $target->getPath(),
+				] )
+				->caller( __METHOD__ )
+				->execute();
+		} else {
+			$db->newInsertQueryBuilder()
+				->insert( static::TABLE )
+				->row( [
+					'wal_instance' => $target->getId(),
+					'wal_instance_path' => $target->getPath(),
+					'wal_level' => $level
+				] )
+				->caller( __METHOD__ )
+				->execute();
+		}
+	}
+
+	/**
 	 * @param InstanceEntity $instance
 	 * @param string $level
 	 * @return void

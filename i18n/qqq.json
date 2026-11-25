@@ -133,6 +133,7 @@
 	"wikifarm-action-runpostinstancedeletioncommands-description": "Descripttion shown for action in management interface",
 	"wikifarm-action-runpreinstancedeletioncommands-description": "Descripttion shown for action in management interface",
 	"wikifarm-action-runupdate-description": "Description shown for action in management interface",
+	"wikifarm-action-cloneaccess-description": "Description shown for action in management interface",
 	"wikifarm-backlink-management": "Label of a link",
 	"wikifarm-button-action-label-cancel": "Button label in form",
 	"wikifarm-button-action-label-clone": "Button label in form",

@@ -2,8 +2,6 @@
 
 namespace BlueSpice\WikiFarm\Process\Step;
 
-use BlueSpice\WikiFarm\AccessControl\InstanceGroupCreator;
-use BlueSpice\WikiFarm\AccessControl\WikiAccessLookup;
 use BlueSpice\WikiFarm\InstanceManager;
 use BlueSpice\WikiFarm\Storage\InstanceTransaction;
 use Exception;
@@ -13,20 +11,18 @@ use MediaWiki\Message\Message;
 use MWStake\MediaWiki\Component\FileStorageUtilities\StorageHandler;
 use Wikimedia\FileBackend\FileBackend;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
 use ZipArchive;
 
 class ArchiveInstance extends InstanceAwareStep {
 
 	/** @var \ZipArchive */
 	private $zip;
+
 	/** @var Config */
 	protected $mainConfig;
-	/** @var StorageHandler */
-	protected StorageHandler $storageHandler;
 
 	/** @var bool */
-	private $sharedDBSetup = false;
+	protected $sharedDBSetup = false;
 
 	/** @var string[] */
 	private $skipFolders = [ 'thumb/', 'temp/', 'cache/', 'images/thumb/', 'images/temp/' ];
@@ -44,17 +40,15 @@ class ArchiveInstance extends InstanceAwareStep {
 	private $tempFilesToBackup = [];
 
 	/** @var FileBackend */
-	private $storageBackend;
+	protected $storageBackend;
 
 	public function __construct(
-		InstanceManager $instanceManager, Config $mainConfig, StorageHandler $storageHandler,
-		private readonly WikiAccessLookup $accessLookup, private readonly InstanceGroupCreator $instanceGroupCreator,
-		private readonly ILoadBalancer $lb, string $instanceId,
-
+		InstanceManager $instanceManager, Config $mainConfig,
+		protected readonly StorageHandler $storageHandler,
+		string $instanceId
 	) {
 		parent::__construct( $instanceManager, $instanceId );
 		$this->mainConfig = $mainConfig;
-		$this->storageHandler = $storageHandler;
 	}
 
 	/**
@@ -89,13 +83,6 @@ class ArchiveInstance extends InstanceAwareStep {
 		if ( !$status->isOK() ) {
 			throw new Exception( Message::newFromKey( 'wikifarm-error-archive-instance-failed' )->text() );
 		}
-		// If it fails, it fails
-		( new InstanceTransaction( $this->storageBackend ) )
-			->deleteInstanceDirectory( $this->getInstance()->getPath() )
-			->commit();
-		$this->dropInstanceDatabase();
-
-		$this->removeInstanceData();
 
 		return array_merge( $data, [ 'success' => true ] );
 	}
@@ -178,7 +165,6 @@ class ArchiveInstance extends InstanceAwareStep {
 			// When all references to the file are gone, file is removed, so to prevent it
 			// we store them in a class member
 			$this->tempFilesToBackup[] = $file;
-			// throw new Exception( json_encode( array_map( fn( $x ) => $x->getPath(), $this->tempFilesToBackup ), JSON_PRETTY_PRINT ) );
 			$this->zip->addFile( $file->getPath(), $path );
 		}
 	}
@@ -223,45 +209,11 @@ class ArchiveInstance extends InstanceAwareStep {
 	}
 
 	/**
-	 * @return void
-	 */
-	protected function dropInstanceDatabase() {
-		$db = $this->getInstanceManager()->getDatabaseConnectionForInstance( $this->getInstance() );
-		if ( !$db ) {
-			$this->getInstanceManager()->getLogger()->error( "Drop database failed: cannot get connection" );
-			return;
-		}
-		if ( $this->sharedDBSetup ) {
-			// Allow next query to return a long response
-			$db->query( "SET SESSION group_concat_max_len = 1000000", __METHOD__ );
-			// DROP VIEWS
-			$this->executeGeneratedStatement(
-				"select concat( 'drop view ', TABLE_SCHEMA, '.', TABLE_NAME, ';') as statement " .
-				"from information_schema.views where table_name like '{$this->getInstance()->getDbPrefix()}%';",
-				$db
-			);
-			// DROP TABLES
-			$this->executeGeneratedStatement(
-				"SELECT CONCAT( 'DROP TABLE ', GROUP_CONCAT( table_name ) , ';' ) AS statement" .
-				" FROM information_schema.tables  WHERE table_name LIKE '{$this->getInstance()->getDbPrefix()}%'" .
-				" AND TABLE_TYPE NOT LIKE 'VIEW'",
-				$db
-			);
-		} else {
-			try {
-				$db->query( "DROP DATABASE {$this->getInstance()->getDBName()}", __METHOD__ );
-			} catch ( \Throwable $e ) {
-				$this->getInstanceManager()->getLogger()->error( "Drop database failed: {error}", [ 'error' => $e->getMessage() ] );
-			}
-		}
-	}
-
-	/**
 	 * @param string $generationQuery
 	 * @param IDatabase $db
 	 * @return void
 	 */
-	private function executeGeneratedStatement( string $generationQuery, IDatabase $db ) {
+	protected function executeGeneratedStatement( string $generationQuery, IDatabase $db ) {
 		$res = $db->query( $generationQuery, __METHOD__ );
 		$row = $res->fetchRow();
 		$dropStatement = $row['statement'];
@@ -279,39 +231,15 @@ class ArchiveInstance extends InstanceAwareStep {
 			"SHOW FULL TABLES FROM `{$this->getInstance()->getDBName()}` WHERE TABLE_TYPE NOT LIKE 'VIEW'",
 			__METHOD__
 		);
-		while ( $row = $res->fetchRow() ) { //phpcs:ignore Generic.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition
+		$dbPrefix = $this->getInstance()->getDbPrefix();
+		$row = $res->fetchRow();
+		while ( $row ) {
 			$tableName = $row[0];
-			if ( strpos( $tableName, $this->getInstance()->getDbPrefix() ) !== 0 ) {
-				continue;
+			if ( str_starts_with( $tableName, $dbPrefix ) ) {
+				$tables[] = $tableName;
 			}
-			$tables[] = $tableName;
+			$row = $res->fetchRow();
 		}
 		return $tables;
-	}
-
-	/**
-	 * @return void
-	 */
-	protected function removeInstanceData(): void {
-		$this->accessLookup->removeAccessLevelForInstance( $this->instance );
-
-		$groupNames = array_keys(
-			$this->instanceGroupCreator->getGroupsAndRolesForInstancePath( $this->instance->getPath() )
-		);
-
-		$db = $this->lb->getConnection( DB_PRIMARY );
-		if ( !empty( $groupNames ) ) {
-			$db->newDeleteQueryBuilder()
-				->delete( 'user_groups' )
-				->where( [ 'ug_group' => $groupNames ] )
-				->caller( __METHOD__ )
-				->execute();
-		}
-
-		$db->newDeleteQueryBuilder()
-			->delete( 'wiki_team_roles' )
-			->where( [ 'wtr_instance' => $this->instance->getId() ] )
-			->caller( __METHOD__ )
-			->execute();
 	}
 }

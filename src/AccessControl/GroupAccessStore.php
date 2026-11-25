@@ -117,6 +117,56 @@ class GroupAccessStore implements IAccessStore {
 	}
 
 	/**
+	 * @param InstanceEntity $source
+	 * @param InstanceEntity $target
+	 * @return void
+	 */
+	public function cloneRoles( InstanceEntity $source, InstanceEntity $target ): void {
+		$prefix = $this->groupCreator->getGroupPrefixForInstancePath( $source->getPath() );
+		$db = $this->databaseFactory->createSharedUserDatabaseConnection();
+		$groups = $db->newSelectQueryBuilder()
+			->table( 'user_groups' )
+			->fields( [ 'ug_user', 'ug_group' ] )
+			->where( [ 'ug_group' . $db->buildLike( $prefix, $db->anyString() ) ] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+
+		$newRows = [];
+		foreach ( $groups as $row ) {
+			$role = str_replace( $prefix, '', $row->ug_group );
+			if ( !isset( IAccessStore::ROLES[$role] ) ) {
+				// Unknown role, skip
+				continue;
+			}
+			$newRows[] = [
+				'ug_user' => $row->ug_user,
+				'ug_group' => $this->groupCreator->getGroupNameForUserRole( $target->getPath(), $role ),
+			];
+		}
+		if ( $newRows ) {
+			$db->newInsertQueryBuilder()
+				->table( 'user_groups' )
+				->rows( $newRows )
+				->caller( __METHOD__ )
+				->execute();
+		}
+	}
+
+	/**
+	 * @param InstanceEntity $instance
+	 * @return void
+	 */
+	public function deleteForInstance( InstanceEntity $instance ) {
+		$prefix = $this->groupCreator->getGroupPrefixForInstancePath( $instance->getPath() );
+		$db = $this->databaseFactory->createSharedUserDatabaseConnection();
+		$db->newDeleteQueryBuilder()
+			->table( 'user_groups' )
+			->where( [ 'ug_group' . $db->buildLike( $prefix, $db->anyString() ) ] )
+			->caller( __METHOD__ )
+			->execute();
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	public function getInstancePathsWhereUserHasRole( UserIdentity $user, string $role ): array {

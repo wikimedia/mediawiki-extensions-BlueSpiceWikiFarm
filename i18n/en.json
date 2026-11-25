@@ -129,6 +129,7 @@
 	"wikifarm-action-runpostinstancecreationcommands-description": "Run Post-Creation-Commands",
 	"wikifarm-action-runpostinstancedeletioncommands-description": "Run Post-Deletion-Commands",
 	"wikifarm-action-runpreinstancedeletioncommands-description": "Run Pre-Deletion-Commands",
+	"wikifarm-action-cloneaccess-description": "Clone access rules",
 	"wikifarm-action-runupdate-description": "Run updates",
 	"wikifarm-backlink-management": "Go to overview",
 	"wikifarm-button-action-label-cancel": "Cancel",

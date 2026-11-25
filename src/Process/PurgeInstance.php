@@ -27,8 +27,11 @@ class PurgeInstance extends ManagedProcess {
 			'purge-instance' => [
 				'class' => Step\PurgeInstance::class,
 				'args' => [ $this->data['instanceId'] ],
-				'services' => [ 'BlueSpiceWikiFarm.InstanceManager', 'MainConfig', 'MWStake.StorageUtilities',
-					'BlueSpiceWikiFarm.WikiAccessLookup', 'BlueSpiceWikiFarm.InstanceGroupCreator', 'DBLoadBalancer' ]
+				'services' => [
+					'BlueSpiceWikiFarm.InstanceManager', 'MainConfig', 'MWStake.StorageUtilities',
+					'BlueSpiceWikiFarm.WikiAccessLookup', 'BlueSpiceWikiFarm.AccessControlStore',
+					'BlueSpiceWikiFarm.GroupRoleManager'
+				]
 			],
 			'run-post-instance-deletion-commands' => [
 				'class' => RunPostInstanceDeletionCommands::class,
