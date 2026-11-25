@@ -23,6 +23,10 @@ class RunForAll extends Maintenance {
 	public function execute() {
 		$iTotalErrors = 0;
 		$sScript 	= $this->getOption( 'script' );
+		$isPath = strpos( $sScript, '/' ) !== false;
+		if ( $isPath ) {
+			$sScript = $GLOBALS['IP'] . '/' . $sScript;
+		}
 		$bQuiet 	= $this->hasOption( 'quiet' );
 		$sArgs 		= $this->getOption( 'args', '' );
 
@@ -63,8 +67,9 @@ class RunForAll extends Maintenance {
 			}
 			$phpCli = \MediaWiki\MediaWikiServices::getInstance()->getMainConfig()->get( 'PhpCli' );
 			$cmd = sprintf(
-				"$phpCli %s %s --sfr=%s",
-				MediaWiki\Shell\Shell::escape( $GLOBALS['IP'] . '/' . $sScript ),
+				"$phpCli %s %s %s --sfr=%s",
+				MediaWiki\Shell\Shell::escape( $GLOBALS['IP'] . '/maintenance/run.php' ),
+				MediaWiki\Shell\Shell::escape( $sScript ),
 				$sArgs,
 				MediaWiki\Shell\Shell::escape( $instance->getId() )
 			);
