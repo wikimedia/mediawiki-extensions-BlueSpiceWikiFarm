@@ -709,7 +709,8 @@
 		"FlexiSkinAdaptConfiguration": "shareFlexiSkin",
 		"MWStakeDynamicConfigManagerLoaded": "setSystemGroupType",
 		"MWStakeDynamicConfigRegisterConfigs": "registerDynamicConfig",
-		"NotifyMeRegisterEvents": "registerNotifyMeEvents"
+		"NotifyMeRegisterEvents": "registerNotifyMeEvents",
+		"NotifyMeSearchInWikis": "setSearchableWikis"
 	},
 	"HookHandlers": {
 		"runDatabaseUpdates": {
@@ -845,6 +846,10 @@
 		},
 		"registerNotifyMeEvents": {
 			"class": "BlueSpice\\WikiFarm\\Hook\\RegisterNotifyMeEvents"
+		},
+		"setSearchableWikis": {
+			"class": "BlueSpice\\WikiFarm\\Hook\\Integration\\NotifyMeSetSearchableWikis",
+			"services": [ "BlueSpiceWikiFarm.WikiMap" ]
 		}
 	},
 	"RestRoutes": [
