@@ -415,5 +415,6 @@
 	"wikifarm-create-instance-menu-title": "Máis opcións de creación",
 	"wikifarm-import-warning-package-schema-version-mismatch": "O paquete de importación contén un esquema de base de datos máis recente que a versión actual do wiki. Isto pode causar problemas ao importar os datos.",
 	"wikifarm-import-warning-package-schema-version-missing": "O paquete de importación non contén unha versión do esquema da base de datos. Asegúrate de que o paquete sexa compatible coa versión actual do wiki.",
-	"wikifarm-import-warning-package-schema-version-local-missing": "O wiki actual non contén unha versión do esquema da base de datos. Asegúrate de que o paquete sexa compatible coa versión actual do wiki."
+	"wikifarm-import-warning-package-schema-version-local-missing": "O wiki actual non contén unha versión do esquema da base de datos. Asegúrate de que o paquete sexa compatible coa versión actual do wiki.",
+	"wikifarm-gettingstarted-content-galaxy-access-instructions": "A continuación, determina quen pode ler, editar ou aprobar páxinas nos wikis.\n\n# Fai clic no botón «{{Icon|bi bi-gear|||}} '''Accións do wiki'''» (símbolo de engrenaxe) na barra superior.\n# Selecciona «Xestión de acceso» no grupo «Administración».\n# Revisa a configuración xeral: quen pode ver e editar o wiki?\n# Cambia á lapela «Roles».\n# Fai clic en «Engadir unha asignación de roles».\n# Selecciona un grupo ou usuario e asígnalle o seu rol para este wiki."
 }
