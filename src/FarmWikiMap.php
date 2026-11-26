@@ -67,6 +67,15 @@ class FarmWikiMap {
 	}
 
 	/**
+	 * @return array
+	 */
+	public function getAllWikiIds(): array {
+		$wikiIds = $this->instanceStore->getAvailableWikiIds();
+		$wikiIds[] = $this->config->get( 'rootInstanceWikiId' );
+		return $wikiIds;
+	}
+
+	/**
 	 * @param InstanceEntity $instanceEntity
 	 * @return array
 	 */

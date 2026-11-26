@@ -127,6 +127,26 @@ class DirectInstanceStore {
 	}
 
 	/**
+	 * @return array
+	 */
+	public function getAvailableWikiIds(): array {
+		$db = $this->getDB();
+		$res = $db->newSelectQueryBuilder()
+			->from( 'simple_farmer_instances' )
+			->select( 'sfi_wiki_id' )
+			->where( [ 'sfi_status' => InstanceEntity::STATUS_READY ] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+
+		$db->close( __METHOD__ );
+		$wikiIds = [];
+		foreach ( $res as $row ) {
+			$wikiIds[] = $row->sfi_wiki_id;
+		}
+		return array_unique( $wikiIds );
+	}
+
+	/**
 	 * @param string $id
 	 * @return InstanceEntity|null
 	 */
