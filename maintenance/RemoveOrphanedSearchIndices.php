@@ -16,6 +16,11 @@ class RemoveOrphanedSearchIndices extends Maintenance {
 	}
 
 	public function execute() {
+		$farmConfig = MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm._Config' );
+		if ( $farmConfig->get( 'useUnifiedSearch' ) ) {
+			$this->output( "Unified search is enabled, cannot run" . PHP_EOL );
+			return;
+		}
 		$indices = $this->getAvailableIndices();
 		$this->output( "Found " . count( $indices ) . " available indices" . PHP_EOL );
 		/** @var InstanceManager $instanceManager */

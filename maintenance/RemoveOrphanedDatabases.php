@@ -2,7 +2,6 @@
 
 use BlueSpice\WikiFarm\InstanceEntity;
 use BlueSpice\WikiFarm\InstanceManager;
-use MediaWiki\Config\Config;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MediaWikiServices;
 
@@ -16,7 +15,7 @@ class RemoveOrphanedDatabases extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->addOption( 'dry', 'Just list databases to be removed' );
+		$this->addOption( 'remove', 'Do remove databases' );
 	}
 
 	/**
@@ -24,44 +23,74 @@ class RemoveOrphanedDatabases extends Maintenance {
 	 * Compares these two sets and deletes orphaned databases, which are not used by any of running instances.
 	 */
 	public function execute() {
+		if ( FARMER_CALLED_INSTANCE !== 'w' ) {
+			$this->fatalError( 'This maintenance script can only be run on the main wiki' );
+		}
+
 		$mainDBName = $this->getConfig()->get( 'DBname' );
 		/** @var InstanceManager $instanceManager */
 		$instanceManager = MediaWikiServices::getInstance()->getService( 'BlueSpiceWikiFarm.InstanceManager' );
-		$active = [];
+
+		$orphanedInstances = [];
 		foreach ( $instanceManager->getStore()->getInstanceIds() as $instanceId ) {
 			$instance = $instanceManager->getStore()->getInstanceById( $instanceId );
 			if ( !$instance ) {
+				$this->output( "Instance $instanceId not found\n" );
 				continue;
 			}
 			$instanceDB = $instance->getDbName();
+			$activeStates = [
+				InstanceEntity::STATUS_READY,
+				InstanceEntity::STATUS_MAINTENANCE,
+				InstanceEntity::STATUS_SUSPENDED
+			];
+			if ( in_array( $instance->getStatus(), $activeStates ) ) {
+				continue;
+			}
 			if ( $instanceDB === $mainDBName ) {
+				// TODO: Support partial drops
+				$this->output(
+					"Instance {$instance->getDisplayName()} is inactive, but uses main database, can't drop\n"
+				);
 				continue;
 			}
-			if (
-				$instance->getStatus() !== InstanceEntity::STATUS_READY &&
-				$instance->getStatus() !== InstanceEntity::STATUS_MAINTENANCE
-			) {
-				continue;
-			}
-			$active[] = $instanceDB;
+			$orphanedInstances[] = $instance;
+
 		}
 
-		$allDatabases = $this->getAllInstanceDatabaseNames( $instanceManager->getFarmConfig() );
-		$orphaned = array_diff( $allDatabases, $active );
+		$allDatabases = $this->getAllDatabases();
 
-		if ( empty( $orphaned ) ) {
-			$this->output( 'No orphaned databases found' );
+		$forRemoval = [];
+		foreach ( $orphanedInstances as $instance ) {
+			$instanceDB = $instance->getDbName();
+			if ( !in_array( $instanceDB, $allDatabases ) ) {
+				$this->error(
+					"Database for instance {$instance->getDisplayName()} ({$instanceDB}) not found on server\n"
+				);
+				continue;
+			}
+			$forRemoval[] = $instance;
+		}
+
+		if ( empty( $forRemoval ) ) {
+			$this->output( "\nNo orphaned databases found\n" );
 			return;
 		}
 
-		$this->output( "Orphaned databases found:\n" );
-		foreach ( $orphaned as $dbName ) {
-			$this->output( $dbName );
-			if ( !$this->hasOption( 'dry' ) ) {
-				$this->output( ' - dropping...' );
-				$db = $this->getDB( DB_PRIMARY );
-				$db->query( "DROP DATABASE $dbName", __METHOD__ );
-				$this->output( " done\n" );
+		$this->output( "\nOrphaned databases found:\n" );
+		foreach ( $forRemoval as $instance ) {
+			$this->output( $instance->getDisplayName() . ' (' . $instance->getDbName() . ")\n" );
+			$this->output( "\tDatabase name: " . $instance->getDbName() . "\n" );
+			$this->output( "\tState: " . $instance->getStatus() . "\n" );
+			if ( $this->hasOption( 'remove' ) ) {
+				$this->output( "\tRemoving database..." );
+				try {
+					$db = $this->getDB( DB_PRIMARY );
+					$db->query( "DROP DATABASE {$instance->getDbName()}", __METHOD__ );
+					$this->output( "done\n\n" );
+				} catch ( Exception $e ) {
+					$this->output( "failed: {$e->getMessage()}\n\n" );
+				}
 			} else {
 				$this->output( "\n" );
 			}
@@ -69,18 +98,15 @@ class RemoveOrphanedDatabases extends Maintenance {
 	}
 
 	/**
-	 * @param Config $farmConfig
 	 * @return array
 	 */
-	public function getAllInstanceDatabaseNames( Config $farmConfig ) {
+	private function getAllDatabases(): array {
 		$res = $this->getDB( DB_REPLICA )->query( 'SHOW DATABASES', __METHOD__ );
 
 		$databases = [];
 		if ( $res ) {
 			foreach ( $res as $row ) {
-				if ( strpos( $row->Database, $farmConfig->get( 'dbPrefix' ) ) === 0 ) {
-					$databases[] = $row->Database;
-				}
+				$databases[] = $row->Database;
 			}
 		}
 

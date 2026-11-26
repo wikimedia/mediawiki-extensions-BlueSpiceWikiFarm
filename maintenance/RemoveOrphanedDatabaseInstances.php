@@ -20,7 +20,7 @@ class RemoveOrphanedDatabaseInstances extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->addOption( 'dry', 'Show instances to be removed' );
+		$this->addOption( 'remove', 'Do remove entities' );
 	}
 
 	public function execute() {
@@ -34,7 +34,7 @@ class RemoveOrphanedDatabaseInstances extends Maintenance {
 
 		$this->output(
 			"This script will check all instance entries in database and remove those which are not active\n" .
-			"It will NOT remove databases, directories or any other resources\n\n"
+			"It will NOT remove databases, but will remove directory\n\n"
 		);
 
 		$found = false;
@@ -46,16 +46,17 @@ class RemoveOrphanedDatabaseInstances extends Maintenance {
 			}
 			if ( !$instance->isComplete() ) {
 				$found = true;
-				$this->output( "> Instance \"" . $instance->getPath() . "\" has status: {$instance->getStatus()}\n" );
-				if ( !$this->hasOption( 'dry' ) ) {
-
+				$this->output( "{$instance->getDisplayName()} ({$instance->getPath()})\n" );
+				$this->output( "\tInstance is not complete. Status: {$instance->getStatus()}\n\n" );
+				if ( $this->hasOption( 'remove' ) ) {
+					$this->output( "\tRemoving instance..." );
 					// Remove vault
 					( new InstanceTransaction( $backend ) )
 						->deleteInstanceDirectory( $instance->getPath() )
 						->commit();
 					// Remove DB entry
 					$this->manager->getStore()->removeEntry( $instance );
-					$this->output( "removed\n" );
+					$this->output( "removed\n\n" );
 				}
 			}
 		}
