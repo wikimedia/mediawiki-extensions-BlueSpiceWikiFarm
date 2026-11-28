@@ -418,5 +418,6 @@
 	"wikifarm-create-instance-menu-title": "Menu title for the \"Create wiki\" menu item",
 	"wikifarm-import-warning-package-schema-version-mismatch": "Warning when importing package which has a different schema version than the current wiki instance.",
 	"wikifarm-import-warning-package-schema-version-missing": "Warning when incoming package does not contain a database schema version.",
-	"wikifarm-import-warning-package-schema-version-local-missing": "Warning when current wiki instance does not contain a database schema version."
+	"wikifarm-import-warning-package-schema-version-local-missing": "Warning when current wiki instance does not contain a database schema version.",
+	"wikifarm-action-cloneaccess-description": "Description shown for action in management interface"
 }

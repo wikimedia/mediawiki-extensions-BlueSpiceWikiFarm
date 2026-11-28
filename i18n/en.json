@@ -415,5 +415,6 @@
 	"wikifarm-create-instance-menu-title": "More creation options",
 	"wikifarm-import-warning-package-schema-version-mismatch": "Import package contains a database schema that is newer then the current version of the wiki. This might cause problems when importing the data.",
 	"wikifarm-import-warning-package-schema-version-missing": "Import package does not contain a database schema version. Make sure that the package is compatible with the current version of the wiki.",
-	"wikifarm-import-warning-package-schema-version-local-missing": "Current wiki does not contain a database schema version. Make sure that the package is compatible with the current version of the wiki."
+	"wikifarm-import-warning-package-schema-version-local-missing": "Current wiki does not contain a database schema version. Make sure that the package is compatible with the current version of the wiki.",
+	"wikifarm-action-cloneaccess-description": "Clone access rules"
 }
